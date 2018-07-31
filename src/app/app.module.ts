@@ -10,6 +10,7 @@ import { DailyStatusComponent } from './daily-status/daily-status.component';
 import { DailyStatusAllUsersComponent } from './daily-status-all-users/daily-status-all-users.component';
 import { IndividualTaskComponent } from './individual-task/individual-task.component';
 import { IndividualMemberComponent } from './individual-member/individual-member.component';
+import { AdminviewallComponent } from './adminviewall/adminviewall.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { IndividualMemberComponent } from './individual-member/individual-member
     DailyStatusComponent,
     DailyStatusAllUsersComponent,
     IndividualTaskComponent,
-    IndividualMemberComponent
+    IndividualMemberComponent,
+    AdminviewallComponent
   ],
   imports: [
     BrowserModule,
