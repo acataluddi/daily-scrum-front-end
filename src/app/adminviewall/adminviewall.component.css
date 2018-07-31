@@ -1,6 +1,8 @@
 .bg{
-    
+
     background-color: #eeeeee;
+    width: 100%;
+    padding: 20px;
 }
 
 h2{
@@ -13,7 +15,7 @@ h2{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
     transition: 0.3s;
     width: 100%;
-    margin: 30px -5px 10px 3px; 
+    
 }
 
 .table{
