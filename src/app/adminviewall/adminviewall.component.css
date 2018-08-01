@@ -1,40 +1,56 @@
-.bg{
-
-    background-color: #eeeeee;
-    width: 100%;
-    padding: 20px;
+body{
+    box-sizing: border-box;  
 }
-
+.mainClass{
+    background-color: #eeeeee;
+    height: 100%;
+    width: 100%
+}
 h2{
-    padding: 10px 20px;
+    padding: 3% 0 0 3%;
     font-family: sans-serif; 
 }
 .card{
-    
     background-color: #ffffff;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.1);
     transition: 0.3s;
-    width: 100%;
-    
+    padding: 1% 2%;
+    margin: 1%;       
 }
 
-.table{
-    width: 100%;
-    padding: 20px;
+.tdstyle{
+    font-family: Arial;
+    font-size: 11pt;
+    padding: 2% 1%;
 }
 
-.col-span{
-    padding: 10px;
-}
 
-tr{
+
+.thead{
     text-align: left;
-    font-family: sans-serif;
-    font-size-adjust: inherit;
+    font-family: Arial;
+    color: black;
+    padding: 1% 1%;
+    border-bottom: 1px inset rgba(173, 172, 172, 0.904);
+}
+
+
+
+.custom-select{
     
+    font-family: Arial;
+    background-color: #ffffff;
+    width: 40%;
+    height: 175%;
 }
-th{
+.section{
+display:flex;
+justify-content: space-between;
+
+}
+.header{
+    width: 33.33%;
     text-align: left;
-    font-family: sans-serif;
-    border-bottom: 1px solid black;
 }
+
+
