@@ -134,13 +134,13 @@
     text-align: left;
  }
  .signin{
-    position: relative;
-    top: 43%;
-    left: 5%;
-    height:auto;
-    width: 25%;
-    background-color: rgba(66, 133, 244, 1);
-    border-radius: 2px;
+  position: relative;
+  top: 43%;
+  left: 5%;
+  height:auto;
+  width: 25%;
+  background-color: rgba(66, 133, 244, 1);
+  border-radius: 2px;
  }
  a{
     text-decoration:none;
@@ -154,15 +154,17 @@
     width: 20%;
  }
  .text{
-    position: absolute;
-    left: 25%;
-    top:1px;
-    width:100%;
-    font-family: 'Roboto';
-    font-size: 1.0vw; 
-    font-weight: 500;
-    color: rgba(255, 255, 255, 1);
-    text-align: left;
+  background-color: rgba(66, 133, 244, 1);
+  border: none;
+  position: absolute;
+  left: 21%;
+  top:40%;
+  width:79%;
+  font-family: 'Roboto';
+  font-size: 0.9vw; 
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+  text-align: left;
  }
  .terms{
     position: absolute;
