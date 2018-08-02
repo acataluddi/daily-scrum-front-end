@@ -4,5 +4,5 @@ export class Member{
     Email: string;
     Password: string;
     EmployeeId: string;
-    Role: string;
+    UserType: string;
 }

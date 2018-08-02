@@ -13,7 +13,7 @@ export class AdminviewallComponent implements OnInit {
   member: Member;
   memberArray: Member[];
   constructor(private viewallservice: AdminviewallserviceService) { }
-  roles = ['Admin', 'Manager', 'User'];
+  userTypes = ['Admin', 'Manager', 'User'];
 
   ngOnInit() {
     this.getData();
@@ -25,13 +25,13 @@ export class AdminviewallComponent implements OnInit {
     this.memberArray = this.viewallservice.getMember();
   }
 
-   onChange(newRole, email) {
+   onChange(newType, email) {
     //  this.viewallservice.updateRole(newRole, email);
      for(let member of this.memberArray){
         if(member.Email == email){
-          member.Role = newRole;
+          member.UserType = newType;
           console.log(member);
-          console.log("Role changed");
+          console.log("User type changed");
         }
       }
    }
