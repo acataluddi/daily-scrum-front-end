@@ -17,26 +17,23 @@ export class AdminviewallComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
-    
-
   }
 
   getData() {
     this.memberArray = this.viewallservice.getMember();
   }
 
-   onChange(newType, email) {
-    //  this.viewallservice.updateRole(newRole, email);
-     for(let member of this.memberArray){
-        if(member.Email == email){
-          member.UserType = newType;
-          console.log(member);
-          console.log("User type changed");
-        }
+  onChange(newType, email) {
+    for (let member of this.memberArray) {
+      if (member.Email == email) {
+        member.UserType = newType;
+        console.log(member);
+        console.log("User type changed");
       }
-   }
-
-  
+    }
   }
+
+
+}
 
 
