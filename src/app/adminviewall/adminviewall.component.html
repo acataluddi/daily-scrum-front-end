@@ -9,7 +9,7 @@
           <div class="header">User Type</div>
         </div>
 
-        <div class="section rowstyle member" *ngFor="let member of memberArray | paginate: {itemsPerPage:5, currentPage: p}">
+        <div class="section rowstyle member" *ngFor="let member of memberArray | paginate: {itemsPerPage:8, currentPage: p}">
           <div class="header">{{member.Name}}</div>
           <div class="header email">{{member.Email}}</div>
           <div class="header">
