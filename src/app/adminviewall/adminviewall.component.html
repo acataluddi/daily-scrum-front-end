@@ -4,47 +4,24 @@
  <h2>Users</h2> 
   <div class="card">
     <div>
-      <div class="section thead">
+      <div class="section head">
         <div class="header">User</div>
         <div  class="header">Email</div>
         <div  class="header">Role</div>
       </div>
-      <!--
-      <div class="section tdstyle">
-        <div class="header">Mila Kunis</div>
-        <div class="header">mila@kunis.com</div>
-        <div class="header">
-            <select class="custom-select">
-                <option value="admin">Admin</option>
-                <option value="manager">Manager</option>
-                <option value="user">User</option>
-            </select>
-        </div>
-      </div>
-      <div class="section tdstyle">
-          <div class="header">Ryna Gosling</div>
-          <div class="header">ryan@gos.com</div>
-          <div class="header">
-              <select class="custom-select">
-                  <option value="admin">Admin</option>
-                  <option value="manager">Manager</option>
-                  <option value="user">User</option>
-              </select>
-          </div>
-        </div>
-      -->
-        <div class="section tdstyle member" *ngFor = "let member of memberArray">
+     
+        <div class="section rowstyle member" *ngFor = "let member of memberArray | paginate: {itemsPerPage:5, currentPage: p}">
             <div class="header">{{member.Name}}</div>
-            <div class="header">{{member.Email}}</div>
+            <div class="header email">{{member.Email}}</div>
             <div class="header">
-                <select class="custom-select">
+                <select class="custom-select" name="role" #role="ngModel" [(ngModel)]="member.Role" (ngModelChange)="onChange($event, member.Email)" > 
                     <option selected>{{member.Role}}</option>
                     <option *ngFor = "let role of roles">{{role}}</option>   
                 </select>
             </div>
           </div>  
           <div>
-            <!-- <button ng-disabled="pagination.currentPage == 0" ng-click="pagination.currentPage=pagination.currentPage-1">1</button>{{pagination.currentPage+1}}/{{pagination.numberOfPages()}} -->
+              <pagination-controls (pageChange)="p =$event"></pagination-controls>
           </div>
     </div>
   </div>
