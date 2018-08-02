@@ -116,7 +116,7 @@
  }
  .logo{
     position: absolute;
-    background-image: url("../assets/red_bg.png");    
+    background-image: url("../../assets/red_bg.png");    
     top:0px;
     right:0px;
     height:100%;
@@ -141,6 +141,7 @@
     width: 25%;
     background-color: rgba(66, 133, 244, 1);
     border-radius: 2px;
+    cursor: pointer;
  }
  a{
     text-decoration:none;
