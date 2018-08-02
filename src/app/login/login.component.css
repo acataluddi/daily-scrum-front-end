@@ -1,0 +1,184 @@
+@media only screen and (max-width:768px){
+  
+ .login-page {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    bottom:10%;
+    right:10%;
+    width: 80%;
+    background-color:white;
+    }
+    .container{
+      display: flex;
+    }
+    .form{
+      position: absolute;
+      top: 10%;
+      left: 40px;
+      height: auto;
+      width: 10%;
+     
+    }
+    .title{
+     
+        font-family:"Arial";
+        position: absolute;
+        left:30%;
+        font-size:5vw;
+        top: 7%;
+    }
+    .description{
+        font-family:"Arial";
+        position: absolute;
+        left:13%;
+        top:30%;
+        font-size:3vw;
+        width: 60%;
+        line-height:1.2;
+        color:rgb(126, 125, 125);
+      }
+      .signin{
+        position: absolute;
+        top: 50%;
+        left: 13%;
+        height: 9%;
+        width: 55%;
+       
+      }
+      .terms{
+        font-family:"Arial";
+        position: absolute;
+        left:13%;
+        top:65%;
+        font-size: 2.5vw;
+        width: 60%;
+        line-height:1.3;
+        color:rgb(126, 125, 125);
+      }
+      .footer{
+        font-family:"Arial";
+        position: absolute;
+        left:13%;
+        top:85%;
+        font-size: 2vw;
+        width: 85%;
+        line-height:1.3;
+        color:rgb(126, 125, 125);
+      }
+      .logo, .moto, .company{
+        display:none;
+    }
+}
+
+
+
+@media only screen and (min-width:768px){
+  
+  .body {
+    background-color: rgba(74, 20, 20, 1);
+    width:100%;
+    height:auto;
+  
+  }
+  .login-page {
+  position: absolute;
+  top: 12%;
+  left: 20%;
+  bottom:12%;
+  width: 25%;
+  background-color:white;
+  }
+  .container{
+    display: flex;
+  }
+  .form{
+    position: absolute;
+    top: 10%;
+    left: 40px;
+    height: auto;
+    width: 10%;
+   
+  }
+  .title{
+   
+      font-family:"Arial";
+      position: absolute;
+      left:32%;
+      font-size:2vw;
+      top: 5%;
+  
+  }
+  .logo{
+    display:visible;
+    background-image: url("../../assets/2018-07-31.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+  top: 12%;
+  left: 45%;
+  bottom:12%;
+  width: 37%;
+  
+  }
+  .description{
+    font-family:"Arial";
+    position: absolute;
+    left:13%;
+    top:30%;
+    font-size:1.3vw;
+    width: 74%;
+    line-height:1.2;
+    color:rgb(126, 125, 125);
+  }
+  .signin{
+    position: absolute;
+    top: 50%;
+    left: 13%;
+    height: 9%;
+    width: 55%;
+   
+  }
+  .terms{
+    font-family:"Arial";
+    position: absolute;
+    left:13%;
+    top:60%;
+    font-size: 1.1vw;
+    width: 85%;
+    line-height:1.3;
+    color:rgb(126, 125, 125);
+  }
+  .moto{
+   
+    font-family:"Arial";
+    position: absolute;
+     left:13%;
+     top:20%;
+    
+     font-size: 3.2vw;
+     width: 60%;
+     line-height:1.4;
+     color:white;
+     font-weight: normal;
+  }
+  .company{
+  
+    position: absolute;
+    top: 90%;
+    left: 80%;
+    height: auto;
+    width: 10%;
+   
+  }
+  .footer{
+    font-family:"Arial";
+    position: absolute;
+    left:13%;
+    top:80%;
+    font-size: 0.9vw;
+    width: 85%;
+    line-height:1.3;
+    color:rgb(126, 125, 125);
+  }
+} 
