@@ -81,6 +81,7 @@
     left: 0px;
     height: auto;
     width: 100%;
+    background-color:rgba(74, 20, 20, 1);
  }
  .login-page{
     position: relative;
