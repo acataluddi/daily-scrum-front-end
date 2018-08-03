@@ -1,0 +1,60 @@
+body{
+    box-sizing: border-box;  
+}
+.mainClass{
+    background-color: #eeeeee;
+    height: 100%;
+    width: 100%
+}
+h2{
+    padding: 3% 0 0 3%;
+    font-family: sans-serif; 
+}
+.card{
+    background-color: #ffffff;
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.1);
+    transition: 0.3s;
+    padding: 1% 2%;
+    margin: 1%;       
+}
+
+.section{
+    display:flex;
+    justify-content: space-between;
+    
+}
+    
+.header{
+    width: 33.33%;
+    text-align: left;
+}
+
+.rowstyle{
+    font-family: Arial;
+    font-size: 11pt;
+    padding: 2% 1%;
+}
+
+.email{
+    font-size: 10.5pt;
+}
+
+.head{
+    text-align: left;
+    font-family: Arial;
+    color: black;
+    padding: 1% 1%;
+    border-bottom: 1px inset rgba(173, 172, 172, 0.904);
+}
+
+.custom-select{
+    
+    font-family: Arial;
+    background-color: #ffffff;
+    font-size: 11pt;
+    width: 40%;
+    height: 175%;
+}
+
+
+

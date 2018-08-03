@@ -4,5 +4,6 @@ export class Member{
     Name:string;   
     Email:string;
     Imageurl:string;
-    Token:string;    
+    Token:string;  
+    UserType: string;  
 }

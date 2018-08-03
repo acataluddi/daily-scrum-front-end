@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
       Name: '',
       Email: '',
       Imageurl: '',
-      Token: ''
+      Token: '',
+      UserType: ''
     }
   }
   public socialSignIn(socialPlatform: string) {
@@ -44,7 +45,8 @@ export class LoginComponent implements OnInit {
           Name: userData.name,
           Email: userData.email,
           Imageurl: userData.image,
-          Token: userData.token
+          Token: userData.token,
+          UserType: null
         }
         this.loginservice.loginMember(this.member);
       }
