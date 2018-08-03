@@ -1,8 +1,9 @@
 
 export class Member{
-    Name: string;
-    Email: string;
-    Password: string;
-    EmployeeId: string;
-    UserType: string;
+    Id:string;
+    Name:string;   
+    Email:string;
+    Imageurl:string;
+    Token:string;  
+    UserType: string;  
 }

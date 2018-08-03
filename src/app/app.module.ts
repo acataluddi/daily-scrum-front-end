@@ -13,6 +13,23 @@ import { DailyStatusAllUsersComponent } from './daily-status-all-users/daily-sta
 import { IndividualTaskComponent } from './individual-task/individual-task.component';
 import { IndividualMemberComponent } from './individual-member/individual-member.component';
 import { AdminviewallComponent } from './adminviewall/adminviewall.component';
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider
+} from "angular-6-social-login";
+
+// Configs 
+export function getAuthServiceConfigs() {
+  let config = new AuthServiceConfig(
+    [{
+      id: GoogleLoginProvider.PROVIDER_ID,
+      provider: new GoogleLoginProvider("967649209783-pi515k1vmqr1igmq535chm1o32hb7fet.apps.googleusercontent.com")
+    }
+    ]
+  );
+  return config;
+}
 
 @NgModule({
   declarations: [
@@ -30,9 +47,15 @@ import { AdminviewallComponent } from './adminviewall/adminviewall.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: getAuthServiceConfigs
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
