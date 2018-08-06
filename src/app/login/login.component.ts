@@ -28,12 +28,12 @@ export class LoginComponent implements OnInit {
   member: Member;
   initializeMember() {
     this.member = {
-      Id: '',
-      Name: '',
-      Email: '',
-      Imageurl: '',
-      Token: '',
-      UserType: ''
+      employee_id: '',
+      name: '',
+      email: '',
+      imageurl: '',
+      // Token: '',
+      designation: ''
     }
     console.log('in init');
     this.loginservice.displayMessage();
@@ -60,12 +60,12 @@ export class LoginComponent implements OnInit {
     console.log('Token: ' + googleUser.getAuthResponse().id_token);
     // this.initializeMember();
     this.member = {
-      Id: profile.getId(),
-      Name: profile.getName(),
-      Email: profile.getEmail(),
-      Imageurl: profile.getImageUrl(),
-      Token: googleUser.getAuthResponse().id_token,
-      UserType: null
+      employee_id: profile.getId(),
+      name: profile.getName(),
+      email: profile.getEmail(),
+      imageurl: profile.getImageUrl(),
+      // Token: googleUser.getAuthResponse().id_token,
+      designation: null
     }
     this.loginservice.loginMember(this.member);
     // this.loginservice.displayMessage();

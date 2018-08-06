@@ -23,13 +23,11 @@ export class DashboardComponent implements OnInit {
   name = "";
   email = "";
   image = "";
-  token = "";
   displayMember() {
-    this.id = this.member.Id;
-    this.name = this.member.Name;
-    this.email = this.member.Email;
-    this.image = this.member.Imageurl;
-    this.token = this.member.Token;
+    this.id = this.member.employee_id;
+    this.name = this.member.name;
+    this.email = this.member.email;
+    this.image = this.member.imageurl;
   }
 
 
