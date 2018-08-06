@@ -8,19 +8,24 @@ import {LocalStorageService} from 'ngx-webstorage';
 })
 export class LoginService {
 
-  private loggedin;
+  
+ 
 
   constructor(public router: Router , private localSt:LocalStorageService) { 
-    this.loggedin = false;
+  
   }
   member: Member;
+  loggedIn;
   
-  
+  getStatus(){
+    localStorage.setItem("logged", "false");
+   
+  }
 
   loginMember(member1: Member) {
     this.member = member1;
     this.router.navigate(['/dashboard']);
-    this.loggedin = true;
+    localStorage.setItem("logged", "true");
     
   }
 
@@ -28,7 +33,7 @@ export class LoginService {
   getMember(): Member {
     return this.member;
   }
-  getLoginStatus() {
-    return this.loggedin;
+  getlogin(){
+    return this.loggedIn;
   }
 }

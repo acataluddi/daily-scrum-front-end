@@ -14,16 +14,15 @@ export class DashboardComponent implements OnInit {
   constructor(public router: Router , private loginservice: LoginService) { }
 
   member: Member;
-  loggedin = false;
+  loggedin;
   
   
   ngOnInit() {
     // this.initializeMember();
     this.member = this.loginservice.getMember();
     this.displayMember();
+    localStorage.getItem("logged");
     
-    this.loggedin = this.loginservice.getLoginStatus();
-    console.log(this.loggedin);
     
   }
 

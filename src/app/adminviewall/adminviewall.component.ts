@@ -20,8 +20,10 @@ export class AdminviewallComponent implements OnInit {
 
   ngOnInit() {
     this.getData();
-    this.loggedin = this.loginservice.getLoginStatus();
-    console.log(this.loggedin);
+    
+    
+    localStorage.getItem("logged");
+    console.log(localStorage.getItem("logged"));
     
   }
 
