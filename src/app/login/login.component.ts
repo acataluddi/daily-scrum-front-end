@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
     private loginservice: LoginService, ngZone: NgZone) { 
       window['onSignIn'] = (googleUser) => ngZone.run(() => this.onSignIn(googleUser));
       // window['renderButton'] = () => ngZone.run(() => this.renderButton());
+      // window['signOut'] = () => ngZone.run(() => this.signOut());
       window['onFailure'] = (error) => ngZone.run(() => this.onFailure(error));
     }
 
