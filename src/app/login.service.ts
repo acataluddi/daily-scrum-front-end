@@ -61,9 +61,9 @@ export class LoginService {
     http.open('POST','http://localhost:8081/DailyScrum/CRUDController')
     // http.setRequestHeader('Content-type', 'application/json')
     http.send(JSON.stringify(params))
+    var body = http.response;
+    console.log(body);
     http.onload = function() {
-      var data = JSON.parse(this.response);
-      console.log(data);
         console.log(http.responseText);
         alert(http.responseText);
     }
