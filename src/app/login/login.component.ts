@@ -7,6 +7,7 @@ import {
 import { Router } from '@angular/router';
 import { LoginService } from "../login.service";
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.initializeMember();
   }
+  
   member: Member;
   initializeMember() {
     this.member = {

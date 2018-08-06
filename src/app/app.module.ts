@@ -18,6 +18,9 @@ import {
   AuthServiceConfig,
   GoogleLoginProvider
 } from "angular-6-social-login";
+import {Ng2Webstorage} from 'ngx-webstorage';
+import { AuthGuard } from './status.service';
+
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -48,14 +51,15 @@ export function getAuthServiceConfigs() {
     AppRoutingModule,
     FormsModule,
     NgxPaginationModule,
-    SocialLoginModule
+    SocialLoginModule,
+    Ng2Webstorage
   ],
   providers: [
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
-    }
-  ],
+    },
+  AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
