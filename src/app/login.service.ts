@@ -62,6 +62,8 @@ export class LoginService {
     // http.setRequestHeader('Content-type', 'application/json')
     http.send(JSON.stringify(params))
     http.onload = function() {
+      var data = JSON.parse(this.response);
+      console.log(data);
         console.log(http.responseText);
         alert(http.responseText);
     }
