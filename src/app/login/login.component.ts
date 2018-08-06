@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.initializeMember();
-    this.loginservice.getStatus();
+    
   }
   
   member: Member;
