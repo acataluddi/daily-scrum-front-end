@@ -9,7 +9,7 @@ import { DailyStatusAllUsersComponent } from "./daily-status-all-users/daily-sta
 import { AdminviewallComponent } from "./adminviewall/adminviewall.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/admin-view-all', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'project', component: ProjectComponent },
   { path: 'dashboard', component: DashboardComponent },

@@ -18,4 +18,8 @@ export class LoginService {
   getMember(): Member {
     return this.member;
   }
+
+  displayMessage(): void {
+    console.log("In service now..");
+  }
 }

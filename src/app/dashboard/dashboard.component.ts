@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
     // this.initializeMember();
     this.member = this.loginservice.getMember();
     this.displayMember();
+    // (<any>window).signOut = this.signOut;
   }
   id = "";
   name = "";
@@ -30,4 +31,12 @@ export class DashboardComponent implements OnInit {
     this.image = this.member.Imageurl;
     this.token = this.member.Token;
   }
+
+
+  // signOut() {
+  //   var auth2 = gapi.auth2.getAuthInstance();
+  //   auth2.signOut().then(function () {
+  //     console.log('User signed out.');
+  //   });
+  // }
 }
