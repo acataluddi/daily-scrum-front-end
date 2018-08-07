@@ -20,7 +20,7 @@ import {
 } from "angular-6-social-login";
 import {Ng2Webstorage} from 'ngx-webstorage';
 import { AuthGuard } from './status.service';
-
+import { HttpClientModule } from '@angular/common/http';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -52,6 +52,7 @@ export function getAuthServiceConfigs() {
     FormsModule,
     NgxPaginationModule,
     SocialLoginModule,
+    HttpClientModule,
     Ng2Webstorage
   ],
   providers: [

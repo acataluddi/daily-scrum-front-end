@@ -7,3 +7,12 @@ export class Member{
     // Token:string;  
     userType: string;  
 }
+
+export class MemberT{
+    name: string;
+    email:string;
+    userType: string;
+    memberID: number;
+    employeeID:string;
+    pageID: number;
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from "../model/member-model";
+import { Member,MemberT } from "../model/member-model";
 import {AuthService,GoogleLoginProvider} from 'angular-6-social-login';
 import { Router } from '@angular/router';
 import { LoginService } from "../service/login.service";
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.initializeMember();
-    
+    this.getHeroes();
   }
   
   member: Member;
@@ -51,5 +51,11 @@ export class LoginComponent implements OnInit {
         this.loginservice.loginMember(this.member);
       }
     );
+  }
+
+  members: MemberT[];
+  getHeroes(): void {
+    this.loginservice.getHeroes()
+        .subscribe(members => console.log(members));
   }
 }
