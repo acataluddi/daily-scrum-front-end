@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from "../model/project-model";
 import { Member } from "../model/member-model";
-import { LoginService } from "../login.service";
+import { LoginService } from "../service/login.service";
 import { Router } from '@angular/router';
 
 @Component({
@@ -31,13 +31,13 @@ export class DashboardComponent implements OnInit {
   name = "";
   email = "";
   image = "";
-  token = "";
+  // token = "";
   displayMember() {
-    this.id = this.member.Id;
-    this.name = this.member.Name;
-    this.email = this.member.Email;
-    this.image = this.member.Imageurl;
-    this.token = this.member.Token;
+    this.id = this.member.employeeID;
+    this.name = this.member.name;
+    this.email = this.member.email;
+    this.image = this.member.imageurl;
+    // this.token = this.member.Token;
     
   }
 }

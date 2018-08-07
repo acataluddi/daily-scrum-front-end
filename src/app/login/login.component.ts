@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Member } from "../model/member-model";
 import {AuthService,GoogleLoginProvider} from 'angular-6-social-login';
 import { Router } from '@angular/router';
-import { LoginService } from "../login.service";
+import { LoginService } from "../service/login.service";
 
 
 @Component({
@@ -24,12 +24,12 @@ export class LoginComponent implements OnInit {
   member: Member;
   initializeMember() {
     this.member = {
-      Id: '',
-      Name: '',
-      Email: '',
-      Imageurl: '',
-      Token: '',
-      UserType: ''
+      employeeID: '',
+      name: '',
+      email: '',
+      imageurl: '',
+      // Token: '',
+      userType: ''
     }
   }
   public socialSignIn(socialPlatform: string) {
@@ -41,12 +41,12 @@ export class LoginComponent implements OnInit {
       (userData) => {
         console.log(socialPlatform + " sign in data : ", userData);
         this.member = {
-          Id: userData.id,
-          Name: userData.name,
-          Email: userData.email,
-          Imageurl: userData.image,
-          Token: userData.token,
-          UserType: null
+          employeeID: userData.id,
+          name: userData.name,
+          email: userData.email,
+          imageurl: userData.image,
+          // Token: userData.token,
+          userType: "user"
         }
         this.loginservice.loginMember(this.member);
       }
