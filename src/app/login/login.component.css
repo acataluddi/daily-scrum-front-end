@@ -27,14 +27,14 @@
   .form{    
      
      top: 10%;
-     left: 40px;
+     left: 6%;
      height: auto;
      width: 6%;
   }
   .title{
      
      top: 11%;
-     left: 15%;
+     left: 16%;
      height:auto;
      font-family: 'Neo Sans Cyr';
      font-size: 2.1vw;
@@ -99,7 +99,7 @@
      top:53%;
      left: 5%;
      height: auto;
-     width: 36%;
+     width: 40%;
      font-family: 'Roboto';
      font-size: 1.1vw;
      color: rgba(79, 86, 105, 1);

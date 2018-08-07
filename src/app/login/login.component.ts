@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from "../model/member-model";
-import {
-  AuthService,
-  GoogleLoginProvider
-} from 'angular-6-social-login';
+import {AuthService,GoogleLoginProvider} from 'angular-6-social-login';
 import { Router } from '@angular/router';
 import { LoginService } from "../login.service";
 
