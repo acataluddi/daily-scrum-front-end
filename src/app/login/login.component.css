@@ -59,6 +59,7 @@
      height:100%;
      width: 53%;
      background-repeat: no-repeat;
+     background-size:cover; 
   }
   .description {
      top: 33%;
