@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
       email: profile.getEmail(),
       imageurl: profile.getImageUrl(),
       // Token: googleUser.getAuthResponse().id_token,
-      userType: null
+      userType: "user"
     }
     this.loginservice.loginMember(this.member);
     // this.loginservice.displayMessage();
