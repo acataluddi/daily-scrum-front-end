@@ -2,250 +2,226 @@
   
 @media only screen and (min-width:768px){
 
-  .body, .form, .title, .logo, .description, .text, .moto, .company{
+  .body, .form, .title, .logo, .description, .text, .moto, .company {
  
      position: absolute;
  
   }
-  .body{
-     
+  .login-page, .signin, .Google, .terms, .footer {
+
+    position:relative;
+
+  }
+  .title, .description, .text, .terms, .footer, .moto {
+
+    text-align: left;
+
+  }
+  .description, .text, .terms, .footer, .moto, .title {
+
+    font-family: 'Roboto';
+
+  }
+  .form, .description, .signin, .Google, .terms, .footer, .moto, .company {
+
+    height: auto;
+
+  }
+  .body {
      top: 0px;
      left: 0px;
      height: 768px;
      width: 100%;
      background-color: rgba(74, 20, 20, 1);
   }
-  .login-page{
-     position: relative;
+  .login-page {
      margin:8% 20% 8% 20%;
      height: 480px;
      width: 58%;
      background-color: rgba(255, 255, 255, 1);
   }
- 
- 
-  .form{    
-     
+  .form {    
      top: 10%;
-     left: 6%;
-     height: auto;
+     left: 6%; 
      width: 6%;
   }
-  .title{
-     
+  .title {
      top: 11%;
-     left: 16%;
-     height:auto;
-     font-family: 'Neo Sans Cyr';
-     font-size: 2.1vw;
-     color: rgba(79, 86, 105, 1);
-     text-align: left;
-  }
-  .logo{
+     left: 16%; 
      
+     font-size: 2.1vw;
+     color: rgba(79, 86, 105, 1); 
+  }
+  .logo {
      background-image: url("../../assets/red_bg.png");    
      top:0px;
      right:0px;
      height:100%;
      width: 53%;
   }
-  .description{
-     
+  .description {
      top: 33%;
-     left: 5%;
-     height: auto;
-     width: 33%;
-     font-family: 'Roboto';
+     left: 5%; 
+     width: 33%; 
      font-size: 1.3vw;
-     color: rgba(79, 86, 105, 1);
-     text-align: left;
+     color: rgba(79, 86, 105, 1); 
   }
-  .signin{
-     position: relative;
+  .signin { 
      top: 52%;
-     left: 5%;
-     height:auto;
+     left: 5%; 
      width: 25%;
      background-color: rgba(66, 133, 244, 1);
      border-radius: 2px;
      cursor: pointer;
   }
-  a{
-     text-decoration:none;
-     color: white;
-  }
-  .Google{
-     position:relative;
+  
+  .Google {
      top:1px;
-     left:1px;
-     height: auto;
+     left:1px; 
      width: 20%;
   }
-  .text{
+  .text {
      background-color: rgba(66, 133, 244, 1);
      border: none;
      cursor: pointer;     
      left: 21%;
      top:40%;
-     width:79%;
-     font-family: 'Roboto';
+     width:79%; 
      font-size: 0.8vw; 
      font-weight: 500;
-     color: rgba(255, 255, 255, 1);
-     text-align: left;
+     color: rgba(255, 255, 255, 1); 
   }
-  .terms{
-     position: relative;
+  .terms {
      top:53%;
-     left: 5%;
-     height: auto;
+     left: 5%; 
      width: 40%;
-     font-family: 'Roboto';
      font-size: 1.1vw;
      color: rgba(79, 86, 105, 1);
-     text-align: left;
      line-height:1.5vw ;
   }
-  .footer{
-     position:relative;
+  .footer {
      top: 57%;
-     left: 5%;
-     height: auto;
-     width: 40%;
-     font-family: 'Roboto';
+     left: 5%; 
+     width: 40%; 
      font-size: 0.9vw;
      color: rgba(79, 86, 105, 1);
-     text-align: left;
   }
-  .moto{
-     
+  .moto { 
      top: 20%;
-     left: 5%;
-     height: auto;
+     left: 5%; 
      width: 70%;
-     font-family: 'Roboto';
      font-size: 3.2vw;
      font-weight: 300;
-     color: rgba(255, 255, 255, 1);
-     text-align: left;
+     color: rgba(255, 255, 255, 1);   
   }
-  .company{
+  .company {
       top: 85%;
-     left: 70%;
-     height: auto;
+     left: 70%; 
      width: 20%;
   }
  }
- @media only screen and (max-width:768px){
+ @media only screen and (max-width:768px) {
  
-     .body, .form, .title, .description, .text{
+    .body, .form, .title, .description, .text {
  
          position: absolute;
      
-      }
-     .body{
-       
+    }
+    .login-page, .signin, .Google, .terms, .footer {
+
+        position:relative;
+    
+    }
+    .title, .description, .text, .terms, .footer {
+
+        text-align: left;
+    
+    }
+    .description, .text, .terms, .footer , .title {
+
+        font-family: 'Roboto';
+    
+    }
+    .form, .description, .signin, .Google, .terms, .footer {
+
+        height: auto;
+    
+    }
+    .body {
        top: 0px;
        left: 0px;
        height: 150%;
        width: 100%;
        background-color:rgba(74, 20, 20, 1);
-     }
-     .login-page {
-         position: relative;
+    }
+    .login-page {    
          margin:20% 20% 20% 20%;
          height: 50%;
          width: 60%;
          background-color: rgba(255, 255, 255, 1);
-     }
-     .form{    
-         
+    }
+    .form {         
          top: 10%;
-         left: 10%;
-         height: auto;
+         left: 10%;     
          width: 11%;
-      }
-      .title{
-         
+    }
+    .title {   
          top: 9.5%;
          left: 27%;
          height:auto;
-         font-family: 'Neo Sans Cyr';
+         
          font-size: 6vw;
-         color: rgba(79, 86, 105, 1);
-         text-align: left;
-      }
-      .description{
-        
+         color: rgba(79, 86, 105, 1);     
+    }
+    .description {    
          top: 33%;
-         left: 5%;
-         height: auto;
-         width: 85%;
-         font-family: 'Roboto';
+         left: 5%;     
+         width: 85%;     
          font-size: 3.4vw;
-         color: rgba(79, 86, 105, 1);
-         text-align: left;
-      }
-      .signin{
-         position: relative;
+         color: rgba(79, 86, 105, 1);     
+    }
+    .signin {     
          top: 52%;
          left: 5%;
-         height:auto;
          width: 50%;
          background-color: rgba(66, 133, 244, 1);
          border-radius: 2px;
          cursor: pointer;
-      }
-      a{
-         text-decoration:none;
-         color: white;
-      }
-      .Google{
-         position:relative;
+    } 
+    .Google {   
          top:1px;
-         left:1px;
-         height: auto;
+         left:1px;     
          width: 20%;
-      }
-      .text{
+    }
+    .text {
          background-color: rgba(66, 133, 244, 1);
          border: none;
          cursor: pointer;         
          left: 21%;
          top:35%;
-         width:79%;
-         font-family: 'Roboto';
+         width:79%;     
          font-size: 2.0vw; 
          font-weight: 500;
-         color: rgba(255, 255, 255, 1);
-         text-align: left;
-      }
-      .terms{
-         position: relative;
+         color: rgba(255, 255, 255, 1);     
+    }
+    .terms {     
          top:53%;
-         left: 5%;
-         height: auto;
-         width: 85%;
-         font-family: 'Roboto';
+         left: 5%;     
+         width: 85%;     
          font-size: 2.5vw;
-         color: rgba(79, 86, 105, 1);
-         text-align: left;
+         color: rgba(79, 86, 105, 1);     
          line-height:3.0vw ;
-      }
-      .footer{
-         position:relative;
+    }
+    .footer {     
          top: 65%;
-         left: 5%;
-         height: auto;
-         width: 80%;
-         font-family: 'Roboto';
+         left: 5%;     
+         width: 80%;     
          font-size: 2.5vw;
-         color: rgba(79, 86, 105, 1);
-         text-align: left;
-      }
-     .logo, .moto, .company{
- 
-            display:none;
- 
-     }
+         color: rgba(79, 86, 105, 1);     
+    }
+    .logo, .moto, .company {
+
+        display:none;
+
+    }
  }
