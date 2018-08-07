@@ -1,9 +1,9 @@
 
 export class Member{
-    employee_id:string;
+    employeeID:string;
     name:string;   
     email:string;
     imageurl:string;
     // Token:string;  
-    designation: string;  
+    userType: string;  
 }

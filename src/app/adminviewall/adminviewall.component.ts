@@ -25,8 +25,8 @@ export class AdminviewallComponent implements OnInit {
 
   onChange(newType, email) {
     for (let member of this.memberArray) {
-      if (member.Email == email) {
-        member.UserType = newType;
+      if (member.email == email) {
+        member.userType = newType;
         console.log(member);
         console.log("User type changed");
       }

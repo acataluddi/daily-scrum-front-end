@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   email = "";
   image = "";
   displayMember() {
-    this.id = this.member.employee_id;
+    this.id = this.member.employeeID;
     this.name = this.member.name;
     this.email = this.member.email;
     this.image = this.member.imageurl;

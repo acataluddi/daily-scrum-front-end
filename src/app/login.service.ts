@@ -29,7 +29,7 @@ export class LoginService {
 
   loginMember(member1: Member) {
     this.member = member1;
-    this.API(this.member.employee_id,this.member.name,this.member.email,this.member.designation)
+    this.API(this.member.employeeID,this.member.name,this.member.email,this.member.userType)
     this.router.navigate(['/dashboard']);
   }
   // apiurl="http://localhost:8081/DailyScrum/CRUDController";
@@ -52,13 +52,13 @@ export class LoginService {
 
   API (id,name,mail,des){
     var params = {
-      employee_id:id,
+      employeeID:id,
       name:name,
       email:mail,
-      designation:des
+      userType:des
     }
     var http = new XMLHttpRequest()
-    http.open('POST','http://localhost:8081/DailyScrum/CRUDController')
+    http.open('POST','http://10.4.6.82:8081/DailyScrum-BackEnd/CRUDController')
     // http.setRequestHeader('Content-type', 'application/json')
     http.send(JSON.stringify(params))
     var body = http.response;

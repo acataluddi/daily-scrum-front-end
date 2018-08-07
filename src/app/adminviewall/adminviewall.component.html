@@ -10,11 +10,11 @@
         </div>
 
         <div class="section rowstyle member" *ngFor="let member of memberArray | paginate: {itemsPerPage:8, currentPage: p}">
-          <div class="header">{{member.Name}}</div>
-          <div class="header email">{{member.Email}}</div>
+          <div class="header">{{member.name}}</div>
+          <div class="header email">{{member.email}}</div>
           <div class="header">
             <select class="custom-select" name="userType" #role="ngModel" [(ngModel)]="member.UserType" (ngModelChange)="onChange($event, member.Email)">
-              <option selected>{{member.UserType}}</option>
+              <option selected>{{member.userType}}</option>
               <option *ngFor="let type of userTypes">{{type}}</option>
             </select>
           </div>
