@@ -16,3 +16,12 @@ export class MemberT{
     employeeID:string;
     pageID: number;
 }
+
+export class Hero{
+    employeeID:string;
+    name: string;
+    email:string;
+    userType: string;
+    // memberID: number;
+    // pageID: number;
+}
