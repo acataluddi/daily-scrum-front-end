@@ -5,3 +5,7 @@ export class Member{
     email:string;
     userType: string;  
 }
+
+export class GMember{
+    id_token:string;
+}
