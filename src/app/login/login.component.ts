@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Member,MemberT,Hero } from "../model/member-model";
+import { Member} from "../model/member-model";
 import {AuthService,GoogleLoginProvider} from 'angular-6-social-login';
 import { Router } from '@angular/router';
 import { LoginService } from "../service/login.service";
@@ -18,18 +18,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.initializeMember();
-    // this.getHeroes();
-    this.addHeroes();
+    // this.getMembers();
   }
   
   member: Member;
   initializeMember() {
     this.member = {
-      employeeID: '',
+      memberID: '',
       name: '',
       email: '',
-      imageurl: '',
-      // Token: '',
       userType: ''
     }
   }
@@ -42,34 +39,26 @@ export class LoginComponent implements OnInit {
       (userData) => {
         console.log(socialPlatform + " sign in data : ", userData);
         this.member = {
-          employeeID: userData.id,
-          name: userData.name,
-          email: userData.email,
-          imageurl: userData.image,
-          // Token: userData.token,
-          userType: "user"
+          memberID:userData.id,
+          name:userData.name, 
+          email:userData.email, 
+          userType:'user'
         }
-        this.loginservice.loginMember(this.member);
+        this.loginservice.loginMember(this.member)
+            .subscribe(msg => {
+              console.log(msg.message);
+              if(msg.message === "registered" || msg.message === "User exists"){
+                localStorage.setItem("logged", "true");
+                this.router.navigate(['/dashboard']);
+              }
+            });
       }
     );
   }
 
-  members: MemberT[];
-  getHeroes(): void {
-    this.loginservice.getHeroes()
+  members: Member[];
+  getMembers(): void {
+    this.loginservice.getMembers()
         .subscribe(members => console.log(members));
-  }
-
-
-  hero: Hero;
-  addHeroes(): void {
-    this.hero = {
-      employeeID:'34576888542',
-      name:'Neeraj', 
-      email:'yyyy@gmail.com', 
-      userType:'admin'
-    }
-    this.loginservice.addHero(this.hero)
-        .subscribe(msg => console.log(msg));
   }
 }

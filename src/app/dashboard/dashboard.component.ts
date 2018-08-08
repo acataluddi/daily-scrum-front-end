@@ -18,26 +18,19 @@ export class DashboardComponent implements OnInit {
   
   
   ngOnInit() {
-    // this.initializeMember();
     this.member = this.loginservice.getMember();
     this.displayMember();
-    localStorage.getItem("logged");
-    
-    
+    localStorage.getItem("logged");   
   }
-
   
   id = "";
   name = "";
   email = "";
-  image = "";
-  // token = "";
+  userType = "";
   displayMember() {
-    this.id = this.member.employeeID;
+    this.id = this.member.memberID;
     this.name = this.member.name;
     this.email = this.member.email;
-    this.image = this.member.imageurl;
-    // this.token = this.member.Token;
-    
+    this.userType = this.member.userType;    
   }
 }
