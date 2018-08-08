@@ -16,12 +16,15 @@ export class LoginComponent implements OnInit {
     public router: Router,
     private loginservice: LoginService) { }
 
+   
+
   ngOnInit() {
     this.initializeMember();
     
   }
   
   member: Member;
+  
   initializeMember() {
     this.member = {
       Id: '',
@@ -31,6 +34,8 @@ export class LoginComponent implements OnInit {
       Token: '',
       UserType: ''
     }
+    
+    
   }
   public socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;

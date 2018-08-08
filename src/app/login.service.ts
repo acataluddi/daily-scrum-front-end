@@ -15,7 +15,7 @@ export class LoginService {
   
   }
   member: Member;
-  loggedIn;
+  logged = "false";
   
   getStatus(){
     localStorage.setItem("logged", "false");
@@ -33,7 +33,5 @@ export class LoginService {
   getMember(): Member {
     return this.member;
   }
-  getlogin(){
-    return this.loggedIn;
-  }
+  
 }
