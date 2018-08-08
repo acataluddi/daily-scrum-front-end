@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from "../model/member-model";
-import {
-  AuthService,
-  GoogleLoginProvider
-} from 'angular-6-social-login';
+import {AuthService,GoogleLoginProvider} from 'angular-6-social-login';
 import { Router } from '@angular/router';
 import { LoginService } from "../login.service";
+
 
 @Component({
   selector: 'app-login',
@@ -18,10 +16,15 @@ export class LoginComponent implements OnInit {
     public router: Router,
     private loginservice: LoginService) { }
 
+   
+
   ngOnInit() {
     this.initializeMember();
+    
   }
+  
   member: Member;
+  
   initializeMember() {
     this.member = {
       Id: '',
@@ -31,6 +34,8 @@ export class LoginComponent implements OnInit {
       Token: '',
       UserType: ''
     }
+    
+    
   }
   public socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
