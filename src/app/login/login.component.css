@@ -31,14 +31,14 @@
      position: fixed;
      top: 0px;
      left: 0px;
-     height:auto;
+     height:100%;
      width: 100%;
      background-color: rgba(74, 20, 20, 1);
      
   }
   .login-page {
-     margin:9% 13%;
-     height: 70vh;
+     margin:10% 13%;
+     height: 65vh;
      width: auto;
      background-color: rgba(255, 255, 255, 1);
   }

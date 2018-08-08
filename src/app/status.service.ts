@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { LoginService } from "./login.service";
 
 
+
 @Injectable()
 export class AuthGuard implements CanActivate {
  
     constructor(private router: Router , private loginservice:LoginService) { }
  
-    loggedin;
+    
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) :boolean {
  
         

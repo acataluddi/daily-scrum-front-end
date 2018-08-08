@@ -14,7 +14,6 @@ export class DashboardComponent implements OnInit {
   constructor(public router: Router , private loginservice: LoginService) { }
 
   member: Member;
-  loggedin;
   
   
   ngOnInit() {
