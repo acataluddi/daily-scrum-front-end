@@ -1,49 +1,31 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div>
-  <div>
+<div class="grid-container">
+  <!-- <div class="task_id">
     Task id : {{task.task_id}}
+  </div> -->
+
+  <div class="description">
+    {{task.description}}
   </div>
-  <div>
-    Hours spent : {{task.hours_spent}}
+  <div class="time">
+    <div class="time_border">
+        <div *ngIf="task.hours_spent>0">
+          {{task.hours_spent}} hour
+        </div>
+        {{task.minutes_spent}} minutes
+    </div>
   </div>
-  <div>
-    Minutes spent : {{task.minutes_spent}}
+  <div class="impediments">
+      <!-- <i class="material-icons md-24 md-dark ">info
+          </i> -->
+
+    
+          <img class="img" src="../../assets/error.png" *ngIf="task.task_completed===true">
+    {{task.impediments}}
   </div>
-  <div>
-    Impediments : {{task.impediments}}
-  </div>
-  <div>
-    Description : {{task.description}}
-  </div>
-  <div>
-    Task completed : {{task.task_completed}}
+
+  <div class="tick">
+    <img class="img" src="../../assets/tick.png" *ngIf="task.task_completed===true">
+    <img class="img" src="../../assets/empty.png" *ngIf="task.task_completed===false">
   </div>
 </div>
 
