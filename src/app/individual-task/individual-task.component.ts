@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Task } from "../model/task-model";
 
 @Component({
@@ -8,9 +8,9 @@ import { Task } from "../model/task-model";
 })
 export class IndividualTaskComponent implements OnInit {
 
+  @Input() task: Task;
   constructor() { }
 
   ngOnInit() {
   }
-
 }

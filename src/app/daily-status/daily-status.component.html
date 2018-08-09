@@ -1,4 +1,8 @@
-<p>
-  daily-status works!
-</p>
-<app-individual-task></app-individual-task>
+<div>
+  Total time : {{total_hours_spent}}Hours {{total_minutes_spent}}Minutes.
+</div>
+<div class="split left">
+  <div *ngFor="let task of Mocktasks">
+    <app-individual-task [task]=task></app-individual-task>
+  </div>
+</div>
