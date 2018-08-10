@@ -1,32 +1,29 @@
-<div class="grid-container">
-  <!-- <div class="task_id">
-    Task id : {{task.task_id}}
-  </div> -->
-
+<div class="part_1">
+  <div class="tick">
+    <img class="img" src="../../assets/empty.png">
+  </div>
   <div class="description">
     {{task.description}}
   </div>
-  <div class="time">
-    <div class="time_border">
-        <div *ngIf="task.hours_spent>0">
-          {{task.hours_spent}} hour
-        </div>
-        {{task.minutes_spent}} minutes
+</div>
+<div class="time">
+  <div class="time_border" *ngIf="task.hours_spent>0 || task.minutes_spent>0">
+    <div *ngIf="task.hours_spent>0">
+      {{task.hours_spent}} hour
     </div>
-  </div>
-  <div class="impediments">
-      <!-- <i class="material-icons md-24 md-dark ">info
-          </i> -->
-
-    
-          <img class="img" src="../../assets/error.png" *ngIf="task.task_completed===true">
-    {{task.impediments}}
+    {{task.minutes_spent}} minutes
   </div>
 
-  <div class="tick">
-    <img class="img" src="../../assets/tick.png" *ngIf="task.task_completed===true">
-    <img class="img" src="../../assets/empty.png" *ngIf="task.task_completed===false">
+  <div class="add_hours" *ngIf="task.hours_spent===0 && task.minutes_spent===0">
+      Add Hours Spent
   </div>
+  <div class="add_impediment" *ngIf="task.impediments== null">
+      Add Impediments
+  </div>
+</div>
+
+<div class="impediments" *ngIf="task.impediments!= null">
+  <img class="img_impediment" src="../../assets/impediment.png" align="top"> {{task.impediments}}
 </div>
 
 

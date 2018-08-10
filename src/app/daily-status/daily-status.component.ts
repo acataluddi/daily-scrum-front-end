@@ -12,7 +12,8 @@ import { ProcessIndividualTaskService } from '../service/process-individual-task
 export class DailyStatusComponent implements OnInit {
 
   task: Task;
-  Mocktasks: Task[];
+  MockYesterdayTasks: Task[];
+  MockTodayTasks: Task[];
 
   task_id;
   hours_spent;
@@ -20,8 +21,14 @@ export class DailyStatusComponent implements OnInit {
   impediments;
   description;
   task_completed;
-  total_hours_spent=0;
-  total_minutes_spent=0;
+  total_hours_spent = 0;
+  total_minutes_spent = 0;
+
+  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  d = new Date();
+  month;
+  date;
+  year;
 
   constructor(
     private taskservice: ProcessIndividualTaskService
@@ -29,15 +36,20 @@ export class DailyStatusComponent implements OnInit {
 
   ngOnInit() {
     this.getTasks();
+    this.month = this.months[this.d.getMonth()];
+    this.date = this.d.getDate();
+    this.year = this.d.getFullYear();
   }
 
   getTasks() {
-    this.Mocktasks = this.taskservice.getTasks();
-    var totalhour=0;
+    this.MockYesterdayTasks = this.taskservice.getYesterdayTasks();
+    this.MockTodayTasks = this.taskservice.getTodayTasks();
+
+    var totalhour = 0;
     var totalminute = 0;
-    for (let task of this.Mocktasks) {
-      totalhour+=task.hours_spent;
-      totalminute+=task.minutes_spent;
+    for (let task of this.MockYesterdayTasks) {
+      totalhour += task.hours_spent;
+      totalminute += task.minutes_spent;
       // if (task.task_id === 1) {
       //   this.task_id = task.task_id;
       //   this.hours_spent = task.hours_spent;
@@ -48,14 +60,14 @@ export class DailyStatusComponent implements OnInit {
       // }
     }
     //convering extra minutes to hours;
-    var extrahour=0;
-    if(totalminute>=60){
-      extrahour = Math.floor(totalminute/60);
-      totalminute=totalminute%60;
+    var extrahour = 0;
+    if (totalminute >= 60) {
+      extrahour = Math.floor(totalminute / 60);
+      totalminute = totalminute % 60;
     }
-    totalhour+=extrahour;
-    this.total_hours_spent=totalhour;
-    this.total_minutes_spent=totalminute;
+    totalhour += extrahour;
+    this.total_hours_spent = totalhour;
+    this.total_minutes_spent = totalminute;
   }
 
 }
