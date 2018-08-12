@@ -1,3 +1,24 @@
+/* customizing the scroll bar */
+
+/* width */
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: rgba(241, 241, 241, 1);
+  border-radius: 150px;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(214, 214, 214, 1);
+}
+
 .part_1 {
   display: flex;
   margin-top: 32px;
@@ -6,6 +27,32 @@
 .img {
   height: 24px;
   width: 24px;
+}
+.text_description{
+  width: 500px;
+  height: 100px;
+  /* padding: 12px 20px; */
+  /* box-sizing: border-box; */
+  border: none;
+  /* background-color: #f8f8f8; */
+  /* font-size: 16px; */
+  resize: none;
+  display:inline-block;
+  /* margin-left: 40px; */
+
+}
+
+.text_impediment{
+  width: 500px;
+  height: 100px;
+  /* padding: 12px 20px; */
+  /* box-sizing: border-box; */
+  border: none;
+  background-color: rgba(0, 0, 0, 0.0);
+  /* font-size: 16px; */
+  resize: none;
+  /* margin-left: 40px; */
+
 }
 
 .description {
@@ -85,12 +132,47 @@
 }
 
 div.add_impediment:hover,
-div.add_hours:hover {
+div.add_hours:hover,
+div.update_value:hover,
+div.cancel_edit:hover {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
 }
 
 div.add_impediment:active,
-div.add_hours:active {
+div.add_hours:active,
+div.update_value:active,
+div.cancel_edit:active {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.update_value{
+  margin-left: 40px;
+  font-family: 'Roboto';
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+  text-align: left;
+  margin-top: 13px;
+  cursor: pointer;
+  padding: 4px 16px 5px 16px;
+}
+
+.cancel_edit{
+  margin-left: 40px;
+  font-family: 'Roboto';
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
+  text-align: left;
+  margin-top: 13px;
+  cursor: pointer;
+  padding: 4px 16px 5px 16px;
+}
+
+
+.make_changes{
+  
+  display: flex;
 }

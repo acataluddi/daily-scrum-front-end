@@ -1,3 +1,24 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  /* height: 700px; Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
 .header {
   height: 60px;
 }
@@ -112,4 +133,47 @@
 
 .total_time {
   display: flex;
+}
+
+.img_add_new_task {
+  height: 24px;
+  width: 24px;
+}
+
+.add_task_label{
+  
+font-family: 'Roboto';
+font-size: 16px;
+color: rgba(0, 0, 0, 0.5);
+text-align: left;
+line-height: 24px;
+margin-left: 16px;
+}
+
+.new_task_field{
+  display: flex;
+  cursor: pointer;
+  margin-top: 32px;
+}
+
+div.new_task_field:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+div.new_task_field:active {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  /* padding: 12px 20px; */
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+  margin-left: 40px;
 }

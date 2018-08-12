@@ -2,9 +2,14 @@
   <div class="tick">
     <img class="img" src="../../assets/empty.png">
   </div>
-  <div class="description">
+  <div class="description" 
+  (click)="edit_description=true" 
+  *ngIf="edit_description==false && task.description!= null">
     {{task.description}}
   </div>
+  <div class="description" *ngIf="edit_description==true || task.description== null">
+      <textarea  class="text_description" placeholder="Add description" (click)="edit_description=true">{{task.description}}</textarea>
+    </div>
 </div>
 <div class="time">
   <div class="time_border" *ngIf="task.hours_spent>0 || task.minutes_spent>0">
@@ -17,13 +22,25 @@
   <div class="add_hours" *ngIf="task.hours_spent===0 && task.minutes_spent===0">
       Add Hours Spent
   </div>
-  <div class="add_impediment" *ngIf="task.impediments== null">
+  <div class="add_impediment" *ngIf="edit_impediment==false && task.impediments== null" (click)="edit_impediment=true">
       Add Impediments
   </div>
 </div>
-
-<div class="impediments" *ngIf="task.impediments!= null">
+<div class="impediments" *ngIf="edit_impediment==false && task.impediments!= null" (click)="edit_impediment=true">
   <img class="img_impediment" src="../../assets/impediment.png" align="top"> {{task.impediments}}
+</div>
+<div class="impediments" *ngIf="edit_impediment==true">
+    <textarea  class="text_impediment" placeholder="Add Impediments" (click)="edit_impediments=true">{{task.impediments}}</textarea>
+</div>
+
+<div class="make_changes" *ngIf="edit_description==true || edit_impediment==true">
+    <div class="cancel_edit"  (click)="edit_description=false; edit_impediment=false;" >
+        CANCEL
+      </div>
+    
+    <div class="update_value" >
+      UPDATE
+    </div>
 </div>
 
 

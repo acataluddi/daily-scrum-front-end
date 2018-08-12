@@ -9,8 +9,13 @@ import { Task } from "../model/task-model";
 export class IndividualTaskComponent implements OnInit {
 
   @Input() task: Task;
+
+  edit_description;
+  edit_impediment;
   constructor() { }
 
   ngOnInit() {
+    this.edit_description=false;
+    this.edit_impediment=false;
   }
 }

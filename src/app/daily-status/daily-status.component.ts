@@ -12,6 +12,7 @@ import { ProcessIndividualTaskService } from '../service/process-individual-task
 export class DailyStatusComponent implements OnInit {
 
   task: Task;
+  emptyTask: Task;
   MockYesterdayTasks: Task[];
   MockTodayTasks: Task[];
 
@@ -29,7 +30,7 @@ export class DailyStatusComponent implements OnInit {
   month;
   date;
   year;
-
+  myvalue;
   constructor(
     private taskservice: ProcessIndividualTaskService
   ) { }
@@ -39,6 +40,8 @@ export class DailyStatusComponent implements OnInit {
     this.month = this.months[this.d.getMonth()];
     this.date = this.d.getDate();
     this.year = this.d.getFullYear();
+    this.myvalue=true;
+    this.initializeEmptyTask();
   }
 
   getTasks() {
@@ -70,4 +73,15 @@ export class DailyStatusComponent implements OnInit {
     this.total_minutes_spent = totalminute;
   }
 
+
+  initializeEmptyTask(){
+    this.emptyTask = {
+      task_id: 0,
+      description: null,
+      hours_spent: 0,
+      minutes_spent: 0,
+      impediments: null,
+      task_completed: false
+    }
+  }
 }
