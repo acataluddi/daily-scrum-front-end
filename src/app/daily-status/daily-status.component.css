@@ -3,64 +3,47 @@
 }
 
 /* Create two equal columns that floats next to each other */
+
 .column {
   float: left;
   width: 50%;
   padding: 10px;
-  /* height: 700px; Should be removed. Only for demonstration */
 }
 
 /* Clear floats after the columns */
+
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
 
+.left-part{
+  padding-left: 168px;
+  box-sizing: border-box;
+}
 
+.right-part{
+  padding-right: 128px;
+  box-sizing: border-box;
+}
 
 .header {
   height: 60px;
 }
-/* Split the screen in half */
-
-.split {
-  height: 100%;
-  width: 50%;
-  position: fixed;
-  z-index: 1;
-  top: 1;
-  bottom: 1;
-  overflow-x: hidden;
-  box-sizing: border-box;
-}
-
 .yesterday_header {
-  /* padding-left: 160px; */
   margin-bottom: 8px;
 }
 
 .today_header {
-  /* padding-left: 160px; */
-  margin-bottom: 8px;
-}
-
-
-
-/* Control the left side */
-
-.left {
-  left: 1;
-  padding-left: 160px;
-}
-
-/* Control the right side */
-
-.right {
-  right: 0;
+  padding-top: 14px;
+  padding-bottom: 14px;
   padding-left: 41px;
-
-  padding-right: 127px;
+  font-family: 'Roboto';
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(79, 86, 105, 1);
+  text-align: left;
 }
 
 /* customizing the scroll bar */
@@ -84,6 +67,17 @@
   background: rgba(214, 214, 214, 1);
 }
 
+.last_edit_label{
+  font-family: 'Roboto';
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: left;
+  line-height: 24px;
+  padding-left: 16px;
+  padding-top: 4px;
+  margin-top: 21px;
+}
+
 .total_time_border {
   display: flex;
   text-align: center;
@@ -102,10 +96,24 @@
 }
 
 .today_task_header {
-  margin-top: 14px;
+  cursor: pointer;
   font-family: 'Roboto';
   font-size: 18px;
+  font-weight: 500;
   color: rgba(79, 86, 105, 1);
+  text-align: left;
+}
+
+.today_task_label{
+
+font-family: 'Roboto';
+font-size: 13px;
+color: rgba(0, 0, 0, 0.5);
+text-align: left;
+line-height: 24px;
+padding-top: 12px;
+padding-bottom: 15px;
+padding-left: 41px;
 }
 
 .spent_text {
@@ -133,6 +141,7 @@
 
 .total_time {
   display: flex;
+  padding-bottom: 8px;
 }
 
 .img_add_new_task {
@@ -140,23 +149,23 @@
   width: 24px;
 }
 
-.add_task_label{
-  
-font-family: 'Roboto';
-font-size: 16px;
-color: rgba(0, 0, 0, 0.5);
-text-align: left;
-line-height: 24px;
-margin-left: 16px;
+.add_task_label {
+  font-family: 'Roboto';
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: left;
+  line-height: 24px;
+  margin-left: 16px;
 }
 
-.new_task_field{
+.new_task_field {
   display: flex;
   cursor: pointer;
   margin-top: 32px;
 }
 
-div.new_task_field:hover {
+div.new_task_field:hover,
+div.today_ header:hover {
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
 }
@@ -168,7 +177,6 @@ div.new_task_field:active {
 textarea {
   width: 100%;
   height: 150px;
-  /* padding: 12px 20px; */
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;

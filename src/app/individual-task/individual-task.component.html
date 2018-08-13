@@ -2,45 +2,52 @@
   <div class="tick">
     <img class="img" src="../../assets/empty.png">
   </div>
-  <div class="description" 
-  (click)="edit_description=true" 
-  *ngIf="edit_description==false && task.description!= null">
+  <div class="description" (click)="edit_description=true" *ngIf="edit_description==false && task.description!= null">
     {{task.description}}
   </div>
   <div class="description" *ngIf="edit_description==true || task.description== null">
-      <textarea  class="text_description" placeholder="Add description" (click)="edit_description=true">{{task.description}}</textarea>
-    </div>
+    <textarea class="text_description" placeholder="Add description" (click)="edit_description=true" [(ngModel)]="task.description">{{task.description}}</textarea>
+  </div>
 </div>
 <div class="time">
-  <div class="time_border" *ngIf="task.hours_spent>0 || task.minutes_spent>0">
+  <div class="time_border" *ngIf="(task.hours_spent>0 || task.minutes_spent>0) && edit_time_spent==false" (click)="edit_time_spent=true">
     <div *ngIf="task.hours_spent>0">
       {{task.hours_spent}} hour
     </div>
     {{task.minutes_spent}} minutes
   </div>
 
-  <div class="add_hours" *ngIf="task.hours_spent===0 && task.minutes_spent===0">
-      Add Hours Spent
+  <div class="add_hours" *ngIf="task.hours_spent===0 && task.minutes_spent===0 && edit_time_spent==false" (click)="edit_time_spent=true">
+    Add Hours Spent
   </div>
-  <div class="add_impediment" *ngIf="edit_impediment==false && task.impediments== null" (click)="edit_impediment=true">
-      Add Impediments
+  <div *ngIf="edit_time_spent==true" class="add_hours">
+    <select class="custom-select" name="hourSpent" [(ngModel)]="task.hours_spent" (ngModelChange)="onChangeHour($event, task); ">
+      <option *ngFor="let i of timeArray(hours).fill(1); let j=index">{{j}}</option>
+    </select>
+    <select class="custom-select" name="minuteSpent" [(ngModel)]="task.minutes_spent" (ngModelChange)="onChangeMinute($event, task);">
+      <option *ngFor="let i of timeArray(minutes).fill(1); let j=index">{{j}}</option>
+    </select>
+  </div>
+
+  <div class="add_impediment" *ngIf="edit_impediment==false && task.impediments== null" (click)="edit_impediment=true; getTasks();">
+    Add Impediments
   </div>
 </div>
 <div class="impediments" *ngIf="edit_impediment==false && task.impediments!= null" (click)="edit_impediment=true">
   <img class="img_impediment" src="../../assets/impediment.png" align="top"> {{task.impediments}}
 </div>
 <div class="impediments" *ngIf="edit_impediment==true">
-    <textarea  class="text_impediment" placeholder="Add Impediments" (click)="edit_impediments=true">{{task.impediments}}</textarea>
+  <textarea class="text_impediment" placeholder="Add Impediments" (click)="edit_impediments=true">{{task.impediments}}</textarea>
 </div>
 
-<div class="make_changes" *ngIf="edit_description==true || edit_impediment==true">
-    <div class="cancel_edit"  (click)="edit_description=false; edit_impediment=false;" >
-        CANCEL
-      </div>
-    
-    <div class="update_value" >
-      UPDATE
-    </div>
+<div class="make_changes" *ngIf="edit_description==true || edit_impediment==true || edit_time_spent==true">
+  <div class="cancel_edit" (click)="edit_description=false; edit_impediment=false; edit_time_spent=false;">
+    CANCEL
+  </div>
+
+  <div class="update_value" (click)="edit_time_spent=false; edit_description=false;">
+    UPDATE
+  </div>
 </div>
 
 

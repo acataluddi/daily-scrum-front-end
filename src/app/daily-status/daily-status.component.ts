@@ -3,7 +3,6 @@ import { Project } from "../model/project-model";
 import { IndividualTaskComponent } from "../individual-task/individual-task.component";
 import { Task } from '../model/task-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
-
 @Component({
   selector: 'app-daily-status',
   templateUrl: './daily-status.component.html',
@@ -24,6 +23,7 @@ export class DailyStatusComponent implements OnInit {
   task_completed;
   total_hours_spent = 0;
   total_minutes_spent = 0;
+  showDatePicker = false;
 
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   d = new Date();
@@ -40,10 +40,12 @@ export class DailyStatusComponent implements OnInit {
     this.month = this.months[this.d.getMonth()];
     this.date = this.d.getDate();
     this.year = this.d.getFullYear();
-    this.myvalue=true;
+    this.myvalue = true;
     this.initializeEmptyTask();
   }
-
+  timeArray = Array; //Array type captured in a variable
+  hours: number = 23;
+  minutes: number = 59;
   getTasks() {
     this.MockYesterdayTasks = this.taskservice.getYesterdayTasks();
     this.MockTodayTasks = this.taskservice.getTodayTasks();
@@ -74,7 +76,7 @@ export class DailyStatusComponent implements OnInit {
   }
 
 
-  initializeEmptyTask(){
+  initializeEmptyTask() {
     this.emptyTask = {
       task_id: 0,
       description: null,
@@ -84,4 +86,23 @@ export class DailyStatusComponent implements OnInit {
       task_completed: false
     }
   }
+
+  // onChange(newtime, task_id, t) {
+  //   for (let yesterdayTask of this.MockYesterdayTasks) {
+  //     if (yesterdayTask.task_id == task_id) {
+  //       if(t===1){
+  //         yesterdayTask.hours_spent = newtime;
+  //         console.log(yesterdayTask);
+  //         console.log("Hours spent changed");
+  //       }
+  //       if(t===2){
+  //         yesterdayTask.minutes_spent = newtime;
+  //         console.log(yesterdayTask);
+  //         console.log("Minutes spent changed");
+  //       }
+  //     }
+  //   }
+  // }
+
+
 }

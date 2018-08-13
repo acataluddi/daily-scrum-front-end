@@ -1,58 +1,51 @@
+<div class="header"></div>
+<!-- <div *ngFor="let i of timeArray(hours).fill(1); let j=index">
+  {{j+1}}
+</div>
+<div *ngFor="let i of timeArray(minutes).fill(1); let j=index">
+    {{j+1}}
+  </div> -->
 <div class="row">
-  <div class="column">
-      <div class="total_time">
-          <div class="total_time_border">
-            <div class="total_time_text"> {{total_hours_spent}}h {{total_minutes_spent}}m</div>
-            <div class="spent_text"> spent</div>
-          </div>
-        </div>
-    <div style="overflow:scroll; height:530px;">
-        <div *ngFor="let yesterdayTask of MockYesterdayTasks">
-          <app-individual-task [task]=yesterdayTask></app-individual-task>
-        </div>
+  <div class="column left-part">
+    <div class="yesterday_header">
+      <div class="yesterday_task_header">Yesterday's Tasks</div>
+    </div>
+    <div class="total_time">
+      <div class="total_time_border">
+        <div class="total_time_text"> {{total_hours_spent}}h {{total_minutes_spent}}m</div>
+        <div class="spent_text"> spent</div>
+      </div>
+      <div class="last_edit_label">Last edit: Wed, 2:30 PM</div>
+    </div>
+    <div style="overflow-y:auto; overflow-x:hidden; height:400px;">
+      <div *ngFor="let yesterdayTask of MockYesterdayTasks">
+        <app-individual-task [task]=yesterdayTask></app-individual-task>
+      </div>
     </div>
   </div>
-  <div class="column" style="overflow:scroll; height:580px;">
-    <div *ngFor="let todayTask of MockTodayTasks" >
-      <app-individual-task [task]=todayTask></app-individual-task>
+  <div class="column right-part">
+    <div class="today_header">
+      <div class="today_task_header" (click)="showDatePicker=true">Today, {{month}} {{date}}, {{year}} </div>
+      <div>
+        <input type="date" *ngIf="showDatePicker==true">
+      </div>
     </div>
-    
-  <div class="new_task_field" (click)="myvalue=false" *ngIf="myvalue==true">
-      <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
+    <div class="today_task_label">Write about your tasks for today</div>
+    <div style="overflow-y:auto; overflow-x:hidden; height:410px; padding-left: 41px;">
+      <div *ngFor="let todayTask of MockTodayTasks">
+        <app-individual-task [task]=todayTask></app-individual-task>
+      </div>
 
-    <div class="add_task_label">
-        Add new task here</div>
-  </div>
+      <div class="new_task_field" (click)="myvalue=false" *ngIf="myvalue==true">
+        <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
 
-  <div class="add_task_label" *ngIf="myvalue==false">
+        <div class="add_task_label">
+          Add new task here</div>
+      </div>
 
-      <app-individual-task [task]=emptyTask></app-individual-task>
-  </div>
-</div>
+      <div class="img_add_new_task" *ngIf="myvalue==false">
 
-
-<!-- <div class="header"></div>
-<div class=" yesterday_header left">
-  <div class="yesterday_task_header">Yesterday's Tasks</div>
-  <div class="total_time">
-    <div class="total_time_border">
-      <div class="total_time_text"> {{total_hours_spent}}h {{total_minutes_spent}}m</div>
-      <div class="spent_text"> spent</div>
+        <app-individual-task [task]=emptyTask></app-individual-task>
+      </div>
     </div>
   </div>
-</div>
-<div class="split left">
-  <div *ngFor="let yesterdayTask of MockYesterdayTasks">
-    <app-individual-task [task]=yesterdayTask></app-individual-task>
-  </div>
-</div>
-
-<div class=" today_header right">
-  <div class="yesterday_task_header">Today, {{month}} {{date}}, {{year}} </div>
-</div>
-
-<div class="split right">
-    <div *ngFor="let todayTask of MockYesterdayTasks" >
-      <app-individual-task [task]=todayTask></app-individual-task>
-    </div>
-</div> -->
