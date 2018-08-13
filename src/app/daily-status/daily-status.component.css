@@ -118,20 +118,27 @@
   padding-top: 13px;
   padding-bottom: 11px;
   padding-left: 39px;
-  font-family: 'Roboto';
-  font-size: 18px;
-  font-weight: 500;
-  color: rgba(79, 86, 105, 1);
   text-align: left;
+  display: flex;
 }
 
 .today_task_header {
   cursor: pointer;
+  text-align: left;
   font-family: 'Roboto';
   font-size: 18px;
   font-weight: 500;
   color: rgba(79, 86, 105, 1);
+}
+
+.edit_status{
+  font-family: 'Roboto';
+  font-size: 13px;
+  color: rgba(178, 178, 178, 1);
   text-align: left;
+  padding-left: 12px;
+  padding-top: 5px;
+  padding-bottom: 4px;
 }
 
 .today_task_label {
@@ -141,8 +148,21 @@
   text-align: left;
   line-height: 24px;
   padding-top: 12px;
-  padding-bottom: 15px;
-  padding-left: 41px;
+  padding-bottom: 12px;
+  padding-left: 39px;
+}
+
+.part-3{
+  overflow-y:auto; 
+  overflow-x:hidden; 
+  height:400px; 
+  padding-left: 39px;
+}
+
+.new_task_field {
+  display: flex;
+  cursor: pointer;
+  margin-top: 32px;
 }
 
 .img_add_new_task {
@@ -159,12 +179,6 @@
   margin-left: 16px;
 }
 
-.new_task_field {
-  display: flex;
-  cursor: pointer;
-  margin-top: 32px;
-}
-
 div.new_task_field:hover,
 div.today_ header:hover {
   background-color: rgba(0, 0, 0, 0.1);
@@ -173,16 +187,4 @@ div.today_ header:hover {
 
 div.new_task_field:active {
   background-color: rgba(0, 0, 0, 0.5);
-}
-
-textarea {
-  width: 100%;
-  height: 150px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  background-color: #f8f8f8;
-  font-size: 16px;
-  resize: none;
-  margin-left: 40px;
 }

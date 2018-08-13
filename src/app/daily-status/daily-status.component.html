@@ -22,25 +22,25 @@
       <div>
         <input type="date" *ngIf="showDatePicker==true">
       </div>
+      <div class="edit_status">Saving..</div>
+      <div class="edit_status">Saved</div>
     </div>
 
-    <!-- <div class="today_task_label">Write about your tasks for today</div>
-    <div style="overflow-y:auto; overflow-x:hidden; height:410px; padding-left: 41px;">
+    <div class="today_task_label">Write about your tasks for today</div>
+    <div class="part-3">
       <div *ngFor="let todayTask of MockTodayTasks">
         <app-individual-task [task]=todayTask></app-individual-task>
       </div>
 
       <div class="new_task_field" (click)="myvalue=false" *ngIf="myvalue==true">
         <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
-
         <div class="add_task_label">
           Add new task here</div>
       </div>
 
       <div class="img_add_new_task" *ngIf="myvalue==false">
-
         <app-individual-task [task]=emptyTask></app-individual-task>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>
