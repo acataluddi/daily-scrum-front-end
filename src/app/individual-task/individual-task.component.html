@@ -5,8 +5,8 @@
   <div class="description" (click)="edit_description=true" *ngIf="edit_description==false && task.description!= null">
     {{task.description}}
   </div>
-  <div class="description" *ngIf="edit_description==true || task.description== null">
-    <textarea class="text_description" placeholder="Add description" (click)="edit_description=true" [(ngModel)]="task.description">{{task.description}}</textarea>
+  <div class="description"  *ngIf="edit_description==true || task.description== null">
+    <textarea class="text_description" #descinput (input)="newdesc = descinput.value" placeholder="Add description" (click)="edit_description=true">{{task.description}}</textarea>
   </div>
 </div>
 <div class="time">
@@ -21,7 +21,7 @@
     Add Hours Spent
   </div>
   <div *ngIf="edit_time_spent==true" class="add_hours">
-    <select class="custom-select" name="hourSpent" [(ngModel)]="task.hours_spent" (ngModelChange)="onChangeHour($event, task); ">
+    <select class="custom-select" name="hourSpent" #hourinput (input)="newdesc = descinput.value">
       <option *ngFor="let i of timeArray(hours).fill(1); let j=index">{{j}}</option>
     </select>
     <select class="custom-select" name="minuteSpent" [(ngModel)]="task.minutes_spent" (ngModelChange)="onChangeMinute($event, task);">
@@ -45,7 +45,7 @@
     CANCEL
   </div>
 
-  <div class="update_value" (click)="edit_time_spent=false; edit_description=false;">
+  <div class="update_value" (click)="edit_time_spent=false; edit_description=false; updateValues(task);">
     UPDATE
   </div>
 </div>

@@ -35,6 +35,17 @@ export class IndividualTaskComponent implements OnInit {
     console.log(task.minutes_spent);
     console.log("Minutes spent changed");
   }
+  newdesc="";
+  updateValues(task){
+    console.log(this.newdesc);
+    if(this.newdesc===""){
+      task.description=null;
+    }
+    else{
+      task.description=this.newdesc;
+      this.newdesc="";
 
+    }    
+  }
 
 }
