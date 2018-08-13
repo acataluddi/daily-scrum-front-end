@@ -38,14 +38,9 @@ export class IndividualTaskComponent implements OnInit {
   newdesc="";
   updateValues(task){
     console.log(this.newdesc);
-    if(this.newdesc===""){
-      task.description=null;
-    }
-    else{
+    if(this.newdesc!=""){
       task.description=this.newdesc;
-      this.newdesc="";
-
-    }    
+    }
   }
 
 }

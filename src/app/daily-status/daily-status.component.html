@@ -1,28 +1,21 @@
 <div class="header"></div>
-<!-- <div *ngFor="let i of timeArray(hours).fill(1); let j=index">
-  {{j+1}}
-</div>
-<div *ngFor="let i of timeArray(minutes).fill(1); let j=index">
-    {{j+1}}
-  </div> -->
 <div class="row">
   <div class="column left-part">
-    <div class="yesterday_header">
-      <div class="yesterday_task_header">Yesterday's Tasks</div>
-    </div>
+    <div class="yesterday_task_header">Yesterday's Tasks</div>
     <div class="total_time">
       <div class="total_time_border">
         <div class="total_time_text"> {{total_hours_spent}}h {{total_minutes_spent}}m</div>
-        <div class="spent_text"> spent</div>
+        <div class="spent_text">Hours spent</div>
       </div>
       <div class="last_edit_label">Last edit: Wed, 2:30 PM</div>
     </div>
-    <div style="overflow-y:auto; overflow-x:hidden; height:400px;">
+    <div class="part-2">
       <div *ngFor="let yesterdayTask of MockYesterdayTasks">
         <app-individual-task [task]=yesterdayTask></app-individual-task>
       </div>
     </div>
   </div>
+
   <div class="column right-part">
     <div class="today_header">
       <div class="today_task_header" (click)="showDatePicker=true">Today, {{month}} {{date}}, {{year}} </div>
@@ -30,7 +23,8 @@
         <input type="date" *ngIf="showDatePicker==true">
       </div>
     </div>
-    <div class="today_task_label">Write about your tasks for today</div>
+
+    <!-- <div class="today_task_label">Write about your tasks for today</div>
     <div style="overflow-y:auto; overflow-x:hidden; height:410px; padding-left: 41px;">
       <div *ngFor="let todayTask of MockTodayTasks">
         <app-individual-task [task]=todayTask></app-individual-task>
@@ -47,5 +41,6 @@
 
         <app-individual-task [task]=emptyTask></app-individual-task>
       </div>
-    </div>
+    </div> -->
   </div>
+</div>

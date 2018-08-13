@@ -24,36 +24,30 @@
   margin-top: 32px;
 }
 
-.img {
-  height: 24px;
-  width: 24px;
-}
-.text_description{
-  width: 300px;
-  height: 100px;
-  border: none;
-  resize: none;
-  display:inline-block;
-
-}
-
-.text_impediment{
-  width: 250px;
-  height: 100px;
-  border: none;
-  background-color: rgba(0, 0, 0, 0.0);
-  resize: none;
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 5px;
 }
 
 .description {
   font-size: 16px;
   line-height: 24px;
-  margin-left: 16px;
-  margin-right: 65px;
+  margin-left: 21px;
   font-family: 'Roboto';
   font-size: 16px;
   color: rgba(79, 86, 105, 1);
   text-align: left;
+}
+
+.text_description {
+  width: 400px;
+  height: 100px;
+  border: none;
+  resize: none;
 }
 
 .time {
@@ -72,28 +66,29 @@
   border-width: 1px;
   border-radius: 4px;
   border-color: rgba(0, 0, 0, 0.1);
-  margin-left: 40px;
+  margin-left: 38px;
   margin-top: 8px;
-  padding: 4px 16px 5px 16px;
+  padding: 5px 16px 4px 16px;
 }
 
-.impediments {
-  background-color: rgba(241, 241, 241, 1);
-  padding: 16px;
-  border-radius: 2px;
+.add_hours {
+  margin-left: 38px;
   font-family: 'Roboto';
-  font-size: 14px;
-  color: rgba(79, 86, 105, 1);
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 1);
   text-align: left;
-  line-height: 24px;
-  margin-right: 65px;
-  margin-left: 40px;
-  margin-top: 8px;
+  margin-top: 13px;
+  cursor: pointer;
+  padding: 0px 0px 0px 0px;
 }
 
-.img_impediment {
+.custom-select {
+  font-family: Arial;
+  background-color: #ffffff;
+  font-size: 11pt;
+  width: 40px;
   height: 20px;
-  width: 20px;
 }
 
 .add_impediment {
@@ -106,19 +101,33 @@
   margin-top: 12px;
   cursor: pointer;
   /* margin-bottom: 5px; */
-  padding: 4px 16px 5px 16px;
+  padding: 0px 0px 0px 0px;
 }
 
-.add_hours {
-  margin-left: 40px;
+.impediments {
+  background-color: rgba(241, 241, 241, 1);
+  padding: 16px;
+  border-radius: 2px;
   font-family: 'Roboto';
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 1);
+  font-size: 14px;
+  color: rgba(79, 86, 105, 1);
   text-align: left;
-  margin-top: 13px;
-  cursor: pointer;
-  padding: 4px 16px 5px 16px;
+  line-height: 24px;
+  margin-left: 38px;
+  margin-top: 8px;
+}
+
+.img_impediment {
+  height: 20px;
+  width: 20px;
+}
+
+.text_impediment {
+  width: 250px;
+  height: 100px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.0);
+  resize: none;
 }
 
 div.add_impediment:hover,
@@ -134,45 +143,4 @@ div.add_hours:active,
 div.update_value:active,
 div.cancel_edit:active {
   background-color: rgba(0, 0, 0, 0.5);
-}
-
-
-.update_value{
-  margin-left: 40px;
-  font-family: 'Roboto';
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 1);
-  text-align: left;
-  margin-top: 13px;
-  cursor: pointer;
-  padding: 4px 16px 5px 16px;
-}
-
-.cancel_edit{
-  margin-left: 40px;
-  font-family: 'Roboto';
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 1);
-  text-align: left;
-  margin-top: 13px;
-  cursor: pointer;
-  padding: 4px 16px 5px 16px;
-}
-
-
-.make_changes{
-  
-  display: flex;
-}
-
-
-.custom-select{
-    
-  font-family: Arial;
-  background-color: #ffffff;
-  font-size: 11pt;
-  width: 40px;
-  height: 20px;
 }
