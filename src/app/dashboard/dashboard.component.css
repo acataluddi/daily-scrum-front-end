@@ -1,0 +1,262 @@
+* {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
+  -webkit-padding-start: 0;
+}
+
+.MainDiv {
+  height: 768px;
+  width: 1366px;
+  background-color: rgb(255, 255, 255);
+}
+
+.TopDiv {
+  height: 50px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+}
+
+.ProjectHeadingDiv {
+  margin-left: 88px;
+  background-color: rgb(255, 255, 255);
+  height: 50%;
+  width: 10%;
+}
+
+.ProjectHeading {
+  text-align: left;
+  font-family: 'Roboto';
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(79, 86, 105, 1);
+  width: 134px;
+  height: 21px;
+  margin-top: 5px;
+}
+
+.AddProjectDiv {
+  margin-left: 5%;
+  height: 70%;
+  width: 138px;
+  background-color: rgb(5, 87, 255);
+  border-radius: 4px;
+  display: flex;
+  border-style: none;
+}
+
+.AddProjectButton {
+  text-align: center;
+  margin: 5%;
+  font-family: 'Roboto';
+  color: white;
+  font-weight: bold;
+}
+
+.PlusSignDiv {
+  margin: 5%;
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  text-align: center;
+}
+
+.PlusSignButton {
+  height: 65%;
+  width: 65%;
+  margin: 15%;
+  position: relative;
+}
+
+.BottomDiv {
+  margin-top: 10px;
+  margin-left: 88px;
+  margin-right: 88px;
+  height: 100%;
+  width: 1161px;
+  background-color: white;
+}
+
+.ProjectBoxDiv {
+  float: left;
+  height: 172px;
+  width: 352px;
+  margin-right: 35px;
+  margin-top: 35px;
+}
+
+.ProjectBoxDivColor1 {
+  background-color: rgb(12, 33, 93);
+}
+
+.ProjectBoxDivColor2 {
+  background-color: rgb(255, 177, 166);
+}
+
+.ProjectBoxDivColor3 {
+  background-color: rgb(63, 205, 195);
+}
+
+.ProjectNameBox {
+  height: 70px;
+  width: 100%;
+}
+
+.ProjectNameBoxDivColor1 {
+  background-color: rgb(12, 33, 93);
+}
+
+.ProjectNameBoxDivColor2 {
+  background-color: rgb(255, 177, 166);
+}
+
+.ProjectNameBoxDivColor3 {
+  background-color: rgb(63, 205, 195);
+}
+
+.ProjectName {
+  font-weight: bold;
+  color: white;
+  font-size: 18px;
+  font-family: 'Roboto';
+  padding-top: 16px;
+  padding-left: 24px;
+}
+
+.InnerProjectBox {
+  margin-top: 54px;
+  margin-bottom: 30px;
+  margin-left: 36px;
+  margin-right: 24px;
+  height: 32px;
+  display: flex;
+}
+
+.InnerProjectBoxDivColor1 {
+  background-color: rgb(12, 33, 93);
+}
+
+.InnerProjectBoxDivColor2 {
+  background-color: rgb(255, 177, 166);
+}
+
+.InnerProjectBoxDivColor3 {
+  background-color: rgb(63, 205, 195);
+}
+
+.SmallCircle {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  margin-left: -12px;
+  border: 2px solid white;
+}
+
+.SmallCircleDiv1Odd {
+  background-color: rgb(212, 54, 178);
+}
+
+.SmallCircleName {
+  color: white;
+  padding: 25%;
+}
+
+.SmallCircleDiv1Even {
+  background-color: rgb(34, 33, 22);
+}
+
+.SmallCircleDiv2 {
+  background-color: rgb(5, 87, 255);
+}
+
+.ExtraMembers {
+  padding-left: 4.5px;
+  padding-top: 2.5px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.DailyStatusDiv {
+  height: 32px;
+  width: 115px;
+  border-radius: 16px;
+  margin-left: 37px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+}
+
+.DailyStatus {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  padding: 6px 10px;
+  color: rgb(5, 87, 255);
+  font-family: 'Roboto'
+}
+
+.MenuDiv {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  margin-left: 7px;
+  background-color: rgb(255, 255, 255);
+  border: none;
+}
+
+.Dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.DropdownContent {
+  top: 40px;
+  left: -100px;
+  display: none;
+  position: absolute;
+  background-color: rgb(5, 87, 255);
+  width: 129px;
+  height: 80px;
+  border-radius: 4px;
+  z-index: 1;
+  border: none;
+}
+
+.Dropdown:focus .DropdownContent {
+  display: block;
+}
+
+.MenuDot {
+  padding-left: 6px;
+  padding-top: 7px;
+  text-align: center;
+  color: white;
+}
+
+.DropdownButtons {
+  color: white;
+  font-weight: bold;
+  border: none;
+}
+
+.EditButton {
+  background-color: rgb(5, 87, 255);
+  padding-top: 10px;
+}
+
+.DeleteButton {
+  margin-top: 20px;
+  background-color: rgb(5, 87, 255);
+}
+
+.BottomDiv:after {
+  content: "";
+  display: table;
+  clear: both;
+}

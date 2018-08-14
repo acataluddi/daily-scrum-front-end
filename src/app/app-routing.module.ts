@@ -10,7 +10,7 @@ import { AdminviewallComponent } from "./adminviewall/adminviewall.component";
 import {AuthGuard} from './status.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'project', component: ProjectComponent, canActivate:[AuthGuard] },
   { path: 'dashboard', component: DashboardComponent , canActivate:[AuthGuard]},
