@@ -16,6 +16,11 @@
       <div *ngFor="let yesterdayTask of MockYesterdayTasks">
         <app-individual-task [task]=yesterdayTask (timeChangeEvent)="modifyTime($event)"></app-individual-task>
       </div>
+      <div class="new_task_field" (click)="addYesterdayTask()" >
+        <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
+        <div class="add_task_label">
+          Add new task here</div>
+      </div>
     </div>
   </div>
 
@@ -37,11 +42,7 @@
         <app-individual-task [task]=todayTask></app-individual-task>
       </div>
 
-      <div class="img_add_new_task" *ngIf="myvalue==false">
-        <app-individual-task [task]=emptyTask></app-individual-task>
-      </div>
-
-      <div class="new_task_field" (click)="myvalue=false" *ngIf="myvalue==true">
+      <div class="new_task_field" (click)="addTodayTask()" >
         <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
         <div class="add_task_label">
           Add new task here</div>

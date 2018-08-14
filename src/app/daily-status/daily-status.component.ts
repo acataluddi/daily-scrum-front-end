@@ -43,7 +43,6 @@ export class DailyStatusComponent implements OnInit {
     this.date = this.d.getDate();
     this.year = this.d.getFullYear();
     this.myvalue = true;
-    this.initializeEmptyTask();
   }
   timeArray = Array; //Array type captured in a variable
   hours: number = 23;
@@ -119,6 +118,31 @@ export class DailyStatusComponent implements OnInit {
     }
   }
 
+  addTodayTask(){
+    var ts = new Task();
+    ts = this.initializeNew(ts);
+    this.MockTodayTasks.push(ts);
+
+  }
+
+  addYesterdayTask(){
+
+    var ts = new Task();
+    ts = this.initializeNew(ts);
+    this.MockYesterdayTasks.push(ts);
+  }
+
+   initializeNew(ts: Task):Task{
+    ts = {
+      task_id: 0,
+      description: null,
+      hours_spent: 0,
+      minutes_spent: 0,
+      impediments: null,
+      task_completed: false
+    }
+    return ts;
+  }
   // onChange(newtime, task_id, t) {
   //   for (let yesterdayTask of this.MockYesterdayTasks) {
   //     if (yesterdayTask.task_id == task_id) {
