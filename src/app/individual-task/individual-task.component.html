@@ -1,12 +1,15 @@
 <div class="part_1">
   <div>
-    <span class="dot"></span>
+    <span *ngIf="task.task_id%3===0" class="dot dot-color-1"></span>
+    <span *ngIf="task.task_id%2===0 && task.task_id%3!=0" class="dot dot-color-2"></span>
+    <span *ngIf="task.task_id%3!=0 && task.task_id%2!=0" class="dot dot-color-3"></span>
   </div>
   <div class="description" (click)="edit_description=true" *ngIf="edit_description==false && task.description!= null">
     {{task.description}}
   </div>
-  <div class="description" *ngIf="edit_description==true || task.description== null">
-    <textarea class="text_description" placeholder="Add description" (blur)="edit_description=false" [(ngModel)]="task.description">{{task.description}}</textarea>
+  <div class="description" (click)="edit_description=true" *ngIf="edit_description==true || task.description== null">
+    <textarea class="text_description" (click)="edit_description=true" placeholder="Add description" (blur)="edit_description=false"
+      [(ngModel)]="task.description">{{task.description}}</textarea>
   </div>
 </div>
 
@@ -30,7 +33,7 @@
     </select>
   </div>
 
-  <div class="add_impediment" *ngIf="edit_impediment==false && task.impediments== null" (click)="edit_impediment=true; getTasks();">
+  <div class="add_impediment" *ngIf="edit_impediment==false && task.impediments== null" (click)="edit_impediment=true;">
     Add Impediments
   </div>
 </div>

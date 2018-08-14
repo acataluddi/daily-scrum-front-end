@@ -27,10 +27,21 @@
 .dot {
   height: 15px;
   width: 15px;
-  background-color: #bbb;
   border-radius: 50%;
   display: inline-block;
   margin-top: 5px;
+}
+
+.dot-color-1 {
+  background-color: rgb(190, 114, 114);
+}
+
+.dot-color-2 {
+  background-color: rgb(24, 50, 104);
+}
+
+.dot-color-3 {
+  background-color: rgb(31, 132, 179);
 }
 
 .description {

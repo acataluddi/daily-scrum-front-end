@@ -25,12 +25,14 @@
 
 /* Create two equal columns that floats next to each other */
 
-.column {
+.column{
   float: left;
   width: 50%;
 }
-
 /* Clear floats after the columns */
+.row{
+  height: 90%;
+}
 
 .row:after {
   content: "";
@@ -109,7 +111,7 @@
 .part-2 {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 400px;
+  height: 480px;
   padding-left: 44px;
   padding-right: 65px;
 }
@@ -168,8 +170,8 @@
 
 .part-3{
   overflow-y:auto; 
-  overflow-x:hidden; 
-  height:400px; 
+  overflow-x:hidden;
+  height: 480px;
   padding-left: 39px;
 }
 
@@ -205,4 +207,17 @@ div.new_task_field:active,
 img.left-arrow:active,
 img.right-arrow:active {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Use a media query to add a breakpoint at 1010px: */
+@media screen and (max-width: 1010px) {
+.left-part{
+  visibility: hidden;
+  height: 0px;
+  width: 0px;
+}
+.column{
+  float: none;
+  width: 100%;
+}
 }
