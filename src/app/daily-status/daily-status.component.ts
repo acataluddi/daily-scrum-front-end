@@ -11,6 +11,7 @@ import { ProcessIndividualTaskService } from '../service/process-individual-task
 export class DailyStatusComponent implements OnInit {
 
   task: Task;
+  task1: Task;
   emptyTask: Task;
   MockYesterdayTasks: Task[];
   MockTodayTasks: Task[];
@@ -37,6 +38,7 @@ export class DailyStatusComponent implements OnInit {
 
   ngOnInit() {
     this.getTasks();
+    this.calculateTotalTime();
     this.month = this.months[this.d.getMonth()];
     this.date = this.d.getDate();
     this.year = this.d.getFullYear();
@@ -49,30 +51,6 @@ export class DailyStatusComponent implements OnInit {
   getTasks() {
     this.MockYesterdayTasks = this.taskservice.getYesterdayTasks();
     this.MockTodayTasks = this.taskservice.getTodayTasks();
-
-    var totalhour = 0;
-    var totalminute = 0;
-    for (let task of this.MockYesterdayTasks) {
-      totalhour += task.hours_spent;
-      totalminute += task.minutes_spent;
-      // if (task.task_id === 1) {
-      //   this.task_id = task.task_id;
-      //   this.hours_spent = task.hours_spent;
-      //   this.minutes_spent = task.minutes_spent;
-      //   this.impediments = task.impediments;
-      //   this.description = task.description;
-      //   this.task_completed = task.task_completed;
-      // }
-    }
-    //convering extra minutes to hours;
-    var extrahour = 0;
-    if (totalminute >= 60) {
-      extrahour = Math.floor(totalminute / 60);
-      totalminute = totalminute % 60;
-    }
-    totalhour += extrahour;
-    this.total_hours_spent = totalhour;
-    this.total_minutes_spent = totalminute;
   }
 
 
@@ -84,6 +62,60 @@ export class DailyStatusComponent implements OnInit {
       minutes_spent: 0,
       impediments: null,
       task_completed: false
+    }
+  }
+
+  totalhour = 0;
+  totalminute = 0;
+  calculateTotalTime() {
+    for (let task of this.MockYesterdayTasks) {
+      this.totalhour += task.hours_spent;
+      this.totalminute += task.minutes_spent;
+    }
+    //convering extra minutes to hours;
+    var extrahour = 0;
+    if (this.totalminute >= 60) {
+      extrahour = Math.floor(this.totalminute / 60);
+      this.totalminute = this.totalminute % 60;
+    }
+    this.totalhour += extrahour;
+    this.total_hours_spent = this.totalhour;
+    this.total_minutes_spent = this.totalminute;
+  }
+
+  modifyTime($event) {
+    this.task1 = $event;
+    console.log('performing event in parent');
+    this.totalhour = 0;
+    this.totalminute = 0;
+    var old_hour=0;
+    var old_minute=0;
+    for (let task of this.MockYesterdayTasks) {
+      if (task.task_id === this.task1.task_id) {
+        old_hour=this.task1.hours_spent;
+        old_minute=this.task1.minutes_spent;
+        this.totalhour = (this.totalhour + this.task1.hours_spent);
+        this.totalminute = (this.totalminute + this.task1.minutes_spent);
+      } else {
+        this.totalhour += task.hours_spent;
+        this.totalminute += task.minutes_spent;
+      }
+    }
+    //convering extra minutes to hours;
+    var extrahour = 0;
+    if (this.totalminute >= 60) {
+      extrahour = Math.floor(this.totalminute / 60);
+      this.totalminute = this.totalminute % 60;
+    }
+    this.totalhour += extrahour;
+    if((this.totalhour>24) || (this.totalhour===24 && this.totalminute>0)){
+      this.task1.hours_spent=old_hour;
+      this.task1.minutes_spent=old_minute;
+      alert('Total time worked cannot be more than 24 hours.');
+    }
+    else{
+      this.total_hours_spent = this.totalhour;
+      this.total_minutes_spent = this.totalminute;
     }
   }
 
@@ -103,6 +135,4 @@ export class DailyStatusComponent implements OnInit {
   //     }
   //   }
   // }
-
-
 }

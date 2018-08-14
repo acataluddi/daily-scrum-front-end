@@ -5,7 +5,7 @@
   <div class="description" (click)="edit_description=true" *ngIf="edit_description==false && task.description!= null">
     {{task.description}}
   </div>
-  <div class="description"  *ngIf="edit_description==true || task.description== null">
+  <div class="description" *ngIf="edit_description==true || task.description== null">
     <textarea class="text_description" placeholder="Add description" (blur)="edit_description=false" [(ngModel)]="task.description">{{task.description}}</textarea>
   </div>
 </div>
@@ -21,12 +21,12 @@
   <div class="add_hours" *ngIf="task.hours_spent===0 && task.minutes_spent===0 && edit_time_spent==false" (click)="edit_time_spent=true">
     Add Hours Spent
   </div>
-  <div *ngIf="edit_time_spent==true" class="add_hours"  (blur)="edit_time_spent=false">
-    <select class="custom-select" name="hourSpent" [(ngModel)]="task.hours_spent" (blur)="edit_time_spent=false">
-      <option *ngFor="let i of timeArray(hours).fill(1); let j=index" (blur)="edit_time_spent=false">{{j}}</option>
+  <div *ngIf="edit_time_spent==true" class="add_hours">
+    <select class="custom-select" name="hourSpent" [(ngModel)]="task.hours_spent" (blur)="edit_time_spent=false; emitTimeEvent(task);">
+      <option *ngFor="let i of timeArray(hours).fill(1); let j=index">{{j}}</option>
     </select>
-    <select class="custom-select" name="minuteSpent" [(ngModel)]="task.minutes_spent" (blur)="edit_time_spent=false">
-      <option *ngFor="let i of timeArray(minutes).fill(1); let j=index" (blur)="edit_time_spent=false">{{j}}</option>
+    <select class="custom-select" name="minuteSpent" [(ngModel)]="task.minutes_spent" (blur)="edit_time_spent=false; emitTimeEvent(task);">
+      <option *ngFor="let i of timeArray(minutes).fill(1); let j=index">{{j}}</option>
     </select>
   </div>
 
@@ -37,10 +37,10 @@
 
 
 <div class="impediments" *ngIf="edit_impediment==false && task.impediments!= null" (click)="edit_impediment=true">
-  <img class="img_impediment" src="../../assets/impediment.png" align="top"> 
-  {{task.impediments}}
+  <img class="img_impediment" src="../../assets/impediment.png" align="top"> {{task.impediments}}
 </div>
 
 <div class="impediments" *ngIf="edit_impediment==true">
-  <textarea class="text_impediment" placeholder="Add Impediments" (click)="edit_impediments=true" (blur)="edit_impediment=false" [(ngModel)]="task.impediments">{{task.impediments}}</textarea>
+  <textarea class="text_impediment" placeholder="Add Impediments" (click)="edit_impediments=true" (blur)="edit_impediment=false"
+    [(ngModel)]="task.impediments">{{task.impediments}}</textarea>
 </div>

@@ -11,7 +11,7 @@
     </div>
     <div class="part-2">
       <div *ngFor="let yesterdayTask of MockYesterdayTasks">
-        <app-individual-task [task]=yesterdayTask></app-individual-task>
+        <app-individual-task [task]=yesterdayTask (timeChangeEvent)="modifyTime($event)"></app-individual-task>
       </div>
     </div>
   </div>
@@ -25,7 +25,7 @@
       <img class="left-arrow" src="../../assets/arrow-left.png" align="top">
       <img class="right-arrow" src="../../assets/arrow-right.png" align="top">
       <div class="edit_status">Saving..</div>
-      <div class="edit_status">Saved</div>
+      <!-- <div class="edit_status">Saved</div> -->
     </div>
 
     <div class="today_task_label">Write about your tasks for today</div>
