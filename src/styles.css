@@ -23,6 +23,12 @@ body .bs-datepicker-container .bs-datepicker-head{
 .next{
     /* margin-right: 30px; */
 }
+
+.is-other-month{
+    /* color: white; */
+    /* visibility: hidden; */
+    
+}
   
   body .bs-datepicker-container .bs-datepicker-head span{     
   font-size: 20px;
