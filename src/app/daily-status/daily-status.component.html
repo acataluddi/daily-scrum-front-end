@@ -26,10 +26,20 @@
 
   <div class="column right-part">
     <div class="today_header">
-      <div class="today_task_header" (click)="showDatePicker=true">Today, {{month}} {{date}}, {{year}} </div>
+      
+      <div class="today_task_header" (click)="showDatePicker=true" *ngIf="showDatePicker===false">Today, {{month}} {{date}}, {{year}} </div>
+      
       <div>
-        <input type="date" *ngIf="showDatePicker==true">
-      </div>
+          <input type="text"
+          class="form-control"
+          [minDate]="minDate"
+          [maxDate]="maxDate"
+          #dp="bsDatepicker"
+          [bsConfig]= "datePickerConfig"
+          bsDatepicker [(bsValue)]="myDateValue"
+           *ngIf="showDatePicker===true"
+           (blur)="showDatePicker=false">
+        </div>
       <img class="left-arrow" src="../../assets/arrow-left.png" align="top">
       <img class="right-arrow" src="../../assets/arrow-right.png" align="top">
       <div class="edit_status">Saving..</div>

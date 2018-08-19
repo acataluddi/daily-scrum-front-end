@@ -3,6 +3,8 @@ import { Project } from "../model/project-model";
 import { IndividualTaskComponent } from "../individual-task/individual-task.component";
 import { Task } from '../model/task-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+
 @Component({
   selector: 'app-daily-status',
   templateUrl: './daily-status.component.html',
@@ -15,6 +17,8 @@ export class DailyStatusComponent implements OnInit {
   emptyTask: Task;
   MockYesterdayTasks: Task[];
   MockTodayTasks: Task[];
+  myDateValue: Date;
+  datePickerConfig: Partial<BsDatepickerConfig>;
 
   task_id;
   hours_spent;
@@ -34,7 +38,12 @@ export class DailyStatusComponent implements OnInit {
   myvalue;
   constructor(
     private taskservice: ProcessIndividualTaskService
-  ) { }
+  ) {
+    this.datePickerConfig = Object.assign({},{
+      containerClass: 'theme-orange',
+      showWeekNumbers: false
+    });
+   }
 
   ngOnInit() {
     this.getTasks();
@@ -43,6 +52,7 @@ export class DailyStatusComponent implements OnInit {
     this.date = this.d.getDate();
     this.year = this.d.getFullYear();
     this.myvalue = true;
+    this.myDateValue = new Date();
   }
   timeArray = Array; //Array type captured in a variable
   hours: number = 23;
@@ -142,6 +152,10 @@ export class DailyStatusComponent implements OnInit {
       task_completed: false
     }
     return ts;
+  }
+
+  onDateChange(newDate: Date) {
+    console.log(newDate);
   }
   // onChange(newtime, task_id, t) {
   //   for (let yesterdayTask of this.MockYesterdayTasks) {

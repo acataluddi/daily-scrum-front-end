@@ -120,7 +120,7 @@
   padding-top: 13px;
   padding-bottom: 11px;
   padding-left: 39px;
-  text-align: left;
+  /* text-align: left; */
   display: flex;
 }
 
