@@ -38,7 +38,7 @@
           [bsConfig]= "datePickerConfig"
           bsDatepicker [(bsValue)]="myDateValue"
            *ngIf="showDatePicker===true"
-           (blur)="showDatePicker=false">
+           (onHidden)="showDatePicker=false">
         </div>
       <img class="left-arrow" src="../../assets/arrow-left.png" align="top">
       <img class="right-arrow" src="../../assets/arrow-right.png" align="top">
