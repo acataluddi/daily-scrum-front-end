@@ -1,19 +1,25 @@
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
 /* Add application styles & imports to this file! */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
 body .bs-datepicker-container .bs-datepicker-head{
     background-color: #0558FF;
     outline: none;
     border: none;
     margin: none;
+    text-align: center;
   }
 
 .previous{
-    margin-left: 50px;
+    /* margin-left: 30px; */
+    /* margin-right: 20px; */
   }
 
 .next{
-    margin-right: 50px;
+    /* margin-right: 30px; */
 }
   
   body .bs-datepicker-container .bs-datepicker-head span{     
@@ -31,7 +37,8 @@ body .bs-datepicker-container .bs-datepicker-head{
   font-family: 'Helvetica Neue';
   font-size: 15px;
   font-weight: 500;
-  z-index: 10;
+  /* z-index: 10;
+  overflow: visible; */
   }
   /* body .bs-datepicker-container{
     background-color: blue;
