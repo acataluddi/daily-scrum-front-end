@@ -39,8 +39,8 @@
                *ngIf="showDatePicker===true"
                (onHidden)="showDatePicker=false"> {{month}} {{date}}, {{year}} </button>
             </div> -->
-      <img class="left-arrow" src="../../assets/arrow-left.png" align="top">
-      <img class="right-arrow" src="../../assets/arrow-right.png" align="top">
+      <img class="left-arrow" src="../../assets/arrow-left.png" align="top" (click)="getPreviousDate()">
+      <img class="right-arrow" src="../../assets/arrow-right.png" align="top" (click)="getNextDate()">
       <div class="edit_status">Saving..</div>
       <!-- <div class="edit_status">Saved</div> -->
     </div>

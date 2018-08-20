@@ -36,6 +36,8 @@ export class DailyStatusComponent implements OnInit {
   totalhour = 0;
   totalminute = 0;
 
+  newDate = new Date();
+
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   d = new Date();
   hour;
@@ -171,8 +173,8 @@ export class DailyStatusComponent implements OnInit {
     }
     return ts;
   }
-
   onDateChange(newDate: Date) {
+    this.newDate=newDate;
     var d1 = new Date(newDate);
     (d1.setDate(d1.getDate()-1));
     this.month = this.months[newDate.getMonth()];
@@ -186,6 +188,41 @@ export class DailyStatusComponent implements OnInit {
       this.todayval = this.month + " " + this.date + ", " + this.year;
       this.yesterdayval =this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
     }
+  }
+
+  getNextDate(){
+    var d1 = new Date(this.newDate);
+    (d1.setDate(d1.getDate()+1));
+    this.month = this.months[d1.getMonth()];
+    this.date = d1.getDate();
+    this.year = d1.getFullYear();
+    if ((this.month === this.d.getMonth()) && (this.date === this.d.getDate()) && (this.year === this.d.getFullYear())) {
+      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval ="Yesterday's Tasks";
+    }
+    else {
+      this.todayval = this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval =this.months[this.newDate.getMonth()] + " " + this.newDate.getDate() + ", " + this.newDate.getFullYear();
+    }
+    this.newDate=d1;
+    this.myDateValue=d1;
+  }
+  getPreviousDate(){
+    var d1 = new Date(this.newDate);
+    (d1.setDate(d1.getDate()-1));
+    this.month = this.months[this.newDate.getMonth()];
+    this.date = this.newDate.getDate();
+    this.year = this.newDate.getFullYear();
+    if ((this.newDate.getMonth() === this.d.getMonth()) && (this.newDate.getDate() === this.d.getDate()) && (this.newDate.getFullYear() === this.d.getFullYear())) {
+      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval ="Yesterday's Tasks";
+    }
+    else {
+      this.todayval = this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval =this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+    }
+    this.newDate=d1;
+    this.myDateValue=d1;
   }
   // onChange(newtime, task_id, t) {
   //   for (let yesterdayTask of this.MockYesterdayTasks) {
