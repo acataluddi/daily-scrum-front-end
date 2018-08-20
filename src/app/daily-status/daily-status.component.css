@@ -1,4 +1,5 @@
 /* To remove scrolling */
+
 /* html, body {
   max-width: 100%;
   max-height : 100%;
@@ -33,12 +34,14 @@
 
 /* Create two equal columns that floats next to each other */
 
-.column{
+.column {
   float: left;
   width: 50%;
 }
+
 /* Clear floats after the columns */
-.row{
+
+.row {
   height: 90%;
 }
 
@@ -141,21 +144,21 @@
   color: rgba(79, 86, 105, 1);
 }
 
-.left-arrow{
+.left-arrow {
   height: 24px;
   width: 24px;
   margin-left: 16px;
   cursor: pointer;
 }
 
-.right-arrow{
+.right-arrow {
   height: 24px;
   width: 24px;
   margin-left: 7px;
   cursor: pointer;
 }
 
-.edit_status{
+.edit_status {
   font-family: 'Roboto';
   font-size: 13px;
   color: rgba(178, 178, 178, 1);
@@ -176,9 +179,9 @@
   padding-left: 39px;
 }
 
-.part-3{
-  overflow-y:auto; 
-  overflow-x:hidden;
+.part-3 {
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 480px;
   padding-left: 39px;
 }
@@ -205,6 +208,7 @@
 
 div.new_task_field:hover,
 div.today_ header:hover,
+div.today_task_header:hover,
 img.left-arrow:hover,
 img.right-arrow:hover {
   background-color: rgba(0, 0, 0, 0.1);
@@ -218,14 +222,15 @@ img.right-arrow:active {
 }
 
 /* Use a media query to add a breakpoint at 1010px: */
+
 @media screen and (max-width: 1010px) {
-.left-part{
-  visibility: hidden;
-  height: 0px;
-  width: 0px;
-}
-.column{
-  float: none;
-  width: 100%;
-}
+  .left-part {
+    visibility: hidden;
+    height: 0px;
+    width: 0px;
+  }
+  .column {
+    float: none;
+    width: 100%;
+  }
 }
