@@ -225,12 +225,9 @@ img.right-arrow:active {
 
 @media screen and (max-width: 1010px) {
   .left-part {
-    visibility: hidden;
-    height: 0px;
-    width: 0px;
+    display: none;
   }
   .column {
-    float: none;
     width: 100%;
   }
 }

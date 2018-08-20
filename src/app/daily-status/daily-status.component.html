@@ -16,7 +16,7 @@
       <div *ngFor="let yesterdayTask of MockYesterdayTasks">
         <app-individual-task [task]=yesterdayTask (timeChangeEvent)="modifyTime($event)"></app-individual-task>
       </div>
-      <div class="new_task_field" (click)="addYesterdayTask()" >
+      <div class="new_task_field" (click)="addYesterdayTask()">
         <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
         <div class="add_task_label">
           Add new task here</div>
@@ -26,17 +26,10 @@
 
   <div class="column right-part">
     <div class="today_header">
-      
-      <div class="today_task_header" 
-      (click)="showDatePicker=true" 
-      type="text"
-          [minDate]="minDate"
-          [maxDate]="maxDate"
-          #dp="bsDatepicker"
-          [bsConfig]= "datePickerConfig"
-          bsDatepicker [(bsValue)]="myDateValue"
-           (onHidden)="showDatePicker=false">Today, {{month}} {{date}}, {{year}} </div>
-           <!-- <div>
+
+      <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate" #dp="bsDatepicker"
+        [bsConfig]="datePickerConfig" bsDatepicker [(bsValue)]="myDateValue" (onHidden)="showDatePicker=false">Today, {{month}} {{date}}, {{year}} </div>
+      <!-- <div>
               <button type="text"
               [minDate]="minDate"
               [maxDate]="maxDate"
@@ -58,7 +51,7 @@
         <app-individual-task [task]=todayTask></app-individual-task>
       </div>
 
-      <div class="new_task_field" (click)="addTodayTask()" >
+      <div class="new_task_field" (click)="addTodayTask()">
         <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
         <div class="add_task_label">
           Add new task here</div>

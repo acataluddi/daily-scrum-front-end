@@ -16,6 +16,11 @@ export class IndividualTaskComponent implements OnInit {
   edit_description;
   edit_impediment;
   edit_time_spent;
+
+  timeArray = Array; // Array type captured in a variable
+  hours = 24;
+  minutes = 60;
+  newdesc = '';
   constructor() { }
 
   ngOnInit() {
@@ -23,10 +28,6 @@ export class IndividualTaskComponent implements OnInit {
     this.edit_impediment = false;
     this.edit_time_spent = false;
   }
-
-  timeArray = Array; //Array type captured in a variable
-  hours: number = 24;
-  minutes: number = 60;
 
   // onChangeHour(newtime, task) {
   //   task.hours_spent = newtime;
@@ -38,10 +39,9 @@ export class IndividualTaskComponent implements OnInit {
   //   console.log(task.minutes_spent);
   //   console.log("Minutes spent changed");
   // }
-  newdesc = "";
   updateValues(task) {
     console.log(this.newdesc);
-    if (this.newdesc != "") {
+    if (this.newdesc !== '') {
       task.description = this.newdesc;
     }
   }
