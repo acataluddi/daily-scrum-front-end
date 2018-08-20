@@ -173,18 +173,18 @@ export class DailyStatusComponent implements OnInit {
   }
 
   onDateChange(newDate: Date) {
-    var newdayval;
+    var d1 = new Date(newDate);
+    (d1.setDate(d1.getDate()-1));
     this.month = this.months[newDate.getMonth()];
     this.date = newDate.getDate();
     this.year = newDate.getFullYear();
-    newdayval = this.month + " " + this.date + ", " + this.year;
     if ((newDate.getMonth() === this.d.getMonth()) && (newDate.getDate() === this.d.getDate()) && (newDate.getFullYear() === this.d.getFullYear())) {
       this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
       this.yesterdayval ="Yesterday's Tasks";
     }
     else {
-      this.todayval = newdayval;
-      this.yesterdayval ="Previous day's Tasks";
+      this.todayval = this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval =this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
     }
   }
   // onChange(newtime, task_id, t) {
