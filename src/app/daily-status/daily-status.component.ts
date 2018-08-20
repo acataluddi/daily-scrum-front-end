@@ -28,6 +28,13 @@ export class DailyStatusComponent implements OnInit {
   total_hours_spent = 0;
   total_minutes_spent = 0;
   showDatePicker = false;
+  timeArray = Array; //Array type captured in a variable
+  hours = 23;
+  minutes = 59;
+  todayval;
+  yesterdayval;
+  totalhour = 0;
+  totalminute = 0;
 
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   d = new Date();
@@ -56,17 +63,13 @@ export class DailyStatusComponent implements OnInit {
     this.year = this.d.getFullYear();
     this.myvalue = true;
     this.myDateValue = new Date();
+    this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+    this.yesterdayval ="Yesterday's Tasks";
   }
-  timeArray = Array; //Array type captured in a variable
-  hours: number = 23;
-  minutes: number = 59;
   getTasks() {
     this.MockYesterdayTasks = this.taskservice.getYesterdayTasks();
     this.MockTodayTasks = this.taskservice.getTodayTasks();
   }
-
-  totalhour = 0;
-  totalminute = 0;
   calculateTotalTime() {
     for (let task of this.MockYesterdayTasks) {
       this.totalhour += task.hours_spent;
@@ -134,30 +137,30 @@ export class DailyStatusComponent implements OnInit {
   }
 
   initializeNew(ts: Task): Task {
-    this.d=new Date();
+    this.d = new Date();
     this.monthval = this.d.getMonth();
-    this.monthval = this.monthval+1;
+    this.monthval = this.monthval + 1;
     this.date = this.d.getDate();
     this.year = this.d.getFullYear();
     this.hour = this.d.getHours();
     this.minute = this.d.getMinutes();
     this.second = this.d.getSeconds();
-    if(this.date<10){
-      this.date = '0'+this.date;
+    if (this.date < 10) {
+      this.date = '0' + this.date;
     }
-    if(this.monthval<10){
-      this.monthval = '0'+this.monthval;
+    if (this.monthval < 10) {
+      this.monthval = '0' + this.monthval;
     }
-    if(this.hour<10){
-      this.hour = '0'+this.hour;
+    if (this.hour < 10) {
+      this.hour = '0' + this.hour;
     }
-    if(this.minute<10){
-      this.minute = '0'+this.minute;
+    if (this.minute < 10) {
+      this.minute = '0' + this.minute;
     }
-    if(this.second<10){
-      this.second = '0'+this.second;
+    if (this.second < 10) {
+      this.second = '0' + this.second;
     }
-    var newid = parseInt(this.date.toString()+this.monthval.toString()+this.year.toString()+this.hour.toString()+this.minute.toString()+this.second.toString());
+    var newid = parseInt(this.date.toString() + this.monthval.toString() + this.year.toString() + this.hour.toString() + this.minute.toString() + this.second.toString());
     ts = {
       task_id: newid,
       description: '',
@@ -170,7 +173,19 @@ export class DailyStatusComponent implements OnInit {
   }
 
   onDateChange(newDate: Date) {
-    console.log(newDate);
+    var newdayval;
+    this.month = this.months[newDate.getMonth()];
+    this.date = newDate.getDate();
+    this.year = newDate.getFullYear();
+    newdayval = this.month + " " + this.date + ", " + this.year;
+    if ((newDate.getMonth() === this.d.getMonth()) && (newDate.getDate() === this.d.getDate()) && (newDate.getFullYear() === this.d.getFullYear())) {
+      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval ="Yesterday's Tasks";
+    }
+    else {
+      this.todayval = newdayval;
+      this.yesterdayval ="Previous day's Tasks";
+    }
   }
   // onChange(newtime, task_id, t) {
   //   for (let yesterdayTask of this.MockYesterdayTasks) {
