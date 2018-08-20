@@ -1,13 +1,15 @@
 <div class="part_1">
   <div>
-    <span *ngIf="task.task_id%3===0" class="dot dot-color-1"></span>
-    <span *ngIf="task.task_id%2===0 && task.task_id%3!=0" class="dot dot-color-2"></span>
-    <span *ngIf="task.task_id%3!=0 && task.task_id%2!=0" class="dot dot-color-3"></span>
+    <span *ngIf="task.task_id%7===0" class="dot dot-color-1"></span>
+    <span *ngIf="task.task_id%6===0 && task.task_id%7!=0" class="dot dot-color-2"></span>
+    <span *ngIf="task.task_id%5===0 && task.task_id%6!=0 && task.task_id%7!=0" class="dot dot-color-3"></span>
+    <span *ngIf="task.task_id%3===0 && task.task_id%5!=0  && task.task_id%6!=0 && task.task_id%7!=0" class="dot dot-color-4"></span>
+    <span *ngIf="task.task_id%3!=0 && task.task_id%5!=0  && task.task_id%6!=0 && task.task_id%7!=0" class="dot dot-color-5"></span>
   </div>
-  <div class="description" (click)="edit_description=true" *ngIf="edit_description==false && task.description!= null">
+  <div class="description" (click)="edit_description=true" *ngIf="edit_description==false && task.description!== ''">
     {{task.description}}
   </div>
-  <div class="description" (click)="edit_description=true" *ngIf="edit_description==true || task.description== null">
+  <div class="description" (click)="edit_description=true" *ngIf="edit_description==true || task.description=== ''">
     <textarea class="text_description" (click)="edit_description=true" placeholder="Add description" (blur)="edit_description=false"
       [(ngModel)]="task.description">{{task.description}}</textarea>
   </div>
@@ -33,13 +35,13 @@
     </select>
   </div>
 
-  <div class="add_impediment" *ngIf="edit_impediment==false && task.impediments== null" (click)="edit_impediment=true;">
+  <div class="add_impediment" *ngIf="edit_impediment==false && task.impediments== ''" (click)="edit_impediment=true;">
     Add Impediments
   </div>
 </div>
 
 
-<div class="impediments" *ngIf="edit_impediment==false && task.impediments!= null" (click)="edit_impediment=true">
+<div class="impediments" *ngIf="edit_impediment==false && task.impediments!= ''" (click)="edit_impediment=true">
   <img class="img_impediment" src="../../assets/impediment.png" align="top"> {{task.impediments}}
 </div>
 

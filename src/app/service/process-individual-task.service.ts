@@ -8,7 +8,7 @@ export class ProcessIndividualTaskService {
 
   MockYesterdaytask: Task[] = [
     {
-      task_id: 1,
+      task_id: 19082018101030,
       hours_spent: 0,
       minutes_spent: 56,
       impediments: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget leo urna. Pellentesque malesuada tincidunt nisi a pharetra. Donec nunc neque, malesuada sit amet accumsan quis, egestas et risus. Vestibulum elementum erat vel convallis porttitor.",
@@ -16,7 +16,7 @@ export class ProcessIndividualTaskService {
       task_completed: true
     },
     {
-      task_id: 2,
+      task_id: 19082018101500,
       hours_spent: 2,
       minutes_spent: 34,
       impediments: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget leo urna. Pellentesque malesuada tincidunt nisi a pharetra. Donec nunc neque, malesuada sit amet accumsan quis, egestas et risus. Vestibulum elementum erat vel convallis porttitor.",
@@ -24,15 +24,15 @@ export class ProcessIndividualTaskService {
       task_completed: false
     },
     {
-      task_id: 3,
+      task_id: 19082018122020,
       hours_spent: 0,
       minutes_spent: 0,
-      impediments: null,
+      impediments: '',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget leo urna. Pellentesque malesuada tincidunt nisi a pharetra. Donec nunc neque, malesuada sit amet accumsan quis, egestas et risus. Vestibulum elementum erat vel convallis porttitor. Quisque eu commodo lacus, quis facilisis elit. Pellentesque volutpat nibh et orci blandit volutpat. Cras eleifend neque non mattis lacinia. Aenean ac mauris sed ex volutpat malesuada ac eu eros.",
       task_completed: true
     },
     {
-      task_id: 4,
+      task_id: 19082018134030,
       hours_spent: 0,
       minutes_spent: 50,
       impediments: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget leo urna. Pellentesque malesuada tincidunt nisi a pharetra. Donec nunc neque, malesuada sit amet accumsan quis, egestas et risus. Vestibulum elementum erat vel convallis porttitor.",
@@ -40,10 +40,10 @@ export class ProcessIndividualTaskService {
       task_completed: true
     },
     {
-      task_id: 5,
+      task_id: 19082018153005,
       hours_spent: 2,
       minutes_spent: 0,
-      impediments: null,
+      impediments: '',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget leo urna. Pellentesque malesuada tincidunt nisi a pharetra. Donec nunc neque, malesuada sit amet accumsan quis, egestas et risus. Vestibulum elementum erat vel convallis porttitor. Quisque eu commodo lacus, quis facilisis elit. Pellentesque volutpat nibh et orci blandit volutpat. Cras eleifend neque non mattis lacinia. Aenean ac mauris sed ex volutpat malesuada ac eu eros.",
       task_completed: false
     }
@@ -51,7 +51,7 @@ export class ProcessIndividualTaskService {
 
   MockTodaytask: Task[] = [
     {
-      task_id: 1,
+      task_id: 20082018101110,
       hours_spent: 0,
       minutes_spent: 56,
       impediments: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget leo urna. Pellentesque malesuada tincidunt nisi a pharetra. Donec nunc neque, malesuada sit amet accumsan quis, egestas et risus. Vestibulum elementum erat vel convallis porttitor.",
@@ -59,7 +59,7 @@ export class ProcessIndividualTaskService {
       task_completed: true
     },
     {
-      task_id: 2,
+      task_id: 20082018114030,
       hours_spent: 2,
       minutes_spent: 34,
       impediments: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget leo urna. Pellentesque malesuada tincidunt nisi a pharetra. Donec nunc neque, malesuada sit amet accumsan quis, egestas et risus. Vestibulum elementum erat vel convallis porttitor.",
@@ -67,10 +67,10 @@ export class ProcessIndividualTaskService {
       task_completed: false
     },
     {
-      task_id: 3,
+      task_id: 20082018121020,
       hours_spent: 0,
       minutes_spent: 0,
-      impediments: null,
+      impediments: '',
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget leo urna. Pellentesque malesuada tincidunt nisi a pharetra. Donec nunc neque, malesuada sit amet accumsan quis, egestas et risus. Vestibulum elementum erat vel convallis porttitor. Quisque eu commodo lacus, quis facilisis elit. Pellentesque volutpat nibh et orci blandit volutpat. Cras eleifend neque non mattis lacinia. Aenean ac mauris sed ex volutpat malesuada ac eu eros.",
       task_completed: true
     }
