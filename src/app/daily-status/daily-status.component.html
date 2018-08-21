@@ -1,18 +1,17 @@
-<head>
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-</head>
-<div class="header"></div>
-<div class="row">
-  <div class="column left-part">
-    <div class="yesterday_task_header">{{yesterdayval}}</div>
-    <div class="total_time">
-      <div class="total_time_border">
-        <div class="total_time_text"> {{total_hours_spent}}h {{total_minutes_spent}}m</div>
-        <div class="spent_text">Hours spent</div>
+<!-- <div style="height:60px;"></div> -->
+<div class="main-part">
+  <div class="container left-part">
+    <div>
+      <div class="yesterday_task_header">{{yesterdayval}}</div>
+      <div class="total_time">
+        <div class="total_time_border">
+          <div class="total_time_text"> {{total_hours_spent}}h {{total_minutes_spent}}m</div>
+          <div class="spent_text">Hours spent</div>
+        </div>
+        <div class="last_edit_label">Last edit: Wed, 2:30 PM</div>
       </div>
-      <div class="last_edit_label">Last edit: Wed, 2:30 PM</div>
     </div>
-    <div class="part-2">
+    <div class="left-inner-part">
       <div *ngFor="let yesterdayTask of MockYesterdayTasks">
         <app-individual-task [task]=yesterdayTask (timeChangeEvent)="modifyTime($event)"></app-individual-task>
       </div>
@@ -24,38 +23,31 @@
     </div>
   </div>
 
-  <div class="column right-part">
-    <div class="today_header">
 
-      <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate" #dp="bsDatepicker"
-        [bsConfig]="datePickerConfig" bsDatepicker [(bsValue)]="myDateValue" (onHidden)="showDatePicker=false" (bsValueChange)="onDateChange($event)">{{todayval}}</div>
-      <!-- <div>
-              <button type="text"
-              [minDate]="minDate"
-              [maxDate]="maxDate"
-              #dp="bsDatepicker"
-              [bsConfig]= "datePickerConfig"
-              bsDatepicker [(bsValue)]="myDateValue"
-               *ngIf="showDatePicker===true"
-               (onHidden)="showDatePicker=false"> {{month}} {{date}}, {{year}} </button>
-            </div> -->
-      <img class="left-arrow" src="../../assets/arrow-left.png" align="top" (click)="getPreviousDate()">
+  <div class="container right-part">
+    <div>
+        <div class="today_header">
+
+            <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate" #dp="bsDatepicker"
+              [bsConfig]="datePickerConfig" bsDatepicker [(bsValue)]="myDateValue" (onHidden)="showDatePicker=false" (bsValueChange)="onDateChange($event)">{{todayval}}</div>
+              <img class="left-arrow" src="../../assets/arrow-left.png" align="top" (click)="getPreviousDate()">
       <img class="right-arrow" src="../../assets/arrow-right.png" align="top" (click)="getNextDate()">
       <div class="edit_status">Saving..</div>
       <!-- <div class="edit_status">Saved</div> -->
     </div>
-
     <div class="today_task_label">Write about your tasks for today</div>
-    <div class="part-3">
+    </div>
+    <div class="right-inner-part">
       <div *ngFor="let todayTask of MockTodayTasks">
-        <app-individual-task [task]=todayTask></app-individual-task>
-      </div>
+          <app-individual-task [task]=todayTask></app-individual-task>
+        </div>
 
-      <div class="new_task_field" (click)="addTodayTask()">
-        <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
-        <div class="add_task_label">
-          Add new task here</div>
-      </div>
+        <div class="new_task_field" (click)="addTodayTask()">
+          <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
+          <div class="add_task_label">
+            Add new task here</div>
+      </div>    
     </div>
   </div>
 </div>
+<!-- <div style="height:2.73%;"></div> -->
