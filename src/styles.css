@@ -1,12 +1,9 @@
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
-/* Add application styles & imports to this file! */
-
 html,
 body {
   max-width: 100%;
   max-height: 100%;
   overflow-x: hidden;
-  /* overflow-y: hidden; */
 }
 
 body .bs-datepicker-container .bs-datepicker-head {
@@ -15,20 +12,6 @@ body .bs-datepicker-container .bs-datepicker-head {
   border: none;
   margin: none;
   text-align: center;
-}
-
-.previous {
-  /* margin-left: 30px; */
-  /* margin-right: 20px; */
-}
-
-.next {
-  /* margin-right: 30px; */
-}
-
-.is-other-month {
-  /* color: white; */
-  /* visibility: hidden; */
 }
 
 body .bs-datepicker-container .bs-datepicker-head span {
@@ -46,13 +29,8 @@ body .bs-datepicker-container {
   font-weight: 500;
 }
 
-/* body .bs-datepicker-container{
-    background-color: blue;
-  } */
-
 body .bs-datepicker-container .bs-datepicker-body {
   background-color: #0558FF;
-  /* outline: none; */
   border: none;
   padding: 0px;
 }
@@ -60,14 +38,7 @@ body .bs-datepicker-container .bs-datepicker-body {
 body .bs-datepicker-container .bs-datepicker-head * {
   color: white;
   font-size: 20px;
-  /* font-weight: bold; */
 }
-
-/* .theme-orange .bs-datepicker-body table td span {
-  background-color: red; } */
-
-/* .theme-orange .bs-datepicker-body table td {
-  background-color: red; } */
 
 .theme-orange .bs-datepicker-body table td {
   color: white;
@@ -77,7 +48,6 @@ body .bs-datepicker-container .bs-datepicker-head * {
 
 .theme-orange .bs-datepicker-body table th {
   color: black;
-  /* letter-spacing: 2px; */
   font-weight: bold;
   font-family: 'Helvetica Neue';
   font-size: 16px
