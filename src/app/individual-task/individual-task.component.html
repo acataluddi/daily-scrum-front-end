@@ -6,10 +6,10 @@
     <span *ngIf="task.task_id%3===0 && task.task_id%5!=0  && task.task_id%6!=0 && task.task_id%7!=0" class="dot dot-color-4"></span>
     <span *ngIf="task.task_id%3!=0 && task.task_id%5!=0  && task.task_id%6!=0 && task.task_id%7!=0" class="dot dot-color-5"></span>
   </div>
-  <div #des class="description" *ngIf="task.description!==''" data-text="Add description" contenteditable="true" (blur)="updateDescription()">
+  <div #des class="description" spellcheck="false" *ngIf="task.description!==''" data-text="Add description" contenteditable="true" (blur)="updateDescription()">
     {{task.description}}
   </div>
-  <div #des class="description" *ngIf="task.description===''" data-text="Add description" contenteditable="true" (blur)="updateDescription()">
+  <div #des class="description" spellcheck="false" *ngIf="task.description===''" data-text="Add description" contenteditable="true" (blur)="updateDescription()">
   </div>
 </div>
 
@@ -39,6 +39,6 @@
 </div>
 
 
-<div class="impediments" #imp contenteditable="true" *ngIf="show_impediment==true" (blur)="updateImpediment()">
+<div class="impediments" spellcheck="false" #imp contenteditable="true" *ngIf="show_impediment==true" (blur)="updateImpediment()">
   <img class="img_impediment" src="../../assets/impediment.png" align="top"> {{task.impediments}}
 </div>
