@@ -23,10 +23,10 @@ export class IndividualTaskComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if(this.task.impediments === ""){
+    if (this.task.impediments === "") {
       this.show_impediment = false;
     }
-    else{
+    else {
       this.show_impediment = true;
     }
     this.edit_time_spent = false;
@@ -63,7 +63,7 @@ export class IndividualTaskComponent implements OnInit {
     console.log(this.task.impediments);
     this.task.impediments.replace('&nbsp;', '');
     if (this.task.impediments === "") {
-      this.show_impediment=false;
+      this.show_impediment = false;
       this.imp.nativeElement.innerHTML = "";
     }
     this
