@@ -231,7 +231,7 @@ img.right-arrow:active {
 }
 
 @media screen and (max-width: 379px) {
-  .today_task_label{
+  .today_task_label {
     font-size: 12px;
   }
   .today_task_header {
@@ -247,13 +247,13 @@ img.right-arrow:active {
     height: 20px;
     width: 20px;
   }
-  .edit_status{
+  .edit_status {
     font-size: 10px;
   }
 }
 
 @media screen and (max-width: 340px) {
-  .today_task_label{
+  .today_task_label {
     font-size: 11px;
   }
   .today_task_header {
@@ -269,7 +269,7 @@ img.right-arrow:active {
     height: 16px;
     width: 16px;
   }
-  .edit_status{
+  .edit_status {
     font-size: 9px;
   }
 }
