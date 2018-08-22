@@ -120,3 +120,11 @@ body .bs-datepicker-container .bs-datepicker-head * {
     left: 5px !important;
   }
 }
+
+@media screen and (max-width: 359px) {
+  body .bs-datepicker-container {
+    position: fixed;
+    width: 305px;
+    left: 5px !important;
+  }
+}

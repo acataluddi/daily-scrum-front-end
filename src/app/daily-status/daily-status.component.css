@@ -229,3 +229,20 @@ img.right-arrow:active {
     width: 100%;
   }
 }
+
+@media screen and (max-width: 359px) {
+  .today_task_header {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(79, 86, 105, 1);
+  }
+  .left-arrow {
+    height: 20px;
+    width: 20px;
+    margin-left: 10px;
+  }
+  .right-arrow {
+    height: 20px;
+    width: 20px;
+  }
+}
