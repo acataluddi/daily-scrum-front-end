@@ -20,6 +20,10 @@ export class DailyStatusComponent implements OnInit {
   datePickerConfig: Partial<BsDatepickerConfig>;
 
   task_id;
+  oldtodaytask: Task;
+  oldyesterdaytask: Task;
+  creatednewtoday=false;
+  creatednewyesterday=false;
   hours_spent;
   minutes_spent;
   impediments;
@@ -58,6 +62,8 @@ export class DailyStatusComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.oldtodaytask= new Task;
+    this.oldyesterdaytask=new Task;
     this.getTasks();
     this.calculateTotalTime();
     this.month = this.months[this.d.getMonth()];
@@ -125,17 +131,43 @@ export class DailyStatusComponent implements OnInit {
   }
 
   addTodayTask() {
-    var ts = new Task();
-    ts = this.initializeNew(ts);
-    this.MockTodayTasks.push(ts);
-
+    if(this.creatednewtoday===true){
+      if(this.oldtodaytask.description!==''){
+        var ts = new Task();
+        ts = this.initializeNew(ts);
+        this.oldtodaytask=ts;
+        this.MockTodayTasks.push(ts);
+        this.creatednewtoday=true;         
+      }
+    }
+    else if(this.creatednewtoday===false){
+      var ts = new Task();
+      console.log(this.oldtodaytask);
+      ts = this.initializeNew(ts);
+      this.oldtodaytask=ts;
+      this.MockTodayTasks.push(ts);
+      this.creatednewtoday=true; 
+    }
   }
 
   addYesterdayTask() {
-
-    var ts = new Task();
-    ts = this.initializeNew(ts);
-    this.MockYesterdayTasks.push(ts);
+    if(this.creatednewyesterday===true){
+      if(this.oldyesterdaytask.description!==''){
+        var ts = new Task();
+        ts = this.initializeNew(ts);
+        this.oldyesterdaytask=ts;
+        this.MockYesterdayTasks.push(ts);
+        this.creatednewyesterday=true;         
+      }
+    }
+    else if(this.creatednewyesterday===false){
+      var ts = new Task();
+      console.log(this.oldyesterdaytask);
+      ts = this.initializeNew(ts);
+      this.oldyesterdaytask=ts;
+      this.MockYesterdayTasks.push(ts);
+      this.creatednewyesterday=true; 
+    }
   }
 
   initializeNew(ts: Task): Task {
@@ -224,20 +256,4 @@ export class DailyStatusComponent implements OnInit {
     this.newDate=d1;
     this.myDateValue=d1;
   }
-  // onChange(newtime, task_id, t) {
-  //   for (let yesterdayTask of this.MockYesterdayTasks) {
-  //     if (yesterdayTask.task_id == task_id) {
-  //       if(t===1){
-  //         yesterdayTask.hours_spent = newtime;
-  //         console.log(yesterdayTask);
-  //         console.log("Hours spent changed");
-  //       }
-  //       if(t===2){
-  //         yesterdayTask.minutes_spent = newtime;
-  //         console.log(yesterdayTask);
-  //         console.log("Minutes spent changed");
-  //       }
-  //     }
-  //   }
-  // }
 }
