@@ -6,12 +6,10 @@
     <span *ngIf="task.task_id%3===0 && task.task_id%5!=0  && task.task_id%6!=0 && task.task_id%7!=0" class="dot dot-color-4"></span>
     <span *ngIf="task.task_id%3!=0 && task.task_id%5!=0  && task.task_id%6!=0 && task.task_id%7!=0" class="dot dot-color-5"></span>
   </div>
-  <div class="description" (click)="edit_description=true" *ngIf="edit_description==false && task.description!== ''">
+  <div #des class="description" *ngIf="task.description!==''" data-text="Add description" contenteditable="true" (blur)="updateDescription()">
     {{task.description}}
   </div>
-  <div class="description" (click)="edit_description=true" *ngIf="edit_description==true || task.description=== ''">
-    <textarea class="text_description" (click)="edit_description=true" placeholder="Add description" (blur)="edit_description=false"
-      [(ngModel)]="task.description">{{task.description}}</textarea>
+  <div #des class="description" *ngIf="task.description===''" data-text="Add description" contenteditable="true" (blur)="updateDescription()">
   </div>
 </div>
 
@@ -35,17 +33,13 @@
     </select>
   </div>
 
-  <div class="add_impediment" *ngIf="edit_impediment==false && task.impediments== ''" (click)="edit_impediment=true;">
+  <div class="add_impediment" *ngIf="task.impediments== '' && show_impediment==false" (click)="show_impediment=true;">
     Add Impediments
   </div>
 </div>
 
 
-<div class="impediments" *ngIf="edit_impediment==false && task.impediments!= ''" (click)="edit_impediment=true">
-  <img class="img_impediment" src="../../assets/impediment.png" align="top"> {{task.impediments}}
-</div>
-
-<div class="impediments" *ngIf="edit_impediment==true">
-  <textarea class="text_impediment" placeholder="Add Impediments" (click)="edit_impediments=true" (blur)="edit_impediment=false"
-    [(ngModel)]="task.impediments">{{task.impediments}}</textarea>
+<div class="impediments" #imp  contenteditable="true" *ngIf="show_impediment==true" (blur)="updateImpediment()">
+  <!-- <img class="img_impediment" src="../../assets/impediment.png" align="top"> -->
+  {{task.impediments}}
 </div>

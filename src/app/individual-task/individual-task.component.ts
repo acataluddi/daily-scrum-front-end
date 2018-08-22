@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Task } from "../model/task-model";
 
 @Component({
@@ -10,35 +10,27 @@ export class IndividualTaskComponent implements OnInit {
 
   @Input() task: Task;
   @Output() timeChangeEvent = new EventEmitter<Task>();
-  // @Output() descriptionChangeEvent = new EventEmitter();
-  // @Output() impedenceChangeEvent = new EventEmitter();
+  @ViewChild('des') des: ElementRef;
+  @ViewChild('imp') imp: ElementRef;
 
-  edit_description;
-  edit_impediment;
+  show_impediment;
   edit_time_spent;
 
-  timeArray = Array; // Array type captured in a variable
+  timeArray = Array;
   hours = 24;
   minutes = 60;
   newdesc = '';
   constructor() { }
 
   ngOnInit() {
-    this.edit_description = false;
-    this.edit_impediment = false;
+    if(this.task.impediments === ""){
+      this.show_impediment = false;
+    }
+    else{
+      this.show_impediment = true;
+    }
     this.edit_time_spent = false;
   }
-
-  // onChangeHour(newtime, task) {
-  //   task.hours_spent = newtime;
-  //   console.log(task.hours_spent);
-  //   console.log("Hours spent changed");
-  // }
-  // onChangeMinute(newtime, task) {
-  //   task.minutes_spent = newtime;
-  //   console.log(task.minutes_spent);
-  //   console.log("Minutes spent changed");
-  // }
   updateValues(task) {
     console.log(this.newdesc);
     if (this.newdesc !== '') {
@@ -47,19 +39,34 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   emitTimeEvent(task) {
-    console.log('emitting event from child');
-    console.log('Hours : ' + task.hours_spent);
-    console.log('Minutes : ' + task.minutes_spent);
     task.hours_spent = parseInt(task.hours_spent);
     task.minutes_spent = parseInt(task.minutes_spent);
     this.timeChangeEvent.emit(task);
   }
+  updateDescription() {
+    this.des.nativeElement.innerHTML = this.des.nativeElement.innerHTML.trim();
+    this.task.description = this.des.nativeElement.innerHTML;
+    console.log(this.des.nativeElement.innerHTML);
+    this.task.description = this.task.description.trim();
+    console.log(this.task.description);
+    this.task.description.replace('&nbsp;', '');
+    if (this.task.description === "") {
+      this.des.nativeElement.innerHTML = "";
+    }
+  }
 
-  // emitDescriptionEvent(){
-  //   this.descriptionChangeEvent.emit();
-  // }
-  // emitImpedenceEvent(){
-  //   this.impedenceChangeEvent.emit();
-  // }
+  updateImpediment() {
+    this.imp.nativeElement.innerHTML = this.imp.nativeElement.innerHTML.trim();
+    this.task.impediments = this.imp.nativeElement.innerHTML.trim();
+    console.log(this.imp.nativeElement.innerHTML);
+    this.task.impediments = this.task.impediments.trim();
+    console.log(this.task.impediments);
+    this.task.impediments.replace('&nbsp;', '');
+    if (this.task.impediments === "") {
+      this.show_impediment=false;
+      this.imp.nativeElement.innerHTML = "";
+    }
+    this
+  }
 
 }
