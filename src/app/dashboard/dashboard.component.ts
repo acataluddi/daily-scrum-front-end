@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   member: Member;
   loggedin;
   projectName = "Daily Scrum";
-  noOfProjects = 12;
+  noOfProjects = 13;
   project: Project;
   projects = PROJECTS;
   ngOnInit() {

@@ -1,14 +1,6 @@
-* {
-  -webkit-margin-before: 0;
-  -webkit-margin-after: 0;
-  -webkit-margin-start: 0;
-  -webkit-margin-end: 0;
-  -webkit-padding-start: 0;
-}
-
 .MainDiv {
   height: 768px;
-  width: 1366px;
+  width: 100%;
   background-color: rgb(255, 255, 255);
 }
 
@@ -19,43 +11,44 @@
   display: flex;
   position: fixed;
   z-index: 100;
+  padding-top: 8px;
   top: 0px;
 }
 
 .ProjectHeadingDiv {
   margin-left: 88px;
+  padding-top: 6px;
   background-color: rgb(255, 255, 255);
   height: 50%;
-  width: 10%;
+  width: 12%;
 }
 
-.ProjectHeading {
+.ProjectHeadingTextDiv {
   text-align: left;
   font-family: 'Roboto';
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 600;
   color: rgba(79, 86, 105, 1);
-  width: 134px;
   height: 21px;
-  margin-top: 5px;
+  position: absolute;
 }
 
-.AddProjectDiv {
-  margin-left: 5%;
-  height: 70%;
+.AddProjectButton {
+  position: absolute;
+  left: 256px;
+  height: 32px;
   width: 138px;
   background-color: rgb(5, 87, 255);
   border-radius: 4px;
   display: flex;
   border-style: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.AddProjectButton {
-  text-align: center;
-  margin: 5%;
-  font-family: 'Roboto';
-  color: white;
-  font-weight: bold;
+.AddProjectButton:hover {
+  background-color: rgb(51, 5, 255);
 }
 
 .PlusSignDiv {
@@ -63,22 +56,28 @@
   width: 15px;
   height: 15px;
   background-color: white;
-  text-align: center;
 }
 
-.PlusSignButton {
+.PlusSignImage {
   height: 65%;
   width: 65%;
   margin: 15%;
-  position: relative;
+}
+
+.AddProjectDiv {
+  text-align: center;
+  margin: 5%;
+  font-family: 'Roboto';
+  color: white;
+  font-weight: bold;
 }
 
 .BottomDiv {
-  margin-top: 10px;
+  margin-top: 30px;
   margin-left: 88px;
   margin-right: 88px;
   height: 100%;
-  width: 1161px;
+  width: 100%;
   background-color: white;
 }
 
@@ -102,7 +101,7 @@
   background-color: rgb(63, 205, 195);
 }
 
-.ProjectNameBox {
+.ProjectNameBoxDiv {
   height: 70px;
   width: 100%;
 }
@@ -119,20 +118,17 @@
   background-color: rgb(63, 205, 195);
 }
 
-.ProjectName {
-  font-weight: bold;
+.ProjectNameDiv {
   color: white;
-  font-size: 18px;
+  font-size: 24px;
   font-family: 'Roboto';
   padding-top: 16px;
   padding-left: 24px;
+  padding-right: 24px;
 }
 
-.InnerProjectBox {
-  margin-top: 54px;
-  margin-bottom: 30px;
-  margin-left: 36px;
-  margin-right: 24px;
+.InnerProjectBoxDiv {
+  margin: 54px 24px 36px 24px;
   height: 32px;
   display: flex;
 }
@@ -149,73 +145,92 @@
   background-color: rgb(63, 205, 195);
 }
 
-.SmallCircle {
+.SmallCircleButton {
   width: 32px;
   height: 32px;
   border-radius: 16px;
   margin-left: -12px;
   border: 2px solid white;
+  outline: none;
 }
 
-.SmallCircleDiv1Odd {
+.SmallCircleButton:hover {
+  background-color: rgb(51, 5, 255);
+}
+
+.SmallCircleButton1Odd {
   background-color: rgb(212, 54, 178);
 }
 
-.SmallCircleName {
+.SmallCircleNameDiv {
   color: white;
-  padding: 25%;
+  margin-left: 0px;
+  font-weight: 600;
 }
 
-.SmallCircleDiv1Even {
+.SmallCircleButton1Even {
   background-color: rgb(34, 33, 22);
 }
 
-.SmallCircleDiv2 {
+.SmallCircleButton2 {
   background-color: rgb(5, 87, 255);
 }
 
-.ExtraMembers {
-  padding-left: 4.5px;
-  padding-top: 2.5px;
-  text-align: center;
-  font-weight: bold;
+.ExtraMembersDiv {
+  padding-right: 4px;
+  font-weight: 600;
+  font-size: 14px;
   color: white;
 }
 
-.DailyStatusDiv {
+.ExtraMemberDiv:hover {
+  background-color: rgb(51, 5, 255);
+}
+
+.DailyStatusButton {
   height: 32px;
   width: 115px;
   border-radius: 16px;
   margin-left: 37px;
   background-color: rgb(255, 255, 255);
   border: none;
+  outline: none;
 }
 
-.DailyStatus {
+.DailyStatusButton:hover {
+  background-color: rgb(168, 168, 168);
+}
+
+.DailyStatusDiv {
   color: white;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 600;
   text-align: center;
-  padding: 6px 10px;
+  padding: 5px 5px;
   color: rgb(5, 87, 255);
   font-family: 'Roboto'
 }
 
-.MenuDiv {
+.MenuButton {
   width: 32px;
   height: 32px;
   border-radius: 16px;
   margin-left: 7px;
   background-color: rgb(255, 255, 255);
   border: none;
+  outline: none;
 }
 
-.Dropdown {
+.MenuButton:hover {
+  background-color: rgb(168, 168, 168);
+}
+
+.DropdownButton {
   position: relative;
-  display: inline-block;
+  display: block;
 }
 
-.DropdownContent {
+.DropdownContentDiv {
   top: 40px;
   left: -100px;
   display: none;
@@ -228,35 +243,84 @@
   border: none;
 }
 
-.Dropdown:focus .DropdownContent {
-  display: block;
+.DropdownButton:focus .DropdownContentDiv {
+  display: inline-block;
 }
 
-.MenuDot {
-  padding-left: 6px;
-  padding-top: 7px;
-  text-align: center;
-  color: white;
-}
-
-.DropdownButtons {
-  color: white;
-  font-weight: bold;
+.Button {
+  background-color: rgb(5, 87, 255);
+  height: 30px;
+  width: 100%;
   border: none;
+  outline: none;
+  color: white;
+  font-size: 13px;
 }
 
 .EditButton {
-  background-color: rgb(5, 87, 255);
-  padding-top: 10px;
+  margin-top: 7px;
+  font-weight: 600;
+  padding-left: 0px;
 }
 
 .DeleteButton {
-  margin-top: 20px;
-  background-color: rgb(5, 87, 255);
+  margin-top: 5px;
+  padding-left: 8px;
+}
+
+.EditButton:hover,
+.DeleteButton:hover {
+  background-color: rgb(51, 5, 255);
+}
+
+.MenuDotDiv {
+  margin-left: 0px;
+  padding-top: 5px;
+  color: white;
 }
 
 .BottomDiv:after {
   content: "";
   display: table;
   clear: both;
+}
+
+@media screen and (max-width: 1200px) {
+  .MainDiv {
+    width: 100%;
+  }
+  .BottomDiv {
+    width: 100%;
+  }
+  .ProjectBoxDiv {
+    width: 352px;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .MainDiv {
+    width: 100%;
+  }
+  .TopDiv {
+    display: none;
+    height: 0px;
+  }
+  .BottomDiv {
+    margin-top: 0px;
+    margin-left: 0px;
+    width: 100%;
+    margin-right: 0px;
+  }
+  .ProjectBoxDiv {
+    width: 310px;
+    margin-top: 16px;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .DailyStatusButton {
+    margin-left: 11px;
+  }
+  .MenuButton {
+    margin-left: 5px;
+  }
 }
