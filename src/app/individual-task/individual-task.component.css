@@ -157,3 +157,24 @@ div.update_value:active,
 div.cancel_edit:active {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+@media screen and (max-width: 650px) {
+  .description{
+    width: 90%;
+  }
+  .impediments{
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .description{
+    width: 90%;
+  }
+  .impediments{
+    width: 90%;
+  }
+  .add_impediment{
+    margin-left: 20px;
+  }
+}
