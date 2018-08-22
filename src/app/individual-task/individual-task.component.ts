@@ -44,29 +44,28 @@ export class IndividualTaskComponent implements OnInit {
     this.timeChangeEvent.emit(task);
   }
   updateDescription() {
-    this.des.nativeElement.innerHTML = this.des.nativeElement.innerHTML.trim();
-    this.task.description = this.des.nativeElement.innerHTML;
-    console.log(this.des.nativeElement.innerHTML);
+    // this.des.nativeElement.textContent = this.des.nativeElement.textContent.trim();
+    this.task.description = this.des.nativeElement.innerText;
+    console.log('idval:' + this.des.nativeElement.innerText);
     this.task.description = this.task.description.trim();
-    console.log(this.task.description);
+    console.log('task val:' + this.task.description);
     this.task.description.replace('&nbsp;', '');
     if (this.task.description === "") {
-      this.des.nativeElement.innerHTML = "";
+      this.des.nativeElement.innerText = "";
     }
   }
 
   updateImpediment() {
-    this.imp.nativeElement.innerHTML = this.imp.nativeElement.innerHTML.trim();
-    this.task.impediments = this.imp.nativeElement.innerHTML.trim();
-    console.log(this.imp.nativeElement.innerHTML);
+    // this.imp.nativeElement.innerText = this.imp.nativeElement.innerText.trim();
+    this.task.impediments = this.imp.nativeElement.innerText.trim();
+    console.log('idval:' + this.imp.nativeElement.innerText);
     this.task.impediments = this.task.impediments.trim();
-    console.log(this.task.impediments);
+    console.log('task val:' + this.task.impediments);
     this.task.impediments.replace('&nbsp;', '');
     if (this.task.impediments === "") {
       this.show_impediment = false;
-      this.imp.nativeElement.innerHTML = "";
+      this.imp.nativeElement.innerText = "";
     }
-    this
   }
 
 }
