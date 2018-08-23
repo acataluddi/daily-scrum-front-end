@@ -21,6 +21,7 @@ import {
 import {Ng2Webstorage} from 'ngx-webstorage';
 import { AuthGuard } from './status.service';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TaskPageAdminComponent } from './task-page-admin/task-page-admin.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -44,7 +45,8 @@ export function getAuthServiceConfigs() {
     DailyStatusAllUsersComponent,
     IndividualTaskComponent,
     IndividualMemberComponent,
-    AdminviewallComponent
+    AdminviewallComponent,
+    TaskPageAdminComponent
   ],
   imports: [
     BrowserModule,
