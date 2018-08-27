@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from '../model/task-model';
-import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
+import { Task, MemberTask } from '../model/task-model';
+import { MemberTaskService } from '../service/member-task.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 @Component({
@@ -10,10 +10,11 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 })
 export class TaskPageAdminComponent implements OnInit {
 
-  task: Task;
+  task: MemberTask;
   task1: Task;
-  MockYesterdayTasks: Task[];
-  MockTodayTasks: Task[];
+  task2:Task;
+  MockMember1: MemberTask[];
+  MockMember2: MemberTask[];
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
 
@@ -26,6 +27,7 @@ export class TaskPageAdminComponent implements OnInit {
   minutes_spent;
   impediments;
   description;
+  member_name;
   task_completed;
   total_hours_spent = 0;
   total_minutes_spent = 0;
@@ -51,7 +53,7 @@ export class TaskPageAdminComponent implements OnInit {
   year;
   myvalue;
   constructor(
-    private taskservice: ProcessIndividualTaskService
+    private taskservice: MemberTaskService
   ) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-orange',
@@ -71,15 +73,17 @@ export class TaskPageAdminComponent implements OnInit {
     this.myDateValue = new Date();
     this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
     this.yesterdayval ="Yesterday's Tasks";
+    // console.log(this.task.member_name);
   }
   getTasks() {
-    this.MockYesterdayTasks = this.taskservice.getYesterdayTasks();
-    this.MockTodayTasks = this.taskservice.getTodayTasks();
+    // this.MockMember2 = this.taskservice.getMember2();
+    this.MockMember1 = this.taskservice.getMember1();
   }
   calculateTotalTime() {
-    for (let task of this.MockYesterdayTasks) {
+    for (let task of this.MockMember1) {
       this.totalhour += task.hours_spent;
       this.totalminute += task.minutes_spent;
+      this.member_name = task.member_name;
     }
     //convering extra minutes to hours;
     var extrahour = 0;
@@ -99,8 +103,10 @@ export class TaskPageAdminComponent implements OnInit {
     this.totalminute = 0;
     var old_hour = 0;
     var old_minute = 0;
-    for (let task of this.MockYesterdayTasks) {
-      if (task.task_id === this.task1.task_id) {
+    this.total_hours_spent = this.totalhour;
+    this.total_minutes_spent = this.totalminute;
+    for (let task of this.MockMember2) {
+      if (this.task2.task_id === this.task1.task_id) {
         old_hour = this.task1.hours_spent;
         old_minute = this.task1.minutes_spent;
         this.totalhour = (this.totalhour + this.task1.hours_spent);
@@ -127,6 +133,60 @@ export class TaskPageAdminComponent implements OnInit {
       this.total_minutes_spent = this.totalminute;
     }
   }
+  onDateChange(newDate: Date) {
+    this.newDate=newDate;
+    var d1 = new Date(newDate);
+    (d1.setDate(d1.getDate()-1));
+    this.month = this.months[newDate.getMonth()];
+    this.date = newDate.getDate();
+    this.year = newDate.getFullYear();
+    if ((newDate.getMonth() === this.d.getMonth()) && (newDate.getDate() === this.d.getDate()) && (newDate.getFullYear() === this.d.getFullYear())) {
+      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval ="Yesterday's Tasks";
+    }
+    else {
+      this.todayval = this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval =this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+    }
+  }
 
+  getNextDate(){
+    var d1 = new Date(this.newDate);
+    (d1.setDate(d1.getDate()+1));
+    this.month = this.months[d1.getMonth()];
+    this.date = d1.getDate();
+    this.year = d1.getFullYear();
+    if ((this.month === this.d.getMonth()) && (this.date === this.d.getDate()) && (this.year === this.d.getFullYear())) {
+      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval ="Yesterday's Tasks";
+    }
+    else {
+      this.todayval = this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval =this.months[this.newDate.getMonth()] + " " + this.newDate.getDate() + ", " + this.newDate.getFullYear();
+    }
+    this.newDate=d1;
+    this.myDateValue=d1;
+  }
+  getPreviousDate(){
+    var d1 = new Date(this.newDate);
+    (d1.setDate(d1.getDate()-1));
+    this.month = this.months[this.newDate.getMonth()];
+    this.date = this.newDate.getDate();
+    this.year = this.newDate.getFullYear();
+    if ((this.newDate.getMonth() === this.d.getMonth()) && (this.newDate.getDate() === this.d.getDate()) && (this.newDate.getFullYear() === this.d.getFullYear())) {
+      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval ="Yesterday's Tasks";
+    }
+    else {
+      this.todayval = this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval =this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+    }
+    this.newDate=d1;
+    this.myDateValue=d1;
+  }
+  getRandomColor() {
+    var color = Math.floor(0x1000000 * Math.random()).toString(16);
+    return '#' + ('000000' + color).slice(-6);
+  }
 
 }

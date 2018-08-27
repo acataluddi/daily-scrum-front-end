@@ -196,6 +196,7 @@ export class DailyStatusComponent implements OnInit {
     }
     var newid = parseInt(this.date.toString() + this.monthval.toString() + this.year.toString() + this.hour.toString() + this.minute.toString() + this.second.toString());
     ts = {
+      member_name:'',
       task_id: newid,
       description: '',
       hours_spent: 0,
