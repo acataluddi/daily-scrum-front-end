@@ -38,15 +38,15 @@ body {
     cursor: pointer;
   }
   .view_all_task{
+    position: absolute;;
     display: flex;
-    width:10%;
-    margin-left:30%;
+    width:150px;
+    margin-left:80%;
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 5%;
     line-height:180%;
-    /* position: absolute; */
-  
-    
+   
+
   }
   .view{
     
@@ -56,9 +56,10 @@ body {
     padding-top:2px;
   }
  .my_task{
-   padding-left: 10%;
+   /* padding-left: 10%; */
    font-family: 'Roboto';
-   font-size: 1.2vw;
+   font-size: 15px;
+   width:100%;
    color: rgba(0, 0, 0, 1);
  }
   .total_time {
@@ -167,9 +168,9 @@ body {
   }
 .search {
   float: right;
-  width:64px;
+  width:50px;
   height:400px;
-  margin-left:7%;
+  margin-left:0%;
   border-left: 1px solid rgba(216, 216, 216, 1);
   display:block;
 }
@@ -177,16 +178,20 @@ body {
   margin-left:30%;
 }
 .member_logo{
-  margin-left:20%;
-  margin-top:10%;
-  width: 35px; 
+  margin-left:25%;
+  margin-top:15%;
+  /* width: 35px; 
   height: 35px;
-  border-radius: 50%;
+  border-radius: 50%; */
+  width: 30px; 
+  height: 30px;
+  background: red; 
+  border-radius: 50px;
 
 }
   .column {
     
-    width: 300px;
+    width: 27%;
     padding-left:5%;
     margin-top:1%;
     float:left;
@@ -207,12 +212,12 @@ body {
   }
   .header {
     /* position: absolute; */
-    width:920px; 
+    width:95%; 
     background-color: white;
     /* display: flex; */
     height:100%;
     /* margin-top:0%; */
-    margin-left:14px;
+    margin-left:0px;
     float:left;
     /* overflow-wrap:nowrap; */
     
@@ -289,11 +294,21 @@ body {
     
   }
   .member_part {
-    content: "•";font-size: 25px;
+    content: "•";font-size: 40px;
     width:90%;
     overflow-wrap: break-word;
+    line-height: 20px;
   }
 
+  @media screen and (max-width: 1300px){
+    .header{
+      width:900px;
+
+    }
+    .column {
+      width :300px;
+    }
+  }
   @media screen and (max-width: 1000px){
     .header{
       width:750px;
@@ -302,14 +317,17 @@ body {
     .column {
       width :350px;
     }
+   .search {
+      display: none;
+    } 
   }
   @media screen and (max-width: 700px){
     .header{
-      width:400px;
+      width:450px;
 
     }
     .column {
-      width :400px;
+      width :350px;
     }
     .total_time , .search{
       display: none;
@@ -317,7 +335,7 @@ body {
   }
   @media screen and (max-width: 400px){
     .header{
-      width:300px;
+      width:350px;
 
     }
     .column {
