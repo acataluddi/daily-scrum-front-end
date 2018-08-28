@@ -14,6 +14,8 @@ export class AdminviewallComponent implements OnInit {
   member: Member;
   memberArray: Member[];
   loggedin;
+  p: number;
+  total: number;
   
   constructor(private viewallservice: AdminviewallserviceService , private loginservice: LoginService) { }
   userTypes = ['Admin', 'Manager', 'User'];
@@ -29,6 +31,7 @@ export class AdminviewallComponent implements OnInit {
 
   getData() {
     this.memberArray = this.viewallservice.getMember();
+    this.total = this.memberArray.length;
   }
 
   onChange(newType, email) {
@@ -41,6 +44,10 @@ export class AdminviewallComponent implements OnInit {
     }
   }
 
+  getPagenum(pagenum){
+    console.log(pagenum);
+    this.p=pagenum;
+  }
 
 }
 
