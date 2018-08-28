@@ -1,3 +1,45 @@
-<p>
-  individual-task works!
-</p>
+<div class="part_1">
+  <div>
+    <span *ngIf="task.task_id%7===0" class="dot dot-color-1"></span>
+    <span *ngIf="task.task_id%6===0 && task.task_id%7!=0" class="dot dot-color-2"></span>
+    <span *ngIf="task.task_id%5===0 && task.task_id%6!=0 && task.task_id%7!=0" class="dot dot-color-3"></span>
+    <span *ngIf="task.task_id%3===0 && task.task_id%5!=0  && task.task_id%6!=0 && task.task_id%7!=0" class="dot dot-color-4"></span>
+    <span *ngIf="task.task_id%3!=0 && task.task_id%5!=0  && task.task_id%6!=0 && task.task_id%7!=0" class="dot dot-color-5"></span>
+  </div>
+  <div #des class="description" spellcheck="false" *ngIf="task.description!==''" data-text="Add description" contenteditable="true"
+    (blur)="updateDescription()">
+    {{task.description}}
+  </div>
+  <div #des class="description" spellcheck="false" *ngIf="task.description===''" data-text="Add description" contenteditable="true"
+    (blur)="updateDescription()">
+  </div>
+</div>
+
+<div class="time">
+  <div class="time_border" *ngIf="(task.hours_spent>0 || task.minutes_spent>0) && edit_time_spent==false" (click)="edit_time_spent=true">
+    <div *ngIf="task.hours_spent>0">
+      {{task.hours_spent}} hour
+    </div>
+    {{task.minutes_spent}} minutes
+  </div>
+
+  <div class="add_hours" *ngIf="task.hours_spent===0 && task.minutes_spent===0 && edit_time_spent==false" (click)="edit_time_spent=true">
+    Add Hours Spent
+  </div>
+  <div *ngIf="edit_time_spent==true" class="add_hours">
+    <select class="custom-select" name="hourSpent" [(ngModel)]="task.hours_spent" (blur)="edit_time_spent=false; emitTimeEvent(task);">
+      <option *ngFor="let i of timeArray(hours).fill(1); let j=index">{{j}}</option>
+    </select>
+    <select class="custom-select" name="minuteSpent" [(ngModel)]="task.minutes_spent" (blur)="edit_time_spent=false; emitTimeEvent(task);">
+      <option *ngFor="let i of timeArray(minutes).fill(1); let j=index">{{j}}</option>
+    </select>
+  </div>
+
+  <div class="add_impediment" *ngIf="task.impediments== '' && show_impediment==false" (click)="show_impediment=true;">
+    Add Impediments
+  </div>
+</div>
+
+<div class="impediments" spellcheck="false" #imp contenteditable="true" *ngIf="show_impediment==true" (blur)="updateImpediment()">
+  <img class="img_impediment" src="../../assets/impediment.png" align="top"> {{task.impediments}}
+</div>
