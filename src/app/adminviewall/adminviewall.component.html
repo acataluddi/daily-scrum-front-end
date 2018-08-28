@@ -1,4 +1,5 @@
 <body>
+  <div class="first">
   <div class="mainClass">
     <h2>Users</h2>
     <div class="card">
@@ -9,20 +10,23 @@
           <div class="header">User Type</div>
         </div>
 
-        <div class="section rowstyle member" *ngFor="let member of memberArray | paginate: {itemsPerPage:8, currentPage: p}">
+        <div class="section rowstyle member" *ngFor="let member of memberArray | paginate: {totalItems: total, itemsPerPage:10, currentPage: p}">
           <div class="header">{{member.name}}</div>
-          <div class="header email">{{member.email}}</div>
+          <div class="header">{{member.email}}</div>
           <div class="header">
-            <select class="custom-select" name="userType" #role="ngModel" [(ngModel)]="member.userType" (ngModelChange)="onChange($event, member.email)">
+            <select class="custom-select" name="userType" [(ngModel)]="member.userType" (ngModelChange)="onChange($event, member.Email)">
               <option selected>{{member.userType}}</option>
-              <option *ngFor="let type of userTypes">{{type}}</option>
+              <option value="Admin" *ngIf="'Admin' != member.userType">Admin</option>
+              <option value="Manager" *ngIf="'Manager' != member.userType">Manager</option>
+              <option value="User" *ngIf="'User' != member.userType">User</option>
             </select>
           </div>
         </div>
-        <div>
-          <pagination-controls (pageChange)="p =$event"></pagination-controls>
-        </div>
+        <div class="pagination section">
+          <pagination-controls (pageChange)="getPagenum($event)"></pagination-controls>
+        </div>        
       </div>
     </div>
   </div>
+</div>
 </body>
