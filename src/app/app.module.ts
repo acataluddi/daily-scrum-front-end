@@ -20,6 +20,7 @@ import {
 } from "angular-6-social-login";
 import {Ng2Webstorage} from 'ngx-webstorage';
 import { AuthGuard } from './status.service';
+import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { HttpClientModule } from '@angular/common/http';
 
 // Configs 
@@ -52,6 +53,9 @@ export function getAuthServiceConfigs() {
     FormsModule,
     NgxPaginationModule,
     SocialLoginModule,
+    Ng2Webstorage, 
+    BsDatepickerModule.forRoot(),
+    DatepickerModule.forRoot(), 
     HttpClientModule,
     Ng2Webstorage
   ],
