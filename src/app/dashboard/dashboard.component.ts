@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from "../model/project-model";
 import { Member } from "../model/member-model";
-import { LoginService } from "../login.service";
+import { LoginService } from "../service/login.service";
 import { Router } from '@angular/router';
 import { PROJECTS } from "../mockProjects";
 @Component({

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import { Member } from '../model/member-model';
-import { LoginService } from "../login.service";
+import { LoginService } from "../service/login.service";
 
 @Component({
   selector: 'app-adminviewall',
@@ -33,8 +33,8 @@ export class AdminviewallComponent implements OnInit {
 
   onChange(newType, email) {
     for (let member of this.memberArray) {
-      if (member.Email == email) {
-        member.UserType = newType;
+      if (member.email == email) {
+        member.userType = newType;
         console.log(member);
         console.log("User type changed");
       }
