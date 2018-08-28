@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from "../model/member-model";
-import {
-  AuthService,
-  GoogleLoginProvider
-} from 'angular-6-social-login';
+import { Member} from "../model/member-model";
+import {AuthService,GoogleLoginProvider} from 'angular-6-social-login';
 import { Router } from '@angular/router';
-import { LoginService } from "../login.service";
+import { LoginService } from "../service/login.service";
+
 
 @Component({
   selector: 'app-login',
@@ -18,19 +16,24 @@ export class LoginComponent implements OnInit {
     public router: Router,
     private loginservice: LoginService) { }
 
+   
+
   ngOnInit() {
     this.initializeMember();
+    // this.getMembers();
   }
+  
   member: Member;
+  
   initializeMember() {
     this.member = {
-      Id: '',
-      Name: '',
-      Email: '',
-      Imageurl: '',
-      Token: '',
-      UserType: ''
+      memberID: '',
+      name: '',
+      email: '',
+      userType: ''
     }
+    
+    
   }
   public socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
@@ -41,15 +44,26 @@ export class LoginComponent implements OnInit {
       (userData) => {
         console.log(socialPlatform + " sign in data : ", userData);
         this.member = {
-          Id: userData.id,
-          Name: userData.name,
-          Email: userData.email,
-          Imageurl: userData.image,
-          Token: userData.token,
-          UserType: null
+          memberID:userData.id,
+          name:userData.name, 
+          email:userData.email, 
+          userType:'user'
         }
-        this.loginservice.loginMember(this.member);
+        this.loginservice.loginMember(this.member)
+            .subscribe(msg => {
+              console.log(msg.message);
+              if(msg.message === "registered" || msg.message === "User exists"){
+                localStorage.setItem("logged", "true");
+                this.router.navigate(['/dashboard']);
+              }
+            });
       }
     );
+  }
+
+  members: Member[];
+  getMembers(): void {
+    this.loginservice.getMembers()
+        .subscribe(members => console.log(members));
   }
 }
