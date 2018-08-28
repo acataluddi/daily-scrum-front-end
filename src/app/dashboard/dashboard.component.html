@@ -1,12 +1,172 @@
-<p>
-  Id:{{id}}
-</p>
-<p>
-  {{name}}
-</p>
-<p>
-  Email:{{email}}
-</p>
-<p>
-  User Type:{{userType}}
-</p>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+</head>
+
+<body>
+  <div class="MainDiv">
+    <div class="TopDiv">
+      <div class="ProjectHeadingDiv">
+        <div class="ProjectHeadingTextDiv">My Projects ({{noOfProjects}})</div>
+      </div>
+      <button class="AddProjectButton">
+        <div class="PlusSignDiv">
+          <img class="PlusSignImage" src="../../assets/plus.png">
+        </div>
+        <div class="AddProjectDiv">Add Project</div>
+      </button>
+    </div>
+    <div class="BottomDiv">
+      <div *ngFor="let project of projects ; let i=index">
+        <div *ngIf="i%6==0">
+          <div class="ProjectBoxDivColor1 ProjectBoxDiv">
+            <div class="ProjectNameBoxDivColor1 ProjectNameBoxDiv">
+              <div class="ProjectNameDiv">{{project.name}}</div>
+            </div>
+            <div class="InnerProjectBoxDivColor1 InnerProjectBoxDiv">
+              <div *ngFor="let item of project.members ; let i=index">
+                <div *ngIf="i<4">
+                  <div *ngIf="i%2!=0">
+                    <button class="SmallCircleButton1Odd SmallCircleButton">
+                      <div class="SmallCircleNameDiv">{{item}}</div>
+                    </button>
+                  </div>
+                  <div *ngIf="i%2==0">
+                    <button class="SmallCircleButton1Even SmallCircleButton">
+                      <div class="SmallCircleNameDiv">{{item}}</div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="project.numberOfMembers-4>0">
+                <button class="SmallCircleButton2 SmallCircleButton">
+                  <div class="ExtraMembersDiv">+{{project.numberOfMembers-4}}</div>
+                </button>
+              </div>
+              <button class="DailyStatusButton">
+                <div class="DailyStatusDiv">Daily Status</div>
+              </button>
+              <button class="MenuButton DropdownButton">
+                <div class="DropdownContentDiv">
+                  <button class="EditButton Button">
+                    <div class="EditDiv">
+                      Edit Project
+                    </div>
+                  </button>
+                  <button class="DeleteButton Button">
+                    <div class="DeleteDiv">
+                      Delete Project
+                    </div>
+                  </button>
+                </div>
+                <div class="MenuDotDiv">
+                  <img src="../../assets/Menudots.png">
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="i%2==0 && i%6!=0">
+          <div class="ProjectBoxDivColor2 ProjectBoxDiv">
+            <div class="ProjectNameBoxDivColor2 ProjectNameBoxDiv">
+              <div class="ProjectNameDiv">{{project.name}}</div>
+            </div>
+            <div class="InnerProjectBoxDivColor2 InnerProjectBoxDiv">
+              <div *ngFor="let item of project.members ; let i=index">
+                <div *ngIf="i<4">
+                  <div *ngIf="i%2!=0">
+                    <button class="SmallCircleButton1Odd SmallCircleButton">
+                      <div class="SmallCircleNameDiv">{{item}}</div>
+                    </button>
+                  </div>
+                  <div *ngIf="i%2==0">
+                    <button class="SmallCircleButton1Even SmallCircleButton">
+                      <div class="SmallCircleNameDiv">{{item}}</div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="project.numberOfMembers-4>0">
+                <button class="SmallCircleButton2 SmallCircleButton">
+                  <div class="ExtraMembersDiv">+{{project.numberOfMembers-4}}</div>
+                </button>
+
+              </div>
+              <button class="DailyStatusButton">
+                <div class="DailyStatusDiv">Daily Status</div>
+              </button>
+              <button class="MenuButton DropdownButton">
+                <div class="DropdownContentDiv">
+                  <button class="EditButton Button">
+                    <div class="EditDiv">
+                      Edit Project
+                    </div>
+                  </button>
+                  <button class="DeleteButton Button">
+                    <div class="DeleteDiv">
+                      Delete Project
+                    </div>
+                  </button>
+                </div>
+                <div class="MenuDotDiv">
+                  <img src="../../assets/Menudots.png">
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="i%2!=0 && i%6!=0">
+          <div class="ProjectBoxDivColor3 ProjectBoxDiv">
+            <div class="ProjectNameBoxDivColor3 ProjectNameBoxDiv">
+              <div class="ProjectNameDiv">{{project.name}}</div>
+            </div>
+            <div class="InnerProjectBoxDivColor3 InnerProjectBoxDiv">
+              <div *ngFor="let item of project.members ; let i=index">
+                <div *ngIf="i<4">
+                  <div *ngIf="i%2!=0">
+                    <button class="SmallCircleButton1Odd SmallCircleButton">
+                      <div class="SmallCircleNameDiv">{{item}}</div>
+                    </button>
+                  </div>
+                  <div *ngIf="i%2==0">
+                    <button class="SmallCircleButton1Even SmallCircleButton">
+                      <div class="SmallCircleNameDiv">{{item}}</div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="project.numberOfMembers-4>0">
+                <button class="SmallCircleButton2 SmallCircleButton">
+                  <div class="ExtraMembersDiv">+{{project.numberOfMembers-4}}</div>
+                </button>
+              </div>
+              <button class="DailyStatusButton">
+                <div class="DailyStatusDiv">Daily Status</div>
+              </button>
+              <button class="MenuButton DropdownButton">
+                <div class="DropdownContentDiv">
+                  <button class="EditButton Button ">
+                    <div class="EditDiv">
+                      Edit Project
+                    </div>
+                  </button>
+                  <button class="DeleteButton Button">
+                    <div class="DeleteDiv">
+                      Delete Project
+                    </div>
+                  </button>
+                </div>
+                <div class="MenuDotDiv">
+                  <img src="../../assets/Menudots.png">
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

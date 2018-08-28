@@ -16,12 +16,15 @@ export class LoginComponent implements OnInit {
     public router: Router,
     private loginservice: LoginService) { }
 
+   
+
   ngOnInit() {
     this.initializeMember();
     // this.getMembers();
   }
   
   member: Member;
+  
   initializeMember() {
     this.member = {
       memberID: '',
@@ -29,6 +32,8 @@ export class LoginComponent implements OnInit {
       email: '',
       userType: ''
     }
+    
+    
   }
   public socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
