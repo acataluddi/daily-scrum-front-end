@@ -195,7 +195,7 @@ body {
   .column {
     
     width: 27%;
-    padding-left:5%;
+    padding-left:55px;
     margin-top:1%;
     float:left;
 
@@ -326,6 +326,7 @@ body {
     }
     .column {
       width :350px;
+      padding-left:40px;
     }
    .search {
       display: none;
@@ -338,6 +339,7 @@ body {
     }
     .column {
       width :350px;
+      padding-left:30px;
     }
     .total_time , .search{
       display: none;
@@ -350,6 +352,7 @@ body {
     }
     .column {
       width :300px;
+      padding-left:25px;
     }
     .view{
     
