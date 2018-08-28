@@ -58,7 +58,7 @@ body {
  .my_task{
    /* padding-left: 10%; */
    font-family: 'Roboto';
-   font-size: 15px;
+   font-size: 13px;
    width:100%;
    color: rgba(0, 0, 0, 1);
  }
@@ -341,7 +341,7 @@ body {
       width :350px;
       padding-left:30px;
     }
-    .total_time , .search{
+    .total_time, .search {
       display: none;
     }
   }
