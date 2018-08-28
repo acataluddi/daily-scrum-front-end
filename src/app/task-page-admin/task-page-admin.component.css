@@ -120,7 +120,7 @@ body {
   .allTask{
     background-color: rgba(216, 216, 216, 1);
     font-family: 'Roboto';
-    border-radius: 10%;
+    border-radius: 5%;
     font-size: 12px;
     color: rgba(68, 68, 68, 1);
     text-align: left;
@@ -132,7 +132,7 @@ body {
   .complete{
     background-color: rgba(0, 0, 0, 0.1);
     font-family: 'Roboto';
-    border-radius: 10%;
+    border-radius: 5%;
     font-size: 12px;
     margin-left:1%;
     color: rgba(0, 0, 0, 1);
@@ -144,7 +144,7 @@ body {
   .progress{
     background-color: rgba(0, 0, 0, 0.1);
     font-family: 'Roboto';
-    border-radius: 10%;
+    border-radius: 5%;
     font-size: 12px;
     margin-left:1%;
     color: rgba(0, 0, 0, 1);
@@ -152,19 +152,22 @@ body {
     line-height: 15px;
     padding-top: 4px;
     padding-bottom: 4px;
-    height:60%;
+    height:65%;
   }
   .impediments {
     background-color: rgba(0, 0, 0, 0.1);
     font-family: 'Roboto';
-    border-radius: 10%;
+    border-radius: 5%;
     font-size: 12px;
     margin-left:1%;
     color: rgba(0, 0, 0, 1);
     text-align: left;
-    line-height:20px;
+    line-height:19px;
     padding-top: 4px;
     padding-bottom: 4px;
+  }
+  .allTask:active, .complete:active, .progress:active, .impediments:active {
+    background-color: rgba(134, 131, 131, 0.1);
   }
 .search {
   float: right;
