@@ -54,6 +54,10 @@ export class ProjectComponent implements OnInit {
 
     this.project = new Project(proname, prodesc);
     this.projectservice.addProject(this.project).subscribe(pro => {});
+
+    console.log(this.project.name);
+    console.log(this.project.projectdescription);
+
   }
 
   getProjectMembers(): void {
@@ -105,6 +109,11 @@ export class ProjectComponent implements OnInit {
   }
   addproject(): void{
     this.set();
+
+    this.projectmemberservice.getProjectMembers()
+    .subscribe(projectmembers => this.projectmembers = projectmembers);
+
+    console.log(this.projectmembers);
     // this.addProjectMember();
   }
   change(projectmember:ProjectMember): void{
@@ -123,6 +132,9 @@ export class ProjectComponent implements OnInit {
     projectmember.id = id;
 
     this.projectmemberservice.updateProjectMember(projectmember).subscribe();
+
+    this.projectmemberservice.getProjectMembers()
+    .subscribe(projectmembers => this.projectmembers = projectmembers);
 
   }
 }

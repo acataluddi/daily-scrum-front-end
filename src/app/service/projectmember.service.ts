@@ -18,8 +18,9 @@ export class ProjectmemberService {
 
   getProjectMembers (): Observable<ProjectMember[]> {
     this.http.get<ProjectMember[]>(this.projectmembersUrl).subscribe(projectmembers => this.projectmembers = projectmembers)
+
     return this.http.get<ProjectMember[]>(this.projectmembersUrl);
-  }
+    }
 
   addProjectMember (promem: ProjectMember): Observable<ProjectMember> {
     return this.http.post<ProjectMember>(this.projectmembersUrl, promem)
@@ -35,6 +36,10 @@ export class ProjectmemberService {
   }
 
   updateProjectMember (promem: ProjectMember): Observable<any> {
+
+
     return this.http.put(this.projectmembersUrl, promem);
+
+
   }
 }

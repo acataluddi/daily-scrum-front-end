@@ -3,8 +3,8 @@ export class Project {
     numberOfMembers: Number;
     name: string;
     projectdescription:string;
-    constructor(projectname:string, projectdescription:string) {
-        this.name = projectname;
+    constructor(name:string, projectdescription:string) {
+        this.name = name;
         this.projectdescription = projectdescription;
     }
 }
