@@ -108,9 +108,10 @@ export class ProjectComponent implements OnInit {
    }
   }
   addproject(): void{
+    this.getProjectMembers()
+
     this.set();
 
-    this.getProjectMembers()
 
     console.log(this.projectmembers);
     // this.addProjectMember();
