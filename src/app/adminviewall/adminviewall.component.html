@@ -14,12 +14,12 @@
           <div class="header">{{member.name}}</div>
           <div class="header">{{member.email}}</div>
           <div class="header">
-            <select class="custom-select" name="userType" [(ngModel)]="member.userType" (ngModelChange)="onChange($event, member.Email)">
-              <option selected>{{member.userType}}</option>
-              <option value="Admin" *ngIf="'Admin' != member.userType">Admin</option>
-              <option value="Manager" *ngIf="'Manager' != member.userType">Manager</option>
-              <option value="User" *ngIf="'User' != member.userType">User</option>
+            <select class="custom-select" name="userType" [(ngModel)]="member.userType" (ngModelChange)="onChange($event, member)">
+              <option value="Admin" >Admin</option>
+              <option value="Manager">Manager</option>
+              <option value="User" >User</option>
             </select>
+
           </div>
         </div>
         <div class="pagination section">
