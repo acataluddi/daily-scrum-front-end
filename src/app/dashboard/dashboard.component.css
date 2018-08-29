@@ -89,33 +89,9 @@
   margin-top: 35px;
 }
 
-.ProjectBoxDivColor1 {
-  background-color: rgb(12, 33, 93);
-}
-
-.ProjectBoxDivColor2 {
-  background-color: rgb(255, 177, 166);
-}
-
-.ProjectBoxDivColor3 {
-  background-color: rgb(63, 205, 195);
-}
-
 .ProjectNameBoxDiv {
   height: 70px;
   width: 100%;
-}
-
-.ProjectNameBoxDivColor1 {
-  background-color: rgb(12, 33, 93);
-}
-
-.ProjectNameBoxDivColor2 {
-  background-color: rgb(255, 177, 166);
-}
-
-.ProjectNameBoxDivColor3 {
-  background-color: rgb(63, 205, 195);
 }
 
 .ProjectNameDiv {
@@ -131,18 +107,6 @@
   margin: 54px 24px 36px 24px;
   height: 32px;
   display: flex;
-}
-
-.InnerProjectBoxDivColor1 {
-  background-color: rgb(12, 33, 93);
-}
-
-.InnerProjectBoxDivColor2 {
-  background-color: rgb(255, 177, 166);
-}
-
-.InnerProjectBoxDivColor3 {
-  background-color: rgb(63, 205, 195);
 }
 
 .SmallCircleButton {

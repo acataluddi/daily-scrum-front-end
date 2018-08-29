@@ -1,6 +1,6 @@
 
 export class Member{
-    memberID:string;
+    employeeID:string;
     name:string;   
     email:string;
     userType: string;  

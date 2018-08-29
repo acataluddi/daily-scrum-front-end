@@ -20,5 +20,11 @@ export class DashboardComponent implements OnInit {
   projects = PROJECTS;
   ngOnInit() {
   }
+  getRandomColor() {
+   var colors = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
+ return colors[Math.floor(Math.random() * colors.length)];
+  } 
+  openDailyStatus(){
+    this.router.navigate(['/daily-status']);
+    }
 }
-
