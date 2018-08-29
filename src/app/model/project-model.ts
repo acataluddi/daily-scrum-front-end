@@ -1,2 +1,9 @@
+export class Project{
+    projectname:string;
+    projectdescription:string;
 
-export class Project{}
+    constructor(projectname:string, projectdescription:string) {
+        this.projectname = projectname;
+        this.projectdescription = projectdescription;
+    }
+}
