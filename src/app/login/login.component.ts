@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   
   initializeMember() {
     this.member = {
-      memberID: '',
+      employeeID: '',
       name: '',
       email: '',
       userType: ''
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
       (userData) => {
         console.log(socialPlatform + " sign in data : ", userData);
         this.member = {
-          memberID:userData.id,
+          employeeID:userData.id,
           name:userData.name, 
           email:userData.email, 
           userType:'user'
@@ -52,11 +52,11 @@ export class LoginComponent implements OnInit {
         this.loginservice.loginMember(this.member)
             .subscribe(msg => {
               console.log(msg.message);
-              if(msg.message === "registered" || msg.message === "User exists"){
+              if(msg.message === "User Registered" || msg.message === "User Already Exist"){
                 localStorage.setItem("logged", "true");
                 this.router.navigate(['/dashboard']);
-              }
-            });
+               }
+             });
       }
     );
   }
