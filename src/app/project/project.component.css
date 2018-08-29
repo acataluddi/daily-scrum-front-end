@@ -27,6 +27,10 @@ input[placeholder="New Project Name"]{
     width: 80%;
     height: 5.3%;
 }
+.subclassone:hover {
+    background-color: rgb(224,224,224);
+    cursor: pointer;
+}
 .adddescriptionlogoclass{
     height: 12px;
     width: 12px;
@@ -54,15 +58,8 @@ div[contenteditable="true"]{
     border: none;
     outline: none;
 }
-textarea{
-    border: none;
-    outline: none;
-    resize: none;
-    height: 100%;
-    width: 100%;
-    font-family: 'Roboto';
-    font-size: 11px;
-    color: rgba(0, 0, 0, 1);
+div[contenteditable="true"]:hover {
+    background-color: rgb(224,224,224);
 }
 .projectmembersclass{
     margin: 0px 0px 0px 35px;
@@ -73,6 +70,9 @@ textarea{
     font-size: 16px;
     color: rgba(0, 0, 0, 1);
     margin: 10px 0px 0px 0px;
+}
+.teamclass:hover{
+    cursor: default;
 }
 .memberclass{
     display: flex;
@@ -140,6 +140,10 @@ select[id="rolevalue"]{
     display: flex;
     width: 80%;
     height: 5.3%;
+}
+.subclasstwo:hover {
+    background-color: rgb(224,224,224);
+    cursor: pointer;
 }
 .addmemberlogoclass{
     height: 12px;

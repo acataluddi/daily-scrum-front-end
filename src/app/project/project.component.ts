@@ -110,8 +110,7 @@ export class ProjectComponent implements OnInit {
   addproject(): void{
     this.set();
 
-    this.projectmemberservice.getProjectMembers()
-    .subscribe(projectmembers => this.projectmembers = projectmembers);
+    this.getProjectMembers()
 
     console.log(this.projectmembers);
     // this.addProjectMember();
@@ -133,8 +132,7 @@ export class ProjectComponent implements OnInit {
 
     this.projectmemberservice.updateProjectMember(projectmember).subscribe();
 
-    this.projectmemberservice.getProjectMembers()
-    .subscribe(projectmembers => this.projectmembers = projectmembers);
+    this.getProjectMembers()
 
   }
 }
