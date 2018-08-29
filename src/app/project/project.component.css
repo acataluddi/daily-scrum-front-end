@@ -87,9 +87,6 @@ div[contenteditable="true"]:hover {
     display: flex;
 
 }
-.email{
-    margin: 0px 20px 0px 0px;
-}
 select{
     border: none;
     height: 20px;
