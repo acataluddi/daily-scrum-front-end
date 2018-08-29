@@ -49,14 +49,14 @@ export class LoginComponent implements OnInit {
           email:userData.email, 
           userType:'user'
         }
-        this.loginservice.loginMember(this.member)
-            .subscribe(msg => {
-              console.log(msg.message);
-              if(msg.message === "registered" || msg.message === "User exists"){
+        // this.loginservice.loginMember(this.member)
+        //     .subscribe(msg => {
+        //       console.log(msg.message);
+        //       if(msg.message === "registered" || msg.message === "User exists"){
                 localStorage.setItem("logged", "true");
                 this.router.navigate(['/dashboard']);
-              }
-            });
+            //   }
+            // });
       }
     );
   }

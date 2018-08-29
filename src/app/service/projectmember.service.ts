@@ -18,7 +18,6 @@ export class ProjectmemberService {
 
   getProjectMembers (): Observable<ProjectMember[]> {
     this.http.get<ProjectMember[]>(this.projectmembersUrl).subscribe(projectmembers => this.projectmembers = projectmembers)
-    console.log(this.projectmembers);
     return this.http.get<ProjectMember[]>(this.projectmembersUrl);
   }
 
@@ -26,13 +25,16 @@ export class ProjectmemberService {
     return this.http.post<ProjectMember>(this.projectmembersUrl, promem)
   }
 
-  deleteHero (promem: ProjectMember): Observable<ProjectMember> {
+  deleteProjectMember (promem: ProjectMember): Observable<ProjectMember> {
     if(promem.id != 0){
-    console.log(promem.id);
     const id = typeof promem === 'number' ? promem : promem.id;
     const url = `${this.projectmembersUrl}/${id}`;
     return this.http.delete<ProjectMember>(url);
     }
     return EMPTY;
+  }
+
+  updateProjectMember (promem: ProjectMember): Observable<any> {
+    return this.http.put(this.projectmembersUrl, promem);
   }
 }

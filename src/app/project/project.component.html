@@ -1,64 +1,84 @@
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div class=body>
-<div class = "mainclass">
-  <div class="subclasszero">
-    <input type="text" placeholder="New Project Name" id="projectname">
-  </div>
-  <ng-container *ngIf="show1">
-    <div class = "subclassone" (click)="changeVisibility1()">
-      <div class = "adddescriptionlogoclass"><img src = "../../assets/Group_8.png"></div>
-      <div class = "adddescriptionclass">Describe about the project</div>
+  <div class="mainclass">
+    <div class="subclasszero">
+      <input type="text" placeholder="New Project Name" id="projectname">
     </div>
-  </ng-container>
-  <ng-container *ngIf="!show1">
-    <div class="descriptioninputclass">
-      <div #des contenteditable="true" id="projectdescription"></div>
-    </div>
-  </ng-container>
-  <ng-container>
-  <div class="projectmembersclass" *ngIf="!show2">
-    <div class="teamclass">TEAM</div>
-    <div class="memberclass" *ngFor="let promem of projectmembers">
-        <!-- <div class="member"><div #em class="email" (blur)="editemail()" contenteditable="true">{{promem.email}}</div><div #rl class="role" (click)="editrole()">{{promem.role}}</div></div> -->
-        <div class="member"><span>{{promem.email}}</span>{{promem.role}}</div>
-        <div class="delete" *ngIf = "promem.id!=0" (click) = delete(promem)><img src = "../../assets/delete_mail.png"></div>
-    </div>
-  </div>
-  </ng-container>
-  <ng-container *ngIf="!show2">
-    <div class="memberinputclass">
+    <ng-container *ngIf="show1">
+      <div class="subclassone" (click)="changeVisibility1()">
+        <div class="adddescriptionlogoclass"><img src="../../assets/Group_8.png"></div>
+        <div class="adddescriptionclass">Describe about the project</div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!show1">
+      <div class="descriptioninputclass">
+        <div #des contenteditable="true" id="projectdescription"></div>
+      </div>
+    </ng-container>
+    <ng-container>
+      <div class="projectmembersclass" *ngIf="!show2">
+        <div class="teamclass">TEAM</div>
+        <div class="memberclass" *ngFor="let promem of projectmembers">
+          <!-- <div class="member"><div #em class="email" (blur)="editemail()" contenteditable="true">{{promem.email}}</div><div #rl class="role" (click)="editrole()">{{promem.role}}</div></div> -->
+          <div class="member" *ngIf="promem.id!=0">
+            <input type="text" placeholder="Email" value="{{promem.email}}" id="email{{promem.id}}" (blur)="change(promem)">
+            <div class="role">
+              <select id="role{{promem.id}}" (blur)="change(promem)">
+                <option>
+                  {{promem.role}}
+                </option>
+                <option>
+                  Project Manager
+                </option>
+                <option>
+                  Business Analyst
+                </option>
+                <option>
+                  Developer
+                </option>
+                <option>
+                  Quality Analyst
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="delete" *ngIf="promem.id!=0" (click)=d elete(promem)><img src="../../assets/delete_mail.png"></div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!show2">
+      <div class="memberinputclass">
         <input type="text" placeholder="Email" id="emailvalue">
-        <select id="rolevalue">
-            <option  >
-                
-            </option>
-            <option  >
-              Project Manager
-            </option>
-            <option>
-                Business Analyst
-            </option>
-            <option>
-                Developer
-            </option>                 
-            <option>
-                Quality Analyst
-            </option>
-          </select>
-    </div>
-</ng-container>
-<ng-container>
-  <div class = "subclasstwo" (click)="setpromem()">
-    <div class = "addmemberlogoclass"><img src = "../../assets/Group_8.png" ></div>
-    <div class = "addmemberclass">Add members</div>
-  </div>  
-</ng-container>
-<ng-container *ngIf="!show2">
-  <div class="addcancelclass">
-    <input type="button" value="Cancel" (click)="cancel()">
-    <input type="button" value="Add Project" (click)="addproject()">
+        <select id="rolevalue" (blur)="setpromem()">
+          <option>
+
+          </option>
+          <option>
+            Project Manager
+          </option>
+          <option>
+            Business Analyst
+          </option>
+          <option>
+            Developer
+          </option>
+          <option>
+            Quality Analyst
+          </option>
+        </select>
+      </div>
+    </ng-container>
+    <ng-container>
+      <div class="subclasstwo" (click)="setpromem()">
+        <div class="addmemberlogoclass"><img src="../../assets/Group_8.png"></div>
+        <div class="addmemberclass">Add members</div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!show2">
+      <div class="addcancelclass">
+        <input type="button" value="Cancel" (click)="cancel()">
+        <input type="button" value="Add Project" (click)="addproject()">
+      </div>
+    </ng-container>
   </div>
-</ng-container>
-</div>
 </div>

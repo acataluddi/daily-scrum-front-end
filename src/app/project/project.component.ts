@@ -12,6 +12,7 @@ import { ProjectMember } from '../model/ProjectMembers';
 export class ProjectComponent implements OnInit {
 
   @ViewChild('des') des: ElementRef;
+  @ViewChild('email') email: ElementRef;
   
   projectmembers:ProjectMember[];
   projectmember:ProjectMember;
@@ -51,9 +52,6 @@ export class ProjectComponent implements OnInit {
     var proname = (<HTMLInputElement>document.getElementById("projectname")).value;
     var prodesc = this.des.nativeElement.innerText;
 
-    // console.log(proname);
-    // console.log(prodesc);
-
     this.project = new Project(proname, prodesc);
     this.projectservice.addProject(this.project).subscribe(pro => {});
   }
@@ -85,9 +83,8 @@ export class ProjectComponent implements OnInit {
   }
 
   delete(projectmember:ProjectMember): void {
-    // console.log(projectmember.id);
     this.projectmembers = this.projectmembers.filter(h => h !== projectmember);
-    this.projectmemberservice.deleteHero(projectmember).subscribe();
+    this.projectmemberservice.deleteProjectMember(projectmember).subscribe();
   }
 
   cancel(): void {
@@ -109,7 +106,23 @@ export class ProjectComponent implements OnInit {
   addproject(): void{
     this.set();
     // this.addProjectMember();
-    console.log(this.project.name);
-    console.log(this.project.projectdescription);
+  }
+  change(projectmember:ProjectMember): void{
+
+    var id = projectmember.id;
+
+    var emailaddress = (<HTMLInputElement>document.getElementById("email"+id.toString())).value;
+    var memberole = (<HTMLInputElement>document.getElementById("role"+id.toString())).value;
+    
+    console.log(emailaddress);
+
+    if(emailaddress!='' && memberole!=''){
+      projectmember = new ProjectMember(emailaddress, memberole);
+    }
+
+    projectmember.id = id;
+
+    this.projectmemberservice.updateProjectMember(projectmember).subscribe();
+
   }
 }

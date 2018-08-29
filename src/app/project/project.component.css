@@ -2,7 +2,6 @@
 .body{
     margin: 0 auto;
     max-width: 350px;
-    /* background-color: palevioletred; */
 }
 .mainclass{
      margin-top: 50%;
@@ -54,7 +53,6 @@ img[src = "../../assets/Group_8.png"]{
 div[contenteditable="true"]{
     border: none;
     outline: none;
-    /* height: 15px; */
 }
 textarea{
     border: none;
@@ -67,9 +65,7 @@ textarea{
     color: rgba(0, 0, 0, 1);
 }
 .projectmembersclass{
-    margin: auto;
-    width: 75%;
-    /* height: 20px; */
+    margin: 0px 0px 0px 35px;
     padding: 10px 0px 10px 0px;
 }
 .teamclass{
@@ -84,14 +80,25 @@ textarea{
 }
 .member{
     margin: auto;
-    width: 80%;
     font-family: 'Roboto';
     font-size: 13px;
     color: rgba(0, 0, 0, 1);
     margin: 0px 20px 0px 0px;
+    display: flex;
+
 }
-span{
+.email{
     margin: 0px 20px 0px 0px;
+}
+select{
+    border: none;
+    height: 20px;
+    width: 100%;
+    font-family: 'Roboto';
+    font-size: 13px;
+    color: rgba(0, 0, 0, 1);
+    background-color: #ffffff ;
+    margin: 0px 0px 0px 10px;
 }
 .delete{
     height: 14px;
@@ -118,7 +125,7 @@ input[placeholder="Email"]{
     color: rgba(0, 0, 0, 1);
     margin: 0px 10px 0px 0px;
 }
-select{
+select[id="rolevalue"]{
     border: none;
     height: 30px;
     width: 45%;
