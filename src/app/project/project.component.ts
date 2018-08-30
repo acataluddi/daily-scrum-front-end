@@ -29,7 +29,7 @@ export class ProjectComponent implements OnInit {
   ngOnInit() {
 
     this.count = 0;
-    this.getProjectMembers();
+    // this.getProjectMembers();
   }
 
   changeVisibility1() {
@@ -55,8 +55,8 @@ export class ProjectComponent implements OnInit {
     this.project = new Project(proname, prodesc);
     this.projectservice.addProject(this.project).subscribe(pro => {});
 
-    console.log(this.project.name);
-    console.log(this.project.projectdescription);
+    console.log(this.project.projectName);
+    console.log(this.project.projectDesc);
 
   }
 
@@ -79,7 +79,7 @@ export class ProjectComponent implements OnInit {
         this.projectmembers.push(projectmember);
       });
 
-      this.getProjectMembers();
+      // this.getProjectMembers();
 
       (<HTMLInputElement>document.getElementById("emailvalue")).value = null;
       (<HTMLInputElement>document.getElementById("rolevalue")).value = "None";
@@ -108,7 +108,7 @@ export class ProjectComponent implements OnInit {
    }
   }
   addproject(): void{
-    this.getProjectMembers()
+    // this.getProjectMembers()
 
     this.set();
 
@@ -133,7 +133,7 @@ export class ProjectComponent implements OnInit {
 
     this.projectmemberservice.updateProjectMember(projectmember).subscribe();
 
-    this.getProjectMembers()
+    // this.getProjectMembers()
 
   }
 }

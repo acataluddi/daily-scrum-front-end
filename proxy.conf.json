@@ -1,0 +1,10 @@
+{
+    "/posts": {
+      "target": "http://localhost:8080/DailyScrum/ProjectController",
+      "secure": true,
+      "pathRewrite": {
+      "^/posts": ""
+    },
+      "changeOrigin": true
+    }
+  }
