@@ -3,5 +3,6 @@ export class Member{
     employeeID:string;
     name:string;   
     email:string;
-    userType: string;  
+    userType: string;
+     
 }

@@ -1,0 +1,367 @@
+
+body {
+  width:100%;
+}
+.right-header {
+    width: 150%;
+    height:5%;
+    /* box-sizing: border-box; */
+    float: left;
+    margin-top:5%;
+    margin-left:5%;
+  }
+.today_header {
+    padding-top: 13px;
+    padding-bottom: 11px;
+    display: flex;
+  }
+  
+  .today_task_header {
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Roboto';
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(79, 86, 105, 1);
+  }
+  .left-arrow {
+    height: 24px;
+    width: 24px;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  
+  .right-arrow {
+    height: 24px;
+    width: 24px;
+    margin-left: 7px;
+    cursor: pointer;
+  }
+  .view_all_task{
+    position: absolute;;
+    display: flex;
+    width:150px;
+    margin-left:80%;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5%;
+    line-height:180%;
+   
+
+  }
+  .view{
+    
+    height:16px;
+    width:16px; 
+    margin-top:4px;
+    padding-top:2px;
+  }
+ .my_task{
+   /* padding-left: 10%; */
+   font-family: 'Roboto';
+   font-size: 13px;
+   width:100%;
+   color: rgba(0, 0, 0, 1);
+ }
+  .total_time {
+    display: flex;
+    /* position: absolute; */
+    float: left;
+    width:100%;
+    /* padding-bottom: 8px;
+    padding-top: 8px; */
+    margin-top:2%;
+    margin-left:5%;
+  }
+  
+  .total_time_border {
+    display: flex;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    height:60%;
+    border-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  .total_time_text {
+    font-family: 'Roboto';
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(79, 86, 105, 1);
+    text-align: left;
+    text-align: end;
+    white-space: pre;
+    padding-top: 7px;
+    padding-bottom: 6px;
+    padding-left: 16px;
+  }
+  .spent_text {
+    font-family: 'Roboto';
+    font-size: 14px;
+    color: rgba(79, 86, 105, 1);
+    text-align: left;
+    white-space: pre;
+    padding: 9px 16px 7px 5px;
+  }
+  .filter {
+    font-family: 'Roboto';
+    font-size: 14px;
+    width:8%;
+    color: rgba(79, 86, 105, 1);
+    text-align: left;
+    line-height: 24px;
+    padding-left: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .buttons{
+    width:55%;
+  }
+  .allTask{
+    background-color: rgba(216, 216, 216, 1);
+    font-family: 'Roboto';
+    border-radius: 5%;
+    font-size: 12px;
+    color: rgba(68, 68, 68, 1);
+    text-align: left;
+    line-height: 150%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+   
+  }
+  .complete{
+    background-color: rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto';
+    border-radius: 5%;
+    font-size: 12px;
+    margin-left:1%;
+    color: rgba(0, 0, 0, 1);
+    text-align: left;
+    line-height: 20px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .progress{
+    background-color: rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto';
+    border-radius: 5%;
+    font-size: 12px;
+    margin-left:1%;
+    color: rgba(0, 0, 0, 1);
+    text-align: left;
+    line-height: 15px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    height:65%;
+  }
+  .impediments {
+    background-color: rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto';
+    border-radius: 5%;
+    font-size: 12px;
+    margin-left:1%;
+    color: rgba(0, 0, 0, 1);
+    text-align: left;
+    line-height:19px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+  .allTask:active, .complete:active, .progress:active, .impediments:active {
+    background-color: rgba(134, 131, 131, 0.1);
+  }
+.search {
+  float: right;
+  width:50px;
+  height:400px;
+  margin-left:0%;
+  border-left: 1px solid rgba(216, 216, 216, 1);
+  display:block;
+}
+.search_icon {
+  margin-left:30%;
+}
+.member_logo{
+  margin-left:25%;
+  margin-top:15%;
+  /* width: 35px; 
+  height: 35px;
+  border-radius: 50%; */
+  width: 30px; 
+  height: 30px;
+  background: red; 
+  border-radius: 50px;
+
+}
+  .column {
+    
+    width: 27%;
+    padding-left:55px;
+    margin-top:1%;
+    float:left;
+
+  }
+  
+  .member1{
+
+    /* position: relative; */
+    width:100%;
+    margin-top:0%;
+    
+    border: 1px solid rgba(216, 216, 216, 1);
+    /* display: flex; */
+    float: left;
+    
+    
+  }
+  .header {
+    /* position: absolute; */
+    width:95%; 
+    background-color: white;
+    /* display: flex; */
+    height:100%;
+    /* margin-top:0%; */
+    margin-left:0px;
+    float:left;
+    /* overflow-wrap:nowrap; */
+    
+  
+  }
+
+  
+  .member_title1 {
+    
+    width:100%;
+    height:47px;
+    /* border: 1px solid rgba(216, 216, 216, 1); */
+    background-color: rgba(242, 242, 242, 1);
+    /* display: flex; */
+    padding-left:5%;
+    /* display: flex; */
+   
+  }
+  .member_image1 {
+    width: 30px; 
+    height: 30px;
+    background: red; 
+    margin-top:10px;
+    margin-left:10px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px; 
+    border-radius: 50px;
+    /* display:block; */
+    float: left;
+
+  }
+ 
+  .more_icon {
+    /* position: relative;; */
+    margin-left:90%;
+    padding-top:10px;
+    /* float: right; */
+    
+  }
+  .member_part {
+    
+    width:240px;
+    margin-left:16px;
+    margin-top:6%;
+    /* height:100%; */
+    overflow-wrap: break-word;
+
+    
+  }
+  .member_name1 {
+    font-family: 'Roboto';
+    padding-top:8px;
+    margin-left:20px;
+    font-size: 13px;
+    font-weight: 500;
+    width:150px;
+    float: left;
+    color: rgba(79, 86, 105, 1);
+    /* display:flex; */
+    
+  }
+  .member_time_spent1 {
+    font-family: 'Roboto';
+    margin-top:0px;
+    margin-left:20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(0,0,0, 1);
+    float: left;
+
+  }
+
+ 
+  
+  li {
+    margin-left:0px;
+    margin-top:15px;
+    color: rgba(96, 96, 96, 1);
+    font-size:14px;
+    
+    
+  }
+  .member_part {
+    content: "•";font-size: 40px;
+    width:90%;
+    overflow-wrap: break-word;
+    line-height: 20px;
+  }
+
+  @media screen and (max-width: 1300px){
+    .header{
+      width:900px;
+
+    }
+    .column {
+      width :300px;
+    }
+  }
+  @media screen and (max-width: 1000px){
+    .header{
+      width:750px;
+
+    }
+    .column {
+      width :350px;
+      padding-left:40px;
+    }
+   .search {
+      display: none;
+    } 
+  }
+  @media screen and (max-width: 700px){
+    .header{
+      width:450px;
+
+    }
+    .column {
+      width :350px;
+      padding-left:30px;
+    }
+    .total_time, .search {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 400px){
+    .header{
+      width:350px;
+
+    }
+    .column {
+      width :300px;
+      padding-left:25px;
+    }
+    .view{
+    
+      height:16px;
+      width:16px; 
+      margin-top:4px;
+      padding-top:2px;
+    }
+    .total_time , .search, .my_task, .view_all_task{
+      display: none;
+    }
+  }
