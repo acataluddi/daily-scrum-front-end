@@ -22,6 +22,7 @@ import {Ng2Webstorage} from 'ngx-webstorage';
 import { AuthGuard } from './status.service';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule,Response,Headers } from '@angular/http';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -57,6 +58,7 @@ export function getAuthServiceConfigs() {
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(), 
     HttpClientModule,
+    HttpModule,
     Ng2Webstorage
   ],
   providers: [
