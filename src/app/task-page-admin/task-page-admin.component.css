@@ -266,15 +266,13 @@ body {
     margin-left:16px;
     margin-top:6%;
     /* height:100%; */
-    overflow-wrap: break-word;
-
-    
+    overflow-wrap: break-word;   
   }
   .member_name1 {
     font-family: 'Roboto';
     padding-top:8px;
     margin-left:20px;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
     width:150px;
     float: left;
@@ -309,6 +307,9 @@ body {
     overflow-wrap: break-word;
     line-height: 20px;
   }
+  .alt-View {
+    visibility: hidden;
+  }
 
   @media screen and (max-width: 1300px){
     .header{
@@ -324,6 +325,7 @@ body {
       width:750px;
 
     }
+    
     .column {
       width :350px;
       padding-left:40px;
@@ -337,11 +339,18 @@ body {
       width:450px;
 
     }
+    .alt-View {
+      visibility: visible;
+      position: absolute;
+      left:93%;
+      height:22px;
+      width:22px;
+    }
     .column {
       width :350px;
       padding-left:30px;
     }
-    .total_time, .search {
+    .total_time, .search, .view_all_task {
       display: none;
     }
   }
@@ -353,6 +362,16 @@ body {
     .column {
       width :300px;
       padding-left:25px;
+    }
+    .alt-View {
+      visibility: visible;
+      position: absolute;
+      left:93%;
+      height:22px;
+      width:22px;
+    }
+    .today_task_header {
+      font-size: 14px;
     }
     .view{
     

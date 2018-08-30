@@ -185,8 +185,7 @@ export class TaskPageAdminComponent implements OnInit {
     this.myDateValue=d1;
   }
   getRandomColor() {
-    var color = Math.floor(0x1000000 * Math.random()).toString(16);
-    return '#' + ('000000' + color).slice(-6);
-  }
-
+    var colors = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
+  return colors[Math.floor(Math.random() * colors.length)];
+   } 
 }
