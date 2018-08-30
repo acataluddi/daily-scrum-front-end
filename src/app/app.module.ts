@@ -35,6 +35,10 @@ export function getAuthServiceConfigs() {
   return config;
 }
 
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './in-memory-data.service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +61,14 @@ export function getAuthServiceConfigs() {
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(), 
     HttpClientModule,
-    Ng2Webstorage
+    Ng2Webstorage,
+
+    // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
+    // and returns simulated server responses.
+    // Remove it when a real server is ready to receive requests.
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   providers: [
     {

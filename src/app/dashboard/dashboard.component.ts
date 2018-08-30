@@ -26,5 +26,8 @@ export class DashboardComponent implements OnInit {
   } 
   openDailyStatus(){
     this.router.navigate(['/daily-status']);
-    }
+  }
+  openAddProject(){
+      this.router.navigate(['/project']);
+  }
 }
