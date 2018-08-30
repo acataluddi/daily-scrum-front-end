@@ -1,4 +1,6 @@
-
+.body{
+    z-index: 100;
+}
   
 @media only screen and (min-width:500px){
 
@@ -34,6 +36,7 @@
      height:auto;
      width: 100%;
      background-color: rgba(74, 20, 20, 1);
+     
      
   }
   .login-page {

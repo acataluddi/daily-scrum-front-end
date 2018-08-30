@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       name: '',
       email: '',
       userType: '',
-      
+      imageurl:''
     }
     
     
@@ -49,16 +49,19 @@ export class LoginComponent implements OnInit {
           name:userData.name, 
           email:userData.email, 
           userType:'user',
-          
+          imageurl: userData.image
         }
         this.loginservice.loginMember(this.member)
             .subscribe(msg => {
               console.log(msg.message);
-              if(msg.message === "User Registered" || msg.message === "User Already Exist"){
+              if(msg.message === "registered" || msg.message === "User exists"){
                 localStorage.setItem("logged", "true");
+                localStorage.setItem("email", this.member.email);
+                
+                localStorage.setItem("image", this.member.imageurl);
                 this.router.navigate(['/dashboard']);
-               }
-             });
+              }
+            });
       }
     );
   }
@@ -67,5 +70,9 @@ export class LoginComponent implements OnInit {
   getMembers(): void {
     this.loginservice.getMembers()
         .subscribe(members => console.log(members));
+  }
+
+  getDetails(): Member{
+    return this.member;
   }
 }
