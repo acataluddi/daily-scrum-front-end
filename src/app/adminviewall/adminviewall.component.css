@@ -1,16 +1,19 @@
 body{
     box-sizing: border-box;  
+    /* overflow: hidden; */
 }
 
 .first{
-    height: 768px;
+    height: 1080px;
     width: 100%;
+    overflow: hidden;
 }
 .mainClass{
     position: relative;
     background-color: #eeeeee;
     height: 130%;
-    width: 100%
+    width: 100%;
+    
 }
 h2{
     padding: 3% 0 0 3%;
@@ -69,7 +72,8 @@ h2{
 div.section.pagination {
     float: right;
     position: absolute;
-    top:93%;
+    top:80%;
+    /* top: 93%; */
     right: 2%;
 }
 
