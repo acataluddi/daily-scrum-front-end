@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         this.loginservice.loginMember(this.member)
             .subscribe(msg => {
               console.log(msg.message);
-              if(msg.message === "registered" || msg.message === "User exists"){
+              if(msg.message === "User Registered" || msg.message === "User Already Exist"){
                 localStorage.setItem("logged", "true");
                 localStorage.setItem("email", this.member.email);
                 
