@@ -355,6 +355,9 @@ body {
     }
   }
   @media screen and (max-width: 400px){
+    body{
+      margin-top:35px; 
+    }
     .header{
       width:350px;
 

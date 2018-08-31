@@ -1,7 +1,8 @@
 .MainDiv {
-  height: 768px;
+  height: 100%;
   width: 100%;
   background-color: rgb(255, 255, 255);
+  overflow: hidden;
 }
 
 .TopDiv {
@@ -10,9 +11,9 @@
   background-color: rgb(255, 255, 255);
   display: flex;
   position: fixed;
-  z-index: 100;
+  z-index: 40;
   padding-top: 8px;
-  top: 0px;
+  top: 60px;
 }
 
 .ProjectHeadingDiv {
@@ -68,7 +69,8 @@
   background-color: rgb(51, 5, 255);
 }
 .PlusSignDiv {
-  margin: 5%;
+  margin: 5px;
+  margin-top: 7.5px;
   width: 15px;
   height: 15px;
   background-color: white;
@@ -77,7 +79,7 @@
 .PlusSignImage {
   height: 65%;
   width: 65%;
-  margin: 15%;
+  padding-bottom: 3px;
 }
 
 .AddProjectDiv {
@@ -89,9 +91,10 @@
 }
 
 .BottomDiv {
-  margin-top: 30px;
+  margin-top: 110px;
   margin-left: 88px;
   margin-right: 88px;
+  margin-bottom: 75px;
   height: 100%;
   width: 100%;
   background-color: white;
@@ -146,6 +149,7 @@
   color: white;
   margin-left: 0px;
   font-weight: 600;
+  padding-top: 2px;
 }
 
 .SmallCircleButton1Even {
@@ -158,6 +162,7 @@
 
 .ExtraMembersDiv {
   padding-right: 4px;
+  padding-top: 2px;
   font-weight: 600;
   font-size: 14px;
   color: white;
@@ -255,7 +260,7 @@
 
 .MenuDotDiv {
   margin-left: 0px;
-  padding-top: 5px;
+  padding-top: 2px;
   color: white;
 }
 
@@ -290,6 +295,7 @@
     margin-left: 0px;
     width: 100%;
     margin-right: 0px;
+    margin-top: 60px;
   }
   .ProjectBoxDiv {
     width: 310px;

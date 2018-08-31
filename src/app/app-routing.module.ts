@@ -11,7 +11,7 @@ import {AuthGuard} from './status.service';
 import { TaskPageAdminComponent} from "./task-page-admin/task-page-admin.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/task-page-admin', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'project', component: ProjectComponent },
   { path: 'dashboard', component: DashboardComponent , canActivate:[AuthGuard]},

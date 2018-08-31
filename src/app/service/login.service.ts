@@ -52,4 +52,11 @@ export class LoginService {
   getMembers (): Observable<Member[]> {
     return this.http.get<Member[]>(this.geturl)
   }
+
+  logoutMember(){
+    this.router.navigate(['/login']);
+    localStorage.setItem("logged","false");
+    localStorage.setItem("email",'');
+    localStorage.setItem("image",'');
+  }
 }

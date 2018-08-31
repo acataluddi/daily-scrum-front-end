@@ -24,6 +24,7 @@ import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TaskPageAdminComponent } from './task-page-admin/task-page-admin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule,Response,Headers } from '@angular/http';
+import { HeaderComponent } from './header/header.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -48,7 +49,8 @@ export function getAuthServiceConfigs() {
     IndividualTaskComponent,
     IndividualMemberComponent,
     AdminviewallComponent,
-    TaskPageAdminComponent
+    TaskPageAdminComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
