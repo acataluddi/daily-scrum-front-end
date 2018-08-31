@@ -7,7 +7,7 @@ body {
     height:5%;
     /* box-sizing: border-box; */
     float: left;
-    margin-top:5%;
+    margin-top:65px;
     margin-left:5%;
   }
 .today_header {
@@ -355,9 +355,7 @@ body {
     }
   }
   @media screen and (max-width: 400px){
-    body{
-      margin-top:35px; 
-    }
+    
     .header{
       width:350px;
 

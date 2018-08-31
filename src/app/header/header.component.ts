@@ -58,27 +58,4 @@ export class HeaderComponent implements OnInit {
     this.selected.name = newProject;
   }
 
-  show(e) {
-    console.log(e.target.className);
-    if (e.target.className == "arrow2" || e.target.className == "button desktop") {
-      if (document.getElementById("signout").style.visibility == "hidden") {
-        document.getElementById("signout").style.visibility = "visible";
-      } else {
-        document.getElementById("signout").style.visibility = "hidden";
-      }
-
-    }
-    else if (e.target.className == "arrow") {
-      if (document.getElementById("projectlist").style.visibility == "hidden") {
-        document.getElementById("projectlist").style.visibility = "visible";
-      } else {
-        document.getElementById("projectlist").style.visibility = "hidden";
-      }
-
-    } else {
-      document.getElementById("signout").style.visibility = "hidden";
-      document.getElementById("projectlist").style.visibility = "hidden";
-    }
-  }
-
 }

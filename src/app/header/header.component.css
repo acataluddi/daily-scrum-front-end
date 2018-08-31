@@ -278,12 +278,14 @@ img[src = "../../assets/Scrum_logo.png"]{
         width: 32px;
         height: 32px;
         border-radius: 32px; 
+        position: fixed;
+        right: 5.5%;
     }
 
     .arrow2{
-        position: absolute;
-        top: 38%;
-        right: -60%;
+        position: fixed;
+        top: 3.7%;
+        right: 0.3%;
     }
 
     .button{
