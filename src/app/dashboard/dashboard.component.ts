@@ -27,4 +27,7 @@ export class DashboardComponent implements OnInit {
   openDailyStatus(){
     this.router.navigate(['/daily-status']);
     }
+    gotoUsersList() {
+      this.router.navigateByUrl('/admin-view-all');
+    }
 }
