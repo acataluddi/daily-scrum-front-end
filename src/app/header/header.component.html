@@ -4,9 +4,12 @@
             <img src="../../assets/Scrum.png">
         </div>
         <div class="textdiv">
-            <div class="dailyscrumclass">{{selected.name}}
+            <div id="dailyscrumclass">{{selected.name}}
             </div>
-            <div class="arrow">
+            <div id="scrum">Daily Scrum 
+                <div class="dash">Dashboard</div>
+            </div>
+            <div id="arrow">
                 <div id="projectlist">
                     <div *ngFor="let project of projects">
                         <div class="items" (click)="changeProject(project.name)">{{project.name}}</div>

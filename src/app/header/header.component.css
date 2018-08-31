@@ -28,7 +28,7 @@ img[src = "../../assets/Scrum_logo.png"]{
     height: 3.09vw;
     width: 3.09vw;
 }
-.dailyscrumclass{
+#dailyscrumclass{
     font-family: 'Neo Sans Cyr', 'Roboto';
     font-size: 2rem;
     font-weight: 300;
@@ -43,7 +43,27 @@ img[src = "../../assets/Scrum_logo.png"]{
     
 }
 
-.arrow{
+#scrum{
+    font-family: 'Neo Sans Cyr', 'Roboto';
+    font-size: 2rem;
+    font-weight: 300;
+    position: absolute;
+    top: 33.34%;
+    left: 0%;
+    width: 250px;
+    color: rgba(79, 86, 105, 1);
+}
+
+.dash{
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    left: 116px;
+    color: rgba(79, 86, 105, 1);
+    font-weight: lighter;
+}
+
+#arrow{
     display: inline-block;
     position: absolute;
     top: 28px;
@@ -53,6 +73,7 @@ img[src = "../../assets/Scrum_logo.png"]{
     border: none;
     height: 16px;
     width: 16px;
+    cursor: pointer;
     
 }    
 
@@ -162,6 +183,7 @@ img[src = "../../assets/Scrum_logo.png"]{
     position: absolute;
     top: 30px;
     left: -75px;
+    cursor: pointer;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -174,7 +196,7 @@ img[src = "../../assets/Scrum_logo.png"]{
     font-weight: bold;
 }
 
-.dailyscrumclass .arrow #projectlist{
+#dailyscrumclass .arrow #projectlist{
     display: none;
     text-decoration: none;
     width: 50%;
@@ -183,7 +205,6 @@ img[src = "../../assets/Scrum_logo.png"]{
     color: #ffffff;
     font-size:0.8rem;
     font-family: Roboto;
-    cursor: pointer;
     z-index: 1;
 }
 
@@ -197,14 +218,14 @@ img[src = "../../assets/Scrum_logo.png"]{
 
 
 @media only screen and (max-width: 700px) {
-    .dailyscrumclass{
+    #dailyscrumclass{
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
         width: 250px;
     }
 
-    .arrow{
+    #arrow{
         position: absolute;
         top: 25px;
         left: 253px;
@@ -248,7 +269,7 @@ img[src = "../../assets/Scrum_logo.png"]{
         margin-left: 0%;
     }
 
-    .dailyscrumclass{
+    #dailyscrumclass{
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -256,6 +277,10 @@ img[src = "../../assets/Scrum_logo.png"]{
         font-size: 1.6rem; 
     }
 
+    .dash{
+        visibility: hidden;
+    }
+    
     .usermailclass{
         display: inline-block;
         width: 32px;
@@ -294,7 +319,7 @@ img[src = "../../assets/Scrum_logo.png"]{
         display: none;
     }
 
-    .arrow{
+    #arrow{
         position: relative;
         top: -2px;
         left: 146%;

@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
           employeeID:userData.id,
           name:userData.name, 
           email:userData.email, 
-          userType:'user',
+          userType:'User',
           imageurl: userData.image
         }
         this.loginservice.loginMember(this.member)
