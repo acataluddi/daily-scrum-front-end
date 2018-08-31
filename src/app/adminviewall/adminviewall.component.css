@@ -73,7 +73,7 @@ h2{
 div.section.pagination {
     float: right;
     position: absolute;
-    top:80%;
+    top:86%;
     /* top: 93%; */
     right: 2%;
 }
@@ -84,14 +84,14 @@ div.section.pagination {
         width: 100%;
     }
 
-    .mainClass[_ngcontent-c1] {
+    .mainClass {
         position: relative;
         background-color: #eeeeee;
         height: 90%;
         width: 100%;
     }
 
-    .card[_ngcontent-c1] {
+    .card {
         position: relative;
         background-color: #ffffff;
         box-shadow: 0 4px 4px 0 rgba(0,0,0,0.1);
@@ -100,4 +100,5 @@ div.section.pagination {
         margin: 1%;
         height: 77%;
     }
+
 }

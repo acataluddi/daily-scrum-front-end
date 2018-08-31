@@ -48,10 +48,26 @@
   font-weight: 600;
 }
 
-.AddProjectButton:hover {
+.UserList {
+  position: absolute;
+  left: 450px;
+  height: 32px;
+  width: 80px;
+  background-color: rgb(5, 87, 255);
+  border-radius: 4px;
+  display: flex;
+  border-style: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  /* padding-left: 2%; */
+  font-family: 'Roboto';
+  color: white;
+  font-weight: bold;
+}
+.AddProjectButton:hover, .UserList:hover, .UserList:active {
   background-color: rgb(51, 5, 255);
 }
-
 .PlusSignDiv {
   margin: 5px;
   margin-top: 7.5px;

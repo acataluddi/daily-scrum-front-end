@@ -52,7 +52,7 @@ export class AdminviewallComponent implements OnInit {
            console.log(this.memberArray);    
     })
   }
-  private postURL= 'http://localhost:8080/DailyScrum/CRUDControllerUser';
+  private postURL= 'http://10.4.6.58:8081/DailyScrum/CRUDControllerUser';
   putUpdate(member:Member):Promise<Member>{
     let cpHeaders = new Headers({ 'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
