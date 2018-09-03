@@ -54,7 +54,7 @@ img[src = "../../assets/Scrum_logo.png"]{
     color: rgba(79, 86, 105, 1);
 }
 
-.dash{
+#dash{
     display: inline-block;
     position: absolute;
     top: 0px;
@@ -215,8 +215,6 @@ img[src = "../../assets/Scrum_logo.png"]{
 } 
   
 
-
-
 @media only screen and (max-width: 700px) {
     #dailyscrumclass{
         white-space: nowrap;
@@ -232,6 +230,11 @@ img[src = "../../assets/Scrum_logo.png"]{
     }
 }
 
+@media only screen and (max-width: 540px) {
+    #dash{
+        visibility: hidden;
+    }
+}
 
 @media only screen and (max-width: 500px) {
     
@@ -277,7 +280,7 @@ img[src = "../../assets/Scrum_logo.png"]{
         font-size: 1.6rem; 
     }
 
-    .dash{
+    #dash{
         visibility: hidden;
     }
     
