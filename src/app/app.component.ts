@@ -40,6 +40,10 @@ export class AppComponent {
         document.getElementById("projectlist").style.visibility = "hidden";
       }
     }
+    else{
+      document.getElementById("projectlist").style.visibility = "hidden";
+      document.getElementById("signout").style.visibility = "hidden";
+    }
   }
   
 }
