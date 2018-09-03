@@ -22,18 +22,17 @@ export class HeaderComponent implements OnInit {
 
   selected: Project = { name: "FR Project LXXXI - Core Order Management System", members: [], numberOfMembers: 5 };
   constructor(
-    private socialAuthService: AuthService, 
-    private route: Router,
-    private loginservice: LoginService, 
-    private projectService: ProjectService, 
-    private act: ActivatedRoute) 
-    { }
+    private socialAuthService: AuthService,
+    private router: Router,
+    private loginservice: LoginService,
+    private projectService: ProjectService,
+    private act: ActivatedRoute) { }
 
   ngOnInit() {
     this.initializeMember();
     this.getdata();
     this.toggle();
-    this.route.events.forEach((event) => {
+    this.router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
         console.log(event);
         if (event['url'] === '/dashboard') {
@@ -41,6 +40,7 @@ export class HeaderComponent implements OnInit {
           document.getElementById("dailyscrumclass").style.visibility = "hidden";
           document.getElementById("arrow").style.visibility = "hidden";
           document.getElementById("scrum").style.visibility = "visible";
+          document.getElementById("dash").style.visibility = "visible";
         } else if (event['url'] === '/project') {
           this.title = 'New Project';
           document.getElementById("dailyscrumclass").style.visibility = "hidden";
@@ -55,6 +55,7 @@ export class HeaderComponent implements OnInit {
           document.getElementById("dailyscrumclass").style.visibility = "visible";
           document.getElementById("arrow").style.visibility = "visible";
           document.getElementById("scrum").style.visibility = "hidden";
+          document.getElementById("dash").style.visibility = "hidden";
         }
       }
     });
@@ -92,28 +93,31 @@ export class HeaderComponent implements OnInit {
   }
 
   toggle() {
-    if (this.route.url == '/dashboard') {
+    if (this.router.url == '/dashboard') {
       this.title = 'Dashboard';
       document.getElementById("dailyscrumclass").style.visibility = "hidden";
       document.getElementById("arrow").style.visibility = "hidden";
       document.getElementById("scrum").style.visibility = "visible";
-    } else if (this.route.url == '/project') {
+    } else if (this.router.url == '/project') {
       this.title = 'New Project';
       document.getElementById("dailyscrumclass").style.visibility = "hidden";
       document.getElementById("arrow").style.visibility = "hidden";
       document.getElementById("scrum").style.visibility = "visible";
-    } else if (this.route.url == '/admin-view-all') {
+    } else if (this.router.url == '/admin-view-all') {
       document.getElementById("dailyscrumclass").style.visibility = "hidden";
       document.getElementById("arrow").style.visibility = "hidden";
       document.getElementById("scrum").style.visibility = "visible";
       document.getElementById("dash").style.visibility = "hidden";
     }
-     else {
+    else {
       document.getElementById("dailyscrumclass").style.visibility = "visible";
       document.getElementById("arrow").style.visibility = "visible";
       document.getElementById("scrum").style.visibility = "hidden";
     }
-    console.log(this.route.url);
+    console.log(this.router.url);
 
+  }
+  openDashboardPage() {
+    this.router.navigate(['/dashboard']);
   }
 }
