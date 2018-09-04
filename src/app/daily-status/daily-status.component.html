@@ -12,8 +12,9 @@
   </div>
   <div class="right-header">
     <div class="today_header">
-      <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate" #dp="bsDatepicker"
-        [bsConfig]="datePickerConfig" bsDatepicker [(bsValue)]="myDateValue" (onHidden)="showDatePicker=false" (bsValueChange)="onDateChange($event)">{{todayval}}</div>
+      <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate"
+        #dp="bsDatepicker" [bsConfig]="datePickerConfig" bsDatepicker [(bsValue)]="myDateValue" (onHidden)="showDatePicker=false"
+        (bsValueChange)="onDateChange($event)">{{todayval}}</div>
       <img class="left-arrow" src="../../assets/arrow-left.png" align="top" (click)="getPreviousDate()">
       <img class="right-arrow" src="../../assets/arrow-right.png" align="top" (click)="getNextDate()">
       <div class="edit_status">Saving..</div>

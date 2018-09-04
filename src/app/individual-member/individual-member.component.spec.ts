@@ -8,9 +8,9 @@ describe('IndividualMemberComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IndividualMemberComponent ]
+      declarations: [IndividualMemberComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

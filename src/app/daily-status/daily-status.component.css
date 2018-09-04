@@ -1,5 +1,4 @@
 /* customizing the scroll bar */
-
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -216,16 +215,20 @@ img.right-arrow:active {
   .header-part {
     width: 100%;
   }
+
   .left-header {
     display: none;
   }
+
   .right-header {
     float: none;
     width: 100%;
   }
+
   .left-part {
     display: none;
   }
+
   .right-part {
     float: none;
     width: 100%;
@@ -236,19 +239,23 @@ img.right-arrow:active {
   .today_task_label {
     font-size: 12px;
   }
+
   .today_task_header {
     font-size: 16px;
     font-weight: 600;
   }
+
   .left-arrow {
     height: 20px;
     width: 20px;
     margin-left: 10px;
   }
+
   .right-arrow {
     height: 20px;
     width: 20px;
   }
+
   .edit_status {
     font-size: 10px;
   }
@@ -258,19 +265,23 @@ img.right-arrow:active {
   .today_task_label {
     font-size: 11px;
   }
+
   .today_task_header {
     font-size: 14px;
     font-weight: 600;
   }
+
   .left-arrow {
     height: 16px;
     width: 16px;
     margin-left: 8px;
   }
+
   .right-arrow {
     height: 16px;
     width: 16px;
   }
+
   .edit_status {
     font-size: 9px;
   }

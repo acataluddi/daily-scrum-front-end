@@ -10,14 +10,14 @@
       <div class="ProjectHeadingDiv">
         <div class="ProjectHeadingTextDiv">My Projects ({{noOfProjects}})</div>
       </div>
-      
+
       <button class="AddProjectButton">
         <div class="PlusSignDiv">
           <img class="PlusSignImage" src="../../assets/plus.png">
         </div>
         <div class="AddProjectDiv">Add Project</div>
       </button>
-      <button class="UserList" (click)="gotoUsersList()"> User List   
+      <button *ngIf="flag === true" class="UserList" (click)="gotoUsersList()"> User List
       </button>
     </div>
     <div class="BottomDiv">
