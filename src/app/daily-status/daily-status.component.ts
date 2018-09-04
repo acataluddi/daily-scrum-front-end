@@ -75,9 +75,9 @@ export class DailyStatusComponent implements OnInit {
     this.yesterdayval = "Yesterday's Tasks";
   }
   getTasks() {
-    // this.MockYesterdayTasks = this.taskservice.getYesterdayTasks();
-    // this.MockTodayTasks = this.taskservice.getTodayTasks();
-    this.MockTodayTasks = this.taskservice.getTodaysDay();
+    this.MockYesterdayTasks = this.taskservice.getYesterdayTasks();
+    this.MockTodayTasks = this.taskservice.getTodayTasks();
+    // this.MockTodayTasks = this.taskservice.getToday();
     // this.MockYesterdayTasks = this.taskservice.getPreviousDay();
 
   }

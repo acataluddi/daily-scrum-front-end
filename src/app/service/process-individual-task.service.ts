@@ -130,7 +130,7 @@ export class ProcessIndividualTaskService {
         return this.PreviousDaytask;
   }
 
-  getTodaysDay(): Task[] {
+  getTodays(): Task[] {
     this.http.get(this.geturlT)
       .subscribe(
         (res: Response) => {
