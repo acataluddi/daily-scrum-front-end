@@ -1,20 +1,16 @@
 /* customizing the scroll bar */
-
 /* width */
-
 ::-webkit-scrollbar {
   width: 5px;
 }
 
 /* Handle */
-
 ::-webkit-scrollbar-thumb {
   background: rgba(241, 241, 241, 1);
   border-radius: 150px;
 }
 
 /* Handle on hover */
-
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(214, 214, 214, 1);
 }
@@ -162,6 +158,7 @@ div.cancel_edit:active {
   .description {
     width: 90%;
   }
+
   .impediments {
     width: 90%;
   }
@@ -171,9 +168,11 @@ div.cancel_edit:active {
   .description {
     width: 90%;
   }
+
   .impediments {
     width: 90%;
   }
+
   .add_impediment {
     margin-left: 20px;
   }

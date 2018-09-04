@@ -22,8 +22,8 @@ export class DailyStatusComponent implements OnInit {
   task_id;
   oldtodaytask: Task;
   oldyesterdaytask: Task;
-  creatednewtoday=false;
-  creatednewyesterday=false;
+  creatednewtoday = false;
+  creatednewyesterday = false;
   hours_spent;
   minutes_spent;
   impediments;
@@ -62,8 +62,8 @@ export class DailyStatusComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.oldtodaytask= new Task;
-    this.oldyesterdaytask=new Task;
+    this.oldtodaytask = new Task;
+    this.oldyesterdaytask = new Task;
     this.getTasks();
     this.calculateTotalTime();
     this.month = this.months[this.d.getMonth()];
@@ -72,7 +72,7 @@ export class DailyStatusComponent implements OnInit {
     this.myvalue = true;
     this.myDateValue = new Date();
     this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-    this.yesterdayval ="Yesterday's Tasks";
+    this.yesterdayval = "Yesterday's Tasks";
   }
   getTasks() {
     this.MockYesterdayTasks = this.taskservice.getYesterdayTasks();
@@ -131,42 +131,42 @@ export class DailyStatusComponent implements OnInit {
   }
 
   addTodayTask() {
-    if(this.creatednewtoday===true){
-      if(this.oldtodaytask.description!==''){
+    if (this.creatednewtoday === true) {
+      if (this.oldtodaytask.description !== '') {
         var ts = new Task();
         ts = this.initializeNew(ts);
-        this.oldtodaytask=ts;
+        this.oldtodaytask = ts;
         this.MockTodayTasks.push(ts);
-        this.creatednewtoday=true;         
+        this.creatednewtoday = true;
       }
     }
-    else if(this.creatednewtoday===false){
+    else if (this.creatednewtoday === false) {
       var ts = new Task();
       console.log(this.oldtodaytask);
       ts = this.initializeNew(ts);
-      this.oldtodaytask=ts;
+      this.oldtodaytask = ts;
       this.MockTodayTasks.push(ts);
-      this.creatednewtoday=true; 
+      this.creatednewtoday = true;
     }
   }
 
   addYesterdayTask() {
-    if(this.creatednewyesterday===true){
-      if(this.oldyesterdaytask.description!==''){
+    if (this.creatednewyesterday === true) {
+      if (this.oldyesterdaytask.description !== '') {
         var ts = new Task();
         ts = this.initializeNew(ts);
-        this.oldyesterdaytask=ts;
+        this.oldyesterdaytask = ts;
         this.MockYesterdayTasks.push(ts);
-        this.creatednewyesterday=true;         
+        this.creatednewyesterday = true;
       }
     }
-    else if(this.creatednewyesterday===false){
+    else if (this.creatednewyesterday === false) {
       var ts = new Task();
       console.log(this.oldyesterdaytask);
       ts = this.initializeNew(ts);
-      this.oldyesterdaytask=ts;
+      this.oldyesterdaytask = ts;
       this.MockYesterdayTasks.push(ts);
-      this.creatednewyesterday=true; 
+      this.creatednewyesterday = true;
     }
   }
 
@@ -196,7 +196,7 @@ export class DailyStatusComponent implements OnInit {
     }
     var newid = parseInt(this.date.toString() + this.monthval.toString() + this.year.toString() + this.hour.toString() + this.minute.toString() + this.second.toString());
     ts = {
-      member_name:'',
+      member_name: '',
       task_id: newid,
       description: '',
       hours_spent: 0,
@@ -207,54 +207,54 @@ export class DailyStatusComponent implements OnInit {
     return ts;
   }
   onDateChange(newDate: Date) {
-    this.newDate=newDate;
+    this.newDate = newDate;
     var d1 = new Date(newDate);
-    (d1.setDate(d1.getDate()-1));
+    (d1.setDate(d1.getDate() - 1));
     this.month = this.months[newDate.getMonth()];
     this.date = newDate.getDate();
     this.year = newDate.getFullYear();
     if ((newDate.getMonth() === this.d.getMonth()) && (newDate.getDate() === this.d.getDate()) && (newDate.getFullYear() === this.d.getFullYear())) {
       this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval ="Yesterday's Tasks";
+      this.yesterdayval = "Yesterday's Tasks";
     }
     else {
       this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval =this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+      this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
     }
   }
 
-  getNextDate(){
+  getNextDate() {
     var d1 = new Date(this.newDate);
-    (d1.setDate(d1.getDate()+1));
+    (d1.setDate(d1.getDate() + 1));
     this.month = this.months[d1.getMonth()];
     this.date = d1.getDate();
     this.year = d1.getFullYear();
     if ((this.month === this.d.getMonth()) && (this.date === this.d.getDate()) && (this.year === this.d.getFullYear())) {
       this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval ="Yesterday's Tasks";
+      this.yesterdayval = "Yesterday's Tasks";
     }
     else {
       this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval =this.months[this.newDate.getMonth()] + " " + this.newDate.getDate() + ", " + this.newDate.getFullYear();
+      this.yesterdayval = this.months[this.newDate.getMonth()] + " " + this.newDate.getDate() + ", " + this.newDate.getFullYear();
     }
-    this.newDate=d1;
-    this.myDateValue=d1;
+    this.newDate = d1;
+    this.myDateValue = d1;
   }
-  getPreviousDate(){
+  getPreviousDate() {
     var d1 = new Date(this.newDate);
-    (d1.setDate(d1.getDate()-1));
+    (d1.setDate(d1.getDate() - 1));
     this.month = this.months[this.newDate.getMonth()];
     this.date = this.newDate.getDate();
     this.year = this.newDate.getFullYear();
     if ((this.newDate.getMonth() === this.d.getMonth()) && (this.newDate.getDate() === this.d.getDate()) && (this.newDate.getFullYear() === this.d.getFullYear())) {
       this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval ="Yesterday's Tasks";
+      this.yesterdayval = "Yesterday's Tasks";
     }
     else {
       this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval =this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+      this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
     }
-    this.newDate=d1;
-    this.myDateValue=d1;
+    this.newDate = d1;
+    this.myDateValue = d1;
   }
 }

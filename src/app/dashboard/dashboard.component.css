@@ -65,9 +65,13 @@
   color: white;
   font-weight: bold;
 }
-.AddProjectButton:hover, .UserList:hover, .UserList:active {
+
+.AddProjectButton:hover,
+.UserList:hover,
+.UserList:active {
   background-color: rgb(51, 5, 255);
 }
+
 .PlusSignDiv {
   margin: 5px;
   margin-top: 7.5px;
@@ -274,9 +278,11 @@
   .MainDiv {
     width: 100%;
   }
+
   .BottomDiv {
     width: 100%;
   }
+
   .ProjectBoxDiv {
     width: 352px;
   }
@@ -286,10 +292,12 @@
   .MainDiv {
     width: 100%;
   }
+
   .TopDiv {
     display: none;
     height: 0px;
   }
+
   .BottomDiv {
     margin-top: 0px;
     margin-left: 0px;
@@ -297,15 +305,18 @@
     margin-right: 0px;
     margin-top: 60px;
   }
+
   .ProjectBoxDiv {
     width: 310px;
     margin-top: 16px;
     margin-left: 0px;
     margin-right: 0px;
   }
+
   .DailyStatusButton {
     margin-left: 11px;
   }
+
   .MenuButton {
     margin-left: 5px;
   }

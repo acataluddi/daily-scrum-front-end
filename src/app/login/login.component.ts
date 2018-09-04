@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Member} from "../model/member-model";
-import {AuthService,GoogleLoginProvider} from 'angular-6-social-login';
+import { Member } from "../model/member-model";
+import { AuthService, GoogleLoginProvider } from 'angular-6-social-login';
 import { Router } from '@angular/router';
 import { LoginService } from "../service/login.service";
 
@@ -16,25 +16,25 @@ export class LoginComponent implements OnInit {
     public router: Router,
     private loginservice: LoginService) { }
 
-   
+
 
   ngOnInit() {
     this.initializeMember();
     // this.getMembers();
   }
-  
+
   member: Member;
-  
+
   initializeMember() {
     this.member = {
       employeeID: '',
       name: '',
       email: '',
       userType: '',
-      imageurl:''
+      imageurl: ''
     }
-    
-    
+
+
   }
   public socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
@@ -45,23 +45,23 @@ export class LoginComponent implements OnInit {
       (userData) => {
         console.log(socialPlatform + " sign in data : ", userData);
         this.member = {
-          employeeID:userData.id,
-          name:userData.name, 
-          email:userData.email, 
-          userType:'User',
+          employeeID: userData.id,
+          name: userData.name,
+          email: userData.email,
+          userType: 'User',
           imageurl: userData.image
         }
         this.loginservice.loginMember(this.member)
-            .subscribe(msg => {
-              console.log(msg.message);
-              if(msg.message === "User Registered" || msg.message === "User Already Exist"){
-                localStorage.setItem("logged", "true");
-                localStorage.setItem("email", this.member.email);
-                
-                localStorage.setItem("image", this.member.imageurl);
-                this.router.navigate(['/dashboard']);
-              }
-            });
+          .subscribe(msg => {
+            console.log(msg);
+            if (msg.email === this.member.email) {
+              localStorage.setItem("logged", "true");
+              localStorage.setItem("email", msg.email);
+              localStorage.setItem("userType", msg.userType);
+              localStorage.setItem("image", msg.imageurl);
+              this.router.navigate(['/dashboard']);
+            }
+          });
       }
     );
   }
@@ -69,10 +69,10 @@ export class LoginComponent implements OnInit {
   members: Member[];
   getMembers(): void {
     this.loginservice.getMembers()
-        .subscribe(members => console.log(members));
+      .subscribe(members => console.log(members));
   }
 
-  getDetails(): Member{
+  getDetails(): Member {
     return this.member;
   }
 }

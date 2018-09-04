@@ -1,32 +1,32 @@
 <body>
   <div class="first">
-  <div class="mainClass">
-    <h2>Users</h2>
-    <div class="card">
-      <div>
-        <div class="section head">
-          <div class="header">User</div>
-          <div class="header">Email</div>
-          <div class="header">User Type</div>
-        </div>
+    <div class="mainClass">
+      <h2>Users</h2>
+      <div class="card">
+        <div>
+          <div class="section head">
+            <div class="header">User</div>
+            <div class="header">Email</div>
+            <div class="header">User Type</div>
+          </div>
 
-        <div class="section rowstyle member" *ngFor="let member of memberArray | paginate: {totalItems: total, itemsPerPage:10, currentPage: p}">
-          <div class="header">{{member.name}}</div>
-          <div class="header">{{member.email}}</div>
-          <div class="header">
-            <select class="custom-select" name="userType" [(ngModel)]="member.userType" (ngModelChange)="onChange($event, member)">
-              <option value="Admin" >Admin</option>
-              <option value="Manager">Manager</option>
-              <option value="User" >User</option>
-            </select>
+          <div class="section rowstyle member" *ngFor="let member of memberArray | paginate: {totalItems: total, itemsPerPage:10, currentPage: p}">
+            <div class="header">{{member.name}}</div>
+            <div class="header">{{member.email}}</div>
+            <div class="header">
+              <select class="custom-select" name="userType" [(ngModel)]="member.userType" (ngModelChange)="onChange($event, member)">
+                <option value="Admin">Admin</option>
+                <option value="Manager">Manager</option>
+                <option value="User">User</option>
+              </select>
 
+            </div>
+          </div>
+          <div class="pagination section">
+            <pagination-controls (pageChange)="getPagenum($event)"></pagination-controls>
           </div>
         </div>
-        <div class="pagination section">
-          <pagination-controls (pageChange)="getPagenum($event)"></pagination-controls>
-        </div>        
       </div>
     </div>
   </div>
-</div>
 </body>

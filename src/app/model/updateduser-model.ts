@@ -1,4 +1,3 @@
-export class Updateduser
-{   
+export class Updateduser {
     name: string;
 }

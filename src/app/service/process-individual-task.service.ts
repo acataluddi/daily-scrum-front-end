@@ -8,7 +8,7 @@ export class ProcessIndividualTaskService {
 
   MockYesterdaytask: Task[] = [
     {
-      member_name:"Patrick Cunningham",
+      member_name: "Patrick Cunningham",
       task_id: 19082018101030,
       hours_spent: 0,
       minutes_spent: 56,
@@ -17,7 +17,7 @@ export class ProcessIndividualTaskService {
       task_completed: true
     },
     {
-      member_name:"Patrick Cunningham",
+      member_name: "Patrick Cunningham",
       task_id: 19082018101500,
       hours_spent: 2,
       minutes_spent: 34,
@@ -26,7 +26,7 @@ export class ProcessIndividualTaskService {
       task_completed: false
     },
     {
-      member_name:"Patrick Cunningham",
+      member_name: "Patrick Cunningham",
       task_id: 19082018122020,
       hours_spent: 0,
       minutes_spent: 0,
@@ -35,7 +35,7 @@ export class ProcessIndividualTaskService {
       task_completed: true
     },
     {
-      member_name:"Patrick Cunningham",
+      member_name: "Patrick Cunningham",
       task_id: 19082018134030,
       hours_spent: 0,
       minutes_spent: 50,
@@ -44,7 +44,7 @@ export class ProcessIndividualTaskService {
       task_completed: true
     },
     {
-      member_name:"Patrick Cunningham",
+      member_name: "Patrick Cunningham",
       task_id: 19082018153005,
       hours_spent: 2,
       minutes_spent: 0,
@@ -56,7 +56,7 @@ export class ProcessIndividualTaskService {
 
   MockTodaytask: Task[] = [
     {
-      member_name:"Patrick Cunningham",
+      member_name: "Patrick Cunningham",
       task_id: 20082018101110,
       hours_spent: 0,
       minutes_spent: 56,
@@ -65,7 +65,7 @@ export class ProcessIndividualTaskService {
       task_completed: true
     },
     {
-      member_name:"Patrick Cunningham",
+      member_name: "Patrick Cunningham",
       task_id: 20082018114030,
       hours_spent: 2,
       minutes_spent: 34,
@@ -74,7 +74,7 @@ export class ProcessIndividualTaskService {
       task_completed: false
     },
     {
-      member_name:"Patrick Cunningham",
+      member_name: "Patrick Cunningham",
       task_id: 20082018121020,
       hours_spent: 0,
       minutes_spent: 0,

@@ -8,16 +8,16 @@ import { Router, NavigationStart } from '@angular/router';
 })
 export class AppComponent {
   title = 'app';
-  showHead:boolean = false;
+  showHead: boolean = false;
   constructor(private router: Router) {
     router.events.forEach((event) => {
-      if (event instanceof NavigationStart) { 
-        if (event['url'] == '/' || event['url'] == '/login' ) {
+      if (event instanceof NavigationStart) {
+        if (event['url'] == '/' || event['url'] == '/login') {
           this.showHead = false;
         } else {
           this.showHead = true;
         }
-  
+
       }
     });
   }
@@ -25,7 +25,7 @@ export class AppComponent {
   show(e) {
     console.log(e);
     if (e.target.className == "arrow2" || e.target.className == "button desktop" ||
-       e.target.className == "dp") {
+      e.target.className == "dp") {
       if (document.getElementById("signout").style.visibility == "hidden") {
         document.getElementById("signout").style.visibility = "visible";
       } else {
@@ -40,10 +40,10 @@ export class AppComponent {
         document.getElementById("projectlist").style.visibility = "hidden";
       }
     }
-    else{
+    else {
       document.getElementById("projectlist").style.visibility = "hidden";
       document.getElementById("signout").style.visibility = "hidden";
     }
   }
-  
+
 }
