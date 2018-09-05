@@ -1,6 +1,6 @@
 
 export class Task {
-    memberId: string;
+    memberEmail: string;
     taskId: string;
     hourSpent: number;
     minuteSpent: number;
