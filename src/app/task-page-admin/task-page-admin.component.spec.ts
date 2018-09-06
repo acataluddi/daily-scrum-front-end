@@ -8,9 +8,9 @@ describe('TaskPageAdminComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskPageAdminComponent ]
+      declarations: [TaskPageAdminComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

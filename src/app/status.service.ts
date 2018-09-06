@@ -5,17 +5,17 @@ import { LoginService } from "./service/login.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
- 
-    constructor(private router: Router , private loginservice:LoginService) { }
- 
+
+    constructor(private router: Router, private loginservice: LoginService) { }
+
     loggedin;
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) :boolean {
- 
-        
-        
-        if (localStorage.getItem("logged") == 'true'){
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+
+
+
+        if (localStorage.getItem("logged") == 'true') {
             return true;
-        }else{
+        } else {
             this.router.navigate(['/login']);
             return false;
         }

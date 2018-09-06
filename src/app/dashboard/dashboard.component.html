@@ -10,14 +10,14 @@
       <div class="ProjectHeadingDiv">
         <div class="ProjectHeadingTextDiv">My Projects ({{noOfProjects}})</div>
       </div>
-      
+
       <button class="AddProjectButton">
         <div class="PlusSignDiv">
           <img class="PlusSignImage" src="../../assets/plus.png">
         </div>
         <div class="AddProjectDiv">Add Project</div>
       </button>
-      <button class="UserList" (click)="gotoUsersList()"> User List   
+      <button *ngIf="flag === true" class="UserList" (click)="gotoUsersList()"> User List
       </button>
     </div>
     <div class="BottomDiv">
@@ -46,8 +46,8 @@
                 <div class="ExtraMembersDiv">+{{project.numberOfMembers-4}}</div>
               </button>
             </div>
-            <button class="DailyStatusButton">
-              <div class="DailyStatusDiv" (click)="openDailyStatus()">Daily Status</div>
+            <button class="DailyStatusButton"(click)="openDailyStatus()">
+              <div class="DailyStatusDiv" >Daily Status</div>
             </button>
             <button class="MenuButton DropdownButton">
               <div class="DropdownContentDiv">

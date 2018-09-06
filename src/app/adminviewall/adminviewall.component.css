@@ -1,104 +1,103 @@
-body{
-    box-sizing: border-box; 
-    overflow: hidden; 
+body {
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-.first{
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    margin-top: 60px; 
-}
-.mainClass{
-    position: relative;
-    background-color: #eeeeee;
-    height: 130%;
-    width: 100%;
-    
-}
-h2{
-    padding: 3% 0 0 3%;
-    font-family: Roboto; 
-}
-.card{
-    position: relative;
-    background-color: #ffffff;
-    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.1);
-    transition: 0.3s;
-    padding: 1% 2% 4.5% 2%;
-    margin: 1%;      
-    height: 77%; 
+.first {
+  height: 1080px;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 60px;
 }
 
-.section{
-    display:flex;
-    justify-content: space-between;
-    
-}
-    
-.header{
-    width: 33.33%;
-    text-align: left;
-    word-wrap: break-word;
+.mainClass {
+  position: relative;
+  background-color: #eeeeee;
+  height: 99.8%;
+  width: 100%;
 }
 
-.rowstyle{
-    font-family: Roboto;
-    font-size: 11pt;
-    padding: 1%;
-    background-color: #eeeeee;
-    margin-bottom: 1%;
+h2 {
+  padding: 3% 0 0 3%;
+  font-family: Roboto;
 }
 
-.head{
-    text-align: left;
-    font-family: Roboto;
-    color: black;
-    padding: 1% 1%;
-    border-bottom: 1px inset rgba(173, 172, 172, 0.904);
-    margin-bottom: 1%;
-    font-weight: bold;
+.card {
+  position: relative;
+  background-color: #ffffff;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+  transition: 0.3s;
+  padding: 1% 2% 4.5% 2%;
+  margin: 1%;
+  height: 90%;
 }
 
-.custom-select{
-    
-    font-family: Roboto;
-    background-color: #ffffff;
-    font-size: 11pt;
-    margin-top: -3%;
-    padding: 0% 1%;
-    word-wrap: break-word;
+.section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header {
+  width: 33.33%;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.rowstyle {
+  font-family: Roboto;
+  font-size: 11pt;
+  padding: 1%;
+  background-color: #eeeeee;
+  margin-bottom: 1%;
+}
+
+.head {
+  text-align: left;
+  font-family: Roboto;
+  color: black;
+  padding: 1% 1%;
+  border-bottom: 1px inset rgba(173, 172, 172, 0.904);
+  margin-bottom: 1%;
+  font-weight: bold;
+}
+
+.custom-select {
+  font-family: Roboto;
+  background-color: #ffffff;
+  font-size: 11pt;
+  margin-top: -3%;
+  padding: 0% 1%;
+  word-wrap: break-word;
 }
 
 div.section.pagination {
-    float: right;
-    position: absolute;
-    top:86%;
-    /* top: 93%; */
-    right: 2%;
+  float: right;
+  position: absolute;
+  /* top:76%; */
+  top: 93%;
+  right: 2%;
 }
 
 @media only screen and (max-width: 420px) {
-    .first{
-        height: 768px;
-        width: 100%;
-    }
+  .first {
+    height: 750px;
+    width: 100%;
+  }
 
-    .mainClass {
-        position: relative;
-        background-color: #eeeeee;
-        height: 90%;
-        width: 100%;
-    }
+  .mainClass {
+    position: relative;
+    background-color: #eeeeee;
+    height: 99.8%;
+    width: 100%;
+  }
 
-    .card {
-        position: relative;
-        background-color: #ffffff;
-        box-shadow: 0 4px 4px 0 rgba(0,0,0,0.1);
-        transition: 0.3s;
-        padding: 1% 2% 2.5% 2%;
-        margin: 1%;
-        height: 77%;
-    }
-
+  .card {
+    position: relative;
+    background-color: #ffffff;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    padding: 1% 2% 2.5% 2%;
+    margin: 1%;
+    height: 90%;
+  }
 }

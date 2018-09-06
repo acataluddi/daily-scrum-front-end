@@ -1,253 +1,306 @@
-.body{
-    z-index: 100;
+.body {
+  z-index: 100;
 }
-  
-@media only screen and (min-width:500px){
 
-  .form, .title, .logo,  .text, .moto, .company , .footer {
- 
-     position: absolute;
- 
-  }
-  .description, .login-page, .signin, .Google, .terms{
+@media only screen and (min-width:500px) {
 
-    position:relative;
-
-  }
-  .title, .description, .text, .terms, .footer, .moto {
-
-    text-align: left;
-
-  }
-  .description, .text, .terms, .footer, .moto, .title {
-
-    font-family: 'Roboto';
-
-  }
-  .form, .description, .signin, .Google, .terms, .footer, .moto, .company {
-
-    height: auto;
-
-  }
-  .body {
-     position: fixed;
-     top: 0px;
-     left: 0px;
-     height:auto;
-     width: 100%;
-     background-color: rgba(74, 20, 20, 1);
-     
-     
-  }
-  .login-page {
-     margin:9% 13%;
-     height: 70vh;
-     width: auto;
-     background-color: rgba(255, 255, 255, 1);
-  }
-  .form {    
-     top: 10%;
-     left: 6%; 
-     width: 6%;
-  }
-  .title {
-     top: 11%;
-     left: 16%; 
-     
-     font-size: 2.6vw;
-     color: rgba(79, 86, 105, 1); 
-  }
-  .logo {
-     background-image: url("../../assets/red_bg.png");    
-     top:0px;
-     right:0px;
-     height:100%;
-     width: 53%;
-     background-repeat: no-repeat;
-     background-size:cover; 
-     
-  }
-  .description {
-     top: 33%;
-     left: 5%; 
-     width: 33%; 
-     font-size: 1.6vw;
-     color: rgba(79, 86, 105, 1); 
-  }
-  .signin { 
-     
-     top: 40%;
-     left: 5%; 
-     width: 25%;
-     height:15%;
-     border-radius: 2px;
-     cursor: pointer;
-  }
-
-  .Google { 
-     background-image: url("../../assets/2018-08-07.png");
-     width: 100%;
-     height:100%;
-     background-size:100%;
-     background-repeat: no-repeat;
-     
-     
-  }
-  .Google:hover {
-      width: 100%;
-      background-image: url("../../assets/2018-08-072.png");
-  }
- 
-  .terms {
-     top:40%;
-     left: 5%; 
-     width: 40%;
-     font-size: 1.4vw;
-     color: rgba(79, 86, 105, 1);
-     line-height:2.2vw ;
-  }
+  .form,
+  .title,
+  .logo,
+  .text,
+  .moto,
+  .company,
   .footer {
-     top: 85%;
-     left: 5%; 
-     width: 40%; 
-     font-size: 1.2vw;
-     color: rgba(79, 86, 105, 1);
+    position: absolute;
   }
-  .moto { 
-     top: 30%;
-     left: 5%; 
-     width: 60%;
-     font-size: 3.6vw;
-     height:47vh;
-     color: rgba(255, 255, 255, 1);   
-     overflow: hidden;
-   }
+
+  .description,
+  .login-page,
+  .signin,
+  .Google,
+  .terms {
+    position: relative;
+  }
+
+  .title,
+  .description,
+  .text,
+  .terms,
+  .footer,
+  .moto {
+    text-align: left;
+  }
+
+  .description,
+  .text,
+  .terms,
+  .footer,
+  .moto,
+  .title {
+    font-family: 'Roboto';
+  }
+
+  .form,
+  .description,
+  .signin,
+  .Google,
+  .terms,
+  .footer,
+  .moto,
   .company {
-      top: 85%;
-      left: 70%; 
-      width: 20%;
+    height: auto;
+  }
+
+  .body {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: auto;
+    width: 100%;
+    background-color: rgba(74, 20, 20, 1);
+  }
+
+  .login-page {
+    margin: 9% 13%;
+    height: 70vh;
+    width: auto;
+    background-color: rgba(255, 255, 255, 1);
+  }
+
+  .form {
+    top: 10%;
+    left: 6%;
+    width: 6%;
+  }
+
+  .title {
+    top: 11%;
+    left: 16%;
+    font-size: 2.6vw;
+    color: rgba(79, 86, 105, 1);
+  }
+
+  .logo {
+    background-image: url("../../assets/red_bg.png");
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    width: 53%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .description {
+    top: 33%;
+    left: 5%;
+    width: 33%;
+    font-size: 1.6vw;
+    color: rgba(79, 86, 105, 1);
+  }
+
+  .signin {
+    top: 40%;
+    left: 5%;
+    width: 25%;
+    height: 15%;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .Google {
+    background-image: url("../../assets/2018-08-07.png");
+    width: 100%;
+    height: 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+
+  .Google:hover {
+    width: 100%;
+    background-image: url("../../assets/2018-08-072.png");
+  }
+
+  .terms {
+    top: 40%;
+    left: 5%;
+    width: 40%;
+    font-size: 1.4vw;
+    color: rgba(79, 86, 105, 1);
+    line-height: 2.2vw;
+  }
+
+  .footer {
+    top: 85%;
+    left: 5%;
+    width: 40%;
+    font-size: 1.2vw;
+    color: rgba(79, 86, 105, 1);
+  }
+
+  .moto {
+    top: 30%;
+    left: 5%;
+    width: 60%;
+    font-size: 3.6vw;
+    height: 47vh;
+    color: rgba(255, 255, 255, 1);
+    overflow: hidden;
+  }
+
+  .company {
+    top: 85%;
+    left: 70%;
+    width: 20%;
   }
 }
- @media only screen and (max-width:500px) {
- 
-    .form, .title,  .text ,  .innerelement1, .description, .footer ,.signin, .innerelement2  , .company{
- 
-         position: absolute;
-     
-    }
-     .Google, .terms, .login-page {
 
-        position:relative;
-    
-    }
-    .title, .description, .text, .terms, .footer {
+@media only screen and (max-width:500px) {
 
-        text-align: left;
-    
-    }
-    .description, .text, .terms, .footer , .title {
+  .form,
+  .title,
+  .text,
+  .innerelement1,
+  .description,
+  .footer,
+  .signin,
+  .innerelement2,
+  .company {
+    position: absolute;
+  }
 
-        font-family: 'Roboto';
-    
-    }
-    .form, .description, .signin, .Google, .terms, .footer, .title, .company {
+  .Google,
+  .terms,
+  .login-page {
+    position: relative;
+  }
 
-        height: auto;
-    
-    }
-    .body {
-        position:fixed;
-       top: 0px;
-       left: 0px;
-       height: 100%;
-       width: 100%;
-    }
-    .innerelement1 {
-        top: 0px;
-       left: 0px;
-       height: 100%;
-       width: 100%;
-       background-color: rgba(74, 20, 20, 1);
-    }
-    .innerelement2{
-        background-image: url("../../assets/red_bg.png");
-        top:30%;
-        left:0px;
-        height:100%;
-        width: 100%;
-        background-repeat: no-repeat;
-        background-size:cover;
-    }
-    
-    .login-page {    
-         margin:10% 5% 10% 5%;
-         height:80% ;
-         width: auto;
-         background-color: rgba(255, 255, 255, 1);
-    }
-    .form {         
-         top: 10%;
-         left: 10%;     
-         width: 10%;
-    }
-    .title {   
-         top: 11%;
-         left: 28%;  
-         font-size: 5.5vw;
-         color: rgba(79, 86, 105, 1);     
-    }
-    .description {    
-         top: 35%;
-         left: 10%;     
-         width: 80%;     
-         font-size: 3.5vw;
-         color: rgba(79, 86, 105, 1);     
-    }
-    .signin {     
-         top: 50%;
-         left: 10%;
-         width: 40%;
-         height:20%;
-         border-radius: 2px;
-         cursor: pointer;
-    } 
-    .Google { 
-        background-image: url("../../assets/2018-08-07.png");
-        width: 100%;
-        height:100%;
-        background-size:100%;
-        background-repeat: no-repeat;
-        
-        
-    }
-     .Google:hover {
-         width: 100%;
-         background-image: url("../../assets/2018-08-072.png");
-    }
-    
-    .terms {     
-         top:62%;
-         left: 10%;     
-         width: 85%;     
-         font-size: 3.0vw;
-         color: rgba(79, 86, 105, 1);     
-         line-height:4.2vw ;
-    }
-    .footer {     
-         top: 85%;
-         left: 10%;     
-         width: 85%;     
-         font-size: 2.5vw;
-         color: rgba(79, 86, 105, 1);     
-    }
-    .company {
-        top: 103%;
-        left: 80%; 
-        width: 20%;
-    }
-   .moto {
+  .title,
+  .description,
+  .text,
+  .terms,
+  .footer {
+    text-align: left;
+  }
 
-        display:none;
+  .description,
+  .text,
+  .terms,
+  .footer,
+  .title {
+    font-family: 'Roboto';
+  }
 
-    } 
+  .form,
+  .description,
+  .signin,
+  .Google,
+  .terms,
+  .footer,
+  .title,
+  .company {
+    height: auto;
+  }
+
+  .body {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+  }
+
+  .innerelement1 {
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(74, 20, 20, 1);
+  }
+
+  .innerelement2 {
+    background-image: url("../../assets/red_bg.png");
+    top: 30%;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .login-page {
+    margin: 10% 5% 10% 5%;
+    height: 80%;
+    width: auto;
+    background-color: rgba(255, 255, 255, 1);
+  }
+
+  .form {
+    top: 10%;
+    left: 10%;
+    width: 10%;
+  }
+
+  .title {
+    top: 11%;
+    left: 28%;
+    font-size: 5.5vw;
+    color: rgba(79, 86, 105, 1);
+  }
+
+  .description {
+    top: 35%;
+    left: 10%;
+    width: 80%;
+    font-size: 3.5vw;
+    color: rgba(79, 86, 105, 1);
+  }
+
+  .signin {
+    top: 50%;
+    left: 10%;
+    width: 40%;
+    height: 20%;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .Google {
+    background-image: url("../../assets/2018-08-07.png");
+    width: 100%;
+    height: 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
+
+  .Google:hover {
+    width: 100%;
+    background-image: url("../../assets/2018-08-072.png");
+  }
+
+  .terms {
+    top: 62%;
+    left: 10%;
+    width: 85%;
+    font-size: 3.0vw;
+    color: rgba(79, 86, 105, 1);
+    line-height: 4.2vw;
+  }
+
+  .footer {
+    top: 85%;
+    left: 10%;
+    width: 85%;
+    font-size: 2.5vw;
+    color: rgba(79, 86, 105, 1);
+  }
+
+  .company {
+    top: 103%;
+    left: 80%;
+    width: 20%;
+  }
+
+  .moto {
+    display: none;
+  }
 }

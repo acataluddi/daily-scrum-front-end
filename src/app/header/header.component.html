@@ -1,29 +1,32 @@
-<div class="firstclass Member">
-    <div class="classone">
-        <div class="scrumlogoclass">
-            <img src="../../assets/Scrum.png">
-        </div>
-        <div class="textdiv">
-            <div class="dailyscrumclass">{{selected.name}}
-            </div>
-            <div class="arrow">
-                <div id="projectlist">
-                    <div *ngFor="let project of projects">
-                        <div class="items" (click)="changeProject(project.name)">{{project.name}}</div>
-                    </div>
-                </div>
-            </div>
-            <div class="usermailclass">
-                <div class="button desktop">{{member.email}}</div>
-                <div class="mobile">
-                    <img class="dp" [src]="getImage()">
-                </div>
-                <div class="arrow2">
-                    <div id="signout" (click)="logout()">
-                        <div class="a"> Signout </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="firstclass Member" (click)="show($event)">
+  <div class="classone">
+    <div class="scrumlogoclass">
+      <img src="../../assets/Scrum.png" (click)="openDashboardPage()">
     </div>
+    <div class="textdiv">
+      <div id="dailyscrumclass">{{selected.name}}
+      </div>
+      <div id="scrum">Daily Scrum
+        <div id="dash">{{title}}</div>
+      </div>
+      <div id="arrow">
+        <div id="projectlist">
+          <div *ngFor="let project of projects">
+            <div class="items" (click)="changeProject(project.name)">{{project.name}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="usermailclass">
+        <div class="button desktop">{{member.email}}</div>
+        <div class="mobile">
+          <img class="dp" [src]="getImage()">
+        </div>
+        <div class="arrow2">
+          <div id="signout" (click)="logout()">
+            <div class="a"> Signout </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

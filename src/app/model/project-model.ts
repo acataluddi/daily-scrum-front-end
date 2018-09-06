@@ -1,5 +1,5 @@
 export class Project {
-    members:string[];
+    members: string[];
     numberOfMembers: Number;
     name: string;
 }

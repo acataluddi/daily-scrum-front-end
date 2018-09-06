@@ -12,7 +12,7 @@ export class TaskPageAdminComponent implements OnInit {
 
   task: MemberTask;
   task1: Task;
-  task2:Task;
+  task2: Task;
   MockMember1: MemberTask[];
   MockMember2: MemberTask[];
   myDateValue: Date;
@@ -21,8 +21,8 @@ export class TaskPageAdminComponent implements OnInit {
   task_id;
   oldtodaytask: Task;
   oldyesterdaytask: Task;
-  creatednewtoday=false;
-  creatednewyesterday=false;
+  creatednewtoday = false;
+  creatednewyesterday = false;
   hours_spent;
   minutes_spent;
   impediments;
@@ -62,8 +62,8 @@ export class TaskPageAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.oldtodaytask= new Task;
-    this.oldyesterdaytask=new Task;
+    this.oldtodaytask = new Task;
+    this.oldyesterdaytask = new Task;
     this.getTasks();
     this.calculateTotalTime();
     this.month = this.months[this.d.getMonth()];
@@ -72,7 +72,7 @@ export class TaskPageAdminComponent implements OnInit {
     this.myvalue = true;
     this.myDateValue = new Date();
     this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-    this.yesterdayval ="Yesterday's Tasks";
+    this.yesterdayval = "Yesterday's Tasks";
     // console.log(this.task.member_name);
   }
   getTasks() {
@@ -134,58 +134,58 @@ export class TaskPageAdminComponent implements OnInit {
     }
   }
   onDateChange(newDate: Date) {
-    this.newDate=newDate;
+    this.newDate = newDate;
     var d1 = new Date(newDate);
-    (d1.setDate(d1.getDate()-1));
+    (d1.setDate(d1.getDate() - 1));
     this.month = this.months[newDate.getMonth()];
     this.date = newDate.getDate();
     this.year = newDate.getFullYear();
     if ((newDate.getMonth() === this.d.getMonth()) && (newDate.getDate() === this.d.getDate()) && (newDate.getFullYear() === this.d.getFullYear())) {
       this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval ="Yesterday's Tasks";
+      this.yesterdayval = "Yesterday's Tasks";
     }
     else {
       this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval =this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+      this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
     }
   }
 
-  getNextDate(){
+  getNextDate() {
     var d1 = new Date(this.newDate);
-    (d1.setDate(d1.getDate()+1));
+    (d1.setDate(d1.getDate() + 1));
     this.month = this.months[d1.getMonth()];
     this.date = d1.getDate();
     this.year = d1.getFullYear();
     if ((this.month === this.d.getMonth()) && (this.date === this.d.getDate()) && (this.year === this.d.getFullYear())) {
       this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval ="Yesterday's Tasks";
+      this.yesterdayval = "Yesterday's Tasks";
     }
     else {
       this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval =this.months[this.newDate.getMonth()] + " " + this.newDate.getDate() + ", " + this.newDate.getFullYear();
+      this.yesterdayval = this.months[this.newDate.getMonth()] + " " + this.newDate.getDate() + ", " + this.newDate.getFullYear();
     }
-    this.newDate=d1;
-    this.myDateValue=d1;
+    this.newDate = d1;
+    this.myDateValue = d1;
   }
-  getPreviousDate(){
+  getPreviousDate() {
     var d1 = new Date(this.newDate);
-    (d1.setDate(d1.getDate()-1));
+    (d1.setDate(d1.getDate() - 1));
     this.month = this.months[this.newDate.getMonth()];
     this.date = this.newDate.getDate();
     this.year = this.newDate.getFullYear();
     if ((this.newDate.getMonth() === this.d.getMonth()) && (this.newDate.getDate() === this.d.getDate()) && (this.newDate.getFullYear() === this.d.getFullYear())) {
       this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval ="Yesterday's Tasks";
+      this.yesterdayval = "Yesterday's Tasks";
     }
     else {
       this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval =this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+      this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
     }
-    this.newDate=d1;
-    this.myDateValue=d1;
+    this.newDate = d1;
+    this.myDateValue = d1;
   }
   getRandomColor() {
     var colors = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
-  return colors[Math.floor(Math.random() * colors.length)];
-   } 
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
 }
