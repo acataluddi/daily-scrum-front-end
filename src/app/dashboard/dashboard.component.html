@@ -21,29 +21,30 @@
       </button>
     </div>
     <div class="BottomDiv">
-      <div *ngFor="let project of projects">
+      <div *ngFor="let Project of newproject ; let i=index">
         <div class="ProjectBoxDiv" [ngStyle]="{'background-color': getRandomColor()}">
           <div class=" ProjectNameBoxDiv">
-            <div class="ProjectNameDiv">{{project.name}}</div>
+            <div class="ProjectNameDiv">{{Project.projectName}}</div>
           </div>
           <div class="InnerProjectBoxDiv">
-            <div *ngFor="let item of project.members ; let i=index">
+            <div *ngFor="let item of Project.members ; let i=index">
               <div *ngIf="i<4">
                 <div *ngIf="i%2!=0">
                   <button class="SmallCircleButton1Odd SmallCircleButton">
-                    <div class="SmallCircleNameDiv">{{item}}</div>
+                    <div class="SmallCircleNameDiv">{{item.email}}</div>
                   </button>
                 </div>
                 <div *ngIf="i%2==0">
                   <button class="SmallCircleButton1Even SmallCircleButton">
-                    <div class="SmallCircleNameDiv">{{item}}</div>
+                    <div class="SmallCircleNameDiv">{{item.email}}</div>
                   </button>
                 </div>
               </div>
+             
             </div>
-            <div *ngIf="project.numberOfMembers-4>0">
+            <div *ngIf="noOfMembers[i]-4>0" >
               <button class="SmallCircleButton2 SmallCircleButton">
-                <div class="ExtraMembersDiv">+{{project.numberOfMembers-4}}</div>
+                <div class="ExtraMembersDiv">+{{noOfMembers[i]-4}}</div>
               </button>
             </div>
             <button class="DailyStatusButton">

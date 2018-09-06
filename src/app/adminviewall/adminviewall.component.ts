@@ -52,12 +52,12 @@ export class AdminviewallComponent implements OnInit {
     this.http.get(this.viewallservice.apiURL)
       .subscribe(
         (res: Response) => {
-          this.memberArray = res.json();
-          this.total = this.memberArray.length;
-          console.log(this.memberArray);
+          // this.memberArray = res.json();
+          // this.total = this.memberArray.length;
+          console.log(res);
         })
   }
-  private postURL = 'http://10.4.6.58:8081/DailyScrum/CRUDControllerUser';
+  private postURL = 'http://localhost:8080/DailyScrum/CRUDControllerUser';
   putUpdate(member: Member): Promise<Member> {
     let cpHeaders = new Headers({
       'Access-Control-Allow-Origin': '*',
