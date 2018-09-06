@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from "../model/member-model";
-import { AuthService, GoogleLoginProvider } from 'angular-6-social-login';
-import { Router } from '@angular/router';
+import { Member} from "../model/member-model";
+import {AuthService,GoogleLoginProvider} from 'angular-6-social-login';
+import { Router,NavigationEnd } from '@angular/router';
 import { LoginService } from "../service/login.service";
 
 
@@ -14,7 +14,10 @@ export class LoginComponent implements OnInit {
 
   constructor(private socialAuthService: AuthService,
     public router: Router,
-    private loginservice: LoginService) { }
+    private loginservice: LoginService) { 
+      this.routeEvent(this.router);
+ 
+}
 
 
 
@@ -74,5 +77,16 @@ export class LoginComponent implements OnInit {
 
   getDetails(): Member {
     return this.member;
+  }
+  routeEvent(router: Router){
+    router.events.subscribe(e => {
+      if(e instanceof NavigationEnd){
+        console.log(e);
+        if ((e['url'] === '/login')&& (localStorage.getItem("logged") == 'true')) {
+          console.log(e);
+          this.router.navigate(['/dashboard']);
+        }
+      }
+    });
   }
 }
