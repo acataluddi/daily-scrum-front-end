@@ -1,10 +1,14 @@
 export class Project {
-    members:string[];
-    numberOfMembers: Number;
+    projectId:string;
     projectName: string;
     projectDesc:string;
-    constructor(projectName:string, projectDesc:string) {
+    members:string[];
+    numberOfMembers: Number;
+    
+    constructor(projectId:string, projectName:string, projectDesc:string) {
+        this.projectId = projectId;
         this.projectName = projectName;
         this.projectDesc = projectDesc;
+        // this.members = members;
     }
 }

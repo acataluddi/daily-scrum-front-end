@@ -10,7 +10,7 @@ import { ProjectMember } from '../model/ProjectMembers';
 })
 export class ProjectmemberService {
 
-  private projectmembersUrl = 'api/projectmembers';  
+  private projectmembersUrl = 'http://localhost:8080/DailyScrum/ProjectController';
 
   projectmembers:ProjectMember[];
   
@@ -23,6 +23,7 @@ export class ProjectmemberService {
     }
 
   addProjectMember (promem: ProjectMember): Observable<ProjectMember> {
+
     return this.http.post<ProjectMember>(this.projectmembersUrl, promem)
   }
 

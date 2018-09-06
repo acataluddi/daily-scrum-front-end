@@ -2,7 +2,7 @@
 <div class=body>
   <div class="mainclass">
     <div class="subclasszero">
-      <input type="text" placeholder="New Project Name" id="projectname">
+      <input type="text" placeholder="New Project Name" id="projectname" (keyup.enter)="set()">
     </div>
     <ng-container *ngIf="show1">
       <div class="subclassone" (click)="changeVisibility1()">
@@ -12,7 +12,7 @@
     </ng-container>
     <ng-container *ngIf="!show1">
       <div class="descriptioninputclass">
-        <div #des contenteditable="true" id="projectdescription"></div>
+        <div #des contenteditable="true" id="projectdescription" (blur)="set()">Write description here...</div>
       </div>
     </ng-container>
     <ng-container>
@@ -77,7 +77,7 @@
     <ng-container *ngIf="!show2">
       <div class="addcancelclass">
         <input type="button" value="Cancel" (click)="cancel()">
-        <input type="button" value="Add Project" (click)="addproject()">
+        <input type="button" value="Add Project" (click)="set()">
       </div>
     </ng-container>
   </div>

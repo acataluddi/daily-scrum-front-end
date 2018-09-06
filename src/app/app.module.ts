@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
-
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,15 +12,12 @@ import { DailyStatusAllUsersComponent } from './daily-status-all-users/daily-sta
 import { IndividualTaskComponent } from './individual-task/individual-task.component';
 import { IndividualMemberComponent } from './individual-member/individual-member.component';
 import { AdminviewallComponent } from './adminviewall/adminviewall.component';
-import {
-  SocialLoginModule,
-  AuthServiceConfig,
-  GoogleLoginProvider
-} from "angular-6-social-login";
+import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from "angular-6-social-login";
 import {Ng2Webstorage} from 'ngx-webstorage';
 import { AuthGuard } from './status.service';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { HttpClientModule } from '@angular/common/http';
+
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -34,9 +30,6 @@ export function getAuthServiceConfigs() {
   );
   return config;
 }
-
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-// import { InMemoryDataService }  from './in-memory-data.service';
 
 
 @NgModule({
@@ -61,7 +54,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(), 
     HttpClientModule,
-    Ng2Webstorage,
+    Ng2Webstorage
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests
     // and returns simulated server responses.

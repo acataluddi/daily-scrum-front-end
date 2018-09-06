@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
           name:userData.name, 
           email:userData.email, 
           userType:'user'
+          
         }
         // this.loginservice.loginMember(this.member)
         //     .subscribe(msg => {

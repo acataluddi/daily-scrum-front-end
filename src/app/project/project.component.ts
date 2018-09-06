@@ -11,7 +11,7 @@ import { ProjectMember } from '../model/ProjectMembers';
 })
 export class ProjectComponent implements OnInit {
 
-  @ViewChild('des') des: ElementRef;
+  @ViewChild('des')'des': ElementRef;
   @ViewChild('email') email: ElementRef;
   
   projectmembers:ProjectMember[];
@@ -19,21 +19,45 @@ export class ProjectComponent implements OnInit {
 
   public project:Project;
   count:number;
+  posted:number;
 
   public show1:boolean = true;
   public show2:boolean = true;
 
+
   constructor(private projectmemberservice: ProjectmemberService, private projectservice: ProjectService) {  }
   
+  id:string;
 
   ngOnInit() {
 
     this.count = 0;
+    this.posted = 0;
+    this.id = this.generateId();
+    console.log(this.id)
     // this.getProjectMembers();
+  }
+
+  generateId(){
+    var date = new Date();
+    var concat;
+    concat = date.getFullYear().toString();
+    concat += date.getMonth().toString();
+    concat += date.getDate().toString();
+    concat += date.getHours().toString();
+    concat += date.getMinutes().toString();
+    concat += date.getSeconds().toString();
+    concat += date.getMilliseconds().toString();
+
+    // console.log(concat);
+
+    return concat;
+
   }
 
   changeVisibility1() {
     this.show1 = !this.show1;
+    setTimeout(() => { this.des.nativeElement.focus(); });
   }
 
   setpromem(){
@@ -47,17 +71,42 @@ export class ProjectComponent implements OnInit {
     this.count++;
   }
 
-  set(): void {
-
+  set(): void{
+    // this.getProjectMembers()
     var proname = (<HTMLInputElement>document.getElementById("projectname")).value;
     var prodesc = this.des.nativeElement.innerText;
 
-    this.project = new Project(proname, prodesc);
-    this.projectservice.addProject(this.project).subscribe(pro => {});
+    console.log("inside set");
 
-    console.log(this.project.projectName);
-    console.log(this.project.projectDesc);
+    if(proname!='' || prodesc!=''){
 
+      this.project = new Project(this.id, proname, prodesc);
+      if(this.posted == 0){
+        this.addProject(this.project);
+      }
+      else{
+        this.editProject(this.project);
+      }
+    }
+    console.log(this.projectmembers);
+    // this.addProjectMember();
+  }
+  
+  addProject(project:Project): void {
+    console.log("inside add");
+      this.projectservice.addProject(this.project).subscribe(
+        (data:any) => {
+          console.log(data);
+        }
+      );
+      this.posted++;
+      console.log(this.project.projectName);
+      console.log(this.project.projectDesc);
+  }
+
+  editProject(project:Project): void{
+    console.log("inside edit");
+    this.projectservice.updateProject(project).subscribe();
   }
 
   getProjectMembers(): void {
@@ -70,6 +119,10 @@ export class ProjectComponent implements OnInit {
     var email = (<HTMLInputElement>document.getElementById("emailvalue")).value;
     var role = (<HTMLInputElement>document.getElementById("rolevalue")).value;
 
+    console.log(email)
+    console.log(role)
+
+
     if(email!='' || role!=''){
     this.projectmember = new ProjectMember(email, role);
 
@@ -79,6 +132,7 @@ export class ProjectComponent implements OnInit {
         this.projectmembers.push(projectmember);
       });
 
+      console.log(this.projectmembers);
       // this.getProjectMembers();
 
       (<HTMLInputElement>document.getElementById("emailvalue")).value = null;
@@ -106,15 +160,6 @@ export class ProjectComponent implements OnInit {
     for ( let promem of this.projectmembers) { 
       this.delete(promem);
    }
-  }
-  addproject(): void{
-    // this.getProjectMembers()
-
-    this.set();
-
-
-    console.log(this.projectmembers);
-    // this.addProjectMember();
   }
   change(projectmember:ProjectMember): void{
 
