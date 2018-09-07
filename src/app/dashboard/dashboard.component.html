@@ -11,11 +11,11 @@
         <div class="ProjectHeadingTextDiv">My Projects ({{noOfProjects}})</div>
       </div>
 
-      <button class="AddProjectButton">
+      <button class="AddProjectButton" (click)="AddProject()">
         <div class="PlusSignDiv">
           <img class="PlusSignImage" src="../../assets/plus.png">
         </div>
-        <div class="AddProjectDiv" (click)="AddProject()">Add Project</div>
+        <div class="AddProjectDiv" >Add Project</div>
       </button>
       <button *ngIf="flag === true" class="UserList" (click)="gotoUsersList()"> User List
       </button>
@@ -27,25 +27,32 @@
             <div class="ProjectNameDiv">{{Project.projectName}}</div>
           </div>
           <div class="InnerProjectBoxDiv">
-            <div *ngFor="let item of memberArray ; let i=index">
+            <div  *ngFor="let member of Project.members ; let i=index">
+            <!-- <div *ngFor="let item of memberArray  ; let i=index"> -->
+                <div *ngIf="j==0">
               <div *ngIf="i<4">
                 <!-- <div *ngIf="i%2!=0"> -->
                   <button class="SmallCircleButton1Odd SmallCircleButton">
-                    <div class="SmallCircleNameDiv">
+                    <div class="SmallCircleNameDiv" >
                       <img class="memberImage" src="{{imageurl[i]}}"></div>
                   </button>
-                <!-- </div> -->
-                <!-- <div *ngIf="i%2==0">
-                  <button class="SmallCircleButton1Even SmallCircleButton">
-                    <div class="SmallCircleNameDiv">{{item.imageurl}}</div>
-                  </button> 
-                </div> -->
-              </div>
+                </div>
+                </div>
+                  <div *ngIf="j>0">
+                      <div *ngIf="i<4">
+                        <!-- <div *ngIf="i%2!=0"> -->
+                          <button class="SmallCircleButton1Odd SmallCircleButton">
+                            <div class="SmallCircleNameDiv" >
+                              <img class="memberImage" src="{{imageurl[i+TotalProjectMembers[j]]}}"></div>
+                          </button>
+                       </div>  
+                   </div>
+             </div>
              
-            </div>
-            <div *ngIf="noOfMembers[i]-4>0" >
+            <!-- </div> -->
+            <div *ngIf="noOfMembers[j]-4>0" >
               <button class="SmallCircleButton2 SmallCircleButton">
-                <div class="ExtraMembersDiv">+{{noOfMembers[i]-4}}</div>
+                <div class="ExtraMembersDiv">+{{noOfMembers[j]-4}}</div>
               </button>
             </div>
             <button class="DailyStatusButton">

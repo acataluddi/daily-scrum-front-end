@@ -25,6 +25,9 @@ import { TaskPageAdminComponent } from './task-page-admin/task-page-admin.compon
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, Response, Headers } from '@angular/http';
 import { HeaderComponent } from './header/header.component';
+import { FilterPipe} from './filter.pipe';
+import { FilterPipeModule } from 'ngx-filter-pipe';
+
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -50,7 +53,8 @@ export function getAuthServiceConfigs() {
     IndividualMemberComponent,
     AdminviewallComponent,
     TaskPageAdminComponent,
-    HeaderComponent
+    HeaderComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -63,7 +67,8 @@ export function getAuthServiceConfigs() {
     DatepickerModule.forRoot(),
     HttpClientModule,
     HttpModule,
-    Ng2Webstorage
+    Ng2Webstorage,
+    FilterPipeModule
   ],
   providers: [
     {
