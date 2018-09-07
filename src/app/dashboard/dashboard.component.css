@@ -141,19 +141,26 @@
   outline: none;
 }
 
-.SmallCircleButton:hover {
+/* .SmallCircleButton:hover {
   background-color: rgb(51, 5, 255);
 }
 
 .SmallCircleButton1Odd {
   background-color: rgb(212, 54, 178);
-}
+} */
 
 .SmallCircleNameDiv {
   color: white;
-  margin-left: 0px;
+  margin-left: -6px;
   font-weight: 600;
-  padding-top: 2px;
+  margin-top: -1px;
+}
+
+.memberImage {
+  object-fit: contain;
+  width:140%;
+  height:140%;
+  border-radius:50% 50% 50% 50%; 
 }
 
 .SmallCircleButton1Even {
@@ -246,13 +253,13 @@
   font-size: 13px;
 }
 
-.EditButton {
+.EditDiv {
   margin-top: 7px;
   font-weight: 600;
   padding-left: 0px;
 }
 
-.DeleteButton {
+.DeleteDiv {
   margin-top: 5px;
   padding-left: 8px;
 }
