@@ -27,18 +27,19 @@
             <div class="ProjectNameDiv">{{Project.projectName}}</div>
           </div>
           <div class="InnerProjectBoxDiv">
-            <div *ngFor="let item of Project.members ; let i=index">
+            <div *ngFor="let item of memberArray ; let i=index">
               <div *ngIf="i<4">
-                <div *ngIf="i%2!=0">
+                <!-- <div *ngIf="i%2!=0"> -->
                   <button class="SmallCircleButton1Odd SmallCircleButton">
-                    <div class="SmallCircleNameDiv">{{item.email}}</div>
+                    <div class="SmallCircleNameDiv">
+                      <img class="memberImage" src="{{imageurl[i]}}"></div>
                   </button>
-                </div>
-                <div *ngIf="i%2==0">
+                <!-- </div> -->
+                <!-- <div *ngIf="i%2==0">
                   <button class="SmallCircleButton1Even SmallCircleButton">
-                    <div class="SmallCircleNameDiv">{{item.email}}</div>
-                  </button>
-                </div>
+                    <div class="SmallCircleNameDiv">{{item.imageurl}}</div>
+                  </button> 
+                </div> -->
               </div>
              
             </div>
@@ -51,17 +52,17 @@
               <div class="DailyStatusDiv" (click)="openDailyStatus()">Daily Status</div>
             </button>
             <button class="MenuButton DropdownButton">
-              <div class="DropdownContentDiv">
-                <button class="EditButton Button ">
-                  <div class="EditDiv">
+              <div class="DropdownContentDiv" >
+                <!-- <button class="EditButton Button "> -->
+                  <div class="EditDiv Button" (click)="EditProject()" >
                     Edit Project
                   </div>
-                </button>
-                <button class="DeleteButton Button">
-                  <div class="DeleteDiv">
+                <!-- </button> -->
+                <!-- <button class="DeleteButton "> -->
+                  <div class="DeleteDiv Button"  (click)="DeleteProject(Project.projectId)" >
                     Delete Project
                   </div>
-                </button>
+                <!-- </button> -->
               </div>
               <div class="MenuDotDiv">
                 <img src="../../assets/Menudots.png">
