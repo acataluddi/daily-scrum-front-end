@@ -1,0 +1,12 @@
+<div class="userslist">
+  <div class="search">
+    <div class="search_icon" (click)="changeCSS()"><img src="../../assets/Combined_Shape_Copy_2.png"></div>
+    <div class="search_name" id="search_name"><input [(ngModel)]="searchText" placeholder="Search"></div>
+  </div>
+<div id="member">
+  <div  class="member" *ngFor="let task of members | filter : searchText"  (click)="gotoDailyStatus(task.member_name)">
+    <div class="member_logo"><img src="{{task.imageurl}}"></div>
+    <div class="member_name">{{task.member_name}}</div>
+  </div>
+</div>
+</div>

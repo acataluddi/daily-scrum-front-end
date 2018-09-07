@@ -25,6 +25,8 @@ import { TaskPageAdminComponent } from './task-page-admin/task-page-admin.compon
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, Response, Headers } from '@angular/http';
 import { HeaderComponent } from './header/header.component';
+import { UserslistComponent } from './userslist/userslist.component';
+import { FilterPipe} from './filter.pipe';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -50,7 +52,9 @@ export function getAuthServiceConfigs() {
     IndividualMemberComponent,
     AdminviewallComponent,
     TaskPageAdminComponent,
-    HeaderComponent
+    HeaderComponent,
+    UserslistComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

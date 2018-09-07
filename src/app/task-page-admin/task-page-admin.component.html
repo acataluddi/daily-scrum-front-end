@@ -1,7 +1,7 @@
 <head>
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 </head>
-
+<app-userslist></app-userslist>
 <body>
   <div class="right-header">
     <div class="today_header">
@@ -18,6 +18,7 @@
     </div>
 
   </div>
+  
   <div class="total_time">
     <div class="total_time_border">
       <div class="total_time_text"> {{total_hours_spent}}h {{total_minutes_spent}}m</div>
@@ -30,6 +31,7 @@
       <button class="progress">In Progress</button>
       <button class="impediments">Impediments</button>
     </div>
+    
   </div>
   <div class="main">
     <div class="header">
@@ -56,11 +58,6 @@
         </div>
       </div>
     </div>
-    <div class="search">
-      <img class="search_icon" src="../../assets/Combined_Shape_Copy_2.png">
-      <div class="member_logo" *ngFor="let task of MockMember1">
-        <!-- <img src={{task.imageurl}}> -->
-      </div>
-    </div>
+    
   </div>
 </body>

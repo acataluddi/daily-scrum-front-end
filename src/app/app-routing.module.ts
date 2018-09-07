@@ -9,6 +9,7 @@ import { DailyStatusAllUsersComponent } from "./daily-status-all-users/daily-sta
 import { AdminviewallComponent } from "./adminviewall/adminviewall.component";
 import { AuthGuard } from './status.service';
 import { TaskPageAdminComponent } from "./task-page-admin/task-page-admin.component";
+import { UserslistComponent } from "./userslist/userslist.component"
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'daily-status-all-users', component: DailyStatusAllUsersComponent, canActivate: [AuthGuard] },
   { path: 'admin-view-all', component: AdminviewallComponent, canActivate: [AuthGuard] },
   { path: 'task-page-admin', component: TaskPageAdminComponent, canActivate: [AuthGuard] },
+  // { path: 'userslist', component: UserslistComponent, canActivate: [AuthGuard] },
   { path: '**', component: LoginComponent }
 ];
 
