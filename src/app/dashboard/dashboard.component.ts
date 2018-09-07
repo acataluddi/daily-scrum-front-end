@@ -31,6 +31,8 @@ export class DashboardComponent implements OnInit {
   projects = PROJECTS;
   flag = true;
   imageurl = [];
+  reqType:string;
+  projectToBeUpdated:newProject;
  
   private getURL = "http://localhost:8080/DailyScrum/ProjectController";
   ngOnInit() {
@@ -47,28 +49,27 @@ export class DashboardComponent implements OnInit {
   }
   
   getProjects(projectArr,memberArray): void {
+    let x=0;
     this.newproject = projectArr;
     this.memberArray = memberArray;
     console.log(this.newproject);
     this.noOfProjects = this.newproject.length;
-    // console.log(this.noOfProjects);
-    // console.log(this.memberArray[0].imageurl);
-    // for (let i = 0; i < this.noOfProjects; i++) {
-      this.noOfMembers[0] = this.newproject[0].members.length; 
-      // console.log(this.noOfMembers[i]);
-      for (let j=0; j< this.noOfMembers[0];j++){
-
+    for (let i = 0; i < this.noOfProjects; i++) {
+      this.noOfMembers[i] = this.newproject[i].members.length; 
+      for (let j=0; j< this.noOfMembers[i];j++){
         for (let k=0;k<this.TotalMembers;k++){
-         if ( this.newproject[0].members[j].email== this.memberArray[k].email){
-            this.imageurl[j]= this.memberArray[k].imageurl;
-            console.log(this.imageurl[j]);
-            // break;
+         if ( this.newproject[i].members[j].email== this.memberArray[k].email){
+            this.imageurl[x]= this.memberArray[k].imageurl;
+            console.log(this.imageurl[x]);
+             x=x+1;
          }
+         
         }
         
       }
     }
-  // }
+    console.log(this.imageurl);
+  }
 
   getMembers(membersArr): void {
     this.memberArray = membersArr;
@@ -83,22 +84,34 @@ export class DashboardComponent implements OnInit {
   openDailyStatus() {
     this.router.navigate(['/daily-status']);
   }
+  setRequestType(rtype: string) {
+    this.reqType = rtype;
+    }
+  setProjectToBeUpdated(p: newProject) {
+    this.projectToBeUpdated = p;
+  }
   gotoUsersList() {
 
     this.router.navigateByUrl('/admin-view-all');
 
   }
+  AddProject() {
 
-  EditProject() {
+    this.setRequestType("add");
+    this.router.navigateByUrl('/project');
+  }
+
+  EditProject(projectDetail) {
+
+    this.setProjectToBeUpdated(projectDetail)
     this.router.navigateByUrl('/project');
   }
 
   DeleteProject(projectId) {
-    console.log("Hello");
-    console.log(projectId);
+   
     this.dashboardservice.deleteProjects(projectId)
-    .subscribe(() => console.log("user deleted"));
-    console.log("hello")
-    // this.router.navigate(["/admin-view-all"]);
+      .subscribe((msg) => console.log("Project Deleted"));
+    window.location.reload();
+    
   }
 }

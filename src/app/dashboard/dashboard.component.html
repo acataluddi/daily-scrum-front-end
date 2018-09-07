@@ -15,13 +15,13 @@
         <div class="PlusSignDiv">
           <img class="PlusSignImage" src="../../assets/plus.png">
         </div>
-        <div class="AddProjectDiv">Add Project</div>
+        <div class="AddProjectDiv" (click)="AddProject()">Add Project</div>
       </button>
       <button *ngIf="flag === true" class="UserList" (click)="gotoUsersList()"> User List
       </button>
     </div>
     <div class="BottomDiv">
-      <div *ngFor="let Project of newproject ; let i=index">
+      <div *ngFor="let Project of newproject ; let j=index">
         <div class="ProjectBoxDiv" [ngStyle]="{'background-color': getRandomColor()}">
           <div class=" ProjectNameBoxDiv">
             <div class="ProjectNameDiv">{{Project.projectName}}</div>
@@ -54,7 +54,7 @@
             <button class="MenuButton DropdownButton">
               <div class="DropdownContentDiv" >
                 <!-- <button class="EditButton Button "> -->
-                  <div class="EditDiv Button" (click)="EditProject()" >
+                  <div class="EditDiv Button" (click)="EditProject(Project)" >
                     Edit Project
                   </div>
                 <!-- </button> -->
