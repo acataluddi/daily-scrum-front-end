@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiBase: 'http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page=1',
 };
 
 /*

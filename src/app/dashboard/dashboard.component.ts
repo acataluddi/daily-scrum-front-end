@@ -4,6 +4,7 @@ import { Member } from "../model/member-model";
 import { LoginService } from "../service/login.service";
 import { Router } from '@angular/router';
 import { PROJECTS } from "../mockProjects";
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,7 +12,10 @@ import { PROJECTS } from "../mockProjects";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public router: Router, private loginservice: LoginService) { }
+  constructor(public router: Router, private loginservice: LoginService,) {
+    
+   }
+  
   member: Member;
   loggedin;
   projectName = "Daily Scrum";
