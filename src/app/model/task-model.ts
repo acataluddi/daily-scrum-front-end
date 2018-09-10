@@ -19,6 +19,4 @@ export class Task {
 //     task1: string;
 //     task2: string;
 //     // task3: string;
-
-
 // }

@@ -2,7 +2,7 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 </head>
 
-<body>
+<body (click)="reaction()">
   <div class="right-header">
     <div class="today_header">
       <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate"
@@ -16,7 +16,6 @@
       </button>
       <a href=""><img class="alt-View" src="../../assets/vire_my_tasks.png"></a>
     </div>
-
   </div>
   <div class="total_time">
     <div class="total_time_border">
@@ -33,24 +32,42 @@
   </div>
   <div class="main">
     <div class="header">
-      <div *ngFor="let task of MockMember1">
-        <div class="column">
-          <div class="member1">
-            <div class="member_title1">
-              <div class="member_image1"></div>
-              <div class="member_name1">{{task.member_name}}</div>
-              <div class="more_icon"><img src="../../assets/more.png"></div>
-              <div class="member_time_spent1">{{task.hours_spent}} h {{task.minutes_spent}} m</div>
+      <div *ngFor="let projectupdated of projectArray">
+        <div *ngIf="projectupdated.projectName === currentProject">
+          <div *ngFor="let member of projectupdated.members">
 
-            </div>
 
-            <div class="member_part">
+            <div class="column">
+              <div class="member1">
+                <div class="member_title1">
+                  <div *ngFor="let memberEmployee of memberEmployeeArray">
+                    <div *ngIf="memberEmployee.email === member.email">
+                      <div class="member_image1"><img class="size" src={{memberEmployee.imageurl}}></div>
+                    </div>
+                  </div>
+                  <!-- <img src={{memberEmployee.imageurl}}> -->
+                  <div *ngFor="let memberEmployee of memberEmployeeArray">
+                    <div *ngIf="memberEmployee.email === member.email">
 
-              <!-- <ul> -->
-              <li [ngStyle]="{'color': getRandomColor()}"><span style="color: rgba(96, 96, 96, 1)">{{task.task1}}</span></li>
-              <li [ngStyle]="{'color': getRandomColor()}"><span style="color: rgba(96, 96, 96, 1)">{{task.task2}}</span></li>
-              <!-- </ul>  -->
 
+
+                      <div class="member_name1">{{memberEmployee.name}}</div>
+                      <div class="more_icon"><img src="../../assets/more.png"></div>
+                    </div>
+                  </div>
+
+
+                  <!-- <div *ngFor="let MockToTasks of MockTodayTasks"> -->
+                  <div class="member_time_spent1">{{indTotalHour}} h {{indTotalMins}} m</div>
+                  <!-- </div> -->
+                </div>
+                <div class="member_part">
+
+                  <ul *ngFor="let MockToTasks of MockTodayTasks">
+                    <li [ngStyle]="{'color': getRandomColor()}"><span style="color: rgba(96, 96, 96, 1)">{{MockToTasks.description}}</span></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -63,4 +80,5 @@
       </div>
     </div>
   </div>
+  <div>{{memberEmployee.imageurl}}</div>
 </body>

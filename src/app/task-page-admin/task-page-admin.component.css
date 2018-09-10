@@ -253,13 +253,17 @@ body {
   background: red;
   margin-top: 10px;
   margin-left: 10px;
+  overflow: hidden;
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
   border-radius: 50px;
   /* display:block; */
   float: left;
 }
-
+.size{
+  height:100%;
+  width:100%;
+}
 .more_icon {
   /* position: relative;; */
   margin-left: 90%;

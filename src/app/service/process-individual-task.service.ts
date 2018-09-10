@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Task } from "../model/task-model";
 import { Http, Response, Headers } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -115,16 +115,20 @@ export class ProcessIndividualTaskService {
     private http: HttpClient
   ) { }
 
-  private geturlP = 'http://10.4.6.71:8080/DailyScrum/TaskController?taskDate=2018-05-05&memberEmail=nishaa@qburst.com';
-  private geturlT = 'http://10.4.6.71:8080/DailyScrum/TaskController?taskDate=2018-05-06&memberEmail=nishaa@qburst.com'; 
+  private geturlP = 'http://localhost:8080/DailyScrum/TaskController?taskDate=2018-05-06&memberEmail=neerajd@qburst.com';
+  private geturl = 'http://localhost:8080/DailyScrum/TaskController'; 
 
   getYesterdays(): Observable<Task[]> {
     return this.http.get<Task[]>(this.geturlP)
   }
 
-  getTodays(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.geturlT)
-  }
+  getTodays(taskDate, memberEmail,projectId): Observable<Task[]> {
+    let params = new HttpParams()
+    .set("taskDate", taskDate)
+    .set("memberEmail", memberEmail)
+    .set("projectId",projectId)
+    return this.http.get<Task[]>(this.geturl,{params:params})
+    }
 
   // private posturl = 'http://10.4.6.71:8080/DailyScrum/TaskController';
   // addTask(member: Member): Observable<any> {

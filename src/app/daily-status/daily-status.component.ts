@@ -66,8 +66,8 @@ export class DailyStatusComponent implements OnInit {
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
 
-    this.taskservice.getTodays()
-        .subscribe(data => this.getTodaysTask(data));
+    // this.taskservice.getTodays()
+    //     .subscribe(data => this.getTodaysTask(data));
     
     this.taskservice.getYesterdays()
         .subscribe(data => {this.getYesterdaysTask(data);
