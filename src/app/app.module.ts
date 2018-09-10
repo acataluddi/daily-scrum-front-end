@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
-
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +27,7 @@ import { HeaderComponent } from './header/header.component';
 import { UserslistComponent } from './userslist/userslist.component';
 import { FilterPipe} from './filter.pipe';
 
+
 // Configs 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -39,6 +39,7 @@ export function getAuthServiceConfigs() {
   );
   return config;
 }
+
 
 @NgModule({
   declarations: [
