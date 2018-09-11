@@ -10,6 +10,7 @@ export class IndividualTaskComponent implements OnInit {
 
   @Input() task: Task;
   @Output() timeChangeEvent = new EventEmitter<Task>();
+  @Output() updateTask = new EventEmitter<Task>();
   @ViewChild('des') des: ElementRef;
   @ViewChild('imp') imp: ElementRef;
 
@@ -20,9 +21,11 @@ export class IndividualTaskComponent implements OnInit {
   hours = 24;
   minutes = 60;
   newdesc = '';
+  tid;
   constructor() { }
 
   ngOnInit() {
+    this.tid=parseInt(this.task.taskId);
     if (this.task.impediments === "") {
       this.show_impediment = false;
     }
@@ -39,8 +42,8 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   emitTimeEvent(task) {
-    task.hours_spent = parseInt(task.hours_spent);
-    task.minutes_spent = parseInt(task.minutes_spent);
+    task.hourSpent = parseInt(task.hourSpent);
+    task.minuteSpent = parseInt(task.minuteSpent);
     this.timeChangeEvent.emit(task);
   }
   updateDescription() {
@@ -53,6 +56,7 @@ export class IndividualTaskComponent implements OnInit {
     if (this.task.description === "") {
       this.des.nativeElement.innerText = "";
     }
+    this.updateTask.emit(this.task);
   }
 
   updateImpediment() {
@@ -66,6 +70,7 @@ export class IndividualTaskComponent implements OnInit {
       this.show_impediment = false;
       this.imp.nativeElement.innerText = "";
     }
+    this.updateTask.emit(this.task);
   }
 
 }

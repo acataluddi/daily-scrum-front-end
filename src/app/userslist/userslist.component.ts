@@ -18,6 +18,7 @@ export class UserslistComponent implements OnInit {
   public members: Member[] = [];
   public loggedmembers: Member[];
   public projects: Project[];
+  checker: boolean = false;
   // memberArray: Member[];
   public projectmembers: member[];
   constructor(public router: Router, private viewallservice: AdminviewallserviceService, private projectservice: ProjectService,private data: NavigationdataService) { }
@@ -28,7 +29,7 @@ export class UserslistComponent implements OnInit {
     .subscribe(membersArr => this.getMembers(membersArr));
 
     
-    console.log(this.childProject)
+    // console.log(this.childProject)
 
     
   }
@@ -73,14 +74,27 @@ export class UserslistComponent implements OnInit {
 
   gotoDailyStatus(memberemail:string) {
     console.log(memberemail);
-    // this.selectedEmailEvent.emit(memberemail)
+    this.selectedEmailEvent.emit(memberemail)
     this.data.changedata(memberemail)
     this.router.navigateByUrl('/daily-status');
+    this.changeCSS();
   }
   changeCSS(){
+    if(!this.checker){
     document.getElementById("search_name").style.display = "flex";
+    document.getElementById("input").style.display = "flex";
     document.getElementById("userslist").style.display = "block";
     for(var i in this.members)
     document.getElementById("member_name"+i).style.display = "flex";
+    this.checker = !this.checker
+    }
+    else{
+      document.getElementById("search_name").style.display = "none";
+      document.getElementById("input").style.display = "none";
+    document.getElementById("userslist").style.display = "flex";
+    for(var i in this.members)
+    document.getElementById("member_name"+i).style.display = "none";
+    this.checker = !this.checker
+    }
   }
 }

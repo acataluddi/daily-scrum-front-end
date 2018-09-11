@@ -1,9 +1,10 @@
 <head>
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 </head>
-<app-userslist [childProject]="currentProject" (selectedEmailEvent)="emailSelected($event)"></app-userslist>
+
 <body>
   <div class="right-header">
+      <app-userslist [childProject]="currentProject"></app-userslist>
     <div class="today_header">
       <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate"
         #dp="bsDatepicker" [bsConfig]="datePickerConfig" bsDatepicker [(bsValue)]="myDateValue" (onHidden)="showDatePicker=false"

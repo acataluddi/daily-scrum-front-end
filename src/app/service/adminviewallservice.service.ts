@@ -27,11 +27,27 @@ export class AdminviewallserviceService {
 
   apiURL = 'http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page=1';
 
-  private posturl='http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page=1';
 
 
   getMembers(): Observable<Member[]> {
     return this.http.get<Member[]>(this.apiURL)
+  }
+  
+  putmember(member: Member) : Observable<any> {
+
+    // this.newmember=member;
+    var newmember = {
+
+          name: member.name,
+          email: member.email,
+          userType: member.userType,
+          
+          }
+    console.log(JSON.stringify(newmember));
+    
+    return this.http.post<any>("http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page=1", 
+      JSON.stringify(newmember)
+    );
   }
 
 }

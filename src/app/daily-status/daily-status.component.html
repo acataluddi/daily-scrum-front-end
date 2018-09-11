@@ -1,5 +1,8 @@
 <!-- <div style="height:60px;"></div> -->
 <div class="header-part">
+  <div>  <app-userslist [childProject]="currentProject" (selectedEmailEvent)="changeEmail($event)"></app-userslist>
+</div>
+<div>
   <div class="left-header">
     <div class="yesterday_task_header">{{yesterdayval}}</div>
     <div class="total_time">
@@ -7,7 +10,7 @@
         <div class="total_time_text"> {{total_hours_spent}}h {{total_minutes_spent}}m</div>
         <div class="spent_text">Hours spent</div>
       </div>
-      <div class="last_edit_label">Last edit: Wed, 2:30 PM</div>
+      <div class="last_edit_label">{{lastEditString}}</div>
     </div>
   </div>
   <div class="right-header">
@@ -23,11 +26,13 @@
     <div class="today_task_label">Write about your tasks for today</div>
   </div>
 </div>
+</div>
 <div class="main-part">
   <div class="container left-part">
     <div class="left-inner-part">
       <div *ngFor="let yesterdayTask of MockYesterdayTasks">
-        <app-individual-task [task]=yesterdayTask (timeChangeEvent)="modifyTime($event)"></app-individual-task>
+        <app-individual-task [task]=yesterdayTask (timeChangeEvent)="modifyTime($event)" 
+        (updateTask)="newYesterdayTask($event)"></app-individual-task>
       </div>
       <div class="new_task_field" (click)="addYesterdayTask()">
         <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
@@ -39,7 +44,8 @@
   <div class="container right-part">
     <div class="right-inner-part">
       <div *ngFor="let todayTask of MockTodayTasks">
-        <app-individual-task [task]=todayTask></app-individual-task>
+        <app-individual-task [task]=todayTask (timeChangeEvent)="newTodayTask($event)" 
+        (updateTask)="newTodayTask($event)"></app-individual-task>
       </div>
       <div class="new_task_field" (click)="addTodayTask()">
         <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">

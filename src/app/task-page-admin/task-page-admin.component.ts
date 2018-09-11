@@ -99,60 +99,80 @@ export class TaskPageAdminComponent implements OnInit {
     this.total_hours_spent = this.totalhour;
     this.total_minutes_spent = this.totalminute;
   }
+  // getTasks() {
+  //   // this.MockMember2 = this.taskservice.getMember2();
+  //   this.MockMember1 = this.taskservice.getMember1();
+  // }
+  // calculateTotalTime() {
+  //   for (let task of this.MockMember1) {
+  //     this.totalhour += task.hours_spent;
+  //     this.totalminute += task.minutes_spent;
+  //     this.member_name = task.member_name;
+  //   }
+  //   //convering extra minutes to hours;
+  //   var extrahour = 0;
+  //   if (this.totalminute >= 60) {
+  //     extrahour = Math.floor(this.totalminute / 60);
+  //     this.totalminute = this.totalminute % 60;
+  //   }
+  //   this.totalhour += extrahour;
+  //   this.total_hours_spent = this.totalhour;
+  //   this.total_minutes_spent = this.totalminute;
+  // }
 
-  modifyTime($event) {
-    this.task1 = $event;
-    console.log('performing event in parent');
-    this.totalhour = 0;
-    this.totalminute = 0;
-    var old_hour = 0;
-    var old_minute = 0;
-    this.total_hours_spent = this.totalhour;
-    this.total_minutes_spent = this.totalminute;
-    for (let task of this.MockMember2) {
-      if (this.task2.task_id === this.task1.task_id) {
-        old_hour = this.task1.hours_spent;
-        old_minute = this.task1.minutes_spent;
-        this.totalhour = (this.totalhour + this.task1.hours_spent);
-        this.totalminute = (this.totalminute + this.task1.minutes_spent);
-      } else {
-        this.totalhour += task.hours_spent;
-        this.totalminute += task.minutes_spent;
-      }
-    }
-    //convering extra minutes to hours;
-    var extrahour = 0;
-    if (this.totalminute >= 60) {
-      extrahour = Math.floor(this.totalminute / 60);
-      this.totalminute = this.totalminute % 60;
-    }
-    this.totalhour += extrahour;
-    if ((this.totalhour > 24) || (this.totalhour === 24 && this.totalminute > 0)) {
-      this.task1.hours_spent = old_hour;
-      this.task1.minutes_spent = old_minute;
-      alert('Total time worked cannot be more than 24 hours.');
-    }
-    else {
-      this.total_hours_spent = this.totalhour;
-      this.total_minutes_spent = this.totalminute;
-    }
-  }
-  onDateChange(newDate: Date) {
-    this.newDate = newDate;
-    var d1 = new Date(newDate);
-    (d1.setDate(d1.getDate() - 1));
-    this.month = this.months[newDate.getMonth()];
-    this.date = newDate.getDate();
-    this.year = newDate.getFullYear();
-    if ((newDate.getMonth() === this.d.getMonth()) && (newDate.getDate() === this.d.getDate()) && (newDate.getFullYear() === this.d.getFullYear())) {
-      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = "Yesterday's Tasks";
-    }
-    else {
-      this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
-    }
-  }
+  // modifyTime($event) {
+  //   this.task1 = $event;
+  //   console.log('performing event in parent');
+  //   this.totalhour = 0;
+  //   this.totalminute = 0;
+  //   var old_hour = 0;
+  //   var old_minute = 0;
+  //   this.total_hours_spent = this.totalhour;
+  //   this.total_minutes_spent = this.totalminute;
+  //   for (let task of this.MockMember2) {
+  //     if (this.task2.task_id === this.task1.task_id) {
+  //       old_hour = this.task1.hours_spent;
+  //       old_minute = this.task1.minutes_spent;
+  //       this.totalhour = (this.totalhour + this.task1.hours_spent);
+  //       this.totalminute = (this.totalminute + this.task1.minutes_spent);
+  //     } else {
+  //       this.totalhour += task.hours_spent;
+  //       this.totalminute += task.minutes_spent;
+  //     }
+  //   }
+  //   //convering extra minutes to hours;
+  //   var extrahour = 0;
+  //   if (this.totalminute >= 60) {
+  //     extrahour = Math.floor(this.totalminute / 60);
+  //     this.totalminute = this.totalminute % 60;
+  //   }
+  //   this.totalhour += extrahour;
+  //   if ((this.totalhour > 24) || (this.totalhour === 24 && this.totalminute > 0)) {
+  //     this.task1.hours_spent = old_hour;
+  //     this.task1.minutes_spent = old_minute;
+  //     alert('Total time worked cannot be more than 24 hours.');
+  //   }
+  //   else {
+  //     this.total_hours_spent = this.totalhour;
+  //     this.total_minutes_spent = this.totalminute;
+  //   }
+  // }
+  // onDateChange(newDate: Date) {
+  //   this.newDate = newDate;
+  //   var d1 = new Date(newDate);
+  //   (d1.setDate(d1.getDate() - 1));
+  //   this.month = this.months[newDate.getMonth()];
+  //   this.date = newDate.getDate();
+  //   this.year = newDate.getFullYear();
+  //   if ((newDate.getMonth() === this.d.getMonth()) && (newDate.getDate() === this.d.getDate()) && (newDate.getFullYear() === this.d.getFullYear())) {
+  //     this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+  //     this.yesterdayval = "Yesterday's Tasks";
+  //   }
+  //   else {
+  //     this.todayval = this.month + " " + this.date + ", " + this.year;
+  //     this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+  //   }
+  // }
 
   getNextDate() {
     var d1 = new Date(this.newDate);
@@ -193,9 +213,9 @@ export class TaskPageAdminComponent implements OnInit {
     return colors[Math.floor(Math.random() * colors.length)];
   }
 
-  emailSelected(email){
-    this.email = email;
-    console.log(this.email)
-  }
+  // emailSelected(email){
+  //   this.email = email;
+  //   console.log(this.email)
+  // }
   
 }

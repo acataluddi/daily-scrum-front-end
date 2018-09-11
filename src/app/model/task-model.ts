@@ -1,12 +1,14 @@
 
 export class Task {
-    member_name: string;
-    task_id: number;
-    hours_spent: number;
-    minutes_spent: number;
+    memberEmail: string;
+    taskId: string;
+    hourSpent: number;
+    minuteSpent: number;
     impediments: string;
     description: string;
-    task_completed: boolean;
+    taskCompleted: boolean;
+    projectId: string;
+    taskDate: string;
 
 }
 export class MemberTask {

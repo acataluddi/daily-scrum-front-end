@@ -1,10 +1,10 @@
-<div class="firstclass Member">
+<div class="firstclass Member" (click)="show($event)">
   <div class="classone">
     <div class="scrumlogoclass">
       <img src="../../assets/Scrum.png" (click)="openDashboardPage()">
     </div>
     <div class="textdiv">
-      <div id="dailyscrumclass">{{selected.name}}
+      <div id="dailyscrumclass">{{selected.projectName}}
       </div>
       <div id="scrum">Daily Scrum
         <div id="dash">{{title}}</div>
@@ -12,7 +12,7 @@
       <div id="arrow">
         <div id="projectlist">
           <div *ngFor="let project of projects">
-            <div class="items" (click)="changeProject(project.name)">{{project.name}}</div>
+            <div class="items" (click)="changeProject(project)">{{project.projectName}}</div>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { Member } from '../model/member-model';
 
 import { AuthService } from 'angular-6-social-login';
@@ -6,7 +6,11 @@ import { LoginService } from '../service/login.service';
 import { Project } from '../model/project-model';
 import { ProjectService } from '../project.service';
 import { Router, NavigationStart } from '@angular/router';
-import { ActivatedRoute } from "@angular/router";
+import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-header',
@@ -19,97 +23,35 @@ export class HeaderComponent implements OnInit {
   image: String;
   projects: Project[];
   title: string;
-
-  selected: Project = {
-    "projectId":"4092018122459",
-    "members":[
-       {
-          "email":"ronyc@qburst.com",
-          "role":"Manager"
-       },
-       {
-          "email":"neerajd@qburst.com",
-          "role":"Developer"
-       },
-       {
-          "email":"nisha@qburst.com",
-          "role":"Developer"
-       },
-       {
-          "email":"arathi@qburst.com",
-          "role":"Team Lead"
-       },
-       {
-          "email":"sanjo@qburst.com",
-          "role":"Developer"
-       },
-       {
-          "email":"athiram@qburst.com",
-          "role":"Developer"
-       },
-       {
-          "email":"sruthy@qburst.com",
-          "role":"Tester"
-       },
-       {
-          "email":"nithaa@qburst.com",
-          "role":"Manager"
-       },
-       {
-          "email":"sunil@qburst.com",
-          "role":"Manager"
-       },
-       {
-          "email":"nithin@qburst.com",
-          "role":"Tester"
-       },
-       {
-          "email":"akhils@qburst.com",
-          "role":"Team Lead"
-       }
-    ],
-    "projectName":"FR Project VIII - EU",
-    "projectDesc":"This project is to customize the existing Taiwanese FR Single Page Application to get it readied for release in EU region with French, German and English language support and some other functional changes in web and cms."
-  };
+  email = localStorage.getItem("email");
+  selected: Project = { projectId: "", projectName: "", members: [], projectDesc: '' };
   constructor(
     private socialAuthService: AuthService,
     private router: Router,
     private loginservice: LoginService,
     private projectService: ProjectService,
-    private act: ActivatedRoute) { }
+    private taskService: ProcessIndividualTaskService) { }
 
   ngOnInit() {
     this.initializeMember();
-    this.getdata();
-    this.toggle();
+    this.getUserDetails();
+    this.toggle(this.router.url);
+
+    this.projectService.getProjects(this.email)
+        .subscribe(data => {
+          this.setProjects(data);
+          let projects = data ; 
+          localStorage.setItem("projectId", projects[0].projectId)    
+        });
+
     this.router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
         console.log(event);
-        if (event['url'] === '/dashboard') {
-          this.title = 'Dashboard';
-          document.getElementById("dailyscrumclass").style.visibility = "hidden";
-          document.getElementById("arrow").style.visibility = "hidden";
-          document.getElementById("scrum").style.visibility = "visible";
-          document.getElementById("dash").style.visibility = "visible";
-        } else if (event['url'] === '/project') {
-          this.title = 'New Project';
-          document.getElementById("dailyscrumclass").style.visibility = "hidden";
-          document.getElementById("arrow").style.visibility = "hidden";
-          document.getElementById("scrum").style.visibility = "visible";
-        } else if (event['url'] === '/admin-view-all') {
-          document.getElementById("dailyscrumclass").style.visibility = "hidden";
-          document.getElementById("arrow").style.visibility = "hidden";
-          document.getElementById("scrum").style.visibility = "visible";
-          document.getElementById("dash").style.visibility = "hidden";
-        } else {
-          document.getElementById("dailyscrumclass").style.visibility = "visible";
-          document.getElementById("arrow").style.visibility = "visible";
-          document.getElementById("scrum").style.visibility = "hidden";
-          document.getElementById("dash").style.visibility = "hidden";
-        }
+        this.toggle(event['url']);
       }
     });
 
+    
   }
 
   initializeMember() {
@@ -123,37 +65,44 @@ export class HeaderComponent implements OnInit {
     this.title = '';
   }
 
-  getdata() {
+  getUserDetails() {
     this.member.email = localStorage.getItem("email");
     this.member.imageurl = localStorage.getItem("image");
-    this.projects = this.projectService.getProjects();
+  }
+
+  setProjects(userProjects){
+    this.projects = userProjects;
+    this.selected = this.projects[0];
   }
 
   getImage(): String {
     this.member.imageurl = localStorage.getItem("image");
     return this.member.imageurl;
   }
+
   logout() {
     this.socialAuthService.signOut();
     this.loginservice.logoutMember();
   }
 
   changeProject(newProject) {
-    this.selected.projectName = newProject;
+    this.selected = newProject;
+    this.taskService.changeProject(this.selected)
   }
 
-  toggle() {
-    if (this.router.url == '/dashboard') {
+  toggle(currenturl) {
+    if (currenturl == '/dashboard') {
       this.title = 'Dashboard';
       document.getElementById("dailyscrumclass").style.visibility = "hidden";
       document.getElementById("arrow").style.visibility = "hidden";
       document.getElementById("scrum").style.visibility = "visible";
-    } else if (this.router.url == '/project') {
+      document.getElementById("dash").style.visibility = "visible";
+    } else if (currenturl == '/project') {
       this.title = 'New Project';
       document.getElementById("dailyscrumclass").style.visibility = "hidden";
       document.getElementById("arrow").style.visibility = "hidden";
       document.getElementById("scrum").style.visibility = "visible";
-    } else if (this.router.url == '/admin-view-all') {
+    } else if (currenturl == '/admin-view-all') {
       document.getElementById("dailyscrumclass").style.visibility = "hidden";
       document.getElementById("arrow").style.visibility = "hidden";
       document.getElementById("scrum").style.visibility = "visible";
@@ -163,11 +112,37 @@ export class HeaderComponent implements OnInit {
       document.getElementById("dailyscrumclass").style.visibility = "visible";
       document.getElementById("arrow").style.visibility = "visible";
       document.getElementById("scrum").style.visibility = "hidden";
+      document.getElementById("dash").style.visibility = "hidden";
     }
-    console.log(this.router.url);
-
+    console.log(currenturl);
   }
+
   openDashboardPage() {
     this.router.navigate(['/dashboard']);
   }
+
+  show(e) {
+    // console.log(e);
+    if (e.target.className == "arrow2" || e.target.className == "button desktop" ||
+      e.target.className == "dp") {
+      if (document.getElementById("signout").style.visibility == "hidden") {
+        document.getElementById("signout").style.visibility = "visible";
+      } else {
+        document.getElementById("signout").style.visibility = "hidden";
+      }
+
+    }
+    else if (e.target.id == "arrow" || e.target.id == "dailyscrumclass") {
+      if (document.getElementById("projectlist").style.visibility == "hidden") {
+        document.getElementById("projectlist").style.visibility = "visible";
+      } else {
+        document.getElementById("projectlist").style.visibility = "hidden";
+      }
+    }
+    else {
+      document.getElementById("projectlist").style.visibility = "hidden";
+      document.getElementById("signout").style.visibility = "hidden";
+    }
+  }
+
 }

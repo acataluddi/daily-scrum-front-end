@@ -53,43 +53,19 @@ export class AdminviewallComponent implements OnInit {
     this.memberArray = membersArr;
     console.log(this.memberArray);
   }
- 
-
-  private postURL = 'http://localhost:8080/DailyScrum/CRUDControllerUser';
-  putUpdate(member: Member) {
-    let cpHeaders = new Headers({
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-      'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
-      'Access-Control-Allow-Credentials': true
-    });
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Access-Control-Allow-Origin', '*');
-    // let options = new RequestOptions({ headers: cpHeaders , method: RequestMethod.Put});
-    var newmember = {
-
-      name: member.name,
-      email: member.email,
-      userType: member.userType,
-
-    }
-
-    console.log(JSON.stringify(newmember));
-    return this.http.put(this.postURL, JSON.stringify(newmember))
-      .toPromise()
-      // .then(res => res.json().data());
-
-
-  }
-
+  
+  
   onChange(newType, mem: Member) {
-    mem.userType = newType;
-    console.log(mem.userType);
-    console.log(mem);
-    console.log("User type changed");
-    // this.putUpdate(mem).then((res) => console.log(res));
-    // .subscribe((res:Response)=> console.log(res.json()));  
+        mem.userType=newType;
+        console.log(mem.userType);
+        console.log(mem);
+        console.log("User type changed");
+        // this.putUpdate(mem).then((res)=> console.log(res));
+        // .subscribe((res:Response)=> console.log(res.json()));  
+        this.viewallservice.putmember(mem)
+        .subscribe((res:Response) => {
+          console.log(res);
+        })
 
   }
   getPagenum(pagenum) {
