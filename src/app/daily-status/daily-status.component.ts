@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { Project } from "../model/project-model";
 import { IndividualTaskComponent } from "../individual-task/individual-task.component";
 import { Task } from '../model/task-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { DatePipe } from '@angular/common';
+import { Subscription } from 'rxjs';
+
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-daily-status',
@@ -12,12 +19,17 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 })
 export class DailyStatusComponent implements OnInit {
 
+
+  
   task: Task;
   task1: Task;
   MockYesterdayTasks: Task[];
   MockTodayTasks: Task[];
+  TodayTasks: Task[];
+  YesterdayTasks: Task[];
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
+  T: Task[];
 
   task_id;
   oldtodaytask: Task;
@@ -52,20 +64,46 @@ export class DailyStatusComponent implements OnInit {
   date;
   year;
   myvalue;
+  todayTaskDate;
+  yesterdayTaskDate;
+  todayDate = new Date();
+  email = localStorage.getItem("email");
+  project: Project;
+  projectId = localStorage.getItem("projectId")
+  status = false;
+  lastEdit;
+  lastEditString = localStorage.getItem("lastEdit");
+  subscription: Subscription;
+
   constructor(
-    private taskservice: ProcessIndividualTaskService
+    private taskservice: ProcessIndividualTaskService,
+    private datepipe: DatePipe
+
   ) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-orange',
       showWeekNumbers: false
     });
-  }
+    this.subscription = taskservice.newList.subscribe(
+      data => { this.projectId = data.projectId
+          taskservice.getTodays(this.todayTaskDate, this.email, this.projectId)
+          .subscribe(data => this.getTodaysTask(data));
+
+          taskservice.getYesterdays(this.yesterdayTaskDate, this.email, this.projectId)
+          .subscribe(data => this.getYesterdaysTask(data));
+  });
+}
+// change() {
+//   this.animal = 'Cat';
+//   }
 
   ngOnInit() {
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
-    this.getTasks();
-    this.calculateTotalTime();
+
+    // this.project = this.header.getProjects();
+
+
     this.month = this.months[this.d.getMonth()];
     this.date = this.d.getDate();
     this.year = this.d.getFullYear();
@@ -73,16 +111,68 @@ export class DailyStatusComponent implements OnInit {
     this.myDateValue = new Date();
     this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
     this.yesterdayval = "Yesterday's Tasks";
+    this.todayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
+    // console.log(this.project); 
+    this.todayDate.setDate(this.todayDate.getDate() - 1);
+    this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
+    console.log(this.projectId)
+    // this.projectId = '121'
+
+    this.taskservice.getTodays(this.todayTaskDate, this.email, this.projectId)
+      .subscribe(data => this.getTodaysTask(data));
+
+    this.taskservice.getYesterdays(this.yesterdayTaskDate, this.email, this.projectId)
+      .subscribe(data => {
+        this.getYesterdaysTask(data);
+        this.calculateTotalTime()
+      });
+
+    // this.status = true;
   }
-  getTasks() {
-    this.MockYesterdayTasks = this.taskservice.getYesterdayTasks();
-    this.MockTodayTasks = this.taskservice.getTodayTasks();
+
+  changeproject(event){
+    // console.log(event)
+    
+    this.projectId = event.projectId
+
+    this.todayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
+    this.todayDate.setDate(this.todayDate.getDate() - 1);
+    this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
+    
+
+    this.taskservice.getTodays(this.todayTaskDate, this.email, this.projectId)
+      .subscribe(data => this.getTodaysTask(data));
+
+    this.taskservice.getYesterdays(this.yesterdayTaskDate, this.email, this.projectId)
+      .subscribe(data => { // console.log(data)
+        this.getYesterdaysTask(data);
+        this.calculateTotalTime()
+      });
   }
+
+
+
+  getTodaysTask(Todays) {
+    this.MockTodayTasks = Todays;
+    this.TodayTasks = Todays;
+    console.log(this.MockTodayTasks);
+    this.status = true;
+  }
+
+  getYesterdaysTask(Yesterdays) {
+    this.MockYesterdayTasks = Yesterdays;
+    this.YesterdayTasks = Yesterdays;
+    console.log(this.MockYesterdayTasks);
+  }
+
   calculateTotalTime() {
+    this.totalhour = 0;
+    this.totalminute = 0;
     for (let task of this.MockYesterdayTasks) {
-      this.totalhour += task.hours_spent;
-      this.totalminute += task.minutes_spent;
+      this.totalhour += task.hourSpent;
+      this.totalminute += task.minuteSpent;
     }
+
     //convering extra minutes to hours;
     var extrahour = 0;
     if (this.totalminute >= 60) {
@@ -95,23 +185,28 @@ export class DailyStatusComponent implements OnInit {
   }
 
   modifyTime($event) {
+    console.log(this.projectId)
     this.task1 = $event;
     console.log('performing event in parent');
     this.totalhour = 0;
     this.totalminute = 0;
     var old_hour = 0;
     var old_minute = 0;
+
+    this.newYesterdayTask(this.task1);
+
     for (let task of this.MockYesterdayTasks) {
-      if (task.task_id === this.task1.task_id) {
-        old_hour = this.task1.hours_spent;
-        old_minute = this.task1.minutes_spent;
-        this.totalhour = (this.totalhour + this.task1.hours_spent);
-        this.totalminute = (this.totalminute + this.task1.minutes_spent);
+      if (task.taskId === this.task1.taskId) {
+        old_hour = this.task1.hourSpent;
+        old_minute = this.task1.minuteSpent;
+        this.totalhour = (this.totalhour + this.task1.hourSpent);
+        this.totalminute = (this.totalminute + this.task1.minuteSpent);
       } else {
-        this.totalhour += task.hours_spent;
-        this.totalminute += task.minutes_spent;
+        this.totalhour += task.hourSpent;
+        this.totalminute += task.minuteSpent;
       }
     }
+
     //convering extra minutes to hours;
     var extrahour = 0;
     if (this.totalminute >= 60) {
@@ -120,8 +215,8 @@ export class DailyStatusComponent implements OnInit {
     }
     this.totalhour += extrahour;
     if ((this.totalhour > 24) || (this.totalhour === 24 && this.totalminute > 0)) {
-      this.task1.hours_spent = old_hour;
-      this.task1.minutes_spent = old_minute;
+      this.task1.hourSpent = old_hour;
+      this.task1.minuteSpent = old_minute;
       alert('Total time worked cannot be more than 24 hours.');
     }
     else {
@@ -131,6 +226,7 @@ export class DailyStatusComponent implements OnInit {
   }
 
   addTodayTask() {
+    // console.log(this.TodayTasks)
     if (this.creatednewtoday === true) {
       if (this.oldtodaytask.description !== '') {
         var ts = new Task();
@@ -138,19 +234,23 @@ export class DailyStatusComponent implements OnInit {
         this.oldtodaytask = ts;
         this.MockTodayTasks.push(ts);
         this.creatednewtoday = true;
+        // console.log(this.oldtodaytask);
       }
     }
     else if (this.creatednewtoday === false) {
       var ts = new Task();
-      console.log(this.oldtodaytask);
+      // console.log(this.oldtodaytask);
       ts = this.initializeNew(ts);
       this.oldtodaytask = ts;
       this.MockTodayTasks.push(ts);
       this.creatednewtoday = true;
+      // console.log(this.oldtodaytask);
     }
+    // console.log(this.oldtodaytask)
   }
 
   addYesterdayTask() {
+    // console.log(this.projectId)
     if (this.creatednewyesterday === true) {
       if (this.oldyesterdaytask.description !== '') {
         var ts = new Task();
@@ -158,15 +258,16 @@ export class DailyStatusComponent implements OnInit {
         this.oldyesterdaytask = ts;
         this.MockYesterdayTasks.push(ts);
         this.creatednewyesterday = true;
+        // console.log(this.oldyesterdaytask);
       }
     }
     else if (this.creatednewyesterday === false) {
       var ts = new Task();
-      console.log(this.oldyesterdaytask);
       ts = this.initializeNew(ts);
       this.oldyesterdaytask = ts;
       this.MockYesterdayTasks.push(ts);
       this.creatednewyesterday = true;
+      // console.log(this.oldyesterdaytask);
     }
   }
 
@@ -196,30 +297,36 @@ export class DailyStatusComponent implements OnInit {
     }
     var newid = parseInt(this.date.toString() + this.monthval.toString() + this.year.toString() + this.hour.toString() + this.minute.toString() + this.second.toString());
     ts = {
-      member_name: '',
-      task_id: newid,
+      memberEmail: this.email,
+      taskId: newid.toString(),
       description: '',
-      hours_spent: 0,
-      minutes_spent: 0,
+      hourSpent: 0,
+      minuteSpent: 0,
       impediments: '',
-      task_completed: false
+      taskCompleted: false,
+      projectId: this.projectId,
+      taskDate: ''
     }
     return ts;
   }
   onDateChange(newDate: Date) {
-    this.newDate = newDate;
-    var d1 = new Date(newDate);
-    (d1.setDate(d1.getDate() - 1));
-    this.month = this.months[newDate.getMonth()];
-    this.date = newDate.getDate();
-    this.year = newDate.getFullYear();
-    if ((newDate.getMonth() === this.d.getMonth()) && (newDate.getDate() === this.d.getDate()) && (newDate.getFullYear() === this.d.getFullYear())) {
-      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = "Yesterday's Tasks";
-    }
-    else {
-      this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+    if (this.status) {
+      this.newDate = newDate;
+      var d1 = new Date(newDate);
+      (d1.setDate(d1.getDate() - 1));
+      this.month = this.months[newDate.getMonth()];
+      this.date = newDate.getDate();
+      this.year = newDate.getFullYear();
+      if ((newDate.getMonth() === this.d.getMonth()) && (newDate.getDate() === this.d.getDate()) && (newDate.getFullYear() === this.d.getFullYear())) {
+        this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+        this.yesterdayval = "Yesterday's Tasks";
+      }
+      else {
+        this.todayval = this.month + " " + this.date + ", " + this.year;
+        this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+      }
+
+      this.getData(newDate);
     }
   }
 
@@ -256,5 +363,100 @@ export class DailyStatusComponent implements OnInit {
     }
     this.newDate = d1;
     this.myDateValue = d1;
+  }
+
+  newTodayTask($event) {
+    this.task1 = $event;
+    if (this.newOld(this.task1, this.TodayTasks)) {
+      //insert
+      if (this.task1.taskDate == '') {
+        this.task1.taskDate = this.todayTaskDate;
+        this.task1.projectId = this.projectId;
+        this.taskservice.addNewTask(this.task1)
+          .subscribe(msg => console.log(msg));
+      } else {
+        //update
+        this.taskservice.updateOldTask(this.task1)
+          .subscribe(msg => console.log(msg));
+      }
+    }
+    else {
+      //update
+      this.taskservice.updateOldTask(this.task1)
+        .subscribe(msg => console.log(msg));
+    }
+  }
+
+  newYesterdayTask(newtask) {
+    this.task1 = newtask
+    this.lastEdit = new Date()
+    this.getLastEdit(this.lastEdit)    
+    if (this.newOld(newtask, this.YesterdayTasks)) {
+      //insert
+      if (this.task1.taskDate == '') {
+        this.task1.taskDate = this.yesterdayTaskDate;
+        this.task1.projectId = this.projectId;
+        this.taskservice.addNewTask(this.task1).subscribe(
+          msg => console.log(msg));
+      } else {
+        this.taskservice.updateOldTask(this.task1)
+          .subscribe(msg => console.log(msg));
+      }
+    } else {
+      //update
+      this.taskservice.updateOldTask(this.task1)
+        .subscribe(msg => console.log(msg));
+    }
+  }
+
+  newOld(keyTask, taskArray) {
+    var flag = true;
+    // console.log(taskArray)
+    // console.log(keyTask);
+    var length = taskArray.length;
+    // console.log(length);
+    var task = taskArray[length - 1]
+    if (keyTask.taskId == task.taskId) {
+      flag = true;
+    }
+    else {
+      flag = false
+    }
+    // console.log(flag)
+    return flag;
+  }
+
+  getData(changedDate){
+      var td = changedDate;
+      var yd = new Date(changedDate);
+      (yd.setDate(changedDate.getDate() - 1));
+      this.todayTaskDate = this.datepipe.transform(td, "dd-MM-yyyy");
+      // this.todayDate.setDate(changedDate.getDate() - 1);
+      this.yesterdayTaskDate = this.datepipe.transform(yd, "dd-MM-yyyy");
+      console.log(this.todayTaskDate)
+      console.log(this.yesterdayTaskDate)
+      this.taskservice.getTodays(this.todayTaskDate, this.email, this.projectId)
+        .subscribe(data => this.getTodaysTask(data));
+      this.taskservice.getYesterdays(this.yesterdayTaskDate, this.email, this.projectId)
+        .subscribe(data => {
+          this.getYesterdaysTask(data);
+          this.calculateTotalTime()
+        });
+  }
+
+  getLastEdit(editTime){
+    var day = new Array(7);
+    day[0] =  "Sunday";
+    day[1] = "Monday";
+    day[2] = "Tuesday";
+    day[3] = "Wednesday";
+    day[4] = "Thursday";
+    day[5] = "Friday";
+    day[6] = "Saturday";
+    var weekday = day[editTime.getDay()]
+    var time = editTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+    this.lastEditString = weekday + " " + time
+    localStorage.setItem("lastEdit", this.lastEditString)
+
   }
 }
