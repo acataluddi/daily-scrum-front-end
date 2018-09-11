@@ -55,14 +55,16 @@
                 <div class="ExtraMembersDiv">+{{noOfMembers[j]-4}}</div>
               </button>
             </div>
-            <button class="DailyStatusButton">
-              <div class="DailyStatusDiv" (click)="openDailyStatus()">Daily Status</div>
+            <button class="DailyStatusButton" (click)="openDailyStatus()">
+              <div class="DailyStatusDiv" >Daily Status</div>
             </button>
             <button class="MenuButton DropdownButton">
               <div class="DropdownContentDiv" >
                 <!-- <button class="EditButton Button "> -->
                   <div class="EditDiv Button" (click)="EditProject(Project)" >
+                     
                     Edit Project
+                  
                   </div>
                 <!-- </button> -->
                 <!-- <button class="DeleteButton "> -->

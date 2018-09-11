@@ -60,23 +60,24 @@ export class DashboardComponent implements OnInit {
     console.log(this.newproject);
     this.noOfProjects = this.newproject.length;
     for (let i = 0; i < this.noOfProjects; i++) {
+
       this.noOfMembers[i] = this.newproject[i].members.length; 
       this.TotalProjectMembers[i+1]=this.TotalProjectMembers[i]+this.noOfMembers[i];
       console.log(this.TotalProjectMembers[i+1]);
       console.log(this.noOfMembers[i]);
+
       for (let j=0; j< this.noOfMembers[i];j++){
+
         for (let k=0;k<this.TotalMembers;k++){
+
          if ( this.newproject[i].members[j].email== this.memberArray[k].email){
             this.imageurl[x]= this.memberArray[k].imageurl;
             console.log(this.imageurl[x]);
              x=x+1;
-         }
-         
-        }
-        
+         } 
+        }       
       }
     }
-    console.log(this.imageurl);
   }
 
   getMembers(membersArr): void {
@@ -98,6 +99,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('/admin-view-all');
 
   }
+
   AddProject() {
 
     this.projectService.setRequestType("add");

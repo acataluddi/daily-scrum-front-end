@@ -46,6 +46,7 @@ export class AdminviewallComponent implements OnInit {
 
     this.viewallservice.getMembers()
     .subscribe(membersArr => this.getMembers(membersArr));
+    
   }
 
 
@@ -93,6 +94,7 @@ export class AdminviewallComponent implements OnInit {
 
   }
   getPagenum(pagenum) {
+    this.viewallservice.getPageNum(pagenum);
     console.log(pagenum);
     this.p = pagenum;
 

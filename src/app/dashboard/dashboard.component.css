@@ -28,7 +28,7 @@
   text-align: left;
   font-family: 'Roboto';
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   color: rgba(79, 86, 105, 1);
   height: 21px;
   position: absolute;
@@ -52,18 +52,17 @@
   position: absolute;
   left: 450px;
   height: 32px;
-  width: 80px;
+  width: 70px;
   background-color: rgb(5, 87, 255);
   border-radius: 4px;
   display: flex;
   border-style: none;
   outline: none;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
   /* padding-left: 2%; */
   font-family: 'Roboto';
-  color: white;
-  font-weight: bold;
 }
 
 .AddProjectButton:hover,
@@ -74,24 +73,26 @@
 
 .PlusSignDiv {
   margin: 5px;
-  margin-top: 7.5px;
+  margin-top: 8px;
   width: 15px;
   height: 15px;
   background-color: white;
 }
 
 .PlusSignImage {
-  height: 65%;
-  width: 65%;
-  padding-bottom: 3px;
+  height: 13px;
+  width: 11px;
+  /* padding-top:-3px; */
+  padding-bottom: 5.5px;
 }
 
 .AddProjectDiv {
   text-align: center;
   margin: 5%;
   font-family: 'Roboto';
-  color: white;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
 }
 
 .BottomDiv {
@@ -137,7 +138,7 @@
   height: 32px;
   border-radius: 16px;
   margin-left: -12px;
-  border: 2px solid white;
+  border: 1px solid white;
   outline: none;
 }
 
@@ -164,7 +165,7 @@
 }
 
 .SmallCircleButton1Even {
-  background-color: rgb(34, 33, 22);
+  background-color: white;
 }
 
 .SmallCircleButton2 {
