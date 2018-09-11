@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Task, MemberTask } from '../model/task-model';
 import { MemberTaskService } from '../service/member-task.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { Project } from '../model/project-model';
 
 @Component({
   selector: 'app-task-page-admin',
@@ -9,7 +10,8 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
   styleUrls: ['./task-page-admin.component.css']
 })
 export class TaskPageAdminComponent implements OnInit {
-
+  currentProject: Project = {projectId:'', projectName:'', projectDesc:'', members:[] }
+  // this.currentProject.projectName = ''
   email:string;
   task: MemberTask;
   task1: Task;
@@ -63,7 +65,7 @@ export class TaskPageAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.currentProject.projectName = 'Daily Scrum'
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
     this.getTasks();

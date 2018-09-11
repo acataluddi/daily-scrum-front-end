@@ -1,7 +1,7 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ProjectService } from '../service/project.service'
 import { AdminviewallserviceService } from '../service/adminviewallservice.service';
-import { Project } from '../model/project-model'
+import { Project, member } from '../model/project-model'
 import { Member } from '../model/member-model';
 import { Router } from '@angular/router';
 import { NavigationdataService } from '../service/navigationdata.service'
@@ -14,10 +14,12 @@ import { TaskPageAdminComponent } from '../task-page-admin/task-page-admin.compo
 export class UserslistComponent implements OnInit {
 
   @Output() selectedEmailEvent = new EventEmitter();
-  public members: Member[];
+  @Input() childProject: Project;
+  public members: Member[] = [];
+  public loggedmembers: Member[];
   public projects: Project[];
-  memberArray: Member[];
-
+  // memberArray: Member[];
+  public projectmembers: member[];
   constructor(public router: Router, private viewallservice: AdminviewallserviceService, private projectservice: ProjectService,private data: NavigationdataService) { }
 
   ngOnInit() {
@@ -25,19 +27,48 @@ export class UserslistComponent implements OnInit {
     this.viewallservice.getMembers()
     .subscribe(membersArr => this.getMembers(membersArr));
 
-    this.projectservice.getProjects()
-    .subscribe(projectsArr => this.getProjects(projectsArr));
+    
+    console.log(this.childProject)
+
+    
   }
 
   getMembers(membersArr): void {
-    this.members = membersArr;
+    this.loggedmembers = membersArr;
     console.log("hiii");
-    console.log(this.members);
+    console.log(this.loggedmembers);
+    
+    this.projectservice.getProjects()
+    .subscribe(projectsArr => this.getProjects(projectsArr));
+
   }
 
   getProjects(projectsArr): void {
     this.projects = projectsArr;
     console.log(this.projects)
+    for(let pro of this.projects){
+      // console.log(pro.members)
+      console.log(pro.projectName)
+      if(pro.projectName == this.childProject.projectName){
+        console.log(pro.members)
+        this.projectmembers = pro.members;
+        console.log(this.projectmembers)
+
+      }
+    }
+    this.getThisProjectMembers()
+  }
+
+  getThisProjectMembers(){
+    for(let promem of this.projectmembers){
+      for(let mem of this.loggedmembers){
+        if(promem.email == mem.email){
+          console.log(mem)
+          this.members.push(mem)
+        }
+    }
+    }
+    console.log(this.members)
   }
 
   gotoDailyStatus(memberemail:string) {

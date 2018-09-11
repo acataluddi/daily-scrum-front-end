@@ -1,7 +1,7 @@
 <head>
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 </head>
-<app-userslist (selectedEmailEvent)="emailSelected($event)"></app-userslist>
+<app-userslist [childProject]="currentProject" (selectedEmailEvent)="emailSelected($event)"></app-userslist>
 <body>
   <div class="right-header">
     <div class="today_header">
