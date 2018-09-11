@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { Member } from '../model/member-model';
 
 import { AuthService } from 'angular-6-social-login';
@@ -6,7 +6,6 @@ import { LoginService } from '../service/login.service';
 import { Project } from '../model/project-model';
 import { ProjectService } from '../project.service';
 import { Router, NavigationStart } from '@angular/router';
-import { DailyStatusComponent } from '../daily-status/daily-status.component';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 
 @Injectable({
@@ -20,8 +19,6 @@ import { ProcessIndividualTaskService } from '../service/process-individual-task
 })
 export class HeaderComponent implements OnInit {
 
-  // @Output() projectChanged = new EventEmitter<Project>();
-
   member: Member;
   image: String;
   projects: Project[];
@@ -33,7 +30,6 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private loginservice: LoginService,
     private projectService: ProjectService,
-    private dailystatus: DailyStatusComponent,
     private taskService: ProcessIndividualTaskService) { }
 
   ngOnInit() {
@@ -47,8 +43,6 @@ export class HeaderComponent implements OnInit {
           let projects = data ; 
           localStorage.setItem("projectId", projects[0].projectId)    
         });
-
-  
 
     this.router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
@@ -79,14 +73,6 @@ export class HeaderComponent implements OnInit {
   setProjects(userProjects){
     this.projects = userProjects;
     this.selected = this.projects[0];
-    // localStorage.setItem("projectId", this.selected.projectId)
-    // console.log(this.selected);
-  }
-
-  getProjects(): Project{
-    console.log("hi") 
-    console.log(this.selected)
-    return this.selected;
   }
 
   getImage(): String {
@@ -100,15 +86,8 @@ export class HeaderComponent implements OnInit {
   }
 
   changeProject(newProject) {
-    // console.log(newProject)
     this.selected = newProject;
     this.taskService.changeProject(this.selected)
-    // this.projectChanged.emit(this.selected)
-
-    // localStorage.setItem("projectId", this.selected.projectId)
-    // this.taskService.getTodays(this.dailystatus.todayTaskDate, 
-    //   this.dailystatus.email, this.selected.projectId).
-    //   subscribe(data => this.dailystatus.getTodaysTask(data));
   }
 
   toggle(currenturl) {
@@ -165,4 +144,5 @@ export class HeaderComponent implements OnInit {
       document.getElementById("signout").style.visibility = "hidden";
     }
   }
+
 }

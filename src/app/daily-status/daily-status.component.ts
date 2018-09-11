@@ -1,6 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
 import { Project } from "../model/project-model";
-import { IndividualTaskComponent } from "../individual-task/individual-task.component";
 import { Task } from '../model/task-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
@@ -19,14 +18,14 @@ import { Subscription } from 'rxjs';
 })
 export class DailyStatusComponent implements OnInit {
 
-
-  
   task: Task;
   task1: Task;
+
   MockYesterdayTasks: Task[];
   MockTodayTasks: Task[];
   TodayTasks: Task[];
   YesterdayTasks: Task[];
+
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
   T: Task[];
@@ -68,7 +67,6 @@ export class DailyStatusComponent implements OnInit {
   yesterdayTaskDate;
   todayDate = new Date();
   email = localStorage.getItem("email");
-  project: Project;
   projectId = localStorage.getItem("projectId")
   status = false;
   lastEdit;
@@ -93,16 +91,10 @@ export class DailyStatusComponent implements OnInit {
           .subscribe(data => this.getYesterdaysTask(data));
   });
 }
-// change() {
-//   this.animal = 'Cat';
-//   }
 
   ngOnInit() {
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
-
-    // this.project = this.header.getProjects();
-
 
     this.month = this.months[this.d.getMonth()];
     this.date = this.d.getDate();
@@ -112,11 +104,11 @@ export class DailyStatusComponent implements OnInit {
     this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
     this.yesterdayval = "Yesterday's Tasks";
     this.todayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
-    // console.log(this.project); 
+     
     this.todayDate.setDate(this.todayDate.getDate() - 1);
     this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
     console.log(this.projectId)
-    // this.projectId = '121'
+
 
     this.taskservice.getTodays(this.todayTaskDate, this.email, this.projectId)
       .subscribe(data => this.getTodaysTask(data));
@@ -126,43 +118,19 @@ export class DailyStatusComponent implements OnInit {
         this.getYesterdaysTask(data);
         this.calculateTotalTime()
       });
-
-    // this.status = true;
   }
-
-  changeproject(event){
-    // console.log(event)
-    
-    this.projectId = event.projectId
-
-    this.todayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
-    this.todayDate.setDate(this.todayDate.getDate() - 1);
-    this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
-    
-
-    this.taskservice.getTodays(this.todayTaskDate, this.email, this.projectId)
-      .subscribe(data => this.getTodaysTask(data));
-
-    this.taskservice.getYesterdays(this.yesterdayTaskDate, this.email, this.projectId)
-      .subscribe(data => { // console.log(data)
-        this.getYesterdaysTask(data);
-        this.calculateTotalTime()
-      });
-  }
-
-
 
   getTodaysTask(Todays) {
     this.MockTodayTasks = Todays;
     this.TodayTasks = Todays;
-    console.log(this.MockTodayTasks);
+    // console.log(this.MockTodayTasks);
     this.status = true;
   }
 
   getYesterdaysTask(Yesterdays) {
     this.MockYesterdayTasks = Yesterdays;
     this.YesterdayTasks = Yesterdays;
-    console.log(this.MockYesterdayTasks);
+    // console.log(this.MockYesterdayTasks);
   }
 
   calculateTotalTime() {
@@ -185,7 +153,6 @@ export class DailyStatusComponent implements OnInit {
   }
 
   modifyTime($event) {
-    console.log(this.projectId)
     this.task1 = $event;
     console.log('performing event in parent');
     this.totalhour = 0;
@@ -226,7 +193,6 @@ export class DailyStatusComponent implements OnInit {
   }
 
   addTodayTask() {
-    // console.log(this.TodayTasks)
     if (this.creatednewtoday === true) {
       if (this.oldtodaytask.description !== '') {
         var ts = new Task();
@@ -234,23 +200,18 @@ export class DailyStatusComponent implements OnInit {
         this.oldtodaytask = ts;
         this.MockTodayTasks.push(ts);
         this.creatednewtoday = true;
-        // console.log(this.oldtodaytask);
       }
     }
     else if (this.creatednewtoday === false) {
       var ts = new Task();
-      // console.log(this.oldtodaytask);
       ts = this.initializeNew(ts);
       this.oldtodaytask = ts;
       this.MockTodayTasks.push(ts);
       this.creatednewtoday = true;
-      // console.log(this.oldtodaytask);
     }
-    // console.log(this.oldtodaytask)
   }
 
   addYesterdayTask() {
-    // console.log(this.projectId)
     if (this.creatednewyesterday === true) {
       if (this.oldyesterdaytask.description !== '') {
         var ts = new Task();
@@ -258,7 +219,6 @@ export class DailyStatusComponent implements OnInit {
         this.oldyesterdaytask = ts;
         this.MockYesterdayTasks.push(ts);
         this.creatednewyesterday = true;
-        // console.log(this.oldyesterdaytask);
       }
     }
     else if (this.creatednewyesterday === false) {
@@ -267,7 +227,6 @@ export class DailyStatusComponent implements OnInit {
       this.oldyesterdaytask = ts;
       this.MockYesterdayTasks.push(ts);
       this.creatednewyesterday = true;
-      // console.log(this.oldyesterdaytask);
     }
   }
 
@@ -411,10 +370,7 @@ export class DailyStatusComponent implements OnInit {
 
   newOld(keyTask, taskArray) {
     var flag = true;
-    // console.log(taskArray)
-    // console.log(keyTask);
     var length = taskArray.length;
-    // console.log(length);
     var task = taskArray[length - 1]
     if (keyTask.taskId == task.taskId) {
       flag = true;
@@ -422,19 +378,17 @@ export class DailyStatusComponent implements OnInit {
     else {
       flag = false
     }
-    // console.log(flag)
     return flag;
   }
 
   getData(changedDate){
+    //get tasks from db on date change
       var td = changedDate;
       var yd = new Date(changedDate);
       (yd.setDate(changedDate.getDate() - 1));
       this.todayTaskDate = this.datepipe.transform(td, "dd-MM-yyyy");
-      // this.todayDate.setDate(changedDate.getDate() - 1);
       this.yesterdayTaskDate = this.datepipe.transform(yd, "dd-MM-yyyy");
-      console.log(this.todayTaskDate)
-      console.log(this.yesterdayTaskDate)
+      
       this.taskservice.getTodays(this.todayTaskDate, this.email, this.projectId)
         .subscribe(data => this.getTodaysTask(data));
       this.taskservice.getYesterdays(this.yesterdayTaskDate, this.email, this.projectId)
