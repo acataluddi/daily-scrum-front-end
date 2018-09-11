@@ -11,56 +11,67 @@
         <div class="ProjectHeadingTextDiv">My Projects ({{noOfProjects}})</div>
       </div>
 
-      <button class="AddProjectButton">
+      <button class="AddProjectButton" (click)="AddProject()">
         <div class="PlusSignDiv">
           <img class="PlusSignImage" src="../../assets/plus.png">
         </div>
-        <div class="AddProjectDiv">Add Project</div>
+        <div class="AddProjectDiv" >Add Project</div>
       </button>
       <button *ngIf="flag === true" class="UserList" (click)="gotoUsersList()"> User List
       </button>
     </div>
     <div class="BottomDiv">
-      <div *ngFor="let project of projects">
+      <div *ngFor="let Project of newproject ; let j=index">
         <div class="ProjectBoxDiv" [ngStyle]="{'background-color': getRandomColor()}">
           <div class=" ProjectNameBoxDiv">
-            <div class="ProjectNameDiv">{{project.name}}</div>
+            <div class="ProjectNameDiv">{{Project.projectName}}</div>
           </div>
           <div class="InnerProjectBoxDiv">
-            <div *ngFor="let item of project.members ; let i=index">
+            <div  *ngFor="let member of Project.members ; let i=index">
+            <!-- <div *ngFor="let item of memberArray  ; let i=index"> -->
+                <div *ngIf="j==0">
               <div *ngIf="i<4">
-                <div *ngIf="i%2!=0">
+                <!-- <div *ngIf="i%2!=0"> -->
                   <button class="SmallCircleButton1Odd SmallCircleButton">
-                    <div class="SmallCircleNameDiv">{{item}}</div>
+                    <div class="SmallCircleNameDiv" >
+                      <img class="memberImage" src="{{imageurl[i]}}"></div>
                   </button>
                 </div>
-                <div *ngIf="i%2==0">
-                  <button class="SmallCircleButton1Even SmallCircleButton">
-                    <div class="SmallCircleNameDiv">{{item}}</div>
-                  </button>
                 </div>
-              </div>
-            </div>
-            <div *ngIf="project.numberOfMembers-4>0">
+                  <div *ngIf="j>0">
+                      <div *ngIf="i<4">
+                        <!-- <div *ngIf="i%2!=0"> -->
+                          <button class="SmallCircleButton1Odd SmallCircleButton">
+                            <div class="SmallCircleNameDiv" >
+                              <img class="memberImage" src="{{imageurl[i+TotalProjectMembers[j]]}}"></div>
+                          </button>
+                       </div>  
+                   </div>
+             </div>
+             
+            <!-- </div> -->
+            <div *ngIf="noOfMembers[j]-4>0" >
               <button class="SmallCircleButton2 SmallCircleButton">
-                <div class="ExtraMembersDiv">+{{project.numberOfMembers-4}}</div>
+                <div class="ExtraMembersDiv">+{{noOfMembers[j]-4}}</div>
               </button>
             </div>
-            <button class="DailyStatusButton"(click)="openDailyStatus()">
+            <button class="DailyStatusButton" (click)="openDailyStatus()">
               <div class="DailyStatusDiv" >Daily Status</div>
             </button>
             <button class="MenuButton DropdownButton">
-              <div class="DropdownContentDiv">
-                <button class="EditButton Button ">
-                  <div class="EditDiv">
+              <div class="DropdownContentDiv" >
+                <!-- <button class="EditButton Button "> -->
+                  <div class="EditDiv Button" (click)="EditProject(Project)" >
+                     
                     Edit Project
+                  
                   </div>
-                </button>
-                <button class="DeleteButton Button">
-                  <div class="DeleteDiv">
+                <!-- </button> -->
+                <!-- <button class="DeleteButton "> -->
+                  <div class="DeleteDiv Button"  (click)="DeleteProject(Project.projectId)" >
                     Delete Project
                   </div>
-                </button>
+                <!-- </button> -->
               </div>
               <div class="MenuDotDiv">
                 <img src="../../assets/Menudots.png">
