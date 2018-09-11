@@ -9,7 +9,6 @@ const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'text/plain',
     'Access-Control-Allow-Origin': '*',
-    // 'Access-Control-Allow-Methods': ' PUT',
   })
 };
 
@@ -26,25 +25,25 @@ export class AdminviewallserviceService {
   newmember:Member;
   p = 1;
 
-  apiURL = 'http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page=1';
+  apiURL :string;
 
   private posturl='http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page=1';
 
 
   getMembers(): Observable<any> {
+    
     return this.http.get<any>(this.apiURL)
   }
   getPageNum(Pagenum) {
-    console.log(Pagenum);
+   
     this.p = Pagenum;
-    console.log('http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page='+this.p);
+    this.apiURL = 'http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page='+this.p;
 
   }
 
   
   putmember(member: Member) : Observable<any> {
 
-    // this.newmember=member;
     var newmember = {
 
           name: member.name,

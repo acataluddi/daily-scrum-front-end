@@ -5,6 +5,7 @@ import { Http, Response, Headers, RequestOptions, RequestMethod, RequestOptionsA
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
+import {DashboardService } from "../service/dashboardservice.service";
 
 
 @Injectable({
@@ -25,7 +26,7 @@ export class AdminviewallComponent implements OnInit {
   total: number;
 
 
-  constructor(public router: Router, private viewallservice: AdminviewallserviceService, private http: HttpClient) {
+  constructor(public router: Router,private dashboardservice:DashboardService, private viewallservice: AdminviewallserviceService, private http: HttpClient) {
 
     if (localStorage.getItem("userType") != 'Admin' && localStorage.getItem("userType") != 'Manager') {
       this.router.navigateByUrl('/dashboard');
@@ -37,13 +38,26 @@ export class AdminviewallComponent implements OnInit {
 
     this.viewallservice.getMembers()
     .subscribe(membersArr => this.getMembers(membersArr));
+
+    this.dashboardservice.getMembers()
+    .subscribe(membersArr => this.getTotalCount(membersArr));
     
   }
 
 
+  getTotalCount(membersArr) {
+    this.memberArray = membersArr;
+    // console.log(this.memberArray);
+    this.total = this.memberArray.length;
+
+  }
+
   getMembers(membersArr): void {
     this.memberArray = membersArr;
     console.log(this.memberArray);
+    // this.total = totalCount;
+     console.log(this.total);
+    
   }
   
   
@@ -62,6 +76,8 @@ export class AdminviewallComponent implements OnInit {
     this.viewallservice.getPageNum(pagenum);
     console.log(pagenum);
     this.p = pagenum;
+    this.viewallservice.getMembers()
+    .subscribe(membersArr => this.getMembers(membersArr));
 
   }
 

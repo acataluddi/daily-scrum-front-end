@@ -22,7 +22,7 @@
     </div>
     <div class="BottomDiv">
       <div *ngFor="let Project of newproject ; let j=index">
-        <div class="ProjectBoxDiv" [ngStyle]="{'background-color': getRandomColor()}">
+        <div class="ProjectBoxDiv" [ngStyle]="{'background-color': color[j]}">
           <div class=" ProjectNameBoxDiv">
             <div class="ProjectNameDiv">{{Project.projectName}}</div>
           </div>

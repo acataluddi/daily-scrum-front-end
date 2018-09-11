@@ -9,6 +9,7 @@ import {Http,Response} from "@angular/http";
 import {DashboardService } from "../service/dashboardservice.service";
 import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import {ProjectService } from "../project.service";
+import {AdminviewallComponent} from '../adminviewall/adminviewall.component';
 
 
 @Component({
@@ -19,7 +20,7 @@ import {ProjectService } from "../project.service";
 export class DashboardComponent implements OnInit {
 
   constructor(public router: Router, private loginservice: LoginService,private dashboardservice:DashboardService, private http:Http,
-  private viewallservice:AdminviewallserviceService, private projectService:ProjectService ) { 
+  private viewallcomponent:AdminviewallComponent, private projectService:ProjectService ) { 
  
   }
   member: Member;
@@ -36,6 +37,7 @@ export class DashboardComponent implements OnInit {
   projects = PROJECTS;
   flag = true;
   imageurl = [];
+  color = ['rgb(12, 33, 93)','rgb(63, 205, 195)','rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
   
  
   private getURL = "http://localhost:8080/DailyScrum/ProjectController";
@@ -43,7 +45,7 @@ export class DashboardComponent implements OnInit {
     if (localStorage.getItem("userType") != "Admin" && localStorage.getItem("userType") != "Manager") {
       this.flag = false;
     }
-    this.viewallservice.getMembers()
+    this.dashboardservice.getMembers()
     .subscribe(membersArr => this.getMembers(membersArr));
 
     this.dashboardservice.getProjects()
@@ -78,19 +80,15 @@ export class DashboardComponent implements OnInit {
         }       
       }
     }
-    console.log(this.imageurl);
   }
 
   getMembers(membersArr): void {
     this.memberArray = membersArr;
     console.log(this.memberArray);
     this.TotalMembers = this.memberArray.length;
+
   }
 
-  getRandomColor() {
-    var colors = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
-    return colors[Math.floor(Math.random() * colors.length)];
-  }
   openDailyStatus() {
     this.router.navigate(['/daily-status']);
   }
