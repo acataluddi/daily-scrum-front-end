@@ -32,7 +32,7 @@ export class LoginService {
     localStorage.setItem("logged", "false");
   }
 
-  private posturl='http://10.4.6.71:8080/DailyScrum/AuthenticationController';
+  private posturl='http://10.4.6.58:8081/DailyScrum/CRUDControllerUser';
   loginMember(member: Member) : Observable<any> {
     this.member=member;
     return this.http.post<any>(this.posturl, 
@@ -47,7 +47,7 @@ export class LoginService {
     return this.loggedIn;
   }
 
-  private geturl = 'http://10.4.6.71:8080/DailyScrum/CRUDControllerUser?page=1';
+  private geturl = 'http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page=1';
   getMembers(): Observable<Member[]> {
     return this.http.get<Member[]>(this.geturl)
   }
