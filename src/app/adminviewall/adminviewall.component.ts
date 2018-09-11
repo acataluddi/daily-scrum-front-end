@@ -61,8 +61,7 @@ export class AdminviewallComponent implements OnInit {
         console.log(mem.userType);
         console.log(mem);
         console.log("User type changed");
-        // this.putUpdate(mem).then((res)=> console.log(res));
-        // .subscribe((res:Response)=> console.log(res.json()));  
+  
         this.viewallservice.putmember(mem)
         .subscribe((res:Response) => {
           console.log(res);

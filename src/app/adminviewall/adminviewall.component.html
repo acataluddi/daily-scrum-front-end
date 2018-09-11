@@ -10,7 +10,7 @@
             <div class="header">User Type</div>
           </div>
 
-          <div class="section rowstyle member" *ngFor="let member of memberArray | paginate: {totalItems: 20, itemsPerPage:10, currentPage: p}">
+          <div class="section rowstyle member" *ngFor="let member of memberArray | paginate: {totalItems: total, itemsPerPage:10, currentPage: p}">
             <div class="header">{{member.name}}</div>
             <div class="header">{{member.email}}</div>
             <div class="header">
