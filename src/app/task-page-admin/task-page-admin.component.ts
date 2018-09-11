@@ -10,6 +10,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 })
 export class TaskPageAdminComponent implements OnInit {
 
+  email:string;
   task: MemberTask;
   task1: Task;
   task2: Task;
@@ -17,7 +18,6 @@ export class TaskPageAdminComponent implements OnInit {
   MockMember2: MemberTask[];
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
-
   task_id;
   oldtodaytask: Task;
   oldyesterdaytask: Task;
@@ -53,7 +53,8 @@ export class TaskPageAdminComponent implements OnInit {
   year;
   myvalue;
   constructor(
-    private taskservice: MemberTaskService
+    private taskservice: MemberTaskService,
+    
   ) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-orange',
@@ -62,6 +63,7 @@ export class TaskPageAdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
     this.getTasks();
@@ -188,4 +190,10 @@ export class TaskPageAdminComponent implements OnInit {
     var colors = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
     return colors[Math.floor(Math.random() * colors.length)];
   }
+
+  emailSelected(email){
+    this.email = email;
+    console.log(this.email)
+  }
+  
 }

@@ -4,6 +4,8 @@ import { IndividualTaskComponent } from "../individual-task/individual-task.comp
 import { Task } from '../model/task-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { NavigationdataService } from '../service/navigationdata.service'
+
 
 @Component({
   selector: 'app-daily-status',
@@ -18,6 +20,7 @@ export class DailyStatusComponent implements OnInit {
   MockTodayTasks: Task[];
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
+  datachanged:string;
 
   task_id;
   oldtodaytask: Task;
@@ -53,7 +56,8 @@ export class DailyStatusComponent implements OnInit {
   year;
   myvalue;
   constructor(
-    private taskservice: ProcessIndividualTaskService
+    private taskservice: ProcessIndividualTaskService,
+    private data: NavigationdataService
   ) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-orange',
@@ -62,6 +66,7 @@ export class DailyStatusComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.checkthis()
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
     this.getTasks();
@@ -256,5 +261,10 @@ export class DailyStatusComponent implements OnInit {
     }
     this.newDate = d1;
     this.myDateValue = d1;
+  }
+  checkthis(){
+    this.data.currentdata$.subscribe(datachanged => this.datachanged = datachanged)
+    console.log(this.datachanged);
+    console.log("this");
   }
 }
