@@ -45,21 +45,15 @@
                       <div class="member_image1"><img class="size" src={{memberEmployee.imageurl}}></div>
                     </div>
                   </div>
-                  <!-- <img src={{memberEmployee.imageurl}}> -->
                   <div *ngFor="let memberEmployee of memberEmployeeArray">
                     <div *ngIf="memberEmployee.email === member.email">
-
-
-
                       <div class="member_name1">{{memberEmployee.name}}</div>
                       <div class="more_icon"><img src="../../assets/more.png"></div>
                     </div>
                   </div>
-
-
-                  <!-- <div *ngFor="let MockToTasks of MockTodayTasks"> -->
+                 
                   <div class="member_time_spent1">{{indTotalHour}} h {{indTotalMins}} m</div>
-                  <!-- </div> -->
+                  
                 </div>
                 <div class="member_part">
 
@@ -73,12 +67,7 @@
         </div>
       </div>
     </div>
-    <div class="search">
-      <img class="search_icon" src="../../assets/Combined_Shape_Copy_2.png">
-      <div class="member_logo" *ngFor="let task of MockMember1">
-        <!-- <img src={{task.imageurl}}> -->
-      </div>
-    </div>
+
   </div>
-  <div>{{memberEmployee.imageurl}}</div>
+
 </body>
