@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import { Member } from '../model/member-model';
-import { Http, Response, Headers} from '@angular/http';
+import { Http, Response, Headers, RequestOptions, RequestMethod, RequestOptionsArgs } from '@angular/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
@@ -24,7 +25,7 @@ export class AdminviewallComponent implements OnInit {
   total: number;
 
 
-  constructor(public router: Router, private viewallservice: AdminviewallserviceService, private http: Http) {
+  constructor(public router: Router, private viewallservice: AdminviewallserviceService, private http: HttpClient) {
 
     if (localStorage.getItem("userType") != 'Admin' && localStorage.getItem("userType") != 'Manager') {
       this.router.navigateByUrl('/dashboard');
@@ -33,19 +34,16 @@ export class AdminviewallComponent implements OnInit {
   userTypes = ['Admin', 'Manager', 'User'];
 
   ngOnInit() {
-    this.getNames();
-    // console.log(this.p);
 
+    this.viewallservice.getMembers()
+    .subscribe(membersArr => this.getMembers(membersArr));
+    
   }
 
-  getNames() {
-    this.http.get(this.viewallservice.apiURL)
-      .subscribe(
-        (res: Response) => {
-          this.memberArray = res.json();
-          this.total = this.memberArray.length;
-          console.log(this.memberArray);
-        })
+
+  getMembers(membersArr): void {
+    this.memberArray = membersArr;
+    console.log(this.memberArray);
   }
   
   
@@ -61,6 +59,7 @@ export class AdminviewallComponent implements OnInit {
 
   }
   getPagenum(pagenum) {
+    this.viewallservice.getPageNum(pagenum);
     console.log(pagenum);
     this.p = pagenum;
 

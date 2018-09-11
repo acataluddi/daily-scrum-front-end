@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Project } from '../app/model/project-model';
+import { Project , newProject} from '../app/model/project-model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +7,9 @@ import { Project } from '../app/model/project-model';
 export class ProjectService {
 
   constructor() { }
+
+  reqType:string;
+  projectToBeUpdated:newProject;
 
   projects: Project[] = [
     { name: "FR Project LXXXI - Core Order Management System", members: [], numberOfMembers: null },
@@ -23,6 +26,13 @@ export class ProjectService {
 
   getProjects(): Project[] {
     return this.projects;
+  }
+
+  setRequestType(rtype: string) {
+    this.reqType = rtype;
+    }
+  setProjectToBeUpdated(p: newProject) {
+    this.projectToBeUpdated = p;
   }
 
 }
