@@ -7,15 +7,6 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
 
-import { Observable, observable } from 'rxjs';
-
-const httpOptions = {
-  headers: new Headers({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
-  })
-};
-
 @Injectable({
   providedIn: 'root'
 })
@@ -60,8 +51,7 @@ export class AdminviewallComponent implements OnInit {
         mem.userType=newType;
         console.log(mem.userType);
         console.log(mem);
-        console.log("User type changed");
-  
+        console.log("User type changed"); 
         this.viewallservice.putmember(mem)
         .subscribe((res:Response) => {
           console.log(res);
@@ -69,7 +59,7 @@ export class AdminviewallComponent implements OnInit {
 
   }
   getPagenum(pagenum) {
-    this.viewallservice.getPageNum(pagenum);
+    
     console.log(pagenum);
     this.p = pagenum;
 

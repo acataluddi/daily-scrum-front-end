@@ -34,12 +34,7 @@ export class AdminviewallserviceService {
   getMembers(): Observable<any> {
     return this.http.get<any>(this.apiURL)
   }
-  getPageNum(Pagenum) {
-    console.log(Pagenum);
-    this.p = Pagenum;
-    console.log('http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page='+this.p);
-
-  }
+ 
 
   
   putmember(member: Member) : Observable<any> {
@@ -54,7 +49,7 @@ export class AdminviewallserviceService {
           }
     console.log(JSON.stringify(newmember));
     
-    return this.http.put<any>("http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page=1", 
+    return this.http.put<any>(this.posturl, 
       JSON.stringify(newmember)
     );
   }
