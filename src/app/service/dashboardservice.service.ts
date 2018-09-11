@@ -26,12 +26,12 @@ export class DashboardService {
 
         if (this.UserType =="Admin"){
 
-        let params = new HttpParams().set('userEmail', 'getAll');
+        let params = new HttpParams().set('memberEmail', 'getall');
         return this.http.get<newProject[]>(this.getURL,{params:params})
 
         }else{
 
-            let params = new HttpParams().set('userEmail', localStorage.getItem("email"));
+            let params = new HttpParams().set('memberEmail', localStorage.getItem("email"));
             return this.http.get<newProject[]>(this.getURL,{params:params})
             
         }

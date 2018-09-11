@@ -78,6 +78,7 @@ export class DashboardComponent implements OnInit {
         }       
       }
     }
+    console.log(this.imageurl);
   }
 
   getMembers(membersArr): void {

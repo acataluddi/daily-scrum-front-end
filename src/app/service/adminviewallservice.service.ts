@@ -26,7 +26,7 @@ export class AdminviewallserviceService {
   newmember:Member;
   p = 1;
 
-  apiURL = 'http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page='+this.p;
+  apiURL = 'http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page=1';
 
   private posturl='http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page=1';
 
@@ -38,6 +38,25 @@ export class AdminviewallserviceService {
     console.log(Pagenum);
     this.p = Pagenum;
     console.log('http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page='+this.p);
+
+  }
+
+  
+  putmember(member: Member) : Observable<any> {
+
+    // this.newmember=member;
+    var newmember = {
+
+          name: member.name,
+          email: member.email,
+          userType: member.userType,
+          
+          }
+    console.log(JSON.stringify(newmember));
+    
+    return this.http.put<any>("http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page=1", 
+      JSON.stringify(newmember)
+    );
   }
 
 }
