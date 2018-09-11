@@ -32,7 +32,35 @@
   </div>
   <div class="main">
     <div class="header">
-      <div *ngFor="let projectupdated of projectArray">
+      <div *ngFor="let IndMemOb of IndMembArray">
+        <div class="column">
+          <div class="member1">
+            <div class="member_title1">
+              <div class="member_image1"><img class="size" src={{IndMemOb.imageurl}}></div>
+              <div class="member_name1">{{IndMemOb.name}}</div>
+              <div class="more_icon"><img src="../../assets/more.png"></div>
+              <div class="member_time_spent1">{{IndMemOb.hour}} h {{IndMemOb.minute}} m</div>
+            </div>
+
+
+            <div class="member_part">
+              <ul>
+                <div *ngFor="let Task of IndMemOb.tasks">
+                  <li [ngStyle]="{'color': getRandomColor()}"><span style="color: rgba(96, 96, 96, 1)">{{Task.description}}</span></li>
+                </div>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+
+
+<!-- <div *ngFor="let projectupdated of projectArray">
         <div *ngIf="projectupdated.projectName === currentProject">
           <div *ngFor="let member of projectupdated.members">
 
@@ -65,9 +93,4 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-  </div>
-
-</body>
+      </div> -->

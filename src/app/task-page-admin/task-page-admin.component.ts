@@ -70,6 +70,9 @@ export class TaskPageAdminComponent implements OnInit {
   date;
   year;
   myvalue;
+
+  Tasks: Task[];
+  Task: Task;
   constructor(
     private taskservice: ProcessIndividualTaskService,
     private employeeservice: AdminviewallserviceService,
@@ -88,8 +91,8 @@ export class TaskPageAdminComponent implements OnInit {
   ngOnInit() {
     this.currentProject = localStorage.getItem("currentProject");
     this.IndMembObj = this.initializeNewMember(this.IndMembObj);
-    // this.IndMembArray=[];
-    // this.memberEmployeeArray=[];
+    this.IndMembArray=[];
+    this.memberEmployeeArray=[];
 
     this.todayTaskDate = "2018-01-01";
     this.employeeservice.getMembers()
@@ -132,6 +135,10 @@ export class TaskPageAdminComponent implements OnInit {
     this.projectupdate = this.getRequiredProject(this.currentProject);
     this.setAllMembers();
   }
+a(){
+  this.projectupdate = this.getRequiredProject(this.currentProject);
+    this.setAllMembers();
+}
 
   getRequiredProject(pname: string): ProjectUpdated {
     for (let individualProject of this.projectArray) {
@@ -151,15 +158,16 @@ export class TaskPageAdminComponent implements OnInit {
               this.IndMembObj.name = memberEmployee.name;
               this.IndMembObj.imageurl = memberEmployee.imageurl;
               this.IndMembObj = this.calculateIndividualTime(this.IndMembObj, data);
-              this.IndMembObj.tasks=data;             
-              // this.IndMembArray.push(this.IndMembObj);
-              console.log("Individual member");
-              console.log(this.IndMembObj);
+              this.IndMembObj.tasks=data;
+             
+              this.IndMembArray.push(this.IndMembObj);             
               this.IndMembObj=this.initializeNewMember(this.IndMembObj);             
             }
           }
         });
     }
+    console.log("DB !");
+    console.log(this.IndMembArray);
   }
 
   initializeNewProject(newProject: ProjectUpdated): ProjectUpdated {
@@ -184,9 +192,6 @@ export class TaskPageAdminComponent implements OnInit {
     return newMember;
   }
 
-  Tasks: Task[];
-  Task: Task;
-
 
 
   getTodaysTask(Todays) {
@@ -207,6 +212,8 @@ export class TaskPageAdminComponent implements OnInit {
     this.indTotalHour = 0;
     this.indTotalMins = 0;
     this.currentProject = localStorage.getItem("currentProject");
+    this.IndMembArray=[];
+    this.a();
     // this.calculateIndividualTime();
     // this.calculateTotalTime();
   }

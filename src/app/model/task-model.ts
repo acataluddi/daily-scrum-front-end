@@ -7,7 +7,7 @@ export class Task {
     impediments: string;
     description: string;
     taskCompleted: boolean;
-    projectId: number;
+    projectId: string;
     taskDate: string;
 
 }
