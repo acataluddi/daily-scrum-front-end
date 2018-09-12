@@ -13,7 +13,7 @@ export class ProcessIndividualTaskService {
     private http: HttpClient,
   ) { }
 
-  private url = 'http://10.4.6.71:8080/DailyScrum/TaskController';
+  private url = 'http://localhost:8080/DailyScrum/TaskController';
   private newListSource = new Subject<Project>();  
   newList = this.newListSource.asObservable();
 
@@ -44,4 +44,11 @@ export class ProcessIndividualTaskService {
   changeProject(currentProject: Project){
     this.newListSource.next(currentProject)
   }
+
+
+
+  
+  // changeProjectTask(currentProject: Project) {
+  //   this.newListSource.next(currentProject)
+  // }
 }
