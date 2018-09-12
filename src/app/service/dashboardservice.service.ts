@@ -20,7 +20,7 @@ export class DashboardService {
         
     }
 
-    getURL = "http://10.4.6.22:8080/DailyScrum/ProjectController";
+    getURL = "http://10.4.6.58:8081/DailyScrum/ProjectController";
     
     getProjects(): Observable<newProject[]> {
 

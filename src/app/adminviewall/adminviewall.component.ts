@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import { Member } from '../model/member-model';
@@ -36,8 +37,7 @@ export class AdminviewallComponent implements OnInit {
   ngOnInit() {
 
     this.viewallservice.getMembers()
-    .subscribe(membersArr => this.getMembers(membersArr));
-    
+    .subscribe(membersArr => this.getMembers(membersArr)); 
   }
 
 
@@ -66,5 +66,3 @@ export class AdminviewallComponent implements OnInit {
   }
 
 }
-
-

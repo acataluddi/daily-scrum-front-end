@@ -20,9 +20,11 @@ export class IndividualTaskComponent implements OnInit {
   hours = 24;
   minutes = 60;
   newdesc = '';
+  tid;
   constructor() { }
 
   ngOnInit() {
+    this.tid=parseInt(this.task.taskId);
     if (this.task.impediments === "") {
       this.show_impediment = false;
     }
@@ -39,8 +41,8 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   emitTimeEvent(task) {
-    task.hours_spent = parseInt(task.hours_spent);
-    task.minutes_spent = parseInt(task.minutes_spent);
+    task.hourSpent = parseInt(task.hourSpent);
+    task.minuteSpent = parseInt(task.minuteSpent);
     this.timeChangeEvent.emit(task);
   }
   updateDescription() {

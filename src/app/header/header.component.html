@@ -4,15 +4,15 @@
       <img src="../../assets/Scrum.png" (click)="openDashboardPage()">
     </div>
     <div class="textdiv">
-      <div id="dailyscrumclass">{{selected.name}}
+      <div id="dailyscrumclass">{{selected.projectName}}
       </div>
       <div id="scrum">Daily Scrum
         <div id="dash">{{title}}</div>
       </div>
       <div id="arrow">
         <div id="projectlist">
-          <div *ngFor="let project of projects">
-            <div class="items" (click)="changeProject(project.name)">{{project.name}}</div>
+          <div *ngFor="let projectupdated of projectArray">
+            <div class="items" (click)="changeProject(projectupdated)">{{projectupdated.projectName}}</div>
           </div>
         </div>
       </div>

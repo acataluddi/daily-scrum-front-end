@@ -18,6 +18,7 @@ export class DailyStatusComponent implements OnInit {
   MockTodayTasks: Task[];
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
+  T: Task[];
 
   task_id;
   oldtodaytask: Task;
@@ -64,8 +65,14 @@ export class DailyStatusComponent implements OnInit {
   ngOnInit() {
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
-    this.getTasks();
-    this.calculateTotalTime();
+
+    // this.taskservice.getTodays()
+    //     .subscribe(data => this.getTodaysTask(data));
+    
+    this.taskservice.getYesterdays()
+        .subscribe(data => {this.getYesterdaysTask(data);
+          this.calculateTotalTime()});
+
     this.month = this.months[this.d.getMonth()];
     this.date = this.d.getDate();
     this.year = this.d.getFullYear();
@@ -73,16 +80,24 @@ export class DailyStatusComponent implements OnInit {
     this.myDateValue = new Date();
     this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
     this.yesterdayval = "Yesterday's Tasks";
+    console.log(this.myDateValue);
   }
-  getTasks() {
-    this.MockYesterdayTasks = this.taskservice.getYesterdayTasks();
-    this.MockTodayTasks = this.taskservice.getTodayTasks();
+
+  getTodaysTask(Todays){
+    this.MockTodayTasks = Todays;
   }
+
+  getYesterdaysTask(Yesterdays){
+    this.MockYesterdayTasks = Yesterdays;
+    console.log(this.MockYesterdayTasks);
+  }
+
   calculateTotalTime() {
     for (let task of this.MockYesterdayTasks) {
-      this.totalhour += task.hours_spent;
-      this.totalminute += task.minutes_spent;
+      this.totalhour += task.hourSpent;
+      this.totalminute += task.minuteSpent;
     }
+    
     //convering extra minutes to hours;
     var extrahour = 0;
     if (this.totalminute >= 60) {
@@ -92,6 +107,8 @@ export class DailyStatusComponent implements OnInit {
     this.totalhour += extrahour;
     this.total_hours_spent = this.totalhour;
     this.total_minutes_spent = this.totalminute;
+    console.log(this.totalhour);//console.log(this.totalhour);
+    console.log(this.totalminute);
   }
 
   modifyTime($event) {
@@ -102,14 +119,14 @@ export class DailyStatusComponent implements OnInit {
     var old_hour = 0;
     var old_minute = 0;
     for (let task of this.MockYesterdayTasks) {
-      if (task.task_id === this.task1.task_id) {
-        old_hour = this.task1.hours_spent;
-        old_minute = this.task1.minutes_spent;
-        this.totalhour = (this.totalhour + this.task1.hours_spent);
-        this.totalminute = (this.totalminute + this.task1.minutes_spent);
+      if (task.taskId === this.task1.taskId) {
+        old_hour = this.task1.hourSpent;
+        old_minute = this.task1.minuteSpent;
+        this.totalhour = (this.totalhour + this.task1.hourSpent);
+        this.totalminute = (this.totalminute + this.task1.minuteSpent);
       } else {
-        this.totalhour += task.hours_spent;
-        this.totalminute += task.minutes_spent;
+        this.totalhour += task.hourSpent;
+        this.totalminute += task.minuteSpent;
       }
     }
     //convering extra minutes to hours;
@@ -120,8 +137,8 @@ export class DailyStatusComponent implements OnInit {
     }
     this.totalhour += extrahour;
     if ((this.totalhour > 24) || (this.totalhour === 24 && this.totalminute > 0)) {
-      this.task1.hours_spent = old_hour;
-      this.task1.minutes_spent = old_minute;
+      this.task1.hourSpent = old_hour;
+      this.task1.minuteSpent = old_minute;
       alert('Total time worked cannot be more than 24 hours.');
     }
     else {
@@ -142,12 +159,14 @@ export class DailyStatusComponent implements OnInit {
     }
     else if (this.creatednewtoday === false) {
       var ts = new Task();
-      console.log(this.oldtodaytask);
+      // console.log(this.oldtodaytask);
       ts = this.initializeNew(ts);
       this.oldtodaytask = ts;
       this.MockTodayTasks.push(ts);
       this.creatednewtoday = true;
+      // console.log(this.oldtodaytask);
     }
+    // console.log(this.MockTodayTasks)
   }
 
   addYesterdayTask() {
@@ -196,13 +215,15 @@ export class DailyStatusComponent implements OnInit {
     }
     var newid = parseInt(this.date.toString() + this.monthval.toString() + this.year.toString() + this.hour.toString() + this.minute.toString() + this.second.toString());
     ts = {
-      member_name: '',
-      task_id: newid,
+      memberEmail: '',
+      taskId: newid.toString(),
       description: '',
-      hours_spent: 0,
-      minutes_spent: 0,
+      hourSpent: 0,
+      minuteSpent: 0,
       impediments: '',
-      task_completed: false
+      taskCompleted: false,
+      projectId: null,
+      taskDate: ''
     }
     return ts;
   }

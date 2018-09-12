@@ -26,9 +26,11 @@ export class AdminviewallserviceService {
   newmember:Member;
   p = 1;
 
-  apiURL = 'http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page=1';
+  apiURL = 'http://localhost:8080/DailyScrum/CRUDControllerUser?page=1';
 
-  private posturl='http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page=1';
+  private posturl='http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page=1';
+
+
 
 
   getMembers(): Observable<any> {

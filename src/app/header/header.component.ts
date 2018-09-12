@@ -1,47 +1,63 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from '../model/member-model';
-
+import { Http, } from '@angular/http';
 import { AuthService } from 'angular-6-social-login';
 import { LoginService } from '../service/login.service';
 import { Project } from '../model/project-model';
 import { ProjectService } from '../project.service';
 import { Router, NavigationStart } from '@angular/router';
 import { ActivatedRoute } from "@angular/router";
-
+import { ProjectviewallService } from '../service/projectviewall.service';
+import { ProjectUpdated } from '../model/projectupdated-model';
+import { TaskPageAdminComponent } from '../task-page-admin/task-page-admin.component';
+import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
   member: Member;
   image: String;
   projects: Project[];
   title: string;
-
-  selected: Project = { name: "FR Project LXXXI - Core Order Management System", members: [], numberOfMembers: 5 };
+  email;
+  selected: ProjectUpdated = { projectId: '', projectDesc: '', projectName: 'Adastria Project I - Studio Application', members: [] }
   constructor(
+    private viewallservice: ProjectviewallService,
     private socialAuthService: AuthService,
     private router: Router,
     private loginservice: LoginService,
     private projectService: ProjectService,
-    private act: ActivatedRoute) { }
-
+    private taskService: ProcessIndividualTaskService
+  ) { }
   ngOnInit() {
+    this.callMethod1();
     this.initializeMember();
     this.getdata();
     this.toggle(this.router.url);
-
+    localStorage.setItem("currentProject", this.projectArray[0].projectName);
+    this.selected.projectName = localStorage.getItem("currentProject");
     this.router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
         console.log(event);
         this.toggle(event['url']);
       }
     });
+  }
+  total: number
+  projectupdated: ProjectUpdated;
+  projectArray: ProjectUpdated[];
+  callMethod1() {
+    this.email = localStorage.getItem("email");
+    this.viewallservice.getLoggedProjects(this.email)
+      .subscribe(data => this.getloggedProjectsglobal(data));
+  }
+  getloggedProjectsglobal(Todays) {
+    this.projectArray = Todays;
+    this.selected.projectName = this.projectArray[0].projectName;
 
   }
-
   initializeMember() {
     this.member = {
       employeeID: '',
@@ -52,13 +68,11 @@ export class HeaderComponent implements OnInit {
     }
     this.title = '';
   }
-
   getdata() {
     this.member.email = localStorage.getItem("email");
     this.member.imageurl = localStorage.getItem("image");
     this.projects = this.projectService.getProjects();
   }
-
   getImage(): String {
     this.member.imageurl = localStorage.getItem("image");
     return this.member.imageurl;
@@ -67,9 +81,10 @@ export class HeaderComponent implements OnInit {
     this.socialAuthService.signOut();
     this.loginservice.logoutMember();
   }
-
   changeProject(newProject) {
-    this.selected.name = newProject;
+    this.selected = newProject;
+    localStorage.setItem("currentProject", this.selected.projectName);
+    this.taskService.changeProjectTask(this.selected)
   }
 
   toggle(currenturl) {
@@ -102,7 +117,6 @@ export class HeaderComponent implements OnInit {
   openDashboardPage() {
     this.router.navigate(['/dashboard']);
   }
-
   show(e) {
     if (e.target.className == "arrow2" || e.target.className == "button desktop" ||
       e.target.className == "dp") {
@@ -111,7 +125,6 @@ export class HeaderComponent implements OnInit {
       } else {
         document.getElementById("signout").style.visibility = "hidden";
       }
-
     }
     else if (e.target.id == "arrow" || e.target.id == "dailyscrumclass") {
       if (document.getElementById("projectlist").style.visibility == "hidden") {
