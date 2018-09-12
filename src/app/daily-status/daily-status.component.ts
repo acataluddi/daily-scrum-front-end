@@ -126,7 +126,6 @@ export class DailyStatusComponent implements OnInit {
       this.totalhour += task.hourSpent;
       this.totalminute += task.minuteSpent;
     }
-
     //convering extra minutes to hours;
     var extrahour = 0;
     if (this.totalminute >= 60) {
@@ -136,6 +135,8 @@ export class DailyStatusComponent implements OnInit {
     this.totalhour += extrahour;
     this.total_hours_spent = this.totalhour;
     this.total_minutes_spent = this.totalminute;
+    console.log(this.totalhour);//console.log(this.totalhour);
+    console.log(this.totalminute);
   }
 
   modifyTime($event) {
@@ -194,7 +195,9 @@ export class DailyStatusComponent implements OnInit {
       this.oldtodaytask = ts;
       this.MockTodayTasks.push(ts);
       this.creatednewtoday = true;
+      // console.log(this.oldtodaytask);
     }
+    // console.log(this.MockTodayTasks)
   }
 
   addYesterdayTask() {
