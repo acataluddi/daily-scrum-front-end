@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Project } from '../model/project-model'
 import { ProjectMember } from '../model/ProjectMembers';
 import { Observable, EMPTY } from 'rxjs';
@@ -51,11 +51,18 @@ export class ProjectService {
     );
   }
 
-  getProjects(): Observable<Project[]> {
+  getallProjects(): Observable<Project[]> {
     console.log(this.projectUrl)
     this.url = this.projectUrl.concat('?memberEmail=getall')
     console.log(this.url)
     return this.http.get<Project[]>(this.url)
+  }
+  
+
+  getProjects(memberEmail): Observable<Project[]> {
+    let params = new HttpParams()
+      .set("memberEmail", memberEmail)
+    return this.http.get<Project[]>(this.projectUrl,{params:params})
   }
 
   //Temporary

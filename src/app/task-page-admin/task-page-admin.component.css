@@ -5,7 +5,6 @@ body {
 .right-header {
   width: 150%;
   height: 5%;
-  /* box-sizing: border-box; */
   float: left;
   margin-top: 65px;
   margin-left: 5%;
@@ -42,7 +41,6 @@ body {
 
 .view_all_task {
   position: absolute;
-  ;
   display: flex;
   width: 150px;
   margin-left: 80%;
@@ -59,7 +57,6 @@ body {
 }
 
 .my_task {
-  /* padding-left: 10%; */
   font-family: 'Roboto';
   font-size: 13px;
   width: 100%;
@@ -68,11 +65,8 @@ body {
 
 .total_time {
   display: flex;
-  /* position: absolute; */
   float: left;
   width: 100%;
-  /* padding-bottom: 8px;
-    padding-top: 8px; */
   margin-top: 2%;
   margin-left: 5%;
 }
@@ -187,9 +181,6 @@ body {
 .member_logo {
   margin-left: 25%;
   margin-top: 15%;
-  /* width: 35px; 
-  height: 35px;
-  border-radius: 50%; */
   width: 30px;
   height: 30px;
   background: red;
@@ -204,34 +195,25 @@ body {
 }
 
 .member1 {
-  /* position: relative; */
   width: 100%;
   margin-top: 0%;
   border: 1px solid rgba(216, 216, 216, 1);
-  /* display: flex; */
   float: left;
 }
 
 .header {
-  /* position: absolute; */
   width: 95%;
   background-color: white;
-  /* display: flex; */
   height: 100%;
-  /* margin-top:0%; */
   margin-left: 0px;
   float: left;
-  /* overflow-wrap:nowrap; */
 }
 
 .member_title1 {
   width: 100%;
   height: 47px;
-  /* border: 1px solid rgba(216, 216, 216, 1); */
   background-color: rgba(242, 242, 242, 1);
-  /* display: flex; */
   padding-left: 5%;
-  /* display: flex; */
 }
 
 .member_image1 {
@@ -240,25 +222,27 @@ body {
   background: red;
   margin-top: 10px;
   margin-left: 10px;
+  overflow: hidden;
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
   border-radius: 50px;
-  /* display:block; */
   float: left;
 }
 
+.size {
+  height: 100%;
+  width: 100%;
+}
+
 .more_icon {
-  /* position: relative;; */
   margin-left: 90%;
   padding-top: 10px;
-  /* float: right; */
 }
 
 .member_part {
   width: 240px;
   margin-left: 16px;
   margin-top: 6%;
-  /* height:100%; */
   overflow-wrap: break-word;
 }
 
@@ -271,7 +255,6 @@ body {
   width: 150px;
   float: left;
   color: rgba(79, 86, 105, 1);
-  /* display:flex; */
 }
 
 .member_time_spent1 {

@@ -71,13 +71,11 @@ export class DailyStatusComponent implements OnInit {
   todayTaskDate;
   yesterdayTaskDate;
   todayDate = new Date();
-  email:string
-  // email = localStorage.getItem("email");
-  
+  email = localStorage.getItem("email");
   projectId = localStorage.getItem("projectId")
   status = false;
   lastEdit;
-  lastEditString = localStorage.getItem("lastEdit");
+  lastEditString = '';
   subscription: Subscription;
 
   constructor(
@@ -92,11 +90,8 @@ export class DailyStatusComponent implements OnInit {
     });
     this.subscription = taskservice.newList.subscribe(
       data => { this.projectId = data.projectId
-          taskservice.getTodays(this.todayTaskDate, this.email, this.projectId)
-          .subscribe(data => this.getTodaysTask(data));
-
-          taskservice.getYesterdays(this.yesterdayTaskDate, this.email, this.projectId)
-          .subscribe(data => this.getYesterdaysTask(data));
+        this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+          
   });
 }
 
@@ -119,28 +114,18 @@ export class DailyStatusComponent implements OnInit {
     this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
     console.log(this.projectId)
 
-
-    this.taskservice.getTodays(this.todayTaskDate, this.email, this.projectId)
-      .subscribe(data => this.getTodaysTask(data));
-
-    this.taskservice.getYesterdays(this.yesterdayTaskDate, this.email, this.projectId)
-      .subscribe(data => {
-        this.getYesterdaysTask(data);
-        this.calculateTotalTime()
-      });
+    this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
   getTodaysTask(Todays) {
     this.MockTodayTasks = Todays;
-    this.TodayTasks = Todays;
-    // console.log(this.MockTodayTasks);
+    this.TodayTasks = Todays;;
     this.status = true;
   }
 
   getYesterdaysTask(Yesterdays) {
     this.MockYesterdayTasks = Yesterdays;
     this.YesterdayTasks = Yesterdays;
-    // console.log(this.MockYesterdayTasks);
   }
 
   calculateTotalTime() {
@@ -160,6 +145,8 @@ export class DailyStatusComponent implements OnInit {
     this.totalhour += extrahour;
     this.total_hours_spent = this.totalhour;
     this.total_minutes_spent = this.totalminute;
+    console.log(this.totalhour);//console.log(this.totalhour);
+    console.log(this.totalminute);
   }
 
   modifyTime($event) {
@@ -218,7 +205,9 @@ export class DailyStatusComponent implements OnInit {
       this.oldtodaytask = ts;
       this.MockTodayTasks.push(ts);
       this.creatednewtoday = true;
+      // console.log(this.oldtodaytask);
     }
+    // console.log(this.MockTodayTasks)
   }
 
   addYesterdayTask() {
@@ -274,7 +263,8 @@ export class DailyStatusComponent implements OnInit {
       impediments: '',
       taskCompleted: false,
       projectId: this.projectId,
-      taskDate: ''
+      taskDate: '',
+      lastEdit:''
     }
     return ts;
   }
@@ -343,21 +333,27 @@ export class DailyStatusComponent implements OnInit {
 
   newTodayTask($event) {
     this.task1 = $event;
+    var editTime  = new Date()
+    var formateditTime = this.datepipe.transform(editTime, "dd-MM-yyyy HH:mm:ss")
+    console.log(formateditTime)
     if (this.newOld(this.task1, this.TodayTasks)) {
       //insert
       if (this.task1.taskDate == '') {
         this.task1.taskDate = this.todayTaskDate;
         this.task1.projectId = this.projectId;
+        this.task1.lastEdit = formateditTime
         this.taskservice.addNewTask(this.task1)
           .subscribe(msg => console.log(msg));
       } else {
         //update
+        this.task1.lastEdit = formateditTime
         this.taskservice.updateOldTask(this.task1)
           .subscribe(msg => console.log(msg));
       }
     }
     else {
       //update
+      this.task1.lastEdit = formateditTime
       this.taskservice.updateOldTask(this.task1)
         .subscribe(msg => console.log(msg));
     }
@@ -365,24 +361,31 @@ export class DailyStatusComponent implements OnInit {
 
   newYesterdayTask(newtask) {
     this.task1 = newtask
-    this.lastEdit = new Date()
-    this.getLastEdit(this.lastEdit)    
+    var editTime  = new Date()
+    var formateditTime = this.datepipe.transform(editTime, "MM-dd-yyyy HH:mm:ss")
+    // this.lastEdit = new Date()
+    // this.getLastEdit(this.lastEdit)   
+    
     if (this.newOld(newtask, this.YesterdayTasks)) {
       //insert
       if (this.task1.taskDate == '') {
         this.task1.taskDate = this.yesterdayTaskDate;
         this.task1.projectId = this.projectId;
+        this.task1.lastEdit = formateditTime
         this.taskservice.addNewTask(this.task1).subscribe(
           msg => console.log(msg));
       } else {
+        this.task1.lastEdit = formateditTime
         this.taskservice.updateOldTask(this.task1)
           .subscribe(msg => console.log(msg));
       }
     } else {
       //update
+      this.task1.lastEdit = formateditTime
       this.taskservice.updateOldTask(this.task1)
         .subscribe(msg => console.log(msg));
     }
+    this.getLastEdit(this.YesterdayTasks) 
   }
 
   newOld(keyTask, taskArray) {
@@ -406,42 +409,39 @@ export class DailyStatusComponent implements OnInit {
       this.todayTaskDate = this.datepipe.transform(td, "dd-MM-yyyy");
       this.yesterdayTaskDate = this.datepipe.transform(yd, "dd-MM-yyyy");
       
-      this.taskservice.getTodays(this.todayTaskDate, this.email, this.projectId)
-        .subscribe(data => this.getTodaysTask(data));
-      this.taskservice.getYesterdays(this.yesterdayTaskDate, this.email, this.projectId)
-        .subscribe(data => {
-          this.getYesterdaysTask(data);
-          this.calculateTotalTime()
-        });
+      this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
-  getLastEdit(editTime){
+  
+
+  getLastEdit(YesterdayTasks){
+    if(YesterdayTasks.length != 0){
+    var edit = new Array()
     var day = new Array(7);
-    day[0] =  "Sunday";
-    day[1] = "Monday";
-    day[2] = "Tuesday";
-    day[3] = "Wednesday";
-    day[4] = "Thursday";
-    day[5] = "Friday";
-    day[6] = "Saturday";
-    var weekday = day[editTime.getDay()]
-    var time = editTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+    day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    for (let task of YesterdayTasks){
+      let datevar = new Date(task.lastEdit)
+      console.log(datevar)
+      edit.push(datevar)
+    } 
+    edit.sort()
+    this.lastEdit = edit[edit.length - 1]
+    var weekday = day[this.lastEdit.getDay()]
+    var time = this.lastEdit.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
     this.lastEditString = weekday + " " + time
-    localStorage.setItem("lastEdit", this.lastEditString)
-
+  } else {
+    this.lastEditString = ''
   }
-  message:string
-  changeEmail($event) {
-    this.message = $event
-    console.log(this.message)
-    this.email = this.message
-    console.log(this.email)
-    this.taskservice.getTodays(this.todayTaskDate, this.email, this.projectId)
+}  
+
+getTask(today, yesterday, email, projectId){
+  this.taskservice.getTodays(today, email, projectId)
         .subscribe(data => this.getTodaysTask(data));
-      this.taskservice.getYesterdays(this.yesterdayTaskDate, this.email, this.projectId)
+      this.taskservice.getYesterdays(yesterday, email, projectId)
         .subscribe(data => {
           this.getYesterdaysTask(data);
           this.calculateTotalTime()
+          this.getLastEdit(this.YesterdayTasks)
         });
-  }
+}
 }

@@ -212,7 +212,7 @@ img.right-arrow:active {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (max-width: 1010px) {
+@media screen and (max-width: 910px) {
   .header-part {
     width: 100%;
   }

@@ -9,16 +9,14 @@ export class Task {
     taskCompleted: boolean;
     projectId: string;
     taskDate: string;
-
+    lastEdit: string;
 }
-export class MemberTask {
-    member_name: string;
-    imageurl: string;
-    hours_spent: number;
-    minutes_spent: number;
-    task1: string;
-    task2: string;
-    // task3: string;
-
-
-}
+// export class MemberTask {
+//     member_name: string;
+//     imageurl: string;
+//     hours_spent: number;
+//     minutes_spent: number;
+//     task1: string;
+//     task2: string;
+//     // task3: string;
+// }

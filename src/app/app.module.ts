@@ -10,9 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProjectComponent } from './project/project.component';
 import { DailyStatusComponent } from './daily-status/daily-status.component';
-import { DailyStatusAllUsersComponent } from './daily-status-all-users/daily-status-all-users.component';
 import { IndividualTaskComponent } from './individual-task/individual-task.component';
-import { IndividualMemberComponent } from './individual-member/individual-member.component';
 import { AdminviewallComponent } from './adminviewall/adminviewall.component';
 import {
   SocialLoginModule,
@@ -51,9 +49,7 @@ export function getAuthServiceConfigs() {
     DashboardComponent,
     ProjectComponent,
     DailyStatusComponent,
-    DailyStatusAllUsersComponent,
     IndividualTaskComponent,
-    IndividualMemberComponent,
     AdminviewallComponent,
     TaskPageAdminComponent,
     HeaderComponent,
@@ -71,7 +67,7 @@ export function getAuthServiceConfigs() {
     DatepickerModule.forRoot(),
     HttpClientModule,
     HttpModule,
-    Ng2Webstorage
+    Ng2Webstorage,
   ],
   providers: [
     {

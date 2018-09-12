@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from "../model/project-model";
+import { Project} from "../model/project-model";
 import { Member } from "../model/member-model";
 import { LoginService } from "../service/login.service";
 import { Router } from '@angular/router';
-import { PROJECTS } from "../mockProjects";
 import {HttpClient} from "@angular/common/http";
 import {Http,Response} from "@angular/http";
 import {DashboardService } from "../service/dashboardservice.service";
@@ -17,25 +16,26 @@ import { ProjectService } from "../service/project.service";
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public router: Router, 
-    private projectService : ProjectService,
-    private loginservice: LoginService,private dashboardservice:DashboardService, private http:Http,
-  private viewallservice:AdminviewallserviceService) { }
+  constructor(public router: Router, private loginservice: LoginService,private dashboardservice:DashboardService, private http:Http,
+  private viewallservice:AdminviewallserviceService, private projectService:ProjectService ) { 
+ 
+  }
   member: Member;
   loggedin;
   projectName = "Daily Scrum";
   noOfProjects = null;
   project: Project;
   TotalMembers = null;
+  TotalProjectMembers = [];
   newproject:Project[];
   memberArray:Member[];
   projectArray:Project[];
   noOfMembers = [];
-  projects = PROJECTS;
   flag = true;
-  imageurl = [];
   reqType:string;
   projectToBeUpdated:Project;
+  imageurl = [];
+  
  
   private getURL = "http://localhost:8080/DailyScrum/ProjectController";
   ngOnInit() {
@@ -53,22 +53,28 @@ export class DashboardComponent implements OnInit {
   
   getProjects(projectArr,memberArray): void {
     let x=0;
+    this.TotalProjectMembers[0]=0;
     this.newproject = projectArr;
     this.memberArray = memberArray;
     console.log(this.newproject);
     this.noOfProjects = this.newproject.length;
     for (let i = 0; i < this.noOfProjects; i++) {
+
       this.noOfMembers[i] = this.newproject[i].members.length; 
+      this.TotalProjectMembers[i+1]=this.TotalProjectMembers[i]+this.noOfMembers[i];
+      console.log(this.TotalProjectMembers[i+1]);
+      console.log(this.noOfMembers[i]);
+
       for (let j=0; j< this.noOfMembers[i];j++){
+
         for (let k=0;k<this.TotalMembers;k++){
+
          if ( this.newproject[i].members[j].email== this.memberArray[k].email){
             this.imageurl[x]= this.memberArray[k].imageurl;
             console.log(this.imageurl[x]);
              x=x+1;
-         }
-         
-        }
-        
+         } 
+        }       
       }
     }
     console.log(this.imageurl);
@@ -93,13 +99,14 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('/admin-view-all');
 
   }
+
   AddProject() {
+
     this.projectService.setRequestType("add");
     this.router.navigateByUrl('/project');
   }
 
   EditProject(projectDetail) {
-    console.log(projectDetail);
     this.projectService.setRequestType("update");
     this.projectService.setProjectToBeUpdated(projectDetail)
     this.router.navigateByUrl('/project');

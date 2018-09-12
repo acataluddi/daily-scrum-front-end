@@ -24,15 +24,14 @@ export class AdminviewallserviceService {
   
   }
   newmember:Member;
+  p = 1;
 
   apiURL = 'http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page=1';
-
-
-
-  getMembers(): Observable<Member[]> {
-    return this.http.get<Member[]>(this.apiURL)
-  }
   
+  getMembers(): Observable<any> {
+    return this.http.get<any>(this.apiURL)
+  }
+ 
   putmember(member: Member) : Observable<any> {
 
     // this.newmember=member;
@@ -45,7 +44,7 @@ export class AdminviewallserviceService {
           }
     console.log(JSON.stringify(newmember));
     
-    return this.http.post<any>("http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page=1", 
+    return this.http.put<any>(this.apiURL, 
       JSON.stringify(newmember)
     );
   }

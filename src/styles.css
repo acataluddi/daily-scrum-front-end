@@ -98,3 +98,7 @@ body .bs-datepicker-container .bs-datepicker-head * {
     left: 5px !important;
   }
 }
+@font-face {
+  font-family: NeoSansCyr-Regular;
+  src: url(assets/NeoSansCyr-Regular.ttf) format("opentype");
+}

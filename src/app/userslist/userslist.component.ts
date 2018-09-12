@@ -4,8 +4,10 @@ import { Project, member } from '../model/project-model'
 import { Member } from '../model/member-model';
 import { Router } from '@angular/router';
 import { NavigationdataService } from '../service/navigationdata.service'
-import { HostListener } from "@angular/core";
+import { Subscription } from 'rxjs';
 import { DashboardService } from '../service/dashboardservice.service';
+import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
+
 @Component({
   selector: 'app-userslist',
   templateUrl: './userslist.component.html',
@@ -14,27 +16,42 @@ import { DashboardService } from '../service/dashboardservice.service';
 export class UserslistComponent implements OnInit {
 
   @Output() selectedEmailEvent = new EventEmitter();
-  @Input() childProject: Project;
+  @Input() childProject: string;
   public members: Member[] = [];
   public loggedmembers: Member[];
   public projects: Project[];
   checker: boolean = false;
   public projectmembers: member[];
+  subscription: Subscription;
   constructor(public router: Router,
     private dashboardservice: DashboardService,
     private projectservice: ProjectService,
-    private data: NavigationdataService) {
+    private data: NavigationdataService,
+    private taskservice:ProcessIndividualTaskService) {
   }
 ngOnInit() {
+  this.getProName()
+  }
+
+  getProName(){
+    this.subscription = this.taskservice.newList.subscribe(
+      data => {
+        this.childProject = data.projectName;
+        this.childProject = localStorage.getItem("currentProject");
+      });
+      console.log(this.childProject)
+      this.getProMem()
+  }
+
+  getProMem(){
     this.dashboardservice.getMembers()
       .subscribe(membersArr => this.getMembers(membersArr));
   }
-
   getMembers(membersArr): void {
     this.loggedmembers = membersArr;
     console.log(this.loggedmembers);
 
-    this.projectservice.getProjects()
+    this.projectservice.getallProjects()
       .subscribe(projectsArr => this.getProjects(projectsArr));
 
   }
@@ -42,7 +59,7 @@ ngOnInit() {
   getProjects(projectsArr): void {
     this.projects = projectsArr;
     for (let pro of this.projects) {
-      if (pro.projectName == this.childProject.projectName) {
+      if (pro.projectName == this.childProject) {
         this.projectmembers = pro.members;
 
       }
