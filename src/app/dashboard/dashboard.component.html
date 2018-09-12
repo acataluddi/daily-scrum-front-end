@@ -15,7 +15,7 @@
         <div class="PlusSignDiv">
           <img class="PlusSignImage" src="../../assets/plus.png">
         </div>
-        <div class="AddProjectDiv" >Add Project</div>
+        <div class="AddProjectDiv" (click)="AddProject()">Add Project</div>
       </button>
       <button *ngIf="flag === true" class="UserList" (click)="gotoUsersList()"> User List
       </button>
@@ -62,7 +62,6 @@
               <div class="DropdownContentDiv" >
                 <!-- <button class="EditButton Button "> -->
                   <div class="EditDiv Button" (click)="EditProject(Project)" >
-                     
                     Edit Project
                   
                   </div>

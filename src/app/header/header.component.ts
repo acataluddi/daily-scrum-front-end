@@ -20,7 +20,57 @@ export class HeaderComponent implements OnInit {
   projects: Project[];
   title: string;
 
-  selected: Project = { name: "FR Project LXXXI - Core Order Management System", members: [], numberOfMembers: 5 };
+  selected: Project = {
+    "projectId":"4092018122459",
+    "members":[
+       {
+          "email":"ronyc@qburst.com",
+          "role":"Manager"
+       },
+       {
+          "email":"neerajd@qburst.com",
+          "role":"Developer"
+       },
+       {
+          "email":"nisha@qburst.com",
+          "role":"Developer"
+       },
+       {
+          "email":"arathi@qburst.com",
+          "role":"Team Lead"
+       },
+       {
+          "email":"sanjo@qburst.com",
+          "role":"Developer"
+       },
+       {
+          "email":"athiram@qburst.com",
+          "role":"Developer"
+       },
+       {
+          "email":"sruthy@qburst.com",
+          "role":"Tester"
+       },
+       {
+          "email":"nithaa@qburst.com",
+          "role":"Manager"
+       },
+       {
+          "email":"sunil@qburst.com",
+          "role":"Manager"
+       },
+       {
+          "email":"nithin@qburst.com",
+          "role":"Tester"
+       },
+       {
+          "email":"akhils@qburst.com",
+          "role":"Team Lead"
+       }
+    ],
+    "projectName":"FR Project VIII - EU",
+    "projectDesc":"This project is to customize the existing Taiwanese FR Single Page Application to get it readied for release in EU region with French, German and English language support and some other functional changes in web and cms."
+  };
   constructor(
     private socialAuthService: AuthService,
     private router: Router,
@@ -69,7 +119,7 @@ export class HeaderComponent implements OnInit {
   }
 
   changeProject(newProject) {
-    this.selected.name = newProject;
+    this.selected.projectName = newProject;
   }
 
   toggle(currenturl) {
