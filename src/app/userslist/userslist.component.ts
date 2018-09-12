@@ -1,11 +1,11 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ProjectService } from '../service/project.service'
-import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import { Project, member } from '../model/project-model'
 import { Member } from '../model/member-model';
 import { Router } from '@angular/router';
 import { NavigationdataService } from '../service/navigationdata.service'
-import { TaskPageAdminComponent } from '../task-page-admin/task-page-admin.component'
+import { HostListener } from "@angular/core";
+import { DashboardService } from '../service/dashboardservice.service';
 @Component({
   selector: 'app-userslist',
   templateUrl: './userslist.component.html',
@@ -19,82 +19,76 @@ export class UserslistComponent implements OnInit {
   public loggedmembers: Member[];
   public projects: Project[];
   checker: boolean = false;
-  // memberArray: Member[];
   public projectmembers: member[];
-  constructor(public router: Router, private viewallservice: AdminviewallserviceService, private projectservice: ProjectService,private data: NavigationdataService) { }
-
-  ngOnInit() {
-    console.log("this is a hi")
-    this.viewallservice.getMembers()
-    .subscribe(membersArr => this.getMembers(membersArr));
-
-    
-    // console.log(this.childProject)
-
-    
+  constructor(public router: Router,
+    private dashboardservice: DashboardService,
+    private projectservice: ProjectService,
+    private data: NavigationdataService) {
+  }
+ngOnInit() {
+    this.dashboardservice.getMembers()
+      .subscribe(membersArr => this.getMembers(membersArr));
   }
 
   getMembers(membersArr): void {
     this.loggedmembers = membersArr;
-    console.log("hiii");
     console.log(this.loggedmembers);
-    
+
     this.projectservice.getProjects()
-    .subscribe(projectsArr => this.getProjects(projectsArr));
+      .subscribe(projectsArr => this.getProjects(projectsArr));
 
   }
 
   getProjects(projectsArr): void {
     this.projects = projectsArr;
-    console.log(this.projects)
-    for(let pro of this.projects){
-      // console.log(pro.members)
-      console.log(pro.projectName)
-      if(pro.projectName == this.childProject.projectName){
-        console.log(pro.members)
+    for (let pro of this.projects) {
+      if (pro.projectName == this.childProject.projectName) {
         this.projectmembers = pro.members;
-        console.log(this.projectmembers)
 
       }
     }
     this.getThisProjectMembers()
   }
 
-  getThisProjectMembers(){
-    for(let promem of this.projectmembers){
-      for(let mem of this.loggedmembers){
-        if(promem.email == mem.email){
-          console.log(mem)
+  getThisProjectMembers() {
+    for (let promem of this.projectmembers) {
+      for (let mem of this.loggedmembers) {
+        if (promem.email == mem.email) {
           this.members.push(mem)
         }
+      }
     }
-    }
-    console.log(this.members)
+
   }
 
-  gotoDailyStatus(memberemail:string) {
-    console.log(memberemail);
+  gotoDailyStatus(memberemail: string) {
     this.selectedEmailEvent.emit(memberemail)
     this.data.changedata(memberemail)
     this.router.navigateByUrl('/daily-status');
-    this.changeCSS();
   }
+
   changeCSS(){
     if(!this.checker){
-    document.getElementById("search_name").style.display = "flex";
-    document.getElementById("input").style.display = "flex";
-    document.getElementById("userslist").style.display = "block";
-    for(var i in this.members)
-    document.getElementById("member_name"+i).style.display = "flex";
+      document.getElementById("userslist").classList.add("block")
+      document.getElementById("search_name").classList.add("flexed")
+      // for (var i in this.members)
+        // document.getElementById("member_name" + i).classList.add("flex")
+        document.getElementById("userslist").classList.add("flex")
+
+        
     this.checker = !this.checker
     }
     else{
-      document.getElementById("search_name").style.display = "none";
-      document.getElementById("input").style.display = "none";
-    document.getElementById("userslist").style.display = "flex";
-    for(var i in this.members)
-    document.getElementById("member_name"+i).style.display = "none";
-    this.checker = !this.checker
+      document.getElementById("userslist").classList.remove("block")
+      document.getElementById("search_name").classList.remove("flexed")
+      // for (var i in this.members)
+      //   document.getElementById("member_name" + i).classList.remove("flex")
+      document.getElementById("userslist").classList.remove("flex")
+
+      this.checker = !this.checker
     }
+    
   }
+
+
 }

@@ -3,6 +3,27 @@ img{
     max-height: 100%;
     border-radius:50% 50% 50% 50%;
 }
+.search{
+    display:flex;
+}
+input[placeholder="Search"]{
+    border: none;
+    outline: none;
+    height: 32px;
+    color: rgba(0, 0, 0, 1);
+}
+.member{
+    display: flex;
+    margin-left: 1%;
+}
+.member:hover{
+    cursor: pointer;
+}
+.member_logo{
+    height: 32px;
+    width: 32px;
+}
+
 @media only screen and (min-width: 700px) {
     .userslist{
         position: absolute;
@@ -15,34 +36,21 @@ img{
         display: block;
         background-color: rgba(255,255,255);
     }
-    .userslist:hover {
+    .userslist:hover{
         right: 0px;
     }
-    .search{
-        display:flex;
-    }
-    .search_icon {
+    
+    .search_icon{
         height: 32px;
         width: 32px;
-        padding: 4% 4% 4% 4%;
+        padding: 4%;
         margin: 5%;
     }
     .search_name{
         padding: 5% 5% 5% 5%;
     }
     input[placeholder="Search"]{
-        border: none;
-        outline: none;
-        height: 32px;
         width: 128px;
-        color: rgba(0, 0, 0, 1);
-    }
-    .member{
-        display: flex;
-        margin-left: 1%;
-    }
-    .member:hover{
-        cursor: pointer;
     }
     .member_logo{
         margin: 5px;
@@ -64,15 +72,13 @@ img{
         height: 32px;
         display: flex;
     }
+    
     .widthheight{
         width: 100%;
         height: 100%;
     }
-    .search{
-        display: flex;
-    }
     .search_icon{
-        padding: 10px 10px 10px 10px;
+        padding: 10px;
     }
     .search_name{
         display: none;
@@ -82,30 +88,22 @@ img{
         width: 100%
     }
     input[placeholder="Search"]{
-        border: none;
-        outline: none;
-        height: 32px;
-        width: 100%;
-        color: rgba(0, 0, 0, 1);
-        
+        width: 100%;        
     }
     .member{
-        display: flex;
-        margin-left: 1%;
         background-color: rgba(255,255,255);
-    }
-    .member:hover{
-        cursor: pointer;
-    }
-    .member_logo{
-        height: 32px;
-        width: 32px;
     }
     .member_name{
         display: none;
         margin: 10px 0px 15px 5px;
     }
-    .cl{
-        display: none;
+    .block{
+        display: block;
+    }
+    .flexed{
+        display: flex;
+    }
+    .flex .member_name{
+        display: flex;
     }
 }
