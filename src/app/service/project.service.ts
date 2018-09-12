@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Project } from '../model/project-model'
 import { ProjectMember } from '../model/ProjectMembers';
 import { Observable, EMPTY } from 'rxjs';
@@ -10,7 +10,7 @@ import { Observable, EMPTY } from 'rxjs';
 
 export class ProjectService {
 
-  private projectUrl = 'http://10.4.6.58:8081/DailyScrum/ProjectController';
+  private projectUrl = 'http://10.4.6.71:8080/DailyScrum/ProjectController';
   private project: Project;
   // reqType: string;
   reqType= 'add';
@@ -50,6 +50,14 @@ export class ProjectService {
     );
   }
 
+  private geturl = 'http://10.4.6.71:8080/DailyScrum/ProjectController';
+
+
+  getProjects(memberEmail): Observable<Project[]> {
+    let params = new HttpParams()
+      .set("memberEmail", memberEmail)
+    return this.http.get<Project[]>(this.geturl,{params:params})
+  }
 
   //Temporary
 
