@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Project, newProject } from "../model/project-model";
+import { Project} from "../model/project-model";
 import { Member } from "../model/member-model";
 import { LoginService } from "../service/login.service";
 import { Router } from '@angular/router';
-import { PROJECTS } from "../mockProjects";
 import {HttpClient} from "@angular/common/http";
 import {Http,Response} from "@angular/http";
 import {DashboardService } from "../service/dashboardservice.service";
 import { AdminviewallserviceService } from '../service/adminviewallservice.service';
-import {ProjectService } from "../project.service";
-import {AdminviewallComponent} from '../adminviewall/adminviewall.component';
-
+import { ProjectService } from "../service/project.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +17,7 @@ import {AdminviewallComponent} from '../adminviewall/adminviewall.component';
 export class DashboardComponent implements OnInit {
 
   constructor(public router: Router, private loginservice: LoginService,private dashboardservice:DashboardService, private http:Http,
-  private viewallcomponent:AdminviewallComponent, private projectService:ProjectService ) { 
+  private viewallservice:AdminviewallserviceService, private projectService:ProjectService ) { 
  
   }
   member: Member;
@@ -30,14 +27,13 @@ export class DashboardComponent implements OnInit {
   project: Project;
   TotalMembers = null;
   TotalProjectMembers = [];
-  newproject:newProject[];
+  color = ['rgb(12, 33, 93)','rgb(63, 205, 195)','rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
+  newproject:Project[];
   memberArray:Member[];
-  projectArray:newProject[];
+  projectArray:Project[];
   noOfMembers = [];
-  projects = PROJECTS;
   flag = true;
   imageurl = [];
-  color = ['rgb(12, 33, 93)','rgb(63, 205, 195)','rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
   
  
   private getURL = "http://localhost:8080/DailyScrum/ProjectController";
@@ -102,7 +98,7 @@ export class DashboardComponent implements OnInit {
   }
 
   EditProject(projectDetail) {
-
+    this.projectService.setRequestType("update");
     this.projectService.setProjectToBeUpdated(projectDetail)
     this.router.navigateByUrl('/project');
   }

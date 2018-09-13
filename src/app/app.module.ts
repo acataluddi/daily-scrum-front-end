@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import {DatePipe} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +25,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, Response, Headers } from '@angular/http';
 import { HeaderComponent } from './header/header.component';
 
-import { FilterPipeModule } from 'ngx-filter-pipe';
+
+
+
+
 
 
 // Configs 
@@ -38,6 +42,7 @@ export function getAuthServiceConfigs() {
   );
   return config;
 }
+
 
 @NgModule({
   declarations: [
@@ -63,14 +68,15 @@ export function getAuthServiceConfigs() {
     DatepickerModule.forRoot(),
     HttpClientModule,
     HttpModule,
-    Ng2Webstorage,
-    FilterPipeModule
+    Ng2Webstorage
+  
   ],
   providers: [
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
     },
+    DatePipe,
     AuthGuard],
   bootstrap: [AppComponent]
 })

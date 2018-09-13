@@ -16,7 +16,6 @@
       </button>
       <a href=""><img class="alt-View" src="../../assets/vire_my_tasks.png"></a>
     </div>
-
   </div>
   <div class="total_time">
     <div class="total_time_border">
@@ -33,33 +32,24 @@
   </div>
   <div class="main">
     <div class="header">
-      <div *ngFor="let task of MockMember1">
+      <div *ngFor="let IndMemOb of IndMembArray">
         <div class="column">
           <div class="member1">
             <div class="member_title1">
-              <div class="member_image1"></div>
-              <div class="member_name1">{{task.member_name}}</div>
+              <div class="member_image1"><img class="size" src={{IndMemOb.imageurl}}></div>
+              <div class="member_name1">{{IndMemOb.name}}</div>
               <div class="more_icon"><img src="../../assets/more.png"></div>
-              <div class="member_time_spent1">{{task.hours_spent}} h {{task.minutes_spent}} m</div>
-
+              <div class="member_time_spent1">{{IndMemOb.hour}} h {{IndMemOb.minute}} m</div>
             </div>
-
             <div class="member_part">
-
-              <!-- <ul> -->
-              <li [ngStyle]="{'color': getRandomColor()}"><span style="color: rgba(96, 96, 96, 1)">{{task.task1}}</span></li>
-              <li [ngStyle]="{'color': getRandomColor()}"><span style="color: rgba(96, 96, 96, 1)">{{task.task2}}</span></li>
-              <!-- </ul>  -->
-
+              <ul>
+                <div *ngFor="let Task of IndMemOb.tasks">
+                  <li [ngStyle]="{'color': getRandomColor()}"><span style="color: rgba(96, 96, 96, 1)">{{Task.description}}</span></li>
+                </div>
+              </ul>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="search">
-      <img class="search_icon" src="../../assets/Combined_Shape_Copy_2.png">
-      <div class="member_logo" *ngFor="let task of MockMember1">
-        <!-- <img src={{task.imageurl}}> -->
       </div>
     </div>
   </div>

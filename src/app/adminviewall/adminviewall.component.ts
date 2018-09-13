@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import { Member } from '../model/member-model';
@@ -82,5 +83,3 @@ export class AdminviewallComponent implements OnInit {
   }
 
 }
-
-
