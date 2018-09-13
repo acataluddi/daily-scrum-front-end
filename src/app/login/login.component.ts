@@ -3,6 +3,7 @@ import { Member} from "../model/member-model";
 import {AuthService,GoogleLoginProvider} from 'angular-6-social-login';
 import { Router,NavigationEnd } from '@angular/router';
 import { LoginService } from "../service/login.service";
+// import { DashboardComponent} from '../dashboard/dashboard.component';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private socialAuthService: AuthService,
     public router: Router,
-    private loginservice: LoginService) { 
+    private loginservice: LoginService ) { 
       this.routeEvent(this.router);
  
 }
@@ -34,7 +35,8 @@ export class LoginComponent implements OnInit {
       name: '',
       email: '',
       userType: '',
-      imageurl: ''
+      imageurl: '',
+      idToken:''
     }
 
 
@@ -52,9 +54,11 @@ export class LoginComponent implements OnInit {
           name: userData.name,
           email: userData.email,
           userType: 'User',
-          imageurl: userData.image
+          imageurl: userData.image,
+          idToken:userData.idToken
         }
-        this.loginservice.loginMember(this.member)
+        // this.dashboardcomponent.getUserData(userData);
+        this.loginservice.loginMember(userData.idToken)
           .subscribe(msg => {
             console.log(msg);
             if (msg.email === this.member.email) {
@@ -62,8 +66,10 @@ export class LoginComponent implements OnInit {
               localStorage.setItem("email", msg.email);
               localStorage.setItem("userType", msg.userType);
               localStorage.setItem("image", msg.imageurl);
+              localStorage.setItem("token",userData.idToken);
               this.router.navigate(['/dashboard']);
             }
+            
           });
       }
     );

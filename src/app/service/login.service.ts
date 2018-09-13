@@ -7,12 +7,7 @@ import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
-  })
-};
+// const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +28,12 @@ export class LoginService {
     localStorage.setItem("logged", "false");
   }
   private posturl='http://10.4.6.58:8081/DailyScrum/CRUDControllerUser';
-  loginMember(member: Member) : Observable<any> {
-    this.member=member;
+  loginMember(UserToken: string) : Observable<any> {
+    
+    const headers = new HttpHeaders().set("token", UserToken);
+
     return this.http.post<any>(this.posturl, 
-      JSON.stringify(member)
+      JSON.stringify("Login"),{headers}
     );
   }
 
@@ -57,5 +54,7 @@ export class LoginService {
     localStorage.setItem("logged", "false");
     localStorage.setItem("email", '');
     localStorage.setItem("image", '');
+    localStorage.setItem("token",'');
+    localStorage.setItem("userType",'');
   }
 }

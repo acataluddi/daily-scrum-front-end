@@ -23,8 +23,10 @@ import { TaskPageAdminComponent } from './task-page-admin/task-page-admin.compon
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, Response, Headers } from '@angular/http';
 import { HeaderComponent } from './header/header.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+// import { TokenInterceptor } from '../app/auth/token.interceptor';
 
-import { FilterPipeModule } from 'ngx-filter-pipe';
+
 
 
 // Configs 
@@ -64,14 +66,22 @@ export function getAuthServiceConfigs() {
     HttpClientModule,
     HttpModule,
     Ng2Webstorage,
-    FilterPipeModule
+    
   ],
   providers: [
     {
       provide: AuthServiceConfig,
-      useFactory: getAuthServiceConfigs
+      useFactory: getAuthServiceConfigs,
+      
     },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenInterceptor,
+    //   multi: true
+    // },
+    
     AuthGuard],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

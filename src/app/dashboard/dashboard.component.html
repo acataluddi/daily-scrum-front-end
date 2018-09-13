@@ -11,7 +11,7 @@
         <div class="ProjectHeadingTextDiv">My Projects ({{noOfProjects}})</div>
       </div>
 
-      <button class="AddProjectButton" (click)="AddProject()">
+      <button  *ngIf="flag === true" class="AddProjectButton" (click)="AddProject()">
         <div class="PlusSignDiv">
           <img class="PlusSignImage" src="../../assets/plus.png">
         </div>
@@ -55,10 +55,10 @@
                 <div class="ExtraMembersDiv">+{{noOfMembers[j]-4}}</div>
               </button>
             </div>
-            <button class="DailyStatusButton" (click)="openDailyStatus()">
+            <button  class="DailyStatusButton" (click)="openDailyStatus()">
               <div class="DailyStatusDiv" >Daily Status</div>
             </button>
-            <button class="MenuButton DropdownButton">
+            <button *ngIf="flag === true" class="MenuButton DropdownButton">
               <div class="DropdownContentDiv" >
                 <!-- <button class="EditButton Button "> -->
                   <div class="EditDiv Button" (click)="EditProject(Project)" >
@@ -73,7 +73,7 @@
                   </div>
                 <!-- </button> -->
               </div>
-              <div class="MenuDotDiv">
+              <div  class="MenuDotDiv">
                 <img src="../../assets/Menudots.png">
               </div>
             </button>

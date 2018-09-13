@@ -10,6 +10,7 @@ import {DashboardService } from "../service/dashboardservice.service";
 import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import {ProjectService } from "../project.service";
 import {AdminviewallComponent} from '../adminviewall/adminviewall.component';
+import {AuthService} from 'angular-6-social-login';
 
 
 @Component({
@@ -20,10 +21,11 @@ import {AdminviewallComponent} from '../adminviewall/adminviewall.component';
 export class DashboardComponent implements OnInit {
 
   constructor(public router: Router, private loginservice: LoginService,private dashboardservice:DashboardService, private http:Http,
-  private viewallcomponent:AdminviewallComponent, private projectService:ProjectService ) { 
+  private viewallcomponent:AdminviewallComponent, private projectService:ProjectService, private socialAuthService: AuthService ) { 
  
   }
   member: Member;
+  LoggedinMember:Member;
   loggedin;
   projectName = "Daily Scrum";
   noOfProjects = null;
@@ -35,25 +37,41 @@ export class DashboardComponent implements OnInit {
   projectArray:newProject[];
   noOfMembers = [];
   projects = PROJECTS;
-  flag = true;
+  flag = false;
   imageurl = [];
+  UserType:string;
   color = ['rgb(12, 33, 93)','rgb(63, 205, 195)','rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
   
  
-  private getURL = "http://localhost:8080/DailyScrum/ProjectController";
   ngOnInit() {
-    if (localStorage.getItem("userType") != "Admin" && localStorage.getItem("userType") != "Manager") {
-      this.flag = false;
-    }
+    this.socialAuthService.authState.subscribe((user) => {
+      console.log("user:");
+      console.log(user);
+      if (user != null) {
+        this.loginservice.loginMember(user.idToken)
+          .subscribe(msg => {
+            this.UserType = msg.userType;
+            if (this.UserType === "Admin" || this.UserType === "Manager") {
+              this.flag = true;
+              console.log("flag:"+this.flag);
+            }
+
+          });
+      }
+      });
+    
+    
     this.dashboardservice.getMembers()
     .subscribe(membersArr => this.getMembers(membersArr));
 
     this.dashboardservice.getProjects()
       .subscribe(projectArr => this.getProjects(projectArr, this.memberArray));
 
+
+      
      
   }
-  
+
   getProjects(projectArr,memberArray): void {
     let x=0;
     this.TotalProjectMembers[0]=0;
@@ -80,13 +98,17 @@ export class DashboardComponent implements OnInit {
 
   getMembers(membersArr): void {
     this.memberArray = membersArr;
-    console.log(this.memberArray);
+    // console.log(this.memberArray);
     this.TotalMembers = this.memberArray.length;
 
   }
 
   openDailyStatus() {
-    this.router.navigate(['/daily-status']);
+    if (this.flag === true){
+    this.router.navigate(['/task-page-admin']);
+    }else{
+      this.router.navigate(['/daily-status']);
+    }
   }
 
   gotoUsersList() {

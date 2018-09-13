@@ -68,7 +68,9 @@ export class HeaderComponent implements OnInit {
       name: '',
       email: '',
       imageurl: '',
-      userType: ''
+      userType: '',
+      idToken:''
+
     }
     this.title = '';
   }

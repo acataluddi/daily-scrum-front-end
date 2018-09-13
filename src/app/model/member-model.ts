@@ -5,4 +5,5 @@ export class Member {
     email: string;
     userType: string;
     imageurl: string;
+    idToken:string;
 }

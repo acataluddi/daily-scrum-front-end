@@ -21,7 +21,7 @@ export class DashboardService {
     }
 
     getallURL = "http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page=0";
-    getURL = "http://10.4.6.22:8080/DailyScrum/ProjectController";
+    getURL = "http://10.4.6.58:8081/DailyScrum/ProjectController";
 
     getMembers(): Observable<any> {
         return this.http.get<any>(this.getallURL)
