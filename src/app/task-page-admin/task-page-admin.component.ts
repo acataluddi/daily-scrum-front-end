@@ -230,7 +230,7 @@ export class TaskPageAdminComponent implements OnInit {
     } else {
       nmonth += (newDate.getMonth() + 1);
     }
-    ndate += newDate.getFullYear() + '-' + nmonth + '-' + nday;
+    ndate += nday + '-' + nmonth + '-' + newDate.getFullYear();
     this.newDate = newDate;
     var d1 = new Date(newDate);
     (d1.setDate(d1.getDate() - 1));
