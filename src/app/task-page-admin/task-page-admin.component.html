@@ -10,7 +10,7 @@
         (bsValueChange)="onDateChange($event)">{{todayval}}</div>
       <img class="left-arrow" src="../../assets/arrow-left.png" align="top" (click)="getPreviousDate()">
       <img class="right-arrow" src="../../assets/arrow-right.png" align="top" (click)="getNextDate()">
-      <button class="view_all_task">
+      <button class="view_all_task" (click)="GotoSingeUserTask()">
         <img class="view" src="../../assets/Group_24-2x.png" align="top">
         <div class="my_task">View my tasks</div>
       </button>

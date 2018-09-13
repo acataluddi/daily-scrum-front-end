@@ -11,6 +11,7 @@ import { AdminviewallserviceService } from '../service/adminviewallservice.servi
 import { IndividualMember } from '../model/user-task-model'
 import { Subscription } from 'rxjs';
 import { Project } from '../model/project-model';
+import { Router } from '@angular/router';
 
 const httpOptions = {
   headers: new Headers({
@@ -70,7 +71,9 @@ export class TaskPageAdminComponent implements OnInit {
   subscription: Subscription;
   Tasks: Task[];
   Task: Task;
+
   constructor(
+    public router: Router,
     private taskservice: ProcessIndividualTaskService,
     private employeeservice: AdminviewallserviceService,
     private viewallservice: ProjectviewallService,
@@ -96,7 +99,7 @@ export class TaskPageAdminComponent implements OnInit {
     this.IndMembObj = this.initializeNewMember(this.IndMembObj);
     this.IndMembArray = [];
     this.memberEmployeeArray = [];
-   this.todayTaskDate = "";
+    this.todayTaskDate = "";
     this.employeeservice.getMembers()
       .subscribe(membersArr => this.getMembers(membersArr));
     this.projectupdate = this.initializeNewProject(this.projectupdate);
@@ -128,6 +131,11 @@ export class TaskPageAdminComponent implements OnInit {
     this.total_minutes_spent = 0;
     this.setAllMembers();
   }
+
+  GotoSingeUserTask() {
+    this.router.navigateByUrl('/daily-status');
+  }
+
   a() {
     this.IndMembArray = [];
     this.projectupdate = this.getRequiredProject(this.currentProject);
@@ -248,7 +256,7 @@ export class TaskPageAdminComponent implements OnInit {
     this.todayTaskDate = ndate;
     this.total_hours_spent = 0;
     this.total_minutes_spent = 0;
-    this.totalhour = 0; 
+    this.totalhour = 0;
     this.totalminute = 0;
     this.indTotalHour = 0;
     this.indTotalMins = 0;
