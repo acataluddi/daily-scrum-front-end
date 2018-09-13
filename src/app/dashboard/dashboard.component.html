@@ -22,7 +22,7 @@
     </div>
     <div class="BottomDiv">
       <div *ngFor="let Project of newproject ; let j=index">
-        <div class="ProjectBoxDiv" [ngStyle]="{'background-color': getRandomColor()}">
+        <div   class="ProjectBoxDiv" [ngStyle]="{'background-color': color[j%4]}">
           <div class=" ProjectNameBoxDiv">
             <div class="ProjectNameDiv">{{Project.projectName}}</div>
           </div>
@@ -62,6 +62,7 @@
               <div class="DropdownContentDiv" >
                 <!-- <button class="EditButton Button "> -->
                   <div class="EditDiv Button" (click)="EditProject(Project)" >
+                     
                     Edit Project
                   
                   </div>

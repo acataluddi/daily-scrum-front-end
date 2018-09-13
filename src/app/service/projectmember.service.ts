@@ -10,7 +10,7 @@ import { ProjectMember } from '../model/ProjectMembers';
 })
 export class ProjectmemberService {
 
-  private projectmembersUrl = 'http://localhost:8080/DailyScrum/ProjectController';
+  private projectmembersUrl = 'http://10.4.6.71:8080/DailyScrum/ProjectController';
 
   projectmembers:ProjectMember[];
   

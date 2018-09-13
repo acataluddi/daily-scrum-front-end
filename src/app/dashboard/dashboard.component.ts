@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
   project: Project;
   TotalMembers = null;
   TotalProjectMembers = [];
+  color = ['rgb(12, 33, 93)','rgb(63, 205, 195)','rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
   newproject:Project[];
   memberArray:Member[];
   projectArray:Project[];
@@ -40,7 +41,7 @@ export class DashboardComponent implements OnInit {
     if (localStorage.getItem("userType") != "Admin" && localStorage.getItem("userType") != "Manager") {
       this.flag = false;
     }
-    this.viewallservice.getMembers()
+    this.dashboardservice.getMembers()
     .subscribe(membersArr => this.getMembers(membersArr));
 
     this.dashboardservice.getProjects()
@@ -54,40 +55,32 @@ export class DashboardComponent implements OnInit {
     this.TotalProjectMembers[0]=0;
     this.newproject = projectArr;
     this.memberArray = memberArray;
-    console.log(this.newproject);
     this.noOfProjects = this.newproject.length;
     for (let i = 0; i < this.noOfProjects; i++) {
 
       this.noOfMembers[i] = this.newproject[i].members.length; 
       this.TotalProjectMembers[i+1]=this.TotalProjectMembers[i]+this.noOfMembers[i];
-      console.log(this.TotalProjectMembers[i+1]);
-      console.log(this.noOfMembers[i]);
-
+     
       for (let j=0; j< this.noOfMembers[i];j++){
 
         for (let k=0;k<this.TotalMembers;k++){
 
          if ( this.newproject[i].members[j].email== this.memberArray[k].email){
             this.imageurl[x]= this.memberArray[k].imageurl;
-            console.log(this.imageurl[x]);
-             x=x+1;
+            x=x+1;
          } 
         }       
       }
     }
-    console.log(this.imageurl);
   }
 
   getMembers(membersArr): void {
     this.memberArray = membersArr;
     console.log(this.memberArray);
     this.TotalMembers = this.memberArray.length;
+
   }
 
-  getRandomColor() {
-    var colors = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
-    return colors[Math.floor(Math.random() * colors.length)];
-  }
   openDailyStatus() {
     this.router.navigate(['/daily-status']);
   }
