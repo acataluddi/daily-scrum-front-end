@@ -17,6 +17,17 @@ export class UserslistComponent implements OnInit {
 
   @Output() selectedEmailEvent = new EventEmitter();
   @Input() childProject: string;
+  // childProject: string;
+  op:number = 0;
+  ngOnChanges(...args: any[]) {
+    if(this.op>0){
+    console.log('onChange fired');
+    console.log('changing', args);
+    console.log(this.childProject)
+    this.getProMem();
+  }
+  this.op++;
+}
   public members: Member[] = [];
   public loggedmembers: Member[];
   public projects: Project[];
@@ -28,24 +39,27 @@ export class UserslistComponent implements OnInit {
     private projectservice: ProjectService,
     private data: NavigationdataService,
     private taskservice:ProcessIndividualTaskService) {
+      // this.getProName()
+        // console.log(this.childProject)
+        // this.subscription = this.taskservice.newList.subscribe(
+        //   data => {
+        //     this.childProject = data.projectName;
+        //     this.childProject = localStorage.getItem("currentProject");
+        //   });
+        //   console.log(this.childProject)
+        // this.getProMem()
   }
 ngOnInit() {
-  this.getProName()
-  }
-
-  getProName(){
-    this.subscription = this.taskservice.newList.subscribe(
-      data => {
-        this.childProject = data.projectName;
-        this.childProject = localStorage.getItem("currentProject");
-      });
-      console.log(this.childProject)
-      this.getProMem()
+  // this.getProName()
+  this.getProMem()
+  
   }
 
   getProMem(){
     this.dashboardservice.getMembers()
       .subscribe(membersArr => this.getMembers(membersArr));
+
+
   }
   getMembers(membersArr): void {
     this.loggedmembers = membersArr;
@@ -58,16 +72,19 @@ ngOnInit() {
 
   getProjects(projectsArr): void {
     this.projects = projectsArr;
+    // this.getProName();
+    console.log(this.childProject)
     for (let pro of this.projects) {
       if (pro.projectName == this.childProject) {
         this.projectmembers = pro.members;
-
+        console.log(this.projectmembers)
       }
     }
     this.getThisProjectMembers()
   }
-
+  
   getThisProjectMembers() {
+    this.members = [];
     for (let promem of this.projectmembers) {
       for (let mem of this.loggedmembers) {
         if (promem.email == mem.email) {
@@ -75,7 +92,7 @@ ngOnInit() {
         }
       }
     }
-
+    console.log(this.members)
   }
 
   gotoDailyStatus(memberemail: string) {
