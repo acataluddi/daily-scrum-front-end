@@ -120,7 +120,5 @@ export class DashboardComponent implements OnInit {
     this.dashboardservice.deleteProjects(projectId)
       .subscribe((msg) => console.log("Project Deleted"));
     window.location.reload();
-
   }
-
 }
