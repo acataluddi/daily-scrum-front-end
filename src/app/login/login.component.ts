@@ -91,6 +91,7 @@ export class LoginComponent implements OnInit {
           console.log(e);
           this.router.navigate(['/dashboard']);
         }
+       
       }
     });
   }

@@ -9,6 +9,7 @@ import { AdminviewallComponent } from "./adminviewall/adminviewall.component";
 import { AuthGuard } from './status.service';
 import { TaskPageAdminComponent } from "./task-page-admin/task-page-admin.component";
 
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: 'daily-status', component: DailyStatusComponent, canActivate: [AuthGuard] },
   { path: 'admin-view-all', component: AdminviewallComponent, canActivate: [AuthGuard] },
   { path: 'task-page-admin', component: TaskPageAdminComponent, canActivate: [AuthGuard] },
-  { path: '**', component: LoginComponent }
+  { path: '**', redirectTo: '/dashboard' }
 ];
 
 @NgModule({
