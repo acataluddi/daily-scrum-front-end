@@ -4,10 +4,9 @@ import { Task } from '../model/task-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { NavigationdataService } from '../service/navigationdata.service'
-
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
-
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,7 @@ import { Subscription } from 'rxjs';
 })
 export class DailyStatusComponent implements OnInit {
 
-  currentProject: Project = {projectId:'', projectName:'', projectDesc:'', members:[] }
+  currentProject: string = ''
 
   task: Task;
   task1: Task;
@@ -79,6 +78,7 @@ export class DailyStatusComponent implements OnInit {
   subscription: Subscription;
 
   constructor(
+    public router: Router,
     private taskservice: ProcessIndividualTaskService,
     private data: NavigationdataService,
     private datepipe: DatePipe
@@ -89,14 +89,19 @@ export class DailyStatusComponent implements OnInit {
       showWeekNumbers: false
     });
     this.subscription = taskservice.newList.subscribe(
-      data => { this.projectId = data.projectId
+      data => { 
+        this.projectId = data.projectId;
+        this.currentProject = data.projectName;
+        this.currentProject = localStorage.getItem("currentProject");
+
         this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
           
   });
 }
 
   ngOnInit() {
-    this.currentProject.projectName = 'Daily Scrum'
+    this.currentProject = localStorage.getItem("currentProject");
+    // this.currentProject = 'FR Project VIII - EU'
     this.checkthis()
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
@@ -118,6 +123,8 @@ export class DailyStatusComponent implements OnInit {
   }
 
   getTodaysTask(Todays) {
+        
+
     this.MockTodayTasks = Todays;
     this.TodayTasks = Todays;;
     this.status = true;
@@ -435,6 +442,7 @@ export class DailyStatusComponent implements OnInit {
 }  
 
 getTask(today, yesterday, email, projectId){
+  console.log(this.currentProject)
   this.taskservice.getTodays(today, email, projectId)
         .subscribe(data => this.getTodaysTask(data));
       this.taskservice.getYesterdays(yesterday, email, projectId)
@@ -443,5 +451,14 @@ getTask(today, yesterday, email, projectId){
           this.calculateTotalTime()
           this.getLastEdit(this.YesterdayTasks)
         });
+}
+viewAllTasks() : void{
+  console.log("Inside view all tasks");
+  this.router.navigateByUrl('/task-page-admin');
+}
+changeEmail($event){
+this.email = $event;
+console.log(this.email)
+this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
 }
 }

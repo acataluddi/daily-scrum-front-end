@@ -92,6 +92,7 @@ export class TaskPageAdminComponent implements OnInit {
   todayTaskDate;
   projectId;
   ngOnInit() {
+    console.log(this.currentProject)
     this.currentProject = localStorage.getItem("currentProject");
     this.IndMembObj = this.initializeNewMember(this.IndMembObj);
     this.IndMembArray = [];

@@ -96,6 +96,8 @@ ngOnInit() {
   }
 
   gotoDailyStatus(memberemail: string) {
+    console.log(memberemail)
+
     this.selectedEmailEvent.emit(memberemail)
     this.data.changedata(memberemail)
     this.router.navigateByUrl('/daily-status');
