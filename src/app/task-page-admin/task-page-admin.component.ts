@@ -11,6 +11,7 @@ import { AdminviewallserviceService } from '../service/adminviewallservice.servi
 import { IndividualMember } from '../model/user-task-model'
 import { Subscription } from 'rxjs';
 import { Project } from '../model/project-model';
+import { Router } from '@angular/router';
 
 const httpOptions = {
   headers: new Headers({
@@ -75,7 +76,7 @@ export class TaskPageAdminComponent implements OnInit {
     private employeeservice: AdminviewallserviceService,
     private viewallservice: ProjectviewallService,
     private http: Http,
-
+    private router: Router
   ) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-orange',
@@ -295,10 +296,9 @@ export class TaskPageAdminComponent implements OnInit {
     var colors = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
     return colors[Math.floor(Math.random() * colors.length)];
   }
-
-  // emailSelected(email){
-  //   this.email = email;
-  //   console.log(this.email)
-  // }
+  viewMyTasks() : void{
+    console.log("hii mann");
+    this.router.navigateByUrl('/daily-status');
+  }
   
 }
