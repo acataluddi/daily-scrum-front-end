@@ -19,7 +19,7 @@ export class DashboardService {
         
     }
 
-    getURL = "http://10.4.6.58:8081/DailyScrum/ProjectController";
+    getURL = "http://localhost:8080/DailyScrum/ProjectController";
     
     getProjects(): Observable<Project[]> {
 
@@ -30,8 +30,9 @@ export class DashboardService {
 
         }else{
 
-            let params = new HttpParams().set('memberEmail', localStorage.getItem("getall"));
-            return this.http.get<Project[]>(this.getURL,{params:params})      
+            let params = new HttpParams().set('memberEmail', localStorage.getItem("email"));
+            return this.http.get<Project[]>(this.getURL,{params:params})
+            
         }
       }
       deleteProjects(project):Observable<any> {
