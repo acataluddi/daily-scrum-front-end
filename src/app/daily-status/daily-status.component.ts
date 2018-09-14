@@ -82,11 +82,12 @@ export class DailyStatusComponent implements OnInit {
       showWeekNumbers: false
     });
     this.subscription = taskservice.newList.subscribe(
-      data => { this.projectId = data.projectId
+      data => {
+        this.projectId = data.projectId
         this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
-          
-  });
-}
+
+      });
+  }
 
   ngOnInit() {
     this.oldtodaytask = new Task;
@@ -100,7 +101,7 @@ export class DailyStatusComponent implements OnInit {
     this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
     this.yesterdayval = "Yesterday's Tasks";
     this.todayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
-     
+
     this.todayDate.setDate(this.todayDate.getDate() - 1);
     this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
     console.log(this.projectId)
@@ -147,7 +148,7 @@ export class DailyStatusComponent implements OnInit {
     var old_hour = 0;
     var old_minute = 0;
 
-    this.newYesterdayTask(this.task1);
+    // this.newYesterdayTask(this.task1);
 
     for (let task of this.MockYesterdayTasks) {
       if (task.taskId === this.task1.taskId) {
@@ -254,7 +255,7 @@ export class DailyStatusComponent implements OnInit {
       taskCompleted: false,
       projectId: this.projectId,
       taskDate: '',
-      lastEdit:''
+      lastEdit: ''
     }
     return ts;
   }
@@ -314,9 +315,10 @@ export class DailyStatusComponent implements OnInit {
     this.myDateValue = d1;
   }
 
+  //Add new task: Today
   newTodayTask($event) {
     this.task1 = $event;
-    var editTime  = new Date()
+    var editTime = new Date()
     var formateditTime = this.datepipe.transform(editTime, "dd-MM-yyyy HH:mm:ss")
     console.log(formateditTime)
     if (this.newOld(this.task1, this.TodayTasks)) {
@@ -342,13 +344,14 @@ export class DailyStatusComponent implements OnInit {
     }
   }
 
+  //Add new task: Yesterday
   newYesterdayTask(newtask) {
     this.task1 = newtask
-    var editTime  = new Date()
+    var editTime = new Date()
     var formateditTime = this.datepipe.transform(editTime, "MM-dd-yyyy HH:mm:ss")
     // this.lastEdit = new Date()
     // this.getLastEdit(this.lastEdit)   
-    
+
     if (this.newOld(newtask, this.YesterdayTasks)) {
       //insert
       if (this.task1.taskDate == '') {
@@ -368,63 +371,79 @@ export class DailyStatusComponent implements OnInit {
       this.taskservice.updateOldTask(this.task1)
         .subscribe(msg => console.log(msg));
     }
-    this.getLastEdit(this.YesterdayTasks) 
+    this.getLastEdit(this.YesterdayTasks)
   }
 
   newOld(keyTask, taskArray) {
     var flag = true;
     var length = taskArray.length;
-    var task = taskArray[length - 1]
-    if (keyTask.taskId == task.taskId) {
-      flag = true;
+    if (length == 0) {
+      flag = true
     }
     else {
-      flag = false
+      var task = taskArray[length - 1]
+      if (keyTask.taskId == task.taskId) {
+        flag = true;
+      }
+      else {
+        flag = false
+      }
     }
     return flag;
   }
 
-  getData(changedDate){
+  getData(changedDate) {
     //get tasks from db on date change
-      var td = changedDate;
-      var yd = new Date(changedDate);
-      (yd.setDate(changedDate.getDate() - 1));
-      this.todayTaskDate = this.datepipe.transform(td, "dd-MM-yyyy");
-      this.yesterdayTaskDate = this.datepipe.transform(yd, "dd-MM-yyyy");
-      
-      this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+    var td = changedDate;
+    var yd = new Date(changedDate);
+    (yd.setDate(changedDate.getDate() - 1));
+    this.todayTaskDate = this.datepipe.transform(td, "dd-MM-yyyy");
+    this.yesterdayTaskDate = this.datepipe.transform(yd, "dd-MM-yyyy");
+
+    this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
-  
 
-  getLastEdit(YesterdayTasks){
-    if(YesterdayTasks.length != 0){
-    var edit = new Array()
-    var day = new Array(7);
-    day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    for (let task of YesterdayTasks){
-      let datevar = new Date(task.lastEdit)
-      console.log(datevar)
-      edit.push(datevar)
-    } 
-    edit.sort()
-    this.lastEdit = edit[edit.length - 1]
-    var weekday = day[this.lastEdit.getDay()]
-    var time = this.lastEdit.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-    this.lastEditString = weekday + " " + time
-  } else {
-    this.lastEditString = ''
+
+  getLastEdit(YesterdayTasks) {
+    if (YesterdayTasks.length != 0) {
+      var edit = new Array()
+      var day = new Array(7);
+      day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      for (let task of YesterdayTasks) {
+        let datevar = new Date(task.lastEdit)
+        console.log(datevar)
+        edit.push(datevar)
+      }
+      edit.sort()
+      this.lastEdit = edit[edit.length - 1]
+      var weekday = day[this.lastEdit.getDay()]
+      var time = this.lastEdit.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+      this.lastEditString = weekday + " " + time
+    } else {
+      this.lastEditString = ''
+    }
   }
-}  
 
-getTask(today, yesterday, email, projectId){
-  this.taskservice.getTodays(today, email, projectId)
-        .subscribe(data => this.getTodaysTask(data));
-      this.taskservice.getYesterdays(yesterday, email, projectId)
-        .subscribe(data => {
-          this.getYesterdaysTask(data);
-          this.calculateTotalTime()
-          this.getLastEdit(this.YesterdayTasks)
-        });
-}
+  getTask(today, yesterday, email, projectId) {
+    this.taskservice.getTodays(today, email, projectId)
+      .subscribe(data => this.getTodaysTask(data));
+    this.taskservice.getYesterdays(yesterday, email, projectId)
+      .subscribe(data => {
+        this.getYesterdaysTask(data);
+        this.calculateTotalTime()
+        this.getLastEdit(this.YesterdayTasks)
+      });
+  }
+
+  popTask(taskArray, task) {
+    if (task.description == null || task.description == '') {
+      taskArray.pop();
+    }
+    if (taskArray == this.MockTodayTasks) {
+      this.creatednewtoday = false
+    } else {
+      this.creatednewyesterday = false
+    }
+  }
 }

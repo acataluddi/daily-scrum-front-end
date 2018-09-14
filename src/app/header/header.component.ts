@@ -47,13 +47,12 @@ export class HeaderComponent implements OnInit {
     this.projectService.getProjects(this.email)
         .subscribe(data => {
           this.setProjects(data);
-          let projects = data ; 
-          localStorage.setItem("projectId", projects[0].projectId)
-          localStorage.setItem("currentProject", this.projectArray[0].projectName);
+    //       let projects = data ; 
+    //       localStorage.setItem("projectId", projects[0].projectId)    
         });
 
-        localStorage.setItem("currentProject", this.projectArray[0].projectName);
-    this.selected.projectName = localStorage.getItem("currentProject");
+    //     localStorage.setItem("currentProject", this.projectArray[0].projectName);
+    // this.selected.projectName = localStorage.getItem("currentProject");
     this.router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
         console.log(event);

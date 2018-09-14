@@ -36,7 +36,7 @@ export class DashboardComponent implements OnInit {
   imageurl = [];
   
  
-  private getURL = "http://localhost:8080/DailyScrum/ProjectController";
+  private getURL = "http://10.4.6.22:8080/DailyScrum/ProjectController";
   ngOnInit() {
     if (localStorage.getItem("userType") != "Admin" && localStorage.getItem("userType") != "Manager") {
       this.flag = false;
