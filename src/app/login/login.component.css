@@ -68,7 +68,7 @@
      
   }
   .description {
-     margin-top: 100px;
+     margin-top: 80px;
      margin-left: 40px; 
      width: 100%; 
 
@@ -77,7 +77,7 @@
   }
   .signin { 
      
-     margin-top: 25px;
+     margin-top: 22px;
      margin-left: 40px; 
      width: 190px;
      height:44px;
@@ -108,14 +108,14 @@
      line-height:20px ;
   }
   .footer {
-     margin-top: 70px;
+     margin-top: 100px;
      margin-left: 40px; 
      width: 100%; 
      font-size: 12px;
      color: rgba(79, 86, 105, 1);
   }
   .moto { 
-     padding-top: 25%;
+     padding-top: 30%;
      padding-left: 5%; 
      width: 275px;
      font-size: 40px;
