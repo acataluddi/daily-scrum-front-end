@@ -4,9 +4,13 @@ import { Project } from '../model/project-model'
 import { ProjectMember } from '../model/ProjectMembers';
 import { Observable, EMPTY } from 'rxjs';
 
+const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
+
+
 @Injectable({
   providedIn: 'root'
 })
+
 
 export class ProjectService {
 
@@ -38,7 +42,7 @@ export class ProjectService {
   addProject(pro: Project): Observable<Project> {
     this.project = pro;
     return this.http.post<Project>(this.projectUrl,
-      JSON.stringify(this.project)
+      JSON.stringify(this.project),{headers}
     );
   }
 
@@ -46,33 +50,28 @@ export class ProjectService {
     this.project = pro;
     console.log(JSON.stringify(this.project));
     return this.http.put<any>(this.projectUrl,
-      JSON.stringify(this.project)
+      JSON.stringify(this.project),{headers}
     );
   }
 
   private geturl = 'http://10.4.6.58:8081/DailyScrum/ProjectController';
 
 
-  getProjects(memberEmail): Observable<Project[]> {
-    let params = new HttpParams()
-      .set("memberEmail", memberEmail)
-    return this.http.get<Project[]>(this.geturl,{params:params})
-  }
+  // getProjects(memberEmail): Observable<Project[]> {
+  //   let params = new HttpParams()
+  //     .set("memberEmail", memberEmail)
+  //   return this.http.get<Project[]>(this.geturl,{params:params})
+  // }
 
   //Temporary
 
 
   initializeTempProject(newProject: Project): Project {
     newProject = {
-      projectId: '20188714303243',
-      projectDesc: 'This project aims at creating a Back-end Basket API for Adastria.',
-      members: [
-        {
-          email : 'sanjo@qburst.com',
-          role : 'Developer'
-        }
-      ],
-      projectName: "Adastria Basket"
+      projectId: '',
+      projectDesc: '',
+      members: [],
+      projectName: ''
     }
     return newProject;
   }

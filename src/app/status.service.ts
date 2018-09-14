@@ -20,15 +20,25 @@ export class AuthGuard implements CanActivate {
 console.log("loginfrewgwtre:");
 console.log(route.url[0].path);
 
-    this.socialAuthService.authState.subscribe((user) => {
-        console.log("user:");
-        console.log(user);
-        this.user = user;
-        if (user != null) {
-                this.flag = true;
-        }
-        });
-        if (this.flag == true) {
+    // this.socialAuthService.authState.subscribe((user) => {
+    //     console.log("user:");
+    //     console.log(user);
+    //     this.user = user;
+    //     if (user != null) {
+    //       this.loginservice.loginMember(user.idToken)
+    //         .subscribe(msg => {
+    //           msg.userType;
+    //           if (msg.userType === "Admin" && msg.userType === "Manager") {
+    //             this.flag = true;
+    //             // console.log("flag:"+this.flag);
+    //             // this.router.navigate(['/dashboard']);
+    //             // return true;
+    //           }
+  
+    //         });
+    //     }
+    //     });
+        if (localStorage.getItem("logged") == 'true') {
             if (route.url[0].path === 'admin-view-all'){
                 this.socialAuthService.authState.subscribe((user) => {
                     console.log("user:");
@@ -79,6 +89,32 @@ console.log(route.url[0].path);
                 // this.adminviewall.AuthenticationUser();
 
             }
+            if (route.url[0].path === 'project'){
+                this.socialAuthService.authState.subscribe((user) => {
+                    console.log("user:");
+                    console.log(user);
+                    if (user != null) {
+                      this.loginservice.loginMember(user.idToken)
+                        .subscribe(msg => {
+                          msg.userType;
+                          if (msg.userType === "Admin" || msg.userType === "Manager") {
+                            // this.flag = true;
+                            // console.log("flag:"+this.flag);
+                            // this.router.navigate(['/dashboard']);
+                            return true;
+                          }else {
+                            this.router.navigate(['/dashboard']);
+                              return false;
+                          }
+              
+                        });
+                    }
+                    });
+
+                // this.adminviewall.AuthenticationUser();
+
+            }
+
 
             return true;
         } else {

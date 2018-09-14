@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 
 
-// const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
+const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class LoginService {
   private posturl='http://10.4.6.58:8081/DailyScrum/CRUDControllerUser';
   loginMember(UserToken: string) : Observable<any> {
     
-    const headers = new HttpHeaders().set("token", UserToken);
+    
 
     return this.http.post<any>(this.posturl, 
       JSON.stringify("Login"),{headers}
@@ -46,7 +46,7 @@ export class LoginService {
 
   private geturl = 'http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page=1';
   getMembers(): Observable<Member[]> {
-    return this.http.get<Member[]>(this.geturl)
+    return this.http.get<Member[]>(this.geturl,{headers})
   }
 
   logoutMember() {

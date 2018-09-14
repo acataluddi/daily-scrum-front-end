@@ -4,7 +4,7 @@ import { Http, } from '@angular/http';
 import { AuthService } from 'angular-6-social-login';
 import { LoginService } from '../service/login.service';
 import { Project } from '../model/project-model';
-import { ProjectService } from '../service/project.service';
+import { DashboardService } from '../service/dashboardservice.service';
 import { Router, NavigationStart } from '@angular/router';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 
@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
     private socialAuthService: AuthService,
     private router: Router,
     private loginservice: LoginService,
-    private projectService: ProjectService,
+    private projectService:DashboardService,
     private taskService: ProcessIndividualTaskService) { }
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit {
     this.getUserDetails();
     this.toggle(this.router.url);
 
-    this.projectService.getProjects(this.email)
+    this.projectService.getProjects()
         .subscribe(data => {
           this.setProjects(data);
           let projects = data ; 
@@ -68,7 +68,7 @@ export class HeaderComponent implements OnInit {
   projectArray: ProjectUpdated[];
   callMethod1() {
     this.email = localStorage.getItem("email");
-    this.viewallservice.getLoggedProjects(this.email)
+    this.viewallservice.getLoggedProjects()
       .subscribe(data => this.getloggedProjectsglobal(data));
   }
   getloggedProjectsglobal(Todays) {

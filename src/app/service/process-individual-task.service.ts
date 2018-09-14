@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Task } from "../model/task-model";
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams ,HttpHeaders} from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Project } from '../model/project-model';
+
+const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +24,7 @@ export class ProcessIndividualTaskService {
       .set("taskDate", taskDate)
       .set("memberEmail", memberEmail)
       .set("projectId", projectId)
+      .set("token",localStorage.getItem("token"))
     return this.http.get<Task[]>(this.url,{params:params})
   }
 
@@ -30,15 +33,16 @@ export class ProcessIndividualTaskService {
       .set("taskDate", taskDate)
       .set("memberEmail", memberEmail)
       .set("projectId", projectId)
+      .set("token",localStorage.getItem("token"))
     return this.http.get<Task[]>(this.url,{params:params})
   }
 
   addNewTask(newTask):Observable<any>{
-    return this.http.post<any>(this.url, JSON.stringify(newTask))
+    return this.http.post<any>(this.url, JSON.stringify(newTask),{headers})
   }
 
   updateOldTask(task): Observable<any>{
-    return this.http.put<any>(this.url, JSON.stringify(task))
+    return this.http.put<any>(this.url, JSON.stringify(task),{headers})
   }
 
   changeProject(currentProject: Project){

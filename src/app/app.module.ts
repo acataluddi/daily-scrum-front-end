@@ -24,9 +24,8 @@ import { TaskPageAdminComponent } from './task-page-admin/task-page-admin.compon
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, Response, Headers } from '@angular/http';
 import { HeaderComponent } from './header/header.component';
-import { FilterPipe} from './filter.pipe';
-import { FilterPipeModule } from 'ngx-filter-pipe';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+
 
 
 
@@ -54,7 +53,7 @@ export function getAuthServiceConfigs() {
     AdminviewallComponent,
     TaskPageAdminComponent,
     HeaderComponent,
-    PageNotFoundComponent,
+
    
   ],
   imports: [
