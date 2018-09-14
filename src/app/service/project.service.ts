@@ -50,7 +50,7 @@ export class ProjectService {
     );
   }
 
-  private geturl = 'http://localhost:8080/DailyScrum/ProjectController';
+  private geturl = 'http://10.4.6.22:8080/DailyScrum/ProjectController';
 
 
   getProjects(memberEmail): Observable<Project[]> {
