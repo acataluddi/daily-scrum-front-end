@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
     public router: Router,
     private loginservice: LoginService ) { 
       this.routeEvent(this.router);
- 
 }
 
 

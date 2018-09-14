@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import {DatePipe} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,9 +24,8 @@ import { TaskPageAdminComponent } from './task-page-admin/task-page-admin.compon
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, Response, Headers } from '@angular/http';
 import { HeaderComponent } from './header/header.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-// import { TokenInterceptor } from '../app/auth/token.interceptor';
-
+import { FilterPipe} from './filter.pipe';
+import { FilterPipeModule } from 'ngx-filter-pipe';
 
 
 
@@ -40,6 +40,7 @@ export function getAuthServiceConfigs() {
   );
   return config;
 }
+
 
 @NgModule({
   declarations: [
@@ -74,12 +75,7 @@ export function getAuthServiceConfigs() {
       useFactory: getAuthServiceConfigs,
       
     },
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: TokenInterceptor,
-    //   multi: true
-    // },
-    
+    DatePipe,
     AuthGuard],
   
   bootstrap: [AppComponent]

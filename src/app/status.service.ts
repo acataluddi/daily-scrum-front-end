@@ -64,6 +64,31 @@ console.log(route.url[0].path);
                 // this.adminviewall.AuthenticationUser();
 
             }
+            if (route.url[0].path === 'task-page-admin'){
+                this.socialAuthService.authState.subscribe((user) => {
+                    console.log("user:");
+                    console.log(user);
+                    if (user != null) {
+                      this.loginservice.loginMember(user.idToken)
+                        .subscribe(msg => {
+                          msg.userType;
+                          if (msg.userType === "Admin" || msg.userType === "Manager") {
+                            // this.flag = true;
+                            // console.log("flag:"+this.flag);
+                            // this.router.navigate(['/dashboard']);
+                            return true;
+                          }else {
+                            this.router.navigate(['/dashboard']);
+                              return false;
+                          }
+              
+                        });
+                    }
+                    });
+
+                // this.adminviewall.AuthenticationUser();
+
+            }
 
             return true;
         } else {

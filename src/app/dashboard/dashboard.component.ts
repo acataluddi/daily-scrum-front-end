@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Project, newProject } from "../model/project-model";
+import { Project} from "../model/project-model";
 import { Member } from "../model/member-model";
 import { LoginService } from "../service/login.service";
 import { Router } from '@angular/router';
-import { PROJECTS } from "../mockProjects";
 import {HttpClient} from "@angular/common/http";
 import {Http,Response} from "@angular/http";
 import {DashboardService } from "../service/dashboardservice.service";
 import { AdminviewallserviceService } from '../service/adminviewallservice.service';
-import {ProjectService } from "../project.service";
+import {ProjectService } from "../service/project.service";
 import {AdminviewallComponent} from '../adminviewall/adminviewall.component';
 import {AuthService} from 'angular-6-social-login';
 
@@ -21,7 +20,7 @@ import {AuthService} from 'angular-6-social-login';
 export class DashboardComponent implements OnInit {
 
   constructor(public router: Router, private loginservice: LoginService,private dashboardservice:DashboardService, private http:Http,
-  private viewallcomponent:AdminviewallComponent, private projectService:ProjectService, private socialAuthService: AuthService ) { 
+  private viewallcomponent:AdminviewallComponent,private viewallservice:AdminviewallserviceService, private projectService:ProjectService, private socialAuthService: AuthService ) { 
  
   }
   member: Member;
@@ -32,17 +31,16 @@ export class DashboardComponent implements OnInit {
   project: Project;
   TotalMembers = null;
   TotalProjectMembers = [];
-  newproject:newProject[];
+  // color = ['rgb(12, 33, 93)','rgb(63, 205, 195)','rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
+  newproject:Project[];
   memberArray:Member[];
-  projectArray:newProject[];
+  projectArray:Project[];
   noOfMembers = [];
-  projects = PROJECTS;
   flag = false;
   imageurl = [];
   UserType:string;
-  color = ['rgb(12, 33, 93)','rgb(63, 205, 195)','rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
-  
  
+  
   ngOnInit() {
     this.socialAuthService.authState.subscribe((user) => {
       console.log("user:");
@@ -50,6 +48,7 @@ export class DashboardComponent implements OnInit {
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
           .subscribe(msg => {
+            console.log(msg.userType);
             this.UserType = msg.userType;
             if (this.UserType === "Admin" || this.UserType === "Manager") {
               this.flag = true;
@@ -60,18 +59,15 @@ export class DashboardComponent implements OnInit {
       }
       });
     
-    
     this.dashboardservice.getMembers()
     .subscribe(membersArr => this.getMembers(membersArr));
 
     this.dashboardservice.getProjects()
       .subscribe(projectArr => this.getProjects(projectArr, this.memberArray));
 
-
-      
      
   }
-
+  
   getProjects(projectArr,memberArray): void {
     let x=0;
     this.TotalProjectMembers[0]=0;
@@ -98,7 +94,7 @@ export class DashboardComponent implements OnInit {
 
   getMembers(membersArr): void {
     this.memberArray = membersArr;
-    // console.log(this.memberArray);
+    console.log(this.memberArray);
     this.TotalMembers = this.memberArray.length;
 
   }
@@ -124,7 +120,7 @@ export class DashboardComponent implements OnInit {
   }
 
   EditProject(projectDetail) {
-
+    this.projectService.setRequestType("update");
     this.projectService.setProjectToBeUpdated(projectDetail)
     this.router.navigateByUrl('/project');
   }

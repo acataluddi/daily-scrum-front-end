@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams} from "@angular/common/http";
-import { newProject } from '../model/project-model';
+import { HttpClient, HttpParams,HttpHeaders} from "@angular/common/http";
+import { Project } from '../model/project-model';
 import { Observable } from 'rxjs';
-
 
 
 @Injectable({
@@ -10,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class DashboardService {
 
-    newproject:newProject;
+    newproject:Project;
     UserType:string;
 
     constructor(private http: HttpClient ) { 
@@ -26,24 +25,25 @@ export class DashboardService {
     getMembers(): Observable<any> {
         return this.http.get<any>(this.getallURL)
       }
+   
     
-    getProjects(): Observable<newProject[]> {
+    getProjects(): Observable<Project[]> {
+        // console.log(localStorage.getItem("token"));
 
-        if (this.UserType =="Admin"){
+        // let params = new HttpParams().set('memberEmail', 'getall');
+        const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
+        return this.http.get<Project[]>(this.getURL,{headers})
 
-        let params = new HttpParams().set('memberEmail', 'getall');
-        return this.http.get<newProject[]>(this.getURL,{params:params})
+    //     if (this.UserType =="Admin"){
 
-        }else{
+    //     return this.http.get<Project[]>(this.getURL,{params:params},{})
 
-            let params = new HttpParams().set('memberEmail', localStorage.getItem("email"));
-            return this.http.get<newProject[]>(this.getURL,{params:params})
-            
-        }
+    //     }else{
 
-        
+    //         let params = new HttpParams().set('memberEmail', localStorage.getItem("email"));
+    //         return this.http.get<Project[]>(this.getURL,{params:params})      
+    //     }
       }
-
       deleteProjects(project):Observable<any> {
          
           return this.http.delete<any>(this.getURL +"?projectId="+ project)

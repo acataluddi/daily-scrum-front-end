@@ -34,9 +34,10 @@ export class AdminviewallserviceService {
           email: member.email,
           userType: member.userType,       
           }
-    return this.http.put<any>(this.apiURL, 
+    console.log(JSON.stringify(newmember));
+    
+    return this.http.put<any>("http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page="+this.p, 
       JSON.stringify(newmember),{headers}
     );
   }
 }
-

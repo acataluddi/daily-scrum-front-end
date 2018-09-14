@@ -1,3 +1,76 @@
-<p>
-  project works!
-</p>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div  *ngIf="flag === true" class=body>
+  <div class="mainclass">
+    <div class="subclasszero">
+      <input type="text" placeholder="New Project Name" id="projectname" [(ngModel)]="project.projectName">
+    </div>
+    <ng-container *ngIf="show1">
+      <div class="subclassone" (click)="changeVisibility1()">
+        <div class="adddescriptionlogoclass"><img src="../../assets/Group_8.png"></div>
+        <div class="adddescriptionclass">Describe about the project</div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!show1">
+      <div class="descriptioninputclass">
+        <div #des contenteditable="true" id="projectdescription" data-text="Write description here...">{{project.projectDesc}}</div>
+      </div>
+    </ng-container>
+    <ng-container>
+      <div class="projectmembersclass" *ngIf="showAddMember==true">
+        <div class="teamclass">TEAM</div>
+        <div class="memberclass" *ngFor="let mem of project.members">
+          <div class="member">
+            <input type="text" placeholder="Email" [(ngModel)]="mem.email">
+            <div class="role">
+              <select id="role{{mem.role}}" [(ngModel)]="mem.role">
+                <option>
+                  Select role
+                </option>
+                <option>
+                  Project Manager
+                </option>
+                <option>
+                  Architect
+                </option>
+                <option>
+                  Developer
+                </option>
+                <option>
+                  Team Lead
+                </option>
+                <option>
+                  Tester
+                </option>
+                <option>
+                  UX Designer
+                </option>
+                <option>
+                  Designer
+                </option>
+                <option>
+                  Business Analyst
+                </option>
+                <option>
+                  System Admin
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="delete" (click)="delete(this.mem)"><img src="../../assets/delete_mail.png"></div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container>
+      <div class="subclasstwo" (click)="showAddMember=true; addNewMem()">
+        <div class="addmemberlogoclass"><img src="../../assets/Group_8.png"></div>
+        <div class="addmemberclass">Add members</div>
+      </div>
+    </ng-container>
+    <ng-container>
+      <div class="addcancelclass">
+        <input type="button" value="Cancel" (click)="cancel()">
+        <input type="button" value="{{buttonText}}" (click)="addOrModifyProject()">
+      </div>
+    </ng-container>
+  </div>
+</div>
