@@ -71,7 +71,7 @@ img[src="../../assets/Scrum_logo.png"] {
   display: inline-block;
   position: absolute;
   top: 28px;
-  left: 355px;
+  left: 350px;
   background-color: #ffffff;
   background-image: url(../../assets/arrow.png);
   border: none;
@@ -305,8 +305,8 @@ img[src="../../assets/Scrum_logo.png"] {
 
   .arrow2 {
     position: fixed;
-    top: 3.7%;
-    right: 0.3%;
+    top: 4%;
+    right: 1%;
   }
 
   .button {
@@ -314,9 +314,9 @@ img[src="../../assets/Scrum_logo.png"] {
   }
 
   #arrow {
-    position: relative;
-    top: -2px;
-    left: 146%;
+    position: absolute;
+    top: 44%;
+    left: 120%;
   }
 
   #projectlist {

@@ -27,7 +27,7 @@ export class AdminviewallserviceService {
 
   apiURL :string;
 
-  private posturl='http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page=1';
+  private posturl='http://localhost:8080/DailyScrum/CRUDControllerUser?page=1';
 
 
   getMembers(): Observable<any> {
@@ -37,7 +37,7 @@ export class AdminviewallserviceService {
   getPageNum(Pagenum) {
    
     this.p = Pagenum;
-    this.apiURL = 'http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page='+this.p;
+    this.apiURL = 'http://localhost:8080/DailyScrum/CRUDControllerUser?page='+this.p;
 
   }
 
@@ -53,7 +53,7 @@ export class AdminviewallserviceService {
           }
     console.log(JSON.stringify(newmember));
     
-    return this.http.put<any>("http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page="+this.p, 
+    return this.http.put<any>("http://localhost:8080/DailyScrum/CRUDControllerUser?page="+this.p, 
       JSON.stringify(newmember)
     );
   }

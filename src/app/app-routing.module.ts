@@ -14,9 +14,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'project', component: ProjectComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'daily-status', component: DailyStatusComponent, canActivate: [AuthGuard] },
+  { path: 'daily-status/:projectId/:name', component: DailyStatusComponent, canActivate: [AuthGuard] },
   { path: 'admin-view-all', component: AdminviewallComponent, canActivate: [AuthGuard] },
-  { path: 'task-page-admin', component: TaskPageAdminComponent, canActivate: [AuthGuard] },
+  { path: 'task-page-admin/:name', component: TaskPageAdminComponent, canActivate: [AuthGuard] },
   { path: '**', component: LoginComponent }
 ];
 

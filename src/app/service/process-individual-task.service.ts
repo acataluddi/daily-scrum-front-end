@@ -10,19 +10,27 @@ import { Project } from '../model/project-model';
 export class ProcessIndividualTaskService {
 
   constructor(
-    private http: HttpClient,
+    private http: HttpClient
   ) { }
 
-  private url = 'http://10.4.6.22:8080/DailyScrum/TaskController';
-  private newListSource = new Subject<Project>();  
+  private url = 'http://localhost:8080/DailyScrum/TaskController';
+  private newListSource = new Subject<Project>();
   newList = this.newListSource.asObservable();
+
+  private selectedSource1 = new Subject<Project>();
+  selected1 = this.selectedSource1.asObservable();
+
+  private selectedSource2 = new Subject<Project>();
+  selected2 = this.selectedSource2.asObservable();
+
+  selectedProject;
 
   getYesterdays(taskDate, memberEmail, projectId): Observable<Task[]> {
     let params = new HttpParams()
       .set("taskDate", taskDate)
       .set("memberEmail", memberEmail)
       .set("projectId", projectId)
-    return this.http.get<Task[]>(this.url,{params:params})
+    return this.http.get<Task[]>(this.url, { params: params })
   }
 
   getTodays(taskDate, memberEmail, projectId): Observable<Task[]> {
@@ -30,25 +38,29 @@ export class ProcessIndividualTaskService {
       .set("taskDate", taskDate)
       .set("memberEmail", memberEmail)
       .set("projectId", projectId)
-    return this.http.get<Task[]>(this.url,{params:params})
+    return this.http.get<Task[]>(this.url, { params: params })
   }
 
-  addNewTask(newTask):Observable<any>{
+  addNewTask(newTask): Observable<any> {
     return this.http.post<any>(this.url, JSON.stringify(newTask))
   }
 
-  updateOldTask(task): Observable<any>{
+  updateOldTask(task): Observable<any> {
     return this.http.put<any>(this.url, JSON.stringify(task))
   }
 
-  changeProject(currentProject: Project){
+  changeProject(currentProject: Project) {
     this.newListSource.next(currentProject)
   }
 
+  getSelectedProject(selected) {
+    this.selectedProject = selected;
+    this.selectedSource1.next(selected);
+  }
 
+  setSelectedProject() {
+    console.log(this.selectedProject)
+    return this.selectedProject;
+  }
 
-  
-  // changeProjectTask(currentProject: Project) {
-  //   this.newListSource.next(currentProject)
-  // }
 }

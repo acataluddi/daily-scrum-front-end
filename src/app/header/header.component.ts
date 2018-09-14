@@ -12,6 +12,8 @@ import { ActivatedRoute } from "@angular/router";
 import { ProjectviewallService } from '../service/projectviewall.service';
 import { ProjectUpdated } from '../model/projectupdated-model';
 import { TaskPageAdminComponent } from '../task-page-admin/task-page-admin.component';
+import { DashboardService } from '../service/dashboardservice.service';
+import { Subscription } from 'rxjs';
 
 
 @Injectable({
@@ -29,30 +31,58 @@ export class HeaderComponent implements OnInit {
   projects: Project[];
   title: string;
   email = localStorage.getItem("email");
-  selected: Project = { projectId: "", projectName: "", members: [], projectDesc: '' };
+  subscription: Subscription;
+  sub;
+  pid
+  selected: Project = { projectId: "", projectName: "", projectDesc: "", members: [] }
+
+  show_dailyscrum;
+  show_arrow;
+  show_scrum;
+  show_dash;
+  show_signout;
+  show_projectlist;
+
   constructor(
     private viewallservice: ProjectviewallService,
     private socialAuthService: AuthService,
     private router: Router,
     private loginservice: LoginService,
     private projectService: ProjectService,
-    private taskService: ProcessIndividualTaskService) { }
+    private route: ActivatedRoute,
+    private taskService: ProcessIndividualTaskService,
+    private dashboardService: DashboardService) {
+
+    this.subscription = taskService.selected1.subscribe(
+      data => {
+        this.setSelected(data)
+        // localStorage.setItem("currentProject",data.projectName)
+      });
+
+    this.subscription = dashboardService.getProjects().subscribe(data => {
+      this.setProjects(data)
+    });
+
+  }
 
   ngOnInit() {
-    this.callMethod1();
+
+    this.show_dailyscrum = false
+    this.show_arrow = false
+    this.show_scrum = true
+    this.show_dash = true
+    this.show_signout = true
+    this.show_projectlist = false
+
+    if (this.router.url.search('daily-status/') || this.router.url.search('task-page-admin/')) {
+      var name = localStorage.getItem("currentProject")
+      console.log(name)
+      this.selected.projectName = name;
+    }
     this.initializeMember();
     this.getUserDetails();
     this.toggle(this.router.url);
 
-    this.projectService.getProjects(this.email)
-        .subscribe(data => {
-          this.setProjects(data);
-    //       let projects = data ; 
-    //       localStorage.setItem("projectId", projects[0].projectId)    
-        });
-
-    //     localStorage.setItem("currentProject", this.projectArray[0].projectName);
-    // this.selected.projectName = localStorage.getItem("currentProject");
     this.router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
         console.log(event);
@@ -60,28 +90,17 @@ export class HeaderComponent implements OnInit {
       }
     });
 
-    
   }
   total: number
-  projectupdated: ProjectUpdated;
-  projectArray: ProjectUpdated[];
-  callMethod1() {
-    this.email = localStorage.getItem("email");
-    this.viewallservice.getLoggedProjects(this.email)
-      .subscribe(data => this.getloggedProjectsglobal(data));
-  }
-  getloggedProjectsglobal(Todays) {
-    this.projectArray = Todays;
-    this.selected.projectName = this.projectArray[0].projectName;
 
-  }
   initializeMember() {
     this.member = {
       employeeID: '',
       name: '',
       email: '',
       imageurl: '',
-      userType: ''
+      userType: '',
+      idToken: ''
     }
     this.title = '';
   }
@@ -91,10 +110,14 @@ export class HeaderComponent implements OnInit {
     this.member.imageurl = localStorage.getItem("image");
   }
 
-  setProjects(userProjects){
+  setProjects(userProjects) {
     this.projects = userProjects;
-    this.selected = this.projects[0];
   }
+
+  setSelected(projectSelected) {
+    this.selected = projectSelected
+  }
+
   getImage(): String {
     this.member.imageurl = localStorage.getItem("image");
     return this.member.imageurl;
@@ -106,35 +129,35 @@ export class HeaderComponent implements OnInit {
   }
   changeProject(newProject) {
     this.selected = newProject;
-   
+
     localStorage.setItem("currentProject", this.selected.projectName);
     this.taskService.changeProject(this.selected)
-   
+
   }
 
   toggle(currenturl) {
     if (currenturl == '/dashboard') {
       this.title = 'Dashboard';
-      document.getElementById("dailyscrumclass").style.visibility = "hidden";
-      document.getElementById("arrow").style.visibility = "hidden";
-      document.getElementById("scrum").style.visibility = "visible";
-      document.getElementById("dash").style.visibility = "visible";
+      this.show_dailyscrum = false
+      this.show_arrow = false
+      this.show_scrum = true
+      this.show_dash = true
     } else if (currenturl == '/project') {
       this.title = 'New Project';
-      document.getElementById("dailyscrumclass").style.visibility = "hidden";
-      document.getElementById("arrow").style.visibility = "hidden";
-      document.getElementById("scrum").style.visibility = "visible";
+      this.show_dailyscrum = false
+      this.show_arrow = false
+      this.show_scrum = true
     } else if (currenturl == '/admin-view-all') {
-      document.getElementById("dailyscrumclass").style.visibility = "hidden";
-      document.getElementById("arrow").style.visibility = "hidden";
-      document.getElementById("scrum").style.visibility = "visible";
-      document.getElementById("dash").style.visibility = "hidden";
+      this.show_dailyscrum = false
+      this.show_arrow = false
+      this.show_scrum = true
+      this.show_dash = false
     }
     else {
-      document.getElementById("dailyscrumclass").style.visibility = "visible";
-      document.getElementById("arrow").style.visibility = "visible";
-      document.getElementById("scrum").style.visibility = "hidden";
-      document.getElementById("dash").style.visibility = "hidden";
+      this.show_dailyscrum = true
+      this.show_arrow = true
+      this.show_scrum = false
+      this.show_dash = false
     }
     console.log(currenturl);
   }

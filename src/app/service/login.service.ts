@@ -33,11 +33,11 @@ export class LoginService {
     localStorage.setItem("logged", "false");
   }
 
-  private posturl = 'http://10.4.6.22:8080/DailyScrum/CRUDControllerUser';
-  loginMember(member: Member): Observable<any> {
-    this.member = member;
+  private posturl = 'http://10.4.6.58:8081/DailyScrum/CRUDControllerUser';
+  loginMember(UserToken: string): Observable<any> {
+    const headers = new HttpHeaders().set("token", UserToken);
     return this.http.post<any>(this.posturl,
-      JSON.stringify(member)
+      JSON.stringify("Login"), { headers }
     );
   }
 
@@ -48,7 +48,7 @@ export class LoginService {
     return this.loggedIn;
   }
 
-  private geturl = 'http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page=1';
+  private geturl = 'http://localhost:8080/DailyScrum/CRUDControllerUser?page=1';
   getMembers(): Observable<Member[]> {
     return this.http.get<Member[]>(this.geturl)
   }
@@ -58,5 +58,8 @@ export class LoginService {
     localStorage.setItem("logged", "false");
     localStorage.setItem("email", '');
     localStorage.setItem("image", '');
+    localStorage.setItem("currentProject", '');
+    localStorage.setItem("projectId", '');
+    localStorage.setItem("userType", '');
   }
 }

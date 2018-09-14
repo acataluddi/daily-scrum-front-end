@@ -21,64 +21,64 @@
       </button>
     </div>
     <div class="BottomDiv">
-      <div  class="ProjectBoxDiv" *ngFor="let Project of newproject ; let j=index">
-        
-          <div class=" ProjectNameBoxDiv">
-            <div class="ProjectNameDiv">{{Project.projectName}}</div>
-          </div>
-          <div class="InnerProjectBoxDiv">
-            <div  *ngFor="let member of Project.members ; let i=index">
+      <div class="ProjectBoxDiv" *ngFor="let Project of newproject ; let j=index">
+
+        <div class=" ProjectNameBoxDiv">
+          <div class="ProjectNameDiv">{{Project.projectName}}</div>
+        </div>
+        <div class="InnerProjectBoxDiv">
+          <div *ngFor="let member of Project.members ; let i=index">
             <!-- <div *ngFor="let item of memberArray  ; let i=index"> -->
-                <div *ngIf="j==0">
+            <div *ngIf="j==0">
               <div *ngIf="i<4">
                 <!-- <div *ngIf="i%2!=0"> -->
-                  <button class="SmallCircleButton1Odd SmallCircleButton">
-                    <div class="SmallCircleNameDiv" >
-                      <img class="memberImage" src="{{imageurl[i]}}"></div>
-                  </button>
-                </div>
-                </div>
-                  <div *ngIf="j>0">
-                      <div *ngIf="i<4">
-                        <!-- <div *ngIf="i%2!=0"> -->
-                          <button class="SmallCircleButton1Odd SmallCircleButton">
-                            <div class="SmallCircleNameDiv" >
-                              <img class="memberImage" src="{{imageurl[i+TotalProjectMembers[j]]}}"></div>
-                          </button>
-                       </div>  
-                   </div>
-             </div>
-             
-            <!-- </div> -->
-            <div *ngIf="noOfMembers[j]-4>0" >
-              <button class="SmallCircleButton2 SmallCircleButton">
-                <div class="ExtraMembersDiv">+{{noOfMembers[j]-4}}</div>
-              </button>
+                <button class="SmallCircleButton1Odd SmallCircleButton">
+                  <div class="SmallCircleNameDiv">
+                    <img class="memberImage" src="{{imageurl[i]}}"></div>
+                </button>
+              </div>
             </div>
-            <button class="DailyStatusButton" (click)="openDailyStatus()">
-              <div class="DailyStatusDiv" >Daily Status</div>
-            </button>
-            <button class="MenuButton DropdownButton">
-              <div class="DropdownContentDiv" >
-                <!-- <button class="EditButton Button "> -->
-                  <div class="EditDiv Button" (click)="EditProject(Project)" >
-                     
-                    Edit Project
-                  
-                  </div>
-                <!-- </button> -->
-                <!-- <button class="DeleteButton "> -->
-                  <div class="DeleteDiv Button"  (click)="DeleteProject(Project.projectId)" >
-                    Delete Project
-                  </div>
-                <!-- </button> -->
+            <div *ngIf="j>0">
+              <div *ngIf="i<4">
+                <!-- <div *ngIf="i%2!=0"> -->
+                <button class="SmallCircleButton1Odd SmallCircleButton">
+                  <div class="SmallCircleNameDiv">
+                    <img class="memberImage" src="{{imageurl[i+TotalProjectMembers[j]]}}"></div>
+                </button>
               </div>
-              <div class="MenuDotDiv">
-                <img src="../../assets/Menudots.png">
-              </div>
+            </div>
+          </div>
+
+          <!-- </div> -->
+          <div *ngIf="noOfMembers[j]-4>0">
+            <button class="SmallCircleButton2 SmallCircleButton">
+              <div class="ExtraMembersDiv">+{{noOfMembers[j]-4}}</div>
             </button>
           </div>
-        
+          <button class="DailyStatusButton" (click)="openDailyStatus(Project)">
+            <div class="DailyStatusDiv">Daily Status</div>
+          </button>
+          <button class="MenuButton DropdownButton">
+            <div class="DropdownContentDiv">
+              <!-- <button class="EditButton Button "> -->
+              <div class="EditDiv Button" (click)="EditProject(Project)">
+
+                Edit Project
+
+              </div>
+              <!-- </button> -->
+              <!-- <button class="DeleteButton "> -->
+              <div class="DeleteDiv Button" (click)="DeleteProject(Project.projectId)">
+                Delete Project
+              </div>
+              <!-- </button> -->
+            </div>
+            <div class="MenuDotDiv">
+              <img src="../../assets/Menudots.png">
+            </div>
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
