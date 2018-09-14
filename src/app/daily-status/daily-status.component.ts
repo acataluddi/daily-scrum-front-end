@@ -4,6 +4,7 @@ import { ProcessIndividualTaskService } from '../service/process-individual-task
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Injectable({
@@ -66,15 +67,17 @@ export class DailyStatusComponent implements OnInit {
   yesterdayTaskDate;
   todayDate = new Date();
   email = localStorage.getItem("email");
-  projectId = localStorage.getItem("projectId")
+  projectId;
   status = false;
   lastEdit;
   lastEditString = '';
   subscription: Subscription;
+  sub: any;
 
   constructor(
     private taskservice: ProcessIndividualTaskService,
-    private datepipe: DatePipe
+    private datepipe: DatePipe,
+    private route: ActivatedRoute
 
   ) {
     this.datePickerConfig = Object.assign({}, {
@@ -104,9 +107,17 @@ export class DailyStatusComponent implements OnInit {
 
     this.todayDate.setDate(this.todayDate.getDate() - 1);
     this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
-    console.log(this.projectId)
 
+    this.sub = this.route.params.subscribe(params => {
+      var name = params['name']
+      this.projectId = +params['projectId'];
+    });
+    console.log(this.projectId)
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
   getTodaysTask(Todays) {
@@ -349,8 +360,6 @@ export class DailyStatusComponent implements OnInit {
     this.task1 = newtask
     var editTime = new Date()
     var formateditTime = this.datepipe.transform(editTime, "MM-dd-yyyy HH:mm:ss")
-    // this.lastEdit = new Date()
-    // this.getLastEdit(this.lastEdit)   
 
     if (this.newOld(newtask, this.YesterdayTasks)) {
       //insert
@@ -402,8 +411,6 @@ export class DailyStatusComponent implements OnInit {
 
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
-
-
 
   getLastEdit(YesterdayTasks) {
     if (YesterdayTasks.length != 0) {

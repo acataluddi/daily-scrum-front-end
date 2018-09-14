@@ -10,7 +10,7 @@ import { Observable, EMPTY } from 'rxjs';
 
 export class ProjectService {
 
-  private projectUrl = 'http://10.4.6.22:8080/DailyScrum/ProjectController';
+  private projectUrl = 'http://localhost:8080/DailyScrum/ProjectController';
   private project: Project;
   // reqType: string;
   reqType= 'add';
@@ -50,7 +50,7 @@ export class ProjectService {
     );
   }
 
-  private geturl = 'http://10.4.6.22:8080/DailyScrum/ProjectController';
+  private geturl = 'http://localhost:8080/DailyScrum/ProjectController';
 
 
   getProjects(memberEmail): Observable<Project[]> {

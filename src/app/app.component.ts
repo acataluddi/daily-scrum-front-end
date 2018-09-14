@@ -12,12 +12,14 @@ export class AppComponent {
   constructor(private router: Router) {
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
+        console.log(event)
         if (event['url'] == '/' || event['url'] == '/login') {
+          this.showHead = false;
+        } else if(localStorage.getItem("logged") == 'false'){
           this.showHead = false;
         } else {
           this.showHead = true;
         }
-
       }
     });
   }

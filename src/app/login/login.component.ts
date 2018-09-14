@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Member} from "../model/member-model";
-import {AuthService,GoogleLoginProvider} from 'angular-6-social-login';
-import { Router,NavigationEnd } from '@angular/router';
+import { Member } from "../model/member-model";
+import { AuthService, GoogleLoginProvider } from 'angular-6-social-login';
+import { Router, NavigationEnd } from '@angular/router';
 import { LoginService } from "../service/login.service";
 
 
@@ -14,9 +14,9 @@ export class LoginComponent implements OnInit {
 
   constructor(private socialAuthService: AuthService,
     public router: Router,
-    private loginservice: LoginService) { 
-      this.routeEvent(this.router);
-}
+    private loginservice: LoginService) {
+    this.routeEvent(this.router);
+  }
 
 
 
@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
       name: '',
       email: '',
       userType: '',
-      imageurl: ''
+      imageurl: '',
+      idToken: ''
     }
 
 
@@ -51,9 +52,10 @@ export class LoginComponent implements OnInit {
           name: userData.name,
           email: userData.email,
           userType: 'User',
-          imageurl: userData.image
+          imageurl: userData.image,
+          idToken: userData.idToken
         }
-        this.loginservice.loginMember(this.member)
+        this.loginservice.loginMember(userData.idToken)
           .subscribe(msg => {
             console.log(msg);
             if (msg.email === this.member.email) {
@@ -77,11 +79,11 @@ export class LoginComponent implements OnInit {
   getDetails(): Member {
     return this.member;
   }
-  routeEvent(router: Router){
+  routeEvent(router: Router) {
     router.events.subscribe(e => {
-      if(e instanceof NavigationEnd){
+      if (e instanceof NavigationEnd) {
         console.log(e);
-        if ((e['url'] === '/login')&& (localStorage.getItem("logged") == 'true')) {
+        if ((e['url'] === '/login') && (localStorage.getItem("logged") == 'true')) {
           console.log(e);
           this.router.navigate(['/dashboard']);
         }
