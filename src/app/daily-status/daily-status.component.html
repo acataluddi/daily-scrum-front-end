@@ -11,13 +11,13 @@
   </div>
   <div class="right-header">
     <div class="today_header">
-      <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate"
-        #dp="bsDatepicker" [bsConfig]="datePickerConfig" bsDatepicker [(bsValue)]="myDateValue" (onHidden)="showDatePicker=false"
-        (bsValueChange)="onDateChange($event)">{{todayval}}</div>
+      <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate" 
+      #dp="bsDatepicker" [bsConfig]="datePickerConfig" bsDatepicker [(bsValue)]="myDateValue" (onHidden)="showDatePicker=false"
+      (bsValueChange)="onDateChange($event)">{{todayval}}</div>
       <img class="left-arrow" src="../../assets/arrow-left.png" align="top" (click)="getPreviousDate()">
       <img class="right-arrow" src="../../assets/arrow-right.png" align="top" (click)="getNextDate()">
-      <div class="edit_status">Saving..</div>
-      
+      <!-- <div class="edit_status">Saving..</div> -->
+      <!-- <div class="edit_status">Saved</div> -->
     </div>
     <div class="today_task_label">Write about your tasks for today</div>
   </div>
@@ -27,11 +27,11 @@
     <div class="left-inner-part">
       <div *ngFor="let yesterdayTask of MockYesterdayTasks">
         <app-individual-task [task]=yesterdayTask (timeChangeEvent)="modifyTime($event)" 
-        (updateTask)="newYesterdayTask($event)"></app-individual-task>
+        (addUpdateTask)="newYesterdayTask($event)" (popTask)="popTask(MockYesterdayTasks, $event)"></app-individual-task>
       </div>
       <div class="new_task_field" (click)="addYesterdayTask()">
         <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
-        <div class="add_task_label">
+        <div class="add_task_label" >
           Add new task here</div>
       </div>
     </div>
@@ -39,8 +39,8 @@
   <div class="container right-part">
     <div class="right-inner-part">
       <div *ngFor="let todayTask of MockTodayTasks">
-        <app-individual-task [task]=todayTask (timeChangeEvent)="newTodayTask($event)" 
-        (updateTask)="newTodayTask($event)"></app-individual-task>
+        <app-individual-task [task]=todayTask (addUpdateTask)="newTodayTask($event)"
+         (popTask)="popTask(MockTodayTasks, $event)"></app-individual-task>
       </div>
       <div class="new_task_field" (click)="addTodayTask()">
         <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
