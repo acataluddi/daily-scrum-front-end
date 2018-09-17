@@ -9,7 +9,8 @@ import { BehaviorSubject } from 'rxjs';
 )
 export class NavigationdataService {
 
-  private dataSource = new BehaviorSubject<string>('default');
+  email = localStorage.getItem('email')
+  private dataSource = new BehaviorSubject<string>(this.email);
   currentdata$ = this.dataSource.asObservable();
   
   // public messages: string = "";

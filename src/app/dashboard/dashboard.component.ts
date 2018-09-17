@@ -104,8 +104,8 @@ export class DashboardComponent implements OnInit {
     this.taskService.getSelectedProject(project)
     localStorage.setItem('currentProject', name)
 
-    if (this.flag) {
-      this.router.navigate(['/task-page-admin', name])
+    if (this.flag) { 
+      this.router.navigate(['/task-page-admin', projectId, name])
     } else {
       this.router.navigate(['/daily-status', projectId, name]);
     }

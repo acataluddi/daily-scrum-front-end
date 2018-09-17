@@ -70,7 +70,7 @@ export class HeaderComponent implements OnInit {
     this.show_arrow = false
     this.show_scrum = true
     this.show_dash = true
-    this.show_signout = true
+    this.show_signout = false
     this.show_projectlist = false
 
     if (this.router.url.search('daily-status/') || this.router.url.search('task-page-admin/')) {
@@ -167,22 +167,22 @@ export class HeaderComponent implements OnInit {
   show(e) {
     if (e.target.className == "arrow2" || e.target.className == "button desktop" ||
       e.target.className == "dp") {
-      if (document.getElementById("signout").style.visibility == "hidden") {
-        document.getElementById("signout").style.visibility = "visible";
+      if (this.show_signout == false) {
+        this.show_signout = true
       } else {
-        document.getElementById("signout").style.visibility = "hidden";
+        this.show_signout = false
       }
     }
     else if (e.target.id == "arrow" || e.target.id == "dailyscrumclass") {
-      if (document.getElementById("projectlist").style.visibility == "hidden") {
-        document.getElementById("projectlist").style.visibility = "visible";
+      if (this.show_projectlist == false) {
+        this.show_projectlist = true
       } else {
-        document.getElementById("projectlist").style.visibility = "hidden";
+        this.show_projectlist = false
       }
     }
     else {
-      document.getElementById("projectlist").style.visibility = "hidden";
-      document.getElementById("signout").style.visibility = "hidden";
+      this.show_projectlist = false
+      this.show_signout = false
     }
   }
 

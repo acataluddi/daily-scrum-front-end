@@ -77,6 +77,7 @@ export class DailyStatusComponent implements OnInit {
   lastEditString = '';
   subscription: Subscription;
   sub: any;
+  editable;
 
   constructor(
     public router: Router,
@@ -329,13 +330,19 @@ export class DailyStatusComponent implements OnInit {
   }
   checkthis(){
     this.data.currentdata$.subscribe(datachanged => this.datachanged = datachanged)
+    if (this.email == this.datachanged){
+      this.editable = true
+    } else{
+      this.editable = false
+    }
     this.email = this.datachanged;
+    console.log(this.email)
   }
 
   newTodayTask($event) {
     this.task1 = $event;
     var editTime = new Date()
-    var formateditTime = this.datepipe.transform(editTime, "dd-MM-yyyy HH:mm:ss")
+    var formateditTime = this.datepipe.transform(editTime, "MM-dd-yyyy HH:mm:ss")
     if (this.newOld(this.task1, this.TodayTasks)) {
       //insert
       if (this.task1.taskDate == '') {

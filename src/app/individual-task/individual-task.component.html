@@ -7,15 +7,15 @@
     <span *ngIf="tid%3!=0 && tid%5!=0  && tid%6!=0 && tid%7!=0" class="dot dot-color-5"></span>
   </div>
   <div #des class="description" spellcheck="false" *ngIf="task.description!==''" data-text="Add description"
-    contenteditable="true" (blur)="updateDescription()" (click)="show_save=true; stageTaskDesc(task)">
+    [contentEditable]="editable" (blur)="updateDescription()" (click)="show_save=true; stageTaskDesc(task)">
     {{task.description}}
   </div>
   <div #des class="description" spellcheck="false" *ngIf="task.description===''" data-text="Add description"
-    contenteditable="true" (blur)="updateDescription()" (click)="show_save=true">
+  [contentEditable]="editable" (blur)="updateDescription()" (click)="show_save=true">
   </div>
 </div>
 
-<div class="impediments" spellcheck="false" #imp contenteditable="true" *ngIf="show_impediment==true" (blur)="updateImpediment()"
+<div class="impediments" spellcheck="false" #imp [contentEditable]="editable" *ngIf="show_impediment==true" (blur)="updateImpediment()"
   (click)="show_save=true">
   <img class="img_impediment" src="../../assets/impediment.png" align="top"> {{task.impediments}}
 </div>
@@ -48,7 +48,7 @@
 <!-- <div class="impediments" spellcheck="false" #imp contenteditable="true" *ngIf="show_impediment==true" (blur)="updateImpediment()">
   <img class="img_impediment" src="../../assets/impediment.png" align="top"> {{task.impediments}}
 </div> -->
-<div class="status">
+<div class="status" *ngIf="editable" >
   <div class="cancel" *ngIf="show_save" (click)="cancelChange(task)">cancel</div>
   <button class="save" *ngIf="show_save" (click)="save(task)">Save</button>
 
