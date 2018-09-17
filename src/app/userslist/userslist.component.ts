@@ -18,13 +18,13 @@ export class UserslistComponent implements OnInit {
   @Output() selectedEmailEvent = new EventEmitter();
   @Input() childProject: string;
   @Input() childProjectId: string;
-  op:number = 0;
+  op: number = 0;
   ngOnChanges(...args: any[]) {
-    if(this.op>0){
-    this.getProMem();
+    if (this.op > 0) {
+      this.getProMem();
+    }
+    this.op++;
   }
-  this.op++;
-}
   public members: Member[] = [];
   public loggedmembers: Member[];
   public projects: Project[];
@@ -35,14 +35,14 @@ export class UserslistComponent implements OnInit {
     private dashboardservice: DashboardService,
     private projectservice: ProjectService,
     private data: NavigationdataService,
-    private taskservice:ProcessIndividualTaskService) {
+    private taskservice: ProcessIndividualTaskService) {
   }
-ngOnInit() {
-  this.getProMem()
-  
+  ngOnInit() {
+    this.getProMem()
+
   }
 
-  getProMem(){
+  getProMem() {
     this.dashboardservice.getMembers()
       .subscribe(membersArr => this.getMembers(membersArr));
 
@@ -65,7 +65,7 @@ ngOnInit() {
     }
     this.getThisProjectMembers()
   }
-  
+
   getThisProjectMembers() {
     this.members = [];
     for (let promem of this.projectmembers) {
@@ -81,26 +81,29 @@ ngOnInit() {
 
     this.selectedEmailEvent.emit(memberemail)
     this.data.changedata(memberemail)
+    console.log(this.childProject)
+    console.log(this.childProjectId)
+
     this.router.navigate(['/daily-status', this.childProjectId, this.childProject]);
   }
 
-  changeCSS(){
-    if(!this.checker){
+  changeCSS() {
+    if (!this.checker) {
       document.getElementById("userslist").classList.add("block")
       document.getElementById("search_name").classList.add("flexed")
       document.getElementById("userslist").classList.add("flex")
 
-        
-    this.checker = !this.checker
+
+      this.checker = !this.checker
     }
-    else{
+    else {
       document.getElementById("userslist").classList.remove("block")
       document.getElementById("search_name").classList.remove("flexed")
       document.getElementById("userslist").classList.remove("flex")
 
       this.checker = !this.checker
     }
-    
+
   }
 
 

@@ -8,6 +8,8 @@ import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { AuthService } from 'angular-6-social-login';
+import { LoginService } from '../service/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +24,8 @@ export class DailyStatusComponent implements OnInit {
 
   currentProject: string = ''
 
+  userEmail: string = localStorage.getItem("email")
+
   task: Task;
   task1: Task;
 
@@ -32,7 +36,7 @@ export class DailyStatusComponent implements OnInit {
 
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
-  datachanged:string;
+  datachanged: string;
   T: Task[];
 
   task_id;
@@ -72,12 +76,15 @@ export class DailyStatusComponent implements OnInit {
   yesterdayTaskDate;
   todayDate = new Date();
   email = localStorage.getItem("email");
+  UserType;
+  flag = false;
   projectId;
   status = false;
   lastEdit;
   lastEditString = '';
   subscription: Subscription;
   sub: any;
+  editable;
 
   constructor(
     public router: Router,
@@ -85,6 +92,8 @@ export class DailyStatusComponent implements OnInit {
     private datepipe: DatePipe,
     private route: ActivatedRoute,
     private data: NavigationdataService,
+    private socialAuthService: AuthService,
+    private loginservice: LoginService
 
   ) {
     this.datePickerConfig = Object.assign({}, {
@@ -105,6 +114,25 @@ export class DailyStatusComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.socialAuthService.authState.subscribe((user) => {
+      console.log("user:");
+      console.log(user);
+      if (user != null) {
+        this.loginservice.loginMember(user.idToken)
+          .subscribe(msg => {
+            this.UserType = msg.userType;
+            if (this.UserType === "Admin" || this.UserType === "Manager") {
+              this.flag = true;
+              console.log("flag:" + this.flag);
+            } else {
+              this.flag = false
+              this.editable = true
+            }
+
+          });
+      }
+    });
+
     this.checkthis()
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
@@ -129,7 +157,7 @@ export class DailyStatusComponent implements OnInit {
   }
 
   getTodaysTask(Todays) {
-        
+
 
     this.MockTodayTasks = Todays;
     this.TodayTasks = Todays;;
@@ -328,15 +356,21 @@ export class DailyStatusComponent implements OnInit {
     this.newDate = d1;
     this.myDateValue = d1;
   }
-  checkthis(){
+  checkthis() {
     this.data.currentdata$.subscribe(datachanged => this.datachanged = datachanged)
+    if (this.userEmail == this.datachanged) {
+      this.editable = true
+    } else {
+      this.editable = false
+    }
     this.email = this.datachanged;
+    console.log(this.email)
   }
 
   newTodayTask($event) {
     this.task1 = $event;
     var editTime = new Date()
-    var formateditTime = this.datepipe.transform(editTime, "dd-MM-yyyy HH:mm:ss")
+    var formateditTime = this.datepipe.transform(editTime, "MM-dd-yyyy HH:mm:ss")
     if (this.newOld(this.task1, this.TodayTasks)) {
       //insert
       if (this.task1.taskDate == '') {
@@ -457,13 +491,18 @@ export class DailyStatusComponent implements OnInit {
       this.creatednewyesterday = false
     }
   }
-  
-  viewAllTasks() : void{
-    this.router.navigate(['/task-page-admin',this.projectId, this.currentProject]);
+
+  viewAllTasks(): void {
+    this.router.navigate(['/task-page-admin', this.projectId, this.currentProject]);
   }
-  
-changeEmail($event){
-this.email = $event;
-this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
-}
+
+  changeEmail($event) {
+    if (this.userEmail == $event) {
+      this.editable = true
+    } else {
+      this.editable = false
+    }
+    this.email = $event;
+    this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+  }
 }

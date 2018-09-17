@@ -9,6 +9,7 @@ import { Task } from "../model/task-model";
 export class IndividualTaskComponent implements OnInit {
 
   @Input() task: Task;
+  @Input() editable: boolean;
   @Output() timeChangeEvent = new EventEmitter<Task>();
   @Output() addUpdateTask = new EventEmitter<Task>();
   @Output() popTask = new EventEmitter<Task>();
@@ -35,6 +36,7 @@ export class IndividualTaskComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.editable)
     this.show_save = false;
     this.saved = false;
     this.tid = parseInt(this.task.taskId);
@@ -112,6 +114,7 @@ export class IndividualTaskComponent implements OnInit {
 
   cancelChange(task) {
     this.show_save = false
+    this.show_impediment = false
     if (this.stageDesc && this.stageTime) {
       task.hourSpent = this.old_hourspent
       task.minuteSpent = this.old_minspent

@@ -59,7 +59,6 @@ export class LoginService {
     localStorage.setItem("email", '');
     localStorage.setItem("image", '');
     localStorage.setItem("currentProject", '');
-    localStorage.setItem("projectId", '');
     localStorage.setItem("userType", '');
   }
 }

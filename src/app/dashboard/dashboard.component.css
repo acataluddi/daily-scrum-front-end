@@ -111,19 +111,24 @@
   width: 352px;
   margin-right: 35px;
   margin-top: 35px;
+  background-color:  rgba(151, 151, 151, 0.2); 
 }
-.ProjectBoxDiv:nth-child(4n+1) {
+
+/* .ProjectBoxDiv:nth-child(4n+1) {
   background-color: rgb(12, 33, 93);
 }
+
 .ProjectBoxDiv:nth-child(4n+2) {
   background-color: rgb(63, 205, 195);
 }
+
 .ProjectBoxDiv:nth-child(4n+3) {
   background-color: rgb(255, 177, 166);
 }
-.ProjectBoxDiv:nth-child(n+4) {
+
+.ProjectBoxDiv:nth-child(4n+4) {
   background-color: rgb(63, 205, 195);
-}
+} */
 
 .ProjectNameBoxDiv {
   height: 70px;
@@ -131,7 +136,7 @@
 }
 
 .ProjectNameDiv {
-  color: white;
+  color: black;
   font-size: 24px;
   font-family: 'Roboto';
   padding-top: 16px;
@@ -171,9 +176,9 @@
 
 .memberImage {
   object-fit: contain;
-  width:140%;
-  height:140%;
-  border-radius:50% 50% 50% 50%; 
+  width: 140%;
+  height: 140%;
+  border-radius: 50% 50% 50% 50%;
 }
 
 .SmallCircleButton1Even {
