@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Project } from '../model/project-model'
 import { ProjectMember } from '../model/ProjectMembers';
 import { Observable, EMPTY } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,9 @@ import { Observable, EMPTY } from 'rxjs';
 
 export class ProjectService {
 
-  private projectUrl = 'http://10.4.6.71:8080/DailyScrum/ProjectController';
+  private readonly baseUrl = environment.apiBase;
+
+  private projectUrl = this.baseUrl + '/ProjectController';
   url: string;
   private project: Project;
   reqType = 'add';
@@ -69,15 +72,15 @@ export class ProjectService {
 
   initializeTempProject(newProject: Project): Project {
     newProject = {
-      projectId: '20188714303243',
-      projectDesc: 'This project aims at creating a Back-end Basket API for Adastria.',
+      projectId: '',
+      projectDesc: '',
       members: [
         {
-          email: 'sanjo@qburst.com',
-          role: 'Developer'
+          email: '',
+          role: ''
         }
       ],
-      projectName: "Adastria Basket"
+      projectName: ''
     }
     return newProject;
   }

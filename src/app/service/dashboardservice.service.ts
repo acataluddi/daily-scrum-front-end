@@ -2,12 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Project } from '../model/project-model';
 import { Observable, Subject } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class DashboardService {
+
+    private readonly baseUrl = environment.apiBase;
 
     newproject: Project;
     UserType: string;
@@ -21,8 +24,9 @@ export class DashboardService {
         console.log(this.UserType);
     }
 
-    getallURL = "http://10.4.6.71:8080/DailyScrum/CRUDControllerUser?page=0";
-    getURL = "http://10.4.6.71:8080/DailyScrum/ProjectController";
+    private getallURL = this.baseUrl + '/CRUDControllerUser?page=0';
+    private getURL = this.baseUrl + '/ProjectController';
+
 
     getMembers(): Observable<any> {
         return this.http.get<any>(this.getallURL)

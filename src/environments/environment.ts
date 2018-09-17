@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBase: 'http://10.4.6.71:8080/DailyScrum/CRUDControllerUser?page=1',
+  apiBase: 'http://10.4.6.71:8080/DailyScrum',
 };
 
 /*

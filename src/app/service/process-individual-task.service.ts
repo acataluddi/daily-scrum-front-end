@@ -3,17 +3,20 @@ import { Task } from "../model/task-model";
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Project } from '../model/project-model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProcessIndividualTaskService {
 
+  private readonly baseUrl = environment.apiBase;
+
   constructor(
     private http: HttpClient
   ) { }
 
-  private url = 'http://10.4.6.71:8080/DailyScrum/TaskController';
+  private url = this.baseUrl + '/TaskController';
   private newListSource = new Subject<Project>();
   newList = this.newListSource.asObservable();
 
