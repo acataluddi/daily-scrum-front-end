@@ -56,7 +56,6 @@ export class HeaderComponent implements OnInit {
     this.subscription = taskService.selected1.subscribe(
       data => {
         this.setSelected(data)
-        // localStorage.setItem("currentProject",data.projectName)
       });
 
     this.subscription = dashboardService.getProjects().subscribe(data => {

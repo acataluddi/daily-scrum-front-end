@@ -5,12 +5,14 @@ import { Http, Headers } from '@angular/http';
 import { ProjectviewallService } from '../service/projectviewall.service';
 import { Member } from '../model/member-model';
 import { Injectable } from '@angular/core';
-// import { ProjectUpdated } from '../model/projectupdated-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import { IndividualMember } from '../model/user-task-model'
 import { Subscription } from 'rxjs';
 import { Project } from '../model/project-model';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
 
 const httpOptions = {
   headers: new Headers({
@@ -30,8 +32,10 @@ const httpOptions = {
 })
 
 export class TaskPageAdminComponent implements OnInit {
+  sub: any;
 
   currentProject;
+  currentProjectId;
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
   task_id;
@@ -75,15 +79,22 @@ export class TaskPageAdminComponent implements OnInit {
     private employeeservice: AdminviewallserviceService,
     private viewallservice: ProjectviewallService,
     private http: Http,
+    private router: Router,
+    private route: ActivatedRoute
 
   ) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-orange',
       showWeekNumbers: false
     });
+    this.sub = this.route.params.subscribe(params => {
+      this.currentProject = params['name']
+      this.projectId = +params['projectId'];
+    });
     this.subscription = taskservice.newList.subscribe(
       data => {
         this.currentProject = data.projectName;
+        this.projectId = data.projectId
         this.currentProject = localStorage.getItem("currentProject");
         this.a();
       });
@@ -92,7 +103,9 @@ export class TaskPageAdminComponent implements OnInit {
   todayTaskDate;
   projectId;
   ngOnInit() {
+    
     this.currentProject = localStorage.getItem("currentProject");
+    
     this.IndMembObj = this.initializeNewMember(this.IndMembObj);
     this.IndMembArray = [];
     this.memberEmployeeArray = [];
@@ -294,4 +307,8 @@ export class TaskPageAdminComponent implements OnInit {
     var colors = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
     return colors[Math.floor(Math.random() * colors.length)];
   }
+  viewMyTasks() : void{
+    this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
+  }
+  
 }
