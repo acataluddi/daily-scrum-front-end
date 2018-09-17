@@ -12,8 +12,7 @@ export class AppComponent {
   constructor(private router: Router) {
     router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
-        console.log(event)
-        if (event['url'] == '/' || event['url'] == '/login') {
+        if (event['url'] == '/' || event['url'] == '/login' || event['url'] == '/**') {
           this.showHead = false;
         } else if(localStorage.getItem("logged") == 'false'){
           this.showHead = false;
@@ -22,5 +21,9 @@ export class AppComponent {
         }
       }
     });
+
+    if (router.url == '/**'){
+      console.log("Inpropper");
+    }
   }
 }

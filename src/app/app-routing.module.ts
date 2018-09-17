@@ -10,15 +10,16 @@ import { AuthGuard } from './status.service';
 import { TaskPageAdminComponent } from "./task-page-admin/task-page-admin.component";
 import { UserslistComponent } from "./userslist/userslist.component"
 
+
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'project', component: ProjectComponent },
+  { path: 'project', component: ProjectComponent, canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'daily-status/:projectId/:name', component: DailyStatusComponent, canActivate: [AuthGuard] },
   { path: 'admin-view-all', component: AdminviewallComponent, canActivate: [AuthGuard] },
   { path: 'task-page-admin/:projectId/:name', component: TaskPageAdminComponent, canActivate: [AuthGuard] },
-  { path: '**', component: LoginComponent }
+  { path: '**', redirectTo: '/dashboard' }
 ];
 
 @NgModule({

@@ -5,9 +5,13 @@ import { ProjectMember } from '../model/ProjectMembers';
 import { Observable, EMPTY } from 'rxjs';
 import { environment } from '../../environments/environment';
 
+const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
+
+
 @Injectable({
   providedIn: 'root'
 })
+
 
 export class ProjectService {
 
@@ -41,7 +45,7 @@ export class ProjectService {
   addProject(pro: Project): Observable<Project> {
     this.project = pro;
     return this.http.post<Project>(this.projectUrl,
-      JSON.stringify(this.project)
+      JSON.stringify(this.project),{headers}
     );
   }
 
@@ -49,37 +53,16 @@ export class ProjectService {
     this.project = pro;
     console.log(JSON.stringify(this.project));
     return this.http.put<any>(this.projectUrl,
-      JSON.stringify(this.project)
+      JSON.stringify(this.project),{headers}
     );
   }
-
-  getallProjects(): Observable<Project[]> {
-    console.log(this.projectUrl)
-    this.url = this.projectUrl.concat('?memberEmail=getall')
-    console.log(this.url)
-    return this.http.get<Project[]>(this.url)
-  }
-
-
-  getProjects(memberEmail): Observable<Project[]> {
-    let params = new HttpParams()
-      .set("memberEmail", memberEmail)
-    return this.http.get<Project[]>(this.projectUrl, { params: params })
-  }
-
-  //Temporary
 
 
   initializeTempProject(newProject: Project): Project {
     newProject = {
       projectId: '',
       projectDesc: '',
-      members: [
-        {
-          email: '',
-          role: ''
-        }
-      ],
+      members: [],
       projectName: ''
     }
     return newProject;

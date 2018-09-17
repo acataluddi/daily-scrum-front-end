@@ -8,12 +8,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
-  })
-};
+const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +30,8 @@ export class LoginService {
   getStatus() {
     localStorage.setItem("logged", "false");
   }
+ 
+ 
 
   private posturl = this.baseUrl + '/CRUDControllerUser';
   loginMember(UserToken: string): Observable<any> {
@@ -53,7 +50,7 @@ export class LoginService {
 
   private geturl = this.baseUrl + '/CRUDControllerUser?page=1';
   getMembers(): Observable<Member[]> {
-    return this.http.get<Member[]>(this.geturl)
+    return this.http.get<Member[]>(this.geturl,{headers})
   }
 
   logoutMember() {
@@ -63,5 +60,8 @@ export class LoginService {
     localStorage.setItem("image", '');
     localStorage.setItem("currentProject", '');
     localStorage.setItem("userType", '');
+    localStorage.setItem("token",'');
+    localStorage.setItem("projectId",'');
+   
   }
 }

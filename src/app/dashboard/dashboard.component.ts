@@ -10,6 +10,7 @@ import { AdminviewallserviceService } from '../service/adminviewallservice.servi
 import { ProjectService } from "../service/project.service";
 import { HeaderComponent } from '../header/header.component';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
+import {AdminviewallComponent} from '../adminviewall/adminviewall.component';
 import { AuthService } from 'angular-6-social-login';
 
 @Component({
@@ -25,10 +26,12 @@ export class DashboardComponent implements OnInit {
     private taskService: ProcessIndividualTaskService,
     private viewallservice: AdminviewallserviceService,
     private projectService: ProjectService,
+    private viewallcomponent:AdminviewallComponent,
     private socialAuthService: AuthService) {
 
   }
   member: Member;
+  LoggedinMember:Member;
   loggedin;
   projectName = "Daily Scrum";
   noOfProjects = null;
@@ -41,9 +44,9 @@ export class DashboardComponent implements OnInit {
   noOfMembers = [];
   flag = false;
   imageurl = [];
-  UserType;
-
-
+  UserType:string;
+ 
+  
   ngOnInit() {
     this.socialAuthService.authState.subscribe((user) => {
       console.log("user:");
@@ -59,10 +62,10 @@ export class DashboardComponent implements OnInit {
 
           });
       }
-    });
-
-    this.viewallservice.getMembers()
-      .subscribe(membersArr => this.getMembers(membersArr));
+      });
+    
+    this.dashboardservice.getMembers()
+    .subscribe(membersArr => this.getMembers(membersArr));
 
     this.dashboardservice.getProjects()
       .subscribe(projectArr => this.getProjects(projectArr, this.memberArray));

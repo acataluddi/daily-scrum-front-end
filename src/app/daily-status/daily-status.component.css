@@ -15,10 +15,8 @@
 .header-part {
   z-index: 10;
   transform-style: preserve-3d;
-  /* position: relative; */
   position: fixed;
   top: 60px;
-  /* margin-top: 60px; */
   background-color: white;
   width: 100%;
 }
@@ -52,7 +50,6 @@
   width: 50%;
   padding: 0px;
   height: 100%;
-  /* overflow-y: auto; */
 }
 
 .left-part {
