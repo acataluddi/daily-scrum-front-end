@@ -105,7 +105,7 @@ export class DashboardComponent implements OnInit {
     localStorage.setItem('currentProject', name)
 
     if (this.flag) {
-      this.router.navigate(['/task-page-admin', name])
+      this.router.navigate(['/task-page-admin',projectId, name])
     } else {
       this.router.navigate(['/daily-status', projectId, name]);
     }

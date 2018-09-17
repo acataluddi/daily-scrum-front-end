@@ -10,7 +10,7 @@
         <div id="dash" *ngIf="show_dash">{{title}}</div>
       </div>
       <div id="arrow" *ngIf="show_arrow">
-        <div id="projectlist">
+        <div id="projectlist" *ngIf="show_projectlist">
           <div *ngFor="let project of projects">
             <div class="items" (click)="changeProject(project)">{{project.projectName}}</div>
           </div>
@@ -22,7 +22,7 @@
           <img class="dp" [src]="getImage()">
         </div>
         <div class="arrow2">
-          <div id="signout" (click)="logout()">
+          <div id="signout" *ngIf="show_signout" (click)="logout()">
             <div class="a"> Signout </div>
           </div>
         </div>

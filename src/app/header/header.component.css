@@ -129,7 +129,7 @@ img[src="../../assets/Scrum_logo.png"] {
   top: 90%;
   right: 10%;
   z-index: 50;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 .usermailclass #signout {
@@ -155,7 +155,7 @@ img[src="../../assets/Scrum_logo.png"] {
 }
 
 .arrow2:focus>#signout {
-  visibility: visible;
+  /* visibility: visible; */
   border: none;
   z-index: 50;
 }
@@ -177,7 +177,7 @@ img[src="../../assets/Scrum_logo.png"] {
   border-radius: 4px;
   background-color: rgba(5, 87, 255, 1);
   padding: 24px 24px 0px 16px;
-  visibility: hidden;
+  /* visibility: hidden; */
   position: absolute;
   top: 30px;
   left: -75px;
@@ -208,7 +208,7 @@ img[src="../../assets/Scrum_logo.png"] {
 }
 
 .arrow:focus #projectlist {
-  visibility: visible !important;
+  /* visibility: visible !important; */
   position: relative;
   z-index: 1;
 }
