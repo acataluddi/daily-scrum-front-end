@@ -9,7 +9,7 @@ export class ProjectviewallService {
   constructor(
     private http: HttpClient
   ) { }
-  private geturl = 'http://localhost:8080/DailyScrum/ProjectController';
+  private geturl = 'http://10.4.6.22:8080/DailyScrum/ProjectController';
   getLoggedProjects(memberEmail): Observable<ProjectUpdated[]> {
     let params = new HttpParams()
       .set("memberEmail", memberEmail)

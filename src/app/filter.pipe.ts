@@ -1,20 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Member } from './model/member-model';
+
 @Pipe({
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
-  transform(items: any[], Email: string): any[] {
-    // console.log(items);
-    //   console.log(Email);
-      console.log(items.filter( it => it.userType));
-      console.log(items.filter( it => {
-        it.email.includes(Email)}));
+  transform(items: Member[], searchText: string): any[] {
     if(!items) return [];
-    if(!Email) return items;
-    Email = Email.toLowerCase();
+    if(!searchText) return items;
+searchText = searchText.toLowerCase();
 return items.filter( it => {
-      return it.userType.toLowerCase().includes("Admin");
+      return it.name.toLowerCase().includes(searchText);
     });
    }
 }
-// .toLowerCase().includes(Email)}

@@ -1,11 +1,13 @@
 import { Component, OnInit, Injectable } from '@angular/core';
+import { Project } from "../model/project-model";
 import { Task } from '../model/task-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { NavigationdataService } from '../service/navigationdata.service'
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DailyStatusComponent implements OnInit {
 
+  currentProject: string = ''
+
   task: Task;
   task1: Task;
 
@@ -28,6 +32,7 @@ export class DailyStatusComponent implements OnInit {
 
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
+  datachanged:string;
   T: Task[];
 
   task_id;
@@ -75,24 +80,34 @@ export class DailyStatusComponent implements OnInit {
   sub: any;
 
   constructor(
+    public router: Router,
     private taskservice: ProcessIndividualTaskService,
     private datepipe: DatePipe,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private data: NavigationdataService,
 
   ) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-orange',
       showWeekNumbers: false
     });
+    this.sub = this.route.params.subscribe(params => {
+      this.currentProject = params['name']
+      this.projectId = +params['projectId'];
+    });
     this.subscription = taskservice.newList.subscribe(
       data => {
         this.projectId = data.projectId
+        this.currentProject = data.projectName
         this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
 
       });
   }
 
   ngOnInit() {
+    // this.currentProject = localStorage.getItem("currentProject");
+    // this.currentProject = 'FR Project VIII - EU'
+    this.checkthis()
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
 
@@ -108,11 +123,7 @@ export class DailyStatusComponent implements OnInit {
     this.todayDate.setDate(this.todayDate.getDate() - 1);
     this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
 
-    this.sub = this.route.params.subscribe(params => {
-      var name = params['name']
-      this.projectId = +params['projectId'];
-    });
-    console.log(this.projectId)
+    console.log(this.currentProject)
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
@@ -121,6 +132,8 @@ export class DailyStatusComponent implements OnInit {
   }
 
   getTodaysTask(Todays) {
+        
+
     this.MockTodayTasks = Todays;
     this.TodayTasks = Todays;;
     this.status = true;
@@ -138,6 +151,7 @@ export class DailyStatusComponent implements OnInit {
       this.totalhour += task.hourSpent;
       this.totalminute += task.minuteSpent;
     }
+
     //convering extra minutes to hours;
     var extrahour = 0;
     if (this.totalminute >= 60) {
@@ -325,12 +339,19 @@ export class DailyStatusComponent implements OnInit {
     this.newDate = d1;
     this.myDateValue = d1;
   }
+  checkthis(){
+    this.data.currentdata$.subscribe(datachanged => this.datachanged = datachanged)
+    console.log(this.datachanged);
+    console.log("this");
+    this.email = this.datachanged;
+    console.log(this.email)
+  }
 
   //Add new task: Today
   newTodayTask($event) {
     this.task1 = $event;
     var editTime = new Date()
-    var formateditTime = this.datepipe.transform(editTime, "dd-MM-yyyy HH:mm:ss")
+    var formateditTime = this.datepipe.transform(editTime, "MM-dd-yyyy HH:mm:ss")
     console.log(formateditTime)
     if (this.newOld(this.task1, this.TodayTasks)) {
       //insert
@@ -453,4 +474,17 @@ export class DailyStatusComponent implements OnInit {
       this.creatednewyesterday = false
     }
   }
+  
+  viewAllTasks() : void{
+    console.log("Inside view all tasks");
+    console.log(this.projectId)
+    console.log(this.currentProject)
+    this.router.navigate(['/task-page-admin',this.projectId, this.currentProject]);
+  }
+  
+changeEmail($event){
+this.email = $event;
+console.log(this.email)
+this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+}
 }

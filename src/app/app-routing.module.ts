@@ -8,6 +8,7 @@ import { DailyStatusComponent } from "./daily-status/daily-status.component";
 import { AdminviewallComponent } from "./adminviewall/adminviewall.component";
 import { AuthGuard } from './status.service';
 import { TaskPageAdminComponent } from "./task-page-admin/task-page-admin.component";
+import { UserslistComponent } from "./userslist/userslist.component"
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'daily-status/:projectId/:name', component: DailyStatusComponent, canActivate: [AuthGuard] },
   { path: 'admin-view-all', component: AdminviewallComponent, canActivate: [AuthGuard] },
-  { path: 'task-page-admin/:name', component: TaskPageAdminComponent, canActivate: [AuthGuard] },
+  { path: 'task-page-admin/:projectId/:name', component: TaskPageAdminComponent, canActivate: [AuthGuard] },
   { path: '**', component: LoginComponent }
 ];
 

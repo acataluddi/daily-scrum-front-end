@@ -11,6 +11,9 @@ import { AdminviewallserviceService } from '../service/adminviewallservice.servi
 import { IndividualMember } from '../model/user-task-model'
 import { Subscription } from 'rxjs';
 import { Project } from '../model/project-model';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
 
 const httpOptions = {
   headers: new Headers({
@@ -30,8 +33,10 @@ const httpOptions = {
 })
 
 export class TaskPageAdminComponent implements OnInit {
+  sub: any;
 
   currentProject;
+  currentProjectId;
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
   task_id;
@@ -68,6 +73,7 @@ export class TaskPageAdminComponent implements OnInit {
   year;
   myvalue;
   subscription: Subscription;
+  color = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
   Tasks: Task[];
   Task: Task;
   constructor(
@@ -75,15 +81,22 @@ export class TaskPageAdminComponent implements OnInit {
     private employeeservice: AdminviewallserviceService,
     private viewallservice: ProjectviewallService,
     private http: Http,
+    private router: Router,
+    private route: ActivatedRoute
 
   ) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-orange',
       showWeekNumbers: false
     });
+    this.sub = this.route.params.subscribe(params => {
+      this.currentProject = params['name']
+      this.projectId = +params['projectId'];
+    });
     this.subscription = taskservice.newList.subscribe(
       data => {
         this.currentProject = data.projectName;
+        this.projectId = data.projectId
         this.currentProject = localStorage.getItem("currentProject");
         this.a();
       });
@@ -92,7 +105,11 @@ export class TaskPageAdminComponent implements OnInit {
   todayTaskDate;
   projectId;
   ngOnInit() {
+    
+    console.log(this.projectId)
+    console.log(this.currentProject)
     this.currentProject = localStorage.getItem("currentProject");
+    
     this.IndMembObj = this.initializeNewMember(this.IndMembObj);
     this.IndMembArray = [];
     this.memberEmployeeArray = [];
@@ -230,7 +247,7 @@ export class TaskPageAdminComponent implements OnInit {
     } else {
       nmonth += (newDate.getMonth() + 1);
     }
-    ndate += nday+ '-' + nmonth + '-' + newDate.getFullYear();
+    ndate += nday + '-' + nmonth + '-' + newDate.getFullYear() ;
     this.newDate = newDate;
     var d1 = new Date(newDate);
     (d1.setDate(d1.getDate() - 1));
@@ -254,7 +271,7 @@ export class TaskPageAdminComponent implements OnInit {
     this.indTotalMins = 0;
     this.currentProject = localStorage.getItem("currentProject");
     this.IndMembArray = [];
-    this.a();
+    // this.a();
   }
   getNextDate() {
     var d1 = new Date(this.newDate);
@@ -294,4 +311,11 @@ export class TaskPageAdminComponent implements OnInit {
     var colors = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
     return colors[Math.floor(Math.random() * colors.length)];
   }
+  viewMyTasks() : void{
+    console.log("hii mann");
+    console.log(this.currentProject)
+    console.log(this.currentProjectId)
+    this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
+  }
+  
 }
