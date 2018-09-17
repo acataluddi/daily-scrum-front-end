@@ -3,6 +3,7 @@ import { Member } from '../model/member-model';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 
 const httpOptions = {
@@ -18,14 +19,14 @@ const httpOptions = {
 })
 export class AdminviewallserviceService {
 
-
+  private readonly baseUrl = environment.apiBase;
   constructor(private http: HttpClient) {
 
   }
   newmember: Member;
   p = 1;
 
-  apiURL = 'http://10.4.6.71:8080/DailyScrum/CRUDControllerUser?page=1';
+  private apiURL = this.baseUrl + '/CRUDControllerUser?page=1';
 
   getMembers(): Observable<any> {
 
@@ -34,8 +35,7 @@ export class AdminviewallserviceService {
   getPageNum(Pagenum) {
 
     this.p = Pagenum;
-    this.apiURL = 'http://10.4.6.71:8080/DailyScrum/CRUDControllerUser?page=' + this.p;
-
+    this.apiURL = this.baseUrl + 'CRUDControllerUser?page=' + this.p;
   }
 
 

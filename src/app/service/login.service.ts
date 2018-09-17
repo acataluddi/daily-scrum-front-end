@@ -5,6 +5,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 
 const httpOptions = {
@@ -18,6 +19,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class LoginService {
+
+  private readonly baseUrl = environment.apiBase;
 
 
 
@@ -33,7 +36,7 @@ export class LoginService {
     localStorage.setItem("logged", "false");
   }
 
-  private posturl = 'http://10.4.6.58:8081/DailyScrum/CRUDControllerUser';
+  private posturl = this.baseUrl + '/CRUDControllerUser';
   loginMember(UserToken: string): Observable<any> {
     const headers = new HttpHeaders().set("token", UserToken);
     return this.http.post<any>(this.posturl,
@@ -48,7 +51,7 @@ export class LoginService {
     return this.loggedIn;
   }
 
-  private geturl = 'http://10.4.6.58:8081/DailyScrum/CRUDControllerUser?page=1';
+  private geturl = this.baseUrl + '/CRUDControllerUser?page=1';
   getMembers(): Observable<Member[]> {
     return this.http.get<Member[]>(this.geturl)
   }

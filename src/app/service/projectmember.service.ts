@@ -4,13 +4,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, EMPTY } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProjectMember } from '../model/ProjectMembers';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectmemberService {
 
-  private projectmembersUrl = 'http://10.4.6.71:8080/DailyScrum/ProjectController';
+  private readonly baseUrl = environment.apiBase;
+
+  private projectmembersUrl = this.baseUrl + '/ProjectController';
 
   projectmembers: ProjectMember[];
 
