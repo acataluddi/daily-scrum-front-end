@@ -10,7 +10,7 @@ import { Observable, EMPTY } from 'rxjs';
 
 export class ProjectService {
 
-  private projectUrl = 'http://10.4.6.22:8080/DailyScrum/ProjectController';
+  private projectUrl = 'http://10.4.6.71:8080/DailyScrum/ProjectController';
   url:string;
   private project: Project;
   reqType= 'add';

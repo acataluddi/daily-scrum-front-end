@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
       }
     });
 
-    this.viewallservice.getMembers()
+    this.dashboardservice.getMembers()
       .subscribe(membersArr => this.getMembers(membersArr));
 
     this.dashboardservice.getProjects()

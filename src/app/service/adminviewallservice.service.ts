@@ -25,7 +25,7 @@ export class AdminviewallserviceService {
   newmember:Member;
   p = 1;
 
-  apiURL = 'http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page=1';
+  apiURL = 'http://10.4.6.71:8080/DailyScrum/CRUDControllerUser?page=1';
   
   getMembers(): Observable<any> {
     
@@ -34,7 +34,7 @@ export class AdminviewallserviceService {
   getPageNum(Pagenum) {
    
     this.p = Pagenum;
-    this.apiURL = 'http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page='+this.p;
+    this.apiURL = 'http://10.4.6.71:8080/DailyScrum/CRUDControllerUser?page='+this.p;
 
   }
 

@@ -103,79 +103,8 @@ body {
   padding: 9px 16px 7px 5px;
 }
 
-.filter {
-  font-family: 'Roboto';
-  font-size: 14px;
-  width: 8%;
-  color: rgba(79, 86, 105, 1);
-  text-align: left;
-  line-height: 24px;
-  padding-left: 16px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
 .buttons {
   width: 55%;
-}
-
-.allTask {
-  background-color: rgba(216, 216, 216, 1);
-  font-family: 'Roboto';
-  border-radius: 5%;
-  font-size: 12px;
-  color: rgba(68, 68, 68, 1);
-  text-align: left;
-  line-height: 150%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-.complete {
-  background-color: rgba(0, 0, 0, 0.1);
-  font-family: 'Roboto';
-  border-radius: 5%;
-  font-size: 12px;
-  margin-left: 1%;
-  color: rgba(0, 0, 0, 1);
-  text-align: left;
-  line-height: 20px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-.progress {
-  background-color: rgba(0, 0, 0, 0.1);
-  font-family: 'Roboto';
-  border-radius: 5%;
-  font-size: 12px;
-  margin-left: 1%;
-  color: rgba(0, 0, 0, 1);
-  text-align: left;
-  line-height: 15px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  height: 65%;
-}
-
-.impediments {
-  background-color: rgba(0, 0, 0, 0.1);
-  font-family: 'Roboto';
-  border-radius: 5%;
-  font-size: 12px;
-  margin-left: 1%;
-  color: rgba(0, 0, 0, 1);
-  text-align: left;
-  line-height: 19px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-.allTask:active,
-.complete:active,
-.progress:active,
-.impediments:active {
-  background-color: rgba(134, 131, 131, 0.1);
 }
 
 .member_logo {
@@ -245,6 +174,7 @@ body {
   margin-left: 16px;
   margin-top: 6%;
   overflow-wrap: break-word;
+  margin-bottom:10px;
 }
 
 .member_name1 {
@@ -310,21 +240,21 @@ body {
 
 @media screen and (max-width: 1300px) {
   .header {
-    width: 900px;
+    width: 1200px;
   }
 
   .column {
-    width: 300px;
+    width: 400px;
   }
 }
 
 @media screen and (max-width: 1000px) {
   .header {
-    width: 750px;
+    width: 950px;
   }
 
   .column {
-    width: 350px;
+    width: 400px;
     padding-left: 40px;
   }
 
@@ -335,7 +265,7 @@ body {
 
 @media screen and (max-width: 700px) {
   .header {
-    width: 450px;
+    width: 500px;
   }
 
   .alt-View {
@@ -347,7 +277,7 @@ body {
   }
 
   .column {
-    width: 350px;
+    width: 300px;
     padding-left: 30px;
   }
 
