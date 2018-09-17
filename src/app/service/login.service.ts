@@ -30,7 +30,7 @@ export class LoginService {
   private posturl='http://10.4.6.58:8081/DailyScrum/CRUDControllerUser';
   loginMember(UserToken: string) : Observable<any> {
     
-    
+    const headers = new HttpHeaders().set("token", UserToken);
 
     return this.http.post<any>(this.posturl, 
       JSON.stringify("Login"),{headers}
