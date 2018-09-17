@@ -48,7 +48,6 @@ export class AdminviewallComponent implements OnInit {
 
   getTotalCount(membersArr) {
     this.memberArray = membersArr;
-    // console.log(this.memberArray);
     this.total = this.memberArray.length;
 
   }
@@ -56,7 +55,6 @@ export class AdminviewallComponent implements OnInit {
   getMembers(membersArr): void {
     this.memberArray = membersArr;
     console.log(this.memberArray);
-    // this.total = totalCount;
      console.log(this.total);
     
   }

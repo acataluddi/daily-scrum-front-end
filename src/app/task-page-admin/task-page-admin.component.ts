@@ -5,7 +5,6 @@ import { Http, Headers } from '@angular/http';
 import { ProjectviewallService } from '../service/projectviewall.service';
 import { Member } from '../model/member-model';
 import { Injectable } from '@angular/core';
-// import { ProjectUpdated } from '../model/projectupdated-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import { IndividualMember } from '../model/user-task-model'
@@ -106,8 +105,6 @@ export class TaskPageAdminComponent implements OnInit {
   projectId;
   ngOnInit() {
     
-    console.log(this.projectId)
-    console.log(this.currentProject)
     this.currentProject = localStorage.getItem("currentProject");
     
     this.IndMembObj = this.initializeNewMember(this.IndMembObj);
@@ -312,9 +309,6 @@ export class TaskPageAdminComponent implements OnInit {
     return colors[Math.floor(Math.random() * colors.length)];
   }
   viewMyTasks() : void{
-    console.log("hii mann");
-    console.log(this.currentProject)
-    console.log(this.currentProjectId)
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }
   

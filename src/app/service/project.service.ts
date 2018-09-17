@@ -13,7 +13,6 @@ export class ProjectService {
   private projectUrl = 'http://10.4.6.22:8080/DailyScrum/ProjectController';
   url:string;
   private project: Project;
-  // reqType: string;
   reqType= 'add';
   private projectToBeUpdated: Project;
   constructor(private http: HttpClient) { 

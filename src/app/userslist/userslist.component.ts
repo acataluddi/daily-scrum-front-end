@@ -18,13 +18,9 @@ export class UserslistComponent implements OnInit {
   @Output() selectedEmailEvent = new EventEmitter();
   @Input() childProject: string;
   @Input() childProjectId: string;
-  // childProject: string;
   op:number = 0;
   ngOnChanges(...args: any[]) {
     if(this.op>0){
-    console.log('onChange fired');
-    console.log('changing', args);
-    console.log(this.childProject)
     this.getProMem();
   }
   this.op++;
@@ -40,18 +36,8 @@ export class UserslistComponent implements OnInit {
     private projectservice: ProjectService,
     private data: NavigationdataService,
     private taskservice:ProcessIndividualTaskService) {
-      // this.getProName()
-        // console.log(this.childProject)
-        // this.subscription = this.taskservice.newList.subscribe(
-        //   data => {
-        //     this.childProject = data.projectName;
-        //     this.childProject = localStorage.getItem("currentProject");
-        //   });
-        //   console.log(this.childProject)
-        // this.getProMem()
   }
 ngOnInit() {
-  // this.getProName()
   this.getProMem()
   
   }
@@ -64,7 +50,6 @@ ngOnInit() {
   }
   getMembers(membersArr): void {
     this.loggedmembers = membersArr;
-    console.log(this.loggedmembers);
 
     this.projectservice.getallProjects()
       .subscribe(projectsArr => this.getProjects(projectsArr));
@@ -73,12 +58,9 @@ ngOnInit() {
 
   getProjects(projectsArr): void {
     this.projects = projectsArr;
-    // this.getProName();
-    console.log(this.childProject)
     for (let pro of this.projects) {
       if (pro.projectName == this.childProject) {
         this.projectmembers = pro.members;
-        console.log(this.projectmembers)
       }
     }
     this.getThisProjectMembers()
@@ -93,16 +75,12 @@ ngOnInit() {
         }
       }
     }
-    console.log(this.members)
   }
 
   gotoDailyStatus(memberemail: string) {
-    console.log(memberemail)
 
     this.selectedEmailEvent.emit(memberemail)
     this.data.changedata(memberemail)
-    console.log(this.childProject)
-    console.log(this.childProjectId)
     this.router.navigate(['/daily-status', this.childProjectId, this.childProject]);
   }
 
@@ -110,9 +88,7 @@ ngOnInit() {
     if(!this.checker){
       document.getElementById("userslist").classList.add("block")
       document.getElementById("search_name").classList.add("flexed")
-      // for (var i in this.members)
-        // document.getElementById("member_name" + i).classList.add("flex")
-        document.getElementById("userslist").classList.add("flex")
+      document.getElementById("userslist").classList.add("flex")
 
         
     this.checker = !this.checker
@@ -120,8 +96,6 @@ ngOnInit() {
     else{
       document.getElementById("userslist").classList.remove("block")
       document.getElementById("search_name").classList.remove("flexed")
-      // for (var i in this.members)
-      //   document.getElementById("member_name" + i).classList.remove("flex")
       document.getElementById("userslist").classList.remove("flex")
 
       this.checker = !this.checker

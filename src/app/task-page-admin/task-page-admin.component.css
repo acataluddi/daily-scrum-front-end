@@ -103,17 +103,79 @@ body {
   padding: 9px 16px 7px 5px;
 }
 
-.search {
-  float: right;
-  width: 50px;
-  height: 400px;
-  margin-left: 0%;
-  border-left: 1px solid rgba(216, 216, 216, 1);
-  display: block;
+.filter {
+  font-family: 'Roboto';
+  font-size: 14px;
+  width: 8%;
+  color: rgba(79, 86, 105, 1);
+  text-align: left;
+  line-height: 24px;
+  padding-left: 16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-.search_icon {
-  margin-left: 30%;
+.buttons {
+  width: 55%;
+}
+
+.allTask {
+  background-color: rgba(216, 216, 216, 1);
+  font-family: 'Roboto';
+  border-radius: 5%;
+  font-size: 12px;
+  color: rgba(68, 68, 68, 1);
+  text-align: left;
+  line-height: 150%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.complete {
+  background-color: rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto';
+  border-radius: 5%;
+  font-size: 12px;
+  margin-left: 1%;
+  color: rgba(0, 0, 0, 1);
+  text-align: left;
+  line-height: 20px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.progress {
+  background-color: rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto';
+  border-radius: 5%;
+  font-size: 12px;
+  margin-left: 1%;
+  color: rgba(0, 0, 0, 1);
+  text-align: left;
+  line-height: 15px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  height: 65%;
+}
+
+.impediments {
+  background-color: rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto';
+  border-radius: 5%;
+  font-size: 12px;
+  margin-left: 1%;
+  color: rgba(0, 0, 0, 1);
+  text-align: left;
+  line-height: 19px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.allTask:active,
+.complete:active,
+.progress:active,
+.impediments:active {
+  background-color: rgba(134, 131, 131, 0.1);
 }
 
 .member_logo {

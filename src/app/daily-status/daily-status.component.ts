@@ -105,8 +105,6 @@ export class DailyStatusComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.currentProject = localStorage.getItem("currentProject");
-    // this.currentProject = 'FR Project VIII - EU'
     this.checkthis()
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
@@ -123,7 +121,6 @@ export class DailyStatusComponent implements OnInit {
     this.todayDate.setDate(this.todayDate.getDate() - 1);
     this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
 
-    console.log(this.currentProject)
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
@@ -152,7 +149,6 @@ export class DailyStatusComponent implements OnInit {
       this.totalminute += task.minuteSpent;
     }
 
-    //convering extra minutes to hours;
     var extrahour = 0;
     if (this.totalminute >= 60) {
       extrahour = Math.floor(this.totalminute / 60);
@@ -161,19 +157,15 @@ export class DailyStatusComponent implements OnInit {
     this.totalhour += extrahour;
     this.total_hours_spent = this.totalhour;
     this.total_minutes_spent = this.totalminute;
-    console.log(this.totalhour);//console.log(this.totalhour);
-    console.log(this.totalminute);
   }
 
   modifyTime($event) {
     this.task1 = $event;
-    console.log('performing event in parent');
     this.totalhour = 0;
     this.totalminute = 0;
     var old_hour = 0;
     var old_minute = 0;
 
-    // this.newYesterdayTask(this.task1);
 
     for (let task of this.MockYesterdayTasks) {
       if (task.taskId === this.task1.taskId) {
@@ -187,7 +179,6 @@ export class DailyStatusComponent implements OnInit {
       }
     }
 
-    //convering extra minutes to hours;
     var extrahour = 0;
     if (this.totalminute >= 60) {
       extrahour = Math.floor(this.totalminute / 60);
@@ -221,9 +212,7 @@ export class DailyStatusComponent implements OnInit {
       this.oldtodaytask = ts;
       this.MockTodayTasks.push(ts);
       this.creatednewtoday = true;
-      // console.log(this.oldtodaytask);
     }
-    // console.log(this.MockTodayTasks)
   }
 
   addYesterdayTask() {
@@ -341,18 +330,13 @@ export class DailyStatusComponent implements OnInit {
   }
   checkthis(){
     this.data.currentdata$.subscribe(datachanged => this.datachanged = datachanged)
-    console.log(this.datachanged);
-    console.log("this");
     this.email = this.datachanged;
-    console.log(this.email)
   }
 
-  //Add new task: Today
   newTodayTask($event) {
     this.task1 = $event;
     var editTime = new Date()
-    var formateditTime = this.datepipe.transform(editTime, "MM-dd-yyyy HH:mm:ss")
-    console.log(formateditTime)
+    var formateditTime = this.datepipe.transform(editTime, "dd-MM-yyyy HH:mm:ss")
     if (this.newOld(this.task1, this.TodayTasks)) {
       //insert
       if (this.task1.taskDate == '') {
@@ -440,7 +424,6 @@ export class DailyStatusComponent implements OnInit {
       day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
       for (let task of YesterdayTasks) {
         let datevar = new Date(task.lastEdit)
-        console.log(datevar)
         edit.push(datevar)
       }
       edit.sort()
@@ -476,15 +459,11 @@ export class DailyStatusComponent implements OnInit {
   }
   
   viewAllTasks() : void{
-    console.log("Inside view all tasks");
-    console.log(this.projectId)
-    console.log(this.currentProject)
     this.router.navigate(['/task-page-admin',this.projectId, this.currentProject]);
   }
   
 changeEmail($event){
 this.email = $event;
-console.log(this.email)
 this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
 }
 }

@@ -45,13 +45,6 @@ export class DashboardService {
         return this.http.delete<any>(this.getURL + "?projectId=" + project)
     }
 
-    // setSelected(Project){
-    //     this.selected = Project
-    // }
-
-    // getSelected() {
-    //     return this.selected
-    // }
     setSelected(projectList) {
         this.newListSource.next(projectList)
     }
