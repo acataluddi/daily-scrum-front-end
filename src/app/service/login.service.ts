@@ -48,7 +48,7 @@ export class LoginService {
     return this.loggedIn;
   }
 
-  private geturl = 'http://localhost:8080/DailyScrum/CRUDControllerUser?page=1';
+  private geturl = 'http://10.4.6.71:8080/DailyScrum/CRUDControllerUser?page=1';
   getMembers(): Observable<Member[]> {
     return this.http.get<Member[]>(this.geturl)
   }

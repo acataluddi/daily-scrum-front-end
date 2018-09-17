@@ -4,19 +4,21 @@
 
 <body>
   <div class="right-header">
+      <app-userslist [childProject]="currentProject" [childProjectId]="projectId"></app-userslist>
     <div class="today_header">
       <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate"
         #dp="bsDatepicker" [bsConfig]="datePickerConfig" bsDatepicker [(bsValue)]="myDateValue" (onHidden)="showDatePicker=false"
         (bsValueChange)="onDateChange($event)">{{todayval}}</div>
       <img class="left-arrow" src="../../assets/arrow-left.png" align="top" (click)="getPreviousDate()">
       <img class="right-arrow" src="../../assets/arrow-right.png" align="top" (click)="getNextDate()">
-      <button class="view_all_task">
+      <button class="view_all_task" (click)="viewMyTasks()">
         <img class="view" src="../../assets/Group_24-2x.png" align="top">
         <div class="my_task">View my tasks</div>
       </button>
-      <a href=""><img class="alt-View" src="../../assets/vire_my_tasks.png"></a>
+      <div class="altView" (click)="viewMyTasks()"><img class="alt-View" src="../../assets/vire_my_tasks.png"></div>
     </div>
   </div>
+  
   <div class="total_time">
     <div class="total_time_border">
       <div class="total_time_text"> {{total_hours_spent}}h {{total_minutes_spent}}m</div>
@@ -29,6 +31,7 @@
       <button class="progress">In Progress</button>
       <button class="impediments">Impediments</button>
     </div>
+    
   </div>
   <div class="main">
     <div class="header">
