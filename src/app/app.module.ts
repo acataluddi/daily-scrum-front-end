@@ -24,9 +24,9 @@ import { TaskPageAdminComponent } from './task-page-admin/task-page-admin.compon
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, Response, Headers } from '@angular/http';
 import { HeaderComponent } from './header/header.component';
+import { UserslistComponent } from './userslist/userslist.component';
 import { FilterPipe} from './filter.pipe';
-import { FilterPipeModule } from 'ngx-filter-pipe';
-
+import { NavigationdataService } from './service/navigationdata.service'
 
 
 // Configs 
@@ -53,6 +53,7 @@ export function getAuthServiceConfigs() {
     AdminviewallComponent,
     TaskPageAdminComponent,
     HeaderComponent,
+    UserslistComponent,
     FilterPipe
   ],
   imports: [
@@ -67,15 +68,15 @@ export function getAuthServiceConfigs() {
     HttpClientModule,
     HttpModule,
     Ng2Webstorage,
-    FilterPipeModule
   ],
   providers: [
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs
     },
-    DatePipe,
-    AuthGuard],
+    AuthGuard,
+    NavigationdataService,
+    DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

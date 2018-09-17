@@ -10,9 +10,9 @@ import { Observable, EMPTY } from 'rxjs';
 
 export class ProjectService {
 
-  private projectUrl = 'http://localhost:8080/DailyScrum/ProjectController';
+  private projectUrl = 'http://10.4.6.22:8080/DailyScrum/ProjectController';
+  url:string;
   private project: Project;
-  // reqType: string;
   reqType= 'add';
   private projectToBeUpdated: Project;
   constructor(private http: HttpClient) { 
@@ -50,13 +50,18 @@ export class ProjectService {
     );
   }
 
-  private geturl = 'http://localhost:8080/DailyScrum/ProjectController';
-
+  getallProjects(): Observable<Project[]> {
+    console.log(this.projectUrl)
+    this.url = this.projectUrl.concat('?memberEmail=getall')
+    console.log(this.url)
+    return this.http.get<Project[]>(this.url)
+  }
+  
 
   getProjects(memberEmail): Observable<Project[]> {
     let params = new HttpParams()
       .set("memberEmail", memberEmail)
-    return this.http.get<Project[]>(this.geturl,{params:params})
+    return this.http.get<Project[]>(this.projectUrl,{params:params})
   }
 
   //Temporary

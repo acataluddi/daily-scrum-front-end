@@ -57,10 +57,8 @@ export class IndividualTaskComponent implements OnInit {
   emitTimeEvent(task) {
     task.hourSpent = parseInt(task.hourSpent);
     task.minuteSpent = parseInt(task.minuteSpent);
-    // this.timeChangeEvent.emit(task);
   }
   updateDescription() {
-    // this.des.nativeElement.textContent = this.des.nativeElement.textContent.trim();
     this.task.description = this.des.nativeElement.innerText;
     console.log('idval:' + this.des.nativeElement.innerText);
     this.task.description = this.task.description.trim();
@@ -69,11 +67,9 @@ export class IndividualTaskComponent implements OnInit {
     if (this.task.description === "") {
       this.des.nativeElement.innerText = "";
     }
-    // this.addUpdateTask.emit(this.task);
   }
 
   updateImpediment() {
-    // this.imp.nativeElement.innerText = this.imp.nativeElement.innerText.trim();
     this.task.impediments = this.imp.nativeElement.innerText.trim();
     console.log('idval:' + this.imp.nativeElement.innerText);
     this.task.impediments = this.task.impediments.trim();
@@ -83,7 +79,6 @@ export class IndividualTaskComponent implements OnInit {
       this.show_impediment = false;
       this.imp.nativeElement.innerText = "";
     }
-    // this.addUpdateTask.emit(this.task);
   }
 
   save(task) {
@@ -96,7 +91,6 @@ export class IndividualTaskComponent implements OnInit {
       this.show_save = false;
       this.saved = true;
     }
-    // console.log(task)
   }
 
   stageTaskDesc(task) {
