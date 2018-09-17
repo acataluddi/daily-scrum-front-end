@@ -21,8 +21,8 @@ export class DashboardService {
         console.log(this.UserType);
     }
 
-    getallURL = "http://10.4.6.71:8080/DailyScrum/CRUDControllerUser?page=0";
-    getURL = "http://10.4.6.71:8080/DailyScrum/ProjectController";
+    getallURL = "http://10.4.6.22:8080/DailyScrum/CRUDControllerUser?page=0";
+    getURL = "http://10.4.6.22:8080/DailyScrum/ProjectController";
 
     getMembers(): Observable<any> {
         return this.http.get<any>(this.getallURL)

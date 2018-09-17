@@ -1,4 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
+import { Project } from "../model/project-model";
 import { Task } from '../model/task-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';

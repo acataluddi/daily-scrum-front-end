@@ -72,6 +72,7 @@ export class TaskPageAdminComponent implements OnInit {
   year;
   myvalue;
   subscription: Subscription;
+  color = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
   Tasks: Task[];
   Task: Task;
   constructor(
@@ -243,7 +244,7 @@ export class TaskPageAdminComponent implements OnInit {
     } else {
       nmonth += (newDate.getMonth() + 1);
     }
-    ndate += nday+ '-' + nmonth + '-' + newDate.getFullYear();
+    ndate += nday + '-' + nmonth + '-' + newDate.getFullYear() ;
     this.newDate = newDate;
     var d1 = new Date(newDate);
     (d1.setDate(d1.getDate() - 1));
@@ -267,7 +268,7 @@ export class TaskPageAdminComponent implements OnInit {
     this.indTotalMins = 0;
     this.currentProject = localStorage.getItem("currentProject");
     this.IndMembArray = [];
-    this.a();
+    // this.a();
   }
   getNextDate() {
     var d1 = new Date(this.newDate);
