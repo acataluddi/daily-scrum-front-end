@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ProjectmemberService } from "../service/projectmember.service";
+// import { ProjectmemberService } from "../service/projectmember.service";
 import { Project, member } from "../model/project-model"
 import { ProjectService } from "../service/project.service";
+import {AuthService} from 'angular-6-social-login';
+import { LoginService } from "../service/login.service";
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,16 +25,33 @@ export class ProjectComponent implements OnInit {
   pName;
   pDesc;
   pMembers;
+  flag = false;
 
   public show1: boolean = true;
   public show2: boolean = true;
   showAddMember: boolean;
 
-  constructor(private projectmemberservice: ProjectmemberService,
+  constructor(
     public router: Router,
-    private projectservice: ProjectService) { }
+    private projectservice: ProjectService,
+    private socialAuthService: AuthService, private loginservice: LoginService ) { }
 
   ngOnInit() {
+
+    this.socialAuthService.authState.subscribe((user) => {
+      console.log("user:");
+      console.log(user);
+      if (user != null) {
+        this.loginservice.loginMember(user.idToken)
+          .subscribe(msg => {
+            msg.userType;
+            if (msg.userType === "Admin" || msg.userType === "Manager") {
+              this.flag = true;
+            }
+
+          });
+      }
+      });
     this.count = 0;
     this.posted = 0;
     this.showAddMember = false;

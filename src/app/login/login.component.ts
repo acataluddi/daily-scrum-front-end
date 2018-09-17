@@ -4,7 +4,6 @@ import { AuthService, GoogleLoginProvider } from 'angular-6-social-login';
 import { Router, NavigationEnd } from '@angular/router';
 import { LoginService } from "../service/login.service";
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -62,8 +61,10 @@ export class LoginComponent implements OnInit {
               localStorage.setItem("email", msg.email);
               localStorage.setItem("userType", msg.userType);
               localStorage.setItem("image", msg.imageurl);
+              localStorage.setItem("token",userData.idToken);
               this.router.navigate(['/dashboard']);
             }
+            
           });
       }
     );
@@ -86,6 +87,7 @@ export class LoginComponent implements OnInit {
           console.log(e);
           this.router.navigate(['/dashboard']);
         }
+       
       }
     });
   }

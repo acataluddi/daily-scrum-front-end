@@ -51,7 +51,7 @@ export class UserslistComponent implements OnInit {
   getMembers(membersArr): void {
     this.loggedmembers = membersArr;
 
-    this.projectservice.getallProjects()
+    this.dashboardservice.getProjects()
       .subscribe(projectsArr => this.getProjects(projectsArr));
 
   }

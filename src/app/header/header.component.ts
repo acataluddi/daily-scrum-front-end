@@ -4,7 +4,7 @@ import { Http, } from '@angular/http';
 import { AuthService } from 'angular-6-social-login';
 import { LoginService } from '../service/login.service';
 import { Project } from '../model/project-model';
-import { ProjectService } from '../service/project.service';
+import { DashboardService } from '../service/dashboardservice.service';
 import { Router, NavigationStart } from '@angular/router';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 
@@ -12,7 +12,6 @@ import { ActivatedRoute } from "@angular/router";
 import { ProjectviewallService } from '../service/projectviewall.service';
 import { ProjectUpdated } from '../model/projectupdated-model';
 import { TaskPageAdminComponent } from '../task-page-admin/task-page-admin.component';
-import { DashboardService } from '../service/dashboardservice.service';
 import { Subscription } from 'rxjs';
 
 
@@ -48,7 +47,7 @@ export class HeaderComponent implements OnInit {
     private socialAuthService: AuthService,
     private router: Router,
     private loginservice: LoginService,
-    private projectService: ProjectService,
+    private projectService: DashboardService,
     private route: ActivatedRoute,
     private taskService: ProcessIndividualTaskService,
     private dashboardService: DashboardService) {

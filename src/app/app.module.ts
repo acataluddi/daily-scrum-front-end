@@ -72,7 +72,8 @@ export function getAuthServiceConfigs() {
   providers: [
     {
       provide: AuthServiceConfig,
-      useFactory: getAuthServiceConfigs
+      useFactory: getAuthServiceConfigs,
+      
     },
     AuthGuard,
     NavigationdataService,

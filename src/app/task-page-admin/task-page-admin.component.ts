@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Task } from '../model/task-model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { Http, Headers } from '@angular/http';
-import { ProjectviewallService } from '../service/projectviewall.service';
+import { DashboardService } from '../service/dashboardservice.service';
 import { Member } from '../model/member-model';
 import { Injectable } from '@angular/core';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
@@ -10,9 +10,10 @@ import { AdminviewallserviceService } from '../service/adminviewallservice.servi
 import { IndividualMember } from '../model/user-task-model'
 import { Subscription } from 'rxjs';
 import { Project } from '../model/project-model';
-import { Router } from '@angular/router';
+import {AuthService} from 'angular-6-social-login';
 import { ActivatedRoute } from '@angular/router';
-
+import { Router } from '@angular/router';
+import { LoginService } from "../service/login.service";
 
 const httpOptions = {
   headers: new Headers({
@@ -75,13 +76,16 @@ export class TaskPageAdminComponent implements OnInit {
   color = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
   Tasks: Task[];
   Task: Task;
+  flag = false;
   constructor(
     private taskservice: ProcessIndividualTaskService,
     private employeeservice: AdminviewallserviceService,
-    private viewallservice: ProjectviewallService,
+    private viewallservice: DashboardService,
     private http: Http,
-    private router: Router,
-    private route: ActivatedRoute
+    private socialAuthService: AuthService,
+    private route: ActivatedRoute,
+    public router: Router,
+    private loginservice: LoginService
 
   ) {
     this.datePickerConfig = Object.assign({}, {
@@ -103,13 +107,32 @@ export class TaskPageAdminComponent implements OnInit {
   email;
   todayTaskDate;
   projectId;
+  memberEmployee: Member;
+  memberEmployeeArray: Member[];
   ngOnInit() {
 
+    this.socialAuthService.authState.subscribe((user) => {
+      console.log("user:");
+      console.log(user);
+      if (user != null) {
+        this.loginservice.loginMember(user.idToken)
+          .subscribe(msg => {
+            msg.userType;
+            if (msg.userType === "Admin" || msg.userType === "Manager") {
+              this.flag = true;
+              // console.log("flag:"+this.flag);
+              // this.router.navigate(['/dashboard']);
+            }
+
+          });
+      }
+      });
     this.currentProject = localStorage.getItem("currentProject");
 
     this.IndMembObj = this.initializeNewMember(this.IndMembObj);
     this.IndMembArray = [];
     this.memberEmployeeArray = [];
+    this.projectArray = [];
     this.todayTaskDate = "";
     this.employeeservice.getMembers()
       .subscribe(membersArr => this.getMembers(membersArr));
@@ -131,14 +154,7 @@ export class TaskPageAdminComponent implements OnInit {
   IndMembObj: IndividualMember;
   projectupdate: Project;
   getProjects() {
-    var userType = localStorage.getItem("userType")
-    if (userType === "Admin" || userType === "Manager") {
-      this.email = 'getall'
-    } else {
-      this.email = localStorage.getItem("email");
-    }
-
-    this.viewallservice.getLoggedProjects(this.email)
+    this.viewallservice.getProjects()
       .subscribe(data => this.getloggedProjectsglobal(data));
   }
   getloggedProjectsglobal(Todays) {
@@ -231,8 +247,6 @@ export class TaskPageAdminComponent implements OnInit {
     }
     return ob;
   }
-  memberEmployee: Member;
-  memberEmployeeArray: Member[];
   getMembers(membersArr): void {
     this.memberEmployeeArray = membersArr;
   }
@@ -250,7 +264,7 @@ export class TaskPageAdminComponent implements OnInit {
     } else {
       nmonth += (newDate.getMonth() + 1);
     }
-    ndate += nday + '-' + nmonth + '-' + newDate.getFullYear();
+    ndate +=  nday + '-' + nmonth + '-' + newDate.getFullYear();
     this.newDate = newDate;
     var d1 = new Date(newDate);
     (d1.setDate(d1.getDate() - 1));
