@@ -104,13 +104,13 @@ export class TaskPageAdminComponent implements OnInit {
   todayTaskDate;
   projectId;
   ngOnInit() {
-    
+
     this.currentProject = localStorage.getItem("currentProject");
-    
+
     this.IndMembObj = this.initializeNewMember(this.IndMembObj);
     this.IndMembArray = [];
     this.memberEmployeeArray = [];
-   this.todayTaskDate = "";
+    this.todayTaskDate = "";
     this.employeeservice.getMembers()
       .subscribe(membersArr => this.getMembers(membersArr));
     this.projectupdate = this.initializeNewProject(this.projectupdate);
@@ -131,7 +131,13 @@ export class TaskPageAdminComponent implements OnInit {
   IndMembObj: IndividualMember;
   projectupdate: Project;
   getProjects() {
-    this.email = localStorage.getItem("email");
+    var userType = localStorage.getItem("userType")
+    if (userType === "Admin" || userType === "Manager") {
+      this.email = 'getall'
+    } else {
+      this.email = localStorage.getItem("email");
+    }
+
     this.viewallservice.getLoggedProjects(this.email)
       .subscribe(data => this.getloggedProjectsglobal(data));
   }
@@ -244,7 +250,7 @@ export class TaskPageAdminComponent implements OnInit {
     } else {
       nmonth += (newDate.getMonth() + 1);
     }
-    ndate += nday + '-' + nmonth + '-' + newDate.getFullYear() ;
+    ndate += nday + '-' + nmonth + '-' + newDate.getFullYear();
     this.newDate = newDate;
     var d1 = new Date(newDate);
     (d1.setDate(d1.getDate() - 1));
@@ -262,13 +268,13 @@ export class TaskPageAdminComponent implements OnInit {
     this.todayTaskDate = ndate;
     this.total_hours_spent = 0;
     this.total_minutes_spent = 0;
-    this.totalhour = 0; 
+    this.totalhour = 0;
     this.totalminute = 0;
     this.indTotalHour = 0;
     this.indTotalMins = 0;
     this.currentProject = localStorage.getItem("currentProject");
     this.IndMembArray = [];
-    // this.a();
+    this.a();
   }
   getNextDate() {
     var d1 = new Date(this.newDate);
@@ -308,8 +314,8 @@ export class TaskPageAdminComponent implements OnInit {
     var colors = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
     return colors[Math.floor(Math.random() * colors.length)];
   }
-  viewMyTasks() : void{
+  viewMyTasks(): void {
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }
-  
+
 }

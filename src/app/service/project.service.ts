@@ -10,13 +10,13 @@ import { Observable, EMPTY } from 'rxjs';
 
 export class ProjectService {
 
-  private projectUrl = 'http://10.4.6.22:8080/DailyScrum/ProjectController';
-  url:string;
+  private projectUrl = 'http://10.4.6.71:8080/DailyScrum/ProjectController';
+  url: string;
   private project: Project;
-  reqType= 'add';
+  reqType = 'add';
   private projectToBeUpdated: Project;
-  constructor(private http: HttpClient) { 
-    this.projectToBeUpdated=this.initializeTempProject(this.projectToBeUpdated);
+  constructor(private http: HttpClient) {
+    this.projectToBeUpdated = this.initializeTempProject(this.projectToBeUpdated);
   }
 
   setRequestType(rtype: string) {
@@ -56,12 +56,12 @@ export class ProjectService {
     console.log(this.url)
     return this.http.get<Project[]>(this.url)
   }
-  
+
 
   getProjects(memberEmail): Observable<Project[]> {
     let params = new HttpParams()
       .set("memberEmail", memberEmail)
-    return this.http.get<Project[]>(this.projectUrl,{params:params})
+    return this.http.get<Project[]>(this.projectUrl, { params: params })
   }
 
   //Temporary
@@ -73,8 +73,8 @@ export class ProjectService {
       projectDesc: 'This project aims at creating a Back-end Basket API for Adastria.',
       members: [
         {
-          email : 'sanjo@qburst.com',
-          role : 'Developer'
+          email: 'sanjo@qburst.com',
+          role: 'Developer'
         }
       ],
       projectName: "Adastria Basket"

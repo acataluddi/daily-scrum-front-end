@@ -166,22 +166,24 @@ export class HeaderComponent implements OnInit {
   }
   show(e) {
     if (e.target.className == "arrow2" || e.target.className == "button desktop" ||
-e.target.className == "dp") {
-if (this.show_signout == false) {
-this.show_signout = true
-} else {
-this.show_signout = false
-}
- }
-else if (e.target.id == "arrow" || e.target.id == "dailyscrumclass") {
-if (this.show_projectlist == false) {
-this.show_projectlist = true
-} else {
-this.show_projectlist = false
-}
- }
-else {
-this.show_projectlist = false
-this.show_signout = false
-}}
+      e.target.className == "dp") {
+      if (this.show_signout == false) {
+        this.show_signout = true
+      } else {
+        this.show_signout = false
+      }
+    }
+    else if (e.target.id == "arrow" || e.target.id == "dailyscrumclass") {
+      if (this.show_projectlist == false) {
+        this.show_projectlist = true
+      } else {
+        this.show_projectlist = false
+      }
+    }
+    else {
+      this.show_projectlist = false
+      this.show_signout = false
+    }
+  }
+
 }
