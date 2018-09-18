@@ -5,8 +5,6 @@ import { ProjectMember } from '../model/ProjectMembers';
 import { Observable, EMPTY } from 'rxjs';
 import { environment } from '../../environments/environment';
 
-const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
-
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +41,7 @@ export class ProjectService {
   }
 
   addProject(pro: Project): Observable<Project> {
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     this.project = pro;
     return this.http.post<Project>(this.projectUrl,
       JSON.stringify(this.project),{headers}
@@ -50,6 +49,7 @@ export class ProjectService {
   }
 
   updateProject(pro: Project): Observable<any> {
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     this.project = pro;
     console.log(JSON.stringify(this.project));
     return this.http.put<any>(this.projectUrl,

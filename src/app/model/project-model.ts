@@ -1,12 +1,14 @@
 
 export class Project {
-    projectId:string;
+    projectId: string;
     projectName: string;
-    projectDesc:string;
-    members:member[];
+    projectDesc: string;
+    members: member[];
 }
-export class member{ 
-    email:string;
-    role:string;
+export class member {
+    email: string;
+    role: string;
+    name: string;
+    image: string;
 }
 

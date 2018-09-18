@@ -5,40 +5,40 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 
-const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
-
 @Injectable({
   providedIn: 'root'
 })
 export class AdminviewallserviceService {
 
-private readonly baseUrl = environment.apiBase;
-  constructor(private http: HttpClient ) {}
+  private readonly baseUrl = environment.apiBase;
+  constructor(private http: HttpClient) { }
 
-  newmember:Member;
+  newmember: Member;
   p = 1;
-  apiURL :string;
-  
+  apiURL: string;
+
   getMembers(): Observable<any> {
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     this.apiURL = this.baseUrl + '/CRUDControllerUser?page=' + this.p;
     console.log(this.apiURL);
-    return this.http.get<any>(this.apiURL,{headers})
+    return this.http.get<any>(this.apiURL, { headers })
   }
 
-  getPageNum(Pagenum) { 
+  getPageNum(Pagenum) {
     this.p = Pagenum;
   }
-  
-  putmember(member: Member) : Observable<any> {
+
+  putmember(member: Member): Observable<any> {
     var newmember = {
-          name: member.name,
-          email: member.email,
-          userType: member.userType,       
-          }
+      name: member.name,
+      email: member.email,
+      userType: member.userType,
+    }
     console.log(JSON.stringify(newmember));
-    
-    return this.http.put<any>(this.apiURL, 
-      JSON.stringify(newmember),{headers}
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
+
+    return this.http.put<any>(this.apiURL,
+      JSON.stringify(newmember), { headers }
     );
   }
 }

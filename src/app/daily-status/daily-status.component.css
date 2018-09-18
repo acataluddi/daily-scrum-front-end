@@ -183,6 +183,7 @@
   padding-top: 5px;
   padding-bottom: 4px;
 }
+
 .view_all_task {
   position: absolute;
   display: flex;
@@ -192,21 +193,25 @@
   border-radius: 5%;
   line-height: 180%;
 }
+
 .view {
   height: 16px;
   width: 16px;
   margin-top: 4px;
   padding-top: 2px;
 }
+
 .alt-View {
   visibility: hidden;
 }
+
 .my_task {
   font-family: 'Roboto';
   font-size: 13px;
   width: 100%;
   color: rgba(0, 0, 0, 1);
 }
+
 .today_task_label {
   font-family: 'Roboto';
   font-size: 13px;
@@ -231,36 +236,43 @@ img.left-arrow:active,
 img.right-arrow:active {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 @media screen and (max-width: 1090px) {
   .view_all_task {
     width: 120px;
     margin-left: 35%;
   }
-  .view{
+
+  .view {
     height: 13px;
-  width: 13px;
-  margin-top: 4px;
-  padding-top: 2px;
+    width: 13px;
+    margin-top: 4px;
+    padding-top: 2px;
   }
-  .my_task{
+
+  .my_task {
     font-size: 11px;
   }
 }
+
 @media screen and (max-width: 990px) {
   .view_all_task {
     width: 110px;
     margin-left: 35%;
   }
-  .view{
+
+  .view {
     height: 10px;
-  width: 10px;
-  margin-top: 6px;
-  padding-top: 2px;
+    width: 10px;
+    margin-top: 6px;
+    padding-top: 2px;
   }
-  .my_task{
+
+  .my_task {
     font-size: 10px;
   }
 }
+
 @media screen and (max-width: 910px) {
   .header-part {
     width: 100%;
@@ -283,6 +295,7 @@ img.right-arrow:active {
     float: none;
     width: 100%;
   }
+
   .alt-View {
     visibility: visible;
     position: absolute;
@@ -290,10 +303,12 @@ img.right-arrow:active {
     height: 22px;
     width: 22px;
   }
+
   .view_all_task {
     display: none;
   }
 }
+
 @media screen and (max-width: 400px) {
   .alt-View {
     visibility: visible;
@@ -302,17 +317,20 @@ img.right-arrow:active {
     height: 22px;
     width: 22px;
   }
+
   .view {
     height: 16px;
     width: 16px;
     margin-top: 4px;
     padding-top: 2px;
   }
+
   .my_task,
   .view_all_task {
     display: none;
   }
 }
+
 @media screen and (max-width: 379px) {
   .today_task_label {
     font-size: 12px;

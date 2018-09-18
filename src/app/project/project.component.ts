@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-// import { ProjectmemberService } from "../service/projectmember.service";
 import { Project, member } from "../model/project-model"
 import { ProjectService } from "../service/project.service";
-import {AuthService} from 'angular-6-social-login';
+import { AuthService } from 'angular-6-social-login';
 import { LoginService } from "../service/login.service";
 import { Router } from '@angular/router';
 
@@ -34,7 +33,7 @@ export class ProjectComponent implements OnInit {
   constructor(
     public router: Router,
     private projectservice: ProjectService,
-    private socialAuthService: AuthService, private loginservice: LoginService ) { }
+    private socialAuthService: AuthService, private loginservice: LoginService) { }
 
   ngOnInit() {
 
@@ -51,7 +50,7 @@ export class ProjectComponent implements OnInit {
 
           });
       }
-      });
+    });
     this.count = 0;
     this.posted = 0;
     this.showAddMember = false;
@@ -109,7 +108,7 @@ export class ProjectComponent implements OnInit {
         this.project.projectName = this.pName;
         this.project.projectDesc = this.pDesc;
         for (let mb of this.pMembers) {
-          this.project.members=[];
+          this.project.members = [];
           this.project.members.push(mb);
         }
         this.show1 = false;

@@ -10,7 +10,7 @@ import { AdminviewallserviceService } from '../service/adminviewallservice.servi
 import { IndividualMember } from '../model/user-task-model'
 import { Subscription } from 'rxjs';
 import { Project } from '../model/project-model';
-import {AuthService} from 'angular-6-social-login';
+import { AuthService } from 'angular-6-social-login';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { LoginService } from "../service/login.service";
@@ -77,7 +77,7 @@ export class TaskPageAdminComponent implements OnInit {
   Tasks: Task[];
   Task: Task;
   flag = false;
-  view_my_task_flag=false;
+  view_my_task_flag = false;
   constructor(
     private taskservice: ProcessIndividualTaskService,
     private employeeservice: AdminviewallserviceService,
@@ -103,7 +103,7 @@ export class TaskPageAdminComponent implements OnInit {
         this.projectId = data.projectId
         this.currentProject = localStorage.getItem("currentProject");
 
-        this.view_my_task_flag=false;
+        this.view_my_task_flag = false;
         this.a();
       });
   }
@@ -113,7 +113,7 @@ export class TaskPageAdminComponent implements OnInit {
   memberEmployee: Member;
   memberEmployeeArray: Member[];
   ngOnInit() {
-    this.view_my_task_flag=false;
+    this.view_my_task_flag = false;
 
     this.socialAuthService.authState.subscribe((user) => {
       console.log("user:");
@@ -128,7 +128,7 @@ export class TaskPageAdminComponent implements OnInit {
 
           });
       }
-      });
+    });
     this.currentProject = localStorage.getItem("currentProject");
 
     this.IndMembObj = this.initializeNewMember(this.IndMembObj);
@@ -166,8 +166,8 @@ export class TaskPageAdminComponent implements OnInit {
     this.IndMembArray = [];
     this.projectupdate = this.getRequiredProject(this.currentProject);
     for (let mem of this.projectupdate.members) {
-      if (mem.email=== localStorage.getItem("email")) {
-        this.view_my_task_flag=true;
+      if (mem.email === localStorage.getItem("email")) {
+        this.view_my_task_flag = true;
         break;
       }
     }
@@ -184,8 +184,8 @@ export class TaskPageAdminComponent implements OnInit {
   }
   setAllMembers() {
     for (let member of this.projectupdate.members) {
-      if (member.email=== localStorage.getItem("email")) {
-        this.view_my_task_flag=true;
+      if (member.email === localStorage.getItem("email")) {
+        this.view_my_task_flag = true;
       }
       this.taskservice.getTodays(this.todayTaskDate, member.email, this.projectupdate.projectId)
         .subscribe(data => {
@@ -271,7 +271,7 @@ export class TaskPageAdminComponent implements OnInit {
     } else {
       nmonth += (newDate.getMonth() + 1);
     }
-    ndate +=  nday + '-' + nmonth + '-' + newDate.getFullYear();
+    ndate += nday + '-' + nmonth + '-' + newDate.getFullYear();
     this.newDate = newDate;
     var d1 = new Date(newDate);
     (d1.setDate(d1.getDate() - 1));

@@ -61,10 +61,10 @@ export class LoginComponent implements OnInit {
               localStorage.setItem("email", msg.email);
               localStorage.setItem("userType", msg.userType);
               localStorage.setItem("image", msg.imageurl);
-              localStorage.setItem("token",userData.idToken);
+              localStorage.setItem("token", userData.idToken);
               this.router.navigate(['/dashboard']);
             }
-            
+
           });
       }
     );
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
           console.log(e);
           this.router.navigate(['/dashboard']);
         }
-       
+
       }
     });
   }

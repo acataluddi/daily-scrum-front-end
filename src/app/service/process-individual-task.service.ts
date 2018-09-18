@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Task } from "../model/task-model";
-import { HttpClient, HttpParams ,HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { Project } from '../model/project-model';
 import { environment } from '../../environments/environment';
-
-const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +33,8 @@ export class ProcessIndividualTaskService {
       .set("taskDate", taskDate)
       .set("memberEmail", memberEmail)
       .set("projectId", projectId)
-      .set("token",localStorage.getItem("token"))
-    return this.http.get<Task[]>(this.url,{params:params})
+      .set("token", localStorage.getItem("token"))
+    return this.http.get<Task[]>(this.url, { params: params })
   }
 
   getTodays(taskDate, memberEmail, projectId): Observable<Task[]> {
@@ -44,16 +42,18 @@ export class ProcessIndividualTaskService {
       .set("taskDate", taskDate)
       .set("memberEmail", memberEmail)
       .set("projectId", projectId)
-      .set("token",localStorage.getItem("token"))
-    return this.http.get<Task[]>(this.url,{params:params})
+      .set("token", localStorage.getItem("token"))
+    return this.http.get<Task[]>(this.url, { params: params })
   }
 
-  addNewTask(newTask):Observable<any>{
-    return this.http.post<any>(this.url, JSON.stringify(newTask),{headers})
+  addNewTask(newTask): Observable<any> {
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
+    return this.http.post<any>(this.url, JSON.stringify(newTask), { headers })
   }
 
-  updateOldTask(task): Observable<any>{
-    return this.http.put<any>(this.url, JSON.stringify(task),{headers})
+  updateOldTask(task): Observable<any> {
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
+    return this.http.put<any>(this.url, JSON.stringify(task), { headers })
   }
 
   changeProject(currentProject: Project) {
