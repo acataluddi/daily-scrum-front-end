@@ -16,7 +16,7 @@ export class ProjectviewallService {
     private http: HttpClient
   ) { }
 private geturl = this.baseUrl + '/ProjectController';
-  getLoggedProjects(): Observable<ProjectUpdated[]> {
+  getLoggedProjects(memberEmail): Observable<ProjectUpdated[]> {
     return this.http.get<ProjectUpdated[]>(this.geturl, { headers })
   }
 }
