@@ -42,7 +42,8 @@ export class DashboardComponent implements OnInit {
   memberArray: Member[];
   projectArray: Project[];
   noOfMembers = [];
-  flag = false;
+  flag1 = false;
+  flag2 = false;
   imageurl = [];
   UserType:string;
  
@@ -55,43 +56,42 @@ export class DashboardComponent implements OnInit {
         this.loginservice.loginMember(user.idToken)
           .subscribe(msg => {
             this.UserType = msg.userType;
-            if (this.UserType === "Admin" || this.UserType === "Manager") {
-              this.flag = true;
-              console.log("flag:" + this.flag);
+            if (this.UserType === "Admin" ) {
+              this.flag1 = true;
+              this.flag2 = true;
+              console.log("flag:" + this.flag1);
+            }else if(this.UserType === "Manager"){
+              this.flag2 = true;
             }
 
           });
       }
       });
     
-    this.dashboardservice.getMembers()
-    .subscribe(membersArr => this.getMembers(membersArr));
+    // this.dashboardservice.getMembers()
+    // .subscribe(membersArr => this.getMembers(membersArr));
 
     this.dashboardservice.getProjects()
-      .subscribe(projectArr => this.getProjects(projectArr, this.memberArray));
+      .subscribe(projectArr => {
+        if(projectArr!=null){
+          this.getProjects(projectArr)
+        }
+      });
   }
 
-  getProjects(projectArr, memberArray): void {
+  getProjects(projectArr): void {
     let x = 0;
     this.TotalProjectMembers[0] = 0;
     this.newproject = projectArr;
-    this.memberArray = memberArray;
-    this.noOfProjects = this.newproject.length;
+    if(this.newproject !== undefined){
+      this.noOfProjects = this.newproject.length;
+    }
     for (let i = 0; i < this.noOfProjects; i++) {
 
       this.noOfMembers[i] = this.newproject[i].members.length;
+      console.log('number'+this.noOfMembers);
+      
       this.TotalProjectMembers[i + 1] = this.TotalProjectMembers[i] + this.noOfMembers[i];
-
-      for (let j = 0; j < this.noOfMembers[i]; j++) {
-
-        for (let k = 0; k < this.TotalMembers; k++) {
-
-          if (this.newproject[i].members[j].email == this.memberArray[k].email) {
-            this.imageurl[x] = this.memberArray[k].imageurl;
-            x = x + 1;
-          }
-        }
-      }
     }
   }
 
@@ -107,7 +107,7 @@ export class DashboardComponent implements OnInit {
     this.taskService.getSelectedProject(project)
     localStorage.setItem('currentProject', name)
 
-    if (this.flag) {
+    if (this.flag2) {
       this.router.navigate(['/task-page-admin', projectId, name])
     } else {
       this.router.navigate(['/daily-status', projectId, name]);

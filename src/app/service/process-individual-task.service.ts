@@ -5,8 +5,6 @@ import { Observable, Subject } from 'rxjs';
 import { Project } from '../model/project-model';
 import { environment } from '../../environments/environment';
 
-const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
-
 @Injectable({
   providedIn: 'root'
 })
@@ -49,10 +47,12 @@ export class ProcessIndividualTaskService {
   }
 
   addNewTask(newTask):Observable<any>{
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     return this.http.post<any>(this.url, JSON.stringify(newTask),{headers})
   }
 
   updateOldTask(task): Observable<any>{
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     return this.http.put<any>(this.url, JSON.stringify(task),{headers})
   }
 

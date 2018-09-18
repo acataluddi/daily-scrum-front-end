@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiBase: 'http://10.4.6.58:8081/DailyScrum',
+  loginURL: 'http://10.4.6.58.xip.io:4200/login'
 };
 
 /*

@@ -4,7 +4,6 @@ import { Project } from '../model/project-model';
 import { Observable, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
 
-const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
 @Injectable({
     providedIn: 'root'
 })
@@ -31,17 +30,19 @@ export class DashboardService {
 
 
     getMembers(): Observable<any> {
+        const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
         return this.http.get<any>(this.getallURL,{headers})
       }
    
     
     getProjects(): Observable<Project[]> {
+        const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
         return this.http.get<Project[]>(this.getURL,{headers})
 
     
       }
       deleteProjects(project):Observable<any> {
-         
+        const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
           return this.http.delete<any>(this.getURL +"?projectId="+ project,{headers})
        
       }     

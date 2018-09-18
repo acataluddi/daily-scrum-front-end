@@ -4,8 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
-const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
-
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +15,7 @@ export class ProjectviewallService {
   ) { }
 private geturl = this.baseUrl + '/ProjectController';
   getLoggedProjects(memberEmail): Observable<ProjectUpdated[]> {
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     return this.http.get<ProjectUpdated[]>(this.geturl, { headers })
   }
 }

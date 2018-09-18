@@ -48,7 +48,7 @@ export class AdminviewallComponent implements OnInit {
         this.loginservice.loginMember(user.idToken)
           .subscribe(msg => {
             msg.userType;
-            if (msg.userType === "Admin" || msg.userType === "Manager") {
+            if (msg.userType === "Admin") {
               this.flag = true;
             }
 

@@ -5,8 +5,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 
-const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +18,7 @@ private readonly baseUrl = environment.apiBase;
   apiURL :string;
   
   getMembers(): Observable<any> {
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     this.apiURL = this.baseUrl + '/CRUDControllerUser?page=' + this.p;
     console.log(this.apiURL);
     return this.http.get<any>(this.apiURL,{headers})
@@ -36,6 +35,7 @@ private readonly baseUrl = environment.apiBase;
           userType: member.userType,       
           }
     console.log(JSON.stringify(newmember));
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     
     return this.http.put<any>(this.apiURL, 
       JSON.stringify(newmember),{headers}
