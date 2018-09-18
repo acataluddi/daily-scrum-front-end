@@ -11,7 +11,7 @@
         (bsValueChange)="onDateChange($event)">{{todayval}}</div>
       <img class="left-arrow" src="../../assets/arrow-left.png" align="top" (click)="getPreviousDate()">
       <img class="right-arrow" src="../../assets/arrow-right.png" align="top" (click)="getNextDate()">
-      <button class="view_all_task" (click)="viewMyTasks()">
+      <button *ngIf="view_my_task_flag==true" class="view_all_task" (click)="viewMyTasks()">
         <img class="view" src="../../assets/Group_24-2x.png" align="top">
         <div class="my_task">View my tasks</div>
       </button>

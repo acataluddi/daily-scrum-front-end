@@ -77,6 +77,7 @@ export class TaskPageAdminComponent implements OnInit {
   Tasks: Task[];
   Task: Task;
   flag = false;
+  view_my_task_flag=false;
   constructor(
     private taskservice: ProcessIndividualTaskService,
     private employeeservice: AdminviewallserviceService,
@@ -101,6 +102,8 @@ export class TaskPageAdminComponent implements OnInit {
         this.currentProject = data.projectName;
         this.projectId = data.projectId
         this.currentProject = localStorage.getItem("currentProject");
+
+        this.view_my_task_flag=false;
         this.a();
       });
   }
@@ -110,6 +113,7 @@ export class TaskPageAdminComponent implements OnInit {
   memberEmployee: Member;
   memberEmployeeArray: Member[];
   ngOnInit() {
+    this.view_my_task_flag=false;
 
     this.socialAuthService.authState.subscribe((user) => {
       console.log("user:");
@@ -120,8 +124,6 @@ export class TaskPageAdminComponent implements OnInit {
             msg.userType;
             if (msg.userType === "Admin" || msg.userType === "Manager") {
               this.flag = true;
-              // console.log("flag:"+this.flag);
-              // this.router.navigate(['/dashboard']);
             }
 
           });
@@ -159,14 +161,16 @@ export class TaskPageAdminComponent implements OnInit {
   }
   getloggedProjectsglobal(Todays) {
     this.projectArray = Todays;
-    this.projectupdate = this.getRequiredProject(this.currentProject);
-    this.total_hours_spent = 0;
-    this.total_minutes_spent = 0;
-    this.setAllMembers();
   }
   a() {
     this.IndMembArray = [];
     this.projectupdate = this.getRequiredProject(this.currentProject);
+    for (let mem of this.projectupdate.members) {
+      if (mem.email=== localStorage.getItem("email")) {
+        this.view_my_task_flag=true;
+        break;
+      }
+    }
     this.total_hours_spent = 0;
     this.total_minutes_spent = 0;
     this.setAllMembers();
@@ -180,6 +184,9 @@ export class TaskPageAdminComponent implements OnInit {
   }
   setAllMembers() {
     for (let member of this.projectupdate.members) {
+      if (member.email=== localStorage.getItem("email")) {
+        this.view_my_task_flag=true;
+      }
       this.taskservice.getTodays(this.todayTaskDate, member.email, this.projectupdate.projectId)
         .subscribe(data => {
           for (let memberEmployee of this.memberEmployeeArray) {
@@ -323,10 +330,6 @@ export class TaskPageAdminComponent implements OnInit {
     }
     this.newDate = d1;
     this.myDateValue = d1;
-  }
-  getRandomColor() {
-    var colors = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
-    return colors[Math.floor(Math.random() * colors.length)];
   }
   viewMyTasks(): void {
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
