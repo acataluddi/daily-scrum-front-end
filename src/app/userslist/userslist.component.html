@@ -5,6 +5,8 @@
   </div>
   <div class="member" *ngFor="let task of members | filter : searchText;let i = index" (click)="gotoDailyStatus(task.email)">
     <div class="member_logo"><img src="{{task.imageurl}}"></div>
-    <div class="member_name" id="member_name{{i}}"><p>{{task.name}}</p></div>
+    <div class="member_name" id="member_name{{i}}">
+      <p>{{task.name}}</p>
+    </div>
   </div>
 </div>

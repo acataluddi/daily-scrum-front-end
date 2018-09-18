@@ -1,224 +1,223 @@
-
-  [contentEditable=true]:empty:not(:focus):before {
-    content: attr(data-text)
-  }
-
+[contentEditable=true]:empty:not(:focus):before {
+  content: attr(data-text)
+}
 
 
-  .body {
-    margin: 0 auto;
-    max-width: 350px;
-  }
 
-  .mainclass {
-    padding-top: 50%;
-  }
+.body {
+  margin: 0 auto;
+  max-width: 350px;
+}
 
-  .subclasszero {
-    padding: 10px 0px 10px 0px;
-    margin: auto;
-    width: 80%;
-    height: 5.3%;
-  }
+.mainclass {
+  padding-top: 50%;
+}
 
-  input[placeholder="New Project Name"] {
-    border: none;
-    outline: none;
-    margin: auto;
-    font-family: 'Roboto';
-    font-size: 32px;
-    height: 100%;
-    width: 100%;
-  }
+.subclasszero {
+  padding: 10px 0px 10px 0px;
+  margin: auto;
+  width: 80%;
+  height: 5.3%;
+}
 
-  .subclassone {
-    margin: auto;
-    display: flex;
-    width: 80%;
-    height: 5.3%;
-  }
+input[placeholder="New Project Name"] {
+  border: none;
+  outline: none;
+  margin: auto;
+  font-family: 'Roboto';
+  font-size: 32px;
+  height: 100%;
+  width: 100%;
+}
 
-  .subclassone:hover {
-    background-color: rgb(224, 224, 224);
-    cursor: pointer;
-  }
+.subclassone {
+  margin: auto;
+  display: flex;
+  width: 80%;
+  height: 5.3%;
+}
 
-  .adddescriptionlogoclass {
-    height: 12px;
-    width: 12px;
-    margin: 13px 4px 13px 0px;
-  }
+.subclassone:hover {
+  background-color: rgb(224, 224, 224);
+  cursor: pointer;
+}
 
-  img[src="../../assets/Group_8.png"] {
-    height: 12px;
-    width: 12px;
-  }
+.adddescriptionlogoclass {
+  height: 12px;
+  width: 12px;
+  margin: 13px 4px 13px 0px;
+}
 
-  .adddescriptionclass {
-    font-family: 'Roboto';
-    color: rgba(79, 86, 105, 1);
-    font-size: 16px;
-    font-weight: 500;
-    margin: 10px 4px 10px 0px;
-  }
+img[src="../../assets/Group_8.png"] {
+  height: 12px;
+  width: 12px;
+}
 
-  .descriptioninputclass {
-    margin: auto;
-    width: 80%;
-    display: block;
-    overflow: auto;
-    padding: 10px 0px 10px 0px;
-  }
+.adddescriptionclass {
+  font-family: 'Roboto';
+  color: rgba(79, 86, 105, 1);
+  font-size: 16px;
+  font-weight: 500;
+  margin: 10px 4px 10px 0px;
+}
 
-  div[contenteditable="true"] {
-    border: none;
-    outline: none;
-  }
+.descriptioninputclass {
+  margin: auto;
+  width: 80%;
+  display: block;
+  overflow: auto;
+  padding: 10px 0px 10px 0px;
+}
 
-  div[contenteditable="true"]:hover {
-    background-color: rgb(224, 224, 224);
-  }
+div[contenteditable="true"] {
+  border: none;
+  outline: none;
+}
 
-  .projectmembersclass {
-    margin: 0px 0px 0px 35px;
-    padding: 10px 0px 10px 0px;
-  }
+div[contenteditable="true"]:hover {
+  background-color: rgb(224, 224, 224);
+}
 
-  .teamclass {
-    font-family: 'Roboto';
-    font-size: 16px;
-    color: rgba(0, 0, 0, 1);
-    margin: 10px 0px 0px 0px;
-  }
+.projectmembersclass {
+  margin: 0px 0px 0px 35px;
+  padding: 10px 0px 10px 0px;
+}
 
-  .teamclass:hover {
-    cursor: default;
-  }
+.teamclass {
+  font-family: 'Roboto';
+  font-size: 16px;
+  color: rgba(0, 0, 0, 1);
+  margin: 10px 0px 0px 0px;
+}
 
-  .memberclass {
-    display: flex;
-    margin: 0px 0px 10px 0px;
-  }
+.teamclass:hover {
+  cursor: default;
+}
 
-  .member {
-    margin: auto;
-    font-family: 'Roboto';
-    font-size: 13px;
-    color: rgba(0, 0, 0, 1);
-    margin: 0px 20px 0px 0px;
-    display: flex;
-  }
+.memberclass {
+  display: flex;
+  margin: 0px 0px 10px 0px;
+}
 
-  select {
-    border: none;
-    height: 20px;
-    width: 100%;
-    font-family: 'Roboto';
-    font-size: 13px;
-    color: rgba(0, 0, 0, 1);
-    background-color: #ffffff;
-    margin: 0px 0px 0px 10px;
-  }
+.member {
+  margin: auto;
+  font-family: 'Roboto';
+  font-size: 13px;
+  color: rgba(0, 0, 0, 1);
+  margin: 0px 20px 0px 0px;
+  display: flex;
+}
 
-  .delete {
-    height: 14px;
-    width: 14px;
-    cursor: pointer;
-  }
+select {
+  border: none;
+  height: 20px;
+  width: 100%;
+  font-family: 'Roboto';
+  font-size: 13px;
+  color: rgba(0, 0, 0, 1);
+  background-color: #ffffff;
+  margin: 0px 0px 0px 10px;
+}
 
-  img[src="../../assets/delete_mail.png"] {
-    height: 14px;
-    width: 14px;
-  }
+.delete {
+  height: 14px;
+  width: 14px;
+  cursor: pointer;
+}
 
-  .memberinputclass {
-    margin: auto;
-    width: 80%;
-    height: 100%;
-    padding: 0px 0px 10px 0px;
-  }
+img[src="../../assets/delete_mail.png"] {
+  height: 14px;
+  width: 14px;
+}
 
-  input[placeholder="Email"] {
-    border: none;
-    outline: none;
-    height: 30px;
-    width: 45%;
-    font-family: 'Roboto';
-    font-size: 15px;
-    color: rgba(0, 0, 0, 1);
-    margin: 0px 10px 0px 0px;
-  }
+.memberinputclass {
+  margin: auto;
+  width: 80%;
+  height: 100%;
+  padding: 0px 0px 10px 0px;
+}
 
-  select[id="rolevalue"] {
-    border: none;
-    height: 30px;
-    width: 45%;
-    font-family: 'Roboto';
-    font-size: 15px;
-    color: rgba(0, 0, 0, 1);
-    background-color: #ffffff;
-    margin: 0px 0px 0px 10px;
-  }
+input[placeholder="Email"] {
+  border: none;
+  outline: none;
+  height: 30px;
+  width: 45%;
+  font-family: 'Roboto';
+  font-size: 15px;
+  color: rgba(0, 0, 0, 1);
+  margin: 0px 10px 0px 0px;
+}
 
-  .subclasstwo {
-    margin: auto;
-    display: flex;
-    width: 80%;
-    height: 5.3%;
-  }
+select[id="rolevalue"] {
+  border: none;
+  height: 30px;
+  width: 45%;
+  font-family: 'Roboto';
+  font-size: 15px;
+  color: rgba(0, 0, 0, 1);
+  background-color: #ffffff;
+  margin: 0px 0px 0px 10px;
+}
 
-  .subclasstwo:hover {
-    background-color: rgb(224, 224, 224);
-    cursor: pointer;
-  }
+.subclasstwo {
+  margin: auto;
+  display: flex;
+  width: 80%;
+  height: 5.3%;
+}
 
-  .subclasstwo:active {
-    background-color: rgba(0, 0, 0, 0.3);
-  }
+.subclasstwo:hover {
+  background-color: rgb(224, 224, 224);
+  cursor: pointer;
+}
 
-  .addmemberlogoclass {
-    height: 12px;
-    width: 12px;
-    margin: 13px 4px 13px 0px;
-  }
+.subclasstwo:active {
+  background-color: rgba(0, 0, 0, 0.3);
+}
 
-  .addmemberclass {
-    font-family: 'Roboto';
-    color: rgba(79, 86, 105, 1);
-    font-size: 16px;
-    font-weight: 500;
-    margin: 10px 0px 10px 0px;
-  }
+.addmemberlogoclass {
+  height: 12px;
+  width: 12px;
+  margin: 13px 4px 13px 0px;
+}
 
-  .addcancelclass {
-    margin: auto;
-    width: 80%;
-    display: flex;
-    align-content: right;
-  }
+.addmemberclass {
+  font-family: 'Roboto';
+  color: rgba(79, 86, 105, 1);
+  font-size: 16px;
+  font-weight: 500;
+  margin: 10px 0px 10px 0px;
+}
 
-  input[value="Cancel"] {
-    height: 25px;
-    width: 30%;
-    border: none;
-    font-size: 70%;
-    margin: 10px;
-    margin-left: auto;
-    margin-right: 0;
-  }
+.addcancelclass {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  align-content: right;
+}
 
-  input[value="Add Project"],
-  input[value="Update Project"] {
-    height: 25px;
-    width: 30%;
-    border: none;
-    font-size: 70%;
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(5, 87, 255, 1);
-    margin: 10px;
-    margin-left: auto;
-    margin-right: 0;
-  }
+input[value="Cancel"] {
+  height: 25px;
+  width: 30%;
+  border: none;
+  font-size: 70%;
+  margin: 10px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+input[value="Add Project"],
+input[value="Update Project"] {
+  height: 25px;
+  width: 30%;
+  border: none;
+  font-size: 70%;
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(5, 87, 255, 1);
+  margin: 10px;
+  margin-left: auto;
+  margin-right: 0;
+}
 
 @media(max-width:340px) {
   input[placeholder="New Project Name"] {

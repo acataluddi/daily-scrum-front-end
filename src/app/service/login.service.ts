@@ -14,11 +14,6 @@ import { environment } from '../../environments/environment';
 export class LoginService {
 
   private readonly baseUrl = environment.apiBase;
-  private readonly loginURL = environment.loginURL;
-
-
-
-
   constructor(public router: Router, private localSt: LocalStorageService,
     private http: HttpClient) {
 
@@ -55,7 +50,7 @@ export class LoginService {
   }
 
   logoutMember() {
-    // this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
     localStorage.setItem("logged", "false");
     localStorage.setItem("email", '');
     localStorage.setItem("image", '');
@@ -63,6 +58,5 @@ export class LoginService {
     localStorage.setItem("userType", '');
     localStorage.setItem("token", '');
     localStorage.setItem("projectId", '');
-    document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=" + this.loginURL;
   }
 }

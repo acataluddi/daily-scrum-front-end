@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 
-import {DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, Response, Headers } from '@angular/http';
 import { HeaderComponent } from './header/header.component';
 import { UserslistComponent } from './userslist/userslist.component';
-import { FilterPipe} from './filter.pipe';
+import { FilterPipe } from './filter.pipe';
 import { NavigationdataService } from './service/navigationdata.service'
 
 
@@ -73,7 +73,7 @@ export function getAuthServiceConfigs() {
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs,
-      
+
     },
     AuthGuard,
     NavigationdataService,

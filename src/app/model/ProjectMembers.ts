@@ -1,8 +1,8 @@
 export class ProjectMember {
-    id:number;
-    email: string;
+  id: number;
+  email: string;
 
-    constructor(email:string, role:string) {
-      this.email = email;
-    }
+  constructor(email: string, role: string) {
+    this.email = email;
   }
+}

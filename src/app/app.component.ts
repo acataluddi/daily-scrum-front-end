@@ -14,7 +14,7 @@ export class AppComponent {
       if (event instanceof NavigationStart) {
         if (event['url'] == '/' || event['url'] == '/login' || event['url'] == '/**') {
           this.showHead = false;
-        } else if(localStorage.getItem("logged") == 'false'){
+        } else if (localStorage.getItem("logged") == 'false') {
           this.showHead = false;
         } else {
           this.showHead = true;
@@ -22,7 +22,7 @@ export class AppComponent {
       }
     });
 
-    if (router.url == '/**'){
+    if (router.url == '/**') {
       console.log("Inpropper");
     }
   }
