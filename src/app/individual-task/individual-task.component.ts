@@ -86,6 +86,8 @@ export class IndividualTaskComponent implements OnInit {
   save(task) {
     if (task.description == "") {
       alert("Add description")
+    } else if (task.hourSpent <= 0 && task.minuteSpent <= 0) {
+      alert("Add Time spent")
     }
     else {
       this.addUpdateTask.emit(task);
