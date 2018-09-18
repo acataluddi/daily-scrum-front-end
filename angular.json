@@ -50,7 +50,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "daily-scrum:build"
+          "browserTarget": "daily-scrum:build",
+          "host": "10.4.6.200.xip.io",
+          "port": 4200
           },
           "configurations": {
             "production": {
