@@ -98,10 +98,12 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   stageTaskDesc(task) {
+    if (this.stageDesc == false){
     this.old_desc = task.description
     this.old_imped = task.impediments
     this.stageDesc = true
-    console.log(this.old_desc)
+    console.log(this.old_imped)
+    }
 
   }
 

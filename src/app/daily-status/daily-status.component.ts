@@ -49,8 +49,10 @@ export class DailyStatusComponent implements OnInit {
   impediments;
   description;
   task_completed;
-  total_hours_spent = 0;
-  total_minutes_spent = 0;
+  total_hours_spent1 = 0;
+  total_minutes_spent1 = 0;
+  total_hours_spent2 = 0;
+  total_minutes_spent2 = 0;
   showDatePicker = false;
   timeArray = Array; //Array type captured in a variable
   hours = 23;
@@ -60,6 +62,7 @@ export class DailyStatusComponent implements OnInit {
   totalhour = 0;
   totalminute = 0;
 
+  disable = true;
   newDate = new Date();
 
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -80,8 +83,10 @@ export class DailyStatusComponent implements OnInit {
   flag = false;
   projectId;
   status = false;
-  lastEdit;
-  lastEditString = '';
+  lastEdit1;
+  lastEdit2;
+  lastEditString1 = '';
+  lastEditString2 = '';
   subscription: Subscription;
   sub: any;
   editable;
@@ -169,10 +174,28 @@ export class DailyStatusComponent implements OnInit {
     this.YesterdayTasks = Yesterdays;
   }
 
-  calculateTotalTime() {
+  // calculateTotalTime() {
+  //   this.totalhour = 0;
+  //   this.totalminute = 0;
+  //   for (let task of this.MockYesterdayTasks) {
+  //     this.totalhour += task.hourSpent;
+  //     this.totalminute += task.minuteSpent;
+  //   }
+
+  //   var extrahour = 0;
+  //   if (this.totalminute >= 60) {
+  //     extrahour = Math.floor(this.totalminute / 60);
+  //     this.totalminute = this.totalminute % 60;
+  //   }
+  //   this.totalhour += extrahour;
+  //   this.total_hours_spent = this.totalhour;
+  //   this.total_minutes_spent = this.totalminute;
+  // }
+
+  calculateTotalTime(taskArray, value) {
     this.totalhour = 0;
     this.totalminute = 0;
-    for (let task of this.MockYesterdayTasks) {
+    for (let task of taskArray) {
       this.totalhour += task.hourSpent;
       this.totalminute += task.minuteSpent;
     }
@@ -183,11 +206,19 @@ export class DailyStatusComponent implements OnInit {
       this.totalminute = this.totalminute % 60;
     }
     this.totalhour += extrahour;
-    this.total_hours_spent = this.totalhour;
-    this.total_minutes_spent = this.totalminute;
+    switch (value) {
+      case 1: this.total_hours_spent1 = this.totalhour;
+        this.total_minutes_spent1 = this.totalminute;
+        break;
+      case 2: this.total_hours_spent2 = this.totalhour;
+        this.total_minutes_spent2 = this.totalminute;
+        break;
+    }
+    // this.total_hours_spent = this.totalhour;
+    // this.total_minutes_spent = this.totalminute;
   }
 
-  modifyTime($event) {
+  modifyTime($event, taskArray, value) {
     this.task1 = $event;
     this.totalhour = 0;
     this.totalminute = 0;
@@ -195,7 +226,7 @@ export class DailyStatusComponent implements OnInit {
     var old_minute = 0;
 
 
-    for (let task of this.MockYesterdayTasks) {
+    for (let task of taskArray) {
       if (task.taskId === this.task1.taskId) {
         old_hour = this.task1.hourSpent;
         old_minute = this.task1.minuteSpent;
@@ -219,8 +250,16 @@ export class DailyStatusComponent implements OnInit {
       alert('Total time worked cannot be more than 24 hours.');
     }
     else {
-      this.total_hours_spent = this.totalhour;
-      this.total_minutes_spent = this.totalminute;
+      // this.total_hours_spent = this.totalhour;
+      // this.total_minutes_spent = this.totalminute;
+      switch (value) {
+        case 1: this.total_hours_spent1 = this.totalhour;
+          this.total_minutes_spent1 = this.totalminute;
+          break;
+        case 2: this.total_hours_spent2 = this.totalhour;
+          this.total_minutes_spent2 = this.totalminute;
+          break;
+      }
     }
   }
 
@@ -317,7 +356,7 @@ export class DailyStatusComponent implements OnInit {
         this.todayval = this.month + " " + this.date + ", " + this.year;
         this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
       }
-
+      console.log(newDate)
       this.getData(newDate);
     }
   }
@@ -392,6 +431,7 @@ export class DailyStatusComponent implements OnInit {
       this.taskservice.updateOldTask(this.task1)
         .subscribe(msg => console.log(msg));
     }
+    this.getLastEdit(this.TodayTasks, 2)
   }
 
   //Add new task: Yesterday
@@ -419,7 +459,7 @@ export class DailyStatusComponent implements OnInit {
       this.taskservice.updateOldTask(this.task1)
         .subscribe(msg => console.log(msg));
     }
-    this.getLastEdit(this.YesterdayTasks)
+    this.getLastEdit(this.YesterdayTasks, 1)
   }
 
   newOld(keyTask, taskArray) {
@@ -451,33 +491,66 @@ export class DailyStatusComponent implements OnInit {
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
-  getLastEdit(YesterdayTasks) {
-    if (YesterdayTasks.length != 0) {
+  getLastEdit(taskArray, value) {
+    if (taskArray.length != 0) {
+      var newDate = new Date()
       var edit = new Array()
       var day = new Array(7);
+      var weekday
+      var inweek
+      let monthDate: string;
       day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-      for (let task of YesterdayTasks) {
+      for (let task of taskArray) {
         let datevar = new Date(task.lastEdit)
         edit.push(datevar)
       }
       edit.sort()
-      this.lastEdit = edit[edit.length - 1]
-      var weekday = day[this.lastEdit.getDay()]
-      var time = this.lastEdit.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-      this.lastEditString = weekday + " " + time
+      var lastEdit = edit[edit.length - 1]
+      var dateDiff = newDate.getDate() - lastEdit.getDate()
+      if (dateDiff <= 7) {
+        weekday = day[lastEdit.getDay()]
+        inweek = true
+      } else {
+        inweek = false
+        let date = lastEdit.getDate()
+        let month = this.months[lastEdit.getMonth()]
+        monthDate = month + " " + date
+      }
+      var time = lastEdit.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+      if (value == 1) {
+        if (inweek) {
+          this.lastEditString1 = weekday + " " + time
+        } else {
+          this.lastEditString1 = monthDate + " " + time
+        }
+      } else {
+        if (inweek) {
+          this.lastEditString2 = weekday + " " + time
+        } else {
+          this.lastEditString2 = monthDate + " " + time
+        }
+      }
     } else {
-      this.lastEditString = ''
+      if (value == 1) {
+        this.lastEditString1 = ''
+      } else {
+        this.lastEditString2 = ''
+      }
     }
   }
 
   getTask(today, yesterday, email, projectId) {
     this.taskservice.getTodays(today, email, projectId)
-      .subscribe(data => this.getTodaysTask(data));
+      .subscribe(data => {
+        this.getTodaysTask(data)
+        this.calculateTotalTime(this.MockTodayTasks, 2)
+        this.getLastEdit(this.TodayTasks, 2)
+      });
     this.taskservice.getYesterdays(yesterday, email, projectId)
       .subscribe(data => {
         this.getYesterdaysTask(data);
-        this.calculateTotalTime()
-        this.getLastEdit(this.YesterdayTasks)
+        this.calculateTotalTime(this.MockYesterdayTasks, 1)
+        this.getLastEdit(this.YesterdayTasks, 1)
       });
   }
 

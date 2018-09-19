@@ -11,7 +11,7 @@
     {{task.description}}
   </div>
   <div #des class="description" spellcheck="false" *ngIf="task.description===''" data-text="Add description"
-    [contentEditable]="editable" (blur)="updateDescription()" (click)="show_save=true">
+    [contentEditable]="editable" (blur)="updateDescription()" (click)="show_save=true; stageTaskDesc(task)">
   </div>
 </div>
 

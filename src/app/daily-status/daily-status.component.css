@@ -47,7 +47,7 @@
 }
 
 .container {
-  width: 50%;
+  width: 48%;
   padding: 0px;
   height: 100%;
 }
@@ -235,6 +235,13 @@ div.new_task_field:active,
 img.left-arrow:active,
 img.right-arrow:active {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.vertical {
+  border-left: 3px solid #eee;
+  height: 500px;
+  position: absolute;
+  right: 51.5%;
 }
 
 @media screen and (max-width: 1090px) {

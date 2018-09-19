@@ -36,28 +36,30 @@
             </div>
           </div>
           <div *ngIf="noOfMembers[j]-4>0">
-            <button class="SmallCircleButton2 SmallCircleButton">
+            <button class="SmallCircleButton2">
               <div class="ExtraMembersDiv">+{{noOfMembers[j]-4}}</div>
             </button>
           </div>
-          <button class="DailyStatusButton" (click)="openDailyStatus(Project)">
-            <div class="DailyStatusDiv">Daily Status</div>
-          </button>
-          <button class="MenuButton DropdownButton" *ngIf="flag2 === true">
-            <div class="DropdownContentDiv">
-              <div class="EditDiv Button" (click)="EditProject(Project)">
+          <div class="TwoButton">
+            <button class="DailyStatusButton" (click)="openDailyStatus(Project)">
+              <div class="DailyStatusDiv">Daily Status</div>
+            </button>
+            <button class="MenuButton DropdownButton" *ngIf="flag2 === true">
+              <div class="DropdownContentDiv">
+                <div class="EditDiv Button" (click)="EditProject(Project)">
 
-                Edit Project
+                  Edit Project
 
+                </div>
+                <div class="DeleteDiv Button" (click)="DeleteProject(Project.projectId)">
+                  Delete Project
+                </div>
               </div>
-              <div class="DeleteDiv Button" (click)="DeleteProject(Project.projectId)">
-                Delete Project
+              <div class="MenuDotDiv">
+                <img src="../../assets/Menudots.png">
               </div>
-            </div>
-            <div class="MenuDotDiv">
-              <img src="../../assets/Menudots.png">
-            </div>
-          </button>
+            </button>
+          </div>
         </div>
 
       </div>
