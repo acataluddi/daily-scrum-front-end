@@ -15,7 +15,6 @@
         <img class="view" src="../../assets/Group_24-2x.png" align="top">
         <div class="my_task">View my tasks</div>
       </button>
-      <div class="altView" (click)="viewMyTasks()"><img class="alt-View" src="../../assets/vire_my_tasks.png"></div>
     </div>
   </div>
 
@@ -31,13 +30,12 @@
         <div class="column">
           <div class="member1">
             <div class="member_title1">
-              <div class="member_image1"><img class="size" src={{IndMemOb.imageurl}}></div>
+              <div class="member_image1"><img class="size" src={{IndMemOb.image}}></div>
               <div class="member_name1">{{IndMemOb.name}}</div>
               <div class="more_icon"><img src="../../assets/more.png"></div>
               <div class="member_time_spent1">{{IndMemOb.hour}} h {{IndMemOb.minute}} m</div>
             </div>
             <div class="member_part">
-              <!-- <ul> -->
               <div *ngFor="let Task of IndMemOb.tasks ">
                 <span *ngIf="Task.taskId%5===0" class="dot dot-color-1"></span>
                 <span *ngIf="Task.taskId%3===0 && Task.taskId%5!=0" class="dot dot-color-2"></span>
@@ -46,7 +44,6 @@
                 <div class="task">
                   {{Task.description}}</div>
               </div>
-              <!-- </ul> -->
             </div>
           </div>
         </div>

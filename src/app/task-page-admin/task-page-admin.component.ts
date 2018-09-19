@@ -1,26 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from '../model/task-model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { Http, Headers } from '@angular/http';
-import { DashboardService } from '../service/dashboardservice.service';
 import { Member } from '../model/member-model';
 import { Injectable } from '@angular/core';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
-import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import { IndividualMember } from '../model/user-task-model'
 import { Subscription } from 'rxjs';
-import { Project } from '../model/project-model';
 import { AuthService } from 'angular-6-social-login';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { LoginService } from "../service/login.service";
-
-const httpOptions = {
-  headers: new Headers({
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*'
-  })
-};
+import { TaskPageService } from "../service/task-page.service";
 
 @Injectable({
   providedIn: 'root'
@@ -34,59 +23,33 @@ const httpOptions = {
 
 export class TaskPageAdminComponent implements OnInit {
   sub: any;
-
   currentProject;
   currentProjectId;
-  myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
-  task_id;
-  oldtodaytask: Task;
-  oldyesterdaytask: Task;
-  creatednewtoday = false;
-  creatednewyesterday = false;
-  hours_spent;
-  minutes_spent;
-  impediments;
-  description;
-  member_name;
-  task_completed;
+  subscription: Subscription;
+  flag = false;
+  view_my_task_flag = false;
   total_hours_spent = 0;
   total_minutes_spent = 0;
   showDatePicker = false;
-  timeArray = Array; //Array type captured in a variable
-  hours;
-  minutes;
+  myDateValue: Date;
   todayval;
-  yesterdayval;
-  totalhour = 0;
-  totalminute = 0;
-  i = 0;
-  newDate = new Date();
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  d = new Date();
-  hour;
-  minute;
-  second;
-  month;
-  monthval;
-  date;
-  year;
-  myvalue;
-  subscription: Subscription;
-  color = ['rgb(12, 33, 93)', 'rgb(255, 177, 166)', 'rgb(63, 205, 195)'];
-  Tasks: Task[];
-  Task: Task;
-  flag = false;
-  view_my_task_flag = false;
+  email;
+  todayTaskDate;
+  projectId;
+  memberEmployee: Member;
+  memberEmployeeArray: Member[];
+  IndMembArray: IndividualMember[];
+  selectedDate: Date;
+
   constructor(
     private taskservice: ProcessIndividualTaskService,
-    private employeeservice: AdminviewallserviceService,
-    private viewallservice: DashboardService,
-    private http: Http,
     private socialAuthService: AuthService,
     private route: ActivatedRoute,
     public router: Router,
-    private loginservice: LoginService
+    private loginservice: LoginService,
+    private taskPageService: TaskPageService
 
   ) {
     this.datePickerConfig = Object.assign({}, {
@@ -94,29 +57,28 @@ export class TaskPageAdminComponent implements OnInit {
       showWeekNumbers: false
     });
     this.sub = this.route.params.subscribe(params => {
+      console.log('The sub data')
+      console.log(params)
       this.currentProject = params['name']
       this.projectId = +params['projectId'];
+      var dt = new Date();
+      this.myDateValue = dt;
     });
     this.subscription = taskservice.newList.subscribe(
       data => {
         this.currentProject = data.projectName;
-        this.projectId = data.projectId
-        this.currentProject = localStorage.getItem("currentProject");
-
+        this.projectId = data.projectId;
         this.view_my_task_flag = false;
-        this.a();
+        var dt = new Date();
+        this.myDateValue = dt;
       });
   }
-  email;
-  todayTaskDate;
-  projectId;
-  memberEmployee: Member;
-  memberEmployeeArray: Member[];
   ngOnInit() {
+    this.myDateValue = new Date();
+    this.projectId = localStorage.getItem("projectId");
+    this.currentProject = localStorage.getItem("currentProject");
     this.view_my_task_flag = false;
-
     this.socialAuthService.authState.subscribe((user) => {
-      console.log("user:");
       console.log(user);
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
@@ -125,142 +87,48 @@ export class TaskPageAdminComponent implements OnInit {
             if (msg.userType === "Admin" || msg.userType === "Manager") {
               this.flag = true;
             }
-
           });
       }
     });
-    this.currentProject = localStorage.getItem("currentProject");
 
-    this.IndMembObj = this.initializeNewMember(this.IndMembObj);
-    this.IndMembArray = [];
-    this.memberEmployeeArray = [];
-    this.projectArray = [];
-    this.todayTaskDate = "";
-    this.employeeservice.getMembers()
-      .subscribe(membersArr => this.getMembers(membersArr));
-    this.projectupdate = this.initializeNewProject(this.projectupdate);
-    this.getProjects();
-    this.oldtodaytask = new Task;
-    this.oldyesterdaytask = new Task;;
-    this.month = this.months[this.d.getMonth()];
-    this.date = this.d.getDate();
-    this.year = this.d.getFullYear();
-    this.myvalue = true;
-    this.myDateValue = new Date();
   }
-  pindTotalHour
-  total: number
-  projectupdated: Project;
-  projectArray: Project[];
-  IndMembArray: IndividualMember[];
-  IndMembObj: IndividualMember;
-  projectupdate: Project;
-  getProjects() {
-    this.viewallservice.getProjects()
-      .subscribe(data => this.getloggedProjectsglobal(data));
-  }
-  getloggedProjectsglobal(Todays) {
-    this.projectArray = Todays;
-  }
-  a() {
-    this.IndMembArray = [];
-    this.projectupdate = this.getRequiredProject(this.currentProject);
-    for (let mem of this.projectupdate.members) {
-      if (mem.email === localStorage.getItem("email")) {
-        this.view_my_task_flag = true;
-        break;
-      }
-    }
+
+  getTaskPageData(taskDate, projectId) {
     this.total_hours_spent = 0;
     this.total_minutes_spent = 0;
-    this.setAllMembers();
+    this.taskPageService.getMembersTask(taskDate, projectId)
+      .subscribe(memberTasks => {
+        console.log(memberTasks);
+        this.IndMembArray = memberTasks;
+        this.calculateTotalTime(this.IndMembArray);
+        if (this.IndMembArray.filter(m => m.email === localStorage.getItem("email")).length != 0) {
+          this.view_my_task_flag = true;
+        }
+      });
   }
-  getRequiredProject(pname: string): Project {
-    for (let individualProject of this.projectArray) {
-      if (individualProject.projectName === pname) {
-        return individualProject;
-      }
-    }
-  }
-  setAllMembers() {
-    for (let member of this.projectupdate.members) {
-      if (member.email === localStorage.getItem("email")) {
-        this.view_my_task_flag = true;
-      }
-      this.taskservice.getTodays(this.todayTaskDate, member.email, this.projectupdate.projectId)
-        .subscribe(data => {
-          for (let memberEmployee of this.memberEmployeeArray) {
-            if (memberEmployee.email === member.email) {
-              this.IndMembObj.name = memberEmployee.name;
-              this.IndMembObj.imageurl = memberEmployee.imageurl;
-              this.IndMembObj = this.calculateIndividualTime(this.IndMembObj, data);
-              this.IndMembObj.tasks = data;
-              this.IndMembArray.push(this.IndMembObj);
-              this.IndMembObj = this.initializeNewMember(this.IndMembObj);
-            }
-          }
-        });
-    }
-  }
-  initializeNewProject(newProject: Project): Project {
-    newProject = {
-      projectId: '',
-      projectDesc: "",
-      members: [],
-      projectName: ""
-    }
-    return newProject;
-  }
-  initializeNewMember(newMember: IndividualMember): IndividualMember {
-    newMember = {
-      name: '',
-      hour: 0,
-      minute: 0,
-      imageurl: "",
-      tasks: []
-    }
-    return newMember;
-  }
-  getTodaysTask(Todays) {
-    this.MockTodayTasks = Todays;
-  }
-  MockToTasks: Task;
-  MockTodayTasks: Task[];
-  indTotalHour = 0;
-  indTotalMins = 0;
-  calculateIndividualTime(ob: IndividualMember, tsk) {
-    this.indTotalHour = 0;
-    this.indTotalMins = 0;
-    for (let t of tsk) {
-      this.indTotalHour += t.hourSpent;
-      this.indTotalMins += t.minuteSpent;
+  calculateTotalTime(tasksArray: IndividualMember[]) {
+    var totalHour = 0;
+    var totalMinute = 0;
+    for (let task of tasksArray) {
+      totalHour += task.hour;
+      totalMinute += task.minute;
     }
     var extrahour = 0;
-    if (this.indTotalMins >= 60) {
-      extrahour = Math.floor(this.totalminute / 60);
-      this.indTotalMins = this.indTotalMins % 60;
-    } this.indTotalHour += extrahour;
-    ob.hour = this.indTotalHour;
-    ob.minute = this.indTotalMins;
-
-    this.total_hours_spent += this.indTotalHour;
-    this.total_minutes_spent += this.indTotalMins;
-
-    var totalextrahour = 0;
-    if (this.total_minutes_spent >= 60) {
-      totalextrahour = Math.floor(this.total_minutes_spent / 60);
-      this.total_minutes_spent = this.total_minutes_spent % 60;
-      this.total_hours_spent += totalextrahour;
+    if (totalMinute >= 60) {
+      extrahour = Math.floor(totalMinute / 60);
+      totalMinute = totalMinute % 60;
     }
-    return ob;
-  }
-  getMembers(membersArr): void {
-    this.memberEmployeeArray = membersArr;
+    totalHour += extrahour;
+    this.total_hours_spent = totalHour;
+    this.total_minutes_spent = totalMinute;
   }
   onDateChange(newDate: Date) {
+    console.log('In on date change');
+    this.selectedDate = newDate;
     var nday = '';
     var nmonth = '';
     var ndate = '';
+    var d = new Date();
     if (newDate.getDate() < 10) {
       nday += '0' + newDate.getDate();
     } else {
@@ -272,67 +140,29 @@ export class TaskPageAdminComponent implements OnInit {
       nmonth += (newDate.getMonth() + 1);
     }
     ndate += nday + '-' + nmonth + '-' + newDate.getFullYear();
-    this.newDate = newDate;
-    var d1 = new Date(newDate);
-    (d1.setDate(d1.getDate() - 1));
-    this.month = this.months[newDate.getMonth()];
-    this.date = newDate.getDate();
-    this.year = newDate.getFullYear();
-    if ((newDate.getMonth() === this.d.getMonth()) && (newDate.getDate() === this.d.getDate()) && (newDate.getFullYear() === this.d.getFullYear())) {
-      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = "Yesterday's Tasks";
+    this.todayval = ndate;
+    var month = this.months[newDate.getMonth()];
+    var date = newDate.getDate();
+    var year = newDate.getFullYear();
+    if ((newDate.getMonth() === d.getMonth()) && (newDate.getDate() === d.getDate()) && (newDate.getFullYear() === d.getFullYear())) {
+      this.todayval = "Today, " + month + " " + date + ", " + year;
     }
     else {
-      this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+      this.todayval = month + " " + date + ", " + year;
     }
-    this.todayTaskDate = ndate;
-    this.total_hours_spent = 0;
-    this.total_minutes_spent = 0;
-    this.totalhour = 0;
-    this.totalminute = 0;
-    this.indTotalHour = 0;
-    this.indTotalMins = 0;
-    this.currentProject = localStorage.getItem("currentProject");
-    this.IndMembArray = [];
-    this.a();
+    this.getTaskPageData(ndate, this.projectId)
   }
   getNextDate() {
-    var d1 = new Date(this.newDate);
+    var d1 = new Date(this.selectedDate);
     (d1.setDate(d1.getDate() + 1));
-    this.month = this.months[d1.getMonth()];
-    this.date = d1.getDate();
-    this.year = d1.getFullYear();
-    if ((this.month === this.d.getMonth()) && (this.date === this.d.getDate()) && (this.year === this.d.getFullYear())) {
-      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = "Yesterday's Tasks";
-    }
-    else {
-      this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = this.months[this.newDate.getMonth()] + " " + this.newDate.getDate() + ", " + this.newDate.getFullYear();
-    }
-    this.newDate = d1;
     this.myDateValue = d1;
   }
   getPreviousDate() {
-    var d1 = new Date(this.newDate);
+    var d1 = new Date(this.selectedDate);
     (d1.setDate(d1.getDate() - 1));
-    this.month = this.months[this.newDate.getMonth()];
-    this.date = this.newDate.getDate();
-    this.year = this.newDate.getFullYear();
-    if ((this.newDate.getMonth() === this.d.getMonth()) && (this.newDate.getDate() === this.d.getDate()) && (this.newDate.getFullYear() === this.d.getFullYear())) {
-      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = "Yesterday's Tasks";
-    }
-    else {
-      this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
-    }
-    this.newDate = d1;
     this.myDateValue = d1;
   }
   viewMyTasks(): void {
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }
-
 }
