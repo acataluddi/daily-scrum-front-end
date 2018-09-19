@@ -114,7 +114,7 @@ export class DailyStatusComponent implements OnInit {
         this.projectId = data.projectId
         this.currentProject = data.projectName
         this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
-
+        // localStorage.setItem("projectId", this.projectId)
       });
   }
 
@@ -153,7 +153,8 @@ export class DailyStatusComponent implements OnInit {
 
     this.todayDate.setDate(this.todayDate.getDate() - 1);
     this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
-
+    this.projectId = localStorage.getItem("projectId")
+    this.currentProject = localStorage.getItem("currentProject")
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
@@ -499,7 +500,7 @@ export class DailyStatusComponent implements OnInit {
       var weekday
       var inweek
       let monthDate: string;
-      day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
       for (let task of taskArray) {
         let datevar = new Date(task.lastEdit)
         edit.push(datevar)

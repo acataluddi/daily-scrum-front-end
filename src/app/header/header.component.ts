@@ -129,6 +129,7 @@ export class HeaderComponent implements OnInit {
     this.selected = newProject;
 
     localStorage.setItem("currentProject", this.selected.projectName);
+    localStorage.setItem("projectId", this.selected.projectId)
     this.taskService.changeProject(this.selected)
 
   }
