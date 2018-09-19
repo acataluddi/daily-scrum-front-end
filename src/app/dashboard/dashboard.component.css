@@ -38,7 +38,7 @@
   position: absolute;
   left: 256px;
   height: 32px;
-  width: 138px;
+  width: 130px;
   background-color: rgb(5, 87, 255);
   border-radius: 4px;
   display: flex;
@@ -128,20 +128,28 @@
 }
 
 .InnerProjectBoxDiv {
-  margin: 54px 24px 36px 24px;
+  margin: 54px 20px 36px 24px;
   height: 32px;
   display: flex;
 }
 
 .SmallCircleButton {
-  width: 32px;
-  height: 32px;
+  width: 29px;
+  height: 29px;
   border-radius: 16px;
   margin-left: -12px;
   border: 1px solid white;
   outline: none;
 }
 
+.SmallCircleButton2 {
+  width: 30px;
+  height: 30px;
+  border-radius: 16px;
+  margin-left: -12px;
+  border: 1px solid white;
+  outline: none;
+}
 
 .SmallCircleNameDiv {
   color: white;
@@ -167,7 +175,7 @@
 
 .ExtraMembersDiv {
   padding-right: 4px;
-  padding-top: 2px;
+  padding-top: 1px;
   font-weight: 600;
   font-size: 14px;
   color: white;
@@ -177,14 +185,21 @@
   background-color: rgb(51, 5, 255);
 }
 
+.TwoButton {
+  position: absolute;
+  width: 300px;
+}
+
 .DailyStatusButton {
+  position: absolute;
   height: 32px;
-  width: 115px;
+  width: 100px;
   border-radius: 16px;
-  margin-left: 37px;
+  margin-left: 50%;
   background-color: rgb(255, 255, 255);
   border: none;
   outline: none;
+
 }
 
 .DailyStatusButton:hover {
@@ -202,13 +217,15 @@
 }
 
 .MenuButton {
+  position: absolute;
   width: 32px;
   height: 32px;
   border-radius: 16px;
-  margin-left: 7px;
+  margin-left: 85%;
   background-color: rgb(255, 255, 255);
   border: none;
   outline: none;
+
 }
 
 .MenuButton:hover {
@@ -225,7 +242,7 @@
   left: -100px;
   display: none;
   position: absolute;
-  background-color: rgb(5, 87, 255);
+  background-color: white;
   width: 129px;
   height: 80px;
   border-radius: 4px;
@@ -238,18 +255,18 @@
 }
 
 .Button {
-  background-color: rgb(5, 87, 255);
+  background-color: rgb(251, 252, 255);
   height: 30px;
   width: 100%;
   border: none;
   outline: none;
-  color: white;
+  color: black;
   font-size: 13px;
 }
 
 .EditDiv {
   margin-top: 7px;
-  font-weight: 600;
+
   padding-left: 0px;
 }
 
@@ -258,14 +275,13 @@
   padding-left: 8px;
 }
 
-.EditButton:hover,
-.DeleteButton:hover {
-  background-color: rgb(51, 5, 255);
+.EditDiv:hover,
+.DeleteDiv:hover {
+  font-weight: 600;
 }
 
 .MenuDotDiv {
   margin-left: 0px;
-  padding-top: 2px;
   color: white;
 }
 
@@ -285,40 +301,89 @@
   }
 
   .ProjectBoxDiv {
-    width: 352px;
+    width: 340px;
+  }
+
+  .TwoButton {
+    width: 300px;
+  }
+
+  .DailyStatusButton {
+    margin-left: 46%;
+  }
+
+  .MenuButton {
+    margin-left: 85%;
   }
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 900px) {
   .MainDiv {
     width: 100%;
   }
 
-  .TopDiv {
-    display: none;
-    height: 0px;
-  }
-
   .BottomDiv {
-    margin-top: 0px;
-    margin-left: 0px;
     width: 100%;
-    margin-right: 0px;
-    margin-top: 60px;
   }
 
   .ProjectBoxDiv {
-    width: 310px;
-    margin-top: 16px;
-    margin-left: 0px;
-    margin-right: 0px;
+    width: 50%;
+    margin-top: 20px;
+    margin-left: 10%;
+  }
+
+  .TwoButton {
+    width: 300px;
   }
 
   .DailyStatusButton {
-    margin-left: 11px;
+    margin-left: 46%;
   }
 
   .MenuButton {
-    margin-left: 5px;
+    margin-left: 85%;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .MainDiv {
+    width: 100%;
+  }
+
+  .ProjectHeadingDiv {
+    display: none;
+  }
+
+  .UserList {
+    left: 60%;
+  }
+
+  .AddProjectButton {
+    left: 10%;
+  }
+
+  .BottomDiv {
+    margin-top: 100px;
+    margin-left: 0px;
+    width: 100%;
+    margin-right: 0px;
+  }
+
+  .ProjectBoxDiv {
+    width: 90%;
+    margin-top: 20px;
+    margin-left: 5%;
+  }
+
+  .TwoButton {
+    width: 83%;
+  }
+
+  .DailyStatusButton {
+    margin-left: 46%;
+  }
+
+  .MenuButton {
+    margin-left: 85%;
   }
 }
