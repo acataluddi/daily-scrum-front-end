@@ -127,7 +127,7 @@ export class HeaderComponent implements OnInit {
   }
   changeProject(newProject) {
     this.selected = newProject;
-
+    console.log(this.selected)
     localStorage.setItem("currentProject", this.selected.projectName);
     localStorage.setItem("projectId", this.selected.projectId)
     this.taskService.changeProject(this.selected)

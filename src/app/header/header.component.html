@@ -4,18 +4,24 @@
       <img src="../../assets/Scrum.png" (click)="openDashboardPage()">
     </div>
     <div class="textdiv">
-      <div id="dailyscrumclass" *ngIf="show_dailyscrum">{{selected.projectName}}
-      </div>
+      <!-- <div id="dailyscrumclass" *ngIf="show_dailyscrum">{{selected.projectName}}
+      </div> -->
       <div id="scrum" *ngIf="show_scrum">Daily Scrum
         <div id="dash" *ngIf="show_dash">{{title}}</div>
       </div>
-      <div id="arrow" *ngIf="show_arrow">
+      <!-- <div id="arrow" *ngIf="show_arrow">
         <div id="projectlist" *ngIf="show_projectlist">
           <div *ngFor="let project of projects">
             <div class="items" (click)="changeProject(project)">{{project.projectName}}</div>
           </div>
         </div>
-      </div>
+      </div> -->
+      <div id="dailyscrumclass" *ngIf="show_dailyscrum">
+          <select class="select" name="projectname" [(ngModel)]="selected.projectName" (ngModelChange)="changeProject($event)">
+            <option *ngFor="let project of projects">{{project.projectName}}</option>
+          </select>
+        </div>
+
       <div class="usermailclass">
         <div class="button desktop">{{member.email}}</div>
         <div class="mobile">

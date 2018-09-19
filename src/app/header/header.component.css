@@ -205,6 +205,11 @@ img[src="../../assets/Scrum_logo.png"] {
   z-index: 1;
 }
 
+.select{
+  border: none;
+  background: #ffffff;
+}
+
 .arrow:focus #projectlist {
   position: relative;
   z-index: 1;
