@@ -12,17 +12,12 @@ export class DashboardService {
     private readonly baseUrl = environment.apiBase;
 
     newproject: Project;
-    UserType: string;
     selected;
 
     private newListSource = new Subject<Project>();
     newList = this.newListSource.asObservable();
 
     constructor(private http: HttpClient) {
-        this.UserType = localStorage.getItem("userType");
-        console.log(this.UserType);
-
-
     }
 
     private getallURL = this.baseUrl + '/CRUDControllerUser?page=0';

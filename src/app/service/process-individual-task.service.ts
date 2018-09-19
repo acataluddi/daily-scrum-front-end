@@ -57,6 +57,8 @@ export class ProcessIndividualTaskService {
   }
 
   changeProject(currentProject: Project) {
+    localStorage.setItem("projectId", currentProject.projectId);
+    localStorage.setItem("currentProject", currentProject.projectName);
     this.newListSource.next(currentProject)
   }
 
