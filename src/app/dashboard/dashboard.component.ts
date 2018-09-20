@@ -83,6 +83,7 @@ export class DashboardComponent implements OnInit {
     let x = 0;
     this.TotalProjectMembers[0] = 0;
     this.newproject = projectArr;
+    this.projectService.setProjectArray(this.newproject);
     if (this.newproject !== undefined) {
       this.noOfProjects = this.newproject.length;
     }
