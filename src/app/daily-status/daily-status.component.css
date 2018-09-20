@@ -107,11 +107,11 @@
 
 .spent_text {
   font-family: 'Roboto';
-  font-size: 14px;
+  font-size: 16px;
   color: rgba(79, 86, 105, 1);
   text-align: left;
   white-space: pre;
-  padding: 9px 16px 7px 5px;
+  padding: 7px 16px 7px 5px;
 }
 
 .last_edit_label {
@@ -121,7 +121,7 @@
   text-align: left;
   line-height: 24px;
   padding-left: 16px;
-  padding-top: 4px;
+  padding-top: 7px;
   padding-bottom: 4px;
 }
 
@@ -285,6 +285,10 @@ img.right-arrow:active {
     width: 100%;
   }
 
+  .vertical {
+   visibility: hidden;
+  }
+
   .left-header {
     display: none;
   }
@@ -387,5 +391,13 @@ img.right-arrow:active {
 
   .edit_status {
     font-size: 9px;
+  }
+
+  .total_time_border{
+    height: 38px;
+  }
+
+  .last_edit_label{
+    padding-top: 0px; 
   }
 }
