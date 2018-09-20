@@ -18,6 +18,7 @@ export class ProjectService {
   private projectUrl = this.baseUrl + '/ProjectController';
   url: string;
   private project: Project;
+  private newproject: Project[];
   reqType = 'add';
   private projectToBeUpdated: Project;
   constructor(private http: HttpClient) {
@@ -26,6 +27,14 @@ export class ProjectService {
 
   setRequestType(rtype: string) {
     this.reqType = rtype;
+  }
+
+  setProjectArray(newproject:Project[]){
+    this.newproject = newproject;
+  }
+
+  getProjectArray():Project[]{
+    return(this.newproject);
   }
 
   getRequestType(): string {

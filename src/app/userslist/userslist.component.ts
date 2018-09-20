@@ -21,7 +21,7 @@ export class UserslistComponent implements OnInit {
   op: number = 0;
   ngOnChanges(...args: any[]) {
     if (this.op > 0) {
-      this.getProMem();
+      this.getProjects();
     }
     this.op++;
   }
@@ -38,44 +38,30 @@ export class UserslistComponent implements OnInit {
     private taskservice: ProcessIndividualTaskService) {
   }
   ngOnInit() {
-    this.getProMem()
-
+    this.getProjects();
   }
 
-  getProMem() {
-    this.dashboardservice.getMembers()
-      .subscribe(membersArr => this.getMembers(membersArr));
+  getProjects(): void {
+    this.projects = this.projectservice.getProjectArray()
 
-
-  }
-  getMembers(membersArr): void {
-    this.loggedmembers = membersArr;
-
-    this.dashboardservice.getProjects()
-      .subscribe(projectsArr => this.getProjects(projectsArr));
-
-  }
-
-  getProjects(projectsArr): void {
-    this.projects = projectsArr;
+    console.log(this.projects);
     for (let pro of this.projects) {
       if (pro.projectName == this.childProject) {
         this.projectmembers = pro.members;
       }
     }
-    this.getThisProjectMembers()
-  }
-
-  getThisProjectMembers() {
-    this.members = [];
-    for (let promem of this.projectmembers) {
-      for (let mem of this.loggedmembers) {
-        if (promem.email == mem.email) {
-          this.members.push(mem)
-        }
+    for(let mem of this.projectmembers){
+      if(mem.name == ''){
+        var index = this.projectmembers.indexOf(mem);
+        this.projectmembers.splice(index,1);
       }
     }
+    console.log(this.projectmembers);
+    console.log(this.childProject);
+
   }
+
+  
 
   gotoDailyStatus(memberemail: string) {
 
@@ -85,6 +71,7 @@ export class UserslistComponent implements OnInit {
     console.log(this.childProjectId)
 
     this.router.navigate(['/daily-status', this.childProjectId, this.childProject]);
+    
   }
 
   changeCSS() {
