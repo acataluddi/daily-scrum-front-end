@@ -4,7 +4,7 @@ body {
 }
 
 .first {
-  height: 1080px;
+  height: 100%;
   width: 100%;
   overflow: hidden;
   margin-top: 60px;
@@ -13,7 +13,7 @@ body {
 .mainClass {
   position: relative;
   background-color: #eeeeee;
-  height: 99.8%;
+  height: 95%;
   width: 100%;
 }
 
@@ -72,9 +72,9 @@ h2 {
 
 div.section.pagination {
   float: right;
-  position: absolute;
+  position: relative;
   /* top:76%; */
-  top: 93%;
+  top: 88%;
   right: 2%;
 }
 

@@ -21,9 +21,11 @@
       </button>
     </div>
     <div class="BottomDiv">
+        <div *ngIf="noOfProjects === 0" >
+          <img  class="smiley" src="../../assets/2018-09-19.png">
+         <div  class="noProject"> Oops! You have no Projects assigned...</div></div>
       <div class="ProjectBoxDiv" *ngFor="let Project of newproject ; let j=index">
-
-        <div class=" ProjectNameBoxDiv">
+         <div class=" ProjectNameBoxDiv">
           <div class="ProjectNameDiv">{{Project.projectName}}</div>
         </div>
         <div class="InnerProjectBoxDiv">
@@ -41,25 +43,25 @@
             </button>
           </div>
           <div class="TwoButton">
-            <button class="DailyStatusButton" (click)="openDailyStatus(Project)">
-              <div class="DailyStatusDiv">Daily Status</div>
-            </button>
-            <button class="MenuButton DropdownButton" *ngIf="flag2 === true">
-              <div class="DropdownContentDiv">
-                <div class="EditDiv Button" (click)="EditProject(Project)">
+          <button class="DailyStatusButton" (click)="openDailyStatus(Project)">
+            <div class="DailyStatusDiv">Daily Status</div>
+          </button>
+          <button class="MenuButton DropdownButton" *ngIf="flag2 === true">
+            <div class="DropdownContentDiv">
+              <div class="EditDiv Button" (click)="EditProject(Project)">
 
-                  Edit Project
+                Edit Project
 
-                </div>
-                <div class="DeleteDiv Button" (click)="DeleteProject(Project.projectId)">
-                  Delete Project
-                </div>
               </div>
-              <div class="MenuDotDiv">
-                <img src="../../assets/Menudots.png">
+              <div class="DeleteDiv Button" (click)="DeleteProject(Project.projectId)">
+                Delete Project
               </div>
-            </button>
-          </div>
+            </div>
+            <div class="MenuDotDiv">
+              <img src="../../assets/Menudots.png">
+            </div>
+          </button>
+        </div>
         </div>
 
       </div>
