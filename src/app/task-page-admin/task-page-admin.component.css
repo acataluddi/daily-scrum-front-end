@@ -271,7 +271,7 @@ body {
 
   .alt-View {
     visibility: visible;
-    position: absolute;
+    position: relative;
     left: 93%;
     height: 22px;
     width: 22px;
@@ -301,7 +301,7 @@ body {
 
   .alt-View {
     visibility: visible;
-    position: absolute;
+    position: relative;
     left: 93%;
     height: 22px;
     width: 22px;
