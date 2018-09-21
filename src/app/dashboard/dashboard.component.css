@@ -12,8 +12,9 @@
   display: flex;
   position: fixed;
   z-index: 40;
-  padding-top: 8px;
+  padding-top: 20px;
   top: 60px;
+  border-top: 1px solid #dfded9;
 }
 .BottomDiv {
   width: 100%;
@@ -60,51 +61,53 @@
   position: absolute;
   left: 256px;
   height: 32px;
-  width: 130px;
-  background-color: rgb(5, 87, 255);
+  width: 100px;
+  background-color: #b1b1b1;
   border-radius: 4px;
   display: flex;
   border-style: none;
   outline: none;
   font-size: 14px;
   font-weight: 600;
+  border-color: #555;
 }
 
 .UserList {
   position: absolute;
-  left: 450px;
+  left: 370px;
   height: 32px;
   width: 70px;
-  background-color: rgb(5, 87, 255);
+  background-color: #b1b1b1;
   border-radius: 4px;
   display: flex;
   border-style: none;
   outline: none;
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 1);
+  color: white;
   font-family: 'Roboto';
+  border-color: #555;
 }
 
 .AddProjectButton:hover,
 .UserList:hover,
 .UserList:active {
-  background-color: rgb(51, 5, 255);
+  background-color: #b1b1b1;
 }
 
-.PlusSignDiv {
+/* .PlusSignDiv {
   margin: 5px;
-  margin-top: 8px;
+  margin-top: 6px;
   width: 15px;
   height: 15px;
-  background-color: white;
+  background-color: #b1b1b1;
 }
 
 .PlusSignImage {
   height: 13px;
   width: 11px;
   padding-bottom: 5.5px;
-}
+} */
 
 .AddProjectDiv {
   text-align: center;
@@ -112,11 +115,11 @@
   font-family: 'Roboto';
   font-size: 14px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 1);
+  color: white;
 }
 
 .BottomDiv {
-  margin-top: 110px;
+  margin-top: 140px;
   margin-right: 88px;
   margin-bottom: 75px;
   height: 100%;
@@ -128,9 +131,10 @@
   float: left;
   height: 172px;
   width: 352px;
-  margin-right: 35px;
-  margin-top: 35px;
-  background-color: rgba(151, 151, 151, 0.2);
+  margin-right: 15px;
+  margin-top: 15px;
+  background-color: #EFF4F9;
+  border: 1px solid #DFDFDF;
 }
 
 
@@ -196,7 +200,7 @@
 }
 
 .SmallCircleButton2 {
-  background-color: rgb(5, 87, 255);
+  background-color: rgb(90, 90, 90);
 }
 
 .ExtraMembersDiv {
@@ -207,7 +211,7 @@
 }
 
 .ExtraMemberDiv:hover {
-  background-color: rgb(51, 5, 255);
+  background-color: #b1b1b1;
 }
 .TwoButton {
 position: absolute;
@@ -219,7 +223,7 @@ width:300px;
   width: 100px;
   border-radius: 16px;
   margin-left: 50%;
-  background-color: rgb(255, 255, 255);
+  background-color: #b1b1b1;
   border: none;
   outline: none;
  
@@ -235,7 +239,6 @@ width:300px;
   font-weight: 600;
   text-align: center;
   padding: 5px 5px;
-  color: rgb(5, 87, 255);
   font-family: 'Roboto'
 }
 
@@ -265,7 +268,7 @@ width:300px;
   left: -100px;
   display: none;
   position: absolute;
-  background-color: white;
+  background-color: rgb(160, 160, 160);
   width: 129px;
   height: 80px;
   border-radius: 4px;
@@ -278,17 +281,17 @@ width:300px;
 }
 
 .Button {
-  background-color: rgb(251, 252, 255);
+  background-color: rgb(160, 160, 160);
   height: 30px;
   width: 100%;
   border: none;
   outline: none;
-  color: black;
+  color: white;
   font-size: 13px;
 }
 
 .EditDiv {
-  margin-top: 7px;
+  margin-top: 10px;
   
   padding-left: 0px;
 }
@@ -355,7 +358,7 @@ width:300px;
   }
 
   .ProjectBoxDiv {
-    width: 50%;
+    width: 350px;
     margin-top: 20px;
     margin-left: 10%;
   }
