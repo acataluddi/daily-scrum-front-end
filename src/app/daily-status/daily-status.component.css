@@ -12,6 +12,15 @@
   background: rgba(214, 214, 214, 1);
 }
 
+hr {
+  position: absolute;
+  top: 35px;
+  z-index: 50;
+  width: 100%;
+  border: 0;
+  border-top: 1px solid #dfded9;
+}
+
 .header-part {
   z-index: 10;
   transform-style: preserve-3d;
@@ -125,7 +134,7 @@
   padding-bottom: 4px;
 }
 
-.last_edit_label_mini{
+.last_edit_label_mini {
   visibility: hidden;
 }
 
@@ -322,21 +331,21 @@ img.right-arrow:active {
     width: 100%;
   }
 
-  .main-part{
+  .main-part {
     /* padding-top: 216px; */
     padding-left: 32px;
   }
 
-  .today_task_label{
+  .today_task_label {
     margin-left: 50px;
   }
 
-  .today_header{
+  .today_header {
     margin-left: 44px;
     margin-top: 5px;
   }
 
-  .total_time{
+  .total_time {
     margin-left: 44px;
   }
 
@@ -376,24 +385,26 @@ img.right-arrow:active {
     display: none;
   }
 }
+
 @media screen and (max-width: 700px) {
-  .name-button{
+  .name-button {
     position: absolute;
     top: 50px;
   }
 
-  .total_time{
+  .total_time {
     height: 56px;
   }
 
-  .total_time_border{
+  .total_time_border {
     height: 38px;
   }
 
-  .last_edit_label{
+  .last_edit_label {
     width: 375px;
   }
-  .main-part{
+
+  .main-part {
     padding-top: 216px;
     padding-left: 32px;
   }
@@ -408,20 +419,20 @@ img.right-arrow:active {
     width: 22px;
   }
 
-  .last_edit_label{
+  .last_edit_label {
     visibility: hidden;
   }
 
-  .total_time_border{
+  .total_time_border {
     width: 155px;
     height: 38px;
   }
 
-  .total_time_text{
+  .total_time_text {
     padding-left: 4px;
   }
 
-  .last_edit_label_mini{
+  .last_edit_label_mini {
     visibility: visible;
     width: 154px;
     height: 15px;
@@ -507,7 +518,7 @@ img.right-arrow:active {
     padding-top: 0px;
   }
 
-  .status{
+  .status {
     position: relative;
     right: 5%;
   }

@@ -22,9 +22,10 @@
 
 <div class="time" (click)="stageTaskTime(task)">
   <div class="time_border" *ngIf="(task.hourSpent>0 || task.minuteSpent>0) && edit_time_spent==false" (click)="edit_time_spent=editable; show_save=true">
-    <div *ngIf="task.hourSpent>0">
+    <div>
       {{task.hourSpent}} hour
     </div>
+
     {{task.minuteSpent}} minutes
   </div>
 
@@ -32,10 +33,10 @@
     Add Hours Spent
   </div>
   <div *ngIf="edit_time_spent==true" class="add_hours">
-    <select class="custom-select" name="hourSpent" [(ngModel)]="task.hourSpent" (blur)="edit_time_spent=false; emitTimeEvent(task);">
+    <select class="custom-select" name="hourSpent" [(ngModel)]="task.hourSpent" (blur)="emitTimeEvent(task);">
       <option *ngFor="let i of timeArray(hours).fill(1); let j=index">{{j}}</option>
     </select>
-    <select class="custom-select" name="minuteSpent" [(ngModel)]="task.minuteSpent" (blur)="edit_time_spent=false; emitTimeEvent(task);">
+    <select class="custom-select" name="minuteSpent" [(ngModel)]="task.minuteSpent" (blur)="emitTimeEvent(task);">
       <option *ngFor="let i of timeArray(minutes).fill(1); let j=index">{{j}}</option>
     </select>
   </div>

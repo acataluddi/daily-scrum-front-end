@@ -1,3 +1,4 @@
+<hr>
 <div class="header-part">
   <div *ngIf="flag">
     <app-userslist [childProject]="currentProject" [childProjectId]="projectId" (selectedEmailEvent)="changeEmail($event)"></app-userslist>
@@ -39,7 +40,7 @@
         </button> -->
         <!-- <div *ngIf="flag" class="alt-View-class" (click)="viewAllTasks()"><img class="alt-View" src="../../assets/vire_my_tasks.png"></div> -->
       </div>
-      <div class="today_task_label" *ngIf="total_hours_spent2 == 0 && total_minutes_spent2 == 0">Write about your tasks
+      <div class="today_task_label" *ngIf="total_hours_spent2 == 0 && total_minutes_spent2 == 0 && editable">Write about your tasks
         for today</div>
 
       <div class="total_time" *ngIf="total_hours_spent2 != 0 || total_minutes_spent2 != 0">

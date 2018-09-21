@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { member } from '../model/project-model';
 
 
 @Injectable(
@@ -8,13 +9,15 @@ import { BehaviorSubject } from 'rxjs';
 export class NavigationdataService {
 
   email = localStorage.getItem('email')
-  private dataSource = new BehaviorSubject<string>(this.email);
+  dummy: member = {email:this.email, role:'', name:'', image:''} 
+  private dataSource = new BehaviorSubject<member>(this.dummy);
   currentdata$ = this.dataSource.asObservable();
 
 
   constructor() { }
 
-  changedata(data: string) {
+  changedata(data:member) {
+    console.log(data)
     this.dataSource.next(data)
   }
 

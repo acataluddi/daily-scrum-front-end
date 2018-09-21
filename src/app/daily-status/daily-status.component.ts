@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { Project } from "../model/project-model";
+import { Project, member } from "../model/project-model";
 import { Task } from '../model/task-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
@@ -36,7 +36,7 @@ export class DailyStatusComponent implements OnInit {
 
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
-  datachanged;
+  datachanged: member;
   taskHolderName = '';
   T: Task[];
 
@@ -82,7 +82,7 @@ export class DailyStatusComponent implements OnInit {
   email = localStorage.getItem("email");
   UserType;
   flag = false;
-  projectId;
+  projectId= localStorage.getItem("projectId");
   status = false;
   lastEdit1;
   lastEdit2;
@@ -108,14 +108,14 @@ export class DailyStatusComponent implements OnInit {
     });
     this.sub = this.route.params.subscribe(params => {
       this.currentProject = params['name']
-      this.projectId = +params['projectId'];
+      this.projectId = params['projectId'];
     });
     this.subscription = taskservice.newList.subscribe(
       data => {
         this.projectId = data.projectId
         this.currentProject = data.projectName
         this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
-        // localStorage.setItem("projectId", this.projectId)
+
       });
   }
 
@@ -156,12 +156,6 @@ export class DailyStatusComponent implements OnInit {
     this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
     this.projectId = localStorage.getItem("projectId")
     this.currentProject = localStorage.getItem("currentProject")
-    // this.email = localStorage.getItem("email");
-    // this.taskHolderName = 'My Tasks';
-    console.log(this.email)
-    // if(this.userEmail == this.email){
-    //   this.editable = true
-    // }
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
@@ -170,16 +164,16 @@ export class DailyStatusComponent implements OnInit {
   }
 
   getTodaysTask(Todays) {
-
-
     this.MockTodayTasks = Todays;
-    this.TodayTasks = Todays;;
+    this.TodayTasks = Todays;
+    // console.log(this.MockTodayTasks)
     this.status = true;
   }
 
   getYesterdaysTask(Yesterdays) {
     this.MockYesterdayTasks = Yesterdays;
     this.YesterdayTasks = Yesterdays;
+    // console.log(this.MockYesterdayTasks)
   }
 
   calculateTotalTime(taskArray, value) {
@@ -386,7 +380,7 @@ export class DailyStatusComponent implements OnInit {
     this.myDateValue = d1;
   }
   checkthis() {
-    this.data.currentdata$.subscribe(datachanged => this.datachanged = datachanged)
+    this.data.currentdata$.subscribe(datachanged => {this.datachanged = datachanged
     if (this.userEmail == this.datachanged.email) {
       this.editable = true;
       this.taskHolderName = 'My Tasks';
@@ -395,7 +389,11 @@ export class DailyStatusComponent implements OnInit {
       this.taskHolderName = this.datachanged.name + "'s Tasks";
     }
     this.email = this.datachanged.email;
+    this.projectId = localStorage.getItem("projectId")
+    this.currentProject = localStorage.getItem("currentProject")
+    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
     console.log(this.email)
+  });
   }
 
   newTodayTask($event) {
@@ -424,6 +422,7 @@ export class DailyStatusComponent implements OnInit {
         .subscribe(msg => console.log(msg));
     }
     this.getLastEdit(this.TodayTasks, 2)
+    this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
   //Add new task: Yesterday
@@ -452,6 +451,7 @@ export class DailyStatusComponent implements OnInit {
         .subscribe(msg => console.log(msg));
     }
     this.getLastEdit(this.YesterdayTasks, 1)
+    this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
   newOld(keyTask, taskArray) {
@@ -532,14 +532,17 @@ export class DailyStatusComponent implements OnInit {
   }
 
   getTask(today, yesterday, email, projectId) {
+    console.log('dasdasadfsafsafsa')
     this.taskservice.getTodays(today, email, projectId)
-      .subscribe(data => {
-        this.getTodaysTask(data)
+      .subscribe(data1 => {
+        this.getTodaysTask(data1)
+        console.log(data1)
         this.calculateTotalTime(this.MockTodayTasks, 2)
         this.getLastEdit(this.TodayTasks, 2)
       });
     this.taskservice.getYesterdays(yesterday, email, projectId)
       .subscribe(data => {
+        console.log(data)
         this.getYesterdaysTask(data);
         this.calculateTotalTime(this.MockYesterdayTasks, 1)
         this.getLastEdit(this.YesterdayTasks, 1)
@@ -567,10 +570,9 @@ export class DailyStatusComponent implements OnInit {
       this.taskHolderName = 'My Tasks'
     } else {
       this.editable = false
-      this.taskHolderName = taskMember.name + "'s Tasks"
+      this.taskHolderName = taskMember.name + "'s Task";
     }
     this.email = taskMember.email;
-    console.log(this.email)
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 }

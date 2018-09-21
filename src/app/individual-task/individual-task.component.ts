@@ -22,7 +22,7 @@ export class IndividualTaskComponent implements OnInit {
   saved;
 
   timeArray = Array;
-  hours = 24;
+  hours = 17;
   minutes = 60;
   newdesc = '';
   tid;
@@ -61,11 +61,12 @@ export class IndividualTaskComponent implements OnInit {
     task.minuteSpent = parseInt(task.minuteSpent);
   }
   updateDescription() {
-    this.task.description = this.des.nativeElement.innerText;
+    this.task.description = this.des.nativeElement.textContent;
+    this.des.nativeElement.textContent = this.task.description;
     console.log('idval:' + this.des.nativeElement.innerText);
     this.task.description = this.task.description.trim();
     console.log('task val:' + this.task.description);
-    this.task.description.replace('&nbsp;', '');
+    // this.task.description.replace('&nbsp;', '');
     if (this.task.description === "") {
       this.des.nativeElement.innerText = "";
     }
@@ -84,6 +85,7 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   save(task) {
+    this.edit_time_spent = false
     if (task.description == "") {
       alert("Add description")
     } else if (task.hourSpent <= 0 && task.minuteSpent <= 0) {
@@ -119,6 +121,7 @@ export class IndividualTaskComponent implements OnInit {
   cancelChange(task) {
     this.show_save = false
     this.show_impediment = false
+    this.edit_time_spent = false
     if (this.stageDesc && this.stageTime) {
       task.hourSpent = this.old_hourspent
       task.minuteSpent = this.old_minspent
