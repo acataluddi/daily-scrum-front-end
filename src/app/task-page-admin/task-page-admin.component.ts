@@ -42,6 +42,7 @@ export class TaskPageAdminComponent implements OnInit {
   memberEmployeeArray: Member[];
   IndMembArray: IndividualMember[];
   selectedDate: Date;
+  
 
   constructor(
     private taskservice: ProcessIndividualTaskService,
@@ -165,4 +166,7 @@ export class TaskPageAdminComponent implements OnInit {
   viewMyTasks(): void {
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }
+  
+
+ 
 }
