@@ -116,28 +116,37 @@ body {
   border-radius: 50px;
 }
 
-.column {
-  width: 32%;
-  padding-left: 55px;
-  margin-top: 1%;
-  float: left;
+.column ,.header {
+	transition: opacity .4s ease-in-out;
+  display: inline-block;
+  column-break-inside: avoid;
+ 
 }
 
 .member1 {
-  width: 100%;
+  width: 90%;
   margin-top: 0%;
   border: 1px solid rgba(216, 216, 216, 1);
-  float: left;
+  
 }
 
+
 .header {
-  width: 95%;
-  background-color: white;
-  height: 100%;
-  margin-left: 0px;
-  float: left;
-  overflow: auto;
+  column-width: 300px;
+	column-gap: 15px;
+  margin-top:20px;
+  margin-left:5%;
 }
+.header {
+  width: 90%;
+  margin-bottom: 5px;
+}
+
+.column {
+  margin-left:5px;
+  width: 340px;
+}
+
 
 .member_title1 {
   width: 100%;
@@ -170,9 +179,13 @@ body {
 }
 
 .member_part {
-  width: 240px;
+  width: 95%;
   margin-left: 16px;
   margin-top: 6%;
+  min-height:30px;
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x:hidden;
   overflow-wrap: break-word;
   margin-bottom: 10px;
 }
@@ -222,6 +235,10 @@ body {
 .dot-color-4 {
   background-color: rgb(63, 205, 195);
 }
+.dot-color-5 {
+  background-color: rgb(31, 132, 179);
+}
+
 
 .task {
   font-size: 13px;
@@ -232,7 +249,7 @@ body {
   font-size: 16px;
   color: rgba(79, 86, 105, 1);
   text-align: left;
-  width: 100%;
+  width: 90%;
 }
 
 .alt-View {
@@ -241,22 +258,21 @@ body {
 
 @media screen and (max-width: 1300px) {
   .header {
-    width: 1200px;
+    width: 90%;
   }
 
   .column {
-    width: 400px;
+    width: 340px;
   }
 }
 
 @media screen and (max-width: 1000px) {
   .header {
-    width: 950px;
+    width:90%;
   }
 
   .column {
-    width: 400px;
-    padding-left: 40px;
+    width: 340px;
   }
 
   .search {
@@ -266,7 +282,7 @@ body {
 
 @media screen and (max-width: 700px) {
   .header {
-    width: 500px;
+    width: 90%;
   }
 
   .alt-View {
@@ -278,8 +294,7 @@ body {
   }
 
   .column {
-    width: 300px;
-    padding-left: 30px;
+    width: 340px;
   }
 
   .total_time,
@@ -291,12 +306,11 @@ body {
 
 @media screen and (max-width: 400px) {
   .header {
-    width: 350px;
+    width: 90%;
   }
 
   .column {
     width: 300px;
-    padding-left: 25px;
   }
 
   .alt-View {
