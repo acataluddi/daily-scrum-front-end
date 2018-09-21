@@ -36,7 +36,8 @@ export class DailyStatusComponent implements OnInit {
 
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
-  datachanged: string;
+  datachanged;
+  taskHolderName = '';
   T: Task[];
 
   task_id;
@@ -114,7 +115,7 @@ export class DailyStatusComponent implements OnInit {
         this.projectId = data.projectId
         this.currentProject = data.projectName
         this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
-
+        // localStorage.setItem("projectId", this.projectId)
       });
   }
 
@@ -153,7 +154,14 @@ export class DailyStatusComponent implements OnInit {
 
     this.todayDate.setDate(this.todayDate.getDate() - 1);
     this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
-
+    this.projectId = localStorage.getItem("projectId")
+    this.currentProject = localStorage.getItem("currentProject")
+    // this.email = localStorage.getItem("email");
+    // this.taskHolderName = 'My Tasks';
+    console.log(this.email)
+    // if(this.userEmail == this.email){
+    //   this.editable = true
+    // }
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
@@ -173,24 +181,6 @@ export class DailyStatusComponent implements OnInit {
     this.MockYesterdayTasks = Yesterdays;
     this.YesterdayTasks = Yesterdays;
   }
-
-  // calculateTotalTime() {
-  //   this.totalhour = 0;
-  //   this.totalminute = 0;
-  //   for (let task of this.MockYesterdayTasks) {
-  //     this.totalhour += task.hourSpent;
-  //     this.totalminute += task.minuteSpent;
-  //   }
-
-  //   var extrahour = 0;
-  //   if (this.totalminute >= 60) {
-  //     extrahour = Math.floor(this.totalminute / 60);
-  //     this.totalminute = this.totalminute % 60;
-  //   }
-  //   this.totalhour += extrahour;
-  //   this.total_hours_spent = this.totalhour;
-  //   this.total_minutes_spent = this.totalminute;
-  // }
 
   calculateTotalTime(taskArray, value) {
     this.totalhour = 0;
@@ -397,12 +387,14 @@ export class DailyStatusComponent implements OnInit {
   }
   checkthis() {
     this.data.currentdata$.subscribe(datachanged => this.datachanged = datachanged)
-    if (this.userEmail == this.datachanged) {
-      this.editable = true
+    if (this.userEmail == this.datachanged.email) {
+      this.editable = true;
+      this.taskHolderName = 'My Tasks';
     } else {
-      this.editable = false
+      this.editable = false;
+      this.taskHolderName = this.datachanged.name + "'s Tasks";
     }
-    this.email = this.datachanged;
+    this.email = this.datachanged.email;
     console.log(this.email)
   }
 
@@ -499,7 +491,7 @@ export class DailyStatusComponent implements OnInit {
       var weekday
       var inweek
       let monthDate: string;
-      day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
       for (let task of taskArray) {
         let datevar = new Date(task.lastEdit)
         edit.push(datevar)
@@ -569,13 +561,16 @@ export class DailyStatusComponent implements OnInit {
     this.router.navigate(['/task-page-admin', this.projectId, this.currentProject]);
   }
 
-  changeEmail($event) {
-    if (this.userEmail == $event) {
-      this.editable = true
+  changeEmail(taskMember) {
+    if (this.userEmail == taskMember.email) {
+      this.editable = true;
+      this.taskHolderName = 'My Tasks'
     } else {
       this.editable = false
+      this.taskHolderName = taskMember.name + "'s Tasks"
     }
-    this.email = $event;
+    this.email = taskMember.email;
+    console.log(this.email)
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 }

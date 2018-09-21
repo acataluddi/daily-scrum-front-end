@@ -2,6 +2,18 @@
   <div *ngIf="flag">
     <app-userslist [childProject]="currentProject" [childProjectId]="projectId" (selectedEmailEvent)="changeEmail($event)"></app-userslist>
   </div>
+  <div class="name-button">
+      <div class="task-holder">
+          {{taskHolderName}}
+        </div>
+        <div class="view-all">
+            <button class="view_all_task" *ngIf="flag" (click)="viewAllTasks()">
+                <img class="view" src="../../assets/Group_24-2x.png" align="top">
+                <div class="my_task">View all tasks</div>
+              </button>
+              <div *ngIf="flag" class="alt-View-class" (click)="viewAllTasks()"><img class="alt-View" src="../../assets/vire_my_tasks.png"></div>
+            </div> 
+    </div>
   <div>
     <div class="left-header">
       <div class="yesterday_task_header">{{yesterdayval}}</div>
@@ -21,11 +33,11 @@
           (bsValueChange)="onDateChange($event)">{{todayval}}</div>
         <img class="left-arrow" src="../../assets/arrow-left.png" align="top" (click)="getPreviousDate()">
         <img class="right-arrow" src="../../assets/arrow-right.png" align="top" (click)="getNextDate()">
-        <button class="view_all_task" *ngIf="flag" (click)="viewAllTasks()">
+        <!-- <button class="view_all_task" *ngIf="flag" (click)="viewAllTasks()">
           <img class="view" src="../../assets/Group_24-2x.png" align="top">
           <div class="my_task">View all tasks</div>
-        </button>
-        <div *ngIf="flag" class="alt-View-class" (click)="viewAllTasks()"><img class="alt-View" src="../../assets/vire_my_tasks.png"></div>
+        </button> -->
+        <!-- <div *ngIf="flag" class="alt-View-class" (click)="viewAllTasks()"><img class="alt-View" src="../../assets/vire_my_tasks.png"></div> -->
       </div>
       <div class="today_task_label" *ngIf="total_hours_spent2 == 0 && total_minutes_spent2 == 0">Write about your tasks
         for today</div>
@@ -36,6 +48,7 @@
           <div class="spent_text">Hours spent</div>
         </div>
         <div class="last_edit_label">Last edit: {{lastEditString2}}</div>
+        <div class="last_edit_label_mini ">Last edit: {{lastEditString1}}</div>
       </div>
 
     </div>

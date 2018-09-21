@@ -3,7 +3,7 @@
     <div class="search_icon" (click)="changeCSS()"><img src="../../assets/Combined_Shape_Copy_2.png"></div>
     <div class="search_name" id="search_name"><input [(ngModel)]="searchText" placeholder="Search"></div>
   </div>
-  <div class="member" *ngFor="let member of projectmembers | filter : searchText;let i = index" (click)="gotoDailyStatus(member.email)">
+  <div class="member" *ngFor="let member of projectmembers | filter : searchText;let i = index" (click)="gotoDailyStatus(member)">
     <div class="member_logo"><img src="{{member.image}}"></div>
     <div class="member_name" id="member_name{{i}}">
       <p>{{member.name}}</p>

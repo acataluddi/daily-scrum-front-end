@@ -70,7 +70,7 @@
 }
 
 .yesterday_task_header {
-  padding-top: 14px;
+  padding-top: 33px;
   padding-bottom: 13px;
   font-family: 'Roboto';
   font-size: 18px;
@@ -107,11 +107,11 @@
 
 .spent_text {
   font-family: 'Roboto';
-  font-size: 14px;
+  font-size: 16px;
   color: rgba(79, 86, 105, 1);
   text-align: left;
   white-space: pre;
-  padding: 9px 16px 7px 5px;
+  padding: 7px 16px 7px 5px;
 }
 
 .last_edit_label {
@@ -121,8 +121,12 @@
   text-align: left;
   line-height: 24px;
   padding-left: 16px;
-  padding-top: 4px;
+  padding-top: 7px;
   padding-bottom: 4px;
+}
+
+.last_edit_label_mini{
+  visibility: hidden;
 }
 
 .new_task_field {
@@ -146,8 +150,8 @@
 }
 
 .today_header {
-  padding-top: 13px;
-  padding-bottom: 11px;
+  padding-top: 33px;
+  padding-bottom: 7px;
   display: flex;
 }
 
@@ -190,6 +194,38 @@
   width: 150px;
   margin-left: 32%;
   background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 5%;
+  line-height: 180%;
+}
+
+.view-all {
+  position: absolute;
+  right: 171px;
+  display: flex;
+  /* width: 150px; */
+  /* margin-left: 32%; */
+  /* background-color: rgba(0, 0, 0, 0.1); */
+  border-radius: 5%;
+  line-height: 180%;
+}
+
+.name-button {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 30px;
+}
+
+.task-holder {
+  position: absolute;
+  left: -25%;
+  display: flex;
+  width: 350px;
+  margin-left: 32%;
+  font-size: 18px;
+  font-family: 'Roboto';
+  font-weight: 500;
+  color: rgba(79, 86, 105, 1);
   border-radius: 5%;
   line-height: 180%;
 }
@@ -247,7 +283,7 @@ img.right-arrow:active {
 @media screen and (max-width: 1090px) {
   .view_all_task {
     width: 120px;
-    margin-left: 35%;
+    right: -114px;
   }
 
   .view {
@@ -258,14 +294,15 @@ img.right-arrow:active {
   }
 
   .my_task {
-    font-size: 11px;
+    font-size: 13px;
   }
 }
 
 @media screen and (max-width: 990px) {
   .view_all_task {
     width: 110px;
-    margin-left: 35%;
+    /* margin-left: 35%; */
+    right: -144px;
   }
 
   .view {
@@ -276,13 +313,35 @@ img.right-arrow:active {
   }
 
   .my_task {
-    font-size: 10px;
+    font-size: 12px;
   }
 }
 
 @media screen and (max-width: 910px) {
   .header-part {
     width: 100%;
+  }
+
+  .main-part{
+    /* padding-top: 216px; */
+    padding-left: 32px;
+  }
+
+  .today_task_label{
+    margin-left: 50px;
+  }
+
+  .today_header{
+    margin-left: 44px;
+    margin-top: 5px;
+  }
+
+  .total_time{
+    margin-left: 44px;
+  }
+
+  .vertical {
+    visibility: hidden;
   }
 
   .left-header {
@@ -306,7 +365,9 @@ img.right-arrow:active {
   .alt-View {
     visibility: visible;
     position: absolute;
-    left: 90%;
+    /* left: 90%; */
+    top: 4px;
+    right: -120px;
     height: 22px;
     width: 22px;
   }
@@ -315,14 +376,63 @@ img.right-arrow:active {
     display: none;
   }
 }
+@media screen and (max-width: 700px) {
+  .name-button{
+    position: absolute;
+    top: 50px;
+  }
 
-@media screen and (max-width: 400px) {
+  .total_time{
+    height: 56px;
+  }
+
+  .total_time_border{
+    height: 38px;
+  }
+
+  .last_edit_label{
+    width: 375px;
+  }
+  .main-part{
+    padding-top: 216px;
+    padding-left: 32px;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
   .alt-View {
     visibility: visible;
     position: absolute;
-    left: 93%;
     height: 22px;
     width: 22px;
+  }
+
+  .last_edit_label{
+    visibility: hidden;
+  }
+
+  .total_time_border{
+    width: 155px;
+    height: 38px;
+  }
+
+  .total_time_text{
+    padding-left: 4px;
+  }
+
+  .last_edit_label_mini{
+    visibility: visible;
+    width: 154px;
+    height: 15px;
+    position: absolute;
+    top: 168px;
+    left: 58px;
+    padding-top: 0.5%;
+    font-family: 'Roboto';
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.5);
+    text-align: center;
   }
 
   .view {
@@ -387,5 +497,18 @@ img.right-arrow:active {
 
   .edit_status {
     font-size: 9px;
+  }
+
+  .total_time_border {
+    height: 38px;
+  }
+
+  .last_edit_label {
+    padding-top: 0px;
+  }
+
+  .status{
+    position: relative;
+    right: 5%;
   }
 }

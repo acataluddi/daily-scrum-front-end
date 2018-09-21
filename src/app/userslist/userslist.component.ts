@@ -38,11 +38,19 @@ export class UserslistComponent implements OnInit {
     private taskservice: ProcessIndividualTaskService) {
   }
   ngOnInit() {
+    // this.getProjects();
+    this.subscription = this.dashboardservice.getProjects().subscribe(data => {
+      this.setProjects(data)
+    });
+  }
+
+  setProjects(projects){
+    this.projects = projects;
     this.getProjects();
   }
 
   getProjects(): void {
-    this.projects = this.projectservice.getProjectArray()
+    // this.projects = this.projectservice.getProjectArray()
 
     console.log(this.projects);
     for (let pro of this.projects) {
@@ -63,10 +71,10 @@ export class UserslistComponent implements OnInit {
 
   
 
-  gotoDailyStatus(memberemail: string) {
+  gotoDailyStatus(selectedMember) {
 
-    this.selectedEmailEvent.emit(memberemail)
-    this.data.changedata(memberemail)
+    this.selectedEmailEvent.emit(selectedMember)
+    this.data.changedata(selectedMember)
     console.log(this.childProject)
     console.log(this.childProjectId)
 
