@@ -1,4 +1,5 @@
 <head>
+  
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 </head>
 
@@ -35,13 +36,16 @@
               <div class="member_name1">{{IndMemOb.name}}</div>
               <div class="more_icon"><img src="../../assets/more.png"></div>
               <div class="member_time_spent1">{{IndMemOb.hour}} h {{IndMemOb.minute}} m</div>
+              
             </div>
             <div class="member_part">
-              <div *ngFor="let Task of IndMemOb.tasks ">
-                <span *ngIf="Task.taskId%5===0" class="dot dot-color-1"></span>
-                <span *ngIf="Task.taskId%3===0 && Task.taskId%5!=0" class="dot dot-color-2"></span>
-                <span *ngIf="Task.taskId%2===0 && Task.taskId%3!=0 && Task.taskId%5!=0" class="dot dot-color-3"></span>
-                <span *ngIf="Task.taskId%2!=0 && Task.taskId%3!=0  && Task.taskId%5!=0" class="dot dot-color-4"></span>
+              <div *ngIf="IndMemOb.hour===0 && IndMemOb.minute===0">Not Active</div>
+              <div *ngFor="let Task of IndMemOb.tasks ">  
+                <span *ngIf="Task.taskId%7===0" class="dot dot-color-1"></span>
+                <span *ngIf="Task.taskId%6===0 && Task.taskId%7!=0" class="dot dot-color-2"></span>
+                 <span *ngIf="Task.taskId%5===0 && Task.taskId%6!=0 && Task.taskId%7!=0" class="dot dot-color-3"></span>
+                <span *ngIf="Task.taskId%3===0 && Task.taskId%5!=0  && Task.taskId%6!=0 && Task.taskId%7!=0" class="dot dot-color-4"></span>
+                <span *ngIf="Task.taskId%3!=0 && Task.taskId%5!=0  && Task.taskId%6!=0 && Task.taskId%7!=0" class="dot dot-color-5"></span>
                 <div class="task">
                   {{Task.description}}</div>
               </div>
