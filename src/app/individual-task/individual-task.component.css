@@ -194,6 +194,22 @@ div.cancel_edit:active {
   font-family: 'Roboto';
 }
 
+.no_time{
+  position: relative;
+  top: 35px;
+  left: -93px;
+  font-size: smaller;
+  color: red;
+}
+
+.no_desc{
+  position: relative;
+  top: 25px;
+  left: -500px;
+  width: 211px;
+  font-size: smaller;
+  color: red;
+}
 @media screen and (max-width: 650px) {
   .description {
     width: 90%;
