@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { Project } from "../model/project-model";
+import { Project, member } from "../model/project-model";
 import { Task } from '../model/task-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
@@ -36,7 +36,8 @@ export class DailyStatusComponent implements OnInit {
 
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
-  datachanged: string;
+  datachanged: member;
+  taskHolderName = '';
   T: Task[];
 
   task_id;
@@ -81,7 +82,7 @@ export class DailyStatusComponent implements OnInit {
   email = localStorage.getItem("email");
   UserType;
   flag = false;
-  projectId;
+  projectId= localStorage.getItem("projectId");
   status = false;
   lastEdit1;
   lastEdit2;
@@ -107,7 +108,7 @@ export class DailyStatusComponent implements OnInit {
     });
     this.sub = this.route.params.subscribe(params => {
       this.currentProject = params['name']
-      this.projectId = +params['projectId'];
+      this.projectId = params['projectId'];
     });
     this.subscription = taskservice.newList.subscribe(
       data => {
@@ -153,7 +154,8 @@ export class DailyStatusComponent implements OnInit {
 
     this.todayDate.setDate(this.todayDate.getDate() - 1);
     this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
-
+    this.projectId = localStorage.getItem("projectId")
+    this.currentProject = localStorage.getItem("currentProject")
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
@@ -162,35 +164,17 @@ export class DailyStatusComponent implements OnInit {
   }
 
   getTodaysTask(Todays) {
-
-
     this.MockTodayTasks = Todays;
-    this.TodayTasks = Todays;;
+    this.TodayTasks = Todays;
+    // console.log(this.MockTodayTasks)
     this.status = true;
   }
 
   getYesterdaysTask(Yesterdays) {
     this.MockYesterdayTasks = Yesterdays;
     this.YesterdayTasks = Yesterdays;
+    // console.log(this.MockYesterdayTasks)
   }
-
-  // calculateTotalTime() {
-  //   this.totalhour = 0;
-  //   this.totalminute = 0;
-  //   for (let task of this.MockYesterdayTasks) {
-  //     this.totalhour += task.hourSpent;
-  //     this.totalminute += task.minuteSpent;
-  //   }
-
-  //   var extrahour = 0;
-  //   if (this.totalminute >= 60) {
-  //     extrahour = Math.floor(this.totalminute / 60);
-  //     this.totalminute = this.totalminute % 60;
-  //   }
-  //   this.totalhour += extrahour;
-  //   this.total_hours_spent = this.totalhour;
-  //   this.total_minutes_spent = this.totalminute;
-  // }
 
   calculateTotalTime(taskArray, value) {
     this.totalhour = 0;
@@ -396,14 +380,20 @@ export class DailyStatusComponent implements OnInit {
     this.myDateValue = d1;
   }
   checkthis() {
-    this.data.currentdata$.subscribe(datachanged => this.datachanged = datachanged)
-    if (this.userEmail == this.datachanged) {
-      this.editable = true
+    this.data.currentdata$.subscribe(datachanged => {this.datachanged = datachanged
+    if (this.userEmail == this.datachanged.email) {
+      this.editable = true;
+      this.taskHolderName = 'My Tasks';
     } else {
-      this.editable = false
+      this.editable = false;
+      this.taskHolderName = this.datachanged.name + "'s Tasks";
     }
-    this.email = this.datachanged;
+    this.email = this.datachanged.email;
+    this.projectId = localStorage.getItem("projectId")
+    this.currentProject = localStorage.getItem("currentProject")
+    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
     console.log(this.email)
+  });
   }
 
   newTodayTask($event) {
@@ -432,6 +422,7 @@ export class DailyStatusComponent implements OnInit {
         .subscribe(msg => console.log(msg));
     }
     this.getLastEdit(this.TodayTasks, 2)
+    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
   //Add new task: Yesterday
@@ -460,6 +451,7 @@ export class DailyStatusComponent implements OnInit {
         .subscribe(msg => console.log(msg));
     }
     this.getLastEdit(this.YesterdayTasks, 1)
+    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
   newOld(keyTask, taskArray) {
@@ -499,7 +491,7 @@ export class DailyStatusComponent implements OnInit {
       var weekday
       var inweek
       let monthDate: string;
-      day = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
       for (let task of taskArray) {
         let datevar = new Date(task.lastEdit)
         edit.push(datevar)
@@ -540,14 +532,17 @@ export class DailyStatusComponent implements OnInit {
   }
 
   getTask(today, yesterday, email, projectId) {
+    console.log('dasdasadfsafsafsa')
     this.taskservice.getTodays(today, email, projectId)
-      .subscribe(data => {
-        this.getTodaysTask(data)
+      .subscribe(data1 => {
+        this.getTodaysTask(data1)
+        console.log(data1)
         this.calculateTotalTime(this.MockTodayTasks, 2)
         this.getLastEdit(this.TodayTasks, 2)
       });
     this.taskservice.getYesterdays(yesterday, email, projectId)
       .subscribe(data => {
+        console.log(data)
         this.getYesterdaysTask(data);
         this.calculateTotalTime(this.MockYesterdayTasks, 1)
         this.getLastEdit(this.YesterdayTasks, 1)
@@ -569,13 +564,15 @@ export class DailyStatusComponent implements OnInit {
     this.router.navigate(['/task-page-admin', this.projectId, this.currentProject]);
   }
 
-  changeEmail($event) {
-    if (this.userEmail == $event) {
-      this.editable = true
+  changeEmail(taskMember) {
+    if (this.userEmail == taskMember.email) {
+      this.editable = true;
+      this.taskHolderName = 'My Tasks'
     } else {
       this.editable = false
+      this.taskHolderName = taskMember.name + "'s Task";
     }
-    this.email = $event;
+    this.email = taskMember.email;
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 }

@@ -7,7 +7,6 @@ import { Project } from '../model/project-model';
 import { DashboardService } from '../service/dashboardservice.service';
 import { Router, NavigationStart } from '@angular/router';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
-
 import { ActivatedRoute } from "@angular/router";
 import { ProjectviewallService } from '../service/projectviewall.service';
 import { ProjectUpdated } from '../model/projectupdated-model';
@@ -25,6 +24,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  
   member: Member;
   image: String;
   projects: Project[];
@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
   show_dash;
   show_signout;
   show_projectlist;
-
+  showTooltip;
   constructor(
     private viewallservice: ProjectviewallService,
     private socialAuthService: AuthService,
@@ -51,7 +51,6 @@ export class HeaderComponent implements OnInit {
     private route: ActivatedRoute,
     private taskService: ProcessIndividualTaskService,
     private dashboardService: DashboardService) {
-
     this.subscription = taskService.selected1.subscribe(
       data => {
         this.setSelected(data)
@@ -64,7 +63,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.showTooltip = false;
     this.show_dailyscrum = false
     this.show_arrow = false
     this.show_scrum = true
@@ -88,6 +87,7 @@ export class HeaderComponent implements OnInit {
       }
     });
 
+    this.selected.projectName = localStorage.getItem("currentProject")
   }
   total: number
 
@@ -127,10 +127,23 @@ export class HeaderComponent implements OnInit {
   }
   changeProject(newProject) {
     this.selected = newProject;
-
+    // var projectArray = this.projects
+    // var result = null
+    // for (var i = 0; i < projectArray.length; i++) { 
+    //   if (projectArray[i].projectName == newProjectName) { 
+    //     result = projectArray[i];
+    //     console.log(result)
+    //     break;
+    //   } 
+    // }
+    
+    // let obj = this.projects.find(a => a.projectName === newProjectName);
+    
+    // this.selected = result;
+    // console.log(this.selected);
     localStorage.setItem("currentProject", this.selected.projectName);
     localStorage.setItem("projectId", this.selected.projectId);
-    this.taskService.changeProject(this.selected)
+    this.taskService.changeProject(this.selected);
 
   }
 
@@ -186,4 +199,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  call(){
+    console.log('called')
+  }
 }

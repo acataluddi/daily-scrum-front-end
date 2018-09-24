@@ -4,18 +4,20 @@
       <img src="../../assets/Scrum.png" (click)="openDashboardPage()">
     </div>
     <div class="textdiv">
-      <div id="dailyscrumclass" *ngIf="show_dailyscrum">{{selected.projectName}}
+      <div id="dailyscrumclass" *ngIf="show_dailyscrum" (mouseenter)="showTooltip=true" (mouseleave)="showTooltip=flase">{{selected.projectName}}     
       </div>
+      <!-- <span class="tooltiptext" *ngIf="showTooltip" style="word-wrap: break-word; width: 100px">{{selected.projectName}}</span> -->
       <div id="scrum" *ngIf="show_scrum">Daily Scrum
         <div id="dash" *ngIf="show_dash">{{title}}</div>
       </div>
       <div id="arrow" *ngIf="show_arrow">
         <div id="projectlist" *ngIf="show_projectlist">
           <div *ngFor="let project of projects">
-            <div class="items" (click)="changeProject(project)">{{project.projectName}}</div>
+            <div class="items" *ngIf="project.projectName != selected.projectName" (click)="changeProject(project)">{{project.projectName}}</div>
           </div>
         </div>
       </div>
+
       <div class="usermailclass">
         <div class="button desktop">{{member.email}}</div>
         <div class="mobile">

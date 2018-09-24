@@ -10,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { LoginService } from "../service/login.service";
 import { TaskPageService } from "../service/task-page.service";
+import { NavigationdataService } from '../service/navigationdata.service';
+import { member } from '../model/project-model';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +50,7 @@ export class TaskPageAdminComponent implements OnInit {
     private taskservice: ProcessIndividualTaskService,
     private socialAuthService: AuthService,
     private route: ActivatedRoute,
+    private navservice: NavigationdataService,
     public router: Router,
     private loginservice: LoginService,
     private taskPageService: TaskPageService
@@ -164,6 +167,9 @@ export class TaskPageAdminComponent implements OnInit {
     this.myDateValue = d1;
   }
   viewMyTasks(): void {
+    var email = localStorage.getItem("email");
+    let projectMember: member ={email:email, role:'', name:'', image:''}
+    this.navservice.changedata(projectMember);
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }
   

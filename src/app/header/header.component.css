@@ -8,6 +8,7 @@ html {
   z-index: 50;
   background: #ffffff;
   position: fixed;
+  border-bottom: 1px solid #dfded9;
 }
 
 .classone {
@@ -39,7 +40,8 @@ img[src="../../assets/Scrum_logo.png"] {
   font-weight: 300;
   position: relative;
   top: 30%;
-  width: 350px;
+  width: 225px;
+  height: 100%;
   color: rgba(79, 86, 105, 1);
   cursor: pointer;
   white-space: nowrap;
@@ -47,6 +49,29 @@ img[src="../../assets/Scrum_logo.png"] {
   text-overflow: ellipsis;
 }
 
+#dailyscrumclass .tooltiptext {
+  visibility: hidden;
+    width: 100px;
+    height: 50%;
+    font-size: 1.5rem;
+    background-color: #eee;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    /* text-overflow: clip; */
+    padding: 5px;
+    box-shadow: 4px; 
+    position: absolute;
+    word-wrap: break-word;
+    top: 47%;
+    left: 5%;
+    z-index: 50;
+    /* overflow: hidden; */
+}
+
+#dailyscrumclass:hover .tooltiptext {
+  visibility: visible;
+}
 #scrum {
   font-family: 'Neo Sans Cyr', 'Roboto';
   font-size: 2rem;
@@ -71,7 +96,7 @@ img[src="../../assets/Scrum_logo.png"] {
   display: inline-block;
   position: absolute;
   top: 28px;
-  left: 350px;
+  left: 225px;
   background-color: #ffffff;
   background-image: url(../../assets/arrow.png);
   border: none;
@@ -137,7 +162,7 @@ img[src="../../assets/Scrum_logo.png"] {
   opacity: 1;
   width: 135px;
   border-radius: 4px;
-  background-color: rgba(5, 87, 255, 1);
+  background-color: #eeeeee;
   position: absolute;
   top: 145%;
   right: 10%;
@@ -148,10 +173,11 @@ img[src="../../assets/Scrum_logo.png"] {
   text-decoration: none;
   padding: 10% 6.67%;
   text-align: left;
-  color: #ffffff;
+  color: black;
   font-size: inherit;
   font-family: Roboto;
   cursor: pointer;
+  /* transform: translateY(0%); */
 }
 
 .arrow2:focus>#signout {
@@ -168,20 +194,22 @@ img[src="../../assets/Scrum_logo.png"] {
   z-index: 1;
   opacity: 1;
   height: 175px;
-  width: 275px;
+  font-size: 1.8rem;
+  width: 251px;
   border-radius: 4px;
   text-decoration: none;
   text-align: left;
-  color: #ffffff;
+  color: solid gray;
   border-radius: 4px;
-  background-color: rgba(5, 87, 255, 1);
+  background-color: #eeeeee;
   padding: 24px 24px 0px 16px;
   position: absolute;
-  top: 30px;
-  left: -75px;
+  top: 26px;
+  left: -233px;
   cursor: pointer;
   overflow-y: scroll;
   overflow-x: hidden;
+  word-break: break-all;
 }
 
 #projectlist .items {
@@ -202,7 +230,12 @@ img[src="../../assets/Scrum_logo.png"] {
   color: #ffffff;
   font-size: 0.8rem;
   font-family: Roboto;
-  z-index: 1;
+  z-index: 60;
+}
+
+.select{
+  border: none;
+  background: #ffffff;
 }
 
 .arrow:focus #projectlist {
@@ -223,12 +256,38 @@ img[src="../../assets/Scrum_logo.png"] {
     top: 25px;
     left: 253px;
   }
+
+  #projectlist{
+    width: 269px;
+    top: 30px;
+    left: -257px;
+  }
+
+  
 }
 
 @media only screen and (max-width: 540px) {
   #dash {
     visibility: hidden;
   }
+
+  .button {
+    display: none;
+}
+
+  .mobile {
+    display: inline;
+  }
+
+  .dp {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 32px;
+    position: fixed;
+    right: 5.5%;
+  }
+
 }
 
 @media only screen and (max-width: 500px) {
@@ -266,7 +325,7 @@ img[src="../../assets/Scrum_logo.png"] {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 150%;
+    width: 120%;
     font-size: 1.6rem;
   }
 
@@ -319,8 +378,8 @@ img[src="../../assets/Scrum_logo.png"] {
   #projectlist {
     position: absolute;
     top: 27px;
-    left: -127px;
+    left: -1106%;
     height: 289px;
-    width: 203px;
+    width: 300px;
   }
 }
