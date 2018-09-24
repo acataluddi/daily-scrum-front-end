@@ -10,5 +10,8 @@ export class member {
     role: string;
     name: string;
     image: string;
+    roleSelected : boolean;
+    invalidMemberEmail : boolean;
+    invalidRole : boolean;
 }
 
