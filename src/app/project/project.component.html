@@ -2,11 +2,14 @@
 <div *ngIf="flag === true" class=body>
   <div class="mainclass">
     <div class="subclasszero">
-      <input type="text" placeholder="New Project Name" id="projectname" [(ngModel)]="project.projectName">
+      <div class="project-name" #pname contenteditable="true" id="projectname" data-text="New Project Name" (click)="invalidProjectName = false">{{project.projectName}}</div>
+      <small *ngIf="invalidProjectName" class="error">
+        Project Name cannot be empty
+      </small>
     </div>
     <ng-container *ngIf="show1">
       <div class="subclassone" (click)="changeVisibility1()">
-        <div class="adddescriptionlogoclass"><img src="../../assets/Group_8.png"></div>
+        <div class="adddescriptionlogoclass"><img src="../../assets/add-icon.png"></div>
         <div class="adddescriptionclass">Describe about the project</div>
       </div>
     </ng-container>
@@ -16,61 +19,92 @@
       </div>
     </ng-container>
     <ng-container>
-      <div class="projectmembersclass" *ngIf="showAddMember==true">
+      <div class="projectmembersclass" id="projectmembers" *ngIf="showAddMember==true">
         <div class="teamclass">TEAM</div>
+        <hr>
         <div class="memberclass" *ngFor="let mem of project.members">
           <div class="member">
-            <input type="text" placeholder="Email" [(ngModel)]="mem.email">
-            <div class="role">
-              <select id="role{{mem.role}}" [(ngModel)]="mem.role">
-                <option>
-                  Select role
-                </option>
-                <option>
-                  Project Manager
-                </option>
-                <option>
-                  Architect
-                </option>
-                <option>
-                  Developer
-                </option>
-                <option>
-                  Team Lead
-                </option>
-                <option>
-                  Tester
-                </option>
-                <option>
-                  UX Designer
-                </option>
-                <option>
-                  Designer
-                </option>
-                <option>
-                  Business Analyst
-                </option>
-                <option>
-                  System Admin
-                </option>
-              </select>
+            <input id="mail{{mem.email}}" type="text" class="email-input" placeholder="Email" [(ngModel)]="mem.email"
+              (click)="mem.invalidMemberEmail=false; memberRepeat=false" (blur)="validteEmailOnBlur(mem)">
+            <div align="right" class="role-group">
+              <div class="role" *ngIf="!mem.roleSelected">
+                <select id="role{{mem.role}}" [(ngModel)]="mem.role" (ngModelChange)="onRoleChange($event, mem)"
+                  (click)="mem.invalidRole=false">
+                  <option selected disabled>
+                    Select role
+                  </option>
+                  <option>
+                    Project Manager
+                  </option>
+                  <option>
+                    Architect
+                  </option>
+                  <option>
+                    Developer
+                  </option>
+                  <option>
+                    Team Lead
+                  </option>
+                  <option>
+                    Tester
+                  </option>
+                  <option>
+                    UX Designer
+                  </option>
+                  <option>
+                    Designer
+                  </option>
+                  <option>
+                    Business Analyst
+                  </option>
+                  <option>
+                    System Admin
+                  </option>
+                </select>
+              </div>
+              <div *ngIf="mem.roleSelected" class="role-label" (click)="mem.roleSelected=false; mem.invalidRole = false;">
+                {{mem.role}}
+              </div>
+              <div class="delete" (click)="delete(this.mem)"><img src="../../assets/delete_mail.png"></div>
             </div>
           </div>
-          <div class="delete" (click)="delete(this.mem)"><img src="../../assets/delete_mail.png"></div>
+          <small *ngIf="mem.invalidMemberEmail" class="error projectmembersclass">
+            Invalid email
+          </small>
+          <small *ngIf="mem.invalidRole" class="error projectmembersclass">
+            Please select a role
+          </small>
         </div>
+      </div>
+      <div *ngIf="memberRepeat">
+        <small class="error projectmembersclass">
+          Same member cannot be added twice
+        </small>
       </div>
     </ng-container>
     <ng-container>
-      <div class="subclasstwo" (click)="showAddMember=true; addNewMem()">
-        <div class="addmemberlogoclass"><img src="../../assets/Group_8.png"></div>
+      <div class="subclasstwo" id="addmember" (click)="showAddMember=true; addNewMem(); invalidMemberLength = false">
+        <div class="addmemberlogoclass"><img src="../../assets/add-icon.png"></div>
         <div class="addmemberclass">Add members</div>
       </div>
+
+      <small class="error project-member-error" *ngIf="invalidMemberLength">
+        Please add atleast one member to the project
+      </small>
     </ng-container>
     <ng-container>
       <div class="addcancelclass">
-        <input type="button" value="Cancel" (click)="cancel()">
+        <input type="button" value="Cancel" (click)="openModal(template)">
         <input type="button" value="{{buttonText}}" (click)="addOrModifyProject()">
       </div>
     </ng-container>
   </div>
 </div>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Do you want to cancel the changes?</p>
+    <button type="button" class="button-no" (click)="decline()">No</button>
+    <button type="button" class="button-yes" (click)="cancel()">Yes</button>
+  </div>
+</ng-template>

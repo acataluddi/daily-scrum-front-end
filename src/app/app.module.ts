@@ -20,6 +20,7 @@ import {
 import { Ng2Webstorage } from 'ngx-webstorage';
 import { AuthGuard } from './status.service';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { TaskPageAdminComponent } from './task-page-admin/task-page-admin.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, Response, Headers } from '@angular/http';
@@ -68,12 +69,12 @@ export function getAuthServiceConfigs() {
     HttpClientModule,
     HttpModule,
     Ng2Webstorage,
+    ModalModule.forRoot(),
   ],
   providers: [
     {
       provide: AuthServiceConfig,
       useFactory: getAuthServiceConfigs,
-
     },
     AuthGuard,
     NavigationdataService,
