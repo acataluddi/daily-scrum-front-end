@@ -8,6 +8,7 @@ html {
   z-index: 50;
   background: #ffffff;
   position: fixed;
+  border-bottom: 1px solid #dfded9;
 }
 
 .classone {
