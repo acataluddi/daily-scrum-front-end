@@ -97,9 +97,12 @@ export class IndividualTaskComponent implements OnInit {
       this.show_save = false;
       this.saved = true;
     }
+    this.stageDesc = false;
+    this.stageTime = false;
   }
 
   stageTaskDesc(task) {
+    this.saved = false
     if (this.stageDesc == false){
     this.old_desc = task.description
     this.old_imped = task.impediments
@@ -110,6 +113,7 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   stageTaskTime(task) {
+    this.saved = false
     if (this.stageTime == false) {
       this.old_hourspent = task.hourSpent
       this.old_minspent = task.minuteSpent
@@ -119,6 +123,7 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   cancelChange(task) {
+    this.saved = false
     this.show_save = false
     this.show_impediment = false
     this.edit_time_spent = false

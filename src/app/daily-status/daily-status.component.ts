@@ -422,7 +422,7 @@ export class DailyStatusComponent implements OnInit {
         .subscribe(msg => console.log(msg));
     }
     this.getLastEdit(this.TodayTasks, 2)
-    this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
   //Add new task: Yesterday
@@ -451,7 +451,7 @@ export class DailyStatusComponent implements OnInit {
         .subscribe(msg => console.log(msg));
     }
     this.getLastEdit(this.YesterdayTasks, 1)
-    this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
   newOld(keyTask, taskArray) {

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiBase: 'http://10.4.6.71:8080/DailyScrum',
-  loginURL: 'http://10.4.6.71.xip.io:4200/login'
+  loginURL: 'http://localhost:4200/login'
 };
 
 /*

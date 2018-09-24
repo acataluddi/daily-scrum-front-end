@@ -16,8 +16,9 @@
 </div>
 
 <div class="impediments" spellcheck="false" #imp [contentEditable]="editable" *ngIf="show_impediment==true" (blur)="updateImpediment()"
-  (click)="show_save=true">
-  <img class="img_impediment" src="../../assets/impediment.png" align="top"> {{task.impediments}}
+  (click)="show_save=true; stageTaskDesc(task)">
+  <!-- <img class="img_impediment" src="../../assets/impediment.png" align="top">  -->
+  {{task.impediments}}
 </div>
 
 <div class="time" (click)="stageTaskTime(task)">
