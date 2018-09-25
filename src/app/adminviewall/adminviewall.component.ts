@@ -56,11 +56,12 @@ export class AdminviewallComponent implements OnInit {
       }
     });
     this.viewallservice.getMembers()
-      .subscribe(membersArr => { this.getMembers(membersArr)
+      .subscribe(membersArr => {
+        this.getMembers(membersArr)
       });
 
     this.dashboardservice.getMembers()
-      .subscribe(membersArr => {this.getTotalCount(membersArr)});
+      .subscribe(membersArr => { this.getTotalCount(membersArr) });
 
   }
 

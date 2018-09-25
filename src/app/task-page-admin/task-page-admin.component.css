@@ -19,7 +19,6 @@ body {
 .today_task_header {
   cursor: pointer;
   text-align: left;
-  font-family: 'Roboto';
   font-size: 18px;
   font-weight: 600;
   color: rgba(79, 86, 105, 1);
@@ -28,7 +27,6 @@ body {
 .left-arrow {
   height: 24px;
   width: 24px;
-  margin-left: 20px;
   cursor: pointer;
 }
 
@@ -36,31 +34,61 @@ body {
   height: 24px;
   width: 24px;
   margin-left: 7px;
+  margin-right: 16px;
   cursor: pointer;
 }
+
+.blocked-arrow,
+.blocked-arrow:active,
+.blocked-arrow:hover {
+  cursor: not-allowed !important;
+  background-color: #ccccccb7 !important;
+  border-radius: 4px;
+}
+
+img.left-arrow:hover,
+img.right-arrow:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+img.left-arrow:active,
+img.right-arrow:active {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 
 .view_all_task {
   position: absolute;
   display: flex;
-  width: 150px;
+  width: 130px;
   margin-left: 80%;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 5%;
+  border-radius: 4px;
   line-height: 180%;
+  background-color: #b1b1b1;
+  height: 30px;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+button.view_all_task::before {
+  content: "\e137";
+  font-size: 16px;
+  font-family: "Glyphicons Halflings";
+  margin-right: 5px;
 }
 
 .view {
-  height: 16px;
-  width: 16px;
-  margin-top: 4px;
-  padding-top: 2px;
+  height: 20px;
+  width: 20px;
 }
 
 .my_task {
-  font-family: 'Roboto';
   font-size: 13px;
   width: 100%;
-  color: rgba(0, 0, 0, 1);
 }
 
 .total_time {
@@ -82,7 +110,6 @@ body {
 }
 
 .total_time_text {
-  font-family: 'Roboto';
   font-size: 16px;
   font-weight: 500;
   color: rgba(79, 86, 105, 1);
@@ -95,7 +122,6 @@ body {
 }
 
 .spent_text {
-  font-family: 'Roboto';
   font-size: 14px;
   color: rgba(79, 86, 105, 1);
   text-align: left;
@@ -116,35 +142,32 @@ body {
   border-radius: 50px;
 }
 
-.column ,.header {
-	transition: opacity .4s ease-in-out;
+.column,
+.header {
+  transition: opacity .4s ease-in-out;
   display: inline-block;
   column-break-inside: avoid;
- 
+
 }
 
 .member1 {
-  width: 90%;
+  width: 100%;
   margin-top: 0%;
   border: 1px solid rgba(216, 216, 216, 1);
-  
+
 }
 
-
 .header {
-  column-width: 300px;
-	column-gap: 15px;
-  margin-top:20px;
-  margin-left:5%;
-}
-.header {
+  column-width: 350px;
+  margin-top: 20px;
+  margin-left: 5%;
   width: 90%;
   margin-bottom: 5px;
 }
 
 .column {
-  margin-left:5px;
-  width: 400px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
 
@@ -182,16 +205,15 @@ body {
   width: 95%;
   margin-left: 16px;
   margin-top: 6%;
-  min-height:30px;
+  min-height: 30px;
   max-height: 300px;
   overflow-y: auto;
-  overflow-x:hidden;
+  overflow-x: hidden;
   overflow-wrap: break-word;
   margin-bottom: 10px;
 }
 
 .member_name1 {
-  font-family: 'Roboto';
   padding-top: 8px;
   margin-left: 20px;
   font-size: 15px;
@@ -202,7 +224,6 @@ body {
 }
 
 .member_time_spent1 {
-  font-family: 'Roboto';
   margin-top: 0px;
   margin-left: 20px;
   font-size: 12px;
@@ -235,6 +256,7 @@ body {
 .dot-color-4 {
   background-color: rgb(63, 205, 195);
 }
+
 .dot-color-5 {
   background-color: rgb(31, 132, 179);
 }
@@ -245,7 +267,6 @@ body {
   line-height: 20px;
   margin-left: 21px;
   margin-top: -20px;
-  font-family: 'Roboto';
   font-size: 16px;
   color: rgba(79, 86, 105, 1);
   text-align: left;
@@ -254,6 +275,7 @@ body {
 
 .alt-View {
   visibility: hidden;
+  color: gray;
 }
 
 @media screen and (max-width: 1300px) {
@@ -262,17 +284,18 @@ body {
   }
 
   .column {
-    width: 340px;
+    width: 100%;
   }
 }
 
 @media screen and (max-width: 1000px) {
   .header {
-    width:90%;
+    width: 90%;
+    column-width: 300px;
   }
 
   .column {
-    width: 340px;
+    width: 90%;
   }
 
   .search {
@@ -291,10 +314,11 @@ body {
     left: 93%;
     height: 22px;
     width: 22px;
+    font-size: 22px;
   }
 
   .column {
-    width: 340px;
+    width: 80%;
   }
 
   .total_time,
@@ -310,7 +334,7 @@ body {
   }
 
   .column {
-    width: 300px;
+    width: 80%;
   }
 
   .alt-View {
@@ -319,6 +343,7 @@ body {
     left: 93%;
     height: 22px;
     width: 22px;
+    font-size: 22px;
   }
 
   .today_task_header {
@@ -337,5 +362,16 @@ body {
   .my_task,
   .view_all_task {
     display: none;
+  }
+
+  .left-arrow {
+    height: 18px;
+    width: 18px;
+  }
+
+  .right-arrow {
+    height: 18px;
+    width: 18px;
+    margin-right: 10px;
   }
 }

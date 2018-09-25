@@ -62,6 +62,8 @@ export class DailyStatusComponent implements OnInit {
   yesterdayval;
   totalhour = 0;
   totalminute = 0;
+  minDate: Date;
+  maxDate: Date;
 
   disable = true;
   newDate = new Date();
@@ -82,7 +84,7 @@ export class DailyStatusComponent implements OnInit {
   email = localStorage.getItem("email");
   UserType;
   flag = false;
-  projectId= localStorage.getItem("projectId");
+  projectId = localStorage.getItem("projectId");
   status = false;
   lastEdit1;
   lastEdit2;
@@ -120,6 +122,8 @@ export class DailyStatusComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.minDate = new Date(2018, 8, 10);
+    this.maxDate = new Date();
     this.socialAuthService.authState.subscribe((user) => {
       console.log("user:");
       console.log(user);
@@ -325,6 +329,20 @@ export class DailyStatusComponent implements OnInit {
     return ts;
   }
   onDateChange(newDate: Date) {
+    if (newDate.getDate() === this.maxDate.getDate() &&
+      newDate.getMonth() === this.maxDate.getMonth() &&
+      newDate.getFullYear() === this.maxDate.getFullYear()) {
+      document.getElementById("rightarrow").classList.add('blocked-arrow');
+    } else {
+      document.getElementById("rightarrow").classList.remove('blocked-arrow');
+    }
+    if (newDate.getDate() === this.minDate.getDate() &&
+      newDate.getMonth() === this.minDate.getMonth() &&
+      newDate.getFullYear() === this.minDate.getFullYear()) {
+      document.getElementById("leftarrow").classList.add('blocked-arrow');
+    } else {
+      document.getElementById("leftarrow").classList.remove('blocked-arrow');
+    }
     if (this.status) {
       this.newDate = newDate;
       var d1 = new Date(newDate);
@@ -347,53 +365,62 @@ export class DailyStatusComponent implements OnInit {
 
   getNextDate() {
     var d1 = new Date(this.newDate);
-    (d1.setDate(d1.getDate() + 1));
-    this.month = this.months[d1.getMonth()];
-    this.date = d1.getDate();
-    this.year = d1.getFullYear();
-    if ((this.month === this.d.getMonth()) && (this.date === this.d.getDate()) && (this.year === this.d.getFullYear())) {
-      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = "Yesterday's Tasks";
+    if (d1.getDate() !== this.maxDate.getDate() &&
+      d1.getMonth() === this.maxDate.getMonth() &&
+      d1.getFullYear() === this.maxDate.getFullYear()) {
+      (d1.setDate(d1.getDate() + 1));
+      this.month = this.months[d1.getMonth()];
+      this.date = d1.getDate();
+      this.year = d1.getFullYear();
+      if ((this.month === this.d.getMonth()) && (this.date === this.d.getDate()) && (this.year === this.d.getFullYear())) {
+        this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+        this.yesterdayval = "Yesterday's Tasks";
+      }
+      else {
+        this.todayval = this.month + " " + this.date + ", " + this.year;
+        this.yesterdayval = this.months[this.newDate.getMonth()] + " " + this.newDate.getDate() + ", " + this.newDate.getFullYear();
+      }
+      this.newDate = d1;
+      this.myDateValue = d1;
     }
-    else {
-      this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = this.months[this.newDate.getMonth()] + " " + this.newDate.getDate() + ", " + this.newDate.getFullYear();
-    }
-    this.newDate = d1;
-    this.myDateValue = d1;
   }
   getPreviousDate() {
     var d1 = new Date(this.newDate);
-    (d1.setDate(d1.getDate() - 1));
-    this.month = this.months[this.newDate.getMonth()];
-    this.date = this.newDate.getDate();
-    this.year = this.newDate.getFullYear();
-    if ((this.newDate.getMonth() === this.d.getMonth()) && (this.newDate.getDate() === this.d.getDate()) && (this.newDate.getFullYear() === this.d.getFullYear())) {
-      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = "Yesterday's Tasks";
+    if (d1.getDate() !== this.minDate.getDate() &&
+      d1.getMonth() === this.minDate.getMonth() &&
+      d1.getFullYear() === this.minDate.getFullYear()) {
+      (d1.setDate(d1.getDate() - 1));
+      this.month = this.months[this.newDate.getMonth()];
+      this.date = this.newDate.getDate();
+      this.year = this.newDate.getFullYear();
+      if ((this.newDate.getMonth() === this.d.getMonth()) && (this.newDate.getDate() === this.d.getDate()) && (this.newDate.getFullYear() === this.d.getFullYear())) {
+        this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+        this.yesterdayval = "Yesterday's Tasks";
+      }
+      else {
+        this.todayval = this.month + " " + this.date + ", " + this.year;
+        this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+      }
+      this.newDate = d1;
+      this.myDateValue = d1;
     }
-    else {
-      this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
-    }
-    this.newDate = d1;
-    this.myDateValue = d1;
   }
   checkthis() {
-    this.data.currentdata$.subscribe(datachanged => {this.datachanged = datachanged
-    if (this.userEmail == this.datachanged.email) {
-      this.editable = true;
-      this.taskHolderName = 'My Tasks';
-    } else {
-      this.editable = false;
-      this.taskHolderName = this.datachanged.name + "'s Tasks";
-    }
-    this.email = this.datachanged.email;
-    this.projectId = localStorage.getItem("projectId")
-    this.currentProject = localStorage.getItem("currentProject")
-    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
-    console.log(this.email)
-  });
+    this.data.currentdata$.subscribe(datachanged => {
+    this.datachanged = datachanged
+      if (this.userEmail == this.datachanged.email) {
+        this.editable = true;
+        this.taskHolderName = 'My Tasks';
+      } else {
+        this.editable = false;
+        this.taskHolderName = this.datachanged.name + "'s Tasks";
+      }
+      this.email = this.datachanged.email;
+      this.projectId = localStorage.getItem("projectId")
+      this.currentProject = localStorage.getItem("currentProject")
+      // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+      console.log(this.email)
+    });
   }
 
   newTodayTask($event) {

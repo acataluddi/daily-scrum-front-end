@@ -6,7 +6,7 @@
 }
 
 .TopDiv {
-  height: 50px;
+  height: 65px;
   width: 100%;
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -15,28 +15,41 @@
   padding-top: 20px;
   top: 60px;
   border-top: 1px solid #dfded9;
+  padding-bottom: 10px;
 }
+
 .BottomDiv {
   width: 100%;
-  margin-left:5%;
+  margin-left: 5%;
 }
+
 .noProject {
   margin-left: auto;
   margin-right: auto;
-  width:200px;
-  font-size:20px;
-  color:rgb(187, 187, 187);
+  width: 200px;
+  font-size: 20px;
+  color: rgb(187, 187, 187);
   font-weight: 400;
   text-align: center;
 }
+
 .smiley {
   display: block;
-  margin-top:200px;
+  margin-top: 200px;
   margin-left: auto;
   margin-right: auto;
-  height:120px;
-  width:120px;
-  filter:opacity(30%);
+  height: 120px;
+  width: 120px;
+  filter: opacity(30%);
+}
+
+.footer-div {
+  height: 25px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  z-index: 40;
+  bottom: 0px;
 }
 
 .ProjectHeadingDiv {
@@ -49,7 +62,6 @@
 
 .ProjectHeadingTextDiv {
   text-align: left;
-  font-family: 'Roboto';
   font-size: 18px;
   font-weight: 500;
   color: rgba(79, 86, 105, 1);
@@ -85,7 +97,6 @@
   font-size: 14px;
   font-weight: 500;
   color: white;
-  font-family: 'Roboto';
   border-color: #555;
 }
 
@@ -95,24 +106,9 @@
   background-color: #b1b1b1;
 }
 
-/* .PlusSignDiv {
-  margin: 5px;
-  margin-top: 6px;
-  width: 15px;
-  height: 15px;
-  background-color: #b1b1b1;
-}
-
-.PlusSignImage {
-  height: 13px;
-  width: 11px;
-  padding-bottom: 5.5px;
-} */
-
 .AddProjectDiv {
   text-align: center;
   margin: 5%;
-  font-family: 'Roboto';
   font-size: 14px;
   font-weight: 500;
   color: white;
@@ -148,7 +144,6 @@
   height: 120px;
   color: black;
   font-size: 24px;
-  font-family: 'Roboto';
   padding-top: 16px;
   padding-left: 24px;
   padding-right: 24px;
@@ -172,6 +167,7 @@
   border: 1px solid white;
   outline: none;
 }
+
 .SmallCircleButton2 {
   width: 30px;
   height: 30px;
@@ -213,10 +209,12 @@
 .ExtraMemberDiv:hover {
   background-color: #b1b1b1;
 }
+
 .TwoButton {
-position: absolute;
-width:300px;
+  position: absolute;
+  width: 300px;
 }
+
 .DailyStatusButton {
   position: absolute;
   height: 32px;
@@ -226,7 +224,7 @@ width:300px;
   background-color: #b1b1b1;
   border: none;
   outline: none;
- 
+
 }
 
 .DailyStatusButton:hover {
@@ -236,10 +234,8 @@ width:300px;
 .DailyStatusDiv {
   color: white;
   font-size: 14px;
-  font-weight: 600;
   text-align: center;
   padding: 5px 5px;
-  font-family: 'Roboto'
 }
 
 .MenuButton {
@@ -268,7 +264,8 @@ width:300px;
   left: -100px;
   display: none;
   position: absolute;
-  background-color: rgb(160, 160, 160);
+  background-color: #b1b1b1;
+  color: white;
   width: 129px;
   height: 80px;
   border-radius: 4px;
@@ -281,18 +278,16 @@ width:300px;
 }
 
 .Button {
-  background-color: rgb(160, 160, 160);
   height: 30px;
   width: 100%;
   border: none;
   outline: none;
-  color: white;
   font-size: 13px;
 }
 
 .EditDiv {
   margin-top: 10px;
-  
+
   padding-left: 0px;
 }
 
@@ -324,15 +319,17 @@ width:300px;
 
   .BottomDiv {
     width: 100%;
-    margin-left:5%;
+    margin-left: 5%;
   }
 
   .ProjectBoxDiv {
     width: 340px;
   }
+
   .TwoButton {
-    width:300px;
-    }
+    width: 300px;
+  }
+
   .DailyStatusButton {
     margin-left: 46%;
   }
@@ -340,14 +337,16 @@ width:300px;
   .MenuButton {
     margin-left: 85%;
   }
+
   .noProject {
     margin-left: auto;
     margin-right: auto;
-    width:200px;
-    font-size:15px;
+    width: 200px;
+    font-size: 15px;
     text-align: center;
   }
 }
+
 @media screen and (max-width: 900px) {
   .MainDiv {
     width: 100%;
@@ -362,17 +361,20 @@ width:300px;
     margin-top: 20px;
     margin-left: 10%;
   }
+
   .TwoButton {
-    width:300px;
-    }
+    width: 300px;
+  }
+
   .DailyStatusButton {
     margin-left: 46%;
   }
+
   .noProject {
     margin-left: auto;
     margin-right: auto;
-    width:200px;
-    font-size:15px;
+    width: 200px;
+    font-size: 15px;
     text-align: center
   }
 
@@ -385,15 +387,19 @@ width:300px;
   .MainDiv {
     width: 100%;
   }
-  .ProjectHeadingDiv{
+
+  .ProjectHeadingDiv {
     display: none;
   }
+
   .UserList {
-    left:60%;
+    left: 60%;
   }
+
   .AddProjectButton {
-    left:10%;
+    left: 10%;
   }
+
   .BottomDiv {
     margin-top: 100px;
     margin-left: 0px;
@@ -408,18 +414,21 @@ width:300px;
   }
 
   .TwoButton {
-    width:83%;
-    }
+    width: 83%;
+  }
+
   .DailyStatusButton {
     margin-left: 46%;
   }
+
   .noProject {
     margin-left: auto;
     margin-right: auto;
-    width:200px;
-    font-size:15px;
+    width: 200px;
+    font-size: 15px;
     text-align: center
   }
+
   .MenuButton {
     margin-left: 85%;
   }
