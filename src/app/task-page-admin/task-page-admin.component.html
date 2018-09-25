@@ -1,5 +1,5 @@
 <head>
-  
+
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 </head>
 
@@ -7,16 +7,17 @@
   <div class="right-header">
     <app-userslist [childProject]="currentProject" [childProjectId]="projectId"></app-userslist>
     <div class="today_header">
+      <img class="left-arrow" id="leftarrow" src="../../assets/arrow-left.png" align="top" (click)="getPreviousDate()">
+      <img class="right-arrow" id="rightarrow" src="../../assets/arrow-right.png" align="top" (click)="getNextDate()">
       <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate"
         #dp="bsDatepicker" [bsConfig]="datePickerConfig" bsDatepicker [(bsValue)]="myDateValue" (onHidden)="showDatePicker=false"
         (bsValueChange)="onDateChange($event)">{{todayval}}</div>
-      <img class="left-arrow" src="../../assets/arrow-left.png" align="top" (click)="getPreviousDate()">
-      <img class="right-arrow" src="../../assets/arrow-right.png" align="top" (click)="getNextDate()">
       <button *ngIf="view_my_task_flag==true" class="view_all_task" (click)="viewMyTasks()">
-        <img class="view" src="../../assets/Group_24-2x.png" align="top">
-        <div class="my_task">View my tasks</div>
+        View my tasks
       </button>
-      <div class="altView" (click)="viewMyTasks()"><img class="alt-View" src="../../assets/vire_my_tasks.png"></div>
+      <div class="altView" (click)="viewMyTasks()">
+        <span class="alt-View glyphicon glyphicon-tasks"></span>
+      </div>
     </div>
   </div>
 
@@ -36,14 +37,14 @@
               <div class="member_name1">{{IndMemOb.name}}</div>
               <div class="more_icon"><img src="../../assets/more.png"></div>
               <div class="member_time_spent1">{{IndMemOb.hour}} h {{IndMemOb.minute}} m</div>
-              
+
             </div>
             <div class="member_part">
               <div *ngIf="IndMemOb.hour===0 && IndMemOb.minute===0">Not Active</div>
-              <div *ngFor="let Task of IndMemOb.tasks ">  
+              <div *ngFor="let Task of IndMemOb.tasks ">
                 <span *ngIf="Task.taskId%7===0" class="dot dot-color-1"></span>
                 <span *ngIf="Task.taskId%6===0 && Task.taskId%7!=0" class="dot dot-color-2"></span>
-                 <span *ngIf="Task.taskId%5===0 && Task.taskId%6!=0 && Task.taskId%7!=0" class="dot dot-color-3"></span>
+                <span *ngIf="Task.taskId%5===0 && Task.taskId%6!=0 && Task.taskId%7!=0" class="dot dot-color-3"></span>
                 <span *ngIf="Task.taskId%3===0 && Task.taskId%5!=0  && Task.taskId%6!=0 && Task.taskId%7!=0" class="dot dot-color-4"></span>
                 <span *ngIf="Task.taskId%3!=0 && Task.taskId%5!=0  && Task.taskId%6!=0 && Task.taskId%7!=0" class="dot dot-color-5"></span>
                 <div class="task">

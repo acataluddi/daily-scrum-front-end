@@ -81,7 +81,6 @@ hr {
 .yesterday_task_header {
   padding-top: 50px;
   padding-bottom: 7px;
-  font-family: 'Roboto';
   font-size: 18px;
   color: rgba(79, 86, 105, 1);
 }
@@ -102,7 +101,6 @@ hr {
 }
 
 .total_time_text {
-  font-family: 'Roboto';
   font-size: 16px;
   font-weight: 500;
   color: rgba(79, 86, 105, 1);
@@ -115,7 +113,6 @@ hr {
 }
 
 .spent_text {
-  font-family: 'Roboto';
   font-size: 16px;
   color: rgba(79, 86, 105, 1);
   text-align: left;
@@ -124,7 +121,6 @@ hr {
 }
 
 .last_edit_label {
-  font-family: 'Roboto';
   font-size: 13px;
   color: rgba(0, 0, 0, 0.5);
   text-align: left;
@@ -133,10 +129,6 @@ hr {
   padding-top: 7px;
   padding-bottom: 4px;
 }
-
-/* .last_edit_label_mini {
-  visibility: hidden;
-} */
 
 .new_task_field {
   display: flex;
@@ -150,7 +142,6 @@ hr {
 }
 
 .add_task_label {
-  font-family: 'Roboto';
   font-size: 16px;
   color: rgba(0, 0, 0, 0.5);
   text-align: left;
@@ -167,7 +158,6 @@ hr {
 .today_task_header {
   cursor: pointer;
   text-align: left;
-  font-family: 'Roboto';
   font-size: 18px;
   font-weight: 600;
   color: rgba(79, 86, 105, 1);
@@ -176,7 +166,6 @@ hr {
 .left-arrow {
   height: 24px;
   width: 24px;
-  margin-left: 16px;
   cursor: pointer;
 }
 
@@ -184,11 +173,19 @@ hr {
   height: 24px;
   width: 24px;
   margin-left: 7px;
+  margin-right: 16px;
   cursor: pointer;
 }
 
+.blocked-arrow,
+.blocked-arrow:active,
+.blocked-arrow:hover {
+  cursor: not-allowed !important;
+  background-color: #ccccccb7 !important;
+  border-radius: 4px;
+}
+
 .edit_status {
-  font-family: 'Roboto';
   font-size: 13px;
   color: rgba(178, 178, 178, 1);
   text-align: left;
@@ -200,20 +197,31 @@ hr {
 .view_all_task {
   position: absolute;
   display: flex;
-  width: 150px;
-  margin-left: 32%;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 5%;
+  width: 130px;
+  margin-left: 80%;
+  border-radius: 4px;
   line-height: 180%;
+  background-color: #b1b1b1;
+  height: 30px;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+button.view_all_task::before {
+  content: "\e011";
+  font-size: 16px;
+  font-family: "Glyphicons Halflings";
+  margin-right: 5px;
 }
 
 .view-all {
   position: absolute;
   right: 171px;
   display: flex;
-  /* width: 150px; */
-  /* margin-left: 32%; */
-  /* background-color: rgba(0, 0, 0, 0.1); */
   border-radius: 5%;
   line-height: 180%;
 }
@@ -233,7 +241,6 @@ hr {
   width: 350px;
   margin-left: 32%;
   font-size: 18px;
-  font-family: 'Roboto';
   font-weight: 500;
   color: rgba(79, 86, 105, 1);
   border-radius: 5%;
@@ -241,25 +248,21 @@ hr {
 }
 
 .view {
-  height: 16px;
-  width: 16px;
-  margin-top: 4px;
-  padding-top: 2px;
+  height: 24px;
+  width: 24px;
 }
 
 .alt-View {
   visibility: hidden;
+  color: gray;
 }
 
 .my_task {
-  font-family: 'Roboto';
   font-size: 13px;
   width: 100%;
-  color: rgba(0, 0, 0, 1);
 }
 
 .today_task_label {
-  font-family: 'Roboto';
   font-size: 13px;
   color: rgba(0, 0, 0, 0.5);
   text-align: left;
@@ -310,8 +313,7 @@ img.right-arrow:active {
 
 @media screen and (max-width: 990px) {
   .view_all_task {
-    width: 110px;
-    /* margin-left: 35%; */
+    width: 120px;
     right: -144px;
   }
 
@@ -333,7 +335,6 @@ img.right-arrow:active {
   }
 
   .main-part {
-    /* padding-top: 216px; */
     padding-left: 32px;
   }
 
@@ -376,11 +377,11 @@ img.right-arrow:active {
   .alt-View {
     visibility: visible;
     position: absolute;
-    /* left: 90%; */
     top: 4px;
     right: -120px;
     height: 22px;
     width: 22px;
+    font-size: 22px;
   }
 
   .view_all_task {
@@ -427,6 +428,7 @@ img.right-arrow:active {
     position: absolute;
     height: 22px;
     width: 22px;
+    font-size: 22px;
   }
 
   .total_time_border {
@@ -437,20 +439,6 @@ img.right-arrow:active {
   .total_time_text {
     padding-left: 4px;
   }
-
-  /* .last_edit_label_mini {
-    visibility: visible;
-    width: 154px;
-    height: 15px;
-    position: absolute;
-    top: 168px;
-    left: 58px;
-    padding-top: 0.5%;
-    font-family: 'Roboto';
-    font-size: 11px;
-    color: rgba(0, 0, 0, 0.5);
-    text-align: center;
-  } */
 
   .view {
     height: 16px;
@@ -487,12 +475,12 @@ img.right-arrow:active {
   .left-arrow {
     height: 20px;
     width: 20px;
-    margin-left: 10px;
   }
 
   .right-arrow {
     height: 20px;
     width: 20px;
+    margin-right: 10px;
   }
 
   .edit_status {
@@ -514,12 +502,12 @@ img.right-arrow:active {
   .left-arrow {
     height: 16px;
     width: 16px;
-    margin-left: 8px;
   }
 
   .right-arrow {
     height: 16px;
     width: 16px;
+    margin-right: 8px;
   }
 
   .edit_status {

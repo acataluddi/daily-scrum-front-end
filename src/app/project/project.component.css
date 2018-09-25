@@ -28,10 +28,10 @@
   margin: auto;
   overflow-x: scroll;
   overflow-x: hidden;
-  font-family: 'Roboto';
   font-size: 32px;
   max-height: 135px;
   width: 100%;
+  color: rgba(43, 42, 42, 0.719);
   text-overflow: ellipsis;
 }
 
@@ -60,7 +60,6 @@ img[src="../../assets/add-icon.png"] {
 }
 
 .adddescriptionclass {
-  font-family: 'Roboto';
   color: rgba(79, 86, 105, 1);
   font-size: 16px;
   font-weight: 500;
@@ -85,8 +84,7 @@ div[contenteditable="true"] {
   padding: 10px 0px 10px 10px;
 }
 
-.teamclass {
-  font-family: 'Roboto';
+.teamclass {  
   font-size: 14px;
   font-weight: 600;
   color: rgba(0, 0, 0, 1);
@@ -107,7 +105,6 @@ div[contenteditable="true"] {
 
 .member {
   margin: auto;
-  font-family: 'Roboto';
   font-size: 13px;
   color: rgba(0, 0, 0, 1);
   margin: 0px 20px 0px 0px;
@@ -119,7 +116,6 @@ select {
   outline: none;
   height: 20px;
   width: 100%;
-  font-family: 'Roboto';
   font-size: 13px;
   color: rgba(0, 0, 0, 1);
   background-color: transparent;
@@ -153,8 +149,7 @@ img[src="../../assets/delete_mail.png"] {
 .role-label {
   height: 24px;
   padding: 6px 16px 6px 16px;
-  border-radius: 3px;
-  font-family: 'Roboto';
+  border-radius: 3px;  
   font-size: 10px;
   color: rgba(77, 75, 75, 0.637);
   background-color: #b8b8be52;
@@ -165,7 +160,6 @@ input[placeholder="Email"] {
   outline: none;
   height: 30px;
   width: 50%;
-  font-family: 'Roboto';
   background-color: transparent;
   font-size: 15px;
   color: rgba(0, 0, 0, 1);
@@ -175,8 +169,7 @@ input[placeholder="Email"] {
 select[id="rolevalue"] {
   border: none;
   height: 30px;
-  width: 45%;
-  font-family: 'Roboto';
+  width: 45%;  
   font-size: 15px;
   color: rgba(0, 0, 0, 1);
   background-color: #ffffff;
@@ -197,6 +190,7 @@ select[id="rolevalue"] {
   margin: auto;
 }
 
+.project-name:hover,
 .subclassone:hover,
 .subclasstwo:hover {
   background-color: rgba(224, 224, 224, 0.274);
@@ -214,7 +208,6 @@ select[id="rolevalue"] {
 }
 
 .addmemberclass {
-  font-family: 'Roboto';
   color: rgba(79, 86, 105, 1);
   font-size: 16px;
   font-weight: 500;
@@ -229,10 +222,10 @@ select[id="rolevalue"] {
 }
 
 .button-yes {
-  background-color: #6586f3;
   border: none;
   outline: none;
-  color: white;
+  color: rgba(255, 255, 255, 1);
+  background-color: #a3a3a3de;
   padding: 5px 20px;
   text-align: center;
   text-decoration: none;
@@ -244,18 +237,18 @@ select[id="rolevalue"] {
 }
 
 .button-yes:hover {
-  background-color: #5071df;
+  background-color: #a3a3a39f;
 }
 
 .button-yes:active {
-  background-color: #345ee9;
+  background-color: #8b8b8b;
 }
 
 .button-no {
-  background-color: rgba(128, 128, 128, 0.671);
+  background-color: transparent;
   border: none;
   outline: none;
-  color: white;
+  color: #9a9da7c5;
   padding: 5px 20px;
   text-align: center;
   text-decoration: none;
@@ -289,7 +282,7 @@ input[value="Update Project"] {
   outline: none;
   font-size: 13px;
   color: rgba(255, 255, 255, 1);
-  background-color: rgba(5, 87, 255, 1);
+  background-color: #a3a3a3de;
   margin: 10px;
   margin-left: auto;
   margin-right: 0;
@@ -299,12 +292,12 @@ input[value="Update Project"] {
 
 input[value="Create Project"]:hover,
 input[value="Update Project"]:hover {
-  background-color: rgb(66, 125, 243);
+  background-color: #a3a3a39f;
 }
 
 input[value="Create Project"]:active,
 input[value="Update Project"]:active {
-  background-color: rgb(47, 101, 209);
+  background-color: #8b8b8b;
 }
 
 .button-no:hover,

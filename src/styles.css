@@ -1,4 +1,7 @@
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+
+* { font-family: "Open Sans" }
+
 html,
 body {
   max-width: 100%;
@@ -7,11 +10,15 @@ body {
 }
 
 body .bs-datepicker-container .bs-datepicker-head {
-  background-color: #0558FF;
+  background: linear-gradient(#cdd0d2, #b1b1b1);
+  background: -webkit-gradient(linear, left top, left bottom, from(#cdd0d2), to(#b1b1b1));
   outline: none;
   border: none;
   margin: none;
   text-align: center;
+  color: #676767;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 body .bs-datepicker-container .bs-datepicker-head span {
@@ -23,14 +30,14 @@ body .bs-datepicker-container .bs-datepicker-head span {
 body .bs-datepicker-container {
   padding: 0px;
   margin: 0px;
-  width: 375px;
+  width: 350px;
   font-family: 'Helvetica Neue';
   font-size: 15px;
   font-weight: 500;
 }
 
 body .bs-datepicker-container .bs-datepicker-body {
-  background-color: #0558FF;
+  background-color: #e6e6e6;
   border: none;
   padding: 0px;
 }
@@ -41,13 +48,13 @@ body .bs-datepicker-container .bs-datepicker-head * {
 }
 
 .theme-orange .bs-datepicker-body table td {
-  color: white;
+  color: #555;
   font-size: 15px;
   font-weight: 500;
 }
 
 .theme-orange .bs-datepicker-body table th {
-  color: black;
+  color: rgba(39, 39, 39, 0.781);
   font-weight: bold;
   font-family: 'Helvetica Neue';
   font-size: 16px
@@ -57,19 +64,43 @@ body .bs-datepicker-container .bs-datepicker-head * {
 .theme-orange .bs-datepicker-body table td.selected span,
 .theme-orange .bs-datepicker-body table td span[class*="select-"]:after,
 .theme-orange .bs-datepicker-body table td[class*="select-"] span:after {
-  background-color: white;
-  color: #0558FF;
-}
-
-.theme-orange .bs-datepicker-body table td.week span {
-  color: red;
+  background-color: #333333;
+  color: white;
 }
 
 .theme-orange .bs-datepicker-body table td span:hover {
-  color: #0558FF;
+  color: #6d6d6d;
 }
 
-@media screen and (max-width: 1010px) {
+.theme-orange .bs-datepicker-body table td span.disabled {
+  color: #6d6d6d75;
+}
+
+@media screen and (max-width: 1500px) {
+  body .bs-datepicker-container {
+    width: 340px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  body .bs-datepicker-container {
+    width: 330px;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  body .bs-datepicker-container {
+    width: 320px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  body .bs-datepicker-container {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 910px) {
   body .bs-datepicker-container {
     position: fixed;
     left: 15px !important;
@@ -98,6 +129,7 @@ body .bs-datepicker-container .bs-datepicker-head * {
     left: 5px !important;
   }
 }
+
 @font-face {
   font-family: NeoSansCyr-Regular;
   src: url(assets/NeoSansCyr-Regular.ttf) format("opentype");

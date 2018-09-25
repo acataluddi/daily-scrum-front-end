@@ -24,7 +24,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  
+
   member: Member;
   image: String;
   projects: Project[];
@@ -136,9 +136,9 @@ export class HeaderComponent implements OnInit {
     //     break;
     //   } 
     // }
-    
+
     // let obj = this.projects.find(a => a.projectName === newProjectName);
-    
+
     // this.selected = result;
     // console.log(this.selected);
     localStorage.setItem("currentProject", this.selected.projectName);
@@ -199,7 +199,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  call(){
+  call() {
     console.log('called')
   }
 }

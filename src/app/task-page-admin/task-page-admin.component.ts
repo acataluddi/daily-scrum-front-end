@@ -44,7 +44,9 @@ export class TaskPageAdminComponent implements OnInit {
   memberEmployeeArray: Member[];
   IndMembArray: IndividualMember[];
   selectedDate: Date;
-  
+  minDate: Date;
+  maxDate: Date;
+
 
   constructor(
     private taskservice: ProcessIndividualTaskService,
@@ -78,6 +80,8 @@ export class TaskPageAdminComponent implements OnInit {
       });
   }
   ngOnInit() {
+    this.minDate = new Date(2018, 8, 10);
+    this.maxDate = new Date();
     this.myDateValue = new Date();
     this.projectId = localStorage.getItem("projectId");
     this.currentProject = localStorage.getItem("currentProject");
@@ -127,7 +131,20 @@ export class TaskPageAdminComponent implements OnInit {
     this.total_minutes_spent = totalMinute;
   }
   onDateChange(newDate: Date) {
-    console.log('In on date change');
+    if (newDate.getDate() === this.maxDate.getDate() &&
+      newDate.getMonth() === this.maxDate.getMonth() &&
+      newDate.getFullYear() === this.maxDate.getFullYear()) {
+      document.getElementById("rightarrow").classList.add('blocked-arrow');
+    } else {
+      document.getElementById("rightarrow").classList.remove('blocked-arrow');
+    }
+    if (newDate.getDate() === this.minDate.getDate() &&
+      newDate.getMonth() === this.minDate.getMonth() &&
+      newDate.getFullYear() === this.minDate.getFullYear()) {
+      document.getElementById("leftarrow").classList.add('blocked-arrow');
+    } else {
+      document.getElementById("leftarrow").classList.remove('blocked-arrow');
+    }
     this.selectedDate = newDate;
     var nday = '';
     var nmonth = '';
@@ -158,13 +175,21 @@ export class TaskPageAdminComponent implements OnInit {
   }
   getNextDate() {
     var d1 = new Date(this.selectedDate);
-    (d1.setDate(d1.getDate() + 1));
-    this.myDateValue = d1;
+    if (d1.getDate() !== this.maxDate.getDate() &&
+      d1.getMonth() === this.maxDate.getMonth() &&
+      d1.getFullYear() === this.maxDate.getFullYear()) {
+      (d1.setDate(d1.getDate() + 1));
+      this.myDateValue = d1;
+    }
   }
   getPreviousDate() {
     var d1 = new Date(this.selectedDate);
-    (d1.setDate(d1.getDate() - 1));
-    this.myDateValue = d1;
+    if (d1.getDate() !== this.minDate.getDate() &&
+      d1.getMonth() === this.minDate.getMonth() &&
+      d1.getFullYear() === this.minDate.getFullYear()) {
+      (d1.setDate(d1.getDate() - 1));
+      this.myDateValue = d1;
+    }
   }
   viewMyTasks(): void {
     var email = localStorage.getItem("email");
@@ -172,7 +197,7 @@ export class TaskPageAdminComponent implements OnInit {
     this.navservice.changedata(projectMember);
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }
-  
 
- 
+
+
 }

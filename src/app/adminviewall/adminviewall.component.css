@@ -19,7 +19,6 @@ body {
 
 h2 {
   padding: 3% 0 0 3%;
-  font-family: Roboto;
 }
 
 .card {
@@ -44,7 +43,6 @@ h2 {
 }
 
 .rowstyle {
-  font-family: Roboto;
   font-size: 11pt;
   padding: 1%;
   background-color: #eeeeee;
@@ -53,7 +51,6 @@ h2 {
 
 .head {
   text-align: left;
-  font-family: Roboto;
   color: black;
   padding: 1% 1%;
   border-bottom: 1px inset rgba(173, 172, 172, 0.904);
@@ -62,7 +59,6 @@ h2 {
 }
 
 .custom-select {
-  font-family: Roboto;
   background-color: #ffffff;
   font-size: 11pt;
   margin-top: -3%;

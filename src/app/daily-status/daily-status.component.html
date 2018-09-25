@@ -1,20 +1,20 @@
-<!-- <hr> -->
 <div class="header-part">
   <div *ngIf="flag">
     <app-userslist [childProject]="currentProject" [childProjectId]="projectId" (selectedEmailEvent)="changeEmail($event)"></app-userslist>
   </div>
   <div class="name-button">
-      <div class="task-holder">
-          {{taskHolderName}}
-        </div>
-        <div class="view-all">
-            <button class="view_all_task" *ngIf="flag" (click)="viewAllTasks()">
-                <img class="view" src="../../assets/Group_24-2x.png" align="top">
-                <div class="my_task">View all tasks</div>
-              </button>
-              <div *ngIf="flag" class="alt-View-class" (click)="viewAllTasks()"><img class="alt-View" src="../../assets/vire_my_tasks.png"></div>
-            </div> 
+    <div class="task-holder">
+      {{taskHolderName}}
     </div>
+    <div class="view-all">
+      <button class="view_all_task" *ngIf="flag" (click)="viewAllTasks()">
+        View all tasks
+      </button>
+      <div *ngIf="flag" class="alt-View-class" (click)="viewAllTasks()">
+        <span class="alt-View glyphicon glyphicon-th"></span>
+      </div>
+    </div>
+  </div>
   <div>
     <div class="left-header">
       <div class="yesterday_task_header">{{yesterdayval}}</div>
@@ -25,22 +25,18 @@
         </div>
         <div class="last_edit_label">Last edit: {{lastEditString1}}</div>
       </div>
-      
+
     </div>
     <div class="right-header">
       <div class="today_header">
+        <img class="left-arrow" id="leftarrow" src="../../assets/arrow-left.png" align="top" (click)="getPreviousDate()">
+        <img class="right-arrow" id="rightarrow" src="../../assets/arrow-right.png" align="top" (click)="getNextDate()">
         <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate"
           #dp="bsDatepicker" [bsConfig]="datePickerConfig" bsDatepicker [(bsValue)]="myDateValue" (onHidden)="showDatePicker=false"
           (bsValueChange)="onDateChange($event)">{{todayval}}</div>
-        <img class="left-arrow" src="../../assets/arrow-left.png" align="top" (click)="getPreviousDate()">
-        <img class="right-arrow" src="../../assets/arrow-right.png" align="top" (click)="getNextDate()">
-        <!-- <button class="view_all_task" *ngIf="flag" (click)="viewAllTasks()">
-          <img class="view" src="../../assets/Group_24-2x.png" align="top">
-          <div class="my_task">View all tasks</div>
-        </button> -->
-        <!-- <div *ngIf="flag" class="alt-View-class" (click)="viewAllTasks()"><img class="alt-View" src="../../assets/vire_my_tasks.png"></div> -->
       </div>
-      <div class="today_task_label" *ngIf="total_hours_spent2 == 0 && total_minutes_spent2 == 0 && editable">Write about your tasks
+      <div class="today_task_label" *ngIf="total_hours_spent2 == 0 && total_minutes_spent2 == 0 && editable">Write
+        about your tasks
         for today</div>
 
       <div class="total_time" *ngIf="total_hours_spent2 != 0 || total_minutes_spent2 != 0">
@@ -63,7 +59,7 @@
           (addUpdateTask)="newYesterdayTask($event)" (popTask)="popTask(MockYesterdayTasks, $event)"></app-individual-task>
       </div>
       <div class="new_task_field" (click)="addYesterdayTask()" *ngIf="editable">
-        <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
+        <img class="img_add_new_task" src="../../assets/add-icon.png" align="top">
         <div class="add_task_label">
           Add new task here</div>
       </div>
@@ -76,7 +72,7 @@
           (addUpdateTask)="newTodayTask($event, MockTodayTasks)" (popTask)="popTask(MockTodayTasks, $event)"></app-individual-task>
       </div>
       <div class="new_task_field" (click)="addTodayTask()" *ngIf="editable">
-        <img class="img_add_new_task" src="../../assets/add_new_task.png" align="top">
+        <img class="img_add_new_task" src="../../assets/add-icon.png" align="top">
         <div class="add_task_label">
           Add new task here</div>
       </div>
