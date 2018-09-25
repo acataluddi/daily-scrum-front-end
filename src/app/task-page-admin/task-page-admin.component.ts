@@ -168,7 +168,7 @@ export class TaskPageAdminComponent implements OnInit {
   }
   viewMyTasks(): void {
     var email = localStorage.getItem("email");
-    let projectMember: member ={email:email, role:'', name:'', image:''}
+    let projectMember: member ={email:email, role:'', name:'', image:'', roleSelected: null, invalidMemberEmail: null, invalidRole: null}
     this.navservice.changedata(projectMember);
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }

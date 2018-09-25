@@ -80,7 +80,7 @@ hr {
 
 .yesterday_task_header {
   padding-top: 50px;
-  padding-bottom: 13px;
+  padding-bottom: 7px;
   font-family: 'Roboto';
   font-size: 18px;
   color: rgba(79, 86, 105, 1);
@@ -344,6 +344,7 @@ img.right-arrow:active {
   .today_header {
     margin-left: 44px;
     margin-top: 5px;
+    padding-top: 45px;
   }
 
   .total_time {
@@ -389,8 +390,15 @@ img.right-arrow:active {
 
 @media screen and (max-width: 700px) {
   .name-button {
-    position: absolute;
-    top: 50px;
+    position: relative;
+    top: 5px;
+    margin-top: 0px;
+  }
+
+  .today_header {
+    margin-left: 44px;
+    margin-top: 5px;
+    padding-top: 13px;
   }
 
   .total_time {
@@ -408,6 +416,7 @@ img.right-arrow:active {
   .main-part {
     padding-top: 216px;
     padding-left: 32px;
+    padding-right: 20px;
   }
 }
 
@@ -466,11 +475,12 @@ img.right-arrow:active {
     font-weight: 600;
   }
 
-  .today_header{
+  .today_header {
     margin-left: 20px;
+    padding-top: 18px;
   }
 
-  .total_time{
+  .total_time {
     margin-left: 20px;
   }
 
@@ -531,7 +541,7 @@ img.right-arrow:active {
 }
 
 @media screen and (max-width: 369px) {
-  .last_edit_label{
+  .last_edit_label {
     visibility: hidden;
   }
 }
