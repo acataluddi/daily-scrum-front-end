@@ -111,17 +111,19 @@ export class IndividualTaskComponent implements OnInit {
 
   stageTaskDesc(task) {
     this.saved = false
-    if (this.stageDesc == false){
-    this.old_desc = task.description
-    this.old_imped = task.impediments
-    this.stageDesc = true
-    console.log(this.old_imped)
+    this.noDesc = false
+    if (this.stageDesc == false) {
+      this.old_desc = task.description
+      this.old_imped = task.impediments
+      this.stageDesc = true
+      console.log(this.old_imped)
     }
 
   }
 
   stageTaskTime(task) {
     this.saved = false
+    this.noTime = false
     if (this.stageTime == false) {
       this.old_hourspent = task.hourSpent
       this.old_minspent = task.minuteSpent
@@ -135,6 +137,8 @@ export class IndividualTaskComponent implements OnInit {
     this.show_save = false
     this.show_impediment = false
     this.edit_time_spent = false
+    this.noDesc = false;
+    this.noTime = false;
     if (this.stageDesc && this.stageTime) {
       task.hourSpent = this.old_hourspent
       task.minuteSpent = this.old_minspent
