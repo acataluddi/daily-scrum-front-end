@@ -8,4 +8,8 @@ export class IndividualMember {
   minute: number;
   image: string;
   tasks: Task[];
+  addedDate: string;
+  deletedDate: string;
+  isActive: boolean;
+  showMember: boolean;
 }

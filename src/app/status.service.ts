@@ -17,14 +17,9 @@ export class AuthGuard implements CanActivate {
   loggedin;
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
 
-    console.log("loginfrewgwtre:");
-    console.log(route.url[0].path);
-
     if (localStorage.getItem("logged") == 'true') {
       if (route.url[0].path === 'admin-view-all') {
         this.socialAuthService.authState.subscribe((user) => {
-          console.log("user:");
-          console.log(user);
           if (user != null) {
             this.loginservice.loginMember(user.idToken)
               .subscribe(msg => {
@@ -43,8 +38,6 @@ export class AuthGuard implements CanActivate {
       }
       if (route.url[0].path === 'task-page-admin') {
         this.socialAuthService.authState.subscribe((user) => {
-          console.log("user:");
-          console.log(user);
           if (user != null) {
             this.loginservice.loginMember(user.idToken)
               .subscribe(msg => {
@@ -62,8 +55,6 @@ export class AuthGuard implements CanActivate {
       }
       if (route.url[0].path === 'project') {
         this.socialAuthService.authState.subscribe((user) => {
-          console.log("user:");
-          console.log(user);
           if (user != null) {
             this.loginservice.loginMember(user.idToken)
               .subscribe(msg => {

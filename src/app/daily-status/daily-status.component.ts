@@ -365,9 +365,7 @@ export class DailyStatusComponent implements OnInit {
 
   getNextDate() {
     var d1 = new Date(this.newDate);
-    if (d1.getDate() !== this.maxDate.getDate() &&
-      d1.getMonth() === this.maxDate.getMonth() &&
-      d1.getFullYear() === this.maxDate.getFullYear()) {
+    if (d1.toDateString() !== this.maxDate.toDateString()) {
       (d1.setDate(d1.getDate() + 1));
       this.month = this.months[d1.getMonth()];
       this.date = d1.getDate();
@@ -386,9 +384,7 @@ export class DailyStatusComponent implements OnInit {
   }
   getPreviousDate() {
     var d1 = new Date(this.newDate);
-    if (d1.getDate() !== this.minDate.getDate() &&
-      d1.getMonth() === this.minDate.getMonth() &&
-      d1.getFullYear() === this.minDate.getFullYear()) {
+    if (d1.toDateString() !== this.minDate.toDateString()) {
       (d1.setDate(d1.getDate() - 1));
       this.month = this.months[this.newDate.getMonth()];
       this.date = this.newDate.getDate();

@@ -143,6 +143,7 @@ export class ProjectComponent implements OnInit {
     initializeNewMember(m: member): member {
         m.email = "";
         m.role = "Select role";
+        m.isActive = true;
         return m;
     }
 
@@ -151,7 +152,9 @@ export class ProjectComponent implements OnInit {
             projectId: this.generateId(),
             projectDesc: "",
             members: [],
-            projectName: ""
+            projectName: "",
+            startDate : "",
+            endDate : ""
         }
         return newProject;
     }

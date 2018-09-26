@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   subscription: Subscription;
   sub;
   pid
-  selected: Project = { projectId: "", projectName: "", projectDesc: "", members: [] }
+  selected: Project = { projectId: "", projectName: "", projectDesc: "", startDate: "", endDate: "", members: [] }
 
   show_dailyscrum;
   show_arrow;

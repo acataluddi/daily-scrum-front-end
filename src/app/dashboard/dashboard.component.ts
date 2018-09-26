@@ -105,12 +105,14 @@ export class DashboardComponent implements OnInit {
   openDailyStatus(project) {
     var projectId = project.projectId
     var name = project.projectName
+    var startdate = project.startDate;
     this.taskService.getSelectedProject(project)
     localStorage.setItem('currentProject', name)
     localStorage.setItem("projectId", projectId)
+    localStorage.setItem("startDate", startdate)
 
     if (this.flag2) {
-      this.router.navigate(['/task-page-admin', projectId, name])
+      this.router.navigate(['/task-page-admin', projectId, name, startdate])
     } else {
       this.router.navigate(['/daily-status', projectId, name]);
     }
