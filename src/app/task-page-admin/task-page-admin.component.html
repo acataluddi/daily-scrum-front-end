@@ -33,7 +33,7 @@
         <div class="column">
           <div class="member1">
             <div class="member_title1">
-              <div class="member_image1"><img class="size" src={{IndMemOb.image}}></div>
+              <div class="member_image1" (click)="gotoDailyStatus(IndMemOb)" ><img class="size" src={{IndMemOb.image}}></div>
               <div class="member_name1">{{IndMemOb.name}}</div>
               <div class="more_icon"><img src="../../assets/more.png"></div>
               <div class="member_time_spent1">{{IndMemOb.hour}} h {{IndMemOb.minute}} m</div>
