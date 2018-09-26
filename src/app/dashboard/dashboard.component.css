@@ -73,7 +73,7 @@
   position: absolute;
   left: 256px;
   height: 32px;
-  width: 100px;
+  width: 115px;
   background-color: #b1b1b1;
   border-radius: 4px;
   display: flex;
@@ -86,9 +86,10 @@
 
 .UserList {
   position: absolute;
-  left: 370px;
+  left: 375px;
   height: 32px;
-  width: 70px;
+  width: 85px;
+  text-align: center;
   background-color: #b1b1b1;
   border-radius: 4px;
   display: flex;
@@ -109,6 +110,7 @@
 .AddProjectDiv {
   text-align: center;
   margin: 5%;
+  padding-left:5px;
   font-size: 14px;
   font-weight: 500;
   color: white;
@@ -163,22 +165,24 @@
   width: 29px;
   height: 29px;
   border-radius: 16px;
-  margin-left: -12px;
-  border: 1px solid white;
+  margin-left: -13px;
+  border:none;
+  /* border: 1px solid white; */
   outline: none;
 }
 
 .SmallCircleButton2 {
   width: 30px;
   height: 30px;
+  margin-top:-2px;
   border-radius: 16px;
-  margin-left: -12px;
+  margin-left: -15px;
   border: 1px solid white;
   outline: none;
 }
 
 .SmallCircleNameDiv {
-  color: white;
+  /* color: white; */
   margin-left: -6px;
   font-weight: 600;
   margin-top: -1px;
@@ -186,8 +190,9 @@
 
 .memberImage {
   object-fit: contain;
-  width: 140%;
-  height: 140%;
+  /* margin-left:-7px; */
+  width: 28px;
+  height: 28px;
   border-radius: 50% 50% 50% 50%;
 }
 
@@ -269,11 +274,14 @@
   width: 129px;
   height: 80px;
   border-radius: 4px;
-  z-index: 1;
+  z-index: 43;
   border: none;
 }
+.DropdownContentDiv {
+  display: block;
+}
 
-.DropdownButton:focus .DropdownContentDiv {
+.DropdownButton:focus {
   display: inline-block;
 }
 
@@ -286,13 +294,13 @@
 }
 
 .EditDiv {
-  margin-top: 10px;
+  margin-top: 11px;
 
-  padding-left: 0px;
+  padding-left: 9px;
 }
 
 .DeleteDiv {
-  margin-top: 5px;
+  margin-top: 4px;
   padding-left: 8px;
 }
 
@@ -302,8 +310,9 @@
 }
 
 .MenuDotDiv {
-  margin-left: 0px;
+  margin-left: 14px;
   color: white;
+  padding-top: 4px;
 }
 
 .BottomDiv:after {
@@ -355,19 +364,27 @@
   .BottomDiv {
     width: 100%;
   }
+  .AddProjectDiv {
+    padding-left:0px;
+  }
+  
 
   .ProjectBoxDiv {
     width: 350px;
     margin-top: 20px;
-    margin-left: 10%;
+    /* margin-left: 7%; */
   }
 
+  .ExtraMembersDiv {
+    margin-left: -3px;
+  }
   .TwoButton {
     width: 300px;
   }
 
   .DailyStatusButton {
     margin-left: 46%;
+    width:115px;
   }
 
   .noProject {
@@ -395,9 +412,16 @@
   .UserList {
     left: 60%;
   }
+  .ExtraMembersDiv {
+    margin-left: -4.3px;
+  }
 
+  .memberImage {
+    margin-left:-7px;
+  }
   .AddProjectButton {
     left: 10%;
+    width: 115px;
   }
 
   .BottomDiv {
@@ -419,6 +443,7 @@
 
   .DailyStatusButton {
     margin-left: 46%;
+    width:115px;
   }
 
   .noProject {
