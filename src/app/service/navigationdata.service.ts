@@ -8,8 +8,9 @@ import { member } from '../model/project-model';
 )
 export class NavigationdataService {
 
-  email = localStorage.getItem('email')
-  dummy: member = {email:this.email, role:'', name:'', image:'', roleSelected: null, invalidMemberEmail: null, invalidRole: null} 
+  taskemail = localStorage.getItem('taskEmail')
+  taskName = localStorage.getItem('taskName')
+  dummy: member = {email:this.taskemail, role:'', name:this.taskName, image:'', roleSelected: null, invalidMemberEmail: null, invalidRole: null} 
   private dataSource = new BehaviorSubject<member>(this.dummy);
   currentdata$ = this.dataSource.asObservable();
 

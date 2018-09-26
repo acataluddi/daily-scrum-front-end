@@ -9,7 +9,7 @@
       <div id="scrum" *ngIf="show_scrum">Daily Scrum
         <div id="dash" *ngIf="show_dash">{{title}}</div>
       </div>
-      <div id="arrow" *ngIf="show_arrow">
+      <div id="arrow" *ngIf="show_arrow && length > 1">
         <div id="projectlist" *ngIf="show_projectlist">
           <div *ngFor="let project of projects">
             <div class="items" *ngIf="project.projectName != selected.projectName" (click)="changeProject(project)">{{project.projectName}}</div>

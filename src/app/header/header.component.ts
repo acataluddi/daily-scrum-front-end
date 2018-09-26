@@ -42,6 +42,8 @@ export class HeaderComponent implements OnInit {
   show_signout;
   show_projectlist;
   showTooltip;
+
+  length;
   constructor(
     private viewallservice: ProjectviewallService,
     private socialAuthService: AuthService,
@@ -108,6 +110,7 @@ export class HeaderComponent implements OnInit {
 
   setProjects(userProjects) {
     this.projects = userProjects;
+    this.length = this.projects.length;
   }
 
   setSelected(projectSelected) {
