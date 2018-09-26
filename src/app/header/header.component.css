@@ -76,7 +76,7 @@ img[src="../../assets/Scrum_logo.png"] {
   font-size: 2rem;
   font-weight: 300;
   position: absolute;
-  top: 33.34%;
+  top: 28.34%;
   left: 0%;
   width: 250px;
   color: rgba(79, 86, 105, 1);
@@ -94,7 +94,7 @@ img[src="../../assets/Scrum_logo.png"] {
 #arrow {
   display: inline-block;
   position: absolute;
-  top: 28px;
+  top: 26px;
   left: 225px;
   background-color: #ffffff;
   background-image: url(../../assets/arrow.png);
@@ -107,7 +107,7 @@ img[src="../../assets/Scrum_logo.png"] {
 .arrow2 {
   display: inline-block;
   position: absolute;
-  top: 4px;
+  top: -1px;
   right: .5%;
   cursor: pointer;
   background-color: #ffffff;
@@ -128,7 +128,7 @@ img[src="../../assets/Scrum_logo.png"] {
 .button {
   border: none;
   position: relative;
-  top: 0%;
+  top: -7px;
   right: 14%;
   background-color: #ffffff;
   color: rgba(79, 86, 105, 1);
@@ -369,7 +369,7 @@ img[src="../../assets/Scrum_logo.png"] {
 
   #arrow {
     position: absolute;
-    top: 44%;
+    top: 37%;
     left: 120%;
   }
 

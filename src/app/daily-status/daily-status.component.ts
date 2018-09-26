@@ -81,7 +81,7 @@ export class DailyStatusComponent implements OnInit {
   todayTaskDate;
   yesterdayTaskDate;
   todayDate = new Date();
-  email = localStorage.getItem("email");
+  email = localStorage.getItem("taskEmail");
   UserType;
   flag = false;
   projectId = localStorage.getItem("projectId");
@@ -90,9 +90,11 @@ export class DailyStatusComponent implements OnInit {
   lastEdit2;
   lastEditString1 = '';
   lastEditString2 = '';
-  subscription: Subscription;
-  sub: any;
+  changeProjectsubscription: Subscription;
+  routeparamsub: any;
+  selectmem: Subscription;
   editable;
+  name = localStorage.getItem("taskName")
 
   constructor(
     public router: Router,
@@ -108,22 +110,57 @@ export class DailyStatusComponent implements OnInit {
       showWeekNumbers: false
     });
 
-    this.sub = this.route.params.subscribe(params => {
+    this.routeparamsub = this.route.params.subscribe(params => {
       this.currentProject = params['name']
       this.projectId = params['projectId'];
     });
 
-    this.subscription = taskservice.newList.subscribe(
+    this.changeProjectsubscription = taskservice.newList.subscribe(
       data => {
         this.projectId = data.projectId
         this.currentProject = data.projectName
+        var taskEmail = data.members[0].email
+        var taskName = data.members[0].name
+        this.email = taskEmail
+        if (this.userEmail == this.email) {
+          this.editable = true;
+          this.taskHolderName = 'My Tasks'
+        } else {
+          if (taskName == '') {
+            taskName = 'Unnamed'
+          }
+          this.editable = false
+          this.taskHolderName = taskName + "'s Task";
+        }
+        localStorage.setItem("taskEmail", this.email)
+        localStorage.setItem("taskName", taskName)
         this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
       });
+
+    this.selectmem = data.currentdata$.subscribe(datachanged => {
+      this.datachanged = datachanged
+      if (this.userEmail == this.datachanged.email) {
+        this.editable = true;
+        this.taskHolderName = 'My Tasks';
+      } else {
+        this.editable = false;
+        if (this.datachanged.name == '') {
+          this.datachanged.name = 'Unnamed'
+        }
+        this.taskHolderName = this.datachanged.name + "'s Tasks";
+      }
+
+      this.email = this.datachanged.email;
+      this.projectId = localStorage.getItem("projectId")
+      this.currentProject = localStorage.getItem("currentProject")
+    });
+
   }
 
   ngOnInit() {
     this.minDate = new Date(2018, 8, 10);
     this.maxDate = new Date();
+
     this.socialAuthService.authState.subscribe((user) => {
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
@@ -138,11 +175,9 @@ export class DailyStatusComponent implements OnInit {
           });
       }
     });
-
-    this.checkthis()
+    // this.checkthis()
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
-
     this.month = this.months[this.d.getMonth()];
     this.date = this.d.getDate();
     this.year = this.d.getFullYear();
@@ -157,12 +192,19 @@ export class DailyStatusComponent implements OnInit {
 
     this.projectId = localStorage.getItem("projectId")
     this.currentProject = localStorage.getItem("currentProject")
-
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+
+    // if(this.userEmail == this.email){
+    //   this.taskHolderName = 'My Tasks';
+    //   this.editable = true
+    // } else{
+    //   this.taskHolderName = this.name + "'s Task";
+    //   this.editable = false
+    // }
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    this.routeparamsub.unsubscribe();
   }
 
   getTodaysTask(Todays) {
@@ -406,22 +448,6 @@ export class DailyStatusComponent implements OnInit {
     }
   }
 
-  checkthis() {
-    this.data.currentdata$.subscribe(datachanged => {
-      this.datachanged = datachanged
-      if (this.userEmail == this.datachanged.email) {
-        this.editable = true;
-        this.taskHolderName = 'My Tasks';
-      } else {
-        this.editable = false;
-        this.taskHolderName = this.datachanged.name + "'s Tasks";
-      }
-      this.email = this.datachanged.email;
-      this.projectId = localStorage.getItem("projectId")
-      this.currentProject = localStorage.getItem("currentProject")
-    });
-  }
-
   newTodayTask($event) {
     this.task1 = $event;
     var editTime = new Date()
@@ -590,6 +616,9 @@ export class DailyStatusComponent implements OnInit {
       this.editable = true;
       this.taskHolderName = 'My Tasks'
     } else {
+      if (taskMember.name == '') {
+        taskMember.name = 'Unnamed'
+      }
       this.editable = false
       this.taskHolderName = taskMember.name + "'s Task";
     }
