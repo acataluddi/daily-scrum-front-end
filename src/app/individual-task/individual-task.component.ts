@@ -39,7 +39,6 @@ export class IndividualTaskComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.editable)
     this.show_save = false;
     this.saved = false;
     this.tid = parseInt(this.task.taskId);
@@ -53,7 +52,6 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   updateValues(task) {
-    console.log(this.newdesc);
     if (this.newdesc !== '') {
       task.description = this.newdesc;
     }
@@ -66,9 +64,7 @@ export class IndividualTaskComponent implements OnInit {
   updateDescription() {
     this.task.description = this.des.nativeElement.textContent;
     this.des.nativeElement.textContent = this.task.description;
-    console.log('idval:' + this.des.nativeElement.innerText);
     this.task.description = this.task.description.trim();
-    console.log('task val:' + this.task.description);
     // this.task.description.replace('&nbsp;', '');
     if (this.task.description === "") {
       this.des.nativeElement.innerText = "";
@@ -76,11 +72,10 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   updateImpediment() {
-    this.task.impediments = this.imp.nativeElement.innerText.trim();
-    console.log('idval:' + this.imp.nativeElement.innerText);
-    this.task.impediments = this.task.impediments.trim();
-    console.log('task val:' + this.task.impediments);
-    this.task.impediments.replace('&nbsp;', '');
+    this.task.impediments = this.imp.nativeElement.innerText;
+    this.imp.nativeElement.innerText = this.task.impediments;
+    this.task.impediments = this.task.impediments;
+    // this.task.impediments.replace('&nbsp;', '');
     if (this.task.impediments === "") {
       this.show_impediment = false;
       this.imp.nativeElement.innerText = "";
@@ -90,10 +85,8 @@ export class IndividualTaskComponent implements OnInit {
   save(task) {
     this.edit_time_spent = false
     if (task.description == "") {
-      // alert("Add description")
       this.noDesc = true;
     } else if (task.hourSpent <= 0 && task.minuteSpent <= 0) {
-      // alert("Add Time spent")
       this.noDesc = false;
       this.noTime = true;
     }
@@ -116,9 +109,7 @@ export class IndividualTaskComponent implements OnInit {
       this.old_desc = task.description
       this.old_imped = task.impediments
       this.stageDesc = true
-      console.log(this.old_imped)
     }
-
   }
 
   stageTaskTime(task) {
@@ -129,7 +120,6 @@ export class IndividualTaskComponent implements OnInit {
       this.old_minspent = task.minuteSpent
       this.stageTime = true
     }
-    console.log(this.old_hourspent)
   }
 
   cancelChange(task) {

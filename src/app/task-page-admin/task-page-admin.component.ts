@@ -63,8 +63,6 @@ export class TaskPageAdminComponent implements OnInit {
       showWeekNumbers: false
     });
     this.sub = this.route.params.subscribe(params => {
-      console.log('The sub data')
-      console.log(params)
       this.currentProject = params['name']
       this.projectId = +params['projectId'];
       var dt = new Date();
@@ -87,7 +85,6 @@ export class TaskPageAdminComponent implements OnInit {
     this.currentProject = localStorage.getItem("currentProject");
     this.view_my_task_flag = false;
     this.socialAuthService.authState.subscribe((user) => {
-      console.log(user);
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
           .subscribe(msg => {
@@ -106,7 +103,6 @@ export class TaskPageAdminComponent implements OnInit {
     this.total_minutes_spent = 0;
     this.taskPageService.getMembersTask(taskDate, projectId)
       .subscribe(memberTasks => {
-        console.log(memberTasks);
         this.IndMembArray = memberTasks;
         this.calculateTotalTime(this.IndMembArray);
         if (this.IndMembArray.filter(m => m.email === localStorage.getItem("email")).length != 0) {

@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
     }
     this.socialAuthService.signIn(socialPlatformProvider).then(
       (userData) => {
-        console.log(socialPlatform + " sign in data : ", userData);
         this.member = {
           employeeID: userData.id,
           name: userData.name,
@@ -55,7 +54,6 @@ export class LoginComponent implements OnInit {
         }
         this.loginservice.loginMember(userData.idToken)
           .subscribe(msg => {
-            console.log(msg);
             if (msg.email === this.member.email) {
               localStorage.setItem("logged", "true");
               localStorage.setItem("email", msg.email);
@@ -64,7 +62,6 @@ export class LoginComponent implements OnInit {
               localStorage.setItem("token", userData.idToken);
               this.router.navigate(['/dashboard']);
             }
-
           });
       }
     );
@@ -82,9 +79,7 @@ export class LoginComponent implements OnInit {
   routeEvent(router: Router) {
     router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
-        console.log(e);
         if ((e['url'] === '/login') && (localStorage.getItem("logged") == 'true')) {
-          console.log(e);
           this.router.navigate(['/dashboard']);
         }
 

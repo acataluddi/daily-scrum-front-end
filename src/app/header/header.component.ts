@@ -73,7 +73,6 @@ export class HeaderComponent implements OnInit {
 
     if (this.router.url.search('daily-status/') || this.router.url.search('task-page-admin/')) {
       var name = localStorage.getItem("currentProject")
-      console.log(name)
       this.selected.projectName = name;
     }
     this.initializeMember();
@@ -82,7 +81,6 @@ export class HeaderComponent implements OnInit {
 
     this.router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
-        console.log(event);
         this.toggle(event['url']);
       }
     });
@@ -127,20 +125,6 @@ export class HeaderComponent implements OnInit {
   }
   changeProject(newProject) {
     this.selected = newProject;
-    // var projectArray = this.projects
-    // var result = null
-    // for (var i = 0; i < projectArray.length; i++) { 
-    //   if (projectArray[i].projectName == newProjectName) { 
-    //     result = projectArray[i];
-    //     console.log(result)
-    //     break;
-    //   } 
-    // }
-
-    // let obj = this.projects.find(a => a.projectName === newProjectName);
-
-    // this.selected = result;
-    // console.log(this.selected);
     localStorage.setItem("currentProject", this.selected.projectName);
     localStorage.setItem("projectId", this.selected.projectId);
     this.taskService.changeProject(this.selected);
@@ -171,7 +155,6 @@ export class HeaderComponent implements OnInit {
       this.show_scrum = false
       this.show_dash = false
     }
-    console.log(currenturl);
   }
 
   openDashboardPage() {
@@ -197,9 +180,5 @@ export class HeaderComponent implements OnInit {
       this.show_projectlist = false
       this.show_signout = false
     }
-  }
-
-  call() {
-    console.log('called')
   }
 }

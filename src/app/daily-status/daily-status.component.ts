@@ -102,22 +102,22 @@ export class DailyStatusComponent implements OnInit {
     private data: NavigationdataService,
     private socialAuthService: AuthService,
     private loginservice: LoginService
-
   ) {
     this.datePickerConfig = Object.assign({}, {
       containerClass: 'theme-orange',
       showWeekNumbers: false
     });
+
     this.sub = this.route.params.subscribe(params => {
       this.currentProject = params['name']
       this.projectId = params['projectId'];
     });
+
     this.subscription = taskservice.newList.subscribe(
       data => {
         this.projectId = data.projectId
         this.currentProject = data.projectName
         this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
-
       });
   }
 
@@ -125,20 +125,16 @@ export class DailyStatusComponent implements OnInit {
     this.minDate = new Date(2018, 8, 10);
     this.maxDate = new Date();
     this.socialAuthService.authState.subscribe((user) => {
-      console.log("user:");
-      console.log(user);
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
           .subscribe(msg => {
             this.UserType = msg.userType;
             if (this.UserType === "Admin" || this.UserType === "Manager") {
               this.flag = true;
-              console.log("flag:" + this.flag);
             } else {
               this.flag = false
               this.editable = true
             }
-
           });
       }
     });
@@ -154,12 +150,14 @@ export class DailyStatusComponent implements OnInit {
     this.myDateValue = new Date();
     this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
     this.yesterdayval = "Yesterday's Tasks";
-    this.todayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
 
+    this.todayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
     this.todayDate.setDate(this.todayDate.getDate() - 1);
     this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
+
     this.projectId = localStorage.getItem("projectId")
     this.currentProject = localStorage.getItem("currentProject")
+
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
@@ -170,30 +168,32 @@ export class DailyStatusComponent implements OnInit {
   getTodaysTask(Todays) {
     this.MockTodayTasks = Todays;
     this.TodayTasks = Todays;
-    // console.log(this.MockTodayTasks)
     this.status = true;
   }
 
   getYesterdaysTask(Yesterdays) {
     this.MockYesterdayTasks = Yesterdays;
     this.YesterdayTasks = Yesterdays;
-    // console.log(this.MockYesterdayTasks)
   }
 
   calculateTotalTime(taskArray, value) {
     this.totalhour = 0;
     this.totalminute = 0;
+
     for (let task of taskArray) {
       this.totalhour += task.hourSpent;
       this.totalminute += task.minuteSpent;
     }
 
     var extrahour = 0;
+
     if (this.totalminute >= 60) {
       extrahour = Math.floor(this.totalminute / 60);
       this.totalminute = this.totalminute % 60;
     }
+
     this.totalhour += extrahour;
+
     switch (value) {
       case 1: this.total_hours_spent1 = this.totalhour;
         this.total_minutes_spent1 = this.totalminute;
@@ -202,8 +202,6 @@ export class DailyStatusComponent implements OnInit {
         this.total_minutes_spent2 = this.totalminute;
         break;
     }
-    // this.total_hours_spent = this.totalhour;
-    // this.total_minutes_spent = this.totalminute;
   }
 
   modifyTime($event, taskArray, value) {
@@ -212,7 +210,6 @@ export class DailyStatusComponent implements OnInit {
     this.totalminute = 0;
     var old_hour = 0;
     var old_minute = 0;
-
 
     for (let task of taskArray) {
       if (task.taskId === this.task1.taskId) {
@@ -238,8 +235,6 @@ export class DailyStatusComponent implements OnInit {
       alert('Total time worked cannot be more than 24 hours.');
     }
     else {
-      // this.total_hours_spent = this.totalhour;
-      // this.total_minutes_spent = this.totalminute;
       switch (value) {
         case 1: this.total_hours_spent1 = this.totalhour;
           this.total_minutes_spent1 = this.totalminute;
@@ -298,6 +293,7 @@ export class DailyStatusComponent implements OnInit {
     this.hour = this.d.getHours();
     this.minute = this.d.getMinutes();
     this.second = this.d.getSeconds();
+
     if (this.date < 10) {
       this.date = '0' + this.date;
     }
@@ -328,6 +324,7 @@ export class DailyStatusComponent implements OnInit {
     }
     return ts;
   }
+
   onDateChange(newDate: Date) {
     if (newDate.getDate() === this.maxDate.getDate() &&
       newDate.getMonth() === this.maxDate.getMonth() &&
@@ -336,6 +333,7 @@ export class DailyStatusComponent implements OnInit {
     } else {
       document.getElementById("rightarrow").classList.remove('blocked-arrow');
     }
+
     if (newDate.getDate() === this.minDate.getDate() &&
       newDate.getMonth() === this.minDate.getMonth() &&
       newDate.getFullYear() === this.minDate.getFullYear()) {
@@ -343,6 +341,7 @@ export class DailyStatusComponent implements OnInit {
     } else {
       document.getElementById("leftarrow").classList.remove('blocked-arrow');
     }
+
     if (this.status) {
       this.newDate = newDate;
       var d1 = new Date(newDate);
@@ -358,7 +357,6 @@ export class DailyStatusComponent implements OnInit {
         this.todayval = this.month + " " + this.date + ", " + this.year;
         this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
       }
-      console.log(newDate)
       this.getData(newDate);
     }
   }
@@ -372,6 +370,7 @@ export class DailyStatusComponent implements OnInit {
       this.month = this.months[d1.getMonth()];
       this.date = d1.getDate();
       this.year = d1.getFullYear();
+
       if ((this.month === this.d.getMonth()) && (this.date === this.d.getDate()) && (this.year === this.d.getFullYear())) {
         this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
         this.yesterdayval = "Yesterday's Tasks";
@@ -380,6 +379,7 @@ export class DailyStatusComponent implements OnInit {
         this.todayval = this.month + " " + this.date + ", " + this.year;
         this.yesterdayval = this.months[this.newDate.getMonth()] + " " + this.newDate.getDate() + ", " + this.newDate.getFullYear();
       }
+
       this.newDate = d1;
       this.myDateValue = d1;
     }
@@ -405,9 +405,10 @@ export class DailyStatusComponent implements OnInit {
       this.myDateValue = d1;
     }
   }
+
   checkthis() {
     this.data.currentdata$.subscribe(datachanged => {
-    this.datachanged = datachanged
+      this.datachanged = datachanged
       if (this.userEmail == this.datachanged.email) {
         this.editable = true;
         this.taskHolderName = 'My Tasks';
@@ -418,8 +419,6 @@ export class DailyStatusComponent implements OnInit {
       this.email = this.datachanged.email;
       this.projectId = localStorage.getItem("projectId")
       this.currentProject = localStorage.getItem("currentProject")
-      // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
-      console.log(this.email)
     });
   }
 
@@ -449,7 +448,6 @@ export class DailyStatusComponent implements OnInit {
         .subscribe(msg => console.log(msg));
     }
     this.getLastEdit(this.TodayTasks, 2)
-    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
   //Add new task: Yesterday
@@ -478,7 +476,6 @@ export class DailyStatusComponent implements OnInit {
         .subscribe(msg => console.log(msg));
     }
     this.getLastEdit(this.YesterdayTasks, 1)
-    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
   newOld(keyTask, taskArray) {
@@ -559,17 +556,14 @@ export class DailyStatusComponent implements OnInit {
   }
 
   getTask(today, yesterday, email, projectId) {
-    console.log('dasdasadfsafsafsa')
     this.taskservice.getTodays(today, email, projectId)
       .subscribe(data1 => {
         this.getTodaysTask(data1)
-        console.log(data1)
         this.calculateTotalTime(this.MockTodayTasks, 2)
         this.getLastEdit(this.TodayTasks, 2)
       });
     this.taskservice.getYesterdays(yesterday, email, projectId)
       .subscribe(data => {
-        console.log(data)
         this.getYesterdaysTask(data);
         this.calculateTotalTime(this.MockYesterdayTasks, 1)
         this.getLastEdit(this.YesterdayTasks, 1)

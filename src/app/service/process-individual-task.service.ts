@@ -68,7 +68,6 @@ export class ProcessIndividualTaskService {
   }
 
   setSelectedProject() {
-    console.log(this.selectedProject)
     return this.selectedProject;
   }
 

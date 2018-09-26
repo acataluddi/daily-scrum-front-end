@@ -60,7 +60,6 @@ export class ProjectService {
   updateProject(pro: Project): Observable<any> {
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     this.project = pro;
-    console.log(JSON.stringify(this.project));
     return this.http.put<any>(this.projectUrl,
       JSON.stringify(this.project),{headers}
     );

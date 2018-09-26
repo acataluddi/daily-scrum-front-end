@@ -51,8 +51,6 @@ export class UserslistComponent implements OnInit {
 
   getProjects(): void {
     // this.projects = this.projectservice.getProjectArray()
-
-    console.log(this.projects);
     for (let pro of this.projects) {
       if (pro.projectName == this.childProject) {
         this.projectmembers = pro.members;
@@ -64,20 +62,13 @@ export class UserslistComponent implements OnInit {
         this.projectmembers.splice(index,1);
       }
     }
-    console.log(this.projectmembers);
-    console.log(this.childProject);
-
   }
 
   
 
   gotoDailyStatus(selectedMember) {
-
     this.selectedEmailEvent.emit(selectedMember)
     this.data.changedata(selectedMember)
-    console.log(this.childProject)
-    console.log(this.childProjectId)
-
     this.router.navigate(['/daily-status', this.childProjectId, this.childProject]);
     
   }
@@ -87,19 +78,13 @@ export class UserslistComponent implements OnInit {
       document.getElementById("userslist").classList.add("block")
       document.getElementById("search_name").classList.add("flexed")
       document.getElementById("userslist").classList.add("flex")
-
-
       this.checker = !this.checker
     }
     else {
       document.getElementById("userslist").classList.remove("block")
       document.getElementById("search_name").classList.remove("flexed")
       document.getElementById("userslist").classList.remove("flex")
-
       this.checker = !this.checker
     }
-
   }
-
-
 }
