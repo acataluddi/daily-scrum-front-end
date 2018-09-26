@@ -432,12 +432,22 @@ img.right-arrow:active {
   }
 
   .total_time_border {
-    width: 155px;
-    height: 38px;
+    width: 160px;
+    height: 37px;
   }
 
   .total_time_text {
     padding-left: 4px;
+    font-size: 14px;
+  }
+
+  .spent_text{
+    font-size: 14px;
+  }
+
+  .last_edit_label{
+    padding-top: 5px;
+    font-size: 12px;
   }
 
   .view {
@@ -486,8 +496,18 @@ img.right-arrow:active {
   .edit_status {
     font-size: 10px;
   }
+
+  .total_time_border {
+    width: 160px;
+    height: 35px;
+  }
 }
 
+@media screen and (max-width: 380px){
+  .last_edit_label{
+    font-size: 12px;
+  }
+}
 
 @media screen and (max-width: 369px) {
   .today_task_label {
@@ -530,6 +550,24 @@ img.right-arrow:active {
 
 @media screen and (max-width: 369px) {
   .last_edit_label {
-    visibility: hidden;
+    font-size: 10px;
+    padding-top: 0px;
+    /* visibility: hidden; */
   }
+
+  .total_time_border{
+    height: 35px;
+    width: 142px;
+  }
+
+  .total_time_text{
+    font-size: 13px;
+    padding-left: 1px;
+  }
+
+  .spent_text{
+    font-size: 13px;
+  }
+
+  
 }

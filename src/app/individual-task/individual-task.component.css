@@ -251,7 +251,23 @@ div.cancel_edit:active {
   }
 }
 
-@media screen and (max-width: 359px) {
+@media screen and (max-width: 480px) {
+  .add_impediment{
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 399px) {
+  .time_border{
+    padding: 5px 9px 4px 9px;
+  }
+  .add_impediment{
+    margin-left: 10px;
+  }
+
+}
+
+@media screen and (max-width: 370px) {
   .description {
     width: 90%;
   }
@@ -268,10 +284,11 @@ div.cancel_edit:active {
   }
 
   .add_impediment {
-    margin-left: 15px;
+    margin-left: 10px;
   }
 
   .time_border {
-    margin-left: -8px;
+    margin-left: -6px;
+    padding: 5px 3px 4px 3px;
   }
 }

@@ -198,6 +198,9 @@ export class TaskPageAdminComponent implements OnInit {
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }
 
-
+  gotoDailyStatus(IndMemOb){
+    this.navservice.changedata(IndMemOb)
+    this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
+  }
 
 }
