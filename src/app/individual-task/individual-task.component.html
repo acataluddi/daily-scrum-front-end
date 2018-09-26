@@ -13,8 +13,8 @@
   <div #des class="description" spellcheck="false" *ngIf="task.description===''" data-text="Add description"
     [contentEditable]="editable" (blur)="updateDescription()" (click)="show_save=true; stageTaskDesc(task)">
   </div>
-  <div class="no_desc" *ngIf="noDesc">Enter Task description</div>
 </div>
+<div class="no_desc" *ngIf="noDesc">Enter Task description</div>
 
 <div class="impediments" spellcheck="false" #imp [contentEditable]="editable" *ngIf="show_impediment==true" (blur)="updateImpediment()"
   (click)="show_save=true; stageTaskDesc(task)">
@@ -46,8 +46,8 @@
   <div class="add_impediment" *ngIf="task.impediments== '' && show_impediment==false && editable==true" (click)="show_impediment=true;">
     Add Impediments
   </div>
-  <div class="no_time" *ngIf="noTime">Enter Time spent</div>
 </div>
+<div class="no_time" *ngIf="noTime">Enter Time spent</div>
 
 <!-- <div class="impediments" spellcheck="false" #imp contenteditable="true" *ngIf="show_impediment==true" (blur)="updateImpediment()">
   <img class="img_impediment" src="../../assets/impediment.png" align="top"> {{task.impediments}}
