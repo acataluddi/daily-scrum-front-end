@@ -44,11 +44,13 @@ export class DashboardComponent implements OnInit {
   noOfMembers = [];
   flag1 = false;
   flag2 = false;
+  show = [];
   imageurl = [];
   UserType: string;
 
 
   ngOnInit() {
+    
     this.socialAuthService.authState.subscribe((user) => {
       console.log("user:");
       console.log(user);
@@ -67,10 +69,6 @@ export class DashboardComponent implements OnInit {
           });
       }
     });
-
-    // this.dashboardservice.getMembers()
-    // .subscribe(membersArr => this.getMembers(membersArr));
-
     this.dashboardservice.getProjects()
       .subscribe(projectArr => {
         if (projectArr != null) {
@@ -79,6 +77,13 @@ export class DashboardComponent implements OnInit {
       });
   }
 
+  InitializeShow() {
+    for (let i=0; i<this.noOfProjects; i++) {
+
+      this.show[i] = 0;
+      console.log(this.show[i])
+    }
+  }
   getProjects(projectArr): void {
     let x = 0;
     this.TotalProjectMembers[0] = 0;
@@ -89,10 +94,14 @@ export class DashboardComponent implements OnInit {
     }
     for (let i = 0; i < this.noOfProjects; i++) {
 
+      this.show[i] = false;
+      console.log(this.show[i])
+
       this.noOfMembers[i] = this.newproject[i].members.length;
       console.log('number' + this.noOfMembers);
 
       this.TotalProjectMembers[i + 1] = this.TotalProjectMembers[i] + this.noOfMembers[i];
+      
     }
   }
 
@@ -140,5 +149,10 @@ export class DashboardComponent implements OnInit {
       .subscribe((msg) => console.log("Project Deleted"));
     window.location.reload();
 
+  }
+  click(index) {
+    let i: number = index
+    console.log(this.show[i]);
+    this.show[index] = !this.show[index]; 
   }
 }

@@ -29,10 +29,8 @@
         <div class="InnerProjectBoxDiv">
           <div *ngFor="let member of Project.members ; let i=index">
             <div *ngIf="i<4">
-              <button class="SmallCircleButton1Odd SmallCircleButton">
                 <div class="SmallCircleNameDiv">
-                  <img class="memberImage" src="{{member.image}}"></div>
-              </button>
+                  <img class="memberImage" src="{{member.image}}"></div>                 
             </div>
           </div>
           <div *ngIf="noOfMembers[j]-4>0">
@@ -44,8 +42,8 @@
             <button class="DailyStatusButton" (click)="openDailyStatus(Project)">
               <div class="DailyStatusDiv">Daily Status</div>
             </button>
-            <button class="MenuButton DropdownButton" *ngIf="flag2 === true">
-              <div class="DropdownContentDiv">
+            <div class="MenuButton DropdownButton"  *ngIf="flag2 === true">
+              <div class="DropdownContentDiv" *ngIf="show[j]">
                 <div class="EditDiv Button" (click)="EditProject(Project)">
 
                   Edit Project
@@ -55,10 +53,11 @@
                   Delete Project
                 </div>
               </div>
-              <div class="MenuDotDiv">
+              <div class="MenuDotDiv" (click)="click(j)">
                 <img src="../../assets/Menudots.png">
               </div>
-            </button>
+            </div>
+            
           </div>
         </div>
 

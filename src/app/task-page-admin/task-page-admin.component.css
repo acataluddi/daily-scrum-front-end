@@ -218,6 +218,9 @@ button.view_all_task::before {
   margin-left: 20px;
   font-size: 15px;
   font-weight: 500;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   width: 150px;
   float: left;
   color: rgba(79, 86, 105, 1);
@@ -303,7 +306,7 @@ button.view_all_task::before {
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
   .header {
     width: 90%;
   }
@@ -330,11 +333,12 @@ button.view_all_task::before {
 
 @media screen and (max-width: 400px) {
   .header {
+    column-width: 400px;
     width: 90%;
   }
 
   .column {
-    width: 80%;
+    width: 100%;
   }
 
   .alt-View {
