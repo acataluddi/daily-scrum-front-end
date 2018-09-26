@@ -15,7 +15,6 @@ import { LoginService } from "../service/login.service";
   providedIn: 'root'
 })
 
-
 @Component({
   selector: 'app-adminviewall',
   templateUrl: './adminviewall.component.html',
@@ -29,21 +28,23 @@ export class AdminviewallComponent implements OnInit {
   total: number;
   flag = false;
 
-  constructor(public router: Router, private dashboardservice: DashboardService, private viewallservice: AdminviewallserviceService,
-    private http: HttpClient, private socialAuthService: AuthService, private loginservice: LoginService) {
+  constructor(
+    public router: Router, 
+    private dashboardservice: DashboardService, 
+    private viewallservice: AdminviewallserviceService,
+    private http: HttpClient, 
+    private socialAuthService: AuthService, 
+    private loginservice: LoginService) {
   }
+
   userTypes = ['Admin', 'Manager', 'User'];
 
   ngOnInit() {
-
     this.AuthenticationUser();
   }
 
   AuthenticationUser() {
-
     this.socialAuthService.authState.subscribe((user) => {
-      console.log("user:");
-      console.log(user);
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
           .subscribe(msg => {
@@ -51,7 +52,6 @@ export class AdminviewallComponent implements OnInit {
             if (msg.userType === "Admin") {
               this.flag = true;
             }
-
           });
       }
     });
@@ -69,23 +69,14 @@ export class AdminviewallComponent implements OnInit {
   getTotalCount(membersArr) {
     this.memberArray = membersArr;
     this.total = this.memberArray.length;
-
   }
 
   getMembers(membersArr): void {
     this.memberArray = membersArr;
-    console.log(this.memberArray);
-    console.log(this.total);
-
   }
-
-
 
   onChange(newType, mem: Member) {
     mem.userType = newType;
-    console.log(mem.userType);
-    console.log(mem);
-    console.log("User type changed");
     this.viewallservice.putmember(mem)
       .subscribe((res: Response) => {
         console.log(res);
@@ -94,7 +85,6 @@ export class AdminviewallComponent implements OnInit {
 
   getPagenum(pagenum) {
     this.viewallservice.getPageNum(pagenum);
-    console.log(pagenum);
     this.p = pagenum;
     this.viewallservice.getMembers()
       .subscribe(membersArr => this.getMembers(membersArr));

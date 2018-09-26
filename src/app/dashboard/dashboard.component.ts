@@ -3,12 +3,9 @@ import { Project } from "../model/project-model";
 import { Member } from "../model/member-model";
 import { LoginService } from "../service/login.service";
 import { Router } from '@angular/router';
-import { HttpClient } from "@angular/common/http";
-import { Http, Response } from "@angular/http";
 import { DashboardService } from "../service/dashboardservice.service";
 import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import { ProjectService } from "../service/project.service";
-import { HeaderComponent } from '../header/header.component';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { AdminviewallComponent } from '../adminviewall/adminviewall.component';
 import { AuthService } from 'angular-6-social-login';
@@ -50,8 +47,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.socialAuthService.authState.subscribe((user) => {
-      console.log("user:");
-      console.log(user);
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
           .subscribe(msg => {
@@ -59,7 +54,6 @@ export class DashboardComponent implements OnInit {
             if (this.UserType === "Admin") {
               this.flag1 = true;
               this.flag2 = true;
-              console.log("flag:" + this.flag1);
             } else if (this.UserType === "Manager") {
               this.flag2 = true;
             }
@@ -67,9 +61,6 @@ export class DashboardComponent implements OnInit {
           });
       }
     });
-
-    // this.dashboardservice.getMembers()
-    // .subscribe(membersArr => this.getMembers(membersArr));
 
     this.dashboardservice.getProjects()
       .subscribe(projectArr => {
@@ -88,17 +79,13 @@ export class DashboardComponent implements OnInit {
       this.noOfProjects = this.newproject.length;
     }
     for (let i = 0; i < this.noOfProjects; i++) {
-
       this.noOfMembers[i] = this.newproject[i].members.length;
-      console.log('number' + this.noOfMembers);
-
       this.TotalProjectMembers[i + 1] = this.TotalProjectMembers[i] + this.noOfMembers[i];
     }
   }
 
   getMembers(membersArr): void {
     this.memberArray = membersArr;
-    console.log(this.memberArray);
     this.TotalMembers = this.memberArray.length;
 
   }
@@ -117,13 +104,10 @@ export class DashboardComponent implements OnInit {
   }
 
   gotoUsersList() {
-
     this.router.navigateByUrl('/admin-view-all');
-
   }
 
   AddProject() {
-
     this.projectService.setRequestType("add");
     this.router.navigateByUrl('/project');
   }
@@ -135,7 +119,6 @@ export class DashboardComponent implements OnInit {
   }
 
   DeleteProject(projectId) {
-
     this.dashboardservice.deleteProjects(projectId)
       .subscribe((msg) => console.log("Project Deleted"));
     window.location.reload();

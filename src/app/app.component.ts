@@ -21,9 +21,5 @@ export class AppComponent {
         }
       }
     });
-
-    if (router.url == '/**') {
-      console.log("Inpropper");
-    }
   }
 }

@@ -13,11 +13,9 @@ export class NavigationdataService {
   private dataSource = new BehaviorSubject<member>(this.dummy);
   currentdata$ = this.dataSource.asObservable();
 
-
   constructor() { }
 
   changedata(data:member) {
-    console.log(data)
     this.dataSource.next(data)
   }
 

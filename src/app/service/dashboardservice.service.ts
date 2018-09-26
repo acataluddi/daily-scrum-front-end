@@ -42,8 +42,6 @@ export class DashboardService {
 
     }
 
-
-
     setSelected(projectList) {
         this.newListSource.next(projectList)
     }

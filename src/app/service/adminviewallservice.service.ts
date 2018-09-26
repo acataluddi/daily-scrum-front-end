@@ -20,7 +20,6 @@ export class AdminviewallserviceService {
   getMembers(): Observable<any> {
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     this.apiURL = this.baseUrl + '/CRUDControllerUser?page=' + this.p;
-    console.log(this.apiURL);
     return this.http.get<any>(this.apiURL, { headers })
   }
 
@@ -34,7 +33,6 @@ export class AdminviewallserviceService {
       email: member.email,
       userType: member.userType,
     }
-    console.log(JSON.stringify(newmember));
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
 
     return this.http.put<any>(this.apiURL,
