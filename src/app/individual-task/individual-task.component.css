@@ -172,7 +172,6 @@ div.cancel_edit:active {
 }
 
 .cancel {
-
   color: rgba(183, 183, 183, 1);
   position: relative;
   left: 58%;
@@ -191,44 +190,25 @@ div.cancel_edit:active {
 
 .no_time {
   position: relative;
-  top: 35px;
-  left: -242px;
+  top: 5px;
+  left: 47px;
   font-size: smaller;
   color: rgba(255, 0, 0, 0.7);
 }
 
 .no_desc {
   position: relative;
-  top: 22px;
-  left: -230px;
+  top: 0px;
+  left: 37px;
   width: 238px;
   font-size: smaller;
   color: rgba(255, 0, 0, 0.7);
 }
 
-@media screen and (max-width: 1090px) {
-  .no_desc {
-    position: relative;
-    top: 22px;
-    left: -148px;
-  }
-}
-
-@media screen and (max-width: 910px) {
-  .no_desc {
-    position: relative;
-    left: -265px;
-  }
-}
 
 @media screen and (max-width: 650px) {
   .description {
     width: 90%;
-  }
-
-  .no_desc {
-    position: relative;
-    left: -265px;
   }
 
   .impediments {
@@ -236,32 +216,18 @@ div.cancel_edit:active {
   }
 }
 
-@media screen and (max-width: 590px) {
-  .no_desc {
-    position: relative;
-    left: -209px;
-  }
-}
-
-@media screen and (max-width: 520px) {
-  .no_desc {
-    position: relative;
-    left: -121px;
-    width: 250px;
-  }
-}
-
 @media screen and (max-width: 480px) {
-  .add_impediment{
+  .add_impediment {
     margin-left: 20px;
   }
 }
 
 @media screen and (max-width: 399px) {
-  .time_border{
+  .time_border {
     padding: 5px 9px 4px 9px;
   }
-  .add_impediment{
+
+  .add_impediment {
     margin-left: 10px;
   }
 
@@ -276,11 +242,14 @@ div.cancel_edit:active {
     width: 90%;
   }
 
-  .no_desc {
+  .add_hours {
+    margin-left: 12px;
+  }
+
+  .no_time{
     position: relative;
-    top: 48px;
-    left: -55px;
-    width: 320px;
+    top: 5px;
+    left: 20px;
   }
 
   .add_impediment {
