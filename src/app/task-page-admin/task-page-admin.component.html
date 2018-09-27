@@ -12,12 +12,14 @@
       <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate"
         #dp="bsDatepicker" [bsConfig]="datePickerConfig" bsDatepicker [(bsValue)]="myDateValue" (onHidden)="showDatePicker=false"
         (bsValueChange)="onDateChange($event)">{{todayval}}</div>
+        <div class="view-all">
       <button *ngIf="view_my_task_flag==true" class="view_all_task" (click)="viewMyTasks()">
         View my tasks
       </button>
       <div class="altView" (click)="viewMyTasks()">
         <span class="alt-View glyphicon glyphicon-tasks"></span>
       </div>
+    </div>
     </div>
   </div>
 

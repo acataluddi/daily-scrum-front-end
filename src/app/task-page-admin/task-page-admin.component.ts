@@ -104,7 +104,6 @@ export class TaskPageAdminComponent implements OnInit {
     this.taskPageService.getMembersTask(taskDate, projectId)
       .subscribe(memberTasks => {
         this.IndMembArray = memberTasks;
-        // console.log(this.IndMembArray.length)
         console.log(this.IndMembArray[2].tasks[0].impediments)
 
         this.calculateTotalTime(this.IndMembArray);

@@ -131,7 +131,7 @@ export class DailyStatusComponent implements OnInit {
             taskName = 'Unnamed'
           }
           this.editable = false
-          this.taskHolderName = taskName + "'s Task";
+          this.taskHolderName = taskName ;
         }
         localStorage.setItem("taskEmail", this.email)
         localStorage.setItem("taskName", taskName)
@@ -148,7 +148,7 @@ export class DailyStatusComponent implements OnInit {
         if (this.datachanged.name == '') {
           this.datachanged.name = 'Unnamed'
         }
-        this.taskHolderName = this.datachanged.name + "'s Tasks";
+        this.taskHolderName = this.datachanged.name ;
       }
 
       this.email = this.datachanged.email;
