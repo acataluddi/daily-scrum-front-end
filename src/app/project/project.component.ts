@@ -6,6 +6,7 @@ import { LoginService } from "../service/login.service";
 import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { DashboardService } from "../service/dashboardservice.service";
 
 
 @Component({
@@ -44,7 +45,8 @@ export class ProjectComponent implements OnInit {
         private projectservice: ProjectService,
         private socialAuthService: AuthService,
         private loginservice: LoginService,
-        private modalService: BsModalService) { }
+        private modalService: BsModalService,
+        private dashboardservice: DashboardService) { }
 
     ngOnInit() {
         this.validMail = false;
@@ -72,19 +74,30 @@ export class ProjectComponent implements OnInit {
         if (this.reqType === 'update') {
             this.buttonText = 'Update Project';
             this.project = this.initializeNewProject(this.project);
-            this.pId = this.projectservice.getProjectToBeUpdated().projectId;
-            this.pName = this.projectservice.getProjectToBeUpdated().projectName;
-            this.pDesc = this.projectservice.getProjectToBeUpdated().projectDesc;
-            this.pMembers = this.projectservice.getProjectToBeUpdated().members;
-            for (let mb of this.pMembers) {
-                mb.roleSelected = true;
-                this.project.members.push(mb);
-            }
-            this.project.projectId = this.pId;
-            this.project.projectName = this.pName;
-            this.project.projectDesc = this.pDesc;
-            this.show1 = false;
-            this.showAddMember = true;
+            var proId = this.projectservice.getProjectToBeUpdated();
+            this.dashboardservice.getProjects()
+                .subscribe(projectArr => {
+                    if(projectArr!=null){
+                        for(let p of projectArr){
+                            if(p.projectId===proId){
+                                this.pId = p.projectId;
+                                this.pName = p.projectName;
+                                this.pDesc = p.projectDesc;
+                                this.pMembers = p.members;
+                                for (let mb of this.pMembers) {
+                                    mb.roleSelected = true;
+                                    this.project.members.push(mb);
+                                }
+                                this.project.projectId = this.pId;
+                                this.project.projectName = this.pName;
+                                this.project.projectDesc = this.pDesc;
+                                this.show1 = false;
+                                this.showAddMember = true;
+                                break;
+                            }
+                        }
+                    }
+                });
         } else if (this.reqType === 'add') {
             this.buttonText = 'Create Project';
             this.project = this.initializeNewProject(this.project);
@@ -153,8 +166,8 @@ export class ProjectComponent implements OnInit {
             projectDesc: "",
             members: [],
             projectName: "",
-            startDate : "",
-            endDate : ""
+            startDate: "",
+            endDate: ""
         }
         return newProject;
     }
@@ -320,7 +333,7 @@ export class ProjectComponent implements OnInit {
             var value = array[i].email;
             if (value in valuesSoFar || value === localStorage.getItem("email") && this.reqType == 'add') {
                 return true;
-            } else if(value in valuesSoFar && this.reqType == 'update'){
+            } else if (value in valuesSoFar && this.reqType == 'update') {
                 return true;
             }
             valuesSoFar[value] = true;

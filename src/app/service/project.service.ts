@@ -27,33 +27,37 @@ export class ProjectService {
 
   setRequestType(rtype: string) {
     this.reqType = rtype;
+    localStorage.setItem('reqType', this.reqType);
   }
 
-  setProjectArray(newproject:Project[]){
+  setProjectArray(newproject: Project[]) {
     this.newproject = newproject;
   }
 
-  getProjectArray():Project[]{
-    return(this.newproject);
+  getProjectArray(): Project[] {
+    return (this.newproject);
   }
 
   getRequestType(): string {
+    this.reqType = localStorage.getItem('reqType')
     return this.reqType;
   }
 
   setProjectToBeUpdated(p: Project) {
     this.projectToBeUpdated = p;
+    localStorage.setItem('changeProjectID', this.projectToBeUpdated.projectId);
   }
 
-  getProjectToBeUpdated(): Project {
-    return this.projectToBeUpdated;
+  getProjectToBeUpdated(): String {
+    var pid = localStorage.getItem('changeProjectID');
+    return pid;
   }
 
   addProject(pro: Project): Observable<Project> {
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     this.project = pro;
     return this.http.post<Project>(this.projectUrl,
-      JSON.stringify(this.project),{headers}
+      JSON.stringify(this.project), { headers }
     );
   }
 
@@ -62,7 +66,7 @@ export class ProjectService {
     this.project = pro;
     console.log(JSON.stringify(this.project));
     return this.http.put<any>(this.projectUrl,
-      JSON.stringify(this.project),{headers}
+      JSON.stringify(this.project), { headers }
     );
   }
 
