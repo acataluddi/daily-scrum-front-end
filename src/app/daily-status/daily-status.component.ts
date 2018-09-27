@@ -68,6 +68,7 @@ export class DailyStatusComponent implements OnInit {
   disable = true;
   newDate = new Date();
 
+  months_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   d = new Date();
   hour;
@@ -193,14 +194,7 @@ export class DailyStatusComponent implements OnInit {
     this.projectId = localStorage.getItem("projectId")
     this.currentProject = localStorage.getItem("currentProject")
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
-
-    // if(this.userEmail == this.email){
-    //   this.taskHolderName = 'My Tasks';
-    //   this.editable = true
-    // } else{
-    //   this.taskHolderName = this.name + "'s Task";
-    //   this.editable = false
-    // }
+    
   }
 
   ngOnDestroy() {
@@ -451,7 +445,8 @@ export class DailyStatusComponent implements OnInit {
   newTodayTask($event) {
     this.task1 = $event;
     var editTime = new Date()
-    var formateditTime = this.datepipe.transform(editTime, "MM-dd-yyyy HH:mm:ss")
+    // var formateditTime = this.datepipe.transform(editTime, "MM-dd-yyyy HH:mm:ss")
+    var formateditTime = editTime.toString()
     if (this.newOld(this.task1, this.TodayTasks)) {
       //insert
       if (this.task1.taskDate == '') {
@@ -480,7 +475,8 @@ export class DailyStatusComponent implements OnInit {
   newYesterdayTask(newtask) {
     this.task1 = newtask
     var editTime = new Date()
-    var formateditTime = this.datepipe.transform(editTime, "MM-dd-yyyy HH:mm:ss")
+    // var formateditTime = this.datepipe.transform(editTime, "MM-dd-yyyy HH:mm:ss")
+    var formateditTime = editTime.toString()
 
     if (this.newOld(newtask, this.YesterdayTasks)) {
       //insert
@@ -555,7 +551,8 @@ export class DailyStatusComponent implements OnInit {
       } else {
         inweek = false
         let date = lastEdit.getDate()
-        let month = this.months[lastEdit.getMonth()]
+        let month = this.months_short[lastEdit.getMonth()]
+
         monthDate = month + " " + date
       }
       var time = lastEdit.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
@@ -563,13 +560,13 @@ export class DailyStatusComponent implements OnInit {
         if (inweek) {
           this.lastEditString1 = weekday + " " + time
         } else {
-          this.lastEditString1 = monthDate + " " + time
+          this.lastEditString1 = monthDate + ", " + time
         }
       } else {
         if (inweek) {
           this.lastEditString2 = weekday + " " + time
         } else {
-          this.lastEditString2 = monthDate + " " + time
+          this.lastEditString2 = monthDate + ", " + time
         }
       }
     } else {
