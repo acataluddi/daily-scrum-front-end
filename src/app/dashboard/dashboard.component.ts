@@ -80,6 +80,8 @@ export class DashboardComponent implements OnInit {
   }
 
   getProjects(projectArr): void {
+    console.log('The project array')
+    console.log(projectArr);
     let x = 0;
     this.TotalProjectMembers[0] = 0;
     this.newproject = projectArr;

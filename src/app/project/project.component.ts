@@ -318,7 +318,9 @@ export class ProjectComponent implements OnInit {
         var valuesSoFar = Object.create(null);
         for (var i = 0; i < array.length; ++i) {
             var value = array[i].email;
-            if (value in valuesSoFar) {
+            if (value in valuesSoFar || value === localStorage.getItem("email") && this.reqType == 'add') {
+                return true;
+            } else if(value in valuesSoFar && this.reqType == 'update'){
                 return true;
             }
             valuesSoFar[value] = true;
