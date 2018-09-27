@@ -62,10 +62,8 @@ export class IndividualTaskComponent implements OnInit {
     task.minuteSpent = parseInt(task.minuteSpent);
   }
   updateDescription() {
-    this.task.description = this.des.nativeElement.textContent;
-    this.des.nativeElement.textContent = this.task.description;
-    this.task.description = this.task.description.trim();
-    // this.task.description.replace('&nbsp;', '');
+    this.task.description = this.des.nativeElement.innerText;
+    this.des.nativeElement.innerText = this.task.description;
     if (this.task.description === "") {
       this.des.nativeElement.innerText = "";
     }
@@ -74,8 +72,6 @@ export class IndividualTaskComponent implements OnInit {
   updateImpediment() {
     this.task.impediments = this.imp.nativeElement.innerText;
     this.imp.nativeElement.innerText = this.task.impediments;
-    this.task.impediments = this.task.impediments;
-    // this.task.impediments.replace('&nbsp;', '');
     if (this.task.impediments === "") {
       this.show_impediment = false;
       this.imp.nativeElement.innerText = "";
