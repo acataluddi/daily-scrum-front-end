@@ -35,10 +35,10 @@
             <div class="member_title1"  (click)="gotoDailyStatus(IndMemOb)" >
               <div class="member_image1"><img class="size" src={{IndMemOb.image}}></div>
               <div class="member_name1">{{IndMemOb.name}}</div>
-              <div class="more_icon"><img src="../../assets/more.png"></div>
               <div class="member_time_spent1">{{IndMemOb.hour}} h {{IndMemOb.minute}} m</div>
 
             </div>
+            <div class="fullTask">
             <div class="member_part">
               <div *ngIf="IndMemOb.hour===0 && IndMemOb.minute===0">Not Active</div>
               <div *ngFor="let Task of IndMemOb.tasks ">
@@ -49,8 +49,10 @@
                 <span *ngIf="Task.taskId%3!=0 && Task.taskId%5!=0  && Task.taskId%6!=0 && Task.taskId%7!=0" class="dot dot-color-5"></span>
                 <div class="task">
                   {{Task.description}}</div>
+                  <div class="impediment" *ngIf="Task.impediments!=0">{{Task.impediments}}</div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
