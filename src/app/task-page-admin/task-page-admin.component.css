@@ -155,6 +155,7 @@ button.view_all_task::before {
   margin-top: 0%;
   border: 1px solid rgba(216, 216, 216, 1);
 
+
 }
 
 .header {
@@ -196,33 +197,28 @@ button.view_all_task::before {
   width: 100%;
 }
 
-.more_icon {
-  margin-left: 90%;
-  padding-top: 10px;
-}
-
 .member_part {
   width: 95%;
   margin-left: 16px;
   margin-top: 6%;
+  margin-bottom: 10px;
+}
+.fullTask {
   min-height: 30px;
   max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
-  overflow-wrap: break-word;
-  margin-bottom: 10px;
 }
 
 .member_name1 {
   padding-top: 8px;
-  margin-left: 20px;
+  margin-left: 60px;
   font-size: 15px;
   font-weight: 500;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 150px;
-  float: left;
   color: rgba(79, 86, 105, 1);
 }
 
@@ -276,6 +272,16 @@ button.view_all_task::before {
   width: 90%;
 }
 
+.impediment {
+  width:90%;
+  margin-left:25px;
+  margin-top:5px;
+  margin-bottom:5px;
+  padding-top:5px;
+  padding-bottom:5px;
+  padding-left:11px;
+  background-color:rgba(241, 241, 241, 1)
+}
 .alt-View {
   visibility: hidden;
   color: gray;
