@@ -555,7 +555,6 @@ export class DailyStatusComponent implements OnInit {
   }
 
   getTask(today, yesterday, email, projectId) {
-    console.log('dasdasadfsafsafsa')
     this.taskservice.getTodays(today, email, projectId)
       .subscribe(data1 => {
         this.getTodaysTask(data1)
@@ -584,7 +583,10 @@ export class DailyStatusComponent implements OnInit {
   }
 
   viewAllTasks(): void {
-    this.router.navigate(['/task-page-admin', this.projectId, this.currentProject]);
+    var sdate = localStorage.getItem("startDate")
+    var thePName = localStorage.getItem('currentProject')
+    this.router.navigate(['/task-page-admin', this.projectId, thePName, sdate])
+    // this.router.navigate(['/task-page-admin', this.projectId, this.currentProject]);
   }
 
   changeEmail(taskMember) {

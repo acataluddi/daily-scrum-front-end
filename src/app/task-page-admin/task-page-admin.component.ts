@@ -63,8 +63,6 @@ export class TaskPageAdminComponent implements OnInit {
       showWeekNumbers: false
     });
     this.sub = this.route.params.subscribe(params => {
-      console.log('The sub data')
-      console.log(params)
       this.currentProject = params['name']
       this.projectId = +params['projectId'];
       var parts = params['startdate'].split('-');
@@ -74,8 +72,6 @@ export class TaskPageAdminComponent implements OnInit {
     });
     this.subscription = taskservice.newList.subscribe(
       data => {
-        console.log('The  data')
-        console.log(data)
         this.currentProject = data.projectName;
         this.projectId = data.projectId;
         var parts = data.startDate.split('-');
@@ -115,7 +111,7 @@ export class TaskPageAdminComponent implements OnInit {
         console.log(memberTasks);
         this.IndMembArray = memberTasks;
         this.calculateTotalTime(this.IndMembArray);
-        if (this.IndMembArray.filter(m => m.email === localStorage.getItem("email")).length != 0) {
+        if (this.IndMembArray.filter(m => m.email === localStorage.getItem("email") && m.isActive == true).length != 0) {
           this.view_my_task_flag = true;
         }
         for (let m of this.IndMembArray) {
