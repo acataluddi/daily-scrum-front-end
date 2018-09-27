@@ -115,6 +115,10 @@ export class TaskPageAdminComponent implements OnInit {
           this.view_my_task_flag = true;
         }
         for (let m of this.IndMembArray) {
+          if(m.email ===  localStorage.getItem("email")){
+            localStorage.setItem('addedDate', m.addedDate);
+            localStorage.setItem('deletedDate', m.deletedDate);
+          }
           var dateParts1 = m.deletedDate.split('-');
           var date1 = new Date(+dateParts1[2], +(dateParts1[1]) - 1, +dateParts1[0]);
           var dateParts2 = m.addedDate.split('-');
@@ -203,7 +207,9 @@ export class TaskPageAdminComponent implements OnInit {
   }
   viewMyTasks(): void {
     var email = localStorage.getItem("email");
-    let projectMember: member = { email: email, role: '', name: '', image: '', addedDate: '', deletedDate: '', isActive: false, roleSelected: null, invalidMemberEmail: null, invalidRole: null }
+    var adDate = localStorage.getItem('addedDate');
+    var delDate = localStorage.getItem('deletedDate');
+    let projectMember: member = { email: email, role: '', name: '', image: '', addedDate: adDate, deletedDate: delDate, isActive: false, roleSelected: null, invalidMemberEmail: null, invalidRole: null }
     this.navservice.changedata(projectMember);
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }
