@@ -65,20 +65,26 @@ export class TaskPageAdminComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.currentProject = params['name']
       this.projectId = +params['projectId'];
+      var parts = params['startdate'].split('-');
+      this.minDate = new Date(+parts[2], +(parts[1]) - 1, +parts[0]);
       var dt = new Date();
       this.myDateValue = dt;
     });
     this.subscription = taskservice.newList.subscribe(
       data => {
+        console.log('The  data')
+        console.log(data)
         this.currentProject = data.projectName;
         this.projectId = data.projectId;
+        var parts = data.startDate.split('-');
+        this.minDate = new Date(+parts[2], +(parts[1]) - 1, +parts[0]);
         this.view_my_task_flag = false;
         var dt = new Date();
         this.myDateValue = dt;
       });
   }
   ngOnInit() {
-    this.minDate = new Date(2018, 8, 10);
+    // this.minDate = new Date(2018, 8, 10);
     this.maxDate = new Date();
     this.myDateValue = new Date();
     this.projectId = localStorage.getItem("projectId");
@@ -107,6 +113,18 @@ export class TaskPageAdminComponent implements OnInit {
         this.calculateTotalTime(this.IndMembArray);
         if (this.IndMembArray.filter(m => m.email === localStorage.getItem("email")).length != 0) {
           this.view_my_task_flag = true;
+        }
+        for (let m of this.IndMembArray) {
+          var dateParts1 = m.deletedDate.split('-');
+          var date1 = new Date(+dateParts1[2], +(dateParts1[1]) - 1, +dateParts1[0]);
+          var dateParts2 = m.addedDate.split('-');
+          var date2 = new Date(+dateParts2[2], +(dateParts2[1]) - 1, +dateParts2[0]);
+          if ((m.isActive === false && (date1 < this.selectedDate)) ||
+            (this.selectedDate < date2)) {
+            m.showMember = false;
+          } else {
+            m.showMember = true;
+          }
         }
       });
   }
@@ -171,25 +189,21 @@ export class TaskPageAdminComponent implements OnInit {
   }
   getNextDate() {
     var d1 = new Date(this.selectedDate);
-    if (d1.getDate() !== this.maxDate.getDate() &&
-      d1.getMonth() === this.maxDate.getMonth() &&
-      d1.getFullYear() === this.maxDate.getFullYear()) {
+    if (d1.toDateString() !== this.maxDate.toDateString()) {
       (d1.setDate(d1.getDate() + 1));
       this.myDateValue = d1;
     }
   }
   getPreviousDate() {
     var d1 = new Date(this.selectedDate);
-    if (d1.getDate() !== this.minDate.getDate() &&
-      d1.getMonth() === this.minDate.getMonth() &&
-      d1.getFullYear() === this.minDate.getFullYear()) {
+    if (d1.toDateString() !== this.minDate.toDateString()) {
       (d1.setDate(d1.getDate() - 1));
       this.myDateValue = d1;
     }
   }
   viewMyTasks(): void {
     var email = localStorage.getItem("email");
-    let projectMember: member ={email:email, role:'', name:'', image:'', roleSelected: null, invalidMemberEmail: null, invalidRole: null}
+    let projectMember: member = { email: email, role: '', name: '', image: '', addedDate: '', deletedDate: '', isActive: false, roleSelected: null, invalidMemberEmail: null, invalidRole: null }
     this.navservice.changedata(projectMember);
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }

@@ -9,6 +9,7 @@ import { ProjectService } from "../service/project.service";
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { AdminviewallComponent } from '../adminviewall/adminviewall.component';
 import { AuthService } from 'angular-6-social-login';
+import { NavigationdataService } from '../service/navigationdata.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,6 +20,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(public router: Router,
     private loginservice: LoginService,
+    private navservice: NavigationdataService,
     private dashboardservice: DashboardService,
     private taskService: ProcessIndividualTaskService,
     private viewallservice: AdminviewallserviceService,
@@ -100,22 +102,59 @@ export class DashboardComponent implements OnInit {
   }
   openDailyStatus(project) {
     var projectId = project.projectId
-    var name = project.projectName
-    var email = project.members[0].email
-    var taskName = project.members[0].name
+    var name = project.projectName 
+    var myId = localStorage.getItem("email")
+    for (let member of project.members) {
+      if (member.isActive) {
+        var firstMember = member
+        break
+      }
+    }
+    var taskemail = firstMember.email
+    var taskName = firstMember.name
+    var startdate = project.startDate;
+    var addDate = firstMember.addDate;
+    var deleteDate = firstMember.deleteDate;
+    var isActive = firstMember.isActive;
+
+    var myMemobj = project.members.find(function (element) {
+      return element.email == myId;
+    });
+    // console.log(myMemobj)
+    if(myMemobj != null){
+      var myEmail = myMemobj.email
+      var myName = myMemobj.name
+      var myAddDate = myMemobj.addDate
+      var myDeleteDate = myMemobj.deleteDate
+      var myIsActive = myMemobj.isActive
+      this.navservice.updateDummy(myMemobj)
+    }
+
+
     this.taskService.getSelectedProject(project)
     localStorage.setItem('currentProject', name)
     localStorage.setItem("projectId", projectId)
+    localStorage.setItem("startDate", startdate)
 
-    if (this.flag2) {
-      this.router.navigate(['/task-page-admin', projectId, name])
-      localStorage.setItem('taskEmail', email)
+    if (this.flag2 && this.flag1) {
+      localStorage.setItem('taskEmail', taskemail)
       localStorage.setItem('taskName', taskName)
+      localStorage.setItem('addDate', addDate)
+      localStorage.setItem("deleteDate", deleteDate)
+      localStorage.setItem("isActive", isActive)
+      this.router.navigate(['/task-page-admin', projectId, name, startdate])
     } else {
-      this.router.navigate(['/daily-status', projectId, name]);
-      var myId = localStorage.getItem("email")
+      
       localStorage.setItem('taskEmail', myId)
-      localStorage.setItem('taskName', '')
+      localStorage.setItem('taskName', myName)
+      localStorage.setItem('addDate', myAddDate)
+      localStorage.setItem("deleteDate", myDeleteDate)
+      localStorage.setItem("isActive", myIsActive)
+      if (this.flag2){
+        this.router.navigate(['/task-page-admin', projectId, name, startdate]);
+      } else{
+        this.router.navigate(['/daily-status', projectId, name]);
+      }
     }
   }
 

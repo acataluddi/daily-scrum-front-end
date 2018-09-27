@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBase: 'http://10.4.2.201:8080/scrum',
-  loginURL: 'http://10.4.2.201.xip.io:4200/login'
+  apiBase: 'http://10.4.6.58:8081/DailyScrum',
+  loginURL: 'http://10.4.6.71.xip.io:4200/login'
 };
 
 /*

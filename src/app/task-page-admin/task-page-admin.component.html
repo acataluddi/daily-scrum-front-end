@@ -30,7 +30,7 @@
   <div class="main">
     <div class="header">
       <div *ngFor="let IndMemOb of IndMembArray">
-        <div class="column">
+        <div class="column" *ngIf="IndMemOb.showMember===true">
           <div class="member1">
             <div class="member_title1"  (click)="gotoDailyStatus(IndMemOb)" >
               <div class="member_image1"><img class="size" src={{IndMemOb.image}}></div>

@@ -71,7 +71,9 @@ export class ProjectService {
       projectId: '',
       projectDesc: '',
       members: [],
-      projectName: ''
+      projectName: '',
+      startDate: '',
+      endDate: ''
     }
     return newProject;
   }
