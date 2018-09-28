@@ -34,7 +34,6 @@ export class AdminviewallserviceService {
       userType: member.userType,
     }
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
-    console.log(JSON.stringify(newmember));
 
     return this.http.put<any>(this.apiURL,
       JSON.stringify(newmember), { headers }
