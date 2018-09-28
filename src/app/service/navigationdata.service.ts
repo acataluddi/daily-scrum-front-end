@@ -10,7 +10,8 @@ export class NavigationdataService {
 
   taskemail = localStorage.getItem('taskEmail')
   taskName = localStorage.getItem('taskName')
-  dummy: member = {email:this.taskemail, role:'', name:this.taskName, image:'', roleSelected: null, invalidMemberEmail: null, invalidRole: null} 
+  email = localStorage.getItem('email')
+  dummy: member = {email:this.taskemail, role:'', name:this.taskName, image:'',addedDate:'', deletedDate:'', isActive: false, roleSelected: null, invalidMemberEmail: null, invalidRole: null}
   private dataSource = new BehaviorSubject<member>(this.dummy);
   currentdata$ = this.dataSource.asObservable();
 

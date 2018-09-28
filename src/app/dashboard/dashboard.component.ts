@@ -75,7 +75,6 @@ export class DashboardComponent implements OnInit {
     for (let i=0; i<this.noOfProjects; i++) {
 
       this.show[i] = 0;
-      console.log(this.show[i])
     }
   }
   getProjects(projectArr): void {
@@ -103,14 +102,16 @@ export class DashboardComponent implements OnInit {
     var name = project.projectName
     var email = project.members[0].email
     var taskName = project.members[0].name
+    var startdate = project.startDate;
     this.taskService.getSelectedProject(project)
     localStorage.setItem('currentProject', name)
     localStorage.setItem("projectId", projectId)
+    localStorage.setItem("startDate", startdate)
 
     if (this.flag2) {
-      this.router.navigate(['/task-page-admin', projectId, name])
       localStorage.setItem('taskEmail', email)
       localStorage.setItem('taskName', taskName)
+      this.router.navigate(['/task-page-admin', projectId, name, startdate])
     } else {
       this.router.navigate(['/daily-status', projectId, name]);
       var myId = localStorage.getItem("email")
@@ -142,7 +143,6 @@ export class DashboardComponent implements OnInit {
   }
   click(index) {
     let i: number = index
-    console.log(this.show[i]);
     this.show[index] = !this.show[index]; 
   }
 }
