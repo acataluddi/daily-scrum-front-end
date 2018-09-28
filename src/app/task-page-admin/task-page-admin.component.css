@@ -277,6 +277,7 @@ button.view_all_task::before {
   color: rgba(79, 86, 105, 1);
   text-align: left;
   width: 90%;
+  white-space: pre-line;
 }
 
 .impediment {
@@ -287,7 +288,8 @@ button.view_all_task::before {
   padding-top:5px;
   padding-bottom:5px;
   padding-left:11px;
-  background-color:rgba(241, 241, 241, .7)
+  background-color:rgba(241, 241, 241, .7);
+  white-space: pre-line;
 }
 .alt-View {
   visibility: hidden;

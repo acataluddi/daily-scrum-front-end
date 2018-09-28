@@ -58,6 +58,7 @@
   width: 100%;
   outline: none;
   border: none;
+  white-space: pre-line;
 }
 
 [contentEditable=true]:empty:not(:focus):before {
@@ -127,6 +128,7 @@
   outline: none;
   border: none;
   width: 100%;
+  white-space: pre-line;
 }
 
 .img_impediment {
