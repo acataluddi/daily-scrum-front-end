@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
   sub;
   pid
   selected: Project = { projectId: "", projectName: "", projectDesc: "", startDate: "", endDate: "", members: [] }
-
+  operation: string;
   show_dailyscrum;
   show_arrow;
   show_scrum;
@@ -65,6 +65,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.operation = localStorage.getItem("currentOperation");
     this.showTooltip = false;
     this.show_dailyscrum = false
     this.show_arrow = false
@@ -83,6 +84,7 @@ export class HeaderComponent implements OnInit {
 
     this.router.events.forEach((event) => {
       if (event instanceof NavigationStart) {
+        this.operation = localStorage.getItem("currentOperation");
         this.toggle(event['url']);
       }
     });
@@ -142,7 +144,14 @@ export class HeaderComponent implements OnInit {
       this.show_scrum = true
       this.show_dash = true
     } else if (currenturl == '/project') {
-      this.title = 'New Project';
+
+      if (this.operation === "AddProject") {
+        this.title = 'New Project';
+      }
+      if (this.operation === "EditProject") {
+        this.title = 'Edit Project';
+      }
+
       this.show_dailyscrum = false
       this.show_arrow = false
       this.show_scrum = true

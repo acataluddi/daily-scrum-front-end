@@ -44,7 +44,7 @@ export class DashboardComponent implements OnInit {
   show = [];
   imageurl = [];
   UserType: string;
-
+  operation: string;
 
   ngOnInit() {
     
@@ -125,14 +125,21 @@ export class DashboardComponent implements OnInit {
   }
 
   AddProject() {
+    this.operation = "AddProject";
+    localStorage.setItem('currentOperation', this.operation);
     this.projectService.setRequestType("add");
     this.router.navigateByUrl('/project');
+    
   }
 
   EditProject(projectDetail) {
+    this.operation = "EditProject";
+    localStorage.setItem('currentOperation', this.operation);
     this.projectService.setRequestType("update");
     this.projectService.setProjectToBeUpdated(projectDetail)
     this.router.navigateByUrl('/project');
+   
+
   }
 
   DeleteProject(projectId) {
