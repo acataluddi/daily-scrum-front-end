@@ -9,6 +9,7 @@ import { ProjectService } from "../service/project.service";
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { AdminviewallComponent } from '../adminviewall/adminviewall.component';
 import { AuthService } from 'angular-6-social-login';
+import { NavigationdataService } from '../service/navigationdata.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,6 +22,7 @@ export class DashboardComponent implements OnInit {
     private loginservice: LoginService,
     private dashboardservice: DashboardService,
     private taskService: ProcessIndividualTaskService,
+    private navservice: NavigationdataService,
     private viewallservice: AdminviewallserviceService,
     private projectService: ProjectService,
     private viewallcomponent: AdminviewallComponent,
@@ -47,7 +49,7 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
-    
+
     this.socialAuthService.authState.subscribe((user) => {
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
@@ -72,7 +74,7 @@ export class DashboardComponent implements OnInit {
   }
 
   InitializeShow() {
-    for (let i=0; i<this.noOfProjects; i++) {
+    for (let i = 0; i < this.noOfProjects; i++) {
 
       this.show[i] = 0;
     }
@@ -88,7 +90,7 @@ export class DashboardComponent implements OnInit {
     for (let i = 0; i < this.noOfProjects; i++) {
       this.noOfMembers[i] = this.newproject[i].members.length;
       this.TotalProjectMembers[i + 1] = this.TotalProjectMembers[i] + this.noOfMembers[i];
-      
+
     }
   }
 
@@ -100,24 +102,55 @@ export class DashboardComponent implements OnInit {
   openDailyStatus(project) {
     var projectId = project.projectId
     var name = project.projectName
-    var email = project.members[0].email
-    var taskName = project.members[0].name
+    var myId = localStorage.getItem("email")
+    var inProject;
+    for (let member of project.members) {
+      if (member.isActive) {
+        var firstMember = member
+        break
+      }
+    }
     var startdate = project.startDate;
+
+    var myMemobj = project.members.find(function (element) {
+      return element.email == myId;
+    });
+    // console.log(myMemobj)
+    if (myMemobj != null) {
+      inProject = true
+    } else {
+      inProject = false
+    }
     this.taskService.getSelectedProject(project)
     localStorage.setItem('currentProject', name)
     localStorage.setItem("projectId", projectId)
     localStorage.setItem("startDate", startdate)
 
-    if (this.flag2) {
-      localStorage.setItem('taskEmail', email)
-      localStorage.setItem('taskName', taskName)
+    if (this.flag2 && this.flag1) {
+      if (inProject) {
+        this.setLocalStorage(myMemobj)
+      } else {
+        this.setLocalStorage(firstMember)
+      }
       this.router.navigate(['/task-page-admin', projectId, name, startdate])
     } else {
-      this.router.navigate(['/daily-status', projectId, name]);
-      var myId = localStorage.getItem("email")
-      localStorage.setItem('taskEmail', myId)
-      localStorage.setItem('taskName', '')
+      this.setLocalStorage(myMemobj)
+      this.navservice.changedata(myMemobj)
+      if (this.flag2) {
+        this.router.navigate(['/task-page-admin', projectId, name, startdate]);
+      } else {
+        this.router.navigate(['/daily-status', projectId, name]);
+      }
     }
+
+  }
+
+  setLocalStorage(memobj) {
+    localStorage.setItem('taskEmail', memobj.email)
+    localStorage.setItem('taskName', memobj.name)
+    localStorage.setItem('addedDate', memobj.addedDate)
+    localStorage.setItem("deletedDate", memobj.deletedDate)
+    localStorage.setItem("isActive", memobj.isActive)
   }
 
   gotoUsersList() {
@@ -143,6 +176,6 @@ export class DashboardComponent implements OnInit {
   }
   click(index) {
     let i: number = index
-    this.show[index] = !this.show[index]; 
+    this.show[index] = !this.show[index];
   }
 }

@@ -208,7 +208,8 @@ export class TaskPageAdminComponent implements OnInit {
     var email = localStorage.getItem("email");
     var adDate = localStorage.getItem('addedDate');
     var delDate = localStorage.getItem('deletedDate');
-    let projectMember: member = { email: email, role: '', name: '', image: '', addedDate: adDate, deletedDate: delDate, isActive: false, roleSelected: null, invalidMemberEmail: null, invalidRole: null }
+    var isActive = JSON.parse(localStorage.getItem('isActive'))
+    let projectMember: member = { email: email, role: '', name: '', image: '', addedDate: adDate, deletedDate: delDate, isActive: isActive, roleSelected: null, invalidMemberEmail: null, invalidRole: null }
     this.navservice.changedata(projectMember);
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }
