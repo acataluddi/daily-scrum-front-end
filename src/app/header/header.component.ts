@@ -162,6 +162,12 @@ export class HeaderComponent implements OnInit {
       this.show_dash = false
     }
     else {
+      this.dashboardService.getProjects()
+        .subscribe(projectArr => {
+          if (projectArr != null) {
+            this.setProjects(projectArr)
+          }
+        });
       this.show_dailyscrum = true
       this.show_arrow = true
       this.show_scrum = false
