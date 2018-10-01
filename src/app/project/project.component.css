@@ -2,6 +2,12 @@
   content: attr(data-text)
 }
 
+textarea {
+  resize: none;
+  outline: none;
+  border: none;
+}
+
 .body {
   margin: 0 auto;
   max-width: 450px;

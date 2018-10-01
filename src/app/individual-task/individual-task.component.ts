@@ -39,7 +39,7 @@ export class IndividualTaskComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    if (this.task.description == '' || this.task.description == null){
+    if (this.task.description == '' || this.task.description == null) {
       this.show_save = true;
       this.saved = false;
     } else {
@@ -68,19 +68,13 @@ export class IndividualTaskComponent implements OnInit {
     task.minuteSpent = parseInt(task.minuteSpent);
   }
   updateDescription() {
-    this.task.description = this.des.nativeElement.innerText.trim();
-    this.des.nativeElement.innerText = this.task.description;
-    if (this.task.description === "") {
-      this.des.nativeElement.innerText = "";
-    }
+    this.task.description = this.task.description.trim();
   }
 
   updateImpediment() {
-    this.task.impediments = this.imp.nativeElement.innerText.trim();
-    this.imp.nativeElement.innerText = this.task.impediments;
+    this.task.impediments = this.task.impediments.trim();
     if (this.task.impediments === "") {
       this.show_impediment = false;
-      this.imp.nativeElement.innerText = "";
     }
   }
 
