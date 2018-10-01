@@ -150,5 +150,4 @@ export class IndividualTaskComponent implements OnInit {
     }
     this.popTask.emit(task)
   }
-
 }
