@@ -140,15 +140,7 @@ export class DailyStatusComponent implements OnInit {
           var taskEmail = myMemobj.email
           var taskName = myMemobj.name
           this.email = taskEmail
-          // var parts1 = myMemobj.addedDate.split('-');
-          // this.minDate = new Date(+parts1[2], +(parts1[1]) - 1, +parts1[0]);
-          // if (myMemobj.deletedDate == '') {
-          //   this.maxDate = new Date();
-          // } else {
-          //   var parts2 = myMemobj.deletedDate.split('-');
-          //   this.maxDate = new Date(+parts2[2], +(parts2[1]) - 1, +parts2[0]);
-          // }
-          // this.myDateValue = this.maxDate;
+          
           this.setMinMaxDate(myMemobj)
         } else {
           for (let member of data.members) {
@@ -163,15 +155,7 @@ export class DailyStatusComponent implements OnInit {
           var taskName = firstMember.name
           this.email = taskEmail
           this.setMinMaxDate(firstMember)
-          // var parts1 = firstMember.addedDate.split('-');
-          // this.minDate = new Date(+parts1[2], +(parts1[1]) - 1, +parts1[0]);
-          // if (firstMember.deletedDate == '') {
-          //   this.maxDate = new Date();
-          // } else {
-          //   var parts2 = firstMember.deletedDate.split('-');
-          //   this.maxDate = new Date(+parts2[2], +(parts2[1]) - 1, +parts2[0]);
-          // }
-          // this.myDateValue = this.maxDate;
+         
         }
 
         if (this.userEmail == this.email) {
@@ -194,15 +178,7 @@ export class DailyStatusComponent implements OnInit {
 
     this.selectmem = data.currentdata$.subscribe(datachanged => {
       this.datachanged = datachanged
-      // var parts1 = datachanged.addedDate.split('-');
-      // this.minDate = new Date(+parts1[2], +(parts1[1]) - 1, +parts1[0]);
-      // if (datachanged.deletedDate == '') {
-      //   this.maxDate = new Date();
-      // } else {
-      //   var parts2 = datachanged.deletedDate.split('-');
-      //   this.maxDate = new Date(+parts2[2], +(parts2[1]) - 1, +parts2[0]);
-      // }
-      // this.myDateValue = this.maxDate;
+      
       this.setMinMaxDate(datachanged)
 
       if (this.UserType == 'Admin' || this.UserType == 'Manager') {
@@ -245,8 +221,8 @@ export class DailyStatusComponent implements OnInit {
               this.flag = true;
             } else {
               this.flag = false
-              this.editable1 = true
-              this.editable2 = true
+              // this.editable1 = true
+              // this.editable2 = true
             }
           });
       }
@@ -704,15 +680,6 @@ export class DailyStatusComponent implements OnInit {
   }
 
   changeEmail(taskMember) {
-    // var parts1 = taskMember.addedDate.split('-');
-    // this.minDate = new Date(+parts1[2], +(parts1[1]) - 1, +parts1[0]);
-    // if (taskMember.deletedDate == '') {
-    //   this.maxDate = new Date();
-    // } else {
-    //   var parts2 = taskMember.deletedDate.split('-');
-    //   this.maxDate = new Date(+parts2[2], +(parts2[1]) - 1, +parts2[0]);
-    // }
-    // this.myDateValue = this.maxDate;
     this.setMinMaxDate(taskMember)
     if (this.userEmail == taskMember.email) {
       this.setEditable(taskMember)
