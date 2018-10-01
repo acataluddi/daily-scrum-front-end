@@ -52,8 +52,8 @@
   <img class="img_impediment" src="../../assets/impediment.png" align="top"> {{task.impediments}}
 </div> -->
 <div class="status" *ngIf="editable">
-  <div class="cancel" *ngIf="saved==false" (click)="cancelChange(task)">cancel</div>
-  <button class="save" *ngIf="saved==false" (click)="save(task)">Save</button>
+  <div class="cancel" *ngIf="show_save" (click)="cancelChange(task)">cancel</div>
+  <button class="save" *ngIf="show_save" (click)="save(task)">Save</button>
 
   <div class="saved" *ngIf="show_save==false && saved==true">Saved!</div>
 </div>

@@ -39,8 +39,14 @@ export class IndividualTaskComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.show_save = false;
-    this.saved = false;
+    if (this.task.description == '' || this.task.description == null){
+      this.show_save = true;
+      this.saved = false;
+    } else {
+      this.show_save = false;
+      this.saved = false;
+    }
+
     this.tid = parseInt(this.task.taskId);
     if (this.task.impediments === "") {
       this.show_impediment = false;
