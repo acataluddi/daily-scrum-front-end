@@ -118,39 +118,135 @@ export class DailyStatusComponent implements OnInit {
 
     this.changeProjectsubscription = taskservice.newList.subscribe(
       data => {
+        var myEmail = this.userEmail
+        var inProject;
+
         this.projectId = data.projectId
         this.currentProject = data.projectName
-        var taskEmail = data.members[0].email
-        var taskName = data.members[0].name
-        this.email = taskEmail
-        if (this.userEmail == this.email) {
-          this.editable = true;
-          this.taskHolderName = 'My Tasks'
+
+        var myMemobj = data.members.find(function (element) {
+          return element.email == myEmail;
+        });
+        if (myMemobj != null) {
+          inProject = true
         } else {
-          if (taskName == '') {
-            taskName = 'Unnamed'
-          }
-          this.editable = false
-          this.taskHolderName = taskName ;
+          inProject = false
         }
-        localStorage.setItem("taskEmail", this.email)
-        localStorage.setItem("taskName", taskName)
+
+        if (this.UserType == 'Admin' || this.UserType == 'Manager') {
+          if (inProject) {
+            this.datachanged = myMemobj;
+            this.setLocalStorage(myMemobj)
+            var taskEmail = myMemobj.email
+            var taskName = myMemobj.name
+            this.email = taskEmail
+            var parts1 = myMemobj.addedDate.split('-');
+            this.minDate = new Date(+parts1[2], +(parts1[1]) - 1, +parts1[0]);
+            if(myMemobj.deletedDate==''){
+              this.maxDate = new Date();
+            }else{
+              var parts2 = myMemobj.deletedDate.split('-');
+              this.maxDate = new Date(+parts2[2], +(parts2[1]) - 1, +parts2[0]);
+            }
+            this.myDateValue=this.maxDate;
+          } else {
+            for (let member of data.members) {
+              if (member.isActive) {
+                var firstMember = member
+                break
+              }
+            }
+            this.datachanged=firstMember;
+            this.setLocalStorage(firstMember)
+            var taskEmail = firstMember.email
+            var taskName = firstMember.name
+            this.email = taskEmail
+            var parts1 = firstMember.addedDate.split('-');
+            this.minDate = new Date(+parts1[2], +(parts1[1]) - 1, +parts1[0]);
+            if(firstMember.deletedDate==''){
+              this.maxDate = new Date();
+            }else{
+              var parts2 = firstMember.deletedDate.split('-');
+              this.maxDate = new Date(+parts2[2], +(parts2[1]) - 1, +parts2[0]);
+            }
+            this.myDateValue=this.maxDate;
+          }
+
+          if (this.userEmail == this.email) {
+            var myAddDateArray = myMemobj.addedDate.split("-")
+            var myAddDate = new Date(+myAddDateArray[2], +(myAddDateArray[1]) - 1, +myAddDateArray[0])
+            var currentDate = new Date()
+            this.taskHolderName = 'My Tasks'
+            if (myMemobj.isActive && currentDate > myAddDate) {
+              this.editable = true;
+            } else {
+              this.editable = false
+            }
+            // this.taskHolderName = 'My Tasks'
+          } else {
+            
+            this.editable = false
+            if (taskName == '') {
+              taskName = 'Unnamed'
+            }
+            
+            this.taskHolderName = taskName;
+          }
+          localStorage.setItem("taskEmail", this.email)
+          localStorage.setItem("taskName", taskName)
+        }
+
         this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
       });
 
     this.selectmem = data.currentdata$.subscribe(datachanged => {
       this.datachanged = datachanged
-      if (this.userEmail == this.datachanged.email) {
-        this.editable = true;
+      var parts1 = datachanged.addedDate.split('-');
+      this.minDate = new Date(+parts1[2], +(parts1[1]) - 1, +parts1[0]);
+      if(datachanged.deletedDate==''){
+        this.maxDate = new Date();
+      }else{
+        var parts2 = datachanged.deletedDate.split('-');
+        this.maxDate = new Date(+parts2[2], +(parts2[1]) - 1, +parts2[0]);
+      }
+      this.myDateValue=this.maxDate;
+
+      if (this.UserType == 'Admin' || this.UserType == 'Manager') {
+
+        if (this.userEmail == this.datachanged.email) {
+          var currentDate = new Date()
+          var myAddDateArray = this.datachanged.addedDate.split("-")
+          var myAddDate = new Date(+myAddDateArray[2], +(myAddDateArray[1]) - 1, +myAddDateArray[0])
+          this.taskHolderName = 'My Tasks';
+          if (this.datachanged.isActive && currentDate > myAddDate) {
+            this.editable = true;
+          } else {
+            this.editable = false
+          }
+        } else {
+          this.editable = false;
+          if (this.datachanged.name == '') {
+            this.datachanged.name = 'Unnamed'
+          }
+          this.taskHolderName = this.datachanged.name;
+        }
+      } else if (this.userEmail == this.datachanged.email) {
+        var currentDate = new Date()
+        var myAddDateArray = this.datachanged.addedDate.split("-")
+        var myAddDate = new Date(+myAddDateArray[2], +(myAddDateArray[1]) - 1, +myAddDateArray[0])
         this.taskHolderName = 'My Tasks';
+        if (this.datachanged.isActive && currentDate > myAddDate) {
+          this.editable = true;
+        } else {
+          this.editable = false
+        }
       } else {
         this.editable = false;
         if (this.datachanged.name == '') {
           this.datachanged.name = 'Unnamed'
         }
-        this.taskHolderName = this.datachanged.name ;
+        this.taskHolderName = this.datachanged.name;
       }
-
       this.email = this.datachanged.email;
       this.projectId = localStorage.getItem("projectId")
       this.currentProject = localStorage.getItem("currentProject")
@@ -159,8 +255,6 @@ export class DailyStatusComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.minDate = new Date(2018, 8, 10);
-    this.maxDate = new Date();
 
     this.socialAuthService.authState.subscribe((user) => {
       if (user != null) {
@@ -194,7 +288,7 @@ export class DailyStatusComponent implements OnInit {
     this.projectId = localStorage.getItem("projectId")
     this.currentProject = localStorage.getItem("currentProject")
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
-    
+
   }
 
   ngOnDestroy() {
@@ -395,6 +489,19 @@ export class DailyStatusComponent implements OnInit {
       }
       this.getData(newDate);
     }
+
+    if (this.userEmail == this.datachanged.email) {
+      var currentDate = new Date(newDate)
+      var myAddDateArray = this.datachanged.addedDate.split("-")
+      var myAddDate = new Date(+myAddDateArray[2], +(myAddDateArray[1]) - 1, +myAddDateArray[0])
+      if (this.datachanged.isActive && currentDate > myAddDate) {
+        this.editable = true
+      } else {
+        this.editable = false
+      }
+    } else {
+      this.editable = false
+    }
   }
 
   getNextDate() {
@@ -441,7 +548,6 @@ export class DailyStatusComponent implements OnInit {
   newTodayTask($event) {
     this.task1 = $event;
     var editTime = new Date()
-    // var formateditTime = this.datepipe.transform(editTime, "MM-dd-yyyy HH:mm:ss")
     var formateditTime = editTime.toString()
     if (this.newOld(this.task1, this.TodayTasks)) {
       //insert
@@ -471,7 +577,6 @@ export class DailyStatusComponent implements OnInit {
   newYesterdayTask(newtask) {
     this.task1 = newtask
     var editTime = new Date()
-    // var formateditTime = this.datepipe.transform(editTime, "MM-dd-yyyy HH:mm:ss")
     var formateditTime = editTime.toString()
 
     if (this.newOld(newtask, this.YesterdayTasks)) {
@@ -608,6 +713,15 @@ export class DailyStatusComponent implements OnInit {
   }
 
   changeEmail(taskMember) {
+    var parts1 = taskMember.addedDate.split('-');
+    this.minDate = new Date(+parts1[2], +(parts1[1]) - 1, +parts1[0]);
+    if(taskMember.deletedDate==''){
+      this.maxDate = new Date();
+    }else{
+      var parts2 = taskMember.deletedDate.split('-');
+      this.maxDate = new Date(+parts2[2], +(parts2[1]) - 1, +parts2[0]);
+    }
+    this.myDateValue=this.maxDate;
     if (this.userEmail == taskMember.email) {
       this.editable = true;
       this.taskHolderName = 'My Tasks'
@@ -616,9 +730,17 @@ export class DailyStatusComponent implements OnInit {
         taskMember.name = 'Unnamed'
       }
       this.editable = false
-      this.taskHolderName = taskMember.name + "'s Task";
+      this.taskHolderName = taskMember.name;
     }
     this.email = taskMember.email;
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+  }
+
+  setLocalStorage(memobj) {
+    localStorage.setItem('taskEmail', memobj.email)
+    localStorage.setItem('taskName', memobj.name)
+    localStorage.setItem('addedDate', memobj.addedDate)
+    localStorage.setItem("deletedDate", memobj.deletedDate)
+    localStorage.setItem("isActive", memobj.isActive)
   }
 }
