@@ -77,9 +77,9 @@ export class ProjectComponent implements OnInit {
             var proId = this.projectservice.getProjectToBeUpdated();
             this.dashboardservice.getProjects()
                 .subscribe(projectArr => {
-                    if(projectArr!=null){
-                        for(let p of projectArr){
-                            if(p.projectId===proId){
+                    if (projectArr != null) {
+                        for (let p of projectArr) {
+                            if (p.projectId === proId) {
                                 this.pId = p.projectId;
                                 this.pName = p.projectName;
                                 this.pDesc = p.projectDesc;
@@ -231,23 +231,8 @@ export class ProjectComponent implements OnInit {
         this.memberRepeat = false;
         this.invalidProjectName = false;
         this.invalidMemberLength = false;
-        if (this.des === undefined) {
-            this.project.projectDesc = '';
-        }
-        else {
-            this.project.projectDesc = this.des.nativeElement.innerText;
-            this.project.projectDesc = this.project.projectDesc.trim();
-            this.des.nativeElement.innerText = this.project.projectDesc;
-        }
-
-        if (this.pname === undefined) {
-            this.project.projectName = '';
-        }
-        else {
-            this.project.projectName = this.pname.nativeElement.innerText;
-            this.project.projectName = this.project.projectName.trim();
-            this.pname.nativeElement.innerText = this.project.projectName;
-        }
+        this.project.projectDesc = this.project.projectDesc.trim();
+        this.project.projectName = this.project.projectName.trim();
         this.validMail = true;
         this.validRole = true;
         for (let memb of this.project.members) {

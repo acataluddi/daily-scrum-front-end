@@ -15,6 +15,12 @@
   background: rgba(214, 214, 214, 1);
 }
 
+textarea {
+  resize: none;
+  outline: none;
+  border: none;
+}
+
 .part_1 {
   display: flex;
   margin-top: 32px;
@@ -58,7 +64,15 @@
   width: 100%;
   outline: none;
   border: none;
+  box-sizing: border-box;
   white-space: pre-line;
+  background-color: transparent;
+}
+
+.description-textarea {
+  width: 100%;
+  outline: none;
+  border: none;
 }
 
 [contentEditable=true]:empty:not(:focus):before {
@@ -248,7 +262,7 @@ div.cancel_edit:active {
     margin-left: 12px;
   }
 
-  .no_time{
+  .no_time {
     position: relative;
     top: 5px;
     left: 20px;
