@@ -236,6 +236,7 @@ export class ProjectComponent implements OnInit {
         }
         else {
             this.project.projectDesc = this.des.nativeElement.innerText;
+            this.project.projectDesc = this.project.projectDesc.trim();
             this.des.nativeElement.innerText = this.project.projectDesc;
         }
 
@@ -244,6 +245,7 @@ export class ProjectComponent implements OnInit {
         }
         else {
             this.project.projectName = this.pname.nativeElement.innerText;
+            this.project.projectName = this.project.projectName.trim();
             this.pname.nativeElement.innerText = this.project.projectName;
         }
         this.validMail = true;

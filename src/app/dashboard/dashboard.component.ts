@@ -115,7 +115,6 @@ export class DashboardComponent implements OnInit {
     var myMemobj = project.members.find(function (element) {
       return element.email == myId;
     });
-    // console.log(myMemobj)
     if (myMemobj != null) {
       inProject = true
     } else {
