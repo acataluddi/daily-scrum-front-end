@@ -68,7 +68,7 @@ export class IndividualTaskComponent implements OnInit {
     task.minuteSpent = parseInt(task.minuteSpent);
   }
   updateDescription() {
-    this.task.description = this.des.nativeElement.innerText;
+    this.task.description = this.des.nativeElement.innerText.trim();
     this.des.nativeElement.innerText = this.task.description;
     if (this.task.description === "") {
       this.des.nativeElement.innerText = "";
@@ -76,7 +76,7 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   updateImpediment() {
-    this.task.impediments = this.imp.nativeElement.innerText;
+    this.task.impediments = this.imp.nativeElement.innerText.trim();
     this.imp.nativeElement.innerText = this.task.impediments;
     if (this.task.impediments === "") {
       this.show_impediment = false;
@@ -147,6 +147,9 @@ export class IndividualTaskComponent implements OnInit {
       task.impediments = this.old_imped
       task.hourSpent = this.old_hourspent
       task.minuteSpent = this.old_minspent
+    }
+    if (task.impediments != ''){
+      this.show_impediment = true
     }
     this.popTask.emit(task)
   }
