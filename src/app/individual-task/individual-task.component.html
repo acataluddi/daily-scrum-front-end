@@ -10,12 +10,17 @@
     <textarea class="description-textarea" [disabled]="!editable" autosize rows="1" (blur)="updateDescription()"
       (click)="show_save=true; stageTaskDesc(task)" [(ngModel)]="task.description" placeholder="Add description Here"></textarea>
   </div>
+  <div (click)="delTask(task)">
+  <img src="../../assets/delete_mail.png">
+  </div>
 </div>
+<div class="no_desc" *ngIf="noDesc">Enter Task description</div>
+
 <textarea class="impediments" [disabled]="!editable" autosize rows="1" *ngIf="show_impediment==true" (blur)="updateImpediment()"
   (click)="show_save=true; stageTaskDesc(task)" [(ngModel)]="task.impediments" placeholder="Add impediments Here"></textarea>
 
 <div class="time" (click)="stageTaskTime(task)">
-  <div class="time_border" *ngIf="(task.hourSpent>0 || task.minuteSpent>0) && edit_time_spent==false" (click)="edit_time_spent=editable; show_save=true">
+  <div class="time_border" *ngIf="(task.hourSpent>0 || task.minuteSpent>0) && edit_time_spent==false" (click)="show_save=true; edit_time_spent=editable">
     <div>
       {{task.hourSpent}} hour
     </div>
@@ -36,7 +41,7 @@
     </select>
   </div>
 
-  <div class="add_impediment" *ngIf="task.impediments== '' && show_impediment==false && editable==true" (click)="show_impediment=true;">
+  <div class="add_impediment" *ngIf="task.impediments== '' && show_impediment==false && editable" (click)="show_save=true; show_impediment=true;">
     Add Impediments
   </div>
 </div>
@@ -45,5 +50,5 @@
   <div class="cancel" *ngIf="show_save" (click)="cancelChange(task)">cancel</div>
   <button class="save" *ngIf="show_save" (click)="save(task)">Save</button>
 
-  <div class="saved" *ngIf="show_save==false && saved==true">Saved!</div>
+  <div class="saved" *ngIf=" saved==true">Saved!</div>
 </div>

@@ -140,7 +140,7 @@ export class DailyStatusComponent implements OnInit {
           var taskEmail = myMemobj.email
           var taskName = myMemobj.name
           this.email = taskEmail
-          
+
           this.setMinMaxDate(myMemobj)
         } else {
           for (let member of data.members) {
@@ -155,7 +155,7 @@ export class DailyStatusComponent implements OnInit {
           var taskName = firstMember.name
           this.email = taskEmail
           this.setMinMaxDate(firstMember)
-         
+
         }
 
         if (this.userEmail == this.email) {
@@ -178,7 +178,7 @@ export class DailyStatusComponent implements OnInit {
 
     this.selectmem = data.currentdata$.subscribe(datachanged => {
       this.datachanged = datachanged
-      
+
       this.setMinMaxDate(datachanged)
 
       if (this.UserType == 'Admin' || this.UserType == 'Manager') {
@@ -221,8 +221,6 @@ export class DailyStatusComponent implements OnInit {
               this.flag = true;
             } else {
               this.flag = false
-              // this.editable1 = true
-              // this.editable2 = true
             }
           });
       }
@@ -316,58 +314,74 @@ export class DailyStatusComponent implements OnInit {
       this.totalminute = this.totalminute % 60;
     }
     this.totalhour += extrahour;
-    if ((this.totalhour > 24) || (this.totalhour === 24 && this.totalminute > 0)) {
-      this.task1.hourSpent = old_hour;
-      this.task1.minuteSpent = old_minute;
-      alert('Total time worked cannot be more than 24 hours.');
+    if ((this.totalhour > 16) || (this.totalhour === 16 && this.totalminute > 0)) {
+      // this.task1.hourSpent = old_hour;
+      // this.task1.minuteSpent = old_minute;
+
+      alert('Total time worked cannot be more than 16 hours.');
+
+      switch (value) {
+        case 1: this.creatednewyesterday = true
+          this.total_hours_spent1 = this.totalhour;
+          this.total_minutes_spent1 = this.totalminute;
+          this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+          break;
+        case 2: this.creatednewtoday = true
+          this.total_hours_spent2 = this.totalhour;
+          this.total_minutes_spent2 = this.totalminute;
+          this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+          break;
+      }
     }
     else {
       switch (value) {
         case 1: this.total_hours_spent1 = this.totalhour;
           this.total_minutes_spent1 = this.totalminute;
+          this.creatednewyesterday = false
+          this.newYesterdayTask(this.task1)
           break;
         case 2: this.total_hours_spent2 = this.totalhour;
           this.total_minutes_spent2 = this.totalminute;
+          this.creatednewtoday = false
+          this.newTodayTask(this.task1)
           break;
       }
     }
   }
 
   addTodayTask() {
-    if (this.creatednewtoday === true) {
+    // console.log(this.total_hours_spent2)
+    if ((this.total_hours_spent2 > 16) || (this.total_hours_spent2 === 16 && this.total_minutes_spent2 >= 0)) {
+      this.creatednewtoday = true;
+    } else {
+      this.creatednewtoday = false;
+    }
+    if (this.creatednewtoday === false) {
       if (this.oldtodaytask.description !== '') {
         var ts = new Task();
         ts = this.initializeNew(ts);
         this.oldtodaytask = ts;
         this.MockTodayTasks.push(ts);
-        this.creatednewtoday = true;
+        this.creatednewtoday = false;
       }
-    }
-    else if (this.creatednewtoday === false) {
-      var ts = new Task();
-      ts = this.initializeNew(ts);
-      this.oldtodaytask = ts;
-      this.MockTodayTasks.push(ts);
-      this.creatednewtoday = true;
     }
   }
 
   addYesterdayTask() {
-    if (this.creatednewyesterday === true) {
-      if (this.oldyesterdaytask.description !== '') {
+    if ((this.total_hours_spent1 > 16) || (this.total_hours_spent1 === 16 && this.total_minutes_spent1 >= 0)) {
+      this.creatednewyesterday = true;
+    } else {
+      this.creatednewyesterday = false;
+    }
+    if (this.creatednewyesterday === false) {
+      if (this.oldyesterdaytask.description != '') {
         var ts = new Task();
         ts = this.initializeNew(ts);
         this.oldyesterdaytask = ts;
         this.MockYesterdayTasks.push(ts);
-        this.creatednewyesterday = true;
+        this.creatednewyesterday = false;
       }
-    }
-    else if (this.creatednewyesterday === false) {
-      var ts = new Task();
-      ts = this.initializeNew(ts);
-      this.oldyesterdaytask = ts;
-      this.MockYesterdayTasks.push(ts);
-      this.creatednewyesterday = true;
+
     }
   }
 
@@ -532,12 +546,13 @@ export class DailyStatusComponent implements OnInit {
       }
     }
     else {
-      //update
+      //update 
       this.task1.lastEdit = formateditTime
       this.taskservice.updateOldTask(this.task1)
         .subscribe(msg => console.log(msg));
     }
     this.getLastEdit(this.TodayTasks, 2)
+    this.calculateTotalTime(this.MockTodayTasks, 2)
   }
 
   //Add new task: Yesterday
@@ -566,6 +581,7 @@ export class DailyStatusComponent implements OnInit {
         .subscribe(msg => console.log(msg));
     }
     this.getLastEdit(this.YesterdayTasks, 1)
+    this.calculateTotalTime(this.MockYesterdayTasks, 1)
   }
 
   newOld(keyTask, taskArray) {
@@ -663,7 +679,11 @@ export class DailyStatusComponent implements OnInit {
 
   popTask(taskArray, task) {
     if (task.description == null || task.description == '') {
-      taskArray.pop();
+      var index = taskArray.indexOf(task);
+      taskArray.splice(index, 1);
+      this.oldyesterdaytask.description = undefined;
+      this.oldtodaytask.description = undefined;
+      // taskArray.pop();
     }
     if (taskArray == this.MockTodayTasks) {
       this.creatednewtoday = false
@@ -734,5 +754,12 @@ export class DailyStatusComponent implements OnInit {
       this.maxDate = new Date(+parts2[2], +(parts2[1]) - 1, +parts2[0]);
     }
     this.myDateValue = this.maxDate;
+  }
+
+  deleteTask(task) {
+    this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+    this.taskservice.deleteTask(task)
+      .subscribe(msg => console.log(msg));
+    this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 }

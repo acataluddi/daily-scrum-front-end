@@ -7,7 +7,7 @@
       <div id="dailyscrumclass" *ngIf="show_dailyscrum" (mouseenter)="showTooltip=true" (mouseleave)="showTooltip=flase">{{selected.projectName}}
       </div>
       <div id="scrum" *ngIf="show_scrum">Daily Scrum
-        <div id="dash" *ngIf="show_dash">{{title}}</div>
+        <div id="dash" *ngIf="show_dash">|  {{title}}</div>
       </div>
       <div id="arrow" *ngIf="show_arrow && length > 1">
         <div id="projectlist" *ngIf="show_projectlist">
