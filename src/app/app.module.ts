@@ -28,7 +28,7 @@ import { HeaderComponent } from './header/header.component';
 import { UserslistComponent } from './userslist/userslist.component';
 import { FilterPipe } from './filter.pipe';
 import { NavigationdataService } from './service/navigationdata.service'
-
+import {AutosizeModule} from 'ngx-autosize';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -69,6 +69,7 @@ export function getAuthServiceConfigs() {
     HttpClientModule,
     HttpModule,
     Ng2Webstorage,
+    AutosizeModule,
     ModalModule.forRoot(),
   ],
   providers: [
