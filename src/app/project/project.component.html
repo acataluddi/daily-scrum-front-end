@@ -2,7 +2,7 @@
 <div *ngIf="flag === true" class=body>
   <div class="mainclass">
     <div class="subclasszero">
-    <textarea class="project-name" autosize rows="1" [maxRows]="3" [(ngModel)]="project.projectName" placeholder="New Project Name"></textarea>
+    <textarea id="projectname" class="project-name" autosize rows="1" [maxRows]="3" [(ngModel)]="project.projectName" placeholder="New Project Name"></textarea>
       <small *ngIf="invalidProjectName" class="error">
         Project Name cannot be empty
       </small>
@@ -14,7 +14,7 @@
       </div>
     </ng-container>
     <ng-container *ngIf="!show1">
-        <textarea class="descriptioninputclass" autosize rows="1" [(ngModel)]="project.projectDesc" placeholder="Write description here..."></textarea>
+        <textarea id="projectdescription" class="descriptioninputclass" autosize rows="1" [(ngModel)]="project.projectDesc" placeholder="Write description here..."></textarea>
     </ng-container>
     <ng-container>
       <div class="projectmembersclass" id="projectmembers" *ngIf="showAddMember==true">

@@ -16,8 +16,6 @@ import { DashboardService } from "../service/dashboardservice.service";
 })
 export class ProjectComponent implements OnInit {
 
-    @ViewChild('des') 'des': ElementRef;
-    @ViewChild('pname') 'pname': ElementRef;
     modalRef: BsModalRef;
     project: Project;
     count: number;
@@ -62,6 +60,7 @@ export class ProjectComponent implements OnInit {
                         msg.userType;
                         if (msg.userType === "Admin" || msg.userType === "Manager") {
                             this.flag = true;
+                            setTimeout(() => { document.getElementById("projectname").focus(); });
                         }
 
                     });
@@ -120,7 +119,7 @@ export class ProjectComponent implements OnInit {
 
     changeVisibility1() {
         this.show1 = !this.show1;
-        setTimeout(() => { this.des.nativeElement.focus(); });
+        setTimeout(() => { document.getElementById("projectdescription").focus(); });
     }
 
     changeVisibility2() {
@@ -142,12 +141,6 @@ export class ProjectComponent implements OnInit {
         } else if (this.reqType == 'add') {
             this.project = this.initializeNewProject(this.project);
             this.show1 = true;
-        }
-        if (this.des !== undefined) {
-            this.des.nativeElement.innerText = this.project.projectDesc;
-        }
-        if (this.pname !== undefined) {
-            this.pname.nativeElement.innerText = this.project.projectName;
         }
         this.modalRef.hide();
         this.router.navigate(['/dashboard']);
