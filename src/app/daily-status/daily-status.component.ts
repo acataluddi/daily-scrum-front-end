@@ -762,11 +762,14 @@ export class DailyStatusComponent implements OnInit {
     this.myDateValue = this.maxDate;
   }
 
-  deleteTask(task) {
-    this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+  deleteTask(taskArray,task, value) {
+    var index = taskArray.indexOf(task);
+      taskArray.splice(index, 1);
+    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
     this.taskservice.deleteTask(task)
       .subscribe(msg => console.log(msg));
-    this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+      this.calculateTotalTime(taskArray, value)
+    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
 //   open(){

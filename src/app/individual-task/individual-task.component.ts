@@ -155,6 +155,7 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   delTask(deltask: Task) {
+    this.saved = false
     this.deleteTask.emit(deltask);
   }
 
