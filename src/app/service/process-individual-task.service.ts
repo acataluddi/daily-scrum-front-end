@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Task } from "../model/task-model";
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import {RequestOptions, Headers} from '@angular/http';
 import { Observable, Subject } from 'rxjs';
 import { Project } from '../model/project-model';
 import { environment } from '../../environments/environment';
@@ -54,6 +55,21 @@ export class ProcessIndividualTaskService {
   updateOldTask(task): Observable<any> {
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     return this.http.put<any>(this.url, JSON.stringify(task), { headers })
+  }
+
+  deleteTask(task:Task): Observable<any> {
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
+    var taskId = task.taskId;
+    var memberEmail = task.memberEmail;
+
+    let params = new HttpParams()
+      .set("taskId", taskId)
+      .set("memberEmail", memberEmail)
+      .set("token", localStorage.getItem("token"))
+    
+    console.log(this.url, {params:params})
+  
+    return this.http.delete<any>(this.url, {params})
   }
 
   changeProject(currentProject: Project) {

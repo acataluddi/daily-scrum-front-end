@@ -11,15 +11,16 @@ export class IndividualTaskComponent implements OnInit {
   @Input() task: Task;
   @Input() editable: boolean;
   @Output() timeChangeEvent = new EventEmitter<Task>();
-  @Output() addUpdateTask = new EventEmitter<Task>();
+  // @Output() addUpdateTask = new EventEmitter<Task>();
+  @Output() deleteTask = new EventEmitter<Task>();
   @Output() popTask = new EventEmitter<Task>();
   @ViewChild('des') des: ElementRef;
   @ViewChild('imp') imp: ElementRef;
 
   show_impediment;
   edit_time_spent;
-  show_save;
   saved;
+  show_save;
 
   noDesc = false;
   noTime = false;
@@ -82,17 +83,19 @@ export class IndividualTaskComponent implements OnInit {
     this.edit_time_spent = false
     if (task.description == "") {
       this.noDesc = true;
-    } else if (task.hourSpent <= 0 && task.minuteSpent <= 0) {
+    } 
+    else if (task.hourSpent <= 0 && task.minuteSpent <= 0) {
       this.noDesc = false;
       this.noTime = true;
     }
     else {
-      this.addUpdateTask.emit(task);
+      // this.addUpdateTask.emit(task);
       this.timeChangeEvent.emit(task);
-      this.show_save = false;
       this.saved = true;
       this.noDesc = false;
       this.noTime = false;
+      this.show_save = false;
+
     }
     this.stageDesc = false;
     this.stageTime = false;
@@ -120,11 +123,11 @@ export class IndividualTaskComponent implements OnInit {
 
   cancelChange(task) {
     this.saved = false
-    this.show_save = false
     this.show_impediment = false
     this.edit_time_spent = false
     this.noDesc = false;
     this.noTime = false;
+    this.show_save = false
     if (this.stageDesc && this.stageTime) {
       task.hourSpent = this.old_hourspent
       task.minuteSpent = this.old_minspent
@@ -146,5 +149,9 @@ export class IndividualTaskComponent implements OnInit {
       this.show_impediment = true
     }
     this.popTask.emit(task)
+  }
+
+  delTask(deltask:Task){
+    this.deleteTask.emit(deltask);
   }
 }
