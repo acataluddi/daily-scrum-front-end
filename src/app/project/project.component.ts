@@ -184,6 +184,7 @@ export class ProjectComponent implements OnInit {
                 this.memberRepeat === false &&
                 (this.lastMember.role !== '' && this.lastMember.role !== 'Select role')) {
                 this.project.members.push(me);
+                setTimeout(() => { document.getElementById("mail" + me.email).focus(); });
             } else {
                 var elmnt = document.getElementById("projectmembers");
                 elmnt.scrollIntoView(true);

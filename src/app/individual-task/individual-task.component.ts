@@ -81,10 +81,13 @@ export class IndividualTaskComponent implements OnInit {
 
   save(task) {
     this.edit_time_spent = false
-    if (task.description == "") {
+    if (task.description == "" && task.hourSpent <= 0 && task.minuteSpent <= 0) {
       this.noDesc = true;
-    } 
-    else if (task.hourSpent <= 0 && task.minuteSpent <= 0) {
+      this.noTime = true;
+    } else if (task.description == "") {
+      this.noDesc = true;
+      this.noTime = false;
+    } else if (task.hourSpent <= 0 && task.minuteSpent <= 0) {
       this.noDesc = false;
       this.noTime = true;
     }
@@ -145,17 +148,17 @@ export class IndividualTaskComponent implements OnInit {
       task.hourSpent = this.old_hourspent
       task.minuteSpent = this.old_minspent
     }
-    if (task.impediments != ''){
+    if (task.impediments != '') {
       this.show_impediment = true
     }
     this.popTask.emit(task)
   }
 
-  delTask(deltask:Task){
+  delTask(deltask: Task) {
     this.deleteTask.emit(deltask);
   }
 
-  focus(){
-    setTimeout(() => {document.getElementById('impediments' + this.task.taskId).focus()});
+  focus() {
+    setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });
   }
 }
