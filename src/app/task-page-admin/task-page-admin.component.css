@@ -209,7 +209,7 @@ button.view_all_task::before {
   margin-left: 16px;
   margin-top: 6%;
   margin-bottom: 10px;
-  font-size: 13px;
+  font-size: 14px;
 }
 .fullTask {
   min-height: 30px;
@@ -268,13 +268,16 @@ button.view_all_task::before {
   background-color: rgb(31, 132, 179);
 }
 
+.task-imp{
+  margin-bottom: 7px;
+}
 
 .task {
   /* font-size: 13px; */
   line-height: 20px;
   margin-left: 21px;
   margin-top: -20px;
-  margin-bottom: 7px;
+  /* margin-bottom: 7px; */
   /* font-size: 16px; */
   color: rgba(79, 86, 105, 1);
   text-align: left;
@@ -285,8 +288,8 @@ button.view_all_task::before {
 .impediment {
   width:90%;
   margin-left:25px;
-  margin-top:5px;
-  margin-bottom:5px;
+  /* margin-top:5px; */
+  /* margin-bottom:5px; */
   padding-top:5px;
   padding-bottom:5px;
   padding-left:11px;
