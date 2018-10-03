@@ -10,7 +10,7 @@
     <textarea id="description{{task.taskId}}" class="description-textarea" [disabled]="!editable" autosize rows="1" (blur)="updateDescription()"
       (click)="show_save=true; stageTaskDesc(task)" [(ngModel)]="task.description" placeholder="Add description Here"></textarea>
   </div>
-  <div (click)="delTask(task)">
+  <div *ngIf="editable" (click)="delTask(task)">
   <img src="../../assets/delete_mail.png">
   </div>
 </div>
