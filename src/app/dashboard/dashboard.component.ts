@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Project } from "../model/project-model";
 import { Member } from "../model/member-model";
 import { LoginService } from "../service/login.service";
@@ -10,6 +10,8 @@ import { ProcessIndividualTaskService } from '../service/process-individual-task
 import { AdminviewallComponent } from '../adminviewall/adminviewall.component';
 import { AuthService } from 'angular-6-social-login';
 import { NavigationdataService } from '../service/navigationdata.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +20,9 @@ import { NavigationdataService } from '../service/navigationdata.service';
 })
 export class DashboardComponent implements OnInit {
 
+  modalRef: BsModalRef;
   constructor(public router: Router,
+    private modalService: BsModalService,
     private loginservice: LoginService,
     private dashboardservice: DashboardService,
     private taskService: ProcessIndividualTaskService,
@@ -173,9 +177,9 @@ export class DashboardComponent implements OnInit {
    
 
   }
-
-  DeleteProject(projectId) {
-    this.dashboardservice.deleteProjects(projectId)
+  deleteId;
+  DeleteProject() {
+    this.dashboardservice.deleteProjects(this.deleteId)
       .subscribe((msg) => console.log("Project Deleted"));
     window.location.reload();
 
@@ -183,5 +187,14 @@ export class DashboardComponent implements OnInit {
   click(index) {
     let i: number = index
     this.show[index] = !this.show[index];
+  }
+
+  openModal(template: TemplateRef<any>,projectId) {
+    this.deleteId=projectId;
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+
+  decline(): void {
+      this.modalRef.hide();
   }
 }

@@ -1,6 +1,8 @@
 @import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
 
-* { font-family: "Open Sans" }
+* {
+  font-family: "Open Sans"
+}
 
 html,
 body {
@@ -76,6 +78,14 @@ body .bs-datepicker-container .bs-datepicker-head * {
   color: #6d6d6d75;
 }
 
+.modal-content {
+  margin-top: 65% !important;
+}
+
+.modal.in .modal-dialog {
+  height: 100%;
+}
+
 @media screen and (max-width: 1500px) {
   body .bs-datepicker-container {
     width: 340px;
@@ -137,32 +147,49 @@ body .bs-datepicker-container .bs-datepicker-head * {
 
 .col-sm-2 {
   width: 175px;
-  height:10px;
-  display:flex;
-  padding-top:8px;
-  padding-left:35px;
+  height: 10px;
+  display: flex;
+  padding-top: 8px;
+  padding-left: 35px;
 }
+
 .form-control {
   width: 40%;
   padding: 6px 6px;
-  margin-right:3px;
+  margin-right: 3px;
 }
-@media (min-width: 768px){
 
-.col-sm-2 {
+@media (min-width: 768px) {
+
+  .col-sm-2 {
     width: 175px;
-    height:10px;
-    display:flex;
-    padding-top:8px;
-    padding-left:35px;
+    height: 10px;
+    display: flex;
+    padding-top: 8px;
+    padding-left: 35px;
   }
+
   .form-control {
     width: 40%;
     padding: 6px 6px;
-    margin-right:3px;
+    margin-right: 3px;
   }
+
   .pagination {
-   
     margin-top: 6px;
+  }
 }
+
+@media (min-width: 1500px) {
+
+  .modal-content {
+    margin-top: 100% !important;
+  }
+}
+
+@media (min-height: 1500px) {
+
+  .modal-content {
+    margin-top: 185% !important;
+  }
 }
