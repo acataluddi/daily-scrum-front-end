@@ -209,6 +209,7 @@ button.view_all_task::before {
   margin-left: 16px;
   margin-top: 6%;
   margin-bottom: 10px;
+  font-size: 13px;
 }
 .fullTask {
   min-height: 30px;
@@ -240,8 +241,8 @@ button.view_all_task::before {
 
 
 .dot {
-  height: 10px;
-  width: 10px;
+  height: 8px;
+  width: 8px;
   border-radius: 50%;
   display: inline-block;
   margin-top: 5px;
@@ -269,11 +270,12 @@ button.view_all_task::before {
 
 
 .task {
-  font-size: 13px;
+  /* font-size: 13px; */
   line-height: 20px;
   margin-left: 21px;
   margin-top: -20px;
-  font-size: 16px;
+  margin-bottom: 7px;
+  /* font-size: 16px; */
   color: rgba(79, 86, 105, 1);
   text-align: left;
   width: 90%;
