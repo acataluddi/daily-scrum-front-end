@@ -154,4 +154,8 @@ export class IndividualTaskComponent implements OnInit {
   delTask(deltask:Task){
     this.deleteTask.emit(deltask);
   }
+
+  focus(){
+    setTimeout(() => {document.getElementById('impediments' + this.task.taskId).focus()});
+  }
 }

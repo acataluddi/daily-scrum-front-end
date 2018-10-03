@@ -42,7 +42,7 @@
             </div>
             <div class="fullTask">
             <div class="member_part">
-              <div *ngIf="IndMemOb.hour===0 && IndMemOb.minute===0">Not Active</div>
+              <div *ngIf="IndMemOb.hour===0 && IndMemOb.minute===0">Tasks not Entered</div>
               <div *ngFor="let Task of IndMemOb.tasks ">
                 <span *ngIf="Task.taskId%7===0" class="dot dot-color-1"></span>
                 <span *ngIf="Task.taskId%6===0 && Task.taskId%7!=0" class="dot dot-color-2"></span>
