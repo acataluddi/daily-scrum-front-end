@@ -7,7 +7,7 @@
     <span *ngIf="tid%3!=0 && tid%5!=0  && tid%6!=0 && tid%7!=0" class="dot dot-color-5"></span>
   </div>
   <div class="description">
-    <textarea class="description-textarea" [disabled]="!editable" autosize rows="1" (blur)="updateDescription()"
+    <textarea id="description{{task.taskId}}" class="description-textarea" [disabled]="!editable" autosize rows="1" (blur)="updateDescription()"
       (click)="show_save=true; stageTaskDesc(task)" [(ngModel)]="task.description" placeholder="Add description Here"></textarea>
   </div>
   <div (click)="delTask(task)">
@@ -16,7 +16,7 @@
 </div>
 <div class="no_desc" *ngIf="noDesc">Enter Task description</div>
 
-<textarea class="impediments" [disabled]="!editable" autosize rows="1" *ngIf="show_impediment==true" (blur)="updateImpediment()"
+<textarea class="impediments" id="impediments{{task.taskId}}" [disabled]="!editable" autosize rows="1" *ngIf="show_impediment==true" (blur)="updateImpediment()"
   (click)="show_save=true; stageTaskDesc(task)" [(ngModel)]="task.impediments" placeholder="Add impediments Here"></textarea>
 
 <div class="time" (click)="stageTaskTime(task)">
@@ -41,7 +41,7 @@
     </select>
   </div>
 
-  <div class="add_impediment" *ngIf="task.impediments== '' && show_impediment==false && editable" (click)="show_save=true; show_impediment=true;">
+  <div class="add_impediment" *ngIf="task.impediments== '' && show_impediment==false && editable" (click)="show_save=true; show_impediment=true; focus()">
     Add Impediments
   </div>
 </div>

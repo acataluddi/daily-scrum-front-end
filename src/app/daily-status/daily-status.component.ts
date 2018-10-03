@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable, TemplateRef } from '@angular/core';
 import { Project, member } from "../model/project-model";
 import { Task } from '../model/task-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from 'angular-6-social-login';
 import { LoginService } from '../service/login.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class DailyStatusComponent implements OnInit {
 
   currentProject: string = ''
 
+  modalRef: BsModalRef
   userEmail: string = localStorage.getItem("email")
 
   task: Task;
@@ -102,6 +104,7 @@ export class DailyStatusComponent implements OnInit {
     public router: Router,
     private taskservice: ProcessIndividualTaskService,
     private datepipe: DatePipe,
+    private modalService: BsModalService,
     private route: ActivatedRoute,
     private data: NavigationdataService,
     private socialAuthService: AuthService,
@@ -317,7 +320,8 @@ export class DailyStatusComponent implements OnInit {
     if ((this.totalhour > 16) || (this.totalhour === 16 && this.totalminute > 0)) {
       // this.task1.hourSpent = old_hour;
       // this.task1.minuteSpent = old_minute;
-
+      // var template = document.getElementById("template");
+      // this.open()
       alert('Total time worked cannot be more than 16 hours.');
 
       switch (value) {
@@ -363,6 +367,7 @@ export class DailyStatusComponent implements OnInit {
         this.oldtodaytask = ts;
         this.MockTodayTasks.push(ts);
         this.creatednewtoday = false;
+        setTimeout(() => {document.getElementById('description' + ts.taskId).focus()});
       }
     }
   }
@@ -380,6 +385,7 @@ export class DailyStatusComponent implements OnInit {
         this.oldyesterdaytask = ts;
         this.MockYesterdayTasks.push(ts);
         this.creatednewyesterday = false;
+        setTimeout(() => {document.getElementById('description' + ts.taskId).focus()});
       }
 
     }
@@ -762,4 +768,12 @@ export class DailyStatusComponent implements OnInit {
       .subscribe(msg => console.log(msg));
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
+
+//   open(){
+//     var template = document.getElementById('template')
+//     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+//   }
+//   decline(): void {
+//     this.modalRef.hide();
+// }
 }
