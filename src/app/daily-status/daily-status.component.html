@@ -56,7 +56,7 @@
     <div class="left-inner-part">
       <div *ngFor="let yesterdayTask of MockYesterdayTasks">
         <app-individual-task [task]=yesterdayTask [editable]=editable1 (timeChangeEvent)="modifyTime($event, MockYesterdayTasks, 1)"
-         (deleteTask)="deleteTask($event)" (popTask)="popTask(MockYesterdayTasks, $event)"></app-individual-task>
+         (deleteTask)="deleteTask(MockYesterdayTasks, $event, 1)" (popTask)="popTask(MockYesterdayTasks, $event)"></app-individual-task>
       </div>
       <div class="new_task_field" (click)="addYesterdayTask()" *ngIf="editable1">
         <img class="img_add_new_task" src="../../assets/add-icon.png" align="top">
@@ -69,7 +69,7 @@
     <div class="right-inner-part">
       <div *ngFor="let todayTask of MockTodayTasks">
         <app-individual-task [task]=todayTask [editable]=editable2 (timeChangeEvent)="modifyTime($event, MockTodayTasks, 2)"
-         (deleteTask)="deleteTask($event)" (popTask)="popTask(MockTodayTasks, $event)"></app-individual-task>
+         (deleteTask)="deleteTask(MockTodayTasks, $event, 2)" (popTask)="popTask(MockTodayTasks, $event)"></app-individual-task>
       </div>
       <div class="new_task_field" (click)="addTodayTask()" *ngIf="editable2">
         <img class="img_add_new_task" src="../../assets/add-icon.png" align="top">
