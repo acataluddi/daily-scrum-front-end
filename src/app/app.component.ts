@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Router, NavigationStart } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app';
   showHead: boolean = false;
   constructor(private router: Router) {
@@ -21,5 +21,27 @@ export class AppComponent {
         }
       }
     });
+  }
+
+
+  ngOnInit() {
+    if (localStorage.getItem("timerCounting") === 'yes') {
+      var dr = new Date();
+      var startTime = +localStorage.getItem("timerTime")
+      var timeElapsed = dr.getTime() - startTime;
+      if (timeElapsed >= 2700000) {
+        localStorage.clear();
+        alert('Your session has been timed out, please login again');
+        window.location.reload();
+      } else {
+        var timeToSet = 2700000 - Math.floor(timeElapsed);
+        var timeoutCounter = setTimeout(function () {
+          localStorage.clear();
+          alert('Your session has been timed out, please login again');
+          clearTimeout(timeoutCounter);
+          window.location.reload();
+        }, timeToSet);
+      }
+    }
   }
 }
