@@ -404,7 +404,7 @@ input[value="Cancel"]:active {
     visibility: visible;
     position: absolute;
     top: 4px;
-    right: -120px;
+    right: -150px;
     height: 22px;
     width: 22px;
     font-size: 22px;
