@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Task } from "../model/task-model";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-individual-task',
@@ -10,8 +11,10 @@ export class IndividualTaskComponent implements OnInit {
 
   @Input() task: Task;
   @Input() editable: boolean;
+  @Input() events: Observable<boolean>;
   @Output() timeChangeEvent = new EventEmitter<Task>();
-  // @Output() addUpdateTask = new EventEmitter<Task>();
+  @Output() selectedTask = new EventEmitter<Task>();
+  @Output() unselectedTask = new EventEmitter<Task>();
   @Output() deleteTask = new EventEmitter<Task>();
   @Output() popTask = new EventEmitter<Task>();
   @ViewChild('des') des: ElementRef;
@@ -37,9 +40,18 @@ export class IndividualTaskComponent implements OnInit {
   stageDesc = false
   stageTime = false
 
-  constructor() { }
+  check = false;
+  
+  eventsSubscription: any;
+  constructor() { 
+    // this.eventsSubscription = this.events.subscribe(isChecked => 
+    //   console.log(isChecked)
+    // );
+  }
 
   ngOnInit() {
+    this.eventsSubscription = this.events.subscribe((ischecked)=>
+    this.check = ischecked);
     if (this.task.description == '' || this.task.description == null) {
       this.show_save = true;
       this.saved = false;
@@ -47,6 +59,8 @@ export class IndividualTaskComponent implements OnInit {
       this.show_save = false;
       this.saved = false;
     }
+    
+    this.check = false
 
     this.tid = parseInt(this.task.taskId);
     if (this.task.impediments === "") {
@@ -161,5 +175,22 @@ export class IndividualTaskComponent implements OnInit {
 
   focus() {
     setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });
+  }
+
+  copy(id){
+    console.log(id)
+    let copyText = document.getElementById('description' + id) as HTMLInputElement;
+    console.log(copyText.value)
+    copyText.select()
+    document.execCommand("copy");
+  }
+
+  checked(task){
+    // console.log(task)
+    this.selectedTask.emit(task)
+  }
+
+  unchecked(task){
+    this.unselectedTask.emit(task)
   }
 }
