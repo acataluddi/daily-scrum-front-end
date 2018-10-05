@@ -24,11 +24,11 @@
           <span *ngIf="checkbox1 && editable1" class="dot dot-fill" (click)="checkbox1=false; unselectAll(1)"></span>
         </div>
         <div class="total_time_border">
-          <div class="total_time_text"> {{total_hours_spent1}}h {{total_minutes_spent1}}m</div>
+          <div class="total_time_text">{{total_hours_spent1}}h {{total_minutes_spent1}}m</div>
           <div class="spent_text">Hours spent</div>
         </div>
         <div class="last_edit_label">Last edit: {{lastEditString1}}</div>
-        <div class="copy" (click)="copy(selectedYesterdaysTasks)" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1">
+        <div class="copy" (click)="copy(selectedYesterdaysTasks, 1)" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1">
           <img src="../../assets/copy.png">
         </div>
       </div>
@@ -52,11 +52,11 @@
           <span *ngIf="checkbox2 && editable2" class="dot dot-fill" (click)="checkbox2=false; unselectAll(2)"></span>
         </div>
         <div class="total_time_border">
-          <div class="total_time_text"> {{total_hours_spent2}}h {{total_minutes_spent2}}m</div>
+          <div class="total_time_text">{{total_hours_spent2}}h {{total_minutes_spent2}}m</div>
           <div class="spent_text">Hours spent</div>
         </div>
         <div class="last_edit_label">Last edit: {{lastEditString2}}</div>
-        <div class="copy" (click)="copy(selectedTodaysTasks)" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
+        <div class="copy" (click)="copy(selectedTodaysTasks, 2)" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
           <img src="../../assets/copy.png">
         </div>
       </div>
@@ -70,8 +70,8 @@
     <div class="left-inner-part">
       <div *ngFor="let yesterdayTask of MockYesterdayTasks">
         <app-individual-task [task]=yesterdayTask [editable]=editable1 [events]="eventsSubject1.asObservable()"
-          (timeChangeEvent)="modifyTime($event, MockYesterdayTasks, 1)" (selectedTask)="selectedTasks($event, 1)"
-          (unselectedTask)="unselectedTasks($event, 1)" (deleteTask)="deleteTask(MockYesterdayTasks, $event, 1)"
+          [hideSavedEvent]="HideSaved1.asObservable()" (timeChangeEvent)="modifyTime($event, MockYesterdayTasks, 1)"
+          (selectedTask)="selectedTasks($event, 1)" (unselectedTask)="unselectedTasks($event, 1)" (deleteTask)="deleteTask(MockYesterdayTasks, $event, 1)"
           (popTask)="popTask(MockYesterdayTasks, $event)"></app-individual-task>
       </div>
       <div class="new_task_field" (click)="addYesterdayTask()" *ngIf="editable1">
@@ -85,8 +85,9 @@
     <div class="right-inner-part">
       <div *ngFor="let todayTask of MockTodayTasks">
         <app-individual-task [task]=todayTask [editable]=editable2 [events]="eventsSubject2.asObservable()"
-          (timeChangeEvent)="modifyTime($event, MockTodayTasks, 2)" (selectedTask)="selectedTasks($event, 2)"
-          (unselectedTask)="unselectedTasks($event, 2)" (deleteTask)="deleteTask(MockTodayTasks, $event, 2)" (popTask)="popTask(MockTodayTasks, $event)"></app-individual-task>
+          [hideSavedEvent]="HideSaved2.asObservable()" (timeChangeEvent)="modifyTime($event, MockTodayTasks, 2)"
+          (selectedTask)="selectedTasks($event, 2)" (unselectedTask)="unselectedTasks($event, 2)" (deleteTask)="deleteTask(MockTodayTasks, $event, 2)"
+          (popTask)="popTask(MockTodayTasks, $event)"></app-individual-task>
       </div>
       <div class="new_task_field" (click)="addTodayTask()" *ngIf="editable2">
         <img class="img_add_new_task" src="../../assets/add-icon.png" align="top">

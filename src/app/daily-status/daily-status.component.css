@@ -83,10 +83,10 @@ hr {
   cursor: pointer;
 } */
 
-img[src="../../assets/copy.png"]{
+img[src="../../assets/copy.png"] {
   cursor: pointer;
-    margin-top: 11px;
-    margin-left: 10px;
+  margin-top: 11px;
+  margin-left: 40px;
 }
 
 .yesterday_task_header {
@@ -339,16 +339,19 @@ input[value="Cancel"]:active {
   margin-top: 10px;
   border-style: solid;
   border-width: 2px;
-  border-color: rgba(0, 0, 0, 0.3);
+  border-color: rgb(219, 219, 219);
+  /* border-color: rgba(0, 0, 0, 0.3); */
 }
 
-.dot-blank{
+.dot-blank {
   background-color: #ffffff;
 }
 
-.dot-fill{
-  border: none;
-  background-color: rgba(0, 0, 0, 0.3);
+.dot-fill {
+  /* border: none; */
+  border-width: 4px;
+  /* background-color: rgba(5, 87, 255, 1); */
+  background-color: rgba(0, 0, 0, 0.54);
 }
 
 @media screen and (max-width: 1090px) {
@@ -362,6 +365,10 @@ input[value="Cancel"]:active {
     width: 13px;
     margin-top: 4px;
     padding-top: 2px;
+  }
+
+  img[src="../../assets/copy.png"] {
+    margin-left: 25px;
   }
 
   .my_task {
@@ -382,12 +389,28 @@ input[value="Cancel"]:active {
     padding-top: 2px;
   }
 
+  img[src="../../assets/copy.png"] {
+    margin-left: 10px;
+  }
+
+  .last_edit_label {
+    padding-left: 2px;
+  }
+
+  .spent_text {
+    padding-right: 7px;
+  }
+
+  .total_time_text {
+    padding-left: 7px;
+  }
+
   .my_task {
     font-size: 12px;
   }
 }
 
-@media screen and (max-width: 910px) {
+@media screen and (max-width: 940px) {
   .header-part {
     width: 100%;
   }
@@ -426,9 +449,10 @@ input[value="Cancel"]:active {
 
   .last_edit_label {
     width: 190px;
+    padding-left: 15px;
   }
 
-  img[src="../../assets/copy.png"]{
+  img[src="../../assets/copy.png"] {
     cursor: pointer;
     margin-top: 10px;
     padding-right: 58px;
@@ -513,11 +537,11 @@ input[value="Cancel"]:active {
     font-size: 14px;
   }
 
-  .spent_text{
+  .spent_text {
     font-size: 14px;
   }
 
-  .last_edit_label{
+  .last_edit_label {
     padding-top: 5px;
     font-size: 12px;
   }
@@ -575,8 +599,8 @@ input[value="Cancel"]:active {
   }
 }
 
-@media screen and (max-width: 380px){
-  .last_edit_label{
+@media screen and (max-width: 380px) {
+  .last_edit_label {
     font-size: 12px;
   }
 }
@@ -627,19 +651,19 @@ input[value="Cancel"]:active {
     /* visibility: hidden; */
   }
 
-  .total_time_border{
+  .total_time_border {
     height: 35px;
     width: 142px;
   }
 
-  .total_time_text{
+  .total_time_text {
     font-size: 13px;
     padding-left: 7px;
   }
 
-  .spent_text{
+  .spent_text {
     font-size: 13px;
   }
 
-  
+
 }

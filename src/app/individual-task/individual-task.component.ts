@@ -12,6 +12,7 @@ export class IndividualTaskComponent implements OnInit {
   @Input() task: Task;
   @Input() editable: boolean;
   @Input() events: Observable<boolean>;
+  @Input() hideSavedEvent: Observable<boolean>;
   @Output() timeChangeEvent = new EventEmitter<Task>();
   @Output() selectedTask = new EventEmitter<Task>();
   @Output() unselectedTask = new EventEmitter<Task>();
@@ -41,17 +42,16 @@ export class IndividualTaskComponent implements OnInit {
   stageTime = false
 
   check = false;
-  
+
   eventsSubscription: any;
-  constructor() { 
-    // this.eventsSubscription = this.events.subscribe(isChecked => 
-    //   console.log(isChecked)
-    // );
-  }
+  copiedSubscription: any;
+  constructor() { }
 
   ngOnInit() {
-    this.eventsSubscription = this.events.subscribe((ischecked)=>
-    this.check = ischecked);
+    this.eventsSubscription = this.events.subscribe((ischecked) =>
+      this.check = ischecked);
+    this.copiedSubscription = this.hideSavedEvent.subscribe((hideSaved) =>
+      this.saved = false);
     if (this.task.description == '' || this.task.description == null) {
       this.show_save = true;
       this.saved = false;
@@ -59,7 +59,7 @@ export class IndividualTaskComponent implements OnInit {
       this.show_save = false;
       this.saved = false;
     }
-    
+
     this.check = false
 
     this.tid = parseInt(this.task.taskId);
@@ -177,7 +177,7 @@ export class IndividualTaskComponent implements OnInit {
     setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });
   }
 
-  copy(id){
+  copy(id) {
     console.log(id)
     let copyText = document.getElementById('description' + id) as HTMLInputElement;
     console.log(copyText.value)
@@ -185,12 +185,12 @@ export class IndividualTaskComponent implements OnInit {
     document.execCommand("copy");
   }
 
-  checked(task){
+  checked(task) {
     // console.log(task)
     this.selectedTask.emit(task)
   }
 
-  unchecked(task){
+  unchecked(task) {
     this.unselectedTask.emit(task)
   }
 }

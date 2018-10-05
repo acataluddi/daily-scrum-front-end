@@ -107,9 +107,11 @@ export class DailyStatusComponent implements OnInit {
   checkbox2 = false;
 
   private eventsSubject1 = new Subject<boolean>();
-  event1 = this.eventsSubject1.asObservable()
+  // event1 = this.eventsSubject1.asObservable()
   private eventsSubject2 = new Subject<boolean>();
-  event2 = this.eventsSubject2.asObservable()
+  // event2 = this.eventsSubject2.asObservable()
+  private HideSaved1 = new Subject<boolean>();
+  private HideSaved2 = new Subject<boolean>();
 
   changeProjectsubscription: Subscription;
   routeparamsub: any;
@@ -371,7 +373,6 @@ export class DailyStatusComponent implements OnInit {
   }
 
   addTodayTask() {
-    // console.log(this.total_hours_spent2)
     if ((this.total_hours_spent2 > 16) || (this.total_hours_spent2 === 16 && this.total_minutes_spent2 >= 0)) {
       this.creatednewtoday = true;
     } else {
@@ -798,9 +799,8 @@ export class DailyStatusComponent implements OnInit {
   //     this.modalRef.hide();
   // }
 
-  copy(selectedTasksArray) {
+  copy(selectedTasksArray, value) {
     let text: string = '';
-    console.log(selectedTasksArray)
     if (selectedTasksArray.length > 0) {
       for (let task of selectedTasksArray) {
         text += task.description + '\n';
@@ -818,6 +818,12 @@ export class DailyStatusComponent implements OnInit {
     document.body.appendChild(txtArea);
     txtArea.select();
     document.execCommand("copy");
+
+    switch (value){
+      case 1: this.HideSaved1.next(true);
+      break;
+      case 2: this.HideSaved2.next(true);
+    }
   }
 
   selectedTasks(task, value) {
