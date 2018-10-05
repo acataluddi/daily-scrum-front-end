@@ -1,10 +1,16 @@
 <div class="part_1">
   <div>
-    <span *ngIf="tid%7===0" class="dot dot-color-1"></span>
+      <span *ngIf="editable == false" class="dot dot-fill"></span>
+    <span *ngIf="check==false && editable" class="dot dot-blank" (click)="check=true; checked(task)"></span>
+    <span *ngIf="check && editable" class="dot dot-fill" (click)="check=false; unchecked(task)"></span>
+    <!-- <div *ngIf="check" class="dot">
+      <span class="dot-fill"></span>
+    </div> -->
+    <!-- <span *ngIf="tid%7===0" class="dot dot-color-1"></span>
     <span *ngIf="tid%6===0 && tid%7!=0" class="dot dot-color-2"></span>
     <span *ngIf="tid%5===0 && tid%6!=0 && tid%7!=0" class="dot dot-color-3"></span>
     <span *ngIf="tid%3===0 && tid%5!=0  && tid%6!=0 && tid%7!=0" class="dot dot-color-4"></span>
-    <span *ngIf="tid%3!=0 && tid%5!=0  && tid%6!=0 && tid%7!=0" class="dot dot-color-5"></span>
+    <span *ngIf="tid%3!=0 && tid%5!=0  && tid%6!=0 && tid%7!=0" class="dot dot-color-5"></span> -->
   </div>
   <div class="description">
     <textarea id="description{{task.taskId}}" class="description-textarea" [disabled]="!editable" autosize rows="1" (blur)="updateDescription()"
@@ -13,6 +19,7 @@
   <div *ngIf="editable && show_save==false" (click)="delTask(task)">
   <img src="../../assets/delete_mail.png">
   </div>
+  <!-- <div class="copy" (click)="copy(task.taskId)" >Copy</div> -->
 </div>
 <div class="no_desc" *ngIf="noDesc">Enter Task description</div>
 

@@ -34,7 +34,7 @@ hr {
   width: 50%;
   float: left;
   box-sizing: border-box;
-  padding-left: 9.37%;
+  padding-left: 7.37%;
 }
 
 .right-header {
@@ -42,7 +42,7 @@ hr {
   box-sizing: border-box;
   float: right;
   padding-left: 2.855%;
-  padding-right: 9.37%;
+  /* padding-right: 9.37%; */
 }
 
 .main-part {
@@ -64,7 +64,7 @@ hr {
 .left-part {
   float: left;
   box-sizing: border-box;
-  padding-left: 9.37%;
+  padding-left: 7.5%;
   padding-right: 4.758%;
   height: 100%;
   overflow: scroll;
@@ -72,10 +72,21 @@ hr {
 
 .right-part {
   float: right;
-  padding-left: 2.855%;
+  padding-left: 1.1%;
   padding-right: 9.37%;
   height: 100%;
   overflow: scroll;
+}
+
+/* copy{
+  margin-top: 2px;
+  cursor: pointer;
+} */
+
+img[src="../../assets/copy.png"]{
+  cursor: pointer;
+    margin-top: 11px;
+    margin-left: 10px;
 }
 
 .yesterday_task_header {
@@ -97,6 +108,7 @@ hr {
   border-style: solid;
   border-width: 1px;
   border-radius: 2px;
+  margin-left: 10px;
   border-color: rgba(0, 0, 0, 0.2);
 }
 
@@ -319,6 +331,26 @@ input[value="Cancel"]:active {
   background-color: rgba(131, 131, 131, 0.37);
 }
 
+.dot {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-top: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
+.dot-blank{
+  background-color: #ffffff;
+}
+
+.dot-fill{
+  border: none;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 @media screen and (max-width: 1090px) {
   .view_all_task {
     width: 120px;
@@ -361,7 +393,8 @@ input[value="Cancel"]:active {
   }
 
   .main-part {
-    padding-left: 32px;
+    /* padding-left: 32px; */
+    padding-left: 2.855%;
   }
 
   .today_task_label {
@@ -391,6 +424,17 @@ input[value="Cancel"]:active {
     width: 100%;
   }
 
+  .last_edit_label {
+    width: 190px;
+  }
+
+  img[src="../../assets/copy.png"]{
+    cursor: pointer;
+    margin-top: 10px;
+    padding-right: 58px;
+    margin-left: 10px;
+  }
+
   .left-part {
     display: none;
   }
@@ -398,13 +442,15 @@ input[value="Cancel"]:active {
   .right-part {
     float: none;
     width: 100%;
+    margin-left: 44px;
+    padding-left: 0%;
   }
 
   .alt-View {
     visibility: visible;
     position: absolute;
     top: 4px;
-    right: -120px;
+    right: -150px;
     height: 22px;
     width: 22px;
     font-size: 22px;
@@ -437,12 +483,12 @@ input[value="Cancel"]:active {
   }
 
   .last_edit_label {
-    width: 375px;
+    width: 190px;
   }
 
   .main-part {
     padding-top: 216px;
-    padding-left: 32px;
+    /* padding-left: 32px; */
     padding-right: 20px;
   }
 }
@@ -577,7 +623,7 @@ input[value="Cancel"]:active {
 @media screen and (max-width: 369px) {
   .last_edit_label {
     font-size: 10px;
-    padding-top: 0px;
+    padding-top: 5px;
     /* visibility: hidden; */
   }
 

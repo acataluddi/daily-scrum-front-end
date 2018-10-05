@@ -5,7 +5,8 @@ import { ProcessIndividualTaskService } from '../service/process-individual-task
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { NavigationdataService } from '../service/navigationdata.service'
 import { DatePipe } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from 'angular-6-social-login';
@@ -35,6 +36,9 @@ export class DailyStatusComponent implements OnInit {
   MockTodayTasks: Task[];
   TodayTasks: Task[];
   YesterdayTasks: Task[];
+
+  selectedYesterdaysTasks: Task[] = [];
+  selectedTodaysTasks: Task[] = [];
 
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
@@ -89,15 +93,28 @@ export class DailyStatusComponent implements OnInit {
   flag = false;
   projectId = localStorage.getItem("projectId");
   status = false;
+
   lastEdit1;
   lastEdit2;
+
   lastEditString1 = '';
   lastEditString2 = '';
+
+  editable1;
+  editable2;
+
+  checkbox1 = false;
+  checkbox2 = false;
+
+  private eventsSubject1 = new Subject<boolean>();
+  event1 = this.eventsSubject1.asObservable()
+  private eventsSubject2 = new Subject<boolean>();
+  event2 = this.eventsSubject2.asObservable()
+
   changeProjectsubscription: Subscription;
   routeparamsub: any;
   selectmem: Subscription;
-  editable1;
-  editable2;
+
   name = localStorage.getItem("taskName")
 
   constructor(
@@ -367,7 +384,7 @@ export class DailyStatusComponent implements OnInit {
         this.oldtodaytask = ts;
         this.MockTodayTasks.push(ts);
         this.creatednewtoday = false;
-        setTimeout(() => {document.getElementById('description' + ts.taskId).focus()});
+        setTimeout(() => { document.getElementById('description' + ts.taskId).focus() });
       }
     }
   }
@@ -385,7 +402,7 @@ export class DailyStatusComponent implements OnInit {
         this.oldyesterdaytask = ts;
         this.MockYesterdayTasks.push(ts);
         this.creatednewyesterday = false;
-        setTimeout(() => {document.getElementById('description' + ts.taskId).focus()});
+        setTimeout(() => { document.getElementById('description' + ts.taskId).focus() });
       }
 
     }
@@ -544,6 +561,7 @@ export class DailyStatusComponent implements OnInit {
         this.task1.lastEdit = formateditTime
         this.taskservice.addNewTask(this.task1)
           .subscribe(msg => console.log(msg));
+          this.checkbox2 = false
       } else {
         //update
         this.task1.lastEdit = formateditTime
@@ -575,6 +593,7 @@ export class DailyStatusComponent implements OnInit {
         this.task1.lastEdit = formateditTime
         this.taskservice.addNewTask(this.task1).subscribe(
           msg => console.log(msg));
+        this.checkbox1 = false
       } else {
         this.task1.lastEdit = formateditTime
         this.taskservice.updateOldTask(this.task1)
@@ -762,21 +781,129 @@ export class DailyStatusComponent implements OnInit {
     this.myDateValue = this.maxDate;
   }
 
-  deleteTask(taskArray,task, value) {
+  deleteTask(taskArray, task, value) {
     var index = taskArray.indexOf(task);
-      taskArray.splice(index, 1);
-    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+    taskArray.splice(index, 1);
+    this.selectAll(taskArray, value)
     this.taskservice.deleteTask(task)
       .subscribe(msg => console.log(msg));
-      this.calculateTotalTime(taskArray, value)
-    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+    this.calculateTotalTime(taskArray, value)
   }
 
-//   open(){
-//     var template = document.getElementById('template')
-//     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
-//   }
-//   decline(): void {
-//     this.modalRef.hide();
-// }
+  //   open(){
+  //     var template = document.getElementById('template')
+  //     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  //   }
+  //   decline(): void {
+  //     this.modalRef.hide();
+  // }
+
+  copy(selectedTasksArray) {
+    let text: string = '';
+    console.log(selectedTasksArray)
+    if (selectedTasksArray.length > 0) {
+      for (let task of selectedTasksArray) {
+        text += task.description + '\n';
+      }
+    } else {
+      text = ''
+    }
+    var txtArea = document.createElement("textarea");
+    txtArea.id = 'txt';
+    txtArea.style.position = 'fixed';
+    txtArea.style.top = '0';
+    txtArea.style.left = '0';
+    txtArea.style.opacity = '0';
+    txtArea.value = text;
+    document.body.appendChild(txtArea);
+    txtArea.select();
+    document.execCommand("copy");
+  }
+
+  selectedTasks(task, value) {
+    switch (value) {
+      case 1: var exist = this.selectedYesterdaysTasks.find(function (element) {
+        return element.taskId == task.taskId;
+      });
+        if (exist == null) {
+          this.selectedYesterdaysTasks.push(task);
+        }
+        if (this.selectedYesterdaysTasks.length == this.MockYesterdayTasks.length) {
+          this.checkbox1 = true;
+        } else {
+          this.checkbox1 = false
+        }
+        break;
+      case 2: var exist = this.selectedYesterdaysTasks.find(function (element) {
+        return element.taskId == task.taskId;
+      });
+        if (exist == null) {
+          this.selectedTodaysTasks.push(task);
+        }
+        if (this.selectedTodaysTasks.length == this.MockTodayTasks.length) {
+          this.checkbox2 = true;
+        } else {
+          this.checkbox2 = false
+        }
+        break;
+    }
+  }
+
+  unselectedTasks(task, value) {
+    switch (value) {
+      case 1: var index = this.selectedYesterdaysTasks.indexOf(task);
+        this.selectedYesterdaysTasks.splice(index, 1);
+        if (this.selectedYesterdaysTasks.length == this.MockYesterdayTasks.length) {
+          this.checkbox1 = true;
+        } else {
+          this.checkbox1 = false
+        }
+        break;
+      case 2: var index = this.selectedTodaysTasks.indexOf(task);
+        this.selectedTodaysTasks.splice(index, 1);
+        if (this.selectedTodaysTasks.length == this.MockTodayTasks.length) {
+          this.checkbox2 = true;
+        } else {
+          this.checkbox2 = false
+        }
+        break;
+    }
+  }
+
+  selectAll(taskArray, value) {
+    switch (value) {
+      case 1: this.selectedYesterdaysTasks = [];
+        for (let task of taskArray) {
+          this.selectedYesterdaysTasks.push(task);
+        }
+        this.emitEventToChild(true, value);
+        break;
+      case 2: this.selectedTodaysTasks = [];
+        for (let task of taskArray) {
+          this.selectedTodaysTasks.push(task)
+        }
+        this.emitEventToChild(true, value);
+        break;
+    }
+  }
+
+  unselectAll(value) {
+    switch (value) {
+      case 1: this.selectedYesterdaysTasks = [];
+        this.emitEventToChild(false, value);
+        break;
+      case 2: this.selectedTodaysTasks = [];
+        this.emitEventToChild(false, value);
+        break;
+    }
+  }
+
+  emitEventToChild(selectAllvalue, value) {
+    switch (value) {
+      case 1: this.eventsSubject1.next(selectAllvalue)
+        break;
+      case 2: this.eventsSubject2.next(selectAllvalue)
+        break;
+    }
+  }
 }
