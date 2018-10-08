@@ -29,6 +29,7 @@ import { UserslistComponent } from './userslist/userslist.component';
 import { FilterPipe } from './filter.pipe';
 import { NavigationdataService } from './service/navigationdata.service'
 import {AutosizeModule} from 'ngx-autosize';
+import { FilterEmail } from './filterEmail.pipe';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -55,7 +56,8 @@ export function getAuthServiceConfigs() {
     TaskPageAdminComponent,
     HeaderComponent,
     UserslistComponent,
-    FilterPipe
+    FilterPipe,
+    FilterEmail
   ],
   imports: [
     BrowserModule,
