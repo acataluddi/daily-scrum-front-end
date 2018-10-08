@@ -43,6 +43,9 @@ export class ProjectService {
     return this.reqType;
   }
 
+  getMembers() {
+    return this.http.get("../../assets/QbEmployee.json")
+  }
   setProjectToBeUpdated(p: Project) {
     this.projectToBeUpdated = p;
     localStorage.setItem('changeProjectID', this.projectToBeUpdated.projectId);
