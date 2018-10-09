@@ -34,7 +34,7 @@ hr {
   width: 50%;
   float: left;
   box-sizing: border-box;
-  padding-left: 7.37%;
+  padding-left: 5.37%;
 }
 
 .right-header {
@@ -64,7 +64,7 @@ hr {
 .left-part {
   float: left;
   box-sizing: border-box;
-  padding-left: 7.5%;
+  padding-left: 5.5%;
   padding-right: 4.758%;
   height: 100%;
   overflow: scroll;
@@ -72,22 +72,78 @@ hr {
 
 .right-part {
   float: right;
-  padding-left: 1.1%;
+  padding-left: 1.0%;
   padding-right: 9.37%;
   height: 100%;
   overflow: scroll;
 }
 
-/* copy{
-  margin-top: 2px;
+#copy1,
+#copy2 {
+  height: 24px;
+  width: 24px;
+  background-color: rgba(151, 151, 151, 0.3);
   cursor: pointer;
-} */
+  margin-top: 7px;
+  margin-left: 40px;
+  padding: 2px;
+  padding-left: 4px;
+  padding-bottom: 4px;
+  border-radius: 2px;
+}
+
+#block-copy1, 
+#block-copy2{
+  height: 24px;
+  width: 24px;
+  background-color: rgba(151, 151, 151, 0.3);
+  cursor: not-allowed;
+  margin-top: 7px;
+  margin-left: 40px;
+  padding: 2px;
+  padding-left: 4px;
+  padding-bottom: 4px;
+  border-radius: 2px;
+  opacity: 0.25;
+}
 
 img[src="../../assets/copy.png"] {
-  cursor: pointer;
+  /* cursor: pointer;
   margin-top: 11px;
-  margin-left: 40px;
+  margin-left: 40px; */
+  height: 16px;
+  width: 16px;
 }
+
+#delete1,
+#delete2 {
+  height: 24px;
+  width: 24px;
+  background-color: rgba(151, 151, 151, 0.3);
+  cursor: pointer;
+  margin-top: 7px;
+  margin-left: 10px;
+  padding-right: 1px;
+  padding-top: 1px;
+  padding-left: 6px;
+  border-radius: 2px;
+}
+
+#block-delete1,
+#block-delete2{
+  height: 24px;
+  width: 24px;
+  background-color: rgba(151, 151, 151, 0.3);
+  cursor: not-allowed;
+  margin-top: 7px;
+  margin-left: 10px;
+  padding-right: 1px;
+  padding-top: 1px;
+  padding-left: 6px;
+  border-radius: 2px;
+  opacity: 0.25;
+}
+
 
 .yesterday_task_header {
   padding-top: 50px;
@@ -252,7 +308,7 @@ button.view_all_task::before {
   left: -25%;
   display: flex;
   width: 350px;
-  margin-left: 32%;
+  margin-left: 30%;
   font-size: 18px;
   font-weight: 500;
   color: rgba(79, 86, 105, 1);
@@ -332,15 +388,16 @@ input[value="Cancel"]:active {
 }
 
 .dot {
-  height: 15px;
-  width: 15px;
+  cursor: pointer;
+  height: 13px;
+  width: 13px;
   border-radius: 50%;
   display: inline-block;
   margin-top: 10px;
   border-style: solid;
   border-width: 2px;
-  border-color: rgb(219, 219, 219);
-  /* border-color: rgba(0, 0, 0, 0.3); */
+  /* border-color: rgb(219, 219, 219); */
+  border-color: rgba(0, 0, 0, 0.3);
 }
 
 .dot-blank {
@@ -349,9 +406,14 @@ input[value="Cancel"]:active {
 
 .dot-fill {
   /* border: none; */
+  border-color:rgb(219, 219, 219);
   border-width: 4px;
   /* background-color: rgba(5, 87, 255, 1); */
   background-color: rgba(0, 0, 0, 0.54);
+}
+
+.mobview {
+  visibility: hidden;
 }
 
 @media screen and (max-width: 1090px) {
@@ -367,7 +429,13 @@ input[value="Cancel"]:active {
     padding-top: 2px;
   }
 
-  img[src="../../assets/copy.png"] {
+  #copy1,
+  #copy2 {
+    margin-left: 25px;
+  }
+
+  #block-copy1,
+  #block-copy2{
     margin-left: 25px;
   }
 
@@ -389,7 +457,13 @@ input[value="Cancel"]:active {
     padding-top: 2px;
   }
 
-  img[src="../../assets/copy.png"] {
+  #copy1,
+  #copy2 {
+    margin-left: 10px;
+  }
+
+  #block-copy1,
+  #block-copy2{
     margin-left: 10px;
   }
 
@@ -452,13 +526,17 @@ input[value="Cancel"]:active {
     padding-left: 15px;
   }
 
-  img[src="../../assets/copy.png"] {
+  #copy1,
+  #copy2 {
     cursor: pointer;
-    margin-top: 10px;
-    padding-right: 58px;
     margin-left: 10px;
   }
 
+  #block-copy1,
+  #block-copy2{
+    margin-left: 10px;
+  }
+  
   .left-part {
     display: none;
   }
@@ -517,6 +595,83 @@ input[value="Cancel"]:active {
   }
 }
 
+@media screen and (max-width: 520px) {
+  #copy1,
+  #copy2 {
+    visibility: hidden;
+  }
+
+  #delete1,
+  #delete2 {
+    visibility: hidden;
+  }
+
+  .mobview {
+    visibility: visible;
+    background-color: rgba(255, 255, 255, 1);
+    position: absolute;
+    top: 90%;
+    display: flex;
+    padding: 16px 0px;
+    width: 100%;
+  }
+
+  .right-part {
+    height: 92%;
+  }
+
+  .selected-count {
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 9px;
+    margin-left: 10px;
+  }
+
+  #copy-mini {
+    height: 24px;
+    width: 24px;
+    background-color: rgba(151, 151, 151, 0.3);
+    cursor: pointer;
+    margin-top: 7px;
+    margin-left: 30px;
+    padding: 2px;
+    padding-left: 4px;
+    padding-bottom: 4px;
+    border-radius: 2px;
+  }
+
+  #delete-mini {
+    height: 24px;
+    width: 24px;
+    background-color: rgba(151, 151, 151, 0.3);
+    cursor: pointer;
+    margin-top: 7px;
+    margin-left: 20px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-left: 6px;
+    border-radius: 2px;
+  }
+
+  .select-all {
+    font-weight: 600;
+    font-size: 13px;
+    margin-top: 9px;
+    margin-left: 10px;
+    position: absolute;
+    right: 50px;
+  }
+
+  #block-copy1,
+  #block-copy2,
+  #block-delete1,
+  #block-delete2{
+    visibility: hidden;
+  }
+  /* .select-all-desktop{ */
+    /* display: none; */
+  /* } */
+}
 
 @media screen and (max-width: 480px) {
   .alt-View {
@@ -527,18 +682,25 @@ input[value="Cancel"]:active {
     font-size: 22px;
   }
 
+  .total_time{
+    width: 500px;
+  }
+
   .total_time_border {
     width: 160px;
     height: 37px;
   }
 
   .total_time_text {
-    padding-left: 4px;
+    padding-left: 9px;
+    padding-right: 7px;
     font-size: 14px;
   }
 
   .spent_text {
     font-size: 14px;
+    padding-right: 5px;
+    padding-left: 0px;
   }
 
   .last_edit_label {
@@ -569,14 +731,14 @@ input[value="Cancel"]:active {
     font-weight: 600;
   }
 
-  .today_header {
+  /* .today_header {
     margin-left: 20px;
     padding-top: 18px;
   }
 
   .total_time {
     margin-left: 20px;
-  }
+  } */
 
   .left-arrow {
     height: 20px;
@@ -596,6 +758,11 @@ input[value="Cancel"]:active {
   .total_time_border {
     width: 160px;
     height: 35px;
+  }
+
+  .select-all {
+    position: absolute;
+    right: 20px;
   }
 }
 
@@ -631,39 +798,31 @@ input[value="Cancel"]:active {
   }
 
   .total_time_border {
-    height: 38px;
+    height: 35px;
+    width: 134px;
+    margin-left: 15px;
   }
 
   .last_edit_label {
-    padding-top: 0px;
+    font-size: 10px;
+    padding-top: 5px;
+    padding-left: 5px;
   }
 
   .status {
     position: relative;
     right: 5%;
   }
-}
-
-@media screen and (max-width: 369px) {
-  .last_edit_label {
-    font-size: 10px;
-    padding-top: 5px;
-    /* visibility: hidden; */
-  }
-
-  .total_time_border {
-    height: 35px;
-    width: 142px;
-  }
 
   .total_time_text {
-    font-size: 13px;
+    font-size: 12px;
     padding-left: 7px;
+    padding-right: 1px;
   }
 
   .spent_text {
-    font-size: 13px;
+    font-size: 12px;
+    padding-left: 4px;
   }
-
 
 }

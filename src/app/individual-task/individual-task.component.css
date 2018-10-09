@@ -34,7 +34,8 @@ textarea {
   margin-top: 10px;
   border-style: solid;
   border-width: 2px;
-  border-color:rgb(219, 219, 219);
+  border-color:rgba(0, 0, 0, 0.3);
+  cursor: pointer;
   /* border-color: rgba(0, 0, 0, 0.3); */
 }
 
@@ -44,6 +45,7 @@ textarea {
 
 .dot-fill{
   /* border: none; */
+  border-color:rgb(219, 219, 219);
   border-width: 3px;
   background-color: rgba(0, 0, 0, 0.55);
 }
@@ -318,7 +320,7 @@ div.cancel_edit:active {
   }
 
   .time_border {
-    margin-left: -6px;
+    margin-left: 20px;
     padding: 5px 3px 4px 3px;
   }
 }
