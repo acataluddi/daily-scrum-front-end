@@ -16,7 +16,7 @@ export class IndividualTaskComponent implements OnInit {
   @Output() timeChangeEvent = new EventEmitter<Task>();
   @Output() selectedTask = new EventEmitter<Task>();
   @Output() unselectedTask = new EventEmitter<Task>();
-  @Output() deleteTask = new EventEmitter<Task>();
+  // @Output() deleteTask = new EventEmitter<Task>();
   @Output() popTask = new EventEmitter<Task>();
   @ViewChild('des') des: ElementRef;
   @ViewChild('imp') imp: ElementRef;
@@ -55,6 +55,7 @@ export class IndividualTaskComponent implements OnInit {
     if (this.task.description == '' || this.task.description == null) {
       this.show_save = true;
       this.saved = false;
+      this.stageTaskDesc(this.task)
     } else {
       this.show_save = false;
       this.saved = false;
@@ -168,10 +169,10 @@ export class IndividualTaskComponent implements OnInit {
     this.popTask.emit(task)
   }
 
-  delTask(deltask: Task) {
-    this.saved = false
-    this.deleteTask.emit(deltask);
-  }
+  // delTask(deltask: Task) {
+  //   this.saved = false
+  //   this.deleteTask.emit(deltask);
+  // }
 
   focus() {
     setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });

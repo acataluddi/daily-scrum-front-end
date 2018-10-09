@@ -1,6 +1,6 @@
 <div class="part_1">
   <div>
-      <span *ngIf="editable == false" class="dot dot-color-1"></span>
+    <span *ngIf="editable == false" class="dot dot-color-1"></span>
     <span *ngIf="check==false && editable" class="dot dot-blank" (click)="check=true; checked(task)"></span>
     <span *ngIf="check && editable" class="dot dot-fill" (click)="check=false; unchecked(task)"></span>
     <!-- <div *ngIf="check" class="dot">
@@ -13,18 +13,19 @@
     <span *ngIf="tid%3!=0 && tid%5!=0  && tid%6!=0 && tid%7!=0" class="dot dot-color-5"></span> -->
   </div>
   <div class="description">
-    <textarea id="description{{task.taskId}}" class="description-textarea" [disabled]="!editable" autosize rows="1" (blur)="updateDescription()"
-      (click)="show_save=true; stageTaskDesc(task)" [(ngModel)]="task.description" placeholder="Add description Here"></textarea>
+    <textarea id="description{{task.taskId}}" class="description-textarea" [disabled]="!editable" autosize rows="1"
+      (blur)="updateDescription()" (click)="show_save=true; stageTaskDesc(task)" [(ngModel)]="task.description"
+      placeholder="Add description Here"></textarea>
   </div>
-  <div *ngIf="editable && show_save==false" (click)="delTask(task)">
-  <img src="../../assets/delete_mail.png">
-  </div>
+  <!-- <div *ngIf="editable && show_save==false" (click)="delTask(task)">
+    <img src="../../assets/delete_mail.png">
+  </div> -->
   <!-- <div class="copy" (click)="copy(task.taskId)" >Copy</div> -->
 </div>
 <div class="no_desc" *ngIf="noDesc">Enter Task description</div>
 
-<textarea class="impediments" id="impediments{{task.taskId}}" [disabled]="!editable" autosize rows="1" *ngIf="show_impediment==true" (blur)="updateImpediment()"
-  (click)="show_save=true; stageTaskDesc(task)" [(ngModel)]="task.impediments" placeholder="Add impediments Here"></textarea>
+<textarea class="impediments" id="impediments{{task.taskId}}" [disabled]="!editable" autosize rows="1" *ngIf="show_impediment==true"
+  (blur)="updateImpediment()" (click)="show_save=true; stageTaskDesc(task)" [(ngModel)]="task.impediments" placeholder="Add blockers/impediments Here"></textarea>
 
 <div class="time" (click)="stageTaskTime(task)">
   <div class="time_border" *ngIf="(task.hourSpent>0 || task.minuteSpent>0) && edit_time_spent==false" (click)="show_save=true; edit_time_spent=editable">
@@ -49,7 +50,7 @@
   </div>
 
   <div class="add_impediment" *ngIf="task.impediments== '' && show_impediment==false && editable" (click)="show_save=true; show_impediment=true; focus()">
-    Add Impediments
+    Add Blockers
   </div>
 </div>
 <div class="no_time" *ngIf="noTime">Enter Time spent</div>
