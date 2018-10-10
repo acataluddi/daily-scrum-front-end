@@ -12,6 +12,8 @@ import { ProjectviewallService } from '../service/projectviewall.service';
 import { ProjectUpdated } from '../model/projectupdated-model';
 import { TaskPageAdminComponent } from '../task-page-admin/task-page-admin.component';
 import { Subscription } from 'rxjs';
+import { FeedbackService } from "../service/feedback.service";
+import { Feedback } from '../model/feedback-model';
 
 
 @Injectable({
@@ -42,6 +44,7 @@ export class HeaderComponent implements OnInit {
   show_signout;
   show_projectlist;
   showTooltip;
+  feedback: Feedback;
 
   length;
   constructor(
@@ -52,7 +55,8 @@ export class HeaderComponent implements OnInit {
     private projectService: DashboardService,
     private route: ActivatedRoute,
     private taskService: ProcessIndividualTaskService,
-    private dashboardService: DashboardService) {
+    private dashboardService: DashboardService,
+    private feedbackService: FeedbackService) {
     this.subscription = taskService.selected1.subscribe(
       data => {
         this.setSelected(data)
@@ -65,6 +69,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.feedback = this.initializeNewFeedback(this.feedback);
+    this.postFeedback(this.feedback);
+    this.fetchFeedbacks();
     this.operation = localStorage.getItem("currentOperation");
     this.showTooltip = false;
     this.show_dailyscrum = false
@@ -199,4 +206,29 @@ export class HeaderComponent implements OnInit {
       this.show_signout = false
     }
   }
+
+  fetchFeedbacks(){
+    this.feedbackService.getFeedbacks()
+    .subscribe(feedbacks => {
+      console.log(feedbacks);
+    });
+  }
+
+  postFeedback(userFeedback: Feedback){
+    this.feedbackService.sendFeedback(userFeedback)
+    .subscribe(feedbacks => {
+      console.log(feedbacks);
+    });
+  }
+
+  initializeNewFeedback(feedback: Feedback): Feedback {
+    feedback = {
+      feedbackId: '',
+      feedbackDate: '',
+      userName: '',
+      userEmail: '',
+      feedbackDescription: 'hello'
+    }
+    return feedback;
+}
 }
