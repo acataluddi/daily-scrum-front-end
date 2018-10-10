@@ -245,7 +245,6 @@ export class DailyStatusComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.socialAuthService.authState.subscribe((user) => {
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
@@ -259,14 +258,12 @@ export class DailyStatusComponent implements OnInit {
           });
       }
     });
-    // this.checkthis()
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
     this.month = this.months[this.d.getMonth()];
     this.date = this.d.getDate();
     this.year = this.d.getFullYear();
     this.myvalue = true;
-    this.myDateValue = new Date();
     this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
     this.yesterdayval = "Yesterday's Tasks";
 
@@ -795,6 +792,7 @@ export class DailyStatusComponent implements OnInit {
       this.maxDate = new Date(+parts2[2], +(parts2[1]) - 1, +parts2[0]);
     }
     this.myDateValue = this.maxDate;
+    this.newDate = this.maxDate;
   }
 
   //   open(){

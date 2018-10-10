@@ -82,7 +82,6 @@ export class TaskPageAdminComponent implements OnInit {
       });
   }
   ngOnInit() {
-    // this.minDate = new Date(2018, 8, 10);
     this.maxDate = new Date();
     this.myDateValue = new Date();
     this.projectId = localStorage.getItem("projectId");
@@ -118,16 +117,7 @@ export class TaskPageAdminComponent implements OnInit {
             localStorage.setItem('addedDate', m.addedDate);
             localStorage.setItem('deletedDate', m.deletedDate);
           }
-          var dateParts1 = m.deletedDate.split('-');
-          var date1 = new Date(+dateParts1[2], +(dateParts1[1]) - 1, +dateParts1[0]);
-          var dateParts2 = m.addedDate.split('-');
-          var date2 = new Date(+dateParts2[2], +(dateParts2[1]) - 1, +dateParts2[0]);
-          if ((m.isActive === false && (date1 < this.selectedDate)) ||
-            (this.selectedDate < date2)) {
-            m.showMember = false;
-          } else {
-            m.showMember = true;
-          }
+          m.showMember = true;
         }
       });
   }
