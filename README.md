@@ -1,27 +1,33 @@
-# DailyScrum
+# Daily Scrum
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+The Daily Scrum is a tool for managing, evaluating and documenting everyday progress of the software development. 
 
-## Development server
+## Getting Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Prerequisites
 
-## Code scaffolding
+This project was generated with [Angular CLI](https://angular.io) version 6.0.8.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Set up the Development Environment
 
-## Build
+Install Node.js and npm if they are not already on your machine.
+Then install the Angular CLI globally:
+	npm install -g @angular/cli
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Build
 
-## Running unit tests
+Run 'ng build' to build the project. 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Development server
 
-## Running end-to-end tests
+Run 'ng serve' for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Setting the environment variables
 
-## Further help
+Set the apiBase value to the Server URL and the loginURL value to your localhost with port no. 4200.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Hosting the application
+
+Run the command 'ng serve --host=(your IP address).xip.io --port=4200' to host the application on your system.
+
+
