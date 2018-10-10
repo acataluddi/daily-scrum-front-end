@@ -24,7 +24,7 @@ export class FeedbackService {
   sendFeedback(userFeedback: Feedback): Observable<Feedback> {
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     return this.http.post<Feedback>(this.posturl,
-      JSON.stringify(userFeedback.feedbackDescription), { headers }
+      JSON.stringify(userFeedback), { headers }
     );
   }
 
