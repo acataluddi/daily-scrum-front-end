@@ -5,12 +5,14 @@ import { ProcessIndividualTaskService } from '../service/process-individual-task
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { NavigationdataService } from '../service/navigationdata.service'
 import { DatePipe } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from 'angular-6-social-login';
 import { LoginService } from '../service/login.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { element } from '@angular/core/src/render3/instructions';
 
 @Injectable({
   providedIn: 'root'
@@ -33,8 +35,11 @@ export class DailyStatusComponent implements OnInit {
 
   MockYesterdayTasks: Task[];
   MockTodayTasks: Task[];
-  TodayTasks: Task[];
-  YesterdayTasks: Task[];
+  TodayTasks: Task[] = [];
+  YesterdayTasks: Task[] = [];
+
+  selectedYesterdaysTasks: Task[] = [];
+  selectedTodaysTasks: Task[] = [];
 
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
@@ -89,15 +94,39 @@ export class DailyStatusComponent implements OnInit {
   flag = false;
   projectId = localStorage.getItem("projectId");
   status = false;
+
   lastEdit1;
   lastEdit2;
+
   lastEditString1 = '';
   lastEditString2 = '';
+
+  editable1;
+  editable2;
+
+  checkbox1 = false;
+  checkbox2 = false;
+
+  numOfSelected = ''
+  // selectAllText = false
+  copyCard = false
+  getElementStatus1 = false
+  getElementStatus2 = false
+
+  elementCopy1;
+  elementDelete1;
+  elementCopy2;
+  elementDelete2;
+
+  private eventsSubject1 = new Subject<boolean>();
+  private eventsSubject2 = new Subject<boolean>();
+  private HideSaved1 = new Subject<boolean>();
+  private HideSaved2 = new Subject<boolean>();
+
   changeProjectsubscription: Subscription;
   routeparamsub: any;
   selectmem: Subscription;
-  editable1;
-  editable2;
+
   name = localStorage.getItem("taskName")
 
   constructor(
@@ -214,7 +243,6 @@ export class DailyStatusComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.socialAuthService.authState.subscribe((user) => {
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
@@ -228,14 +256,12 @@ export class DailyStatusComponent implements OnInit {
           });
       }
     });
-    // this.checkthis()
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
     this.month = this.months[this.d.getMonth()];
     this.date = this.d.getDate();
     this.year = this.d.getFullYear();
     this.myvalue = true;
-    this.myDateValue = new Date();
     this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
     this.yesterdayval = "Yesterday's Tasks";
 
@@ -247,6 +273,8 @@ export class DailyStatusComponent implements OnInit {
     this.currentProject = localStorage.getItem("currentProject")
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
 
+    this.numOfSelected = '0'
+
   }
 
   ngOnDestroy() {
@@ -255,13 +283,25 @@ export class DailyStatusComponent implements OnInit {
 
   getTodaysTask(Todays) {
     this.MockTodayTasks = Todays;
-    this.TodayTasks = Todays;
+    if (Todays.length != 0) {
+      Todays.forEach(element => {
+        this.TodayTasks.push(element)
+      });
+    } else {
+      this.TodayTasks = []
+    }
     this.status = true;
   }
 
   getYesterdaysTask(Yesterdays) {
     this.MockYesterdayTasks = Yesterdays;
-    this.YesterdayTasks = Yesterdays;
+    if (Yesterdays.length != 0) {
+      Yesterdays.forEach(element => {
+        this.YesterdayTasks.push(element)
+      });
+    } else {
+      this.YesterdayTasks = []
+    }
   }
 
   calculateTotalTime(taskArray, value) {
@@ -318,10 +358,6 @@ export class DailyStatusComponent implements OnInit {
     }
     this.totalhour += extrahour;
     if ((this.totalhour > 16) || (this.totalhour === 16 && this.totalminute > 0)) {
-      // this.task1.hourSpent = old_hour;
-      // this.task1.minuteSpent = old_minute;
-      // var template = document.getElementById("template");
-      // this.open()
       alert('Total time worked cannot be more than 16 hours.');
 
       switch (value) {
@@ -329,11 +365,17 @@ export class DailyStatusComponent implements OnInit {
           this.total_hours_spent1 = this.totalhour;
           this.total_minutes_spent1 = this.totalminute;
           this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+          this.selectedYesterdaysTasks = []
+          this.checkbox1 = false
+          this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
           break;
         case 2: this.creatednewtoday = true
           this.total_hours_spent2 = this.totalhour;
           this.total_minutes_spent2 = this.totalminute;
           this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+          this.selectedTodaysTasks = []
+          this.checkbox2 = false
+          this.blockCopyDelete(this.selectedTodaysTasks.length, 2)
           break;
       }
     }
@@ -354,7 +396,6 @@ export class DailyStatusComponent implements OnInit {
   }
 
   addTodayTask() {
-    // console.log(this.total_hours_spent2)
     if ((this.total_hours_spent2 > 16) || (this.total_hours_spent2 === 16 && this.total_minutes_spent2 >= 0)) {
       this.creatednewtoday = true;
     } else {
@@ -367,7 +408,7 @@ export class DailyStatusComponent implements OnInit {
         this.oldtodaytask = ts;
         this.MockTodayTasks.push(ts);
         this.creatednewtoday = false;
-        setTimeout(() => {document.getElementById('description' + ts.taskId).focus()});
+        setTimeout(() => { document.getElementById('description' + ts.taskId).focus() });
       }
     }
   }
@@ -385,7 +426,7 @@ export class DailyStatusComponent implements OnInit {
         this.oldyesterdaytask = ts;
         this.MockYesterdayTasks.push(ts);
         this.creatednewyesterday = false;
-        setTimeout(() => {document.getElementById('description' + ts.taskId).focus()});
+        setTimeout(() => { document.getElementById('description' + ts.taskId).focus() });
       }
 
     }
@@ -538,24 +579,21 @@ export class DailyStatusComponent implements OnInit {
     var formateditTime = editTime.toString()
     if (this.newOld(this.task1, this.TodayTasks)) {
       //insert
-      if (this.task1.taskDate == '') {
-        this.task1.taskDate = this.todayTaskDate;
-        this.task1.projectId = this.projectId;
-        this.task1.lastEdit = formateditTime
-        this.taskservice.addNewTask(this.task1)
-          .subscribe(msg => console.log(msg));
-      } else {
-        //update
-        this.task1.lastEdit = formateditTime
-        this.taskservice.updateOldTask(this.task1)
-          .subscribe(msg => console.log(msg));
-      }
+      this.task1.taskDate = this.todayTaskDate;
+      this.task1.projectId = this.projectId;
+      this.task1.lastEdit = formateditTime
+      this.taskservice.addNewTask(this.task1)
+        .subscribe(msg => console.log(msg));
+      this.checkbox2 = false
+      this.TodayTasks.push(this.task1)
     }
     else {
       //update 
       this.task1.lastEdit = formateditTime
       this.taskservice.updateOldTask(this.task1)
         .subscribe(msg => console.log(msg));
+      var index = this.TodayTasks.findIndex(element => element.taskId == this.task1.taskId)
+      this.TodayTasks[index] = this.task1
     }
     this.getLastEdit(this.TodayTasks, 2)
     this.calculateTotalTime(this.MockTodayTasks, 2)
@@ -569,22 +607,20 @@ export class DailyStatusComponent implements OnInit {
 
     if (this.newOld(newtask, this.YesterdayTasks)) {
       //insert
-      if (this.task1.taskDate == '') {
-        this.task1.taskDate = this.yesterdayTaskDate;
-        this.task1.projectId = this.projectId;
-        this.task1.lastEdit = formateditTime
-        this.taskservice.addNewTask(this.task1).subscribe(
-          msg => console.log(msg));
-      } else {
-        this.task1.lastEdit = formateditTime
-        this.taskservice.updateOldTask(this.task1)
-          .subscribe(msg => console.log(msg));
-      }
+      this.task1.taskDate = this.yesterdayTaskDate;
+      this.task1.projectId = this.projectId;
+      this.task1.lastEdit = formateditTime
+      this.taskservice.addNewTask(this.task1).subscribe(
+        msg => console.log(msg));
+      this.checkbox1 = false
+      this.YesterdayTasks.push(this.task1)
     } else {
       //update
       this.task1.lastEdit = formateditTime
       this.taskservice.updateOldTask(this.task1)
         .subscribe(msg => console.log(msg));
+      var index = this.YesterdayTasks.findIndex(element => element.taskId == this.task1.taskId)
+      this.YesterdayTasks[index] = this.task1
     }
     this.getLastEdit(this.YesterdayTasks, 1)
     this.calculateTotalTime(this.MockYesterdayTasks, 1)
@@ -592,17 +628,17 @@ export class DailyStatusComponent implements OnInit {
 
   newOld(keyTask, taskArray) {
     var flag = true;
-    var length = taskArray.length;
-    if (length == 0) {
+    if (taskArray.length == 0) {
       flag = true
-    }
-    else {
-      var task = taskArray[length - 1]
-      if (keyTask.taskId == task.taskId) {
-        flag = true;
-      }
-      else {
+    } else {
+      var taskInArray = taskArray.find(function (element) {
+        return element.taskId == keyTask.taskId;
+      })
+
+      if (taskInArray != null) {
         flag = false
+      } else {
+        flag = true
       }
     }
     return flag;
@@ -673,13 +709,13 @@ export class DailyStatusComponent implements OnInit {
       .subscribe(data1 => {
         this.getTodaysTask(data1)
         this.calculateTotalTime(this.MockTodayTasks, 2)
-        this.getLastEdit(this.TodayTasks, 2)
+        this.getLastEdit(this.MockTodayTasks, 2)
       });
     this.taskservice.getYesterdays(yesterday, email, projectId)
       .subscribe(data => {
         this.getYesterdaysTask(data);
         this.calculateTotalTime(this.MockYesterdayTasks, 1)
-        this.getLastEdit(this.YesterdayTasks, 1)
+        this.getLastEdit(this.MockYesterdayTasks, 1)
       });
   }
 
@@ -702,7 +738,6 @@ export class DailyStatusComponent implements OnInit {
     var sdate = localStorage.getItem("startDate")
     var thePName = localStorage.getItem('currentProject')
     this.router.navigate(['/task-page-admin', this.projectId, thePName, sdate])
-    // this.router.navigate(['/task-page-admin', this.projectId, this.currentProject]);
   }
 
   changeEmail(taskMember) {
@@ -760,23 +795,223 @@ export class DailyStatusComponent implements OnInit {
       this.maxDate = new Date(+parts2[2], +(parts2[1]) - 1, +parts2[0]);
     }
     this.myDateValue = this.maxDate;
+    this.newDate = this.maxDate;
   }
 
-  deleteTask(taskArray,task, value) {
-    var index = taskArray.indexOf(task);
+  //   open(){
+  //     var template = document.getElementById('template')
+  //     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  //   }
+  //   decline(): void {
+  //     this.modalRef.hide();
+  // }
+
+  copy(selectedTasksArray, value) {
+    let text: string = '';
+    if (selectedTasksArray.length > 0) {
+      for (let task of selectedTasksArray) {
+        text += task.description + '\n';
+      }
+    } else {
+      text = ''
+    }
+    var txtArea = document.createElement("textarea");
+    txtArea.id = 'txt';
+    txtArea.style.position = 'fixed';
+    txtArea.style.top = '0';
+    txtArea.style.left = '0';
+    txtArea.style.opacity = '0';
+    txtArea.value = text;
+    document.body.appendChild(txtArea);
+    txtArea.select();
+    document.execCommand("copy");
+
+    switch (value) {
+      case 1: this.HideSaved1.next(true);
+        break;
+      case 2: this.HideSaved2.next(true);
+    }
+  }
+
+  selectedTasks(task, value) {
+
+    switch (value) {
+      case 1: this.getElement(1)
+        var exist = this.selectedYesterdaysTasks.find(function (element) {
+          return element.taskId == task.taskId;
+        });
+        if (exist == null) {
+          this.selectedYesterdaysTasks.push(task);
+        }
+        if (this.selectedYesterdaysTasks.length == this.MockYesterdayTasks.length) {
+          this.checkbox1 = true;
+        } else {
+          this.checkbox1 = false
+        }
+        this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
+        break;
+      case 2: this.getElement(2)
+        var exist = this.selectedTodaysTasks.find(function (element) {
+          return element.taskId == task.taskId;
+        });
+        if (exist == null) {
+          this.selectedTodaysTasks.push(task);
+        }
+        if (this.selectedTodaysTasks.length == this.MockTodayTasks.length) {
+          this.checkbox2 = true;
+        } else {
+          this.checkbox2 = false
+        }
+        this.numOfSelected = this.selectedTodaysTasks.length.toString()
+        if (this.selectedTodaysTasks.length != 0) {
+          this.copyCard = true
+        } else {
+          this.copyCard = false
+        }
+        this.blockCopyDelete(this.selectedTodaysTasks.length, 2)
+        break;
+    }
+  }
+
+  unselectedTasks(task, value) {
+    switch (value) {
+      case 1: var index = this.selectedYesterdaysTasks.indexOf(task);
+        this.selectedYesterdaysTasks.splice(index, 1);
+        if (this.selectedYesterdaysTasks.length == this.MockYesterdayTasks.length) {
+          this.checkbox1 = true;
+        } else {
+          this.checkbox1 = false
+        }
+        this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
+        break;
+      case 2: var index = this.selectedTodaysTasks.indexOf(task);
+        this.selectedTodaysTasks.splice(index, 1);
+        if (this.selectedTodaysTasks.length == this.MockTodayTasks.length) {
+          this.checkbox2 = true;
+        } else {
+          this.checkbox2 = false
+        }
+        this.numOfSelected = this.selectedTodaysTasks.length.toString()
+        if (this.selectedTodaysTasks.length != 0) {
+          this.copyCard = true
+        } else {
+          this.copyCard = false
+        }
+        this.blockCopyDelete(this.selectedTodaysTasks.length, 2)
+        break;
+    }
+  }
+
+  selectAll(taskArray, value) {
+    switch (value) {
+      case 1: this.getElement(1)
+        this.selectedYesterdaysTasks = [];
+        for (let task of taskArray) {
+          this.selectedYesterdaysTasks.push(task);
+        }
+        this.emitEventToChild(true, value);
+        this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
+        break;
+      case 2: this.getElement(2)
+        this.selectedTodaysTasks = [];
+        for (let task of taskArray) {
+          this.selectedTodaysTasks.push(task)
+        }
+        this.numOfSelected = this.selectedTodaysTasks.length.toString()
+        this.copyCard = true
+        this.emitEventToChild(true, value);
+        this.blockCopyDelete(this.selectedTodaysTasks.length, 2)
+        break;
+    }
+  }
+
+  unselectAll(value) {
+    // this.selectAllText = 'SELECT ALL'
+    switch (value) {
+      case 1: this.selectedYesterdaysTasks = [];
+        this.emitEventToChild(false, value);
+        this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
+        break;
+      case 2: this.selectedTodaysTasks = [];
+        this.checkbox2 = false
+        this.emitEventToChild(false, value);
+        this.numOfSelected = this.selectedTodaysTasks.length.toString()
+        this.copyCard = false
+        this.blockCopyDelete(this.selectedTodaysTasks.length, 2)
+        break;
+    }
+  }
+
+  emitEventToChild(selectAllvalue, value) {
+    switch (value) {
+      case 1: this.eventsSubject1.next(selectAllvalue)
+        break;
+      case 2: this.eventsSubject2.next(selectAllvalue)
+        break;
+    }
+  }
+
+  deleteSelected(selectedTaskArray, taskArray, value) {
+    selectedTaskArray.forEach(element => {
+      var index = taskArray.indexOf(element);
+      // var selectArrayIndex = selectedTaskArray.indexOf(element);
+      // selectedTaskArray.splice(selectArrayIndex, 1);
       taskArray.splice(index, 1);
-    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
-    this.taskservice.deleteTask(task)
-      .subscribe(msg => console.log(msg));
-      this.calculateTotalTime(taskArray, value)
-    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+      this.taskservice.deleteTask(element)
+        .subscribe(msg => console.log(msg));
+      if (value == 1) { 
+        this.YesterdayTasks.splice(index, 1)
+      } else {
+        this.TodayTasks.splice(index, 1)
+      }
+    });
+    this.calculateTotalTime(taskArray, value)
+    if (value == 1){
+      this.checkbox1 = false
+      this.selectedYesterdaysTasks = []
+    } else {
+      this.checkbox2 = false
+      this.selectedTodaysTasks = []
+    }
+    this.copyCard = false
   }
 
-//   open(){
-//     var template = document.getElementById('template')
-//     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
-//   }
-//   decline(): void {
-//     this.modalRef.hide();
-// }
+  blockCopyDelete(length, value) {
+    switch (value) {
+      case 1: if (length == 0) {
+        this.elementCopy1.setAttribute('id', 'block-copy1');
+        this.elementDelete1.setAttribute('id', 'block-delete1');
+      } else {
+        this.elementCopy1.setAttribute('id', 'copy1')
+        this.elementDelete1.setAttribute('id', 'delete1')
+      }
+        break
+      case 2: if (length == 0) {
+        this.elementCopy2.setAttribute('id', 'block-copy2');
+        this.elementDelete2.setAttribute('id', 'block-delete2');
+      } else {
+        this.elementCopy2.setAttribute('id', 'copy2')
+        this.elementDelete2.setAttribute('id', 'delete2')
+      }
+
+    }
+
+  }
+
+  getElement(value) {
+    switch (value) {
+      case 1: if (this.getElementStatus1 == false) {
+        this.elementCopy1 = document.getElementById('block-copy1');
+        this.elementDelete1 = document.getElementById('block-delete1');
+        this.getElementStatus1 = true
+      }
+        break
+      case 2: if (this.getElementStatus2 == false) {
+        this.elementCopy2 = document.getElementById('block-copy2');
+        this.elementDelete2 = document.getElementById('block-delete2');
+        this.getElementStatus2 = true
+      }
+        break
+    }
+  }
 }

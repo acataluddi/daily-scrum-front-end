@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/core';
 import { Project, member } from "../model/project-model"
 import { ProjectService } from "../service/project.service";
+import { Employee } from "../model/member-model";
 import { AuthService } from 'angular-6-social-login';
 import { LoginService } from "../service/login.service";
 import { Router } from '@angular/router';
@@ -28,6 +29,8 @@ export class ProjectComponent implements OnInit {
     pDesc;
     pMembers;
     flag = false;
+    show = [];
+    Members : Employee;
     invalidProjectName = false;
     invalidMemberLength = false;
     memberRepeat = false;
@@ -101,6 +104,13 @@ export class ProjectComponent implements OnInit {
             this.buttonText = 'Create Project';
             this.project = this.initializeNewProject(this.project);
         }
+        this.projectservice.getMembers()
+           .subscribe(memberArr => {
+                 if (memberArr != null) {
+                    this.getMembers(memberArr)
+                }
+            });
+          
     }
 
     generateId() {
@@ -148,6 +158,7 @@ export class ProjectComponent implements OnInit {
 
     initializeNewMember(m: member): member {
         m.email = "";
+       
         m.role = "Select role";
         m.isActive = true;
         return m;
@@ -168,6 +179,7 @@ export class ProjectComponent implements OnInit {
     addNewMem() {
         var me = new member();
         me = this.initializeNewMember(me);
+      
         var membersLength = this.project.members.length;
         if (membersLength > 0) {
             this.lastMember = this.project.members[membersLength - 1];
@@ -341,4 +353,15 @@ export class ProjectComponent implements OnInit {
     decline(): void {
         this.modalRef.hide();
     }
+    getMembers(memberArr) {
+        this.Members = memberArr;
+
+    }
+    dropdown(index) {
+        this.show[index] = !this.show[index];
+    }
+    changeProject(newMailId,mem:member) {
+        mem.email = newMailId;
+        mem.invalidMemberEmail=false;
+      }
 }

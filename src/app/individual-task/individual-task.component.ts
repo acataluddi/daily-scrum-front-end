@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Task } from "../model/task-model";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-individual-task',
@@ -10,9 +11,12 @@ export class IndividualTaskComponent implements OnInit {
 
   @Input() task: Task;
   @Input() editable: boolean;
+  @Input() events: Observable<boolean>;
+  @Input() hideSavedEvent: Observable<boolean>;
   @Output() timeChangeEvent = new EventEmitter<Task>();
-  // @Output() addUpdateTask = new EventEmitter<Task>();
-  @Output() deleteTask = new EventEmitter<Task>();
+  @Output() selectedTask = new EventEmitter<Task>();
+  @Output() unselectedTask = new EventEmitter<Task>();
+  // @Output() deleteTask = new EventEmitter<Task>();
   @Output() popTask = new EventEmitter<Task>();
   @ViewChild('des') des: ElementRef;
   @ViewChild('imp') imp: ElementRef;
@@ -37,16 +41,27 @@ export class IndividualTaskComponent implements OnInit {
   stageDesc = false
   stageTime = false
 
+  check = false;
+
+  eventsSubscription: any;
+  copiedSubscription: any;
   constructor() { }
 
   ngOnInit() {
+    this.eventsSubscription = this.events.subscribe((ischecked) =>
+      this.check = ischecked);
+    this.copiedSubscription = this.hideSavedEvent.subscribe((hideSaved) =>
+      this.saved = false);
     if (this.task.description == '' || this.task.description == null) {
       this.show_save = true;
       this.saved = false;
+      this.stageTaskDesc(this.task)
     } else {
       this.show_save = false;
       this.saved = false;
     }
+
+    this.check = false
 
     this.tid = parseInt(this.task.taskId);
     if (this.task.impediments === "") {
@@ -98,7 +113,9 @@ export class IndividualTaskComponent implements OnInit {
       this.noDesc = false;
       this.noTime = false;
       this.show_save = false;
-
+      setTimeout(()=>{  
+        this.saved = false;
+   }, 5000);
     }
     this.stageDesc = false;
     this.stageTime = false;
@@ -154,12 +171,24 @@ export class IndividualTaskComponent implements OnInit {
     this.popTask.emit(task)
   }
 
-  delTask(deltask: Task) {
-    this.saved = false
-    this.deleteTask.emit(deltask);
-  }
-
   focus() {
     setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });
+  }
+
+  copy(id) {
+    console.log(id)
+    let copyText = document.getElementById('description' + id) as HTMLInputElement;
+    console.log(copyText.value)
+    copyText.select()
+    document.execCommand("copy");
+  }
+
+  checked(task) {
+    // console.log(task)
+    this.selectedTask.emit(task)
+  }
+
+  unchecked(task) {
+    this.unselectedTask.emit(task)
   }
 }

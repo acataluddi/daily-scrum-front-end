@@ -66,9 +66,6 @@ export class ProcessIndividualTaskService {
       .set("taskId", taskId)
       .set("memberEmail", memberEmail)
       .set("token", localStorage.getItem("token"))
-    
-    console.log(this.url, {params:params})
-  
     return this.http.delete<any>(this.url, {params})
   }
 

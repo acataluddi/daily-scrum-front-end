@@ -26,31 +26,70 @@ textarea {
   margin-top: 32px;
 }
 
+/* .ind-task{
+  height: 154px;
+} */
+
 .dot {
-  height: 15px;
-  width: 15px;
+  height: 13px;
+  width: 13px;
   border-radius: 50%;
   display: inline-block;
-  margin-top: 5px;
+  margin-top: 11px;
+  border-style: solid;
+  border-width: 2px;
+  border-color:rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  /* border-color: rgba(0, 0, 0, 0.3); */
+}
+
+.dot-blank{
+  background-color: #ffffff;
+}
+
+.dot-fill{
+  border-color:rgb(219, 219, 219);
+  border-width: 4px;
+  background-color: rgba(0, 0, 0, 0.54);
 }
 
 .dot-color-1 {
-  background-color: rgb(190, 114, 114);
+  border: none;
+  height: 12px;
+  width: 12px;
+  cursor: default;
+  background-color: rgba(0 ,0 ,0, 0.3);
 }
 
 .dot-color-2 {
+  border: none;
+  height: 12px;
+  width: 12px;
+  cursor: default;
   background-color: rgb(24, 50, 104);
 }
 
 .dot-color-3 {
+  border: none;
+  height: 12px;
+  width: 12px;
+  cursor: default;
   background-color: rgb(31, 132, 179);
 }
 
 .dot-color-4 {
-  background-color: rgb(241, 141, 26);
+  border: none;
+  height: 12px;
+  width: 12px;
+  cursor: default;
+  background-color: rgb(238, 160, 70);
 }
 
 .dot-color-5 {
+  border: none;
+  height: 12px;
+  width: 12px;
+  cursor: default;
   background-color: rgb(70, 209, 133);
 }
 
@@ -158,6 +197,14 @@ img[src="../../assets/delete_mail.png"]{
   width: 20px;
 }
 
+.copy{
+  margin-top: 2px;
+  margin-left: 5px;
+  color: rgba(79, 86, 105, 0.5);
+  /* padding: 13px 0px 0px 50px; */
+  cursor: pointer;
+}
+
 div.add_impediment:hover,
 div.add_hours:hover,
 div.update_value:hover,
@@ -208,7 +255,7 @@ div.cancel_edit:active {
 .status {
   display: flex;
   position: relative;
-  top: 32px;
+  top: 12px;
   right: 30px;
 }
 
@@ -240,6 +287,15 @@ div.cancel_edit:active {
   }
 }
 
+@media screen and (max-width: 550px) {
+  .description{
+    font-size: 15px;
+  }
+
+  .impediments{
+    font-size: 14px;
+  }
+}
 @media screen and (max-width: 480px) {
   .add_impediment {
     margin-left: 20px;
@@ -281,7 +337,7 @@ div.cancel_edit:active {
   }
 
   .time_border {
-    margin-left: -6px;
+    margin-left: 20px;
     padding: 5px 3px 4px 3px;
   }
 }

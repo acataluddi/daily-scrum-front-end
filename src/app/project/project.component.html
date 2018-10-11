@@ -20,14 +20,14 @@
       <div class="projectmembersclass" id="projectmembers" *ngIf="showAddMember==true">
         <div class="teamclass">TEAM</div>
         <hr>
-        <div class="memberclass" *ngFor="let mem of project.members">
+        <div class="memberclass" *ngFor="let mem of project.members;let i=index">
           <div class="member">
             <input id="mail{{mem.email}}" type="text" class="email-input" placeholder="Email" [(ngModel)]="mem.email"
-              (click)="mem.invalidMemberEmail=false; memberRepeat=false" (blur)="validteEmailOnBlur(mem)">
+              (click)="mem.invalidMemberEmail=false; memberRepeat=false " (blur)="validteEmailOnBlur(mem)" (keyup)="show[i]=true">
             <div align="right" class="role-group">
               <div class="role" *ngIf="!mem.roleSelected">
                 <select id="role{{mem.role}}" [(ngModel)]="mem.role" (ngModelChange)="onRoleChange($event, mem)"
-                  (click)="mem.invalidRole=false">
+                  (click)="mem.invalidRole=false;show[i]=false">
                   <option selected disabled>
                     Select role
                   </option>
@@ -66,10 +66,13 @@
               <div class="delete" (click)="delete(this.mem)"><img src="../../assets/delete_mail.png"></div>
             </div>
           </div>
-          <small *ngIf="mem.invalidMemberEmail" class="error projectmembersclass">
-            Invalid email
+          <div *ngIf ="show[i]" class="dropdown-content">
+            <div  *ngFor = "let employee of Members | filterPipe:mem.email"  (click)="changeProject(employee.companyEmail,mem);show[i]=false">{{employee.companyEmail}}</div>
+          </div>
+          <small *ngIf="mem.invalidMemberEmail" class="projectmembersclass error1">
+            Please enter a valid email
           </small>
-          <small *ngIf="mem.invalidRole" class="error projectmembersclass">
+          <small *ngIf="mem.invalidRole" class="projectmembersclass error1">
             Please select a role
           </small>
         </div>

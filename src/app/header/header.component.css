@@ -459,6 +459,26 @@ textarea:focus {
     right: 5.5%;
   }
 
+  .usermailclass {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 32px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: absolute;
+    left: 206.54%;
+    top: 23.34%;
+  }
+
+  .arrow2 {
+    position: fixed;
+    top: 4%;
+    right: 1%;
+  }
+
+
 }
 
 @media only screen and (max-width: 500px) {

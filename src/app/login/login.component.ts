@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.initializeMember();
+    localStorage.setItem("timerCounting", "no");
   }
 
   member: Member;
@@ -55,6 +56,15 @@ export class LoginComponent implements OnInit {
         this.loginservice.loginMember(userData.idToken)
           .subscribe(msg => {
             if (msg.email === this.member.email) {
+              localStorage.setItem("timerCounting", "yes");
+              var time = new Date();
+              localStorage.setItem("timerTime", time.getTime().toString());
+              var timeoutCounter = setTimeout(function () {
+                localStorage.clear();
+                alert('Your session has been timed out, please login again');
+                clearTimeout(timeoutCounter);
+                window.location.reload();
+              }, 2700000);
               localStorage.setItem("logged", "true");
               localStorage.setItem("email", msg.email);
               localStorage.setItem("userType", msg.userType);
