@@ -319,6 +319,12 @@ textarea:focus {
   color: rgb(255, 255, 255);
 }
 
+small.error{
+  font-family: Arial, Helvetica, sans-serif;
+  color: red;
+  text-align: left;
+}
+
 .submit {
   height: 34px;
   width: 80px;

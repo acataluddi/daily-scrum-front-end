@@ -14,6 +14,8 @@ import { TaskPageAdminComponent } from '../task-page-admin/task-page-admin.compo
 import { Subscription } from 'rxjs';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { FeedbackService } from "../service/feedback.service";
+import { Feedback } from '../model/feedback-model';
 
 
 @Injectable({
@@ -46,6 +48,8 @@ export class HeaderComponent implements OnInit {
   show_projectlist;
   showTooltip;
   show_feedback;
+  feedback: Feedback;
+  invalidDescription;
 
   length;
   constructor(
@@ -57,7 +61,8 @@ export class HeaderComponent implements OnInit {
     private modalService: BsModalService,
     private route: ActivatedRoute,
     private taskService: ProcessIndividualTaskService,
-    private dashboardService: DashboardService) {
+    private dashboardService: DashboardService,
+    private feedbackService: FeedbackService) {
     this.subscription = taskService.selected1.subscribe(
       data => {
         this.setSelected(data)
@@ -70,6 +75,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.invalidDescription=false;
     this.operation = localStorage.getItem("currentOperation");
     this.showTooltip = false;
     this.show_dailyscrum = false
@@ -143,6 +149,8 @@ export class HeaderComponent implements OnInit {
   }
 
   openModal(template: TemplateRef<any>) {
+    this.feedback = this.initializeNewFeedback(this.feedback);
+    this.invalidDescription=false;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
 }
 decline(): void {
@@ -211,5 +219,38 @@ decline(): void {
       this.show_projectlist = false
       this.show_signout = false
     }
+  }
+
+  fetchFeedbacks() {
+    this.feedbackService.getFeedbacks()
+      .subscribe(feedbacks => {
+        console.log(feedbacks);
+      });
+  }
+
+  postFeedback(userFeedback: Feedback) {
+    userFeedback.feedbackDescription = userFeedback.feedbackDescription.trim();
+    if(userFeedback.feedbackDescription===''){
+      this.invalidDescription = true;
+      setTimeout(() => { document.getElementById("feedbackDesc").focus(); });
+    }
+    if(this.invalidDescription==false){
+      this.feedbackService.sendFeedback(userFeedback)
+        .subscribe(feedbacks => {
+          console.log(feedbacks);
+        });
+      this.modalRef.hide();
+    }    
+  }
+
+  initializeNewFeedback(feedback: Feedback): Feedback {
+    feedback = {
+      feedbackId: '',
+      feedbackDate: '',
+      userName: '',
+      userEmail: '',
+      feedbackDescription: ''
+    }
+    return feedback;
   }
 }

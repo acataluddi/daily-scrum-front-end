@@ -37,11 +37,20 @@
               </div>
             </div>
             <div class="MiddleDiv">
-              <textarea class="textarea" placeholder="I would like to.."></textarea>
+              <textarea 
+                id="feedbackDesc" 
+                class="textarea" 
+                placeholder="I would like to.." 
+                [(ngModel)]="feedback.feedbackDescription" 
+                (click)="invalidDescription=false">
+              </textarea>
+              <small *ngIf="invalidDescription" class="error">
+                Please enter description
+              </small>
             </div>
             <div class="BottomDiv">
               <button class="cancel" (click)="decline()">Cancel</button>
-              <button class="submit" (click)="decline()">Submit</button>
+              <button class="submit" (click)="postFeedback(feedback)">Submit</button>
             </div>
           </div>
        </div>
