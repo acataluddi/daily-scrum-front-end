@@ -7,7 +7,7 @@
       <div id="dailyscrumclass" *ngIf="show_dailyscrum" (mouseenter)="showTooltip=true" (mouseleave)="showTooltip=flase">{{selected.projectName}}
       </div>
       <div id="scrum" *ngIf="show_scrum">Daily Scrum
-        <div id="dash" *ngIf="show_dash">|  {{title}}</div>
+        <div id="dash" *ngIf="show_dash">| {{title}}</div>
       </div>
       <div id="arrow" *ngIf="show_arrow && length > 1">
         <div id="projectlist" *ngIf="show_projectlist">
@@ -16,18 +16,33 @@
           </div>
         </div>
       </div>
-
       <div class="usermailclass">
         <div class="button desktop">{{member.email}}</div>
         <div class="mobile">
           <img class="dp" [src]="getImage()">
         </div>
         <div class="arrow2">
-          <div id="signout" *ngIf="show_signout" (click)="logout()">
-            <div class="a"> Signout </div>
+          <div id="signout" *ngIf="show_signout">
+            <div id="feed" class="a" (click)="openModal(template)"> Feedback </div>
+            <div id="sign" class="a" (click)="logout()"> Signout </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+      <ng-template #template>
+          <div class="modal-body text-center">
+          <div id="vis" class="Feed">
+            <div class="TopDiv">
+              <div class="FeedbackText">
+                Feedback and Suggestions
+              </div>
+            </div>
+            <div class="MiddleDiv">
+              <textarea class="textarea" placeholder="I would like to.."></textarea>
+            </div>
+            <div class="BottomDiv">
+              <button class="cancel" (click)="decline()">Cancel</button>
+              <button class="submit" (click)="decline()">Submit</button>
+            </div>
+          </div>
+       </div>
+      </ng-template>

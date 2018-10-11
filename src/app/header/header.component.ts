@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit, Injectable,TemplateRef } from '@angular/core';
 import { Member } from '../model/member-model';
 import { Http, } from '@angular/http';
 import { AuthService } from 'angular-6-social-login';
@@ -12,6 +12,8 @@ import { ProjectviewallService } from '../service/projectviewall.service';
 import { ProjectUpdated } from '../model/projectupdated-model';
 import { TaskPageAdminComponent } from '../task-page-admin/task-page-admin.component';
 import { Subscription } from 'rxjs';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 
 @Injectable({
@@ -25,6 +27,7 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
+  modalRef: BsModalRef;
   member: Member;
   image: String;
   projects: Project[];
@@ -42,6 +45,7 @@ export class HeaderComponent implements OnInit {
   show_signout;
   show_projectlist;
   showTooltip;
+  show_feedback;
 
   length;
   constructor(
@@ -50,6 +54,7 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private loginservice: LoginService,
     private projectService: DashboardService,
+    private modalService: BsModalService,
     private route: ActivatedRoute,
     private taskService: ProcessIndividualTaskService,
     private dashboardService: DashboardService) {
@@ -73,6 +78,7 @@ export class HeaderComponent implements OnInit {
     this.show_dash = true
     this.show_signout = false
     this.show_projectlist = false
+    this.show_feedback = false
 
     if (this.router.url.search('daily-status/') || this.router.url.search('task-page-admin/')) {
       var name = localStorage.getItem("currentProject")
@@ -136,6 +142,12 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+}
+decline(): void {
+  this.modalRef.hide();
+}
   toggle(currenturl) {
     if (currenturl == '/dashboard') {
       this.title = 'Dashboard';
@@ -174,13 +186,14 @@ export class HeaderComponent implements OnInit {
       this.show_dash = false
     }
   }
-
   openDashboardPage() {
     this.router.navigate(['/dashboard']);
   }
+
   show(e) {
     if (e.target.className == "arrow2" || e.target.className == "button desktop" ||
       e.target.className == "dp") {
+      this.show_feedback = false;
       if (this.show_signout == false) {
         this.show_signout = true
       } else {
