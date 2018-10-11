@@ -35,8 +35,8 @@ export class DailyStatusComponent implements OnInit {
 
   MockYesterdayTasks: Task[];
   MockTodayTasks: Task[];
-  TodayTasks: Task[];
-  YesterdayTasks: Task[];
+  TodayTasks: Task[] = [];
+  YesterdayTasks: Task[] = [];
 
   selectedYesterdaysTasks: Task[] = [];
   selectedTodaysTasks: Task[] = [];
@@ -119,9 +119,7 @@ export class DailyStatusComponent implements OnInit {
   elementDelete2;
 
   private eventsSubject1 = new Subject<boolean>();
-  // event1 = this.eventsSubject1.asObservable()
   private eventsSubject2 = new Subject<boolean>();
-  // event2 = this.eventsSubject2.asObservable()
   private HideSaved1 = new Subject<boolean>();
   private HideSaved2 = new Subject<boolean>();
 
@@ -285,13 +283,25 @@ export class DailyStatusComponent implements OnInit {
 
   getTodaysTask(Todays) {
     this.MockTodayTasks = Todays;
-    this.TodayTasks = Todays;
+    if (Todays.length != 0) {
+      Todays.forEach(element => {
+        this.TodayTasks.push(element)
+      });
+    } else {
+      this.TodayTasks = []
+    }
     this.status = true;
   }
 
   getYesterdaysTask(Yesterdays) {
     this.MockYesterdayTasks = Yesterdays;
-    this.YesterdayTasks = Yesterdays;
+    if (Yesterdays.length != 0) {
+      Yesterdays.forEach(element => {
+        this.YesterdayTasks.push(element)
+      });
+    } else {
+      this.YesterdayTasks = []
+    }
   }
 
   calculateTotalTime(taskArray, value) {
@@ -569,25 +579,21 @@ export class DailyStatusComponent implements OnInit {
     var formateditTime = editTime.toString()
     if (this.newOld(this.task1, this.TodayTasks)) {
       //insert
-      if (this.task1.taskDate == '') {
-        this.task1.taskDate = this.todayTaskDate;
-        this.task1.projectId = this.projectId;
-        this.task1.lastEdit = formateditTime
-        this.taskservice.addNewTask(this.task1)
-          .subscribe(msg => console.log(msg));
-        this.checkbox2 = false
-      } else {
-        //update
-        this.task1.lastEdit = formateditTime
-        this.taskservice.updateOldTask(this.task1)
-          .subscribe(msg => console.log(msg));
-      }
+      this.task1.taskDate = this.todayTaskDate;
+      this.task1.projectId = this.projectId;
+      this.task1.lastEdit = formateditTime
+      this.taskservice.addNewTask(this.task1)
+        .subscribe(msg => console.log(msg));
+      this.checkbox2 = false
+      this.TodayTasks.push(this.task1)
     }
     else {
       //update 
       this.task1.lastEdit = formateditTime
       this.taskservice.updateOldTask(this.task1)
         .subscribe(msg => console.log(msg));
+      var index = this.TodayTasks.findIndex(element => element.taskId == this.task1.taskId)
+      this.TodayTasks[index] = this.task1
     }
     this.getLastEdit(this.TodayTasks, 2)
     this.calculateTotalTime(this.MockTodayTasks, 2)
@@ -601,23 +607,20 @@ export class DailyStatusComponent implements OnInit {
 
     if (this.newOld(newtask, this.YesterdayTasks)) {
       //insert
-      if (this.task1.taskDate == '') {
-        this.task1.taskDate = this.yesterdayTaskDate;
-        this.task1.projectId = this.projectId;
-        this.task1.lastEdit = formateditTime
-        this.taskservice.addNewTask(this.task1).subscribe(
-          msg => console.log(msg));
-        this.checkbox1 = false
-      } else {
-        this.task1.lastEdit = formateditTime
-        this.taskservice.updateOldTask(this.task1)
-          .subscribe(msg => console.log(msg));
-      }
+      this.task1.taskDate = this.yesterdayTaskDate;
+      this.task1.projectId = this.projectId;
+      this.task1.lastEdit = formateditTime
+      this.taskservice.addNewTask(this.task1).subscribe(
+        msg => console.log(msg));
+      this.checkbox1 = false
+      this.YesterdayTasks.push(this.task1)
     } else {
       //update
       this.task1.lastEdit = formateditTime
       this.taskservice.updateOldTask(this.task1)
         .subscribe(msg => console.log(msg));
+      var index = this.YesterdayTasks.findIndex(element => element.taskId == this.task1.taskId)
+      this.YesterdayTasks[index] = this.task1
     }
     this.getLastEdit(this.YesterdayTasks, 1)
     this.calculateTotalTime(this.MockYesterdayTasks, 1)
@@ -625,17 +628,17 @@ export class DailyStatusComponent implements OnInit {
 
   newOld(keyTask, taskArray) {
     var flag = true;
-    var length = taskArray.length;
-    if (length == 0) {
+    if (taskArray.length == 0) {
       flag = true
-    }
-    else {
-      var task = taskArray[length - 1]
-      if (keyTask.taskId == task.taskId) {
-        flag = true;
-      }
-      else {
+    } else {
+      var taskInArray = taskArray.find(function (element) {
+        return element.taskId == keyTask.taskId;
+      })
+
+      if (taskInArray != null) {
         flag = false
+      } else {
+        flag = true
       }
     }
     return flag;
@@ -706,13 +709,13 @@ export class DailyStatusComponent implements OnInit {
       .subscribe(data1 => {
         this.getTodaysTask(data1)
         this.calculateTotalTime(this.MockTodayTasks, 2)
-        this.getLastEdit(this.TodayTasks, 2)
+        this.getLastEdit(this.MockTodayTasks, 2)
       });
     this.taskservice.getYesterdays(yesterday, email, projectId)
       .subscribe(data => {
         this.getYesterdaysTask(data);
         this.calculateTotalTime(this.MockYesterdayTasks, 1)
-        this.getLastEdit(this.YesterdayTasks, 1)
+        this.getLastEdit(this.MockYesterdayTasks, 1)
       });
   }
 
@@ -951,18 +954,26 @@ export class DailyStatusComponent implements OnInit {
   deleteSelected(selectedTaskArray, taskArray, value) {
     selectedTaskArray.forEach(element => {
       var index = taskArray.indexOf(element);
+      // var selectArrayIndex = selectedTaskArray.indexOf(element);
+      // selectedTaskArray.splice(selectArrayIndex, 1);
       taskArray.splice(index, 1);
-
       this.taskservice.deleteTask(element)
         .subscribe(msg => console.log(msg));
+      if (value == 1) { 
+        this.YesterdayTasks.splice(index, 1)
+      } else {
+        this.TodayTasks.splice(index, 1)
+      }
     });
     this.calculateTotalTime(taskArray, value)
-    this.numOfSelected = this.selectedTodaysTasks.length.toString()
-    if (this.selectedTodaysTasks.length == this.MockTodayTasks.length) {
-      this.checkbox2 = true;
+    if (value == 1){
+      this.checkbox1 = false
+      this.selectedYesterdaysTasks = []
     } else {
       this.checkbox2 = false
+      this.selectedTodaysTasks = []
     }
+    this.copyCard = false
   }
 
   blockCopyDelete(length, value) {

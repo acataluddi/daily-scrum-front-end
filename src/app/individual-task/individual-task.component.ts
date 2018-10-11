@@ -113,7 +113,9 @@ export class IndividualTaskComponent implements OnInit {
       this.noDesc = false;
       this.noTime = false;
       this.show_save = false;
-
+      setTimeout(()=>{  
+        this.saved = false;
+   }, 5000);
     }
     this.stageDesc = false;
     this.stageTime = false;
@@ -168,11 +170,6 @@ export class IndividualTaskComponent implements OnInit {
     }
     this.popTask.emit(task)
   }
-
-  // delTask(deltask: Task) {
-  //   this.saved = false
-  //   this.deleteTask.emit(deltask);
-  // }
 
   focus() {
     setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });

@@ -82,6 +82,10 @@ img.right-arrow:active {
   font-weight: 500;
 }
 
+.view_all_task:hover{
+  background-color: rgba(177, 177, 177, 0.8);
+}
+
 button.view_all_task::before {
   content: "\e137";
   font-size: 16px;

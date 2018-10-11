@@ -26,12 +26,16 @@ textarea {
   margin-top: 32px;
 }
 
+/* .ind-task{
+  height: 154px;
+} */
+
 .dot {
   height: 13px;
   width: 13px;
   border-radius: 50%;
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 11px;
   border-style: solid;
   border-width: 2px;
   border-color:rgba(0, 0, 0, 0.3);
@@ -44,44 +48,48 @@ textarea {
 }
 
 .dot-fill{
-  /* border: none; */
   border-color:rgb(219, 219, 219);
-  border-width: 3px;
-  background-color: rgba(0, 0, 0, 0.55);
+  border-width: 4px;
+  background-color: rgba(0, 0, 0, 0.54);
 }
-
-/* .dot-fill{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -2px 0px 0px -2px;
-  height: 5px;
-  width: 5px;
-  /* position: relative;*/
- /* border-radius: 50%; */
-  /* border-color: rgba(0, 0, 0, 0.3); */ 
-  /* padding: 2px; */
- /* background-color: red;
-} */
 
 .dot-color-1 {
   border: none;
+  height: 12px;
+  width: 12px;
+  cursor: default;
   background-color: rgba(0 ,0 ,0, 0.3);
 }
 
 .dot-color-2 {
+  border: none;
+  height: 12px;
+  width: 12px;
+  cursor: default;
   background-color: rgb(24, 50, 104);
 }
 
 .dot-color-3 {
+  border: none;
+  height: 12px;
+  width: 12px;
+  cursor: default;
   background-color: rgb(31, 132, 179);
 }
 
 .dot-color-4 {
-  background-color: rgb(241, 141, 26);
+  border: none;
+  height: 12px;
+  width: 12px;
+  cursor: default;
+  background-color: rgb(238, 160, 70);
 }
 
 .dot-color-5 {
+  border: none;
+  height: 12px;
+  width: 12px;
+  cursor: default;
   background-color: rgb(70, 209, 133);
 }
 
@@ -247,7 +255,7 @@ div.cancel_edit:active {
 .status {
   display: flex;
   position: relative;
-  top: 32px;
+  top: 12px;
   right: 30px;
 }
 
@@ -279,6 +287,15 @@ div.cancel_edit:active {
   }
 }
 
+@media screen and (max-width: 550px) {
+  .description{
+    font-size: 15px;
+  }
+
+  .impediments{
+    font-size: 14px;
+  }
+}
 @media screen and (max-width: 480px) {
   .add_impediment {
     margin-left: 20px;
