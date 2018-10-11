@@ -69,9 +69,9 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.feedback = this.initializeNewFeedback(this.feedback);
-    this.postFeedback(this.feedback);
-    this.fetchFeedbacks();
+    // this.feedback = this.initializeNewFeedback(this.feedback);
+    // this.postFeedback(this.feedback);
+    // this.fetchFeedbacks();
     this.operation = localStorage.getItem("currentOperation");
     this.showTooltip = false;
     this.show_dailyscrum = false
@@ -207,18 +207,18 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  fetchFeedbacks(){
+  fetchFeedbacks() {
     this.feedbackService.getFeedbacks()
-    .subscribe(feedbacks => {
-      console.log(feedbacks);
-    });
+      .subscribe(feedbacks => {
+        console.log(feedbacks);
+      });
   }
 
-  postFeedback(userFeedback: Feedback){
+  postFeedback(userFeedback: Feedback) {
     this.feedbackService.sendFeedback(userFeedback)
-    .subscribe(feedbacks => {
-      console.log(feedbacks);
-    });
+      .subscribe(feedbacks => {
+        console.log(feedbacks);
+      });
   }
 
   initializeNewFeedback(feedback: Feedback): Feedback {
@@ -230,5 +230,5 @@ export class HeaderComponent implements OnInit {
       feedbackDescription: 'hello'
     }
     return feedback;
-}
+  }
 }
