@@ -78,12 +78,18 @@ body .bs-datepicker-container .bs-datepicker-head * {
   color: #6d6d6d75;
 }
 
-.modal-content {
+/* .modal-content {
   margin-top: 65% !important;
-}
+} */
 
 .modal.in .modal-dialog {
   height: 100%;
+}
+
+
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 @media screen and (max-width: 1500px) {
@@ -180,7 +186,7 @@ body .bs-datepicker-container .bs-datepicker-head * {
   }
 }
 
-@media (min-width: 1500px) {
+/* @media (min-width: 1500px) {
 
   .modal-content {
     margin-top: 100% !important;
@@ -191,5 +197,32 @@ body .bs-datepicker-container .bs-datepicker-head * {
 
   .modal-content {
     margin-top: 185% !important;
-  }
-}
+  } */
+
+
+  
+
+    .modal-content {
+      margin-top: 200px;
+    }
+
+    @media (min-width: 2500px) {
+
+      .modal-content {
+        margin-top:500px;
+      }
+
+    }
+
+    @media (min-width: 1500px) {
+
+      .modal-content {
+        margin-top:400px;
+      }
+
+    }
+
+    .modal-content {
+      margin-top: 200px;
+    }
+
