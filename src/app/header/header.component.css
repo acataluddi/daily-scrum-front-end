@@ -269,7 +269,7 @@ img[src="../../assets/Scrum_logo.png"] {
 .textarea {
   height: 100%;
   width: 100%;
-  padding: 20px;
+  padding: 32px;
   border: none;
   border-bottom-style: solid;
   border-width: 0.2px;
@@ -304,7 +304,7 @@ textarea:focus {
 
 .cancel {
   height: 34px;
-  width: 84px;
+  width: 80px;
   font-family: 'Roboto';
   font-size: 18px;
   font-weight: 550;
@@ -321,13 +321,13 @@ textarea:focus {
 
 .submit {
   height: 34px;
-  width: 84px;
+  width: 80px;
   font-family: 'Roboto';
   font-size: 18px;
   font-weight: 550;
   color: rgb(85, 85, 87);
   text-align: left;
-  margin-left: 50px;
+  margin-left: 40px;
   background-color: #ffffff;
   border: none;
 }
