@@ -160,13 +160,12 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('/admin-view-all');
   }
 
-  AddProject() {
-    this.operation = "AddProject";
-    localStorage.setItem('currentOperation', this.operation);
-    this.projectService.setRequestType("add");
-    this.router.navigateByUrl('/project');
-    
-  }
+  // AddProject() {
+  //   this.operation = "AddProject";
+  //   localStorage.setItem('currentOperation', this.operation);
+  //   this.projectService.setRequestType("add");
+  //   this.router.navigateByUrl('/project'); 
+  // }
 
   EditProject(projectDetail) {
     this.operation = "EditProject";

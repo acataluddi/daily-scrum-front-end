@@ -1,0 +1,147 @@
+.add-project-div {
+  text-align: center;
+  margin: 5%;
+  padding-left: 9px;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+}
+
+.add-new-div {
+  text-align: center;
+  margin: 5%;
+  padding-left: 15px;
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+}
+
+.add-pro-button {
+  position: absolute;
+  right: 10%;
+  top: 18px;
+  height: 32px;
+  width: 115px;
+  background-color: #b1b1b1;
+  border-radius: 4px;
+  display: flex;
+  border-style: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  border-color: #555;
+}
+
+.add-pro-button:hover {
+  background-color: rgb(168, 168, 168);
+}
+
+.goals-tab {
+  margin-left: 30px;
+  height: 32px;
+  /* width: 85px; */
+  color: rgba(79, 86, 105, 1);
+  border: none;
+  cursor: pointer;
+}
+
+.main-div {
+  height: 65px;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  position: fixed;
+  z-index: 40;
+  padding-top: 20px;
+  top: 60px;
+  border-top: 1px solid #dfded9;
+  padding-bottom: 10px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.mob-view {
+  visibility: hidden;
+}
+
+.projects-tab {
+  margin-left: 5%;
+  color: rgba(79, 86, 105, 1);
+  height: 32px;
+  border: none;
+  cursor: pointer;
+}
+
+.users-tab,
+.feedback-tab {
+  margin-left: 30px;
+  height: 32px;
+  color: rgba(79, 86, 105, 1);
+  border: none;
+  cursor: pointer;
+}
+
+.tab-active {
+  border-bottom-style: solid;
+  border-bottom-color: #b1b1b1;
+  font-weight: 600;
+}
+
+.tabs {
+  display: flex;
+  width: 75%;
+}
+
+@media only screen and (max-width: 520px) {
+  .add-pro-button {
+    right: 5%;
+  }
+
+  .users-tab,
+  .goals-tab,
+  .feedback-tab {
+    margin-left: 20px;
+  }
+
+
+
+}
+
+@media only screen and (max-width: 420px) {
+  .add-pro-button {
+    visibility: hidden;
+  }
+
+  .mob-view {
+    position: absolute;
+    right: 5%;
+    top: 16px;
+    visibility: visible;
+    width: 32px;
+    height: 32px;
+    background: #b1b1b1;
+    border-radius: 4px;
+    padding: 4.4px 7.5px;
+    color: white;
+  }
+
+  .users-tab,
+  .goals-tab,
+  .feedback-tab {
+    margin-left: 15px;
+  }
+
+  .tabs {
+    width: 75%;
+    background-image: -webkit-linear-gradient(-90deg, rgba(255, 255, 255, 0.37) 0%, rgba(255, 255, 255, 0.93) 89%, rgba(255, 255, 255, 1) 100%);
+    background-image: -moz-linear-gradient(-90deg, rgba(255, 255, 255, 0.37) 0%, rgba(255, 255, 255, 0.93) 89%, rgba(255, 255, 255, 1) 100%);
+    background-image: -o-linear-gradient(-90deg, rgba(255, 255, 255, 0.37) 0%, rgba(255, 255, 255, 0.93) 89%, rgba(255, 255, 255, 1) 100%);
+    background-image: linear-gradient(-90deg, rgba(255, 255, 255, 0.37) 0%, rgba(255, 255, 255, 0.93) 89%, rgba(255, 255, 255, 1) 100%);
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .tabs {
+    overflow-x: scroll;
+  }
+}
