@@ -4,17 +4,16 @@ import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Feedback } from "../model/feedback-model";
+import { GoalMember } from "../model/goalmember-model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedbackService {
 
-  p = 1;
-
   private readonly baseUrl = environment.apiBase;
   private posturl = this.baseUrl + '/FeedbackController';
-  private geturl = this.baseUrl + '/FeedbackController?page=' + this.p;
+  private geturl = this.baseUrl + '/FeedbackController';
   feedback: Feedback;
 
   constructor(
@@ -28,8 +27,22 @@ export class FeedbackService {
     );
   }
 
-  getFeedbacks(): Observable<Feedback[]> {
+  getFeedbacks(userEmail: string): Observable<Feedback[]> {
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
-    return this.http.get<Feedback[]>(this.geturl, { headers })
+    let listUrl = this.geturl+"?feedbackParam="+userEmail;
+    return this.http.get<Feedback[]>(listUrl, { headers })
+  }
+
+  getFeedBackStatusList(): Observable<GoalMember[]>{
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
+    let listUrl = this.geturl+"?feedbackParam=getStatusList";
+    return this.http.get<GoalMember[]>(listUrl, { headers })
+  }
+
+  updateFeedbackStatus(userEmailToUpdate: string): Observable<GoalMember>{
+    const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
+    let putUrl = this.geturl+"?updateEmail="+userEmailToUpdate;
+    return this.http.put<any>(putUrl,null ,{ headers }
+    );
   }
 }
