@@ -30,6 +30,9 @@ import { FilterPipe } from './filter.pipe';
 import { NavigationdataService } from './service/navigationdata.service'
 import {AutosizeModule} from 'ngx-autosize';
 import { FilterEmail } from './filterEmail.pipe';
+import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
+import { GoalsComponent } from './goals/goals.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -57,7 +60,10 @@ export function getAuthServiceConfigs() {
     HeaderComponent,
     UserslistComponent,
     FilterPipe,
-    FilterEmail
+    FilterEmail,
+    DashboardHeaderComponent,
+    GoalsComponent,
+    FeedbackComponent
   ],
   imports: [
     BrowserModule,

@@ -677,7 +677,11 @@ input[value="Cancel"]:active {
   }
 
   .header-part {
-    box-shadow: 0px 2px 40px 0px rgba(0, 0, 0, 0.17);
+    box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.17);
+  }
+
+  .main-part{
+    padding-top: 220px;
   }
   /* .select-all-desktop{ */
   /* display: none; */
