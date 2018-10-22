@@ -1,0 +1,81 @@
+.userlist-maindiv {
+  padding-left: 25%;
+  box-sizing: border-box;
+  width: 300px;
+  height: 100%;
+  float: left;
+  /* border-right-style: solid; */
+  /* border-top-style: solid; */
+  border-color: rgb(218, 218, 218);
+  border-width: 1px;
+}
+
+.search {
+  display: flex;
+  height: 60px;
+  border-bottom-style: solid;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: rgb(218, 218, 218);
+}
+
+input[placeholder="Search User"] {
+  border: none;
+  outline: none;
+  height: 32px;
+  width: 165px;
+  color: rgba(0, 0, 0, 1);
+  font-family: 'Roboto';
+  font-size: 16px;
+}
+
+.search_icon {
+  /*height: 32px; */
+  /* width: 32px; */
+  padding: 7.5% 0% 8% 8%;
+  /* margin: 2%; */
+}
+
+.search_name {
+  padding: 5% 0% 5% 5%;
+}
+
+.member {
+  height: 42px;
+  /* margin: 5px 42px 5px 5%; */
+  padding: 5px 42px 5px 5%;
+    margin: 5px 0px;
+  display: flex;
+}
+
+.member_logo{
+  height: 32px;
+  width: 32px;
+  border-radius: 50px;
+}
+
+.member_name{
+  padding: 7px 0 8px 8px;
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dot {
+  /* margin: -99px; */
+  position: relative;
+  top: 14px;
+  left: 6px;
+    border: none;
+    height: 9px;
+    width: 9px;
+    cursor: default;
+    border-radius: 50%;
+    background-color: rgba(177, 177, 177, 1);
+}
+
+.member:hover,
+.focus{
+  background-color: rgba(242, 242, 242, 1);
+}

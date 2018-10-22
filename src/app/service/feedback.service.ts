@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Feedback } from "../model/feedback-model";
+import { Feedback, FeedbackMember } from "../model/feedback-model";
 import { GoalMember } from "../model/goalmember-model";
 
 @Injectable({
@@ -27,10 +27,10 @@ export class FeedbackService {
     );
   }
 
-  getFeedbacks(userEmail: string): Observable<Feedback[]> {
+  getFeedbacks(userEmail: string): Observable<FeedbackMember> {
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     let listUrl = this.geturl+"?feedbackParam="+userEmail;
-    return this.http.get<Feedback[]>(listUrl, { headers })
+    return this.http.get<FeedbackMember>(listUrl, { headers })
   }
 
   getFeedBackStatusList(): Observable<GoalMember[]>{

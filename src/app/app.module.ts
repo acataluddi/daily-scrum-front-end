@@ -33,6 +33,8 @@ import { FilterEmail } from './filterEmail.pipe';
 import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
 import { GoalsComponent } from './goals/goals.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { GoalUserlistComponent } from './goal-userlist/goal-userlist.component';
+import { FeedbackFilterPipe } from './feedbacklistfilter.pipe';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -59,11 +61,13 @@ export function getAuthServiceConfigs() {
     TaskPageAdminComponent,
     HeaderComponent,
     UserslistComponent,
+    FeedbackFilterPipe,
     FilterPipe,
     FilterEmail,
     DashboardHeaderComponent,
     GoalsComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    GoalUserlistComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,16 @@
+<div class="userlist-maindiv">
+  <div class="search">
+    <div class="search_icon"><img src="../../assets/Combined_Shape_Copy_2.png"></div>
+    <div class="search_name" id="search_name"><input [(ngModel)]="searchText" placeholder="Search User"></div>
+  </div>
+  <!-- <div class="member" *ngFor="let member of feedbackmemberArray | filter : searchText;let i = index" (click)="gotoDailyStatus(member)"> -->
+  <div *ngFor="let member of feedbackmemberArray | feedbacklistfilter : searchText">
+    <div class="member" id="{{member.memberId}}" (click)="getFeedbackOfUser(member)">
+      <div><img class="member_logo" src="{{member.memberImage}}"></div>
+      <div class="member_name" id="member_name{{i}}">
+        {{member.memberName}}
+      </div>
+      <span *ngIf="member.hasNewUpdates" class="dot"></span>
+    </div>
+  </div>
+</div>
