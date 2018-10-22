@@ -3,6 +3,9 @@ import { AuthService } from 'angular-6-social-login';
 import { LoginService } from '../service/login.service';
 import { ProjectService } from '../service/project.service';
 import { Router } from '@angular/router';
+import { FeedbackService } from '../service/feedback.service';
+import { GoalMember } from '../model/goalmember-model';
+import { FeedbackMember } from '../model/feedback-model';
 
 @Component({
   selector: 'app-dashboard-header',
@@ -16,10 +19,14 @@ export class DashboardHeaderComponent implements OnInit {
   flag2;
   operation: string;
 
+  feedbackUserList: GoalMember[] = []
+  firstFeedbackmember: FeedbackMember
+
   constructor(private socialAuthService: AuthService,
     private loginservice: LoginService,
     private projectService: ProjectService,
-    public router: Router) { }
+    public router: Router,
+    private feedbackService: FeedbackService) { }
 
   ngOnInit() {
     this.activetab = 1;
@@ -39,6 +46,15 @@ export class DashboardHeaderComponent implements OnInit {
           });
       }
     });
+
+    if (localStorage.getItem('userType') == "Admin") {
+      this.feedbackService.getFeedBackStatusList().subscribe(data => {
+      this.feedbackUserList = data;
+        if (data.length > 0) {
+          this.feedbackService.getFeedbacks(data[0].memberEmail).subscribe(data => this.fetchFirstFeedbackMember(data))
+        }
+      })
+    }
   }
 
   activateTab(value) {
@@ -53,7 +69,7 @@ export class DashboardHeaderComponent implements OnInit {
     this.router.navigateByUrl('/project');
   }
 
-  AddGoal(){
+  AddGoal() {
     alert("We are working on it!")
   }
 
@@ -118,5 +134,9 @@ export class DashboardHeaderComponent implements OnInit {
         }
         break;
     }
+  }
+
+  fetchFirstFeedbackMember(member) {
+    this.firstFeedbackmember = member;
   }
 }

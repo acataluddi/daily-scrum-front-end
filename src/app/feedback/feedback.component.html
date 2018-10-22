@@ -1,5 +1,17 @@
 <div class="header">
-<p>
-  feedback works!
-</p>
+  <app-goal-userlist (selectMemberEvent)="selectedMember($event)"></app-goal-userlist>
+  <div class="right-part">
+    <div class="right-header">
+      <div class="member-image">
+        <img class="image" src="{{feedbackMember.userImage}}">
+      </div>
+      <div class="member-feedback-head">
+        <div class="member-name">{{feedbackMember.userName}}</div>
+        <div class="last-update">{{feedbackMember.lastUpdate}}</div>
+      </div>
+    </div>
+    <div class="right-body">
+      <div class="feedback" *ngFor="let feedback of feedbackMember.feedbacks">{{feedback.feedbackDescription}}</div>
+    </div>
+  </div>
 </div>
