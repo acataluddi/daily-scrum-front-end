@@ -1,5 +1,5 @@
-<div class="header">
-  <app-goal-userlist (selectMemberEvent)="selectedMember($event)"></app-goal-userlist>
+<div class="header" *ngIf="length != 0">
+  <app-goal-userlist (selectMemberEvent)="selectedMember($event)" [feedbackUserList]="feedbackUserList"></app-goal-userlist>
   <div class="right-part">
     <div class="right-header">
       <div class="member-image">
@@ -14,4 +14,8 @@
       <div class="feedback" *ngFor="let feedback of feedbackMember.feedbacks">{{feedback.feedbackDescription}}</div>
     </div>
   </div>
+</div>
+<div class="feedbackErr" *ngIf="length == 0">
+  <img class="nofeedback" src="../../assets/nofeedback.png">
+  <div class="nofeedbackmsg">We're all ears!</div>
 </div>
