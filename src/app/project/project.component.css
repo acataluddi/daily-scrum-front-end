@@ -246,7 +246,7 @@ select[id="rolevalue"] {
   border: none;
   outline: none;
   color: rgba(255, 255, 255, 1);
-  background-color: #a3a3a3de;
+  background-color: rgb(177, 177, 177);
   padding: 5px 20px;
   text-align: center;
   text-decoration: none;
@@ -258,7 +258,7 @@ select[id="rolevalue"] {
 }
 
 .button-yes:hover {
-  background-color: #a3a3a39f;
+  background-color: rgb(177, 177, 177,0.8);
 }
 
 .button-yes:active {
@@ -303,7 +303,7 @@ input[value="Update Project"] {
   outline: none;
   font-size: 13px;
   color: rgba(255, 255, 255, 1);
-  background-color: #a3a3a3de;
+  background-color: rgb(177, 177, 177);
   margin: 10px;
   margin-left: auto;
   margin-right: 0;
@@ -313,12 +313,12 @@ input[value="Update Project"] {
 
 input[value="Create Project"]:hover,
 input[value="Update Project"]:hover {
-  background-color: #a3a3a39f;
+  background-color: rgb(177, 177, 177,0.8);
 }
 
 input[value="Create Project"]:active,
 input[value="Update Project"]:active {
-  background-color: #8b8b8b;
+  background-color: rgb(177, 177, 177,0.8);
 }
 
 .button-no:hover,

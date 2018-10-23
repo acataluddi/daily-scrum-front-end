@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
   imageurl = [];
   UserType: string;
   operation: string;
-
+  dropdownVisibilityFlag: boolean;
   ngOnInit() {
 
     this.socialAuthService.authState.subscribe((user) => {
@@ -69,6 +69,7 @@ export class DashboardComponent implements OnInit {
           });
       }
     });
+    this.dropdownVisibilityFlag = false;
     this.dashboardservice.getProjects()
       .subscribe(projectArr => {
         if (projectArr != null) {
@@ -97,7 +98,11 @@ export class DashboardComponent implements OnInit {
 
     }
   }
-
+  HideMenuDropDown() {
+    if (this.dropdownVisibilityFlag == true) {
+      this.dropdownVisibilityFlag = false;
+    }
+  }
   getMembers(membersArr): void {
     this.memberArray = membersArr;
     this.TotalMembers = this.memberArray.length;
@@ -173,7 +178,7 @@ export class DashboardComponent implements OnInit {
     this.projectService.setRequestType("update");
     this.projectService.setProjectToBeUpdated(projectDetail)
     this.router.navigateByUrl('/project');
-   
+
 
   }
   deleteId;
@@ -183,17 +188,27 @@ export class DashboardComponent implements OnInit {
     window.location.reload();
 
   }
+
   click(index) {
-    let i: number = index
-    this.show[index] = !this.show[index];
+    if (this.show[index] == 1) {
+      this.show[index] = 0;
+    }
+    else {
+      this.show[index] = 1;
+      for (let i = 0; i < this.noOfProjects; i++) {
+        if (i != index) {
+          this.show[i] = 0;
+        }
+      }
+    }
   }
 
-  openModal(template: TemplateRef<any>,projectId) {
-    this.deleteId=projectId;
+  openModal(template: TemplateRef<any>, projectId) {
+    this.deleteId = projectId;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
   decline(): void {
-      this.modalRef.hide();
+    this.modalRef.hide();
   }
 }

@@ -22,7 +22,7 @@
   top: 18px;
   height: 32px;
   width: 115px;
-  background-color: #b1b1b1;
+  background-color: rgb(177, 177, 177);
   border-radius: 4px;
   display: flex;
   border-style: none;
@@ -33,7 +33,7 @@
 }
 
 .add-pro-button:hover {
-  background-color: rgb(168, 168, 168);
+  background-color: rgb(177, 177, 177,0.8);
 }
 
 .goals-tab {
@@ -123,6 +123,7 @@
     border-radius: 4px;
     padding: 4.4px 7.5px;
     color: white;
+    cursor: pointer;
   }
 
   .users-tab,
