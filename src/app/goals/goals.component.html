@@ -1,6 +1,25 @@
 <div class="header">
-  <p>
-    goals works!
-  </p>
+  <app-goal-userlist (selectMemberEvent)="selectedMember($event)" [feedbackUserList]="userList"></app-goal-userlist>
+  <div class="right-part">
+    <div class="right-header">
+      <div class="member-image">
+        <img class="image" src="{{goalMember.userImage}}">
+      </div>
+      <div class="member-feedback-head">
+        <div class="member-name">{{goalMember.userName}}</div>
+        <div class="last-update">{{goalMember.lastUpdate}}</div>
+      </div>
+    </div>
+    <div class="right-body">
+      <!-- <div class="goals-chat">
+        chat here!!
+      </div>  -->
+      <app-individual-goal [goal]="goalMember.goals[0]"></app-individual-goal>
+      <!-- <div class="input-area">
+        <textarea class="message-box" autosize rows="1" placeholder="Type your message here.."></textarea>
+        <button class="send">Send</button>
+      </div> -->
+    </div>
+  </div>
+  
 </div>
-

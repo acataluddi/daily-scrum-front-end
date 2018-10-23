@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FeedbackMember } from '../model/feedback-model';
 import { FeedbackService } from '../service/feedback.service';
-import { GoalMember } from '../model/goalmember-model';
+import { GoalUserList } from '../model/goalUserList-model';
 
 @Component({
   selector: 'app-feedback',
@@ -11,7 +11,7 @@ import { GoalMember } from '../model/goalmember-model';
 export class FeedbackComponent implements OnInit {
 
   @Input() firstFeedback: FeedbackMember;
-  @Input() feedbackUserList: GoalMember[];
+  @Input() feedbackUserList: GoalUserList[];
 
   feedbackMember: FeedbackMember;
   length: number;
@@ -27,7 +27,7 @@ export class FeedbackComponent implements OnInit {
     this.feedbackMember = this.firstFeedback;
   }
 
-  selectedMember(member: GoalMember){
+  selectedMember(member: GoalUserList){
     this.feedbackService.getFeedbacks(member.memberEmail).subscribe(data => this.feedbackMember = data);
   }
 }

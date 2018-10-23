@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Feedback, FeedbackMember } from "../model/feedback-model";
-import { GoalMember } from "../model/goalmember-model";
+import { GoalUserList } from "../model/goalUserList-model";
 
 @Injectable({
   providedIn: 'root'
@@ -33,13 +33,13 @@ export class FeedbackService {
     return this.http.get<FeedbackMember>(listUrl, { headers })
   }
 
-  getFeedBackStatusList(): Observable<GoalMember[]>{
+  getFeedBackStatusList(): Observable<GoalUserList[]>{
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     let listUrl = this.geturl+"?feedbackParam=getStatusList";
-    return this.http.get<GoalMember[]>(listUrl, { headers })
+    return this.http.get<GoalUserList[]>(listUrl, { headers })
   }
 
-  updateFeedbackStatus(userEmailToUpdate: string): Observable<GoalMember>{
+  updateFeedbackStatus(userEmailToUpdate: string): Observable<GoalUserList>{
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     let putUrl = this.geturl+"?updateEmail="+userEmailToUpdate;
     return this.http.put<any>(putUrl,null ,{ headers }

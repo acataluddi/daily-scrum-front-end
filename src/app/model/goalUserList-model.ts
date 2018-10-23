@@ -1,4 +1,4 @@
-export class GoalMember {
+export class GoalUserList {
     memberId: string;
     memberEmail: string;
     memberName: string;

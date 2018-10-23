@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { GoalMember } from '../model/goalmember-model';
+import { GoalUserList } from '../model/goalUserList-model';
 import { FeedbackService } from '../service/feedback.service';
-import { equal } from 'assert';
 
 @Component({
   selector: 'app-goal-userlist',
@@ -10,10 +9,10 @@ import { equal } from 'assert';
 })
 export class GoalUserlistComponent implements OnInit {
 
-  @Input() feedbackUserList: GoalMember[];
+  @Input() feedbackUserList: GoalUserList[];
   @Output() selectMemberEvent = new EventEmitter();
 
-  feedbackmemberArray: GoalMember[];
+  feedbackmemberArray: GoalUserList[];
   Usertype = localStorage.getItem('userType');
   checker: boolean = false;
   length: number;
@@ -46,6 +45,9 @@ export class GoalUserlistComponent implements OnInit {
     if (this.Usertype == 'Admin') {
       selectedmember.hasNewUpdates = false;
       this.feedbackService.updateFeedbackStatus(selectedmember.memberEmail).subscribe(data => console.log(data));
+    } else if(this.Usertype == 'Manager') {
+      selectedmember.hasNewUpdates = false;
+      //update in db
     }
 
     for (let member of this.feedbackmemberArray) {

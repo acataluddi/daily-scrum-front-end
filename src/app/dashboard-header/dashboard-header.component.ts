@@ -4,7 +4,7 @@ import { LoginService } from '../service/login.service';
 import { ProjectService } from '../service/project.service';
 import { Router } from '@angular/router';
 import { FeedbackService } from '../service/feedback.service';
-import { GoalMember } from '../model/goalmember-model';
+import { GoalUserList } from '../model/goalUserList-model';
 import { FeedbackMember } from '../model/feedback-model';
 
 @Component({
@@ -19,7 +19,7 @@ export class DashboardHeaderComponent implements OnInit {
   flag2;
   operation: string;
 
-  feedbackUserList: GoalMember[] = []
+  feedbackUserList: GoalUserList[] = []
   firstFeedbackmember: FeedbackMember
 
   constructor(private socialAuthService: AuthService,
@@ -68,7 +68,7 @@ export class DashboardHeaderComponent implements OnInit {
     this.projectService.setRequestType("add");
     this.router.navigateByUrl('/project');
   }
-
+  
   AddGoal() {
     alert("We are working on it!")
   }

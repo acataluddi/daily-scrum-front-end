@@ -1,0 +1,14 @@
+.goal {
+  display: flex;
+  padding: 15px;
+}
+
+.manager-img {
+  height: 32px;
+  width: 32px;
+  border-radius: 32px;
+}
+
+.goal-info {
+    padding: 0px 10px 3px 25px;
+}

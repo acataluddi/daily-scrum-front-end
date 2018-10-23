@@ -1,11 +1,11 @@
 import { PipeTransform, Pipe } from "@angular/core";
-import { GoalMember } from "./model/goalmember-model";
+import { GoalUserList } from "./model/goalUserList-model";
 
 @Pipe({
     name: 'feedbacklistfilter'
   })
   export class FeedbackFilterPipe implements PipeTransform {
-    transform(items: GoalMember[], searchText: string): any[] {
+    transform(items: GoalUserList[], searchText: string): any[] {
       if (!items) return [];
       if (!searchText) return items;
       searchText = searchText.toLowerCase();
