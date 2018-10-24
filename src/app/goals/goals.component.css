@@ -41,7 +41,8 @@
   }
   
   .right-body {
-    height: 70%;
+    height: 65%;
+    overflow-y: auto;
   }
   
   .right-header {
@@ -56,7 +57,7 @@
   }
   
   .right-part {
-    width: 65%;
+    width: 75%;
     padding-right: 5%;
   }
 

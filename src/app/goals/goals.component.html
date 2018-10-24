@@ -14,7 +14,8 @@
       <!-- <div class="goals-chat">
         chat here!!
       </div>  -->
-      <app-individual-goal [goal]="goalMember.goals[0]"></app-individual-goal>
+      <div *ngFor="let goal of goalMember.goals">
+      <app-individual-goal [goal]="goal"></app-individual-goal>
       <!-- <div class="input-area">
         <textarea class="message-box" autosize rows="1" placeholder="Type your message here.."></textarea>
         <button class="send">Send</button>

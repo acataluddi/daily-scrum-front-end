@@ -24,6 +24,14 @@ export class GoalsComponent implements OnInit {
         userEmail: 'n@gmail.com', hasNewUpdates: false, 
         comments: [
         ]
+      },
+      {
+        goalId: 'g102', goalTitle:'Goal 2', goalDescription: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 
+        goalTime: '1/1/2019', managerName:'A', 
+        managerEmail: 'a@gmail.com', managerImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaFfIZjtmUjzI94KOcU50tSXMguL8gnWvQZiOZXBLpqvAhMJ5K', 
+        userEmail: 'n@gmail.com', hasNewUpdates: false, 
+        comments: [
+        ]
       }
     ]
   };

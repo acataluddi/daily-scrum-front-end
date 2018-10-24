@@ -1,7 +1,21 @@
 <div class="goal">
   <img class="manager-img" src="{{goal.managerImage}}">
   <div class="goal-info">
-    <div>{{goal.goalTitle}}</div>
-    <div>{{goal.goalDescription}}</div>
+    <div class="goal-title">{{goal.goalTitle}}</div>
+    <div class="goal-desc">{{goal.goalDescription}}</div>
+    <div class="create-show">
+      <div class="created-on">Created: {{goal.goalTime}}</div>
+      <div class="show">show less</div>
+    </div>
+    <div class="comments">
+      <img class="commenter-img" src="{{goal.managerImage}}">
+      <div class="comment-info">
+        <div class="comment-desc">comment 1 </div>
+        <div class="comment-date">1,1,1,1</div>
+      </div>
+    </div>
+    <div class="input-comment">
+    <textarea class="comment-textarea" autosize rows="1" placeholder="Type your message here.."></textarea>
+    <button class="send">Send</button>  
   </div>
-</div>
+  </div>
