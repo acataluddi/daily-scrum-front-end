@@ -309,7 +309,7 @@ textarea:focus {
   font-size: 18px;
   font-weight: 550;
   color: rgb(169, 170, 172);
-  text-align: left;
+  text-align: center;
   background-color: #ffffff;
   border: none;
 }
@@ -332,7 +332,7 @@ small.error{
   font-size: 18px;
   font-weight: 550;
   color: rgb(85, 85, 87);
-  text-align: left;
+  text-align: center;
   margin-left: 40px;
   background-color: #ffffff;
   border: none;
