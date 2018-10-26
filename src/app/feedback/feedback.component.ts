@@ -11,36 +11,21 @@ import { GoalMember } from '../model/goalmember-model';
 export class FeedbackComponent implements OnInit {
 
   @Input() firstFeedback: FeedbackMember;
+  @Input() feedbackUserList: GoalMember[];
 
   feedbackMember: FeedbackMember;
-  // lastUpdate: string = 'Thu, 01:30PM';
+  length: number;
 
   constructor(private feedbackService: FeedbackService) { }
 
   ngOnInit() {
-    // console.log(this.firstFeedback)
+    if(this.firstFeedback != null ){
+      this.length = 1;
+    } else {
+      this.length = 0;
+    }
     this.feedbackMember = this.firstFeedback;
-    // this.initialize();
-    // this.lastUpdate = 'Thu, 01:30PM';
   }
-
-  // initialize() {
-  //   this.feedbackMember = {
-  //     userEmail: '',
-  //     userId: '',
-  //     userImage: '',
-  //     userName: '',
-  //     lastUpdate:'',
-  //     hasNewUpdates: true,
-  //     feedbacks: [
-  //       {
-  //         feedbackDate: '',
-  //         feedbackId: "",
-  //         feedbackDescription: ''
-  //       }
-  //     ]
-  //   };
-  // }
 
   selectedMember(member: GoalMember){
     this.feedbackService.getFeedbacks(member.memberEmail).subscribe(data => this.feedbackMember = data);
