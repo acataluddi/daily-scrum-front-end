@@ -8,6 +8,7 @@
   <button class="add-pro-button" *ngIf="activetab==1 && flag2 === true" (click)="AddProject()">
     <div class="add-project-div">Add Project</div>
   </button>
+  
   <div class="mob-view" *ngIf="activetab==1 && flag2 === true" (click)="AddProject()">
     <span class="glyphicon glyphicon-plus"></span>
   </div>
@@ -28,5 +29,5 @@
   <app-goals></app-goals>
 </div>
 <div *ngIf="activetab==4">
-  <app-feedback [firstFeedback] = "firstFeedbackmember"></app-feedback>
+  <app-feedback [firstFeedback] = "firstFeedbackmember" [feedbackUserList]="feedbackUserList"></app-feedback>
 </div>

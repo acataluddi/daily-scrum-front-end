@@ -7,15 +7,13 @@ body {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  margin-top: 125px;
+  margin-top: 113px;
 }
 
 .mainClass {
   position: relative;
-  background-color: #eeeeee;
   height: 95%;
   width: 100%;
-  padding-top: 1%;
 }
 
 h2 {
@@ -27,7 +25,7 @@ h2 {
   background-color: #ffffff;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
   transition: 0.3s;
-  padding: 1% 2% 4.5% 2%;
+  padding: 0% 2% 4.5% 2%;
   margin: 1%;
   height: 90%;
 }
@@ -46,17 +44,38 @@ h2 {
 .rowstyle {
   font-size: 11pt;
   padding: 1%;
-  background-color: #eeeeee;
+  border-bottom:1px solid #eeeeee;
   margin-bottom: 1%;
 }
 
 .head {
   text-align: left;
   color: black;
-  padding: 1% 1%;
-  border-bottom: 1px inset rgba(173, 172, 172, 0.904);
+  padding: 1.5% 1%;
   margin-bottom: 1%;
   font-weight: bold;
+  background-color: #eeeeee;
+}
+
+.search {
+  display: flex;
+  margin-left:75%;
+}
+
+input[placeholder="Search"] {
+  border: none;
+  outline: none;
+  height: 32px;
+  color: rgba(0, 0, 0, 1);
+}
+
+.search_icon {
+  width: 14px;
+  margin: 5%;
+}
+
+.search_name {
+  padding-top: 3%;
 }
 
 .custom-select {
@@ -65,6 +84,7 @@ h2 {
   margin-top: -3%;
   padding: 0% 1%;
   word-wrap: break-word;
+  border: none;
 }
 
 div.section.pagination {
@@ -82,11 +102,19 @@ div.section.pagination {
 
   .mainClass {
     position: relative;
-    background-color: #eeeeee;
     height: 99.8%;
     width: 100%;
   }
 
+  .search {
+    position: fixed;
+    margin-top:2%;
+  }
+  
+
+  .search_name {
+    padding-top: 0%;
+  }
   .card {
     position: relative;
     background-color: #ffffff;

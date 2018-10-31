@@ -64,4 +64,37 @@
 .right-part {
   /* margin-left: 25%; */
   width: 65%;
+  padding-right: 5%;
+}
+
+.feedbackErr{
+  height: 100%;
+}
+
+.nofeedback{
+  display: block;
+  margin-top: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 120px;
+  width: 120px;
+  filter: opacity(30%);
+}
+
+.nofeedbackmsg{
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+  color: rgb(187, 187, 187);
+}
+
+@media only screen and (max-width: 700px){
+  .header{
+    display: block;
+    margin-top: 130px;
+  }
+  .right-part{
+    padding-left: 8%;
+    width: 100%;
+  } 
 }

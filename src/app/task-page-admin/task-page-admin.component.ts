@@ -107,6 +107,7 @@ export class TaskPageAdminComponent implements OnInit {
     this.taskPageService.getMembersTask(taskDate, projectId)
       .subscribe(memberTasks => {
         this.IndMembArray = memberTasks;
+        console.log(this.IndMembArray)
 
         this.calculateTotalTime(this.IndMembArray);
         if (this.IndMembArray.filter(m => m.email === localStorage.getItem("email") && m.isActive == true).length != 0) {

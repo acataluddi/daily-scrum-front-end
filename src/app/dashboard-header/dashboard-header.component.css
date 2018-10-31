@@ -92,6 +92,28 @@
   width: 75%;
 }
 
+.search {
+  display: flex;
+}
+
+input[placeholder="Search"] {
+  border: none;
+  outline: none;
+  height: 32px;
+  color: rgba(0, 0, 0, 1);
+}
+
+.search_icon {
+  height: 32px;
+  width: 32px;
+  margin-top: 1%;
+}
+
+.search_name {
+  /* padding: 5% 5% 5% 5%; */
+}
+
+
 @media only screen and (max-width: 520px) {
   .add-pro-button {
     right: 5%;
