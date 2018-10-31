@@ -11,7 +11,6 @@ body {
 }
 
 .today_header {
-  /* padding-top: 13px; */
   margin-top: 10px;
   padding-bottom: 11px;
   display: flex;
@@ -61,7 +60,7 @@ img.right-arrow:active {
 
 .view-all {
   position: absolute;
-  right: 171px;
+  right: 350px;
   display: flex;
   border-radius: 5%;
   line-height: 180%;
@@ -73,7 +72,7 @@ img.right-arrow:active {
   margin-left: 80%;
   border-radius: 4px;
   line-height: 180%;
-  background-color: #b1b1b1;
+  background-color:rgba(229, 229, 229, 1);
   height: 30px;
   border: none;
   outline: none;
@@ -82,15 +81,23 @@ img.right-arrow:active {
   font-weight: 500;
 }
 
-.view_all_task:hover{
-  background-color: rgba(177, 177, 177, 0.8);
+.view_text {
+  margin-left: 7px;
+  margin-top:-2px;
+  font-size:13px;
+  color:  rgba(12, 33, 93, 1);
+  font-weight: 900;
 }
 
-button.view_all_task::before {
-  content: "\e137";
-  font-size: 16px;
-  font-family: "Glyphicons Halflings";
-  margin-right: 5px;
+.view_all_task:hover{
+  background-color: rgba(243, 243, 243, 0.8);
+}
+.view_img {
+  width:17px;
+  height:16px;
+  margin-top:2px;
+  background-image:url("../../assets/Group_24.png");
+  background-repeat: no-repeat;
 }
 
 .view {
@@ -107,7 +114,7 @@ button.view_all_task::before {
   display: flex;
   float: left;
   width: 100%;
-  margin-top: 2%;
+  margin-top: 1%;
   margin-left: 5%;
 }
 
@@ -122,15 +129,15 @@ button.view_all_task::before {
 }
 
 .total_time_text {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 900;
   color: rgba(79, 86, 105, 1);
   text-align: left;
   text-align: end;
   white-space: pre;
-  padding-top: 7px;
+  padding-top: 8px;
   padding-bottom: 6px;
-  padding-left: 16px;
+  padding-left: 10px;
 }
 
 .spent_text {
@@ -138,7 +145,7 @@ button.view_all_task::before {
   color: rgba(79, 86, 105, 1);
   text-align: left;
   white-space: pre;
-  padding: 9px 16px 7px 5px;
+  padding: 9px 16px 7px 9px;
 }
 
 .buttons {
@@ -166,8 +173,6 @@ button.view_all_task::before {
   width: 100%;
   margin-top: 0%;
   border: 1px solid rgba(216, 216, 216, 1);
-
-
 }
 
 .header {
@@ -183,12 +188,18 @@ button.view_all_task::before {
   margin-bottom: 10px;
 }
 
+.bullet {
+  height:16px;
+  margin-top:2px;
+  background-image:url("../../assets/rsz_1all_selected_2.png");
+  background-repeat: no-repeat;
+}
 
 .member_title1 {
   cursor: pointer;
   width: 100%;
   height: 47px;
-  background-color: #EFF4F9;
+  background-color:  rgba(242, 242, 242, 1);
   padding-left: 5%;
 }
 
@@ -279,32 +290,42 @@ button.view_all_task::before {
 }
 
 .task {
-  /* font-size: 13px; */
   line-height: 20px;
   margin-left: 21px;
   margin-top: -20px;
-  /* margin-bottom: 7px; */
-  /* font-size: 16px; */
   color: rgba(79, 86, 105, 1);
   text-align: left;
   width: 90%;
   white-space: pre-line;
 }
 
+.impediment_img {
+  height:16px;
+  width:16px;
+  margin-top:3px;
+  margin-right: 1px;
+  background-image:url("../../assets/rsz_rsz_impediment.png");
+  background-repeat: no-repeat;
+}
+.imped {
+  margin-left: 3px;
+  font-size: 13px;
+  color: rgba(79, 86, 105, 1);
+}
+
 .impediment {
+  display: flex;
   width:90%;
-  margin-left:25px;
-  /* margin-top:5px; */
-  /* margin-bottom:5px; */
-  padding-top:5px;
-  padding-bottom:5px;
+  margin-left:11px;
+  margin-top:5px;
+  margin-bottom:5px;
+  padding-top:10px;
+  padding-bottom:13px;
   padding-left:11px;
-  background-color:rgba(241, 241, 241, .7);
   white-space: pre-line;
 }
 .alt-View {
   visibility: hidden;
-  color: gray;
 }
 
 @media screen and (max-width: 1300px) {
@@ -319,11 +340,15 @@ button.view_all_task::before {
   .column {
     width: 100%;
   }
+
+  .alt-View {
+    visibility: hidden;
+  }
 }
 
 @media screen and (max-width: 1000px) {
   .view-all {
-    right: 45px;
+    right: 350px;
   }
   .view_all_task {
     width: 125px;
@@ -342,11 +367,17 @@ button.view_all_task::before {
   .search {
     display: none;
   }
+
+
+  .alt-View {
+    visibility: hidden;
+  }
+
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
   .view-all {
-    right: 45px;
+    right: 110px;
   }
   .header {
     width: 90%;
@@ -355,10 +386,13 @@ button.view_all_task::before {
   .alt-View {
     visibility: visible;
     position: relative;
-    left: 93%;
-    height: 22px;
-    width: 22px;
     font-size: 22px;
+    right: -50px;
+    width:17px;
+    height:16px;
+    margin-top:2px;
+    background-image:url("../../assets/Group_24.png");
+    background-repeat: no-repeat;
   }
 
   .column {
@@ -374,7 +408,7 @@ button.view_all_task::before {
 
 @media screen and (max-width: 400px) {
   .view-all {
-    right: 40px;
+    right: 110px;
   }
   .header {
     column-width: 400px;
