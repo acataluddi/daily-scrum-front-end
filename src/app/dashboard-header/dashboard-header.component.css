@@ -1,16 +1,16 @@
 .add-project-div {
-  text-align: center;
-  margin: 5%;
-  padding-left: 9px;
+  text-align: left;
+  margin: 4%;
+  padding-left: 0px;
   font-size: 14px;
   font-weight: 500;
   color: white;
 }
 
 .add-new-div {
-  text-align: center;
-  margin: 5%;
-  padding-left: 15px;
+  text-align: left;
+  margin: 4%;
+  padding-left: 0px;
   font-size: 14px;
   font-weight: 500;
   color: white;
@@ -21,8 +21,8 @@
   right: 10%;
   top: 18px;
   height: 32px;
-  width: 115px;
-  background-color: rgb(177, 177, 177);
+  width: 135px;
+  background-color: rgba(12, 33, 93, 1);
   border-radius: 4px;
   display: flex;
   border-style: none;
@@ -31,16 +31,30 @@
   font-weight: 600;
   border-color: #555;
 }
-
-.add-pro-button:hover {
-  background-color: rgb(177, 177, 177,0.8);
+.add-goal-button {
+  position: absolute;
+  right: 10%;
+  top: 18px;
+  height: 32px;
+  width: 135px;
+  background-color: rgba(12, 33, 93, 1);
+  border-radius: 4px;
+  display: flex;
+  border-style: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  border-color: #555;
+}
+.add-pro-button:hover,.add-goal-button:hover {
+  background-color: rgba(0, 35, 192, 0.8);
 }
 
 .goals-tab {
   margin-left: 30px;
   height: 32px;
   /* width: 85px; */
-  color: rgba(79, 86, 105, 1);
+  color: rgba(181, 186, 201, 1);
   border: none;
   cursor: pointer;
 }
@@ -54,7 +68,6 @@
   z-index: 40;
   padding-top: 20px;
   top: 60px;
-  border-top: 1px solid #dfded9;
   padding-bottom: 10px;
   font-size: 18px;
   font-weight: 500;
@@ -65,8 +78,8 @@
 }
 
 .projects-tab {
-  margin-left: 5%;
-  color: rgba(79, 86, 105, 1);
+  margin-left: 6.8%;
+  color: rgba(181, 186, 201, 1);
   height: 32px;
   border: none;
   cursor: pointer;
@@ -76,20 +89,24 @@
 .feedback-tab {
   margin-left: 30px;
   height: 32px;
-  color: rgba(79, 86, 105, 1);
+  color: rgba(181, 186, 201, 1);
   border: none;
   cursor: pointer;
 }
 
 .tab-active {
   border-bottom-style: solid;
-  border-bottom-color: #b1b1b1;
+  color: rgba(12, 33, 93, 1);
+  border-bottom-color: rgba(255, 0, 0, 1);
   font-weight: 600;
 }
 
 .tabs {
   display: flex;
   width: 75%;
+}
+.plus-sign{
+  padding:6%;
 }
 
 .search {
@@ -130,7 +147,7 @@ input[placeholder="Search"] {
 }
 
 @media only screen and (max-width: 420px) {
-  .add-pro-button {
+  .add-pro-button,.add-goal-button {
     visibility: hidden;
   }
 
@@ -141,7 +158,7 @@ input[placeholder="Search"] {
     visibility: visible;
     width: 32px;
     height: 32px;
-    background: #b1b1b1;
+    background-color: rgba(12, 33, 93, 1);
     border-radius: 4px;
     padding: 4.4px 7.5px;
     color: white;
