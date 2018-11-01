@@ -6,14 +6,16 @@
     <div id="feedback-tab" class="feedback-tab" *ngIf="flag1 === true" (click)="activateTab(4)">FEEDBACK</div>
   </div>
   <button class="add-pro-button" *ngIf="activetab==1 && flag2 === true" (click)="AddProject()">
+    <img class="plus-sign" src="../../assets/add_project_button.png">
     <div class="add-project-div">Add Project</div>
   </button>
   
   <div class="mob-view" *ngIf="activetab==1 && flag2 === true" (click)="AddProject()">
     <span class="glyphicon glyphicon-plus"></span>
   </div>
-  <button class="add-pro-button" *ngIf="activetab==3 && UserType === 'Manager'" (click)="AddGoal()">
-    <div class="add-new-div">Add New</div>
+  <button class="add-goal-button" *ngIf="activetab==3 && UserType === 'Manager'" (click)="AddGoal()">
+    <img class="plus-sign" src="../../assets/add_project_button.png">
+    <div class="add-new-div">Add Goal</div>
   </button>
   <div class="mob-view" *ngIf="activetab==3 && UserType === 'Manager'" (click)="AddGoal()">
     <span class="glyphicon glyphicon-plus"></span>

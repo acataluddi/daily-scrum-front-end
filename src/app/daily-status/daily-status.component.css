@@ -289,7 +289,7 @@ button.view_all_task::before {
 
 .view-all {
   position: absolute;
-  right: 171px;
+  right: 330px;
   display: flex;
   border-radius: 5%;
   line-height: 180%;
