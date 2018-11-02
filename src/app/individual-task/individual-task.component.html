@@ -8,7 +8,10 @@
       <span *ngIf="editable == false && tid%3===0 && tid%5!=0  && tid%6!=0 && tid%7!=0" class="dot dot-color-4"></span>
       <span *ngIf="editable == false && tid%3!=0 && tid%5!=0  && tid%6!=0 && tid%7!=0" class="dot dot-color-5"></span>
       <span *ngIf="check==false && editable" class="dot dot-blank" (click)="check=true; checked(task)"></span>
-      <span *ngIf="check && editable" class="dot dot-fill" (click)="check=false; unchecked(task)"></span>
+      <!-- <span *ngIf="check && editable" class="dot dot-fill" (click)="check=false; unchecked(task)"> -->
+      <span *ngIf="check && editable" (click)="check=false; unchecked(task)">
+        <img class="img-checked" src="../../assets/radio_selected.png">
+      </span>
     </div>
     <div class="description">
       <textarea id="description{{task.taskId}}" class="description-textarea" [disabled]="!editable" autosize rows="1"
@@ -27,28 +30,32 @@
     placeholder="Add blockers/impediments Here"></textarea>
 
   <div class="time" (click)="stageTaskTime(task)">
-    <div class="time_border" *ngIf="(task.hourSpent>0 || task.minuteSpent>0) && edit_time_spent==false" (click)="show_save=true; edit_time_spent=editable">
+    <div class="time_border" *ngIf="(task.hourSpent>0 || task.minuteSpent>0) && edit_time_spent==false" (click)="show_save=true; edit_time_spent=editable; focus(1)">
       <div>
         {{task.hourSpent}} hour
       </div>
 
       {{task.minuteSpent}} minutes
     </div>
-
+    <!-- <input type="time" value="00:30"> -->
     <div class="add_hours" *ngIf="task.hourSpent===0 && task.minuteSpent===0 && edit_time_spent==false && editable"
-      (click)="edit_time_spent=true; show_save=true">
+      (click)="edit_time_spent=true; show_save=true; focus(1)">
       Add Hours Spent
     </div>
-    <div *ngIf="edit_time_spent==true" class="col-sm-2">
+    <!-- <div *ngIf="edit_time_spent==true" class="col-sm-2">
       <select class="form-control" id="gender1" name="hourSpent" [(ngModel)]="task.hourSpent" (blur)="emitTimeEvent(task);">
         <option *ngFor="let i of timeArray(hours).fill(1); let j=index">{{j}}</option>
       </select>
       <select class="form-control" id="gender1" name="minuteSpent" [(ngModel)]="task.minuteSpent" (blur)="emitTimeEvent(task);">
         <option *ngFor="let i of timeArray(minutes).fill(1); let j=index">{{j}}</option>
       </select>
-    </div>
+    </div> -->
 
-    <div class="add_impediment" *ngIf="task.impediments== '' && show_impediment==false && editable" (click)="show_save=true; show_impediment=true; focus()">
+    <div *ngIf="edit_time_spent==true" class="col-sm-2">
+        <input class="time_spent" id="timeSpent{{task.taskId}}" [(ngModel)]="time" type="time" (blur)="emitTimeEvent(task); edit_time_spent=false" min="00:00" max="16:00" autofocus>
+      </div>
+
+    <div class="add_impediment" *ngIf="task.impediments== '' && show_impediment==false && editable" (click)="show_save=true; show_impediment=true; focus(2)">
       Add Blockers
     </div>
   </div>

@@ -6,8 +6,8 @@
     <div class="textdiv">
       <div id="dailyscrumclass" *ngIf="show_dailyscrum" (mouseenter)="showTooltip=true" (mouseleave)="showTooltip=flase">{{selected.projectName}}
       </div>
-      <div id="scrum" *ngIf="show_scrum">Daily Scrum
-        <div id="dash" *ngIf="show_dash">| {{title}}</div>
+      <div id="scrum" class="scrum" *ngIf="show_scrum">Daily Scrum
+        <div id="dash" *ngIf="show_dash"> {{title}}</div>
       </div>
       <div id="arrow" *ngIf="show_arrow && length > 1">
         <div id="projectlist" *ngIf="show_projectlist">
@@ -23,8 +23,8 @@
         </div>
         <div class="arrow2">
           <div id="signout" *ngIf="show_signout">
+              <div id="sign" class="a" (click)="logout()"> Logout </div>
             <div id="feed" class="a" (click)="openModal(template)"> Feedback </div>
-            <div id="sign" class="a" (click)="logout()"> Signout </div>
           </div>
         </div>
       </div>
