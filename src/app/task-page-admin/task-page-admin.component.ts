@@ -67,8 +67,13 @@ export class TaskPageAdminComponent implements OnInit {
       this.projectId = +params['projectId'];
       var parts = params['startdate'].split('-');
       this.minDate = new Date(+parts[2], +(parts[1]) - 1, +parts[0]);
-      var dt = new Date();
-      this.myDateValue = dt;
+      var newSelectedDate = this.getSelectedDate();
+      if(newSelectedDate<this.minDate){
+        var dt = new Date();
+        this.myDateValue = dt;
+      } else{
+        this.myDateValue = newSelectedDate;
+      }
     });
     this.subscription = taskservice.newList.subscribe(
       data => {
@@ -77,13 +82,21 @@ export class TaskPageAdminComponent implements OnInit {
         var parts = data.startDate.split('-');
         this.minDate = new Date(+parts[2], +(parts[1]) - 1, +parts[0]);
         this.view_my_task_flag = false;
+        // var dt = new Date();
+        // this.myDateValue = dt;
+      var newSelectedDate = this.getSelectedDate();
+      if(newSelectedDate<this.minDate){
         var dt = new Date();
         this.myDateValue = dt;
+      } else{
+        this.myDateValue = newSelectedDate;
+      }
       });
   }
   ngOnInit() {
     this.maxDate = new Date();
-    this.myDateValue = new Date();
+    // this.myDateValue = new Date();
+    this.myDateValue = this.getSelectedDate();
     this.projectId = localStorage.getItem("projectId");
     this.currentProject = localStorage.getItem("currentProject");
     this.view_my_task_flag = false;
@@ -138,6 +151,7 @@ export class TaskPageAdminComponent implements OnInit {
     this.total_minutes_spent = totalMinute;
   }
   onDateChange(newDate: Date) {
+    this.saveSelectedDate();
     if (newDate.getDate() === this.maxDate.getDate() &&
       newDate.getMonth() === this.maxDate.getMonth() &&
       newDate.getFullYear() === this.maxDate.getFullYear()) {
@@ -195,6 +209,7 @@ export class TaskPageAdminComponent implements OnInit {
     }
   }
   viewMyTasks(): void {
+    this.saveSelectedDate();
     var email = localStorage.getItem("email");
     var adDate = localStorage.getItem('addedDate');
     var delDate = localStorage.getItem('deletedDate');
@@ -205,8 +220,34 @@ export class TaskPageAdminComponent implements OnInit {
   }
 
   gotoDailyStatus(IndMemOb){
+    this.saveSelectedDate();
     this.navservice.changedata(IndMemOb)
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
+  }
+
+  saveSelectedDate(){
+    var nday = '';
+    var nmonth = '';
+    var selectedDate = '';
+    if (this.myDateValue.getDate() < 10) {
+      nday += '0' + this.myDateValue.getDate();
+    } else {
+      nday += this.myDateValue.getDate();
+    }
+    if ((this.myDateValue.getMonth() + 1) < 10) {
+      nmonth += '0' + (this.myDateValue.getMonth() + 1);
+    } else {
+      nmonth += (this.myDateValue.getMonth() + 1);
+    }
+    selectedDate += nday + '-' + nmonth + '-' + this.myDateValue.getFullYear();
+    localStorage.setItem("selectedDate", selectedDate);
+  }
+
+  getSelectedDate():Date{
+    var dateSelected = localStorage.getItem("selectedDate");
+    var parts = dateSelected.split('-');
+    var newSelectedDate = new Date(+parts[2], +(parts[1]) - 1, +parts[0]);
+    return newSelectedDate;
   }
 
 }
