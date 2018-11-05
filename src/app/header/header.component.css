@@ -8,7 +8,8 @@ html {
   z-index: 50;
   background: #ffffff;
   position: fixed;
-  border-bottom: 1px solid #dfded9;
+  border-bottom: 1px solid rgba(229, 229, 229, 1);
+  background: rgba(242, 242, 242, 1);
 }
 
 .classone {
@@ -74,21 +75,22 @@ img[src="../../assets/Scrum_logo.png"] {
 #scrum {
   font-family: 'Neo Sans Cyr', 'Roboto';
   font-size: 2rem;
-  font-weight: 300;
+  font-weight: 500;
   position: absolute;
   top: 28.34%;
   left: 0%;
   width: 250px;
-  color: rgba(79, 86, 105, 1);
+  color: rgba(12, 33, 93, 1);
 }
 
 #dash {
   display: inline-block;
   position: absolute;
+  font-family: 'Roboto';
   top: 0px;
   left: 116px;
-  color: rgba(79, 86, 105, 1);
-  font-weight: lighter;
+  color: rgba(12, 33, 93, 1);
+  font-weight: 100;
 }
 
 #arrow {
@@ -96,7 +98,6 @@ img[src="../../assets/Scrum_logo.png"] {
   position: absolute;
   top: 26px;
   left: 225px;
-  background-color: #ffffff;
   background-image: url(../../assets/arrow.png);
   border: none;
   height: 16px;
@@ -110,7 +111,6 @@ img[src="../../assets/Scrum_logo.png"] {
   top: -1px;
   right: .5%;
   cursor: pointer;
-  background-color: #ffffff;
   border: none;
   background-image: url(../../assets/arrow.png);
   height: 16px;
@@ -130,7 +130,6 @@ img[src="../../assets/Scrum_logo.png"] {
   position: relative;
   top: -7px;
   right: 14%;
-  background-color: #ffffff;
   color: rgba(79, 86, 105, 1);
   font-size: 1.6rem;
   cursor: pointer;
@@ -159,9 +158,9 @@ img[src="../../assets/Scrum_logo.png"] {
 .usermailclass #signout {
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.17);
   opacity: 1;
-  width: 96px;
+  width: 117px;
   border-radius: 4px;
-  background-color: #eeeeee;
+  background-color: #ffffff;
   position: absolute;
   top: 145%;
   right: 10%;
@@ -172,7 +171,7 @@ img[src="../../assets/Scrum_logo.png"] {
   text-decoration: none;
   padding: 10% 25%;
   text-align: left;
-  color: black;
+  color: rgba(12, 33, 93, 1);
   font-size: inherit;
   cursor: pointer;
 }
@@ -192,7 +191,7 @@ img[src="../../assets/Scrum_logo.png"] {
 }
 
 #projectlist {
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.17);
+  box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.17);
   z-index: 1;
   opacity: 1;
   max-height: 175px;
@@ -203,11 +202,11 @@ img[src="../../assets/Scrum_logo.png"] {
   text-align: left;
   color: solid gray;
   border-radius: 4px;
-  background-color: #eeeeee;
-  padding: 0px 0px 0px 0px;
+  background-color: #ffffff;
+  padding: 12px 0px;
   position: absolute;
   top: 26px;
-  left: -233px;
+  left: -120px;
   cursor: pointer;
   overflow-y: auto;
   overflow-x: hidden;
@@ -219,7 +218,8 @@ img[src="../../assets/Scrum_logo.png"] {
 }
 
 .items:hover {
-  background-color: #dedede;
+  color: rgba(12, 33, 93, 1);
+  font-weight: bold;
 }
 
 #sign:hover {
@@ -425,7 +425,7 @@ small.error{
   #projectlist {
     width: 269px;
     top: 30px;
-    left: -257px;
+    left: -133px;
   }
 }
 
@@ -443,7 +443,7 @@ small.error{
   }
 }
 
-@media only screen and (max-width: 540px) {
+@media only screen and (max-width: 560px) {
   #dash {
     visibility: hidden;
   }
@@ -482,6 +482,14 @@ small.error{
     position: fixed;
     top: 4%;
     right: 1%;
+  }
+
+  #projectlist {
+    position: absolute;
+    top: 27px;
+    left: -1106%;
+    max-height: 289px;
+    width: 262px;
   }
 
 
@@ -572,13 +580,13 @@ small.error{
     left: 120%;
   }
 
-  #projectlist {
+  /* #projectlist {
     position: absolute;
     top: 27px;
     left: -1106%;
     height: 289px;
-    width: 300px;
-  }
+    width: 262px;
+  } */
 }
 @media only screen and (max-width: 420px) {
   .BottomDiv {

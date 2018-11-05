@@ -12,8 +12,9 @@ body {
 }
 
 body .bs-datepicker-container .bs-datepicker-head {
-  background: linear-gradient(#cdd0d2, #b1b1b1);
-  background: -webkit-gradient(linear, left top, left bottom, from(#cdd0d2), to(#b1b1b1));
+  /* background: linear-gradient(#cdd0d2, #b1b1b1); */
+  /* background: -webkit-gradient(linear, left top, left bottom, from(#cdd0d2), to(#b1b1b1)); */
+  background: #ffffff;
   outline: none;
   border: none;
   margin: none;
@@ -39,43 +40,56 @@ body .bs-datepicker-container {
 }
 
 body .bs-datepicker-container .bs-datepicker-body {
-  background-color: #e6e6e6;
+  background-color: #ffffff;
   border: none;
   padding: 0px;
 }
 
+body .bs-datepicker .is-other-month {
+  color: rgba(135, 206, 250, 1);
+}
+
+body .bs-datepicker-body table td span {
+  font-weight: bold;
+}
 body .bs-datepicker-container .bs-datepicker-head * {
-  color: white;
+  /* color: white; */
+  color: rgba(12, 33, 93, 1);
   font-size: 20px;
 }
 
 .theme-orange .bs-datepicker-body table td {
-  color: #555;
+  /* color: #555; */
+  color: rgba(12, 33, 93, 1);
   font-size: 15px;
   font-weight: 500;
 }
 
 .theme-orange .bs-datepicker-body table th {
-  color: rgba(39, 39, 39, 0.781);
+  /* color: rgba(39, 39, 39, 0.781); */
+  color: rgba(225, 227, 230, 1);
   font-weight: bold;
-  font-family: 'Helvetica Neue';
-  font-size: 16px
+  font-family: 'Helvetica Neue', 'Roboto';
+  font-size: 13px;
 }
 
 .theme-orange .bs-datepicker-body table td span.selected,
 .theme-orange .bs-datepicker-body table td.selected span,
 .theme-orange .bs-datepicker-body table td span[class*="select-"]:after,
 .theme-orange .bs-datepicker-body table td[class*="select-"] span:after {
-  background-color: #333333;
+  /* background-color: #333333; */
+  background-color: rgba(12, 33, 93, 1);
   color: white;
 }
 
-.theme-orange .bs-datepicker-body table td span:hover {
-  color: #6d6d6d;
-}
+/* .theme-orange .bs-datepicker-body table td span:hover {
+  /* color: #6d6d6d; 
+  color: rgba(12, 33, 93, 1);
+} */
 
 .theme-orange .bs-datepicker-body table td span.disabled {
-  color: #6d6d6d75;
+  /* color: #6d6d6d75; */
+  color: rgba(135, 206, 250, 0.5);
 }
 
 /* .modal-content {

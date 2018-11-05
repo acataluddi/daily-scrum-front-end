@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Task } from "../model/task-model";
 import { Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-individual-task',
@@ -26,12 +27,14 @@ export class IndividualTaskComponent implements OnInit {
   saved;
   show_save;
 
+  time;
+
   noDesc = false;
   noTime = false;
 
   timeArray = Array;
-  hours = 17;
-  minutes = 60;
+  hours;
+  minutes;
   newdesc = '';
   tid;
   old_desc = '';
@@ -52,6 +55,21 @@ export class IndividualTaskComponent implements OnInit {
       this.check = ischecked);
     this.copiedSubscription = this.hideSavedEvent.subscribe((hideSaved) =>
       this.saved = false);
+    
+    if (this.task.hourSpent >= 0 || this.task.minuteSpent >= 0) {
+      if (this.task.hourSpent < 10) {
+        this.hours = '0' + this.task.hourSpent.toString();
+      } else {
+        this.hours = this.task.hourSpent.toString();
+      }
+      if (this.task.minuteSpent < 10) {
+        this.minutes = '0' + this.task.minuteSpent.toString();
+      } else {
+        this.minutes = this.task.minuteSpent.toString();
+      }
+      this.time = this.hours + ':' + this.minutes;
+    }
+    
     if (this.task.description == '' || this.task.description == null) {
       this.show_save = true;
       this.saved = false;
@@ -80,8 +98,9 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   emitTimeEvent(task) {
-    task.hourSpent = parseInt(task.hourSpent);
-    task.minuteSpent = parseInt(task.minuteSpent);
+    var hr = this.time.split(":")
+    task.hourSpent = parseInt(hr[0]);
+    task.minuteSpent = parseInt(hr[1]);
   }
   updateDescription() {
     this.task.description = this.task.description.trim();
@@ -113,9 +132,9 @@ export class IndividualTaskComponent implements OnInit {
       this.noDesc = false;
       this.noTime = false;
       this.show_save = false;
-      setTimeout(()=>{  
+      setTimeout(() => {
         this.saved = false;
-   }, 5000);
+      }, 5000);
     }
     this.stageDesc = false;
     this.stageTime = false;
@@ -171,8 +190,13 @@ export class IndividualTaskComponent implements OnInit {
     this.popTask.emit(task)
   }
 
-  focus() {
-    setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });
+  focus(value) {
+    if (value == 1) {
+      setTimeout(() => { document.getElementById('timeSpent' + this.task.taskId).focus() });  
+    } else if (value == 2){
+      setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });
+    }
+    // setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });
   }
 
   copy(id) {

@@ -158,7 +158,7 @@ decline(): void {
 }
   toggle(currenturl) {
     if (currenturl == '/dashboard') {
-      this.title = 'Dashboard';
+      this.title = '';
       this.show_dailyscrum = false
       this.show_arrow = false
       this.show_scrum = true

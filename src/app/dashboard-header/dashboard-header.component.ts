@@ -80,14 +80,15 @@ export class DashboardHeaderComponent implements OnInit {
           if (document.getElementById("users-tab").classList.contains('tab-active')) {
             document.getElementById("users-tab").classList.remove('tab-active');
           }
-          if (document.getElementById("feedback-tab").classList.contains('tab-active')) {
-            document.getElementById("feedback-tab").classList.remove('tab-active');
-          }
+          // sholud use after completing feedback tab
+          // if (document.getElementById("feedback-tab").classList.contains('tab-active')) {
+          //   document.getElementById("feedback-tab").classList.remove('tab-active');
+          // }
         }
         if (this.UserType == 'Manager' || this.UserType == 'User') {
-          if (document.getElementById("goals-tab").classList.contains('tab-active')) {
-            document.getElementById("goals-tab").classList.remove('tab-active');
-          }
+          // if (document.getElementById("goals-tab").classList.contains('tab-active')) {
+          //   document.getElementById("goals-tab").classList.remove('tab-active');
+          // }
         }
         break;
       case 2: document.getElementById("users-tab").classList.add('tab-active');
@@ -95,14 +96,16 @@ export class DashboardHeaderComponent implements OnInit {
           document.getElementById("projects-tab").classList.remove('tab-active');
         }
         if (this.UserType == 'Manager' || this.UserType == 'User') {
-          if (document.getElementById("goals-tab").classList.contains('tab-active')) {
-            document.getElementById("goals-tab").classList.remove('tab-active');
-          }
+          // should use after completing goals tab
+          // if (document.getElementById("goals-tab").classList.contains('tab-active')) {
+          //   document.getElementById("goals-tab").classList.remove('tab-active');
+          // }
         }
         if (this.flag1) {
-          if (document.getElementById("feedback-tab").classList.contains('tab-active')) {
-            document.getElementById("feedback-tab").classList.remove('tab-active');
-          }
+          // should use after completing feedback tab
+          // if (document.getElementById("feedback-tab").classList.contains('tab-active')) {
+          //   document.getElementById("feedback-tab").classList.remove('tab-active');
+          // }
         }
         break;
       case 3: document.getElementById("goals-tab").classList.add('tab-active');
