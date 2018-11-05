@@ -174,6 +174,15 @@ export class DailyStatusComponent implements OnInit {
           this.email = taskEmail
 
           this.setMinMaxDate(myMemobj)
+
+          var addedDateParts = myMemobj.addedDate.split('-');
+          var addedDate = new Date(+addedDateParts[2], +(addedDateParts[1]) - 1, +addedDateParts[0]);
+          if (this.getSelectedDate() > addedDate) {
+            this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+          } else {
+            localStorage.setItem('selectedDate', myMemobj.addedDate);
+            this.myDateValue = addedDate;
+          }
         } else {
           for (let member of data.members) {
             if (member.isActive) {
@@ -187,6 +196,15 @@ export class DailyStatusComponent implements OnInit {
           var taskName = firstMember.name
           this.email = taskEmail
           this.setMinMaxDate(firstMember)
+
+          var addedDateParts = firstMember.addedDate.split('-');
+          var addedDate = new Date(+addedDateParts[2], +(addedDateParts[1]) - 1, +addedDateParts[0]);
+          if (this.getSelectedDate() > addedDate) {
+            this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+          } else {
+            localStorage.setItem('selectedDate', firstMember.addedDate);
+            this.myDateValue = addedDate;
+          }
 
         }
 
@@ -258,21 +276,22 @@ export class DailyStatusComponent implements OnInit {
     });
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
+    // this.d = this.getSelectedDate()
     this.month = this.months[this.d.getMonth()];
     this.date = this.d.getDate();
     this.year = this.d.getFullYear();
     this.myvalue = true;
-    this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-    this.yesterdayval = "Yesterday's Tasks";
+    // this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+    // this.yesterdayval = "Yesterday's Tasks";
 
-    this.todayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
-    this.todayDate.setDate(this.todayDate.getDate() - 1);
-    this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
+    this.onDateChange(this.getSelectedDate())
+    // this.todayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
+    // this.todayDate.setDate(this.todayDate.getDate() - 1);
+    // this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
 
     this.projectId = localStorage.getItem("projectId")
     this.currentProject = localStorage.getItem("currentProject")
-    this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
-
+    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
     this.numOfSelected = '0'
 
   }
@@ -490,23 +509,24 @@ export class DailyStatusComponent implements OnInit {
       document.getElementById("leftarrow").classList.remove('blocked-arrow');
     }
 
-    if (this.status) {
-      this.newDate = newDate;
-      var d1 = new Date(newDate);
-      (d1.setDate(d1.getDate() - 1));
-      this.month = this.months[newDate.getMonth()];
-      this.date = newDate.getDate();
-      this.year = newDate.getFullYear();
-      if ((newDate.getMonth() === this.d.getMonth()) && (newDate.getDate() === this.d.getDate()) && (newDate.getFullYear() === this.d.getFullYear())) {
-        this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
-        this.yesterdayval = "Yesterday's Tasks";
-      }
-      else {
-        this.todayval = this.month + " " + this.date + ", " + this.year;
-        this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
-      }
-      this.getData(newDate);
+    // if (this.status) {
+    this.newDate = newDate;
+    var d1 = new Date(newDate);
+    (d1.setDate(d1.getDate() - 1));
+    this.month = this.months[newDate.getMonth()];
+    this.date = newDate.getDate();
+    this.year = newDate.getFullYear();
+    if ((newDate.getMonth() === this.d.getMonth()) && (newDate.getDate() === this.d.getDate()) && (newDate.getFullYear() === this.d.getFullYear())) {
+      this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval = "Yesterday's Tasks";
     }
+    else {
+      this.todayval = this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+    }
+    this.getData(newDate);
+    this.saveSelectedDate(newDate)
+    // }
 
     if (this.userEmail == this.datachanged.email) {
       var currentDate = new Date(newDate)
@@ -551,6 +571,9 @@ export class DailyStatusComponent implements OnInit {
 
       this.newDate = d1;
       this.myDateValue = d1;
+      // var localdate = this.month + " " + this.date + ", " + this.year;
+      // localStorage.setItem('selectedDate', localdate)
+      this.saveSelectedDate(this.myDateValue);
     }
   }
   getPreviousDate() {
@@ -570,6 +593,10 @@ export class DailyStatusComponent implements OnInit {
       }
       this.newDate = d1;
       this.myDateValue = d1;
+      // var localdate = this.date + "-" + this.newDate.getMonth() + this.year;
+
+      // localStorage.setItem('selectedDate', localdate)
+      this.saveSelectedDate(this.myDateValue);
     }
   }
 
@@ -753,7 +780,15 @@ export class DailyStatusComponent implements OnInit {
       this.taskHolderName = taskMember.name;
     }
     this.email = taskMember.email;
-    this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+    var addedDateParts = taskMember.addedDate.split('-');
+    var addedDate = new Date(+addedDateParts[2], +(addedDateParts[1]) - 1, +addedDateParts[0]);
+    if (this.getSelectedDate() > addedDate) {
+      this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
+    } else {
+      localStorage.setItem('selectedDate', taskMember.addedDate);
+      this.onDateChange(addedDate)
+    }
+    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
   setLocalStorage(memobj) {
@@ -794,7 +829,7 @@ export class DailyStatusComponent implements OnInit {
       var parts2 = member.deletedDate.split('-');
       this.maxDate = new Date(+parts2[2], +(parts2[1]) - 1, +parts2[0]);
     }
-    this.myDateValue = this.maxDate;
+    this.myDateValue = this.getSelectedDate();
     this.newDate = this.maxDate;
   }
 
@@ -962,7 +997,7 @@ export class DailyStatusComponent implements OnInit {
       this.taskservice.deleteTask(element)
         .subscribe(msg => console.log(msg));
       if (value == 1) {
-        this.YesterdayTasks.splice(index, 1);
+        this.YesterdayTasks.splice(index, 1)
       } else {
         this.TodayTasks.splice(index, 1);
       }
@@ -1017,5 +1052,30 @@ export class DailyStatusComponent implements OnInit {
       }
         break;
     }
+  }
+
+  getSelectedDate(): Date {
+    var selectedDate = localStorage.getItem('selectedDate');
+    var selectedDateparts = selectedDate.split('-');
+    var seldate = new Date(+selectedDateparts[2], +(selectedDateparts[1]) - 1, +selectedDateparts[0]);
+    return seldate;
+  }
+
+  saveSelectedDate(newSelectedDate) {
+    var nday = '';
+    var nmonth = '';
+    var selectedDate = '';
+    if (newSelectedDate.getDate() < 10) {
+      nday += '0' + newSelectedDate.getDate();
+    } else {
+      nday += newSelectedDate.getDate();
+    }
+    if ((newSelectedDate.getMonth() + 1) < 10) {
+      nmonth += '0' + (newSelectedDate.getMonth() + 1);
+    } else {
+      nmonth += (newSelectedDate.getMonth() + 1);
+    }
+    selectedDate += nday + '-' + nmonth + '-' + newSelectedDate.getFullYear();
+    localStorage.setItem("selectedDate", selectedDate);
   }
 }

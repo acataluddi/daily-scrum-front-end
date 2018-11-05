@@ -108,7 +108,8 @@ export class DashboardComponent implements OnInit {
     this.TotalMembers = this.memberArray.length;
 
   }
-  openDailyStatus(project) {
+  openDailyStatus(project) {    
+    this.saveSelectedDate();
     var projectId = project.projectId
     var name = project.projectName
     var myId = localStorage.getItem("email")
@@ -210,5 +211,24 @@ export class DashboardComponent implements OnInit {
 
   decline(): void {
     this.modalRef.hide();
+  }
+
+  saveSelectedDate(){
+    var d = new Date();
+    var nday = '';
+    var nmonth = '';
+    var selectedDate = '';
+    if (d.getDate() < 10) {
+      nday += '0' + d.getDate();
+    } else {
+      nday += d.getDate();
+    }
+    if ((d.getMonth() + 1) < 10) {
+      nmonth += '0' + (d.getMonth() + 1);
+    } else {
+      nmonth += (d.getMonth() + 1);
+    }
+    selectedDate += nday + '-' + nmonth + '-' + d.getFullYear();
+    localStorage.setItem("selectedDate", selectedDate);
   }
 }

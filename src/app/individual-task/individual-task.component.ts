@@ -219,15 +219,12 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   copy(id) {
-    console.log(id)
     let copyText = document.getElementById('description' + id) as HTMLInputElement;
-    console.log(copyText.value)
     copyText.select()
     document.execCommand("copy");
   }
 
   checked(task) {
-    // console.log(task)
     this.selectedTask.emit(task)
   }
 
