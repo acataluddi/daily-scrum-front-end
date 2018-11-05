@@ -3,9 +3,8 @@ import { AuthService } from 'angular-6-social-login';
 import { LoginService } from '../service/login.service';
 import { ProjectService } from '../service/project.service';
 import { Router } from '@angular/router';
-import { FeedbackService } from '../service/feedback.service';
 import { GoalMember } from '../model/goalmember-model';
-import { FeedbackMember } from '../model/feedback-model';
+import { Feedback } from '../model/feedback-model';
 
 @Component({
   selector: 'app-dashboard-header',
@@ -20,13 +19,12 @@ export class DashboardHeaderComponent implements OnInit {
   operation: string;
 
   feedbackUserList: GoalMember[] = []
-  firstFeedbackmember: FeedbackMember
+  feedbackList: Feedback[];
 
   constructor(private socialAuthService: AuthService,
     private loginservice: LoginService,
     private projectService: ProjectService,
-    public router: Router,
-    private feedbackService: FeedbackService) { }
+    public router: Router) { }
 
   ngOnInit() {
     this.activetab = 1;
@@ -46,15 +44,6 @@ export class DashboardHeaderComponent implements OnInit {
           });
       }
     });
-
-    if (localStorage.getItem('userType') == "Admin") {
-      this.feedbackService.getFeedBackStatusList().subscribe(data => {
-      this.feedbackUserList = data;
-        if (data.length > 0) {
-          this.feedbackService.getFeedbacks(data[0].memberEmail).subscribe(data => this.fetchFirstFeedbackMember(data))
-        }
-      })
-    }
   }
 
   activateTab(value) {
@@ -80,10 +69,10 @@ export class DashboardHeaderComponent implements OnInit {
           if (document.getElementById("users-tab").classList.contains('tab-active')) {
             document.getElementById("users-tab").classList.remove('tab-active');
           }
-          // sholud use after completing feedback tab
-          // if (document.getElementById("feedback-tab").classList.contains('tab-active')) {
-          //   document.getElementById("feedback-tab").classList.remove('tab-active');
-          // }
+          // should use after completing feedback tab
+          if (document.getElementById("feedback-tab").classList.contains('tab-active')) {
+            document.getElementById("feedback-tab").classList.remove('tab-active');
+          }
         }
         if (this.UserType == 'Manager' || this.UserType == 'User') {
           // if (document.getElementById("goals-tab").classList.contains('tab-active')) {
@@ -103,9 +92,9 @@ export class DashboardHeaderComponent implements OnInit {
         }
         if (this.flag1) {
           // should use after completing feedback tab
-          // if (document.getElementById("feedback-tab").classList.contains('tab-active')) {
-          //   document.getElementById("feedback-tab").classList.remove('tab-active');
-          // }
+          if (document.getElementById("feedback-tab").classList.contains('tab-active')) {
+            document.getElementById("feedback-tab").classList.remove('tab-active');
+          }
         }
         break;
       case 3: document.getElementById("goals-tab").classList.add('tab-active');
@@ -137,9 +126,5 @@ export class DashboardHeaderComponent implements OnInit {
         }
         break;
     }
-  }
-
-  fetchFirstFeedbackMember(member) {
-    this.firstFeedbackmember = member;
-  }
+    }
 }

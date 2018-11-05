@@ -2,8 +2,8 @@
   <div class="tabs">
     <div id="projects-tab" class="projects-tab" (click)="activateTab(1)">PROJECTS</div>
     <div id="users-tab" class="users-tab" *ngIf="flag1 === true" (click)="activateTab(2)">USERS</div>
-    <!-- <div id="goals-tab" class="goals-tab" *ngIf="UserType === 'Manager' || UserType === 'User'" (click)="activateTab(3)">GOALS</div>
-    <div id="feedback-tab" class="feedback-tab" *ngIf="flag1 === true" (click)="activateTab(4)">FEEDBACK</div> -->
+    <!-- <div id="goals-tab" class="goals-tab" *ngIf="UserType === 'Manager' || UserType === 'User'" (click)="activateTab(3)">GOALS</div>-->
+    <div id="feedback-tab" class="feedback-tab" *ngIf="flag1 === true" (click)="activateTab(4)">FEEDBACK</div>
   </div>
   <button class="add-pro-button" *ngIf="activetab==1 && flag2 === true" (click)="AddProject()">
     <img class="plus-sign" src="../../assets/add_project_button.png">
@@ -31,5 +31,5 @@
   <app-goals></app-goals>
 </div>
 <div *ngIf="activetab==4">
-  <app-feedback [firstFeedback] = "firstFeedbackmember" [feedbackUserList]="feedbackUserList"></app-feedback>
+  <app-feedback></app-feedback>
 </div>
