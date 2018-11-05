@@ -28,6 +28,7 @@ export class IndividualTaskComponent implements OnInit {
   show_save;
 
   time;
+  buttonText;
 
   noDesc = false;
   noTime = false;
@@ -41,8 +42,8 @@ export class IndividualTaskComponent implements OnInit {
   old_imped = '';
   old_hourspent = '';
   old_minspent = '';
-  stageDesc = false
-  stageTime = false
+  stageDesc = false;
+  stageTime = false;
 
   check = false;
 
@@ -51,6 +52,12 @@ export class IndividualTaskComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if (this.task.lastEdit == '') {
+      this.buttonText = 'Save';
+    } else {
+      this.buttonText = 'Update';
+    }
+
     this.eventsSubscription = this.events.subscribe((ischecked) =>
       this.check = ischecked);
     this.copiedSubscription = this.hideSavedEvent.subscribe((hideSaved) =>
@@ -148,6 +155,12 @@ export class IndividualTaskComponent implements OnInit {
       this.old_imped = task.impediments
       this.stageDesc = true
     }
+
+    if (this.task.lastEdit == '') {
+      this.buttonText = 'Save';
+    } else {
+      this.buttonText = 'Update';
+    }
   }
 
   stageTaskTime(task) {
@@ -157,6 +170,12 @@ export class IndividualTaskComponent implements OnInit {
       this.old_hourspent = task.hourSpent
       this.old_minspent = task.minuteSpent
       this.stageTime = true
+    }
+
+    if (this.task.lastEdit == '') {
+      this.buttonText = 'Save';
+    } else {
+      this.buttonText = 'Update';
     }
   }
 

@@ -62,7 +62,7 @@
   <div class="no_time" *ngIf="noTime">Enter Time spent</div>
   <div class="status" *ngIf="editable">
     <div class="cancel" *ngIf="show_save" (click)="cancelChange(task)">cancel</div>
-    <button class="save" *ngIf="show_save" (click)="save(task)">Save</button>
+    <button class="save" *ngIf="show_save" (click)="save(task)">{{buttonText}}</button>
 
     <div class="saved" *ngIf=" saved==true">Saved!</div>
   </div>
