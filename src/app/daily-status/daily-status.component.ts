@@ -798,14 +798,6 @@ export class DailyStatusComponent implements OnInit {
     this.newDate = this.maxDate;
   }
 
-  //   open(){
-  //     var template = document.getElementById('template')
-  //     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
-  //   }
-  //   decline(): void {
-  //     this.modalRef.hide();
-  // }
-
   copy(selectedTasksArray, value) {
     let text: string = '';
     if (selectedTasksArray.length > 0) {
@@ -836,7 +828,10 @@ export class DailyStatusComponent implements OnInit {
   selectedTasks(task, value) {
 
     switch (value) {
-      case 1: this.getElement(1)
+      case 1: if (this.selectedYesterdaysTasks.length == 0) {
+        this.getElementStatus1 = false;
+      }
+        this.getElement(1)
         var exist = this.selectedYesterdaysTasks.find(function (element) {
           return element.taskId == task.taskId;
         });
@@ -850,7 +845,10 @@ export class DailyStatusComponent implements OnInit {
         }
         this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
         break;
-      case 2: this.getElement(2)
+      case 2: if (this.selectedTodaysTasks.length == 0) {
+        this.getElementStatus2 = false;
+      }
+        this.getElement(2)
         var exist = this.selectedTodaysTasks.find(function (element) {
           return element.taskId == task.taskId;
         });
@@ -904,7 +902,10 @@ export class DailyStatusComponent implements OnInit {
 
   selectAll(taskArray, value) {
     switch (value) {
-      case 1: this.getElement(1)
+      case 1: if (this.selectedYesterdaysTasks.length == 0) {
+        this.getElementStatus1 = false;
+      }
+        this.getElement(1)
         this.selectedYesterdaysTasks = [];
         for (let task of taskArray) {
           this.selectedYesterdaysTasks.push(task);
@@ -912,7 +913,10 @@ export class DailyStatusComponent implements OnInit {
         this.emitEventToChild(true, value);
         this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
         break;
-      case 2: this.getElement(2)
+      case 2: if (this.selectedTodaysTasks.length == 0) {
+        this.getElementStatus2 = false;
+      }
+        this.getElement(2);
         this.selectedTodaysTasks = [];
         for (let task of taskArray) {
           this.selectedTodaysTasks.push(task)
@@ -954,26 +958,26 @@ export class DailyStatusComponent implements OnInit {
   deleteSelected(selectedTaskArray, taskArray, value) {
     selectedTaskArray.forEach(element => {
       var index = taskArray.indexOf(element);
-      // var selectArrayIndex = selectedTaskArray.indexOf(element);
-      // selectedTaskArray.splice(selectArrayIndex, 1);
       taskArray.splice(index, 1);
       this.taskservice.deleteTask(element)
         .subscribe(msg => console.log(msg));
-      if (value == 1) { 
-        this.YesterdayTasks.splice(index, 1)
+      if (value == 1) {
+        this.YesterdayTasks.splice(index, 1);
       } else {
-        this.TodayTasks.splice(index, 1)
+        this.TodayTasks.splice(index, 1);
       }
     });
     this.calculateTotalTime(taskArray, value)
-    if (value == 1){
-      this.checkbox1 = false
-      this.selectedYesterdaysTasks = []
+    if (value == 1) {
+      this.checkbox1 = false;
+      this.selectedYesterdaysTasks = [];
+      this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
     } else {
-      this.checkbox2 = false
-      this.selectedTodaysTasks = []
+      this.checkbox2 = false;
+      this.selectedTodaysTasks = [];
+      this.blockCopyDelete(this.selectedTodaysTasks.length, 2)
     }
-    this.copyCard = false
+    this.copyCard = false;
   }
 
   blockCopyDelete(length, value) {
@@ -1005,13 +1009,13 @@ export class DailyStatusComponent implements OnInit {
         this.elementDelete1 = document.getElementById('block-delete1');
         this.getElementStatus1 = true
       }
-        break
+        break;
       case 2: if (this.getElementStatus2 == false) {
         this.elementCopy2 = document.getElementById('block-copy2');
         this.elementDelete2 = document.getElementById('block-delete2');
         this.getElementStatus2 = true
       }
-        break
+        break;
     }
   }
 }
