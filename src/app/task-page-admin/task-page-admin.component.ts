@@ -195,18 +195,46 @@ export class TaskPageAdminComponent implements OnInit {
     }
   }
   viewMyTasks(): void {
+    var nday = '';
+    var nmonth = '';
+    var selectedDate = '';
+    if (this.myDateValue.getDate() < 10) {
+      nday += '0' + this.myDateValue.getDate();
+    } else {
+      nday += this.myDateValue.getDate();
+    }
+    if ((this.myDateValue.getMonth() + 1) < 10) {
+      nmonth += '0' + (this.myDateValue.getMonth() + 1);
+    } else {
+      nmonth += (this.myDateValue.getMonth() + 1);
+    }
+    selectedDate += nday + '-' + nmonth + '-' + this.myDateValue.getFullYear();
     var email = localStorage.getItem("email");
     var adDate = localStorage.getItem('addedDate');
     var delDate = localStorage.getItem('deletedDate');
     var isActive = JSON.parse(localStorage.getItem('isActive'))
     let projectMember: member = { email: email, role: '', name: '', image: '', addedDate: adDate, deletedDate: delDate, isActive: isActive, roleSelected: null, invalidMemberEmail: null, invalidRole: null }
     this.navservice.changedata(projectMember);
-    this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
+    this.router.navigate(['/daily-status', this.projectId, this.currentProject, selectedDate]);
   }
 
   gotoDailyStatus(IndMemOb){
+    var nday = '';
+    var nmonth = '';
+    var selectedDate = '';
+    if (this.myDateValue.getDate() < 10) {
+      nday += '0' + this.myDateValue.getDate();
+    } else {
+      nday += this.myDateValue.getDate();
+    }
+    if ((this.myDateValue.getMonth() + 1) < 10) {
+      nmonth += '0' + (this.myDateValue.getMonth() + 1);
+    } else {
+      nmonth += (this.myDateValue.getMonth() + 1);
+    }
+    selectedDate += nday + '-' + nmonth + '-' + this.myDateValue.getFullYear();
     this.navservice.changedata(IndMemOb)
-    this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
+    this.router.navigate(['/daily-status', this.projectId, this.currentProject, selectedDate]);
   }
 
 }

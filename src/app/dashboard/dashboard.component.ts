@@ -109,6 +109,22 @@ export class DashboardComponent implements OnInit {
 
   }
   openDailyStatus(project) {
+    var d = new Date();
+    var nday = '';
+    var nmonth = '';
+    var selectedDate = '';
+    if (d.getDate() < 10) {
+      nday += '0' + d.getDate();
+    } else {
+      nday += d.getDate();
+    }
+    if ((d.getMonth() + 1) < 10) {
+      nmonth += '0' + (d.getMonth() + 1);
+    } else {
+      nmonth += (d.getMonth() + 1);
+    }
+    selectedDate += nday + '-' + nmonth + '-' + d.getFullYear();
+    console.log(selectedDate)
     var projectId = project.projectId
     var name = project.projectName
     var myId = localStorage.getItem("email")
@@ -140,12 +156,12 @@ export class DashboardComponent implements OnInit {
       } else {
         this.setLocalStorage(firstMember)
       }
-      this.router.navigate(['/task-page-admin', projectId, name, startdate])
+      this.router.navigate(['/task-page-admin', projectId, name, startdate, selectedDate])
     } else {
       this.setLocalStorage(myMemobj)
       this.navservice.changedata(myMemobj)
       if (this.flag2) {
-        this.router.navigate(['/task-page-admin', projectId, name, startdate]);
+        this.router.navigate(['/task-page-admin', projectId, name, startdate, selectedDate]);
       } else {
         this.router.navigate(['/daily-status', projectId, name]);
       }
