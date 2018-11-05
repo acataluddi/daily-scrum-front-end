@@ -73,9 +73,6 @@ export class AdminviewallComponent implements OnInit {
     this.memberArray = membersArr;
     this.total = this.memberArray.length;
     this.member = membersArr;
-    console.log(this.member)
-    // this.filterMember = this.filterPipe.string;
-    // console.log(this.filterMember)
   }
 
   getMembers(membersArr): void {

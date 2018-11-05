@@ -221,8 +221,8 @@ decline(): void {
     }
   }
 
-  fetchFeedbacks(userEmail: string) {
-    this.feedbackService.getFeedbacks(userEmail)
+  fetchFeedbacks() {
+    this.feedbackService.getFeedbacks()
       .subscribe(feedbacks => {
         console.log(feedbacks);
       });
@@ -246,23 +246,13 @@ decline(): void {
   initializeNewFeedback(feedback: Feedback): Feedback {
     feedback = {
       feedbackId: '',
-      feedbackDate: '',
-      feedbackDescription: ''
+      feedbackDate: new Date(),
+      feedbackDescription: '',
+      userEmail: '',
+      userId: '',
+      userImage: '',
+      userName: ''
     }
     return feedback;
-  }
-
-  fetchFeedbackList(){
-    this.feedbackService.getFeedBackStatusList()
-      .subscribe(data => {
-        console.log(data);
-      });
-  }
-
-  changeFeedbackStatus(userEmail: string){
-    this.feedbackService.updateFeedbackStatus(userEmail)
-      .subscribe(data => {
-        console.log(data);
-      });
   }
 }
