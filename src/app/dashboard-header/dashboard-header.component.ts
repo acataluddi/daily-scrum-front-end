@@ -3,7 +3,6 @@ import { AuthService } from 'angular-6-social-login';
 import { LoginService } from '../service/login.service';
 import { ProjectService } from '../service/project.service';
 import { Router } from '@angular/router';
-import { GoalMember } from '../model/goalmember-model';
 import { Feedback } from '../model/feedback-model';
 
 @Component({
@@ -17,9 +16,6 @@ export class DashboardHeaderComponent implements OnInit {
   flag1;
   flag2;
   operation: string;
-
-  feedbackUserList: GoalMember[] = []
-  feedbackList: Feedback[];
 
   constructor(private socialAuthService: AuthService,
     private loginservice: LoginService,

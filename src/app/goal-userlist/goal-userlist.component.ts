@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { GoalMember } from '../model/goalmember-model';
+import { NavBarMember } from '../model/nav-bar-member';
 import { FeedbackService } from '../service/feedback.service';
 import { equal } from 'assert';
 
@@ -10,10 +10,10 @@ import { equal } from 'assert';
 })
 export class GoalUserlistComponent implements OnInit {
 
-  @Input() feedbackUserList: GoalMember[];
+  @Input() feedbackUserList: NavBarMember[];
   @Output() selectMemberEvent = new EventEmitter();
 
-  feedbackmemberArray: GoalMember[];
+  feedbackmemberArray: NavBarMember[];
   Usertype = localStorage.getItem('userType');
   checker: boolean = false;
   length: number;
