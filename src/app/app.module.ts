@@ -36,6 +36,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { GoalUserlistComponent } from './goal-userlist/goal-userlist.component';
 import { FeedbackFilterPipe } from './feedbacklistfilter.pipe';
 import { UserListFilterPipe } from './UserListfilter.pipe';
+import { AddGoalComponent } from './add-goal/add-goal.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -69,7 +70,8 @@ export function getAuthServiceConfigs() {
     DashboardHeaderComponent,
     GoalsComponent,
     FeedbackComponent,
-    GoalUserlistComponent
+    GoalUserlistComponent,
+    AddGoalComponent
   ],
   imports: [
     BrowserModule,

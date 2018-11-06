@@ -1,0 +1,171 @@
+.goal {
+    height: 24px;
+    width: 242px;
+    font-family: 'Roboto';
+    font-size: 20px;
+    font-weight: 900;
+    color: rgba(12, 33, 93, 1);
+  }
+  .goback {
+    position: relative;
+    margin-top: 30px;
+    margin-left: -500px;
+    height: 160px;
+    width: 146px;
+  }
+  textarea {
+    resize: none;
+    outline: none;
+    border: none;
+  }
+  
+  .body1 {
+    margin: 0 auto;
+    margin-top:100px;
+    max-width: 450px;
+  }
+  img {
+    width: 10px;
+    height: 10px;
+    margin-top: 4px;
+    margin-right: 2px;
+  }
+  .description {
+    display:flex;
+    margin-top:11px;
+    height:100px;
+    box-shadow: 0px 2px rgba(238, 238, 238, 0.8);;
+  }
+  
+  .mainclass {
+
+    margin: 0 auto;
+    padding-top: 20%;
+  }
+  
+  .subclasszero {
+    padding: 10px 0px 10px 0px;
+    margin: auto;
+    width: 80%;
+    height: 5.3%;
+  }
+  .email-input {
+    font-size: 12px;
+    width: 100%;
+    height: 34px;
+    border:none;
+    font-family: 'Roboto';
+    margin-left:2px;
+  }
+  
+  .member_title1 {
+    cursor: pointer;
+    margin-top:50px;
+    width: 100%;
+    height: 36px;
+    display: flex;
+  }
+  
+  .member_image1 {
+    width: 30px;
+    height: 30px;
+    background: red;
+    margin-top: 10px;
+    margin-left: 3px;
+    overflow: hidden;
+    border-radius: 50px;
+    float: left;
+  }
+  .size {
+    height: 100%;
+    width: 100%;
+  }
+  .member_name1 {
+    padding-top: 14px;
+    margin-left: 17px;
+    font-size: 13px;
+    font-weight: 500;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 150px;
+    color: rgba(0, 0, 0, 1);
+  }
+  .project-name {
+    border: none;
+    outline: none;
+    margin: auto;
+    /* margin-top:5px; */
+    overflow-x: scroll;
+    overflow-x: hidden;
+    font-size: 30px;
+    max-height: 400px;
+    font-family: 'Roboto';
+    width: 100%;
+    color:rgba(0, 0, 0, 1);
+  }
+  .goalDescription {
+    border: none;
+    outline: none;
+    margin: auto;
+    margin-top:-3px;
+    overflow-x: scroll;
+    overflow-x: hidden;
+    font-family: 'Roboto';
+    font-size: 14px;
+    height:100%;
+    width: 100%;
+    color:rgba(0, 0, 0, 1);
+  }
+  .addcancelclass {
+    margin: auto;
+    width: 80%;
+    display: flex;
+    align-content: right;
+  }
+  input[value="Cancel"] {
+    height: 30px;
+    width: 35%;
+    border: none;
+    outline: none;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 1);
+    margin: 10px;
+    margin-left: auto;
+    margin-right: 0;
+    font-weight: 600;
+    border-radius: 2px;
+    background-color: transparent;
+  }
+  input[value="Add Goal"] {
+  height: 32px;
+  width: 120px;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(12, 33, 93, 1);
+  margin: 10px;
+  margin-left: auto;
+  margin-right: 0;
+  font-weight: bold;
+  border-radius: 2px;
+}
+input[value="Add Goal"]:hover {
+  background-color: #072988
+}
+
+input[value="Add Goal"]:active {
+  background-color:rgba(12, 33, 93, 1);
+}
+
+.button-no:hover,
+input[value="Cancel"]:hover {
+  background-color: rgba(107, 107, 107, 0.11);
+}
+
+.button-no:active,
+input[value="Cancel"]:active {
+  background-color: rgba(131, 131, 131, 0.37);
+}
+

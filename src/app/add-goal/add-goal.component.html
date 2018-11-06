@@ -1,0 +1,36 @@
+
+ 
+  <div>
+    <div  class="goBack">Cancel new Goal</div>
+  <div class=body1>
+  <div class="mainclass">
+    <div class="subclasszero">
+    <div class="goal">New Goal</div>
+    <div class="member_title1" *ngIf="showSign1" (click)="show1()">
+      <img src='../../assets/add_goal.png'>
+      <textarea  type="text" class="email-input" placeholder="Select Team Member" ></textarea>
+    </div>
+    <div class="member_title1" *ngIf="!showSign1">
+        <textarea autofocus type="text" class="email-input" placeholder="" [(ngModel)]="searchText" ></textarea>
+    </div>
+    <div *ngIf="!showSign1" class="dropdown-content">
+        <div  *ngFor="let member of members | filter : searchText;" >{{member.name}}</div>
+    </div>
+    <textarea id="projectname" class="project-name" autosize rows="1" [maxRows]="3"  placeholder="New Goal Name"></textarea>
+    <div class="description"  *ngIf="showSign2" (click)="show2()">
+      <img src='../../assets/add_goal.png'>
+      <textarea id="goalDescription" class="goalDescription" autosize rows="1" [maxRows]="3"  placeholder="Describe about the goal"></textarea>
+    </div>
+    <div class="description" *ngIf="!showSign2" >
+        <textarea autofocus id="goalDescription" class="goalDescription" autosize rows="1" [maxRows]="5"  placeholder=""></textarea>
+      </div>
+  </div>
+  <ng-container>
+      <div class="addcancelclass">
+        <input type="button" value="Cancel" (click)="openModal(template)">
+        <input type="button" value="Add Goal" (click)="addOrModifyProject()">
+      </div>
+    </ng-container>
+  </div>
+</div>
+</div>
