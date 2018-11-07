@@ -270,7 +270,7 @@ img[src="../../assets/copy.png"] {
 .view_all_task {
   position: absolute;
   display: flex;
-  width: 130px;
+  width: 137px;
   margin-left: 23%;
   border-radius: 4px;
   line-height: 180%;
@@ -293,7 +293,7 @@ button.view_all_task::before {
 
 .view-all {
   position: absolute;
-  right: 330px;
+  right: 325px;
   display: flex;
   border-radius: 5%;
   line-height: 180%;
@@ -566,20 +566,6 @@ input[value="Cancel"]:active {
     margin-left: 27px;
     padding-left: 0%;
   }
-
-  .alt-View {
-    visibility: visible;
-    position: absolute;
-    top: 4px;
-    right: -125px;
-    height: 22px;
-    width: 22px;
-    font-size: 22px;
-  }
-
-  .view_all_task {
-    display: none;
-  }
 }
 
 @media screen and (max-width: 700px) {
@@ -619,7 +605,24 @@ input[value="Cancel"]:active {
     right: -277px;
   }
 }
+@media screen and (max-width: 650px){
+  .alt-View {
+    visibility: visible;
+    position: absolute;
+    top: 4px;
+    right: -125px;
+    height: 22px;
+    width: 22px;
+    font-size: 22px;
+  }
 
+  .view_all_task {
+    display: none;
+  }
+  .view-all{
+    right: 140px; 
+  }
+}
 @media screen and (max-width: 520px) {
 
   #copy1,
@@ -759,7 +762,9 @@ input[value="Cancel"]:active {
   .today_task_label {
     font-size: 12px;
   }
-
+  .view-all{
+    right: 144px; 
+  }
   .today_task_header {
     font-size: 16px;
     font-weight: 600;

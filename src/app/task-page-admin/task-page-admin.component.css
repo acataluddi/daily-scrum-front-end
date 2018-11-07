@@ -60,7 +60,7 @@ img.right-arrow:active {
 
 .view-all {
   position: absolute;
-  right: 350px;
+  right: 310px;
   display: flex;
   border-radius: 5%;
   line-height: 180%;
@@ -68,8 +68,8 @@ img.right-arrow:active {
 .view_all_task {
   position: absolute;
   display: flex;
-  width: 142px;
-  margin-left: 80%;
+  width: 130px;
+  margin-left: 95%;
   border-radius: 4px;
   line-height: 180%;
   background-color:rgba(229, 229, 229, 1);
@@ -91,7 +91,7 @@ img.right-arrow:active {
 }
 
 .view_all_task:hover{
-  background-color: rgba(243, 243, 243, 0.8);
+  background-color: rgba(177, 177, 177, 0.8);
 }
 .view_img {
   width:17px;
@@ -350,7 +350,7 @@ img.right-arrow:active {
 
 @media screen and (max-width: 1000px) {
   .view-all {
-    right: 350px;
+    right: 325px;
   }
   .view_all_task {
     width: 125px;
@@ -379,7 +379,7 @@ img.right-arrow:active {
 
 @media screen and (max-width: 650px) {
   .view-all {
-    right: 110px;
+    right: 68px;
   }
   .header {
     width: 90%;
@@ -409,9 +409,9 @@ img.right-arrow:active {
 }
 
 @media screen and (max-width: 400px) {
-  .view-all {
+  /* .view-all {
     right: 110px;
-  }
+  } */
   .header {
     column-width: 400px;
     width: 90%;
