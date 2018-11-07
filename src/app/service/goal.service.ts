@@ -35,15 +35,11 @@ export class GoalService {
 
   getNavigationBarList(goalParam: string): Observable<NavBarMember[]> {
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
-    let params = new HttpParams()
-      .set("goalParam", goalParam)
-    return this.http.get<NavBarMember[]>(this.goalsApiUrl, { headers })
+    return this.http.get<NavBarMember[]>(this.goalsApiUrl+'?goalParam='+goalParam,  { headers })
   }
 
   getMembersUnderManager(goalParam: string): Observable<Member[]> {
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
-    let params = new HttpParams()
-      .set("goalParam", goalParam)
     return this.http.get<Member[]>(this.goalsApiUrl+'?goalParam='+goalParam,  { headers })
   }
 }

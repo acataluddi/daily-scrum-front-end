@@ -3,7 +3,8 @@ import { AuthService } from 'angular-6-social-login';
 import { LoginService } from "../service/login.service";
 import { GoalService } from "../service/goal.service";
 import { Goal } from '../model/goal-model'
-import { DashboardService } from '../service/dashboardservice.service';
+import { NavBarMember } from '../model/nav-bar-member'
+
 
 @Component({
   selector: 'app-add-goal',
@@ -17,10 +18,14 @@ export class AddGoalComponent implements OnInit {
     private goalService: GoalService) { }
 
   image:string
+  name:string
   userName:string
   showSign1:boolean
   showSign2:boolean
-  members: Goal[];
+  members: NavBarMember[];
+  dropDown:boolean
+  searchText:string
+  hide:boolean
 
   ngOnInit() {
 
@@ -34,12 +39,14 @@ export class AddGoalComponent implements OnInit {
           });
       }
     });
-   this.goalService.getMembersUnderManager("getMembersUnderManager").subscribe(data => {
+   this.goalService.getNavigationBarList("getStatusList").subscribe(data => {
      console.log(data);
       this.setProjects(data)
     });
     this.showSign1 = true;
     this.showSign2 = true;
+    this.dropDown = false;
+    this.hide = false;
   }
   show1() {
     this.showSign1 = !this.showSign1;
@@ -48,18 +55,20 @@ export class AddGoalComponent implements OnInit {
   show2() {
     this.showSign2 = !this.showSign2;
   }
+  list() {
+    this.dropDown = !this.dropDown;
+  }
   setProjects(members){
     this.members = members;
     // this.getProjects();
   }
-  // getProjects(): void {
-  //   // this.projects = this.projectservice.getProjectArray()
-  //   for (let pro of this.projects) {
-  //     if (pro.projectName == this.childProject) {
-  //       this.projectmembers = pro.members;
-  //     }
-  //   }
-  // }
+  changeProject(newMailId,newImage) {
+    this.name = newMailId;
+    this.image = newImage
+  }
+  visible() {
+    this.hide = true;
+  }
 
 }
 

@@ -27,7 +27,7 @@
   img {
     width: 10px;
     height: 10px;
-    margin-top: 4px;
+    margin-top: 5px;
     margin-right: 2px;
   }
   .description {
@@ -40,7 +40,7 @@
   .mainclass {
 
     margin: 0 auto;
-    padding-top: 20%;
+    padding-top: 14%;
   }
   
   .subclasszero {
@@ -50,7 +50,7 @@
     height: 5.3%;
   }
   .email-input {
-    font-size: 12px;
+    font-size: 13px;
     width: 100%;
     height: 34px;
     border:none;
@@ -59,37 +59,70 @@
   }
   
   .member_title1 {
-    cursor: pointer;
     margin-top:50px;
     width: 100%;
     height: 36px;
     display: flex;
   }
   
-  .member_image1 {
-    width: 30px;
-    height: 30px;
-    background: red;
-    margin-top: 10px;
-    margin-left: 3px;
-    overflow: hidden;
-    border-radius: 50px;
-    float: left;
+  .dropdown-content {
+    position: absolute;
+    background-color: #ffffff;
+    min-width: 220px;
+    max-height: 211px;
+    margin-top:-5px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    cursor: pointer;
   }
   .size {
     height: 100%;
     width: 100%;
   }
-  .member_name1 {
-    padding-top: 14px;
-    margin-left: 17px;
-    font-size: 13px;
-    font-weight: 500;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    width: 150px;
+
+  .image {
+    margin:8px 5px 0px 10px;
+    border-radius: 25px;
+    height: 34px;
+    width: 34px;
+    padding:3px;
+    float: left;
+  }
+  .memberArray {
+    display: flex;
+  }
+  .memberImage {
+    margin:-8px 5px 0px -4px;
+    border-radius: 25px;
+    height: 34px;
+    width: 34px;
+    padding:3px;
+  }
+  .Member_name {
+    font-size: 16px;
+    margin-top: -2.5px;
+    margin-left: 5px;
     color: rgba(0, 0, 0, 1);
+  }
+  .deleteMember {
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin-left: 10px;
+  }
+  .name {
+    padding-top:10px;
+    padding-left: 7px;
+    font-family: 'Roboto';
+    font-size: 13px;
+    float: left;
+  }
+  .email {
+    font-family: 'Roboto';
+    font-size: 10px;
+    padding-bottom:10px;
+    padding-left: 7px;
   }
   .project-name {
     border: none;

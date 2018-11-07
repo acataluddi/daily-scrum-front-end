@@ -6,15 +6,23 @@
   <div class="mainclass">
     <div class="subclasszero">
     <div class="goal">New Goal</div>
-    <div class="member_title1" *ngIf="showSign1" (click)="show1()">
-      <img src='../../assets/add_goal.png'>
-      <textarea  type="text" class="email-input" placeholder="Select Team Member" ></textarea>
+    <div class="member_title1" *ngIf="showSign1 && !hide" (keyup)="dropDown=true">
+        <img src='../../assets/add_goal.png'>
+        <textarea autofocus type="text" class="email-input" placeholder="Select Team Member" [(ngModel)]="searchText" (click)="dropDown=false"></textarea>
     </div>
-    <div class="member_title1" *ngIf="!showSign1">
-        <textarea autofocus type="text" class="email-input" placeholder="" [(ngModel)]="searchText" ></textarea>
-    </div>
-    <div *ngIf="!showSign1" class="dropdown-content">
-        <div  *ngFor="let member of members | filter : searchText;" >{{member.name}}</div>
+    <div class="member_title1" *ngIf="hide" >
+        <img class="memberImage" src='{{image}}'>
+          <div class="Member_name">{{name}}</div>
+          <img class="deleteMember" src="../../assets/delete_mail.png" (click)="hide=false;showSign1=true; searchText=''">
+      </div>
+    <div *ngIf="dropDown" class="dropdown-content">
+        <div  class="memberArray" *ngFor="let member of members | goalMemberFilter : searchText;"  (click)="changeProject(member.memberName,member.memberImage);dropDown=false;visible()">
+          <img class='image' src="{{member.memberImage}}">
+          <div class="block">
+            <div class='name'>{{member.memberName}}</div>
+            <div class='email'>{{member.memberEmail}}</div>
+          </div>
+        </div>
     </div>
     <textarea id="projectname" class="project-name" autosize rows="1" [maxRows]="3"  placeholder="New Goal Name"></textarea>
     <div class="description"  *ngIf="showSign2" (click)="show2()">
@@ -22,13 +30,13 @@
       <textarea id="goalDescription" class="goalDescription" autosize rows="1" [maxRows]="3"  placeholder="Describe about the goal"></textarea>
     </div>
     <div class="description" *ngIf="!showSign2" >
-        <textarea autofocus id="goalDescription" class="goalDescription" autosize rows="1" [maxRows]="5"  placeholder=""></textarea>
-      </div>
+        <textarea autofocus id="goalDescription" class="goalDescription" autosize rows="1" [maxRows]="5"  placeholder="Add description"></textarea>
+    </div>
   </div>
   <ng-container>
       <div class="addcancelclass">
-        <input type="button" value="Cancel" (click)="openModal(template)">
-        <input type="button" value="Add Goal" (click)="addOrModifyProject()">
+        <input type="button" value="Cancel" >
+        <input type="button" value="Add Goal" >
       </div>
     </ng-container>
   </div>
