@@ -10,30 +10,42 @@ textarea {
 }
 
 .mainclass {
-  padding-top: 50%;
+  padding-top: 35%;
 }
 
 .subclasszero {
-  padding: 10px 0px 10px 0px;
+  padding: 70px 0px 10px 0px;
   margin: auto;
   width: 80%;
   height: 5.3%;
 }
 
+.project {
+  font-family: 'Roboto';
+  margin: 0 auto;
+  width: 80%;
+  font-size: 20px;
+  color: rgba(12, 33, 93, 1);
+  font-weight: 500;
+}
 .high-light-element {
   background-color: rgba(197, 194, 194, 0.404);
+}
+
+::placeholder {
+  color:  rgb(146, 145, 145);
 }
 
 .project-name {
   border: none;
   outline: none;
   margin: auto;
-  overflow-x: scroll;
+  /* overflow-y: auto; */
   overflow-x: hidden;
   font-size: 32px;
   max-height: 135px;
   width: 100%;
-  color: rgba(43, 42, 42, 0.719);
+  color: rgba(12, 33, 93, 1);
   text-overflow: ellipsis;
 }
 
@@ -60,7 +72,7 @@ small.error1 {
 .adddescriptionlogoclass {
   height: 12px;
   width: 12px;
-  margin: 13px 4px 13px 0px;
+  margin: 9px 4px 13px 0px;
 }
 
 img[src="../../assets/add-icon.png"] {
@@ -69,10 +81,10 @@ img[src="../../assets/add-icon.png"] {
 }
 
 .adddescriptionclass {
-  color: rgba(79, 86, 105, 1);
+  color: rgb(146, 145, 145);
   font-size: 16px;
   font-weight: 500;
-  margin: 10px 4px 10px 0px;
+  margin: 9px 4px 10px 0px;
 }
 
 .descriptioninputclass {
@@ -96,7 +108,7 @@ div[contenteditable="true"] {
 .teamclass {
   font-size: 14px;
   font-weight: 600;
-  color: rgba(0, 0, 0, 1);
+  color:  rgb(146, 145, 145);
   margin: 10px 0px 0px 0px;
 }
 
@@ -119,7 +131,7 @@ div[contenteditable="true"] {
   max-height: 300px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  padding: 12px 16px;
+  padding: 0px 16px;
   z-index: 1;
   cursor: pointer;
 }
@@ -129,7 +141,7 @@ div[contenteditable="true"] {
   font-size: 13px;
   color: rgba(0, 0, 0, 1);
   margin: 0px 20px 0px 0px;
-  display: flex;
+  /* display: flex; */
 }
 
 select {
@@ -138,7 +150,7 @@ select {
   height: 20px;
   width: 100%;
   font-size: 13px;
-  color: rgba(0, 0, 0, 1);
+  color: rgb(146, 145, 145);
   background-color: transparent;
   margin: 0px 0px 0px 10px;
 }
@@ -164,15 +176,16 @@ img[src="../../assets/delete_mail.png"] {
 
 .role-group {
   display: flex;
-  float: left;
+  float: right;
+  width: 119px;
 }
 
 .role-label {
   height: 24px;
-  padding: 6px 16px 6px 16px;
+  padding: 5px 5px 6px 5px;
   border-radius: 3px;
   font-size: 10px;
-  color: rgba(77, 75, 75, 0.637);
+  color:  rgb(146, 145, 145);
   background-color: #b8b8be52;
 }
 
@@ -192,7 +205,7 @@ select[id="rolevalue"] {
   height: 30px;
   width: 45%;
   font-size: 15px;
-  color: rgba(0, 0, 0, 1);
+  color: rgb(146, 145, 145);
   background-color: #ffffff;
   margin: 0px 0px 0px 10px;
 }
@@ -229,10 +242,10 @@ select[id="rolevalue"] {
 }
 
 .addmemberclass {
-  color: rgba(79, 86, 105, 1);
+  color:  rgb(146, 145, 145);
   font-size: 16px;
   font-weight: 500;
-  margin: 10px 0px 10px 0px;
+  margin: 13px 0px 10px 0px;
 }
 
 .addcancelclass {
@@ -246,7 +259,7 @@ select[id="rolevalue"] {
   border: none;
   outline: none;
   color: rgba(255, 255, 255, 1);
-  background-color: rgb(177, 177, 177);
+  background-color:rgba(12, 33, 93, 1);
   padding: 5px 20px;
   text-align: center;
   text-decoration: none;
@@ -258,15 +271,15 @@ select[id="rolevalue"] {
 }
 
 .button-yes:hover {
-  background-color: rgb(177, 177, 177,0.8);
+  background-color: #072988;
 }
 
 .button-yes:active {
-  background-color: #8b8b8b;
+  background-color: rgba(12, 33, 93, 1);
 }
 
 .button-no {
-  background-color: transparent;
+  background-color: #ffffff;
   border: none;
   outline: none;
   color: #9a9da7c5;
@@ -279,6 +292,10 @@ select[id="rolevalue"] {
   margin: 4px 10px;
   cursor: pointer;
 }
+.button-no:hover {
+  color: black;
+  font-weight: 600;
+}
 
 input[value="Cancel"] {
   height: 30px;
@@ -286,13 +303,13 @@ input[value="Cancel"] {
   border: none;
   outline: none;
   font-size: 13px;
-  color: #9a9da7c5;
+  color:rgb(146, 145, 145);
   margin: 10px;
   margin-left: auto;
   margin-right: 0;
   font-weight: 600;
   border-radius: 2px;
-  background-color: transparent;
+  background-color: #ffffff;
 }
 
 input[value="Create Project"],
@@ -303,7 +320,7 @@ input[value="Update Project"] {
   outline: none;
   font-size: 13px;
   color: rgba(255, 255, 255, 1);
-  background-color: rgb(177, 177, 177);
+  background-color:  rgba(12, 33, 93, 1);
   margin: 10px;
   margin-left: auto;
   margin-right: 0;
@@ -313,22 +330,26 @@ input[value="Update Project"] {
 
 input[value="Create Project"]:hover,
 input[value="Update Project"]:hover {
-  background-color: rgb(177, 177, 177,0.8);
+  background-color: #072988
 }
 
 input[value="Create Project"]:active,
 input[value="Update Project"]:active {
-  background-color: rgb(177, 177, 177,0.8);
+  background-color:  rgba(12, 33, 93, 1);
 }
 
 .button-no:hover,
 input[value="Cancel"]:hover {
-  background-color: rgba(107, 107, 107, 0.11);
+  color: black;
+  font-weight: 900;
+  /* background-color: rgba(107, 107, 107, 0.11); */
 }
 
 .button-no:active,
 input[value="Cancel"]:active {
-  background-color: rgba(131, 131, 131, 0.37);
+  /* background-color: rgba(131, 131, 131, 0.37); */
+  color: black;
+  font-weight: 900;
 }
 
 @media(max-width:350px) {
@@ -395,7 +416,7 @@ input[value="Cancel"]:active {
   }
 
   .mainclass {
-    padding-top: 25%;
+    padding-top: 35%;
   }
 
   img[src="../../assets/add-icon.png"] {
@@ -406,7 +427,7 @@ input[value="Cancel"]:active {
   .adddescriptionlogoclass {
     height: 14px;
     width: 14px;
-    margin: 13px 4px 13px 0px;
+    margin: 12px 4px 13px 0px;
   }
 
   .project-name {
@@ -441,9 +462,12 @@ input[value="Cancel"]:active {
 
   .role-label {
     height: 28px;
-    padding: 6px 16px 6px 16px;
+    padding: 6px 7px 6px 7px;
     font-size: 13px;
     text-align: center;
+  }
+  .role-group {
+    width: 150px;
   }
 
   .descriptioninputclass {
@@ -461,7 +485,7 @@ input[value="Cancel"]:active {
 
   .addmemberclass {
     font-size: 18px;
-    margin-left: 10px;
+    margin-left: 3px;
   }
 
   small.error1 {
@@ -491,7 +515,11 @@ input[value="Cancel"]:active {
   }
 
   .mainclass {
-    padding-top: 30%;
+    padding-top: 35%;
+  }
+
+  .role-group {
+    width: 150px;
   }
 
   img[src="../../assets/add-icon.png"] {
@@ -584,7 +612,7 @@ input[value="Cancel"]:active {
   }
 
   .mainclass {
-    padding-top: 30%;
+    padding-top: 35%;
   }
 
   .project-name {
@@ -595,6 +623,10 @@ input[value="Cancel"]:active {
   .role-label {
     height: 34px;
     font-size: 20px;
+  }
+
+  .role-group {
+    width: 150px;
   }
 
   img[src="../../assets/add-icon.png"] {
