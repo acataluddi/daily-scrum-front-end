@@ -1,10 +1,10 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+// The list of file replacements can be found in `angular.json'.
 
 export const environment = {
   production: false,
-  apiBase: 'http://10.4.6.58:8080/DailyScrum',
+  apiBase: 'http://10.4.6.71:8080/DailyScrum',
   loginURL: 'http://10.4.6.71.xip.io:4200/login'
 };
 

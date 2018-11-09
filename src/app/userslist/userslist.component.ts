@@ -78,12 +78,14 @@ export class UserslistComponent implements OnInit {
       document.getElementById("userslist").classList.add("block")
       document.getElementById("search_name").classList.add("flexed")
       document.getElementById("userslist").classList.add("flex")
+      document.getElementById("userslist").classList.add("bigheight")
       this.checker = !this.checker
     }
     else {
       document.getElementById("userslist").classList.remove("block")
       document.getElementById("search_name").classList.remove("flexed")
       document.getElementById("userslist").classList.remove("flex")
+      document.getElementById("userslist").classList.remove("bigheight")
       this.checker = !this.checker
     }
   }

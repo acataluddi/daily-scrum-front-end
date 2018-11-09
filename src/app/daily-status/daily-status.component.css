@@ -24,7 +24,7 @@ hr {
 .header-part {
   z-index: 10;
   transform-style: preserve-3d;
-  position: fixed;
+  position: absolute;
   top: 60px;
   background-color: white;
   width: 100%;
@@ -318,6 +318,7 @@ button.view_all_task::before {
   color: rgba(79, 86, 105, 1);
   border-radius: 5%;
   line-height: 180%;
+  margin-top:5px;
 }
 
 .view {
