@@ -1,7 +1,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div *ngIf="flag === true" class=body>
   <div class="mainclass">
-    <div class="project">Create New Project</div>
+    <!-- <div class="project">Create New Project</div> -->
     <div class="subclasszero">
     <textarea id="projectname" class="project-name" autosize rows="1" [maxRows]="3" style="font-size: 34px;" [(ngModel)]="project.projectName" placeholder="New Project Name"></textarea>
       <small *ngIf="invalidProjectName" class="error">

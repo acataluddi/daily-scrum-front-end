@@ -177,7 +177,7 @@ img[src="../../assets/delete_mail.png"] {
 .role-group {
   display: flex;
   float: right;
-  width: 119px;
+  /* width: 119px; */
 }
 
 .role-label {
@@ -185,7 +185,7 @@ img[src="../../assets/delete_mail.png"] {
   padding: 5px 5px 6px 5px;
   border-radius: 3px;
   font-size: 10px;
-  color:  rgb(146, 145, 145);
+  color:  rgb(56, 55, 55);
   background-color: #b8b8be52;
 }
 
@@ -193,7 +193,7 @@ input[placeholder="Email"] {
   border: none;
   outline: none;
   height: 30px;
-  width: 50%;
+  width: 42%;
   background-color: transparent;
   font-size: 15px;
   color: rgba(0, 0, 0, 1);
@@ -398,7 +398,7 @@ input[value="Cancel"]:active {
 
   input[placeholder="Email"] {
     font-size: 13px;
-    width: 40%;
+    width: 35%;
   }
 }
 
@@ -467,7 +467,7 @@ input[value="Cancel"]:active {
     text-align: center;
   }
   .role-group {
-    width: 150px;
+    /* width: 150px; */
   }
 
   .descriptioninputclass {
@@ -519,7 +519,7 @@ input[value="Cancel"]:active {
   }
 
   .role-group {
-    width: 150px;
+    /* width: 150px; */
   }
 
   img[src="../../assets/add-icon.png"] {
