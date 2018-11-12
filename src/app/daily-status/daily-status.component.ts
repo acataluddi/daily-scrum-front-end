@@ -113,6 +113,10 @@ export class DailyStatusComponent implements OnInit {
   getElementStatus1 = false
   getElementStatus2 = false
 
+  copied1 = false;
+  copied2 = false;
+
+  deselectCopiedtext = 'DESELECT';
   elementCopy1;
   elementDelete1;
   elementCopy2;
@@ -855,8 +859,16 @@ export class DailyStatusComponent implements OnInit {
 
     switch (value) {
       case 1: this.HideSaved1.next(true);
+        setTimeout(() => {
+          this.copied1 = false;
+        }, 1000);
         break;
       case 2: this.HideSaved2.next(true);
+        setTimeout(() => {
+          this.copied2 = false;
+          this.deselectCopiedtext = 'DESELECT'
+        }, 1000);
+        break;
     }
   }
 
