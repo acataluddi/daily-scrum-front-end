@@ -36,6 +36,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { GoalUserlistComponent } from './goal-userlist/goal-userlist.component';
 import { FeedbackFilterPipe } from './feedbacklistfilter.pipe';
 import { UserListFilterPipe } from './UserListfilter.pipe';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -80,6 +81,7 @@ export function getAuthServiceConfigs() {
     Ng2Webstorage,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
     HttpClientModule,
     HttpModule,
     Ng2Webstorage,
