@@ -35,7 +35,7 @@
         <div class="last_edit_label" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0)">
           Edited: {{lastEditString1}}
         </div>
-        <div id="block-copy1" (click)="copy(selectedYesterdaysTasks, 1)" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1 ">
+        <div id="block-copy1" (click)="copy(selectedYesterdaysTasks, 1);copied1 = true" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1 ">
           <img src="../../assets/copy.png">
         </div>
         <div id="block-delete1" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1"
@@ -43,7 +43,7 @@
           <img src="../../assets/delete-task24px.png">
         </div>
       </div>
-
+      <div class="copied-label1" *ngIf="copied1">Copied!</div>
     </div>
     <div class="right-header">
       <div class="today_header">
@@ -71,7 +71,7 @@
         </div>
         <div class="last_edit_label">Edited: {{lastEditString2}}</div>
 
-        <div id="block-copy2" (click)="copy(selectedTodaysTasks, 2)" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
+        <div id="block-copy2" (click)="copy(selectedTodaysTasks, 2);copied2 = true" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
           <img src="../../assets/copy.png">
         </div>
         <div id="block-delete2" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2"
@@ -79,7 +79,7 @@
           <img src="../../assets/delete-task24px.png">
         </div>
       </div>
-
+      <div class="copied-label2" *ngIf="copied2">Copied!</div>
     </div>
   </div>
 </div>
@@ -115,14 +115,14 @@
   </div>
   <div class="mobview" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2 && copyCard">
     <div class="selected-count">{{numOfSelected}} Tasks Selected</div>
-    <div id="copy-mini" (click)="copy(selectedTodaysTasks, 2)">
+    <div id="copy-mini" (click)="copy(selectedTodaysTasks, 2); deselectCopiedtext='Copied'">
       <img src="../../assets/copy.png">
     </div>
     <div id="delete-mini" (click)="deleteSelected(selectedTodaysTasks, MockTodayTasks, 2)">
       <img src="../../assets/delete-task24px.png">
     </div>
     <!-- <div class="select-all" (click)="selectAllText=true; selectAll(MockTodayTasks, 2)">SELECT ALL</div> -->
-    <div class="select-all" (click)="selectAllText=false; unselectAll(2)">DESELECT</div>
+    <div class="select-all" (click)="selectAllText=false; unselectAll(2)">{{deselectCopiedtext}}</div>
   </div>
 </div>
 <!-- <ng-template #template>

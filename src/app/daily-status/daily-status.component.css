@@ -435,6 +435,22 @@ input[value="Cancel"]:active {
   background-color: rgba(177, 177, 177, 0.8);
 }
 
+.copied-label1 {
+  margin: -14px 16px 0px 383px;
+  color: rgb(169, 169, 169);
+  font-size: 12px;
+}
+
+.copied-label2 {
+  margin: -14px 16px 0px 375px;
+  color: rgb(169, 169, 169);
+  font-size: 12px;
+}
+
+.copied-label-mini {
+  visibility: hidden;
+}
+
 @media screen and (max-width: 1090px) {
   .view_all_task {
     width: 120px;
@@ -460,6 +476,14 @@ input[value="Cancel"]:active {
 
   .my_task {
     font-size: 13px;
+  }
+
+  .copied-label1 {
+    margin-left: 370px;
+  }
+
+  .copied-label2 {
+    margin-left: 360px;
   }
 }
 
@@ -500,6 +524,14 @@ input[value="Cancel"]:active {
 
   .my_task {
     font-size: 12px;
+  }
+
+  .copied-label1 {
+    margin-left: 325px
+  }
+
+  .copied-label2 {
+    margin-left: 315px
   }
 }
 
@@ -565,6 +597,10 @@ input[value="Cancel"]:active {
     width: 100%;
     margin-left: 27px;
     padding-left: 0%;
+  }
+
+  .copied-label2 {
+    margin-left: 405px;
   }
 }
 
@@ -640,8 +676,9 @@ input[value="Cancel"]:active {
     background-color: rgba(255, 255, 255, 1);
     position: absolute;
     top: 90%;
+    left: 0px;
     display: flex;
-    padding: 16px 0px;
+    padding: 16px 0px 16px 10px;
     width: 100%;
   }
 
@@ -704,6 +741,14 @@ input[value="Cancel"]:active {
 
   .main-part{
     padding-top: 220px;
+  }
+
+  .copied-label2 {
+    display: none;
+  }
+
+  .copied-label-mini {
+    visibility: visible;
   }
   /* .select-all-desktop{ */
   /* display: none; */
