@@ -201,4 +201,9 @@ input[value="Cancel"]:hover {
 input[value="Cancel"]:active {
   background-color: rgba(131, 131, 131, 0.37);
 }
+.error {
+  color: grey;
+  margin-top:-5px;
+  padding: 3px 0px 3px 10px;
 
+}

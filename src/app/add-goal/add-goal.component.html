@@ -16,13 +16,19 @@
           <img class="deleteMember" src="../../assets/delete_mail.png" (click)="hide=false;showSign1=true; searchText=''">
       </div>
     <div *ngIf="dropDown" class="dropdown-content">
-        <div  class="memberArray" *ngFor="let member of members | goalMemberFilter : searchText;"  (click)="changeProject(member.memberName,member.memberImage);dropDown=false;visible()">
+        <div  *ngFor="let member of members | goalMemberFilter : searchText;"  (click)="changeProject(member.memberName,member.memberImage);">
+        <div  class="memberArray" *ngIf="member.memberName!=null">
+          
           <img class='image' src="{{member.memberImage}}">
           <div class="block">
             <div class='name'>{{member.memberName}}</div>
             <div class='email'>{{member.memberEmail}}</div>
           </div>
         </div>
+        <div class="error" *ngIf="member.memberName==null">
+          No results matching
+        </div>
+      </div>
     </div>
     <textarea id="projectname" class="project-name" autosize rows="1" [maxRows]="3"  placeholder="New Goal Name"></textarea>
     <div class="description"  *ngIf="showSign2" (click)="show2()">

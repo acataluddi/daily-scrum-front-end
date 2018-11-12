@@ -4,6 +4,7 @@ import { LoginService } from "../service/login.service";
 import { GoalService } from "../service/goal.service";
 import { Goal } from '../model/goal-model'
 import { NavBarMember } from '../model/nav-bar-member'
+import { forEach } from '@angular/router/src/utils/collection';
 
 
 @Component({
@@ -28,8 +29,6 @@ export class AddGoalComponent implements OnInit {
   hide:boolean
 
   ngOnInit() {
-
-    this.image = localStorage.getItem('image') ;
     this.socialAuthService.authState.subscribe((user) => {
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
@@ -62,9 +61,13 @@ export class AddGoalComponent implements OnInit {
     this.members = members;
     // this.getProjects();
   }
-  changeProject(newMailId,newImage) {
-    this.name = newMailId;
+  changeProject(newMemberName,newImage) {
+    if (newMemberName!==null){
+    this.name = newMemberName;
     this.image = newImage
+    this.dropDown=false;
+    this.visible();
+    }
   }
   visible() {
     this.hide = true;
