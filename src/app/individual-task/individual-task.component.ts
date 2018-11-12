@@ -27,11 +27,13 @@ export class IndividualTaskComponent implements OnInit {
   saved;
   show_save;
 
-  time;
   buttonText;
 
   noDesc = false;
   noTime = false;
+
+  time: Date = new Date();
+  maxtime: Date = new Date();
 
   timeArray = Array;
   hours;
@@ -49,7 +51,10 @@ export class IndividualTaskComponent implements OnInit {
 
   eventsSubscription: any;
   copiedSubscription: any;
-  constructor() { }
+  constructor() { 
+    this.maxtime.setHours(17);
+    this.maxtime.setMinutes(0);
+  }
 
   ngOnInit() {
     if (this.task.lastEdit == '') {
@@ -62,21 +67,10 @@ export class IndividualTaskComponent implements OnInit {
       this.check = ischecked);
     this.copiedSubscription = this.hideSavedEvent.subscribe((hideSaved) =>
       this.saved = false);
-    
-    if (this.task.hourSpent >= 0 || this.task.minuteSpent >= 0) {
-      if (this.task.hourSpent < 10) {
-        this.hours = '0' + this.task.hourSpent.toString();
-      } else {
-        this.hours = this.task.hourSpent.toString();
-      }
-      if (this.task.minuteSpent < 10) {
-        this.minutes = '0' + this.task.minuteSpent.toString();
-      } else {
-        this.minutes = this.task.minuteSpent.toString();
-      }
-      this.time = this.hours + ':' + this.minutes;
-    }
-    
+
+    this.time.setHours(this.task.hourSpent);
+    this.time.setMinutes(this.task.minuteSpent);
+
     if (this.task.description == '' || this.task.description == null) {
       this.show_save = true;
       this.saved = false;
@@ -105,9 +99,8 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   emitTimeEvent(task) {
-    var hr = this.time.split(":")
-    task.hourSpent = parseInt(hr[0]);
-    task.minuteSpent = parseInt(hr[1]);
+    task.hourSpent = this.time.getHours();
+    task.minuteSpent = this.time.getMinutes();
   }
   updateDescription() {
     this.task.description = this.task.description.trim();

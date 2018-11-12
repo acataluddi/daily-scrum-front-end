@@ -41,7 +41,7 @@ img[src="../../assets/Scrum_logo.png"] {
   font-weight: 300;
   position: relative;
   top: 30%;
-  width: 225px;
+  width: auto;
   height: 100%;
   color: rgba(79, 86, 105, 1);
   cursor: pointer;
@@ -95,9 +95,11 @@ img[src="../../assets/Scrum_logo.png"] {
 
 #arrow {
   display: inline-block;
-  position: absolute;
-  top: 26px;
-  left: 225px;
+  /* position: absolute; */
+  /* top: 26px; */
+  /* left: 225px; */
+  margin-top: 25px;
+  margin-left: 10px;
   background-image: url(../../assets/arrow.png);
   border: none;
   height: 16px;
@@ -145,6 +147,7 @@ img[src="../../assets/Scrum_logo.png"] {
   left: 1.213%;
   width: 100%;
   margin-left: 2.5%;
+  display: flex;
 }
 
 #signout {
@@ -204,9 +207,9 @@ img[src="../../assets/Scrum_logo.png"] {
   border-radius: 4px;
   background-color: #ffffff;
   padding: 12px 0px;
-  position: absolute;
-  top: 26px;
-  left: -120px;
+  position: relative;
+  top: 24px;
+  left: -112px;
   cursor: pointer;
   overflow-y: auto;
   overflow-x: hidden;
@@ -413,19 +416,20 @@ small.error{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 250px;
+    /* width: 250px; */
+    width: auto;
   }
 
-  #arrow {
+  /* #arrow {
     position: absolute;
     top: 25px;
     left: 253px;
-  }
+  } */
 
   #projectlist {
-    width: 269px;
+    /* width: 269px; */
     top: 30px;
-    left: -133px;
+    left: -104px;
   }
 }
 
@@ -484,13 +488,13 @@ small.error{
     right: 1%;
   }
 
-  #projectlist {
+  /* #projectlist {
     position: absolute;
     top: 27px;
     left: -1106%;
     max-height: 289px;
     width: 262px;
-  }
+  } */
 
 
 }
@@ -530,8 +534,8 @@ small.error{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 120%;
-    font-size: 1.6rem;
+    /* width: 120%; */
+    /* font-size: 1.6rem; */
   }
 
   #dash {
@@ -574,11 +578,11 @@ small.error{
     display: none;
   }
 
-  #arrow {
+  /* #arrow {
     position: absolute;
     top: 37%;
     left: 120%;
-  }
+  } */
 
   /* #projectlist {
     position: absolute;
