@@ -337,7 +337,7 @@ body{
   border: none;
   outline: none;
   color: rgba(255, 255, 255, 1);
-  background-color: #a3a3a3de;
+  background-color:rgba(12, 33, 93, 1);
   padding: 5px 20px;
   text-align: center;
   text-decoration: none;
@@ -349,15 +349,15 @@ body{
 }
 
 .button-yes:hover {
-  background-color: #a3a3a39f;
+  background-color: #072988;
 }
 
 .button-yes:active {
-  background-color: #8b8b8b;
+  background-color: rgba(12, 33, 93, 1);
 }
 
 .button-no {
-  background-color: transparent;
+  background-color: #ffffff;
   border: none;
   outline: none;
   color: #9a9da7c5;
@@ -371,12 +371,15 @@ body{
   cursor: pointer;
 }
 
-.button-no:hover,
+.button-no:hover {
+  color: black;
+  font-weight: 600;
+}
+
 input[value="Cancel"]:hover {
   background-color: rgba(107, 107, 107, 0.11);
 }
 
-.button-no:active,
 input[value="Cancel"]:active {
   background-color: rgba(131, 131, 131, 0.37);
 }

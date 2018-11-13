@@ -80,6 +80,7 @@ img.right-arrow:active {
   font-size: 14px;
   font-weight: 500;
   padding-top: 3px;
+  right: -108px;
 }
 
 .view_text {
@@ -332,7 +333,7 @@ img.right-arrow:active {
 @media screen and (max-width: 1300px) {
   .view_all_task {
     width: 138px;
-    right: -114px;
+    right: -108px;
     padding-top: 3px;
   }
   .header {
@@ -354,7 +355,7 @@ img.right-arrow:active {
   }
   .view_all_task {
     width: 125px;
-    right: -144px;
+    right: -125px;
   }
 
   .header {

@@ -35,7 +35,7 @@ input[placeholder="Search"] {
     right: -155px;
     transition: 0.5s;
     width: 200px;
-    height: 550px;
+    height: 575px;
     overflow-y: scroll;
     border-left: 2px solid rgba(242, 242, 242, 1);
     display: block;
