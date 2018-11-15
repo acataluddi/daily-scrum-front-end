@@ -28,8 +28,8 @@
             </div>
         </div>
         <div *ngIf="comment.commentId===''" class="send">
-          <textarea id="comment" class="addComment" autosize rows="2" max-row="3" placeholder="Add a comment"></textarea>
-          <img class="sendIcon" (click)="postComment(comment.value)" src="../../assets/send.png">
+          <textarea [(ngModel)]="comment.commentDescription" class="addComment" autosize rows="2" max-row="3" placeholder="Add a comment"></textarea>
+          <img *ngIf="comment.commentDescription!==''" class="sendIcon" (click)="postComment(comment)" src="../../assets/send.png">
         </div>
       </div>
     </div>

@@ -114,10 +114,10 @@ export class GoalsComponent implements OnInit {
     }
     return goalMember;
   }
-  postComment(value){
+  postComment(newComment: Comment){
     // this.comment = this.initializeNewComment(this.comment, goal);
     // var elmnt = document.getElementById('comment'+ goal.goalId);
-    console.log(value)
+    console.log(newComment)
 
   }
 }
