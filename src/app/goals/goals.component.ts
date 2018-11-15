@@ -38,11 +38,25 @@ export class GoalsComponent implements OnInit {
   //body of selected member
   fetchGoalMember() {
     this.goalService.getGoalMember('getGoalMember', 'neerajd@qburst.com').subscribe(goalMember => {
-      this.selectedGoalMember = goalMember;
+      this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
       this.length = goalMember.goals.length;
       console.log(this.selectedGoalMember);
-
     });
+  }
+
+  initializeGoalsWithComment(selectedMember:GoalMember): GoalMember{
+    for (let goal of selectedMember.goals) {
+      var comment = new Comment();
+      comment = this.initializeNewComment(comment,goal);
+      if(goal.comments!==null){
+        goal.comments.push(comment);
+      } else if (goal.comments===null){
+        var commentsArray:Comment[] = [comment];
+        goal.comments = commentsArray;
+      }
+    }
+    console.log('new member:', selectedMember);
+    return selectedMember;
   }
 
   // createNewGoal(goal: Goal) {
