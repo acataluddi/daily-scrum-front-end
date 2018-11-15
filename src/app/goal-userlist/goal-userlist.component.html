@@ -6,7 +6,7 @@
   <!-- <div class="member" *ngFor="let member of feedbackmemberArray | filter : searchText;let i = index" (click)="gotoDailyStatus(member)"> -->
   <div class="list" id="list">
     <div *ngFor="let member of feedbackmemberArray | feedbacklistfilter : searchText">
-    <div class="member" id="{{member.memberId}}" (click)="getFeedbackOfUser(member); searchText=''">
+    <div class="member" id="{{member.memberId}}" (click)="getGoalsOfUser(member); searchText=''">
       <div><img class="member_logo" src="{{member.memberImage}}"></div>
       <div class="member_name" id="member_name{{i}}">
         {{member.memberName}}

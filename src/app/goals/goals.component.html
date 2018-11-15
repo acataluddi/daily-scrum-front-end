@@ -11,27 +11,35 @@
       </div>
     </div>
     <div class="goals" *ngFor="let goal of selectedGoalMember.goals;let i=index">
-      <div class="time">
-        <div class="goalLabel">Goal {{length-i}}</div>
-        <div class="last-update">Created {{goal.goalTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div>
-      </div>
-      <div class="goalTitle">{{goal.goalTitle}}</div>
-      <div class="goalDescription">{{goal.goalDescription}}</div>
-      <div class="comment" *ngFor="let comment of goal.comments">
-        <div *ngIf="comment.commentId!=''" class="non-empty-comment">
-            <div>
-              <img class="member-image" src="{{comment.memberImage}}">
-            </div>
+        <div class="time">
+          <div class="goalLabel">Goal {{length-i}}</div>
+          <!-- <div class="last-update">Created {{goal.goalTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div> -->
+          <div class="last-update">Created by: {{goal.managerName}}</div>
+        </div>
+        <div class="goalTitle">{{goal.goalTitle}}</div>
+        <div class="created-on">Created: {{goal.goalTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div>
+        <div class="goalDescription">{{goal.goalDescription}}</div>
+        <div class="comment" *ngFor="let comment of goal.comments">
+          <div *ngIf="comment.commentId!=''" class="non-empty-comment">
+              <div>
+                <img class="member-image" src="{{comment.memberImage}}">
+              </div>
             <div class="commentTitle">
               <div class="commentDescp">{{comment.commentDescription}}</div>
-              <div class="commentTime">Created {{comment.commentTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div>
+              <div class="commentTime">{{comment.commentTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div>
             </div>
         </div>
         <div *ngIf="comment.commentId==='' && (goal.managerEmail === currentUserEmail || goal.userEmail === currentUserEmail)" class="send">
+          <div class="user-image">
+            <img class="member-image" src="{{currentUserImage}}">
+          </div>
           <textarea [(ngModel)]="comment.commentDescription" class="addComment" autosize rows="2" max-row="3" placeholder="Add a comment"></textarea>
           <img *ngIf="comment.commentDescription!==''" class="sendIcon" (click)="createNewComment(comment,goal)" src="../../assets/send.png">
         </div>
       </div>
     </div>
+  </div>
+  <div>
+    <app-goal-userlist (selectMemberEvent)="selectMember($event)"></app-goal-userlist>
   </div>
 </div>

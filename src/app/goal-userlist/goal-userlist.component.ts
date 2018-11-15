@@ -40,15 +40,16 @@ export class GoalUserlistComponent implements OnInit {
   //   }, 50);
   // }
 
-  // getFeedbackOfUser(selectedmember) navigationBarList{
-  //   this.selectMemberEvent.emit(selectedmember)
-  //   if(document.getElementById("search_name").classList.contains('flexed')){
-  //     document.getElementById("userslist").classList.remove("block")
-  //     document.getElementById("list").classList.remove("block")
-  //     document.getElementById("list").classList.remove("shadow")
-  //     document.getElementById("search_name").classList.remove("flexed")
-  //     document.getElementById("userslist").classList.remove("flex")
-  //   }
+  getGoalsOfUser(selectedmember) {
+    this.selectMemberEvent.emit(selectedmember)
+    if(document.getElementById("search_name").classList.contains('flexed')){
+      document.getElementById("userslist").classList.remove("block")
+      document.getElementById("list").classList.remove("block")
+      document.getElementById("list").classList.remove("shadow")
+      document.getElementById("search_name").classList.remove("flexed")
+      document.getElementById("userslist").classList.remove("flex")
+    }
+  }
 
   //   if (this.Usertype == 'Admin') {
   //     selectedmember.hasNewUpdates = false;

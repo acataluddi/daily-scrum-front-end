@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GoalService } from "../service/goal.service";
-import { Goal, Comment,GoalMember } from "../model/goal-model";
+import { Goal, Comment, GoalMember } from "../model/goal-model";
+import { NavBarMember } from '../model/nav-bar-member';
 
 @Component({
   selector: 'app-goals',
@@ -12,16 +13,19 @@ export class GoalsComponent implements OnInit {
   goal: Goal;
   comment: Comment;
   newComment: string[];
-  getFirstMember:string;
   currentUserEmail: string;
+  currentUserImage: string;
   selectedGoalMember:GoalMember;
   length:number;
+  firstMemberEmail: string;
+  navbarList: NavBarMember[];
   constructor(
     private goalService: GoalService
   ) { }
 
   ngOnInit() {
     this.currentUserEmail = localStorage.getItem('email');
+    this.currentUserImage = localStorage.getItem('image');
     // this.goal = this.initializeNewGoal(this.goal);
     // this.newComment[] = '';
     this.selectedGoalMember = this.initializeNewGoalMember(this.selectedGoalMember);
@@ -32,14 +36,16 @@ export class GoalsComponent implements OnInit {
   //goal member list 
   fetchNavigationBarList() {
     this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {
-      this.getFirstMember = navigationBarList[0].memberEmail;
+      console.log(navigationBarList)
+      this.navbarList = navigationBarList;
+      this.firstMemberEmail = navigationBarList[0].memberEmail;
       this.fetchGoalMember();
     });
   }
 
   //body of selected member
   fetchGoalMember() {
-    this.goalService.getGoalMember('getGoalMember', 'neerajd@qburst.com').subscribe(goalMember => {
+    this.goalService.getGoalMember('getGoalMember', this.firstMemberEmail).subscribe(goalMember => {
       this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
       this.length = goalMember.goals.length;
       console.log(this.selectedGoalMember);
@@ -57,7 +63,7 @@ export class GoalsComponent implements OnInit {
         goal.comments = commentsArray;
       }
     }
-    console.log('new member:', selectedMember);
+    // console.log('new member:', selectedMember);
     return selectedMember;
   }
 
@@ -104,15 +110,15 @@ export class GoalsComponent implements OnInit {
     }
     return comment;
   }
-  initializeNewGoalMember(goalMember:GoalMember){
+  initializeNewGoalMember(goalMember: GoalMember) {
     goalMember = {
-      goals:[],
-      hasNewUpdates:false,
-      id:'',
-      lastUpdate:null,
-      userEmail:'',
-      userId:'',
-      userImage:'',
+      goals: [],
+      hasNewUpdates: false,
+      id: '',
+      lastUpdate: null,
+      userEmail: '',
+      userId: '',
+      userImage: '',
       userName: ''
     }
     return goalMember;
@@ -130,5 +136,13 @@ export class GoalsComponent implements OnInit {
           selectedGoal.comments.push(comment);
         });
       }
+  }
+
+  selectMember(member: NavBarMember) {
+    this.goalService.getGoalMember('getGoalMember', member.memberEmail).subscribe(goalMember => {
+      this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
+      this.length = goalMember.goals.length;
+      console.log(this.selectedGoalMember);
+    });
   }
 }
