@@ -65,7 +65,7 @@ export class GoalsComponent implements OnInit {
   //   });
   // }
 
-  createNewComment(comment: Comment) {
+  postComment(comment: Comment) {
     this.goalService.addComment(comment).subscribe(addedComment => {
       console.log(addedComment);
     });
@@ -114,7 +114,7 @@ export class GoalsComponent implements OnInit {
     }
     return goalMember;
   }
-  postComment(newComment: Comment){
+  createNewComment(newComment: Comment){
     // this.comment = this.initializeNewComment(this.comment, goal);
     // var elmnt = document.getElementById('comment'+ goal.goalId);
     console.log(newComment)
