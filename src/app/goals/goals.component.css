@@ -79,8 +79,11 @@
 }
 .comment {
     width:75%;
-    display: flex;
+    /* display: flex; */
     margin-top:25px;
+}
+.non-empty-comment{
+    display: flex;
 }
 .commentDescp {
     margin-left: 20px;

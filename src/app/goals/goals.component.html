@@ -3,7 +3,7 @@
   <div class="right-part">
     <div class="header">
       <!-- Header -->
-      <div >
+      <div>
         <img class="member-image" src="{{selectedGoalMember.userImage}}">
       </div>
       <div class="member-goal-head">
@@ -11,25 +11,27 @@
       </div>
     </div>
     <div class="goals" *ngFor="let goal of selectedGoalMember.goals;let i=index">
-        <div class="time">
-          <div class="goalLabel">Goal {{length-i}}</div>
-          <div class="last-update">Created {{goal.goalTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div>
-        </div>
-        <div class="goalTitle">{{goal.goalTitle}}</div>
-        <div class="goalDescription">{{goal.goalDescription}}</div>
-        <div class="comment" *ngFor="let comment of goal.comments">
-            <div >
-                <img class="member-image" src="{{comment.memberImage}}">
-              </div>
+      <div class="time">
+        <div class="goalLabel">Goal {{length-i}}</div>
+        <div class="last-update">Created {{goal.goalTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div>
+      </div>
+      <div class="goalTitle">{{goal.goalTitle}}</div>
+      <div class="goalDescription">{{goal.goalDescription}}</div>
+      <div class="comment" *ngFor="let comment of goal.comments">
+        <div *ngIf="comment.commentId!=''" class="non-empty-comment">
+            <div>
+              <img class="member-image" src="{{comment.memberImage}}">
+            </div>
             <div class="commentTitle">
               <div class="commentDescp">{{comment.commentDescription}}</div>
               <div class="commentTime">Created {{comment.commentTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div>
             </div>
         </div>
-        <div class="send">
-        <textarea  id="comment" class="addComment"  autosize rows="2" max-row="3" placeholder="Add a comment"></textarea>
-        <img class="sendIcon" (click)="postComment(comment.value)" src="../../assets/send.png">
-       </div>
+        <div *ngIf="comment.commentId===''" class="send">
+          <textarea id="comment" class="addComment" autosize rows="2" max-row="3" placeholder="Add a comment"></textarea>
+          <img class="sendIcon" (click)="postComment(comment.value)" src="../../assets/send.png">
+        </div>
+      </div>
     </div>
   </div>
 </div>
