@@ -65,11 +65,12 @@ export class GoalsComponent implements OnInit {
   //   });
   // }
 
-  postComment(comment: Comment) {
-    this.goalService.addComment(comment).subscribe(addedComment => {
-      console.log(addedComment);
-    });
-  }
+  // postComment(comment: Comment): Comment {
+  //   this.goalService.addComment(comment).subscribe(addedComment => {
+  //     console.log(addedComment);
+  //     return addedComment;
+  //   });
+  // }
 
   // initializeNewGoal(newGoal: Goal): Goal {
   //   newGoal = {
@@ -114,10 +115,18 @@ export class GoalsComponent implements OnInit {
     }
     return goalMember;
   }
-  createNewComment(newComment: Comment){
-    // this.comment = this.initializeNewComment(this.comment, goal);
-    // var elmnt = document.getElementById('comment'+ goal.goalId);
-    console.log(newComment)
-
+  createNewComment(newComment: Comment, selectedGoal: Goal){
+    if(newComment.commentDescription.trim()!=='' && newComment.goalId!=='' 
+      && newComment.userEmail!==''){
+        this.goalService.addComment(newComment).subscribe(addedComment => {
+          var commentsArray = selectedGoal.comments;
+          commentsArray.pop();
+          commentsArray.push(addedComment);
+          selectedGoal.comments = commentsArray;
+          var comment = new Comment();
+          comment = this.initializeNewComment(comment,selectedGoal);
+          selectedGoal.comments.push(comment);
+        });
+      }
   }
 }
