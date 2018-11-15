@@ -104,4 +104,14 @@ export class UserslistComponent implements OnInit {
       document.getElementById("userslist").classList.remove("flex")
     }
   }
+
+  hidelist() {
+    if (document.getElementById("list").classList.contains('block')) {
+      document.getElementById("userslist").classList.remove("block")
+      document.getElementById("list").classList.remove("block")
+      document.getElementById("list").classList.remove("shadow")
+      document.getElementById("search_name").classList.remove("flexed")
+      document.getElementById("userslist").classList.remove("flex")
+    }
+  }
 }

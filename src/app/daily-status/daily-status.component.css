@@ -397,7 +397,7 @@ input[value="Cancel"]:active {
   width: 13px;
   border-radius: 50%;
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 13px;
   border-style: solid;
   border-width: 2px;
   /* border-color: rgb(219, 219, 219); */
@@ -409,7 +409,7 @@ input[value="Cancel"]:active {
   width: 13px;
   border-radius: 50%;
   display: inline-block;
-  margin-top: 11px;
+  margin-top: 13px;
   cursor: pointer;
 }
 
@@ -639,6 +639,10 @@ input[value="Cancel"]:active {
     position: absolute;
     top: 4px;
     right: -277px;
+  }
+
+  .header-part {
+    box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.17);
   }
 }
 @media screen and (max-width: 650px){

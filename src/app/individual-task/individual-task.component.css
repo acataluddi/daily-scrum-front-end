@@ -35,7 +35,7 @@ textarea {
   width: 13px;
   border-radius: 50%;
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 8.5px;
   border-style: solid;
   border-width: 2px;
   border-color:rgba(181, 186, 201, 1);
@@ -48,7 +48,7 @@ textarea {
   width: 13px;
   border-radius: 50%;
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 8.5px;
   cursor: pointer;
 }
 

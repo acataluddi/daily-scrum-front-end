@@ -4,7 +4,7 @@
     <div class="search_name" id="search_name"><input [(ngModel)]="searchText" placeholder="Search"></div>
   </div>
   <div class="list" id="list">
-    <div *ngFor="let member of projectmembers | filter : searchText;let i = index" (click)="gotoDailyStatus(member);changeCSS();searchText=''">
+    <div *ngFor="let member of projectmembers | filter : searchText;let i = index" (click)="gotoDailyStatus(member);hidelist();searchText=''">
       <div class="member" *ngIf="member.name!=''">
         <div class="member_logo"><img src="{{member.image}}"></div>
         <div class="member_name" id="member_name{{i}}">
