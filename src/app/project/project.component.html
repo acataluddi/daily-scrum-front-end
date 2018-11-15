@@ -68,7 +68,9 @@
             </div>
           </div>
           <div *ngIf ="show[i]" class="dropdown-content">
-            <div  *ngFor = "let employee of Members | filterPipe:mem.email"  (click)="changeProject(employee.companyEmail,mem);show[i]=false">{{employee.companyEmail}}</div>
+            <div  *ngFor = "let employee of Members | filterPipe:mem.email"  (click)="changeProject(employee.companyEmail,mem);show[i]=false">
+                <div class='email'>{{employee.companyEmail}}</div>
+            </div>
           </div>
           <small *ngIf="mem.invalidMemberEmail" class="projectmembersclass error1">
             Please enter a valid email

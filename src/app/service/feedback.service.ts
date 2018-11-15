@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Feedback } from "../model/feedback-model";
-import { GoalMember } from "../model/goalmember-model";
 
 @Injectable({
   providedIn: 'root'

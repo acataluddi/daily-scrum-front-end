@@ -37,6 +37,8 @@ import { GoalUserlistComponent } from './goal-userlist/goal-userlist.component';
 import { FeedbackFilterPipe } from './feedbacklistfilter.pipe';
 import { UserListFilterPipe } from './UserListfilter.pipe';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { AddGoalComponent } from './add-goal/add-goal.component';
+import { GoalMemberFilter } from './goalMemberFilter.pipe';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -70,7 +72,9 @@ export function getAuthServiceConfigs() {
     DashboardHeaderComponent,
     GoalsComponent,
     FeedbackComponent,
-    GoalUserlistComponent
+    GoalUserlistComponent,
+    AddGoalComponent,
+    GoalMemberFilter
   ],
   imports: [
     BrowserModule,

@@ -3,8 +3,6 @@ import { AuthService } from 'angular-6-social-login';
 import { LoginService } from '../service/login.service';
 import { ProjectService } from '../service/project.service';
 import { Router } from '@angular/router';
-import { GoalMember } from '../model/goalmember-model';
-import { Feedback } from '../model/feedback-model';
 
 @Component({
   selector: 'app-dashboard-header',
@@ -17,9 +15,6 @@ export class DashboardHeaderComponent implements OnInit {
   flag1;
   flag2;
   operation: string;
-
-  feedbackUserList: GoalMember[] = []
-  feedbackList: Feedback[];
 
   constructor(private socialAuthService: AuthService,
     private loginservice: LoginService,
@@ -59,7 +54,10 @@ export class DashboardHeaderComponent implements OnInit {
   }
 
   AddGoal() {
-    alert("We are working on it!")
+    // alert("We are working on it!")
+    this.operation = "AddGoal";
+    localStorage.setItem('currentOperation', this.operation);
+    this.router.navigateByUrl('/addGoal');
   }
 
   setActivetabStyle(value) {
@@ -75,9 +73,9 @@ export class DashboardHeaderComponent implements OnInit {
           }
         }
         if (this.UserType == 'Manager' || this.UserType == 'User') {
-          // if (document.getElementById("goals-tab").classList.contains('tab-active')) {
-          //   document.getElementById("goals-tab").classList.remove('tab-active');
-          // }
+          if (document.getElementById("goals-tab").classList.contains('tab-active')) {
+            document.getElementById("goals-tab").classList.remove('tab-active');
+          }
         }
         break;
       case 2: document.getElementById("users-tab").classList.add('tab-active');
@@ -86,9 +84,9 @@ export class DashboardHeaderComponent implements OnInit {
         }
         if (this.UserType == 'Manager' || this.UserType == 'User') {
           // should use after completing goals tab
-          // if (document.getElementById("goals-tab").classList.contains('tab-active')) {
-          //   document.getElementById("goals-tab").classList.remove('tab-active');
-          // }
+          if (document.getElementById("goals-tab").classList.contains('tab-active')) {
+            document.getElementById("goals-tab").classList.remove('tab-active');
+          }
         }
         if (this.flag1) {
           // should use after completing feedback tab
