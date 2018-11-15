@@ -14,10 +14,10 @@
         <div class="time">
           <div class="goalLabel">Goal {{length-i}}</div>
           <!-- <div class="last-update">Created {{goal.goalTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div> -->
-          <div class="last-update">Created by: {{goal.managerName}}</div>
+          <div class="last-update">Created by {{goal.managerName}} on {{goal.goalTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div>
         </div>
         <div class="goalTitle">{{goal.goalTitle}}</div>
-        <div class="created-on">Created: {{goal.goalTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div>
+        <!-- <div class="created-on">Created: {{goal.goalTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div> -->
         <div class="goalDescription">{{goal.goalDescription}}</div>
         <div class="comment" *ngFor="let comment of goal.comments">
           <div *ngIf="comment.commentId!=''" class="non-empty-comment">

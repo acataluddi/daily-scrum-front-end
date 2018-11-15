@@ -36,7 +36,7 @@ export class GoalsComponent implements OnInit {
   //goal member list 
   fetchNavigationBarList() {
     this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {
-      console.log(navigationBarList)
+      // console.log(navigationBarList)
       this.navbarList = navigationBarList;
       this.firstMemberEmail = navigationBarList[0].memberEmail;
       this.fetchGoalMember();
@@ -48,7 +48,7 @@ export class GoalsComponent implements OnInit {
     this.goalService.getGoalMember('getGoalMember', this.firstMemberEmail).subscribe(goalMember => {
       this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
       this.length = goalMember.goals.length;
-      console.log(this.selectedGoalMember);
+      // console.log(this.selectedGoalMember.userName);
     });
   }
 
@@ -142,7 +142,7 @@ export class GoalsComponent implements OnInit {
     this.goalService.getGoalMember('getGoalMember', member.memberEmail).subscribe(goalMember => {
       this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
       this.length = goalMember.goals.length;
-      console.log(this.selectedGoalMember);
+      // console.log(this.selectedGoalMember);
     });
   }
 }

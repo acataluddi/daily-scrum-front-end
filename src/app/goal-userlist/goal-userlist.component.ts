@@ -41,6 +41,9 @@ export class GoalUserlistComponent implements OnInit {
   // }
 
   getGoalsOfUser(selectedmember) {
+    if (selectedmember.hasNewUpdates) {
+      selectedmember.hasNewUpdates = false;
+    }
     this.selectMemberEvent.emit(selectedmember)
     if(document.getElementById("search_name").classList.contains('flexed')){
       document.getElementById("userslist").classList.remove("block")
@@ -49,24 +52,27 @@ export class GoalUserlistComponent implements OnInit {
       document.getElementById("search_name").classList.remove("flexed")
       document.getElementById("userslist").classList.remove("flex")
     }
-  }
+    // this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {
+    //   this.feedbackUserList(navigationBarList)
+    // });
+  
 
   //   if (this.Usertype == 'Admin') {
   //     selectedmember.hasNewUpdates = false;
   //     this.feedbackService.updateFeedbackStatus(selectedmember.memberEmail).subscribe(data => console.log(data));
   //   }
 
-  //   for (let member of this.feedbackmemberArray) {
-  //     if (document.getElementById(member.memberId) != null) {
-  //       if (selectedmember.memberId == member.memberId) {
-  //         document.getElementById(member.memberId).classList.add('focus');
-  //       }
-  //       else {
-  //         document.getElementById(member.memberId).classList.remove('focus');
-  //       }
-  //     }
-  //   }
-  // }
+    for (let member of this.feedbackmemberArray) {
+      if (document.getElementById(member.memberId) != null) {
+        if (selectedmember.memberId == member.memberId) {
+          document.getElementById(member.memberId).classList.add('focus');
+        }
+        else {
+          document.getElementById(member.memberId).classList.remove('focus');
+        }
+      }
+    }
+  }
 
   changeCSS() {
     if (!this.checker) {
@@ -90,7 +96,6 @@ export class GoalUserlistComponent implements OnInit {
   feedbackUserList(navigationBarList) {
     this.feedbackmemberArray = navigationBarList;
     this.length = this.feedbackmemberArray.length;
-    console.log(this.length);
     var mem = this.feedbackmemberArray[0]
     setTimeout(() => {
       document.getElementById(mem.memberId).classList.add('focus');
