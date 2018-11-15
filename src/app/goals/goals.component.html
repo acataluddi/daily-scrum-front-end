@@ -27,7 +27,7 @@
               <div class="commentTime">Created {{comment.commentTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div>
             </div>
         </div>
-        <div *ngIf="comment.commentId===''" class="send">
+        <div *ngIf="comment.commentId==='' && (goal.managerEmail === currentUserEmail || goal.userEmail === currentUserEmail)" class="send">
           <textarea [(ngModel)]="comment.commentDescription" class="addComment" autosize rows="2" max-row="3" placeholder="Add a comment"></textarea>
           <img *ngIf="comment.commentDescription!==''" class="sendIcon" (click)="createNewComment(comment,goal)" src="../../assets/send.png">
         </div>

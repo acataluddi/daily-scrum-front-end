@@ -13,6 +13,7 @@ export class GoalsComponent implements OnInit {
   comment: Comment;
   newComment: string[];
   getFirstMember:string;
+  currentUserEmail: string;
   selectedGoalMember:GoalMember;
   length:number;
   constructor(
@@ -20,6 +21,7 @@ export class GoalsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.currentUserEmail = localStorage.getItem('email');
     // this.goal = this.initializeNewGoal(this.goal);
     // this.newComment[] = '';
     this.selectedGoalMember = this.initializeNewGoalMember(this.selectedGoalMember);
