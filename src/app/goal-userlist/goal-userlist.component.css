@@ -1,13 +1,16 @@
 .userlist-maindiv {
-  padding-left: 25%;
+  margin-top:50px;
   box-sizing: border-box;
-  width: 300px;
+  width: 250px;
   height: 100%;
-  float: left;
+  float: right;
+  border-left:solid 1px rgb(218, 218, 218);
   border-color: rgb(218, 218, 218);
   border-width: 1px;
 }
-
+/* .userlist-maindiv:hover {
+  width:250px;
+} */
 .search {
   display: flex;
   height: 60px;
@@ -26,7 +29,6 @@ input[placeholder="Search User"] {
   font-family: 'Roboto';
   font-size: 16px;
 }
-
 .search_icon {
   padding: 7.5% 0% 8% 8%;
 }
@@ -37,7 +39,7 @@ input[placeholder="Search User"] {
 
 .member {
   height: 42px;
-  padding: 5px 42px 5px 5%;
+  padding: 5px 42px 5px 7%;
   margin: 5px 0px;
   display: flex;
   cursor: pointer;
@@ -71,8 +73,8 @@ input[placeholder="Search User"] {
 
 .member:hover,
 .focus {
-  background-color: rgba(242, 242, 242, 1);
-  border-radius: 35px;
+  /* background-color: rgba(242, 242, 242, 1);
+  border-radius: 35px; */
 }
 
 @media only screen and (max-width: 700px) {

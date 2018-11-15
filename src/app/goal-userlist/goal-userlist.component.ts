@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { NavBarMember } from '../model/nav-bar-member';
 import { FeedbackService } from '../service/feedback.service';
+import {GoalService } from '../service/goal.service'
 import { equal } from 'assert';
 
 @Component({
@@ -10,30 +11,36 @@ import { equal } from 'assert';
 })
 export class GoalUserlistComponent implements OnInit {
 
-  @Input() feedbackUserList: NavBarMember[];
+  // @Input() feedbackUserList: NavBarMember[];
   @Output() selectMemberEvent = new EventEmitter();
 
   feedbackmemberArray: NavBarMember[];
   Usertype = localStorage.getItem('userType');
   checker: boolean = false;
   length: number;
-  constructor(private feedbackService: FeedbackService) { }
+  constructor(private feedbackService: FeedbackService,
+    private goalService:GoalService) { }
 
   ngOnInit() {
-    this.initializeMemberArray(this.feedbackUserList)
+    // this.initializeMemberArray(this.feedbackUserList)
+      this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {
+        this.feedbackUserList(navigationBarList)
+      });
+    
+    
     // this.feedbackService.getFeedBackStatusList().subscribe(data => this.initializeMemberArray(data));
   }
 
-  initializeMemberArray(array) {
-    this.feedbackmemberArray = array;
-    this.length = this.feedbackmemberArray.length;
-    var mem = this.feedbackmemberArray[0]
-    setTimeout(() => {
-      document.getElementById(mem.memberId).classList.add('focus');
-    }, 50);
-  }
+  // initializeMemberArray(array) {
+  //   this.feedbackmemberArray = array;
+  //   this.length = this.feedbackmemberArray.length;
+  //   var mem = this.feedbackmemberArray[0]
+  //   setTimeout(() => {
+  //     document.getElementById(mem.memberId).classList.add('focus');
+  //   }, 50);
+  // }
 
-  // getFeedbackOfUser(selectedmember) {
+  // getFeedbackOfUser(selectedmember) navigationBarList{
   //   this.selectMemberEvent.emit(selectedmember)
   //   if(document.getElementById("search_name").classList.contains('flexed')){
   //     document.getElementById("userslist").classList.remove("block")
@@ -78,5 +85,14 @@ export class GoalUserlistComponent implements OnInit {
       this.checker = !this.checker
 
     }
+  }
+  feedbackUserList(navigationBarList) {
+    this.feedbackmemberArray = navigationBarList;
+    this.length = this.feedbackmemberArray.length;
+    console.log(this.length);
+    var mem = this.feedbackmemberArray[0]
+    setTimeout(() => {
+      document.getElementById(mem.memberId).classList.add('focus');
+    }, 50);
   }
 }
