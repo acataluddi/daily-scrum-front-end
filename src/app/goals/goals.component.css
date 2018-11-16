@@ -92,14 +92,21 @@
 .goalDescription {
   margin-top: 6px;
   font-family: 'Roboto';
-  font-size: 14px;
+  font-size: 16px;
   color: rgba(79, 86, 105, 1);
 }
 
+.comment-num {
+  color: rgba(79, 86, 105, 1);
+  cursor: pointer;
+  display: flex;
+  margin: 20px 1px;
+  font-family: 'Roboto';
+}
 .comment {
     width:75%;
     /* display: flex; */
-    margin-top:25px;
+    margin-bottom:20px;
 }
 .non-empty-comment{
     display: flex;
@@ -152,4 +159,25 @@
 
 .user-image {
   margin: 10px 0px;
+}
+
+.no-goals {
+  height: 100%;
+}
+
+.no-goals-img {
+  display: block;
+  margin-top: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  filter: opacity(90%);
+  height: 170px;
+  width: 285px;
+}
+
+.no-goals-msg {
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+  color: rgba(79, 86, 105, 1);
 }

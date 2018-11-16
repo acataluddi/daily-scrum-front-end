@@ -3,7 +3,7 @@
   background: #ffffff;
   position: fixed;
   top: 60px;
-  z-index: 500;
+  z-index: 40;
   box-sizing: border-box;
   width: 200px;
   height: 100%;
@@ -24,7 +24,7 @@
   border-color: rgb(218, 218, 218);
 }
 
-input[placeholder="Search User"] {
+input[placeholder="Search"] {
   border: none;
   outline: none;
   height: 32px;
@@ -65,14 +65,14 @@ input[placeholder="Search User"] {
 
 .dot {
   position: relative;
-  top: 14px;
-  left: 6px;
+  top: 23px;
+  left: -113px;
   border: none;
   height: 9px;
   width: 9px;
   cursor: default;
   border-radius: 50%;
-  background-color: rgba(177, 177, 177, 1);
+  background-color: rgba(255, 0, 0, 1);
 }
 
 .member:hover,

@@ -97,6 +97,7 @@ export class GoalUserlistComponent implements OnInit {
     this.feedbackmemberArray = navigationBarList;
     this.length = this.feedbackmemberArray.length;
     var mem = this.feedbackmemberArray[0]
+    mem.hasNewUpdates = false;
     setTimeout(() => {
       document.getElementById(mem.memberId).classList.add('focus');
     }, 50);

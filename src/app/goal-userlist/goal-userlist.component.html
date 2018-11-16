@@ -1,7 +1,7 @@
 <div class="userlist-maindiv" id="userslist"  *ngIf="length>0">
   <div class="search">
     <div class="search_icon" (click)="changeCSS(); searchText=''"><img src="../../assets/Combined_Shape_Copy_2.png"></div>
-    <div class="search_name" id="search_name"><input [(ngModel)]="searchText" placeholder="Search User"></div>
+    <div class="search_name" id="search_name"><input [(ngModel)]="searchText" placeholder="Search"></div>
   </div>
   <!-- <div class="member" *ngFor="let member of feedbackmemberArray | filter : searchText;let i = index" (click)="gotoDailyStatus(member)"> -->
   <div class="list" id="list">

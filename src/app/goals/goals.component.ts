@@ -19,6 +19,9 @@ export class GoalsComponent implements OnInit {
   length:number;
   firstMemberEmail: string;
   navbarList: NavBarMember[];
+  noOfComments = [];
+  expand = [];
+  len = 0;
   constructor(
     private goalService: GoalService
   ) { }
@@ -48,7 +51,14 @@ export class GoalsComponent implements OnInit {
     this.goalService.getGoalMember('getGoalMember', this.firstMemberEmail).subscribe(goalMember => {
       this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
       this.length = goalMember.goals.length;
-      // console.log(this.selectedGoalMember.userName);
+      for(let i = 0; i < this.length; i++ ) {
+        this.noOfComments[i] = goalMember.goals[i].comments.length-1;
+        if (i==0) {
+          this.expand[i] = true;
+        } else {
+          this.expand[i] = false;
+        }
+      }
     });
   }
 
@@ -142,7 +152,13 @@ export class GoalsComponent implements OnInit {
     this.goalService.getGoalMember('getGoalMember', member.memberEmail).subscribe(goalMember => {
       this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
       this.length = goalMember.goals.length;
-      // console.log(this.selectedGoalMember);
+      for(let i = 0; i < this.length; i++ ) {
+        if (i==0) {
+          this.expand[i] = true;
+        } else {
+          this.expand[i] = false;
+        }
+      }
     });
   }
 }
