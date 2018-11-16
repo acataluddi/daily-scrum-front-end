@@ -30,8 +30,8 @@ body{
   margin-left: auto;
   margin-right: auto;
   width: 200px;
-  font-size: 20px;
-  color: rgb(187, 187, 187);
+  font-size: 17px;
+  color: rgb(187, 187, 187,1);
   font-weight: 400;
   text-align: center;
 }
@@ -41,9 +41,9 @@ body{
   margin-top: 200px;
   margin-left: auto;
   margin-right: auto;
-  height: 120px;
-  width: 120px;
-  filter: opacity(30%);
+  height: 150px;
+  width: 150px;
+  filter: opacity(85%);
 }
 
 .footer-div {
