@@ -181,3 +181,51 @@
   font-size: 15px;
   color: rgba(79, 86, 105, 1);
 }
+
+@media only screen and (max-width: 700px) {
+  .maindiv {
+    margin-top: 188px;
+    margin-right: 5.2%;
+  }
+
+  .right-part {
+    width: 100%;
+  }
+
+  .goals {
+    width: 100%;
+    padding-right: 5%;
+  }
+
+  .goalLabel {
+    padding: 4px 0px 6px 3px;
+    margin-right: 5px;
+    width: 47px;
+  }
+
+  .last-update {
+    margin-top: 3px;
+    font-size: 10px;
+  }
+
+  .goalTitle {
+    font-size: 18px;
+    width: 100%;
+  }
+
+  .goalDescription {
+    font-size: 14px;
+  }
+
+  .comment {
+    width: 95%;
+  }
+  
+  .comment-num {
+    font-size: 12px;
+  }
+
+  .commentTime {
+    font-size: 10px;
+  }
+}

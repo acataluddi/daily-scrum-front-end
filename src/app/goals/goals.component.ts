@@ -15,13 +15,12 @@ export class GoalsComponent implements OnInit {
   newComment: string[];
   currentUserEmail: string;
   currentUserImage: string;
-  selectedGoalMember:GoalMember;
-  length:number;
+  selectedGoalMember: GoalMember;
+  length: number;
   firstMemberEmail: string;
   navbarList: NavBarMember[];
   noOfComments = [];
   expand = [];
-  len = 0;
   constructor(
     private goalService: GoalService
   ) { }
@@ -39,37 +38,46 @@ export class GoalsComponent implements OnInit {
   //goal member list 
   fetchNavigationBarList() {
     this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {
-      // console.log(navigationBarList)
-      this.navbarList = navigationBarList;
-      this.firstMemberEmail = navigationBarList[0].memberEmail;
-      this.fetchGoalMember();
+      if (navigationBarList.length > 0) {
+        this.navbarList = navigationBarList;
+        this.firstMemberEmail = navigationBarList[0].memberEmail;
+        this.fetchGoalMember();
+      } else {
+        this.length = 0;
+      }
     });
   }
 
   //body of selected member
   fetchGoalMember() {
     this.goalService.getGoalMember('getGoalMember', this.firstMemberEmail).subscribe(goalMember => {
-      this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
-      this.length = goalMember.goals.length;
-      for(let i = 0; i < this.length; i++ ) {
-        this.noOfComments[i] = goalMember.goals[i].comments.length-1;
-        if (i==0) {
-          this.expand[i] = true;
-        } else {
-          this.expand[i] = false;
+      // this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
+
+      if (goalMember != null) {
+        this.length = goalMember.goals.length;
+        this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
+        for (let i = 0; i < this.length; i++) {
+          this.noOfComments[i] = goalMember.goals[i].comments.length - 1;
+          if (i == 0) {
+            this.expand[i] = true;
+          } else {
+            this.expand[i] = false;
+          }
         }
+      } else {
+        this.length = 0;
       }
     });
   }
 
-  initializeGoalsWithComment(selectedMember:GoalMember): GoalMember{
+  initializeGoalsWithComment(selectedMember: GoalMember): GoalMember {
     for (let goal of selectedMember.goals) {
       var comment = new Comment();
-      comment = this.initializeNewComment(comment,goal);
-      if(goal.comments!==null){
+      comment = this.initializeNewComment(comment, goal);
+      if (goal.comments !== null) {
         goal.comments.push(comment);
-      } else if (goal.comments===null){
-        var commentsArray:Comment[] = [comment];
+      } else if (goal.comments === null) {
+        var commentsArray: Comment[] = [comment];
         goal.comments = commentsArray;
       }
     }
@@ -133,31 +141,38 @@ export class GoalsComponent implements OnInit {
     }
     return goalMember;
   }
-  createNewComment(newComment: Comment, selectedGoal: Goal){
-    if(newComment.commentDescription.trim()!=='' && newComment.goalId!=='' 
-      && newComment.userEmail!==''){
-        this.goalService.addComment(newComment).subscribe(addedComment => {
-          var commentsArray = selectedGoal.comments;
-          commentsArray.pop();
-          commentsArray.push(addedComment);
-          selectedGoal.comments = commentsArray;
-          var comment = new Comment();
-          comment = this.initializeNewComment(comment,selectedGoal);
-          selectedGoal.comments.push(comment);
-        });
-      }
+  createNewComment(newComment: Comment, selectedGoal: Goal) {
+    if (newComment.commentDescription.trim() !== '' && newComment.goalId !== ''
+      && newComment.userEmail !== '') {
+      this.goalService.addComment(newComment).subscribe(addedComment => {
+        var commentsArray = selectedGoal.comments;
+        commentsArray.pop();
+        commentsArray.push(addedComment);
+        selectedGoal.comments = commentsArray;
+        var comment = new Comment();
+        comment = this.initializeNewComment(comment, selectedGoal);
+        selectedGoal.comments.push(comment);
+      });
+    }
   }
 
   selectMember(member: NavBarMember) {
     this.goalService.getGoalMember('getGoalMember', member.memberEmail).subscribe(goalMember => {
-      this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
-      this.length = goalMember.goals.length;
-      for(let i = 0; i < this.length; i++ ) {
-        if (i==0) {
-          this.expand[i] = true;
-        } else {
-          this.expand[i] = false;
+      // this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
+      // this.length = goalMember.goals.length;
+      console.log(goalMember)
+      if (goalMember != null) {
+        this.length = goalMember.goals.length;
+        this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
+        for (let i = 0; i < this.length; i++) {
+          if (i == 0) {
+            this.expand[i] = true;
+          } else {
+            this.expand[i] = false;
+          }
         }
+      } else {
+        this.length = 0;
       }
     });
   }

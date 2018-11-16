@@ -25,6 +25,7 @@ export class GoalUserlistComponent implements OnInit {
     // this.initializeMemberArray(this.feedbackUserList)
       this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {
         this.feedbackUserList(navigationBarList)
+        console.log(navigationBarList)
       });
     
     
