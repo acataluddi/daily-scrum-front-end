@@ -163,8 +163,7 @@
 
 .no-goals {
   height: 100%;
-  margin: 0 auto;
-  margin-left: 25%;
+  margin-top: -50px;
 }
 
 .no-goals-img {

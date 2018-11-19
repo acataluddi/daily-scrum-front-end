@@ -52,15 +52,11 @@
       <!-- </div> -->
     </div>
   </div>
-  <div class="no-goals" *ngIf="length==0">
-    <img class="no-goals-img" src="../../assets/Manager - No Goal.png">
-    <div class="no-goals-msg">No Goals Assigned Yet!</div>
+  <div class="no-goals" [style.width]="getStyle()" *ngIf="length==0">
+      <img class="no-goals-img" src="../../assets/Manager - No Goal.png">
+      <div class="no-goals-msg">No Goals Assigned Yet!</div>
   </div>
   <div>
     <app-goal-userlist (selectMemberEvent)="selectMember($event)"></app-goal-userlist>
   </div>
 </div>
-<!-- <div class="no-goals" *ngIf="length==0">
-    <img class="no-goals-img" src="../../assets/Manager - No Goal.png">
-    <div class="no-goals-msg">No Goals Assigned Yet!</div>
-</div> -->

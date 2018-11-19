@@ -19,6 +19,7 @@ export class GoalsComponent implements OnInit {
   length: number;
   firstMemberEmail: string;
   navbarList: NavBarMember[];
+  navigationMemberLength :number;
   noOfComments = [];
   expand = [];
   constructor(
@@ -38,6 +39,8 @@ export class GoalsComponent implements OnInit {
   //goal member list 
   fetchNavigationBarList() {
     this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {
+      this.navigationMemberLength = navigationBarList.length;
+      console.log(this.navigationMemberLength)
       if (navigationBarList.length > 0) {
         this.navbarList = navigationBarList;
         this.firstMemberEmail = navigationBarList[0].memberEmail;
@@ -175,5 +178,13 @@ export class GoalsComponent implements OnInit {
         this.length = 0;
       }
     });
+  }
+
+  getStyle() {
+    if (this.navigationMemberLength==0) {
+      return "100%";
+    }else {
+      return "calc(100% - 191px)";
+    }
   }
 }
