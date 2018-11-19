@@ -117,6 +117,7 @@
   font-family: 'Roboto';
   font-size: 14px;
   color: rgba(79, 86, 105, 1);
+  white-space: pre-line;
 }
 
 .commentTime {
