@@ -307,20 +307,21 @@ textarea:focus {
 }
 
 .cancel {
+  background-color: #ffffff;
+  border: none;
+  outline: none;
+  color: #9a9da7c5;
   height: 34px;
   width: 80px;
   font-family: 'Roboto';
   font-size: 18px;
   font-weight: 550;
-  color: rgb(169, 170, 172);
   text-align: center;
-  background-color: #ffffff;
-  border: none;
 }
 
 .cancel:hover {
-  background-color: rgb(169, 170, 172);
-  color: rgb(255, 255, 255);
+  color: black;
+  font-weight: 600;
 }
 
 small.error{
@@ -330,21 +331,26 @@ small.error{
 }
 
 .submit {
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 1);
+  background-color:rgba(12, 33, 93, 1);
   height: 34px;
   width: 80px;
   font-family: 'Roboto';
   font-size: 18px;
   font-weight: 550;
-  color: rgb(85, 85, 87);
   text-align: center;
   margin-left: 40px;
-  background-color: #ffffff;
-  border: none;
+  border-radius: 2px;
 }
 
 .submit:hover {
-  background-color: rgb(169, 170, 172);
-  color: rgb(255, 255, 255);
+  background-color: #072988;
+}
+
+.submit:active {
+  background-color: rgba(12, 33, 93, 1);
 }
 
 #dailyscrumclass .arrow #projectlist {
