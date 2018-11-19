@@ -18,7 +18,7 @@
 
 .add-pro-button {
   position: absolute;
-  right: 10%;
+  right: 210px;
   top: 18px;
   height: 32px;
   width: 135px;
@@ -133,9 +133,9 @@ input[placeholder="Search"] {
 
 
 @media only screen and (max-width: 520px) {
-  .add-pro-button {
+  /* .add-pro-button {
     right: 5%;
-  }
+  } */
 
   .users-tab,
   .goals-tab,
@@ -146,7 +146,8 @@ input[placeholder="Search"] {
 }
 
 @media only screen and (max-width: 700px) {
-  .add-goal-button {
+  .add-goal-button,
+  .add-pro-button {
     visibility: hidden;
   }
 
@@ -164,13 +165,6 @@ input[placeholder="Search"] {
     cursor: pointer;
   }
 
-}
-
-@media only screen and (max-width: 420px) {
-  .add-pro-button {
-    visibility: hidden;
-  }
-
   .mob-view-project {
     position: absolute;
     right: 5%;
@@ -183,6 +177,12 @@ input[placeholder="Search"] {
     padding: 4.4px 7.5px;
     color: white;
     cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .add-pro-button {
+    visibility: hidden;
   }
 
   .users-tab,
