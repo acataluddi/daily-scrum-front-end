@@ -17,19 +17,19 @@
         </div>
       </div>
       <div class="usermailclass">
-        <div class="button desktop">{{member.email}}</div>
         <div class="mobile">
           <img class="dp" [src]="getImage()">
         </div>
+        <div class="button desktop">{{member.email}}</div>
         <div class="arrow2">
           <div id="signout" *ngIf="show_signout">
-              <div id="sign" class="a" (click)="logout()"> Logout </div>
+            <div id="sign" class="a" (click)="logout()"> Logout </div>
             <div id="feed" class="a" (click)="openModal(template)"> Feedback </div>
           </div>
         </div>
       </div>
       <ng-template #template>
-          <div class="modal-body text-center">
+        <div class="modal-body text-center">
           <div id="vis" class="Feed">
             <div class="TopDiv">
               <div class="FeedbackText">
@@ -37,11 +37,7 @@
               </div>
             </div>
             <div class="MiddleDiv">
-              <textarea 
-                id="feedbackDesc" 
-                class="textarea" 
-                placeholder="I would like to.." 
-                [(ngModel)]="feedback.feedbackDescription" 
+              <textarea id="feedbackDesc" class="textarea" placeholder="I would like to.." [(ngModel)]="feedback.feedbackDescription"
                 (click)="invalidDescription=false">
               </textarea>
               <small *ngIf="invalidDescription" class="error">
@@ -53,5 +49,5 @@
               <button class="submit" (click)="postFeedback(feedback)">Submit</button>
             </div>
           </div>
-       </div>
+        </div>
       </ng-template>

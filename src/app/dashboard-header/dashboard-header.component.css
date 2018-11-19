@@ -33,7 +33,7 @@
 }
 .add-goal-button {
   position: absolute;
-  right: 10%;
+  right: 210px;
   top: 18px;
   height: 32px;
   width: 135px;
@@ -47,7 +47,7 @@
   border-color: #555;
 }
 .add-pro-button:hover,.add-goal-button:hover {
-  background-color: rgba(0, 35, 192, 0.8);
+  background-color: #072988;
 }
 
 .goals-tab {
@@ -73,7 +73,8 @@
   font-weight: 500;
 }
 
-.mob-view {
+.mob-view-goal,
+.mob-view-project {
   visibility: hidden;
 }
 
@@ -142,16 +143,35 @@ input[placeholder="Search"] {
     margin-left: 20px;
   }
 
+}
 
+@media only screen and (max-width: 700px) {
+  .add-goal-button {
+    visibility: hidden;
+  }
+
+  .mob-view-goal {
+    position: absolute;
+    right: 5%;
+    top: 16px;
+    visibility: visible;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(12, 33, 93, 1);
+    border-radius: 4px;
+    padding: 4.4px 7.5px;
+    color: white;
+    cursor: pointer;
+  }
 
 }
 
 @media only screen and (max-width: 420px) {
-  .add-pro-button,.add-goal-button {
+  .add-pro-button {
     visibility: hidden;
   }
 
-  .mob-view {
+  .mob-view-project {
     position: absolute;
     right: 5%;
     top: 16px;

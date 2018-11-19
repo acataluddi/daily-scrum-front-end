@@ -136,6 +136,10 @@ div[contenteditable="true"] {
   cursor: pointer;
 }
 
+.email {
+  padding: 12px 16px;
+}
+
 .member {
   margin: auto;
   font-size: 13px;
