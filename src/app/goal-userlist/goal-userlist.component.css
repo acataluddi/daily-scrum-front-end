@@ -134,7 +134,7 @@ input[placeholder="Search"] {
   .dot {
     position: relative;
     top: 22px;
-    left: -248px;
+    left: -6px;
   }
 
   .block {
