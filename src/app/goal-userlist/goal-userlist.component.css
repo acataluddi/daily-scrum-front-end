@@ -1,23 +1,31 @@
 .userlist-maindiv {
-  padding-left: 25%;
+  /* margin-top:50px; */
+  background: #ffffff;
+  position: fixed;
+  top: 60px;
+  right: 0px;
+  z-index: 40;
   box-sizing: border-box;
-  width: 300px;
+  width: 200px;
   height: 100%;
-  float: left;
+  float: right;
+  border-left:solid 1px rgb(218, 218, 218);
   border-color: rgb(218, 218, 218);
   border-width: 1px;
 }
-
+/* .userlist-maindiv:hover {
+  width:250px;
+} */
 .search {
   display: flex;
   height: 60px;
   border-bottom-style: solid;
-  border-top-style: solid;
+  /* border-top-style: solid; */
   border-width: 1px;
   border-color: rgb(218, 218, 218);
 }
 
-input[placeholder="Search User"] {
+input[placeholder="Search"] {
   border: none;
   outline: none;
   height: 32px;
@@ -26,7 +34,6 @@ input[placeholder="Search User"] {
   font-family: 'Roboto';
   font-size: 16px;
 }
-
 .search_icon {
   padding: 7.5% 0% 8% 8%;
 }
@@ -37,8 +44,8 @@ input[placeholder="Search User"] {
 
 .member {
   height: 42px;
-  padding: 5px 42px 5px 5%;
-  margin: 5px 0px;
+  padding: 5px 30px 5px 7%;
+  margin: 5px 9px 0px 0px;
   display: flex;
   cursor: pointer;
 }
@@ -59,34 +66,35 @@ input[placeholder="Search User"] {
 
 .dot {
   position: relative;
-  top: 14px;
-  left: 6px;
+  top: 23px;
+  left: -113px;
   border: none;
   height: 9px;
   width: 9px;
   cursor: default;
   border-radius: 50%;
-  background-color: rgba(177, 177, 177, 1);
+  background-color: rgba(255, 0, 0, 1);
 }
 
 .member:hover,
 .focus {
   background-color: rgba(242, 242, 242, 1);
-  border-radius: 35px;
+  border-radius: 40px;
 }
 
 @media only screen and (max-width: 700px) {
 
   .userlist-maindiv {
-    position: relative;
-    top: 0px;
+    position: fixed;
+    top: 125px;
     left: 0px;
     width: 100%;
-    height: 75px;
+    height: 60px;
     overflow-x: auto;
     display: flex;
     padding-left: 5%;
     padding-right: 5%;
+    border: none;
   }
 
   .search {

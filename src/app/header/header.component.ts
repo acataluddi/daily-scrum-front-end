@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable,TemplateRef } from '@angular/core';
+import { Component, OnInit, Injectable, TemplateRef } from '@angular/core';
 import { Member } from '../model/member-model';
 import { Http, } from '@angular/http';
 import { AuthService } from 'angular-6-social-login';
@@ -75,7 +75,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.invalidDescription=false;
+    this.invalidDescription = false;
     this.operation = localStorage.getItem("currentOperation");
     this.showTooltip = false;
     this.show_dailyscrum = false
@@ -150,12 +150,12 @@ export class HeaderComponent implements OnInit {
 
   openModal(template: TemplateRef<any>) {
     this.feedback = this.initializeNewFeedback(this.feedback);
-    this.invalidDescription=false;
+    this.invalidDescription = false;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
-}
-decline(): void {
-  this.modalRef.hide();
-}
+  }
+  decline(): void {
+    this.modalRef.hide();
+  }
   toggle(currenturl) {
     if (currenturl == '/dashboard') {
       this.title = '';
@@ -180,6 +180,11 @@ decline(): void {
       this.show_arrow = false
       this.show_scrum = true
       this.show_dash = false
+    } else if (currenturl == '/addGoal') {
+      this.show_dailyscrum = false
+      this.show_arrow = false
+      this.show_scrum = true
+      this.title = 'New Goal'
     }
     else {
       this.dashboardService.getProjects()
@@ -230,17 +235,17 @@ decline(): void {
 
   postFeedback(userFeedback: Feedback) {
     userFeedback.feedbackDescription = userFeedback.feedbackDescription.trim();
-    if(userFeedback.feedbackDescription===''){
+    if (userFeedback.feedbackDescription === '') {
       this.invalidDescription = true;
       setTimeout(() => { document.getElementById("feedbackDesc").focus(); });
     }
-    if(this.invalidDescription==false){
+    if (this.invalidDescription == false) {
       this.feedbackService.sendFeedback(userFeedback)
         .subscribe(feedbacks => {
           console.log(feedbacks);
         });
       this.modalRef.hide();
-    }    
+    }
   }
 
   initializeNewFeedback(feedback: Feedback): Feedback {

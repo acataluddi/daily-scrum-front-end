@@ -10,6 +10,8 @@ import { AuthGuard } from './status.service';
 import { TaskPageAdminComponent } from "./task-page-admin/task-page-admin.component";
 import { UserslistComponent } from "./userslist/userslist.component"
 import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
+import { AddGoalComponent } from './add-goal/add-goal.component';
+import { GoalUserlistComponent } from './goal-userlist/goal-userlist.component';
 
 
 const routes: Routes = [
@@ -19,6 +21,8 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardHeaderComponent, canActivate: [AuthGuard] },
   { path: 'daily-status/:projectId/:name', component: DailyStatusComponent, canActivate: [AuthGuard] },
   { path: 'admin-view-all', component: AdminviewallComponent, canActivate: [AuthGuard] },
+  { path: 'addGoal', component: AddGoalComponent, canActivate: [AuthGuard] },
+  { path: 'goal', component: GoalUserlistComponent, canActivate: [AuthGuard] },
   { path: 'task-page-admin/:projectId/:name/:startdate', component: TaskPageAdminComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/dashboard' }
 ];
