@@ -538,13 +538,26 @@ export class DailyStatusComponent implements OnInit {
       var myAddDateArray = this.datachanged.addedDate.split("-")
       var myAddDate = new Date(+myAddDateArray[2], +(myAddDateArray[1]) - 1, +myAddDateArray[0])
       var myAddDateShort = this.datepipe.transform(myAddDate, "dd-MM-yyyy");
+
+      var currentnewDate = new Date()
+      var lowerlimitdate = new Date()
+      lowerlimitdate.setDate(currentnewDate.getDate()-7)
+      var upperlimitdate = currentDate;
+      var diff = upperlimitdate.getDate() - lowerlimitdate.getDate();
+    
       if (this.datachanged.isActive && currentDate >= myAddDate) {
         if (currentDateShort === myAddDateShort) {
           this.editable1 = false
           this.editable2 = true
+        } else if(diff <= 7 && diff > 0) {
+          this.editable1 = true;
+          this.editable2 = true; 
+        } else if (diff == 0) {
+          this.editable1 = false;
+          this.editable2 = true;
         } else {
-          this.editable1 = true
-          this.editable2 = true
+          this.editable1 = false;
+          this.editable2 = false;
         }
       } else {
         this.editable1 = false
@@ -810,13 +823,26 @@ export class DailyStatusComponent implements OnInit {
     var currentDate = new Date()
     var currentDateShort = this.datepipe.transform(currentDate, "dd-MM-yyyy");
     this.taskHolderName = 'My Tasks'
+
+    var lowerlimitdate = new Date()
+    lowerlimitdate.setDate(currentDate.getDate()-7)
+    var selectedDate = localStorage.getItem("selectedDate")
+    var selectedDateArray = selectedDate.split("-")
+    var upperlimitdate = new Date(+selectedDateArray[2], +(selectedDateArray[1]) - 1, +selectedDateArray[0])
+    var diff = upperlimitdate.getDate() - lowerlimitdate.getDate()
     if (member.isActive && currentDate >= myAddDate) {
       if (myAddDateShort === currentDateShort) {
         this.editable1 = false
         this.editable2 = true
-      } else {
+      } else if(diff <= 7 && diff > 0) {
         this.editable1 = true;
+        this.editable2 = true; 
+      } else if (diff == 0) {
+        this.editable1 = false;
         this.editable2 = true;
+      } else {
+        this.editable1 = false;
+        this.editable2 = false;
       }
     } else {
       this.editable1 = false
@@ -1009,9 +1035,28 @@ export class DailyStatusComponent implements OnInit {
       this.taskservice.deleteTask(element)
         .subscribe(msg => console.log(msg));
       if (value == 1) {
-        this.YesterdayTasks.splice(index, 1)
+        this.YesterdayTasks.splice(index, 1);
+        if (this.YesterdayTasks.length > 0) {
+          var task = this.YesterdayTasks[0];
+          var editTime = new Date();
+          var formateditTime = editTime.toString();
+          task.lastEdit = formateditTime;
+          this.taskservice.updateOldTask(task)
+          .subscribe(msg => console.log(msg));
+          this.getLastEdit (this.YesterdayTasks, value)
+        }
       } else {
         this.TodayTasks.splice(index, 1);
+        if (this.TodayTasks.length > 0) {
+          var task = this.TodayTasks[0];
+          var editTime = new Date();
+          var formateditTime = editTime.toString();
+          task.lastEdit = formateditTime;
+          this.taskservice.updateOldTask(task)
+          .subscribe(msg => console.log(msg));
+          console.log(task.description)
+          this.getLastEdit(this.TodayTasks, value)
+        }
       }
     });
     this.calculateTotalTime(taskArray, value)
