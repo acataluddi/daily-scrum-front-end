@@ -237,10 +237,10 @@ body{
   outline: none;
 
 }
-
+/* 
 .DailyStatusButton:hover {
   background-color: rgb(177, 177, 177,0.8);
-}
+} */
 
 .DailyStatusDiv {
   color: rgba(12, 33, 93, 1);
@@ -248,6 +248,11 @@ body{
   font-weight: 500;
   text-align: center;
   padding: 5px 5px;
+}
+
+.DailyStatusDiv:hover {
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .MenuButton {
@@ -264,9 +269,9 @@ body{
 
 }
 
-.MenuButton:hover {
+/* .MenuButton:hover {
   background-color: rgb(177, 177, 177,0.8);
-}
+} */
 
 .DropdownButton {
   position: relative;

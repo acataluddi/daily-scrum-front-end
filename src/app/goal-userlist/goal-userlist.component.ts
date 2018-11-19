@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { NavBarMember } from '../model/nav-bar-member';
 import { FeedbackService } from '../service/feedback.service';
-import {GoalService } from '../service/goal.service'
+import { GoalService } from '../service/goal.service'
 import { equal } from 'assert';
 
 @Component({
@@ -19,16 +19,16 @@ export class GoalUserlistComponent implements OnInit {
   checker: boolean = false;
   length: number;
   constructor(private feedbackService: FeedbackService,
-    private goalService:GoalService) { }
+    private goalService: GoalService) { }
 
   ngOnInit() {
     // this.initializeMemberArray(this.feedbackUserList)
-      this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {
-        this.feedbackUserList(navigationBarList)
-        console.log(navigationBarList)
-      });
-    
-    
+    this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {
+      this.feedbackUserList(navigationBarList)
+      console.log(navigationBarList)
+    });
+
+
     // this.feedbackService.getFeedBackStatusList().subscribe(data => this.initializeMemberArray(data));
   }
 
@@ -46,7 +46,7 @@ export class GoalUserlistComponent implements OnInit {
       selectedmember.hasNewUpdates = false;
     }
     this.selectMemberEvent.emit(selectedmember)
-    if(document.getElementById("search_name").classList.contains('flexed')){
+    if (document.getElementById("search_name").classList.contains('flexed')) {
       document.getElementById("userslist").classList.remove("block")
       document.getElementById("list").classList.remove("block")
       document.getElementById("list").classList.remove("shadow")
@@ -56,12 +56,12 @@ export class GoalUserlistComponent implements OnInit {
     // this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {
     //   this.feedbackUserList(navigationBarList)
     // });
-  
 
-  //   if (this.Usertype == 'Admin') {
-  //     selectedmember.hasNewUpdates = false;
-  //     this.feedbackService.updateFeedbackStatus(selectedmember.memberEmail).subscribe(data => console.log(data));
-  //   }
+
+    //   if (this.Usertype == 'Admin') {
+    //     selectedmember.hasNewUpdates = false;
+    //     this.feedbackService.updateFeedbackStatus(selectedmember.memberEmail).subscribe(data => console.log(data));
+    //   }
 
     for (let member of this.feedbackmemberArray) {
       if (document.getElementById(member.memberId) != null) {
@@ -97,10 +97,12 @@ export class GoalUserlistComponent implements OnInit {
   feedbackUserList(navigationBarList) {
     this.feedbackmemberArray = navigationBarList;
     this.length = this.feedbackmemberArray.length;
-    var mem = this.feedbackmemberArray[0]
-    mem.hasNewUpdates = false;
-    setTimeout(() => {
-      document.getElementById(mem.memberId).classList.add('focus');
-    }, 50);
+    if (this.length > 0) {
+      var mem = this.feedbackmemberArray[0]
+      mem.hasNewUpdates = false;
+      setTimeout(() => {
+        document.getElementById(mem.memberId).classList.add('focus');
+      }, 50);
+    }
   }
 }

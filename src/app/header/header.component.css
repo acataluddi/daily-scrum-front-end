@@ -124,7 +124,7 @@ img[src="../../assets/Scrum_logo.png"] {
   right: 2.5%;
   top: 43.34%;
   color: rgba(79, 86, 105, 1);
-  display: inline-block;
+  display: flex;
 }
 
 .button {
@@ -135,6 +135,7 @@ img[src="../../assets/Scrum_logo.png"] {
   color: rgba(79, 86, 105, 1);
   font-size: 1.6rem;
   cursor: pointer;
+  margin-left: 50px;
 }
 
 .usermailclass .button:hover {
@@ -190,7 +191,16 @@ img[src="../../assets/Scrum_logo.png"] {
 } */
 
 .mobile {
-  display: none;
+  display: inline;
+}
+
+.dp {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  position: relative;
+  top: -10px;
 }
 
 #projectlist {
@@ -467,6 +477,7 @@ small.error{
     border-radius: 32px;
     position: fixed;
     right: 5.5%;
+    top: auto;
   }
 
   .usermailclass {

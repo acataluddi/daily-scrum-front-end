@@ -47,7 +47,7 @@
   border-color: #555;
 }
 .add-pro-button:hover,.add-goal-button:hover {
-  background-color: rgba(0, 35, 192, 0.8);
+  background-color: #072988;
 }
 
 .goals-tab {
@@ -142,8 +142,6 @@ input[placeholder="Search"] {
   .feedback-tab {
     margin-left: 20px;
   }
-
-
 
 }
 
