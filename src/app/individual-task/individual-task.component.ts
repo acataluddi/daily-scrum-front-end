@@ -182,11 +182,15 @@ export class IndividualTaskComponent implements OnInit {
     if (this.stageDesc && this.stageTime) {
       task.hourSpent = this.old_hourspent
       task.minuteSpent = this.old_minspent
+      this.time.setHours(+this.old_hourspent)
+      this.time.setMinutes(+this.old_minspent)
       task.description = this.old_desc
       task.impediments = this.old_imped
     } else if (this.stageTime) {
       task.hourSpent = this.old_hourspent
       task.minuteSpent = this.old_minspent
+      this.time.setHours(+this.old_hourspent)
+      this.time.setMinutes(+this.old_minspent)
     } else if (this.stageDesc) {
       task.description = this.old_desc
       task.impediments = this.old_imped
@@ -195,6 +199,8 @@ export class IndividualTaskComponent implements OnInit {
       task.impediments = this.old_imped
       task.hourSpent = this.old_hourspent
       task.minuteSpent = this.old_minspent
+      this.time.setHours(+this.old_hourspent)
+      this.time.setMinutes(+this.old_minspent)
     }
     if (task.impediments != '') {
       this.show_impediment = true
@@ -204,6 +210,8 @@ export class IndividualTaskComponent implements OnInit {
 
   focus(value) {
     if (value == 1) {
+      // var tag = document.getElementsByClassName('bs-timepicker-field') 
+      // console.log(tag, tag.item(0))
       setTimeout(() => { document.getElementById('timeSpent' + this.task.taskId).focus() });  
     } else if (value == 2){
       setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });

@@ -41,9 +41,6 @@
         <div class="description" *ngIf="!showSign2">
           <textarea autofocus id="goalDescriptionInput" class="goalDescription" autosize rows="1" [maxRows]="5" placeholder="Add description" [(ngModel)]="goal.goalDescription" (click)="invalidGoalDescription=false;" (blur)="isValidGoalDescription(goal.goalDescription);"></textarea>
         </div>
-        <small *ngIf="invalidGoalDescription"  class="error">
-          Please enter goal description
-        </small>
       </div>
       <ng-container>
         <div class="addcancelclass">

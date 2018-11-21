@@ -361,7 +361,7 @@ img.right-arrow:active {
 
 .vertical {
   border-left: 3px solid #eee;
-  height: 500px;
+  height: calc(100% - 250px);
   position: absolute;
   right: 51.5%;
 }
@@ -913,4 +913,20 @@ input[value="Cancel"]:active {
     padding-left: 4px;
   }
 
+}
+
+@media screen and (min-height: 1000px) {
+  .main-part {
+    padding-bottom: 50px;
+  }
+
+  .vertical {
+    height: calc(100% - 290px);
+  }
+}
+
+@media screen and (min-height: 700px) {
+  .vertical {
+    height: calc(100% - 290px);
+  }
 }

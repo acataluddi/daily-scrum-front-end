@@ -451,7 +451,6 @@ export class DailyStatusComponent implements OnInit {
         this.creatednewyesterday = false;
         setTimeout(() => { document.getElementById('description' + ts.taskId).focus() });
       }
-
     }
   }
 
@@ -767,14 +766,15 @@ export class DailyStatusComponent implements OnInit {
     if (task.description == null || task.description == '') {
       var index = taskArray.indexOf(task);
       taskArray.splice(index, 1);
-      this.oldyesterdaytask.description = undefined;
-      this.oldtodaytask.description = undefined;
-      // taskArray.pop();
+      // this.oldyesterdaytask.description = undefined;
+      // this.oldtodaytask.description = undefined;
     }
     if (taskArray == this.MockTodayTasks) {
-      this.creatednewtoday = false
+      this.creatednewtoday = false;
+      this.oldtodaytask.description = undefined;
     } else {
-      this.creatednewyesterday = false
+      this.creatednewyesterday = false;
+      this.oldyesterdaytask.description = undefined;
     }
   }
 
