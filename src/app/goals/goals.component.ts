@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { GoalService } from "../service/goal.service";
 import { Goal, Comment, GoalMember } from "../model/goal-model";
 import { NavBarMember } from '../model/nav-bar-member';
+import { GoalUserlistComponent } from "../goal-userlist/goal-userlist.component";
 
 @Component({
   selector: 'app-goals',
@@ -19,9 +20,11 @@ export class GoalsComponent implements OnInit {
   length: number;
   firstMemberEmail: string;
   navbarList: NavBarMember[];
-  navigationMemberLength :number;
+  navigationMemberLength: number;
   noOfComments = [];
   expand = [];
+  @ViewChild('goalUserList') goalUserList: GoalUserlistComponent;
+
   constructor(
     private goalService: GoalService
   ) { }
@@ -126,8 +129,8 @@ export class GoalsComponent implements OnInit {
 
   selectMember(member: NavBarMember) {
     this.goalService.getGoalMember('getGoalMember', member.memberEmail).subscribe(goalMember => {
-     
-    
+
+
       if (goalMember != null) {
         this.length = goalMember.goals.length;
         this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
@@ -145,10 +148,15 @@ export class GoalsComponent implements OnInit {
   }
 
   getStyle() {
-    if (this.navigationMemberLength==0) {
+    if (this.navigationMemberLength == 0) {
       return "100%";
-    }else {
+    } else {
       return "calc(100% - 191px)";
     }
+  }
+
+  updateAfterNewGoal() {
+    this.goalUserList.fetchMembersList();
+    this.fetchNavigationBarList();
   }
 }

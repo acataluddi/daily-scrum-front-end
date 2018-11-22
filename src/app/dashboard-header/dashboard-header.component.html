@@ -9,7 +9,7 @@
     <img class="plus-sign" src="../../assets/add_project_button.png">
     <div class="add-project-div">Add Project</div>
   </button>
-  
+
   <div class="mob-view-project" *ngIf="activetab==1 && flag2 === true" (click)="AddProject()">
     <span class="glyphicon glyphicon-plus"></span>
   </div>
@@ -28,8 +28,20 @@
   <app-adminviewall></app-adminviewall>
 </div>
 <div *ngIf="activetab==3">
-  <app-goals></app-goals>
+  <app-goals #goalsPage></app-goals>
 </div>
 <div *ngIf="activetab==4">
   <app-feedback></app-feedback>
+</div>
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <app-add-goal #addNewGoal (cancelEvent)="closeModal()" (goalAddedEvent)="updatePage()"></app-add-goal>
+  </div>
+
 </div>

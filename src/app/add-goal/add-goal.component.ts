@@ -1,12 +1,10 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { AuthService } from 'angular-6-social-login';
 import { LoginService } from "../service/login.service";
 import { GoalService } from "../service/goal.service";
 import { Goal } from '../model/goal-model'
 import { NavBarMember } from '../model/nav-bar-member'
 import { Router } from '@angular/router';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   selector: 'app-add-goal',
@@ -15,7 +13,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 })
 export class AddGoalComponent implements OnInit {
 
-  modalRef: BsModalRef;
   goal: Goal;
   showPage: boolean;
   image: string;
@@ -29,16 +26,31 @@ export class AddGoalComponent implements OnInit {
   invalidGoalTitle: boolean;
   invalidGoalMember: boolean;
   invalidGoalDescription: boolean;
+  @Output() goalAddedEvent = new EventEmitter();
+  @Output() cancelEvent = new EventEmitter();
 
   constructor(
     public router: Router,
     private socialAuthService: AuthService,
     private loginservice: LoginService,
-    private modalService: BsModalService,
     private goalService: GoalService) { }
 
   ngOnInit() {
     this.showPage = false;
+    this.searchText = '';
+    this.goal = this.initializeNewGoal(this.goal);
+    this.invalidGoalTitle = false;
+    this.invalidGoalMember = false;
+    this.invalidGoalDescription = false
+    this.showSign1 = true;
+    this.showSign2 = true;
+    this.dropDown = false;
+    this.hide = false;
+  }
+
+  refreshData() {
+    this.showPage = false;
+    this.searchText = '';
     this.goal = this.initializeNewGoal(this.goal);
     this.invalidGoalTitle = false;
     this.invalidGoalMember = false;
@@ -66,7 +78,7 @@ export class AddGoalComponent implements OnInit {
   }
   show2() {
     this.showSign2 = !this.showSign2;
-    this.invalidGoalDescription=false;
+    this.invalidGoalDescription = false;
     setTimeout(() => { document.getElementById('goalDescriptionInput').focus() });
   }
   list() {
@@ -160,9 +172,10 @@ export class AddGoalComponent implements OnInit {
     if (!hasError) {
       this.goalService.addGoal(goal).subscribe(addedGoal => {
         if (addedGoal.goalId != '' && addedGoal.goalId != undefined && addedGoal.goalId != null) {
-          console.log(addedGoal);
+          console.log('Goal added successfully');
           this.goal = this.initializeNewGoal(this.goal);
-          this.router.navigate(['/dashboard']);
+          // this.router.navigate(['/dashboard']);
+          this.goalAddedEvent.emit();
         }
       });
     }
@@ -170,8 +183,8 @@ export class AddGoalComponent implements OnInit {
 
   cancelCreation() {
     this.goal = this.initializeNewGoal(this.goal);
-    this.modalRef.hide();
-    this.router.navigate(['/dashboard']);
+    this.cancelEvent.emit();
+    this.searchText = '';
   }
 
   isValidGoalName(goalName) {
@@ -184,14 +197,6 @@ export class AddGoalComponent implements OnInit {
     if (description.trim() == '') {
       this.invalidGoalDescription = true;
     }
-  }
-
-  openModal(template: TemplateRef<any>) {
-      this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
-  }
-
-  decline(): void {
-      this.modalRef.hide();
   }
 
 }
