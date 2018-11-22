@@ -1,8 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NavBarMember } from '../model/nav-bar-member';
-import { FeedbackService } from '../service/feedback.service';
 import { GoalService } from '../service/goal.service'
-import { equal } from 'assert';
 
 @Component({
   selector: 'app-goal-userlist',
@@ -17,16 +15,17 @@ export class GoalUserlistComponent implements OnInit {
   Usertype = localStorage.getItem('userType');
   checker: boolean = false;
   length: number;
-  constructor(private feedbackService: FeedbackService,
+  constructor(
     private goalService: GoalService) { }
 
   ngOnInit() {
-   this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {
-      this.feedbackUserList(navigationBarList)
-      console.log(navigationBarList)
+    this.fetchMembersList();
+  }
+
+  fetchMembersList() {
+    this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {
+      this.feedbackUserList(navigationBarList);
     });
-
-
   }
 
 

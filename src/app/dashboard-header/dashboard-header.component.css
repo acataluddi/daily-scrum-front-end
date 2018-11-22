@@ -1,3 +1,80 @@
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 50;
+  /* Sit on top */
+  padding-top: 100px !important;
+  /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0
+  }
+
+  to {
+    top: 0;
+    opacity: 1
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0
+  }
+
+  to {
+    top: 0;
+    opacity: 1
+  }
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .add-project-div {
   text-align: left;
   margin: 4%;
@@ -31,6 +108,7 @@
   font-weight: 600;
   border-color: #555;
 }
+
 .add-goal-button {
   position: absolute;
   right: 250px;
@@ -46,7 +124,9 @@
   font-weight: 600;
   border-color: #555;
 }
-.add-pro-button:hover,.add-goal-button:hover {
+
+.add-pro-button:hover,
+.add-goal-button:hover {
   background-color: #072988;
 }
 
@@ -106,8 +186,9 @@
   display: flex;
   width: 75%;
 }
-.plus-sign{
-  padding:6%;
+
+.plus-sign {
+  padding: 6%;
 }
 
 .search {
@@ -146,6 +227,11 @@ input[placeholder="Search"] {
 }
 
 @media only screen and (max-width: 700px) {
+
+  .modal-content {
+    width: 80%;
+  }
+
   .add-goal-button,
   .add-pro-button {
     visibility: hidden;
