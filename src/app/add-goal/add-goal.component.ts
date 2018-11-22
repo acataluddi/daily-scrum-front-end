@@ -25,7 +25,6 @@ export class AddGoalComponent implements OnInit {
   hide: boolean;
   invalidGoalTitle: boolean;
   invalidGoalMember: boolean;
-  invalidGoalDescription: boolean;
   @Output() goalAddedEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
 
@@ -41,7 +40,6 @@ export class AddGoalComponent implements OnInit {
     this.goal = this.initializeNewGoal(this.goal);
     this.invalidGoalTitle = false;
     this.invalidGoalMember = false;
-    this.invalidGoalDescription = false
     this.showSign1 = true;
     this.showSign2 = true;
     this.dropDown = false;
@@ -54,7 +52,6 @@ export class AddGoalComponent implements OnInit {
     this.goal = this.initializeNewGoal(this.goal);
     this.invalidGoalTitle = false;
     this.invalidGoalMember = false;
-    this.invalidGoalDescription = false
     this.socialAuthService.authState.subscribe((user) => {
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
@@ -78,7 +75,6 @@ export class AddGoalComponent implements OnInit {
   }
   show2() {
     this.showSign2 = !this.showSign2;
-    this.invalidGoalDescription = false;
     setTimeout(() => { document.getElementById('goalDescriptionInput').focus() });
   }
   list() {
@@ -118,7 +114,6 @@ export class AddGoalComponent implements OnInit {
   }
 
   createNewGoal(goal: Goal) {
-    this.invalidGoalDescription = false;
     this.invalidGoalMember = false;
     this.invalidGoalTitle = false;
     var hasError = false;
@@ -134,10 +129,6 @@ export class AddGoalComponent implements OnInit {
       hasError = true;
       this.invalidGoalTitle = true;
     }
-    if (goal.goalDescription.trim() === '' || goal.goalDescription === null) {
-      hasError = true;
-      this.invalidGoalDescription = true;
-    }
     if (this.invalidGoalMember) {
       var elmnt = document.getElementById("teamMember");
       elmnt.scrollIntoView(false);
@@ -152,29 +143,12 @@ export class AddGoalComponent implements OnInit {
       setTimeout(function () {
         document.getElementById("goalName").classList.remove('high-light-element');
       }, 280);
-    } else if (this.invalidGoalDescription) {
-      var elmnt = document.getElementById("goalDescriptionLabel");
-      if (elmnt !== null) {
-        elmnt.scrollIntoView(false);
-        document.getElementById("goalDescriptionLabel").classList.add('high-light-element');
-        setTimeout(function () {
-          document.getElementById("goalDescriptionLabel").classList.remove('high-light-element');
-        }, 280);
-      } else {
-        elmnt = document.getElementById("goalDescriptionInput");
-        elmnt.scrollIntoView(false);
-        document.getElementById("goalDescriptionInput").classList.add('high-light-element');
-        setTimeout(function () {
-          document.getElementById("goalDescriptionInput").classList.remove('high-light-element');
-        }, 280);
-      }
-    }
+    } 
     if (!hasError) {
       this.goalService.addGoal(goal).subscribe(addedGoal => {
         if (addedGoal.goalId != '' && addedGoal.goalId != undefined && addedGoal.goalId != null) {
           console.log('Goal added successfully');
           this.goal = this.initializeNewGoal(this.goal);
-          // this.router.navigate(['/dashboard']);
           this.goalAddedEvent.emit();
         }
       });
@@ -190,12 +164,6 @@ export class AddGoalComponent implements OnInit {
   isValidGoalName(goalName) {
     if (goalName.trim() == '') {
       this.invalidGoalTitle = true;
-    }
-  }
-
-  isValidGoalDescription(description) {
-    if (description.trim() == '') {
-      this.invalidGoalDescription = true;
     }
   }
 

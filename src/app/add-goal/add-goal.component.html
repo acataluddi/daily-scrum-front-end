@@ -5,7 +5,7 @@
         <div class="goal">New Goal</div>
         <div class="member_title1" *ngIf="showSign1 && !hide" (keyup)="dropDown=true">
           <img src='../../assets/add_goal.png'>
-          <textarea id="teamMember" autofocus type="text" class="email-input" placeholder="Select Team Member"
+          <textarea id="teamMember" autofocus type="text" class="email-input" placeholder="Select Assignee"
             [(ngModel)]="searchText" (click)="dropDown=false; invalidGoalMember=false;"></textarea>
         </div>
         <div class="member_title1" *ngIf="hide">
@@ -30,7 +30,7 @@
             </div>
           </div>
         </div>
-        <textarea id="goalName" class="goal-name" autosize rows="1" [maxRows]="3" placeholder="New Goal Name"
+        <textarea id="goalName" class="goal-name" autosize rows="1" [maxRows]="3" placeholder="Title"
           [(ngModel)]="goal.goalTitle" (click)="invalidGoalTitle=false;" (blur)="isValidGoalName(goal.goalTitle)"></textarea>
         <small *ngIf="invalidGoalTitle" class="error">
           Please enter goal name
@@ -41,8 +41,7 @@
         </div>
         <div class="description" *ngIf="!showSign2">
           <textarea autofocus id="goalDescriptionInput" class="goalDescription" autosize rows="1" [maxRows]="5"
-            placeholder="Add description" [(ngModel)]="goal.goalDescription" (click)="invalidGoalDescription=false;"
-            (blur)="isValidGoalDescription(goal.goalDescription);"></textarea>
+            placeholder="Add description" [(ngModel)]="goal.goalDescription"></textarea>
         </div>
       </div>
       <ng-container>
