@@ -1,7 +1,6 @@
 <div class="maindiv">
   <div class="right-part" *ngIf="length>0">
     <div class="header">
-      <!-- Header -->
       <div>
         <img class="member-image" src="{{selectedGoalMember.userImage}}">
       </div>
@@ -12,13 +11,10 @@
     <div class="goals" *ngFor="let goal of selectedGoalMember.goals;let i=index">
       <div class="time">
         <div class="goalLabel">Goal {{length-i}}</div>
-        <!-- <div class="last-update">Created {{goal.goalTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div> -->
-        <div class="last-update">Created by {{goal.managerName}} on {{goal.goalTime | date:'EEE, dd MMM yyyy, hh:mm
-          aaa'}}</div>
+        <div class="last-update">Created on {{goal.goalTime | date:'dd MMM yyyy'}}</div>
       </div>
       <div>
         <div class="goalTitle">{{goal.goalTitle}}</div>
-        <!-- <div class="created-on">Created: {{goal.goalTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div> -->
         <div class="goalDescription">{{goal.goalDescription}}</div>
         <div class="comment-num" *ngIf="goal.comments.length-1 > 0" (click)="expand[i]=!expand[i]">{{goal.comments.length-1}}
           Comments
@@ -29,7 +25,6 @@
             <img src="../../assets/expand-arrow.svg">
           </div>
         </div>
-        <!-- <div *ngIf="expand[i]"> -->
         <div class="comment" *ngFor="let comment of goal.comments">
           <div *ngIf="comment.commentId!=''&& expand[i]" class="non-empty-comment">
             <div>
