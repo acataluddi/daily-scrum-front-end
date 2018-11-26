@@ -73,14 +73,16 @@ export class GoalsComponent implements OnInit {
   }
 
   initializeGoalsWithComment(selectedMember: GoalMember): GoalMember {
-    for (let goal of selectedMember.goals) {
-      var comment = new Comment();
-      comment = this.initializeNewComment(comment, goal);
-      if (goal.comments !== null) {
-        goal.comments.push(comment);
-      } else if (goal.comments === null) {
-        var commentsArray: Comment[] = [comment];
-        goal.comments = commentsArray;
+    if (selectedMember.goals != null) {
+      for (let goal of selectedMember.goals) {
+        var comment = new Comment();
+        comment = this.initializeNewComment(comment, goal);
+        if (goal.comments !== null) {
+          goal.comments.push(comment);
+        } else if (goal.comments === null) {
+          var commentsArray: Comment[] = [comment];
+          goal.comments = commentsArray;
+        }
       }
     }
     return selectedMember;
@@ -129,10 +131,12 @@ export class GoalsComponent implements OnInit {
 
   selectMember(member: NavBarMember) {
     this.goalService.getGoalMember('getGoalMember', member.memberEmail).subscribe(goalMember => {
-
-
       if (goalMember != null) {
-        this.length = goalMember.goals.length;
+        if (goalMember.goals != null) {
+          this.length = goalMember.goals.length;
+        } else {
+          this.length = 0;
+        }
         this.selectedGoalMember = this.initializeGoalsWithComment(goalMember);
         for (let i = 0; i < this.length; i++) {
           if (i == 0) {
