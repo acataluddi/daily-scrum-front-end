@@ -3,10 +3,10 @@
     <div class="mainclass">
       <div class="subclasszero">
         <div class="goal">New Goal</div>
-        <div class="member_title1" *ngIf="showSign1 && !hide" (keyup)="dropDown=true">
-          <img src='../../assets/add_goal.png'>
+        <div class="member_title1" *ngIf="showSign1 && !hide"  (click)="hide=false;list()" (keyup)="dropDown=true">
+          <img src='../../assets/add_goal.png' >
           <textarea id="teamMember" autofocus type="text" class="email-input" placeholder="Select Assignee"
-            [(ngModel)]="searchText" (click)="dropDown=false; invalidGoalMember=false;"></textarea>
+            [(ngModel)]="searchText" (click)="invalidGoalMember=false;"></textarea>
         </div>
         <div class="member_title1" *ngIf="hide">
           <img class="memberImage" src='{{image}}'>
