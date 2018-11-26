@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 export class AddGoalComponent implements OnInit {
 
   goal: Goal;
-  showPage: boolean;
   image: string;
   name: string;
   showSign1: boolean;
@@ -35,7 +34,6 @@ export class AddGoalComponent implements OnInit {
     private goalService: GoalService) { }
 
   ngOnInit() {
-    this.showPage = false;
     this.searchText = '';
     this.goal = this.initializeNewGoal(this.goal);
     this.invalidGoalTitle = false;
@@ -47,22 +45,15 @@ export class AddGoalComponent implements OnInit {
   }
 
   refreshData() {
-    this.showPage = false;
     this.searchText = '';
     this.goal = this.initializeNewGoal(this.goal);
     this.invalidGoalTitle = false;
     this.invalidGoalMember = false;
     this.socialAuthService.authState.subscribe((user) => {
       if (user != null) {
-        this.loginservice.loginMember(user.idToken)
-          .subscribe(msg => {
-            if (msg.userType === "Manager") {
-              this.showPage = true;
-              this.goalService.getNavigationBarList("getStatusList").subscribe(data => {
-                this.setProjects(data)
-              });
-            }
-          });
+        this.goalService.getNavigationBarList("getStatusList").subscribe(data => {
+          this.setProjects(data)
+        });
       }
     });
     this.showSign1 = true;
@@ -143,7 +134,7 @@ export class AddGoalComponent implements OnInit {
       setTimeout(function () {
         document.getElementById("goalName").classList.remove('high-light-element');
       }, 280);
-    } 
+    }
     if (!hasError) {
       this.goalService.addGoal(goal).subscribe(addedGoal => {
         if (addedGoal.goalId != '' && addedGoal.goalId != undefined && addedGoal.goalId != null) {
