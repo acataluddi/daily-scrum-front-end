@@ -7,6 +7,7 @@ export class Member {
     imageurl: string;
     idToken: string;
 }
+
 export class Employee {
-    companyEmail:string;
+    companyEmail: string;
 }

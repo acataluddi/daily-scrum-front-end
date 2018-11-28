@@ -16,7 +16,6 @@
 .inner {
   display: table-cell;
   vertical-align: middle;
-
 }
 
 .login-page {
@@ -25,7 +24,6 @@
   width: 750px;
   height: 480px;
   background-color: rgba(255, 255, 255, 1);
-
 }
 
 .first-class {
@@ -55,7 +53,6 @@
   width: 57%;
   height: 100%;
   float: left;
-
 }
 
 .logo {
@@ -66,20 +63,17 @@
   background-repeat: no-repeat;
   background-size: cover;
   float: left;
-
 }
 
 .description {
   margin-top: 80px;
   margin-left: 40px;
   width: 100%;
-
   font-size: 16px;
   color: rgba(79, 86, 105, 1);
 }
 
 .signin {
-
   margin-top: 22px;
   margin-left: 40px;
   width: 190px;
@@ -94,8 +88,6 @@
   height: 100%;
   background-size: 100%;
   background-repeat: no-repeat;
-
-
 }
 
 .Google:hover {

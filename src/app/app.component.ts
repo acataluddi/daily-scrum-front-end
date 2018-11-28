@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {
     if (localStorage.getItem("timerCounting") === 'yes') {
       var dr = new Date();
