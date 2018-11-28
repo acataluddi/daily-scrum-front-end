@@ -188,6 +188,18 @@ input[value="Add Goal"]:active {
   cursor: pointer;
 }
 
+.dot {
+  position: relative;
+  top: 9px;
+  left: 5px;
+  border: none;
+  height: 9px;
+  width: 9px;
+  cursor: default;
+  border-radius: 50%;
+  background-color: rgba(255, 0, 0, 1);
+}
+
 .main-div {
   height: 65px;
   width: 100%;

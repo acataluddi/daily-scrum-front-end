@@ -5,6 +5,7 @@ import { ProjectService } from '../service/project.service';
 import { Router } from '@angular/router';
 import { GoalsComponent } from "../goals/goals.component";
 import { AddGoalComponent } from "../add-goal/add-goal.component";
+import { GoalService } from '../service/goal.service';
 
 @Component({
   selector: 'app-dashboard-header',
@@ -17,16 +18,19 @@ export class DashboardHeaderComponent implements OnInit {
   flag1;
   flag2;
   operation: string;
+  hasUpdates: boolean = false;
   @ViewChild('goalsPage') goalsPage: GoalsComponent;
   @ViewChild('addNewGoal') addNewGoal: AddGoalComponent;
 
   constructor(private socialAuthService: AuthService,
+    private goalService: GoalService,
     private loginservice: LoginService,
     private projectService: ProjectService,
     public router: Router) { }
 
   ngOnInit() {
     this.activetab = 1;
+    this.notifyUser();
     document.getElementById("projects-tab").classList.add('tab-active');
     this.socialAuthService.authState.subscribe((user) => {
       if (user != null) {
@@ -144,5 +148,17 @@ export class DashboardHeaderComponent implements OnInit {
         }
         break;
     }
+  }
+
+  notifyUser() {
+    this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {
+      navigationBarList.forEach(member => {
+        if (member.hasNewUpdates) {
+          this.hasUpdates = true;
+        }
+      });
+      this.hasUpdates = false;
+    });
+    console.log(this.hasUpdates)
   }
 }

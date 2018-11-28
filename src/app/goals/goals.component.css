@@ -80,7 +80,8 @@
   font-weight: 600;
   color: rgba(27, 47, 103, 1);
   text-align: left;
-  line-height: 24px
+  line-height: 24px;
+  word-break: break-all;
 }
 
 .created-on {
@@ -252,5 +253,7 @@
     display: flex;
   }
 
-
+  .no-goals {
+    width: 100% !important;
+  }
 }
