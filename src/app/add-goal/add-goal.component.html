@@ -1,7 +1,6 @@
 <div class=body1>
   <div class="mainclass">
     <div class="subclasszero">
-      <div class="goal">New Goal</div>
       <div class="member_title1" *ngIf="showSign1 && !hide"  (click)="hide=false;list()" (keyup)="dropDown=true">
         <img src='../../assets/add_goal.png' >
         <textarea id="teamMember" autofocus type="text" class="email-input" placeholder="Select Assignee"
@@ -43,11 +42,5 @@
           placeholder="Add description" [(ngModel)]="goal.goalDescription"></textarea>
       </div>
     </div>
-    <ng-container>
-      <div class="addcancelclass">
-        <input type="button" value="Cancel" (click)="cancelCreation()">
-        <input type="button" value="Add Goal" (click)="createNewGoal(goal)">
-      </div>
-    </ng-container>
   </div>
 </div>

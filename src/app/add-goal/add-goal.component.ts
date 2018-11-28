@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { AuthService } from 'angular-6-social-login';
-import { LoginService } from "../service/login.service";
 import { GoalService } from "../service/goal.service";
 import { Goal } from '../model/goal-model'
 import { NavBarMember } from '../model/nav-bar-member'
@@ -25,12 +24,10 @@ export class AddGoalComponent implements OnInit {
   invalidGoalTitle: boolean;
   invalidGoalMember: boolean;
   @Output() goalAddedEvent = new EventEmitter();
-  @Output() cancelEvent = new EventEmitter();
 
   constructor(
     public router: Router,
     private socialAuthService: AuthService,
-    private loginservice: LoginService,
     private goalService: GoalService) { }
 
   ngOnInit() {
@@ -52,7 +49,7 @@ export class AddGoalComponent implements OnInit {
     this.socialAuthService.authState.subscribe((user) => {
       if (user != null) {
         this.goalService.getNavigationBarList("getStatusList").subscribe(data => {
-          this.setProjects(data)
+          this.setMembers(data)
         });
       }
     });
@@ -61,19 +58,24 @@ export class AddGoalComponent implements OnInit {
     this.dropDown = false;
     this.hide = false;
   }
+
   show1() {
     this.showSign1 = !this.showSign1;
   }
+
   show2() {
     this.showSign2 = !this.showSign2;
     setTimeout(() => { document.getElementById('goalDescriptionInput').focus() });
   }
+
   list() {
     this.dropDown = !this.dropDown;
   }
-  setProjects(members) {
+
+  setMembers(members) {
     this.members = members;
   }
+
   selectMember(member: NavBarMember) {
     if (member.memberName !== null) {
       this.name = member.memberName;
@@ -83,6 +85,7 @@ export class AddGoalComponent implements OnInit {
       this.goal.userEmail = member.memberEmail;
     }
   }
+  
   visible() {
     this.hide = true;
   }
@@ -104,19 +107,17 @@ export class AddGoalComponent implements OnInit {
     return newGoal;
   }
 
-  createNewGoal(goal: Goal) {
+  createNewGoal() {
     this.invalidGoalMember = false;
     this.invalidGoalTitle = false;
     var hasError = false;
     this.goal.goalTitle = this.goal.goalTitle.trim();
     this.goal.goalDescription = this.goal.goalDescription.trim();
-    goal.goalTitle = this.goal.goalTitle;
-    goal.goalDescription = this.goal.goalDescription;
-    if (goal.userEmail.trim() === '' || goal.userEmail === null) {
+    if (this.goal.userEmail.trim() === '' || this.goal.userEmail === null) {
       hasError = true;
       this.invalidGoalMember = true;
     }
-    if (goal.goalTitle.trim() === '' || goal.goalTitle === null) {
+    if (this.goal.goalTitle.trim() === '' || this.goal.goalTitle === null) {
       hasError = true;
       this.invalidGoalTitle = true;
     }
@@ -136,7 +137,7 @@ export class AddGoalComponent implements OnInit {
       }, 280);
     }
     if (!hasError) {
-      this.goalService.addGoal(goal).subscribe(addedGoal => {
+      this.goalService.addGoal(this.goal).subscribe(addedGoal => {
         if (addedGoal.goalId != '' && addedGoal.goalId != undefined && addedGoal.goalId != null) {
           console.log('Goal added successfully');
           this.goal = this.initializeNewGoal(this.goal);
@@ -144,12 +145,6 @@ export class AddGoalComponent implements OnInit {
         }
       });
     }
-  }
-
-  cancelCreation() {
-    this.goal = this.initializeNewGoal(this.goal);
-    this.cancelEvent.emit();
-    this.searchText = '';
   }
 
   isValidGoalName(goalName) {
