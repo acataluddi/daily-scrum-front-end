@@ -1,5 +1,4 @@
 .userlist-maindiv {
-  /* margin-top:50px; */
   background: #ffffff;
   position: fixed;
   top: 60px;
@@ -9,18 +8,15 @@
   width: 215px;
   height: 100%;
   float: right;
-  border-left:solid 1px rgb(218, 218, 218);
+  border-left: solid 1px rgb(218, 218, 218);
   border-color: rgb(218, 218, 218);
   border-width: 1px;
 }
-/* .userlist-maindiv:hover {
-  width:250px;
-} */
+
 .search {
   display: flex;
   height: 60px;
   border-bottom-style: solid;
-  /* border-top-style: solid; */
   border-width: 1px;
   border-color: rgb(218, 218, 218);
 }
@@ -34,6 +30,7 @@ input[placeholder="Search"] {
   font-family: 'Roboto';
   font-size: 16px;
 }
+
 .search_icon {
   padding: 7.5% 0% 8% 8%;
 }
@@ -79,7 +76,6 @@ input[placeholder="Search"] {
 .member:hover,
 .focus {
   background-color: rgba(242, 242, 242, 1);
-  /* border-radius: 40px; */
 }
 
 @media only screen and (max-width: 700px) {

@@ -75,7 +75,6 @@ img {
 }
 
 .mainclass {
-
   margin: 0 auto;
   padding-top: 10%;
 }
@@ -259,5 +258,4 @@ input[value="Add Goal"]:active {
   color: grey;
   margin-top: -5px;
   padding: 3px 0px 3px 10px;
-
 }

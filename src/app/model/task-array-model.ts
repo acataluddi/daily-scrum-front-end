@@ -1,6 +1,7 @@
 export class TaskArray {
     taskArray: taskarray;
 }
+
 class taskarray {
     memberEmail: string;
     taskId: string;

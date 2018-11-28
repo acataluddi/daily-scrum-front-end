@@ -13,9 +13,7 @@ export class FeedbackComponent implements OnInit {
   individualfeedback: Feedback;
   length: number;
   date = new Date();
-
   constructor(private feedbackService: FeedbackService) { }
-
   ngOnInit() {
     this.length = 2;
     this.fetchFeedback();

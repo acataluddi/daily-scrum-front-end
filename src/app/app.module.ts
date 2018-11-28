@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
-
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,12 +22,12 @@ import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TaskPageAdminComponent } from './task-page-admin/task-page-admin.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule, Response, Headers } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { HeaderComponent } from './header/header.component';
 import { UserslistComponent } from './userslist/userslist.component';
 import { FilterPipe } from './filter.pipe';
 import { NavigationdataService } from './service/navigationdata.service'
-import {AutosizeModule} from 'ngx-autosize';
+import { AutosizeModule } from 'ngx-autosize';
 import { FilterEmail } from './filterEmail.pipe';
 import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
 import { GoalsComponent } from './goals/goals.component';
@@ -51,7 +50,6 @@ export function getAuthServiceConfigs() {
   );
   return config;
 }
-
 
 @NgModule({
   declarations: [
