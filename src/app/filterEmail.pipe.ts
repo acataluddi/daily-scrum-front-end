@@ -6,7 +6,7 @@ import { Employee } from './model/member-model';
 })
 export class FilterEmail implements PipeTransform {
   transform(items: Employee[], searchText: string): any[] {
-
+      
     if (!items) return [];
     if (!searchText) return items;
     return items.filter(it => {

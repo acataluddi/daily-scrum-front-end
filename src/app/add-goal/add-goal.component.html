@@ -1,10 +1,10 @@
 <div class=body1>
   <div class="mainclass">
     <div class="subclasszero">
-      <div class="member_title1" *ngIf="showSign1 && !hide" (click)="hide=false;list()" (keyup)="dropDown=true">
-        <img src='../../assets/add_goal.png'>
-        <textarea id="teamMember" autofocus type="text" class="email-input" placeholder="Select Assignee" [(ngModel)]="searchText"
-          (click)="invalidGoalMember=false;"></textarea>
+      <div class="member_title1" *ngIf="showSign1 && !hide"  (click)="hide=false;list()" (keyup)="dropDown=true">
+        <img src='../../assets/add_goal.png' >
+        <textarea id="teamMember" autofocus type="text" class="email-input" placeholder="Select Assignee"
+          [(ngModel)]="searchText" (click)="invalidGoalMember=false;"></textarea>
       </div>
       <div class="member_title1" *ngIf="hide">
         <img class="memberImage" src='{{image}}'>
@@ -28,8 +28,8 @@
           </div>
         </div>
       </div>
-      <textarea id="goalName" class="goal-name" autosize rows="1" [maxRows]="3" placeholder="Title" [(ngModel)]="goal.goalTitle"
-        (click)="invalidGoalTitle=false;" (blur)="isValidGoalName(goal.goalTitle)"></textarea>
+      <textarea id="goalName" class="goal-name" autosize rows="1" [maxRows]="3" placeholder="Title"
+        [(ngModel)]="goal.goalTitle" (click)="invalidGoalTitle=false;" (blur)="isValidGoalName(goal.goalTitle)"></textarea>
       <small *ngIf="invalidGoalTitle" class="error">
         Please enter goal name
       </small>

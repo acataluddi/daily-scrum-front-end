@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Task } from "../model/task-model";
 import { Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-individual-task',
@@ -16,6 +17,7 @@ export class IndividualTaskComponent implements OnInit {
   @Output() timeChangeEvent = new EventEmitter<Task>();
   @Output() selectedTask = new EventEmitter<Task>();
   @Output() unselectedTask = new EventEmitter<Task>();
+  // @Output() deleteTask = new EventEmitter<Task>();
   @Output() popTask = new EventEmitter<Task>();
   @ViewChild('des') des: ElementRef;
   @ViewChild('imp') imp: ElementRef;
@@ -24,11 +26,15 @@ export class IndividualTaskComponent implements OnInit {
   edit_time_spent;
   saved;
   show_save;
+
   buttonText;
+
   noDesc = false;
   noTime = false;
+
   time: Date = new Date();
   maxtime: Date = new Date();
+
   timeArray = Array;
   hours;
   minutes;
@@ -40,10 +46,12 @@ export class IndividualTaskComponent implements OnInit {
   old_minspent = '';
   stageDesc = false;
   stageTime = false;
+
   check = false;
+
   eventsSubscription: any;
   copiedSubscription: any;
-  constructor() {
+  constructor() { 
     this.maxtime.setHours(17);
     this.maxtime.setMinutes(0);
   }
@@ -71,7 +79,9 @@ export class IndividualTaskComponent implements OnInit {
       this.show_save = false;
       this.saved = false;
     }
+
     this.check = false
+
     this.tid = parseInt(this.task.taskId);
     if (this.task.impediments === "") {
       this.show_impediment = false;
@@ -116,6 +126,7 @@ export class IndividualTaskComponent implements OnInit {
       this.noTime = true;
     }
     else {
+      // this.addUpdateTask.emit(task);
       this.timeChangeEvent.emit(task);
       this.saved = true;
       this.noDesc = false;
@@ -199,10 +210,13 @@ export class IndividualTaskComponent implements OnInit {
 
   focus(value) {
     if (value == 1) {
-      setTimeout(() => { document.getElementById('timeSpent' + this.task.taskId).focus() });
-    } else if (value == 2) {
+      // var tag = document.getElementsByClassName('bs-timepicker-field') 
+      // console.log(tag, tag.item(0))
+      setTimeout(() => { document.getElementById('timeSpent' + this.task.taskId).focus() });  
+    } else if (value == 2){
       setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });
     }
+    // setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });
   }
 
   copy(id) {

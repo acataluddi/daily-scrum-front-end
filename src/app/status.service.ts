@@ -4,12 +4,14 @@ import { LoginService } from "./service/login.service";
 import { AuthService } from 'angular-6-social-login';
 import { AdminviewallComponent } from "./adminviewall/adminviewall.component";
 
+
 @Injectable()
 export class AuthGuard implements CanActivate {
 
   constructor(private router: Router, private loginservice: LoginService,
     private socialAuthService: AuthService,
     private adminviewall: AdminviewallComponent) { }
+
   flag = false;
   private user;
   loggedin;
@@ -44,6 +46,7 @@ export class AuthGuard implements CanActivate {
                   this.router.navigate(['/dashboard']);
                   return false;
                 }
+
               });
           }
         });

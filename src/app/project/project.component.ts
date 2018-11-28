@@ -9,6 +9,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DashboardService } from "../service/dashboardservice.service";
 
+
 @Component({
     selector: 'app-project',
     templateUrl: './project.component.html',
@@ -29,15 +30,17 @@ export class ProjectComponent implements OnInit {
     pMembers;
     flag = false;
     show = [];
-    Members: Employee;
+    Members : Employee;
     invalidProjectName = false;
     invalidMemberLength = false;
     memberRepeat = false;
     validMail = false;
     validRole = false;
+
     public show1: boolean = true;
     public show2: boolean = true;
     showAddMember: boolean;
+
     constructor(
         public router: Router,
         private projectservice: ProjectService,
@@ -52,6 +55,7 @@ export class ProjectComponent implements OnInit {
         this.invalidProjectName = false;
         this.invalidMemberLength = false;
         this.memberRepeat = false;
+
         this.socialAuthService.authState.subscribe((user) => {
             if (user != null) {
                 this.loginservice.loginMember(user.idToken)
@@ -61,6 +65,7 @@ export class ProjectComponent implements OnInit {
                             this.flag = true;
                             setTimeout(() => { document.getElementById("projectname").focus(); });
                         }
+
                     });
             }
         });
@@ -100,11 +105,12 @@ export class ProjectComponent implements OnInit {
             this.project = this.initializeNewProject(this.project);
         }
         this.projectservice.getMembers()
-            .subscribe(memberArr => {
-                if (memberArr != null) {
+           .subscribe(memberArr => {
+                 if (memberArr != null) {
                     this.getMembers(memberArr)
                 }
             });
+          
     }
 
     generateId() {
@@ -118,6 +124,7 @@ export class ProjectComponent implements OnInit {
         concat += date.getSeconds().toString();
         concat += date.getMilliseconds().toString();
         return concat;
+
     }
 
     changeVisibility1() {
@@ -129,6 +136,7 @@ export class ProjectComponent implements OnInit {
         this.show2 = !this.show2;
         this.count++;
     }
+
 
     cancel(): void {
         if (this.reqType == 'update') {
@@ -150,6 +158,7 @@ export class ProjectComponent implements OnInit {
 
     initializeNewMember(m: member): member {
         m.email = "";
+       
         m.role = "Select role";
         m.isActive = true;
         return m;
@@ -170,6 +179,7 @@ export class ProjectComponent implements OnInit {
     addNewMem() {
         var me = new member();
         me = this.initializeNewMember(me);
+      
         var membersLength = this.project.members.length;
         if (membersLength > 0) {
             this.lastMember = this.project.members[membersLength - 1];
@@ -330,6 +340,7 @@ export class ProjectComponent implements OnInit {
         }
     }
 
+
     isValidEmail(email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
@@ -342,17 +353,15 @@ export class ProjectComponent implements OnInit {
     decline(): void {
         this.modalRef.hide();
     }
-
     getMembers(memberArr) {
         this.Members = memberArr;
-    }
 
+    }
     dropdown(index) {
         this.show[index] = !this.show[index];
     }
-
-    changeProject(newMailId, mem: member) {
+    changeProject(newMailId,mem:member) {
         mem.email = newMailId;
-        mem.invalidMemberEmail = false;
-    }
+        mem.invalidMemberEmail=false;
+      }
 }

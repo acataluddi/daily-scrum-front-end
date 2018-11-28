@@ -13,7 +13,7 @@ export class ProjectviewallService {
   constructor(
     private http: HttpClient
   ) { }
-  private geturl = this.baseUrl + '/ProjectController';
+private geturl = this.baseUrl + '/ProjectController';
   getLoggedProjects(memberEmail): Observable<ProjectUpdated[]> {
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     return this.http.get<ProjectUpdated[]>(this.geturl, { headers })

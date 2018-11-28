@@ -47,6 +47,7 @@ export class TaskPageAdminComponent implements OnInit {
   minDate: Date;
   maxDate: Date;
 
+
   constructor(
     private taskservice: ProcessIndividualTaskService,
     private socialAuthService: AuthService,
@@ -67,10 +68,10 @@ export class TaskPageAdminComponent implements OnInit {
       var parts = params['startdate'].split('-');
       this.minDate = new Date(+parts[2], +(parts[1]) - 1, +parts[0]);
       var newSelectedDate = this.getSelectedDate();
-      if (newSelectedDate < this.minDate) {
+      if(newSelectedDate<this.minDate){
         var dt = new Date();
         this.myDateValue = dt;
-      } else {
+      } else{
         this.myDateValue = newSelectedDate;
       }
     });
@@ -81,17 +82,20 @@ export class TaskPageAdminComponent implements OnInit {
         var parts = data.startDate.split('-');
         this.minDate = new Date(+parts[2], +(parts[1]) - 1, +parts[0]);
         this.view_my_task_flag = false;
-        var newSelectedDate = this.getSelectedDate();
-        if (newSelectedDate < this.minDate) {
-          var dt = new Date();
-          this.myDateValue = dt;
-        } else {
-          this.myDateValue = newSelectedDate;
-        }
+        // var dt = new Date();
+        // this.myDateValue = dt;
+      var newSelectedDate = this.getSelectedDate();
+      if(newSelectedDate<this.minDate){
+        var dt = new Date();
+        this.myDateValue = dt;
+      } else{
+        this.myDateValue = newSelectedDate;
+      }
       });
   }
   ngOnInit() {
     this.maxDate = new Date();
+    // this.myDateValue = new Date();
     this.myDateValue = this.getSelectedDate();
     this.projectId = localStorage.getItem("projectId");
     this.currentProject = localStorage.getItem("currentProject");
@@ -107,6 +111,7 @@ export class TaskPageAdminComponent implements OnInit {
           });
       }
     });
+
   }
 
   getTaskPageData(taskDate, projectId) {
@@ -121,7 +126,7 @@ export class TaskPageAdminComponent implements OnInit {
           this.view_my_task_flag = true;
         }
         for (let m of this.IndMembArray) {
-          if (m.email === localStorage.getItem("email")) {
+          if(m.email ===  localStorage.getItem("email")){
             localStorage.setItem('addedDate', m.addedDate);
             localStorage.setItem('deletedDate', m.deletedDate);
           }
@@ -129,7 +134,6 @@ export class TaskPageAdminComponent implements OnInit {
         }
       });
   }
-
   calculateTotalTime(tasksArray: IndividualMember[]) {
     var totalHour = 0;
     var totalMinute = 0;
@@ -146,7 +150,6 @@ export class TaskPageAdminComponent implements OnInit {
     this.total_hours_spent = totalHour;
     this.total_minutes_spent = totalMinute;
   }
-
   onDateChange(newDate: Date) {
     this.saveSelectedDate();
     if (newDate.getDate() === this.maxDate.getDate() &&
@@ -191,7 +194,6 @@ export class TaskPageAdminComponent implements OnInit {
     }
     this.getTaskPageData(ndate, this.projectId)
   }
-
   getNextDate() {
     var d1 = new Date(this.selectedDate);
     if (d1.toDateString() !== this.maxDate.toDateString()) {
@@ -199,7 +201,6 @@ export class TaskPageAdminComponent implements OnInit {
       this.myDateValue = d1;
     }
   }
-
   getPreviousDate() {
     var d1 = new Date(this.selectedDate);
     if (d1.toDateString() !== this.minDate.toDateString()) {
@@ -207,7 +208,6 @@ export class TaskPageAdminComponent implements OnInit {
       this.myDateValue = d1;
     }
   }
-
   viewMyTasks(): void {
     this.saveSelectedDate();
     var email = localStorage.getItem("email");
@@ -219,13 +219,13 @@ export class TaskPageAdminComponent implements OnInit {
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }
 
-  gotoDailyStatus(IndMemOb) {
+  gotoDailyStatus(IndMemOb){
     this.saveSelectedDate();
     this.navservice.changedata(IndMemOb)
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }
 
-  saveSelectedDate() {
+  saveSelectedDate(){
     var nday = '';
     var nmonth = '';
     var selectedDate = '';
@@ -243,10 +243,11 @@ export class TaskPageAdminComponent implements OnInit {
     localStorage.setItem("selectedDate", selectedDate);
   }
 
-  getSelectedDate(): Date {
+  getSelectedDate():Date{
     var dateSelected = localStorage.getItem("selectedDate");
     var parts = dateSelected.split('-');
     var newSelectedDate = new Date(+parts[2], +(parts[1]) - 1, +parts[0]);
     return newSelectedDate;
   }
+
 }

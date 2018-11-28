@@ -1,22 +1,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <div *ngIf="flag === true" class=body>
   <div class="mainclass">
+    <!-- <div class="project">Create New Project</div> -->
     <div class="subclasszero">
-      <textarea id="projectname" class="project-name" autosize rows="1" [maxRows]="3" style="font-size: 34px;"
-        [(ngModel)]="project.projectName" placeholder="New Project Name"></textarea>
+    <textarea id="projectname" class="project-name" autosize rows="1" [maxRows]="3" style="font-size: 34px;" [(ngModel)]="project.projectName" placeholder="New Project Name"></textarea>
       <small *ngIf="invalidProjectName" class="error">
         Project Name cannot be empty
       </small>
     </div>
     <ng-container *ngIf="show1">
       <div class="subclassone" (click)="changeVisibility1()">
-        <div class="adddescriptionlogoclass"><img src="../../assets/add_project.png"></div>
+        <div  class="adddescriptionlogoclass"><img  src="../../assets/add_project.png"></div>
         <div class="adddescriptionclass">Describe about the project</div>
       </div>
     </ng-container>
     <ng-container *ngIf="!show1">
-      <textarea id="projectdescription" class="descriptioninputclass" autosize rows="1" [(ngModel)]="project.projectDesc"
-        placeholder="Write description here..."></textarea>
+        <textarea id="projectdescription" class="descriptioninputclass" autosize rows="1" [(ngModel)]="project.projectDesc" placeholder="Write description here..."></textarea>
     </ng-container>
     <ng-container>
       <div class="projectmembersclass" id="projectmembers" *ngIf="showAddMember==true">
@@ -68,9 +67,9 @@
               <div class="delete" (click)="delete(this.mem)"><img src="../../assets/delete_mail.png"></div>
             </div>
           </div>
-          <div *ngIf="show[i]" class="dropdown-content">
-            <div *ngFor="let employee of Members | filterPipe:mem.email" (click)="changeProject(employee.companyEmail,mem);show[i]=false">
-              <div class='email'>{{employee.companyEmail}}</div>
+          <div *ngIf ="show[i]" class="dropdown-content">
+            <div  *ngFor = "let employee of Members | filterPipe:mem.email"  (click)="changeProject(employee.companyEmail,mem);show[i]=false">
+                <div class='email'>{{employee.companyEmail}}</div>
             </div>
           </div>
           <small *ngIf="mem.invalidMemberEmail" class="projectmembersclass error1">
@@ -92,6 +91,7 @@
         <div class="addmemberlogoclass"><img src="../../assets/add_project.png"></div>
         <div class="addmemberclass">Add members</div>
       </div>
+
       <small class="error project-member-error" *ngIf="invalidMemberLength">
         Please add atleast one member to the project
       </small>
@@ -104,6 +104,7 @@
     </ng-container>
   </div>
 </div>
+
 <ng-template #template>
   <div class="modal-body text-center">
     <p>Do you want to cancel the changes?</p>

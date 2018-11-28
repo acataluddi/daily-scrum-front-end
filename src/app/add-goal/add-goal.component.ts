@@ -85,7 +85,7 @@ export class AddGoalComponent implements OnInit {
       this.goal.userEmail = member.memberEmail;
     }
   }
-
+  
   visible() {
     this.hide = true;
   }
@@ -152,5 +152,6 @@ export class AddGoalComponent implements OnInit {
       this.invalidGoalTitle = true;
     }
   }
+
 }
 

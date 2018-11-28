@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +17,7 @@ export class LoginService {
   private readonly loginURL = environment.loginURL;
   constructor(public router: Router, private localSt: LocalStorageService,
     private http: HttpClient) {
+
   }
   member: Member;
   loggedIn;
@@ -23,6 +25,8 @@ export class LoginService {
   getStatus() {
     localStorage.setItem("logged", "false");
   }
+
+
 
   private posturl = this.baseUrl + '/CRUDControllerUser';
   loginMember(UserToken: string): Observable<any> {
@@ -47,7 +51,7 @@ export class LoginService {
   }
 
   logoutMember() {
-    localStorage.clear();
+    localStorage.clear(); 
     document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=" + this.loginURL;
   }
 }

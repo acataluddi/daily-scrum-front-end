@@ -20,4 +20,5 @@ export class TaskPageService {
       .set("token", localStorage.getItem("token"))
     return this.http.get<IndividualMember[]>(this.taskPageURL, { params: params })
   }
+
 }

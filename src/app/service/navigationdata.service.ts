@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { member } from '../model/project-model';
 
+
 @Injectable(
 
 )
@@ -23,4 +24,5 @@ export class NavigationdataService {
   changedata(data: member) {
     this.dataSource.next(data)
   }
+
 }

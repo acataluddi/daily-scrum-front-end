@@ -36,6 +36,7 @@ export class GoalsComponent implements OnInit {
     this.fetchNavigationBarList();
   }
 
+
   //goal member list 
   fetchNavigationBarList() {
     this.goalService.getNavigationBarList('getStatusList').subscribe(navigationBarList => {

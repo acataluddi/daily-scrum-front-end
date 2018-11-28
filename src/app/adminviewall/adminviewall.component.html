@@ -1,6 +1,10 @@
 <body>
   <div *ngIf="flag === true" class="first">
     <div class="mainClass">
+        <!-- <div class="search">
+            <div class="search_icon"><img src="../../assets/Combined_Shape_Copy_2.png"></div>
+            <div class="search_name" id="search_name"><input [(ngModel)]="searchText" placeholder="Search"></div>
+        </div> -->
       <div class="card">
         <div>
           <div class="section head">
@@ -8,6 +12,7 @@
             <div class="header">Email</div>
             <div class="header">User Type</div>
           </div>
+
           <div class="section rowstyle member" *ngFor="let members of member | paginate: {totalitems:total, itemsPerPage:8, currentPage: p}">
             <div class="header">{{members.name}}</div>
             <div class="header">{{members.email}}</div>
@@ -17,6 +22,7 @@
                 <option value="Manager">Manager</option>
                 <option value="User">User</option>
               </select>
+
             </div>
           </div>
           <div class="pagination section">

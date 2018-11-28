@@ -1,16 +1,18 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-import { member } from "../model/project-model";
+import { Component, OnInit, Injectable, TemplateRef } from '@angular/core';
+import { Project, member } from "../model/project-model";
 import { Task } from '../model/task-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { NavigationdataService } from '../service/navigationdata.service'
 import { DatePipe } from '@angular/common';
 import { Subscription, Subject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from 'angular-6-social-login';
 import { LoginService } from '../service/login.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { element } from '@angular/core/src/render3/instructions';
 
 @Injectable({
   providedIn: 'root'
@@ -24,21 +26,27 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class DailyStatusComponent implements OnInit {
 
   currentProject: string = ''
+
   modalRef: BsModalRef
   userEmail: string = localStorage.getItem("email")
+
   task: Task;
   task1: Task;
+
   MockYesterdayTasks: Task[];
   MockTodayTasks: Task[];
   TodayTasks: Task[] = [];
   YesterdayTasks: Task[] = [];
+
   selectedYesterdaysTasks: Task[] = [];
   selectedTodaysTasks: Task[] = [];
+
   myDateValue: Date;
   datePickerConfig: Partial<BsDatepickerConfig>;
   datachanged: member;
   taskHolderName = '';
   T: Task[];
+
   task_id;
   oldtodaytask: Task;
   oldyesterdaytask: Task;
@@ -63,8 +71,10 @@ export class DailyStatusComponent implements OnInit {
   totalminute = 0;
   minDate: Date;
   maxDate: Date;
+
   disable = true;
   newDate = new Date();
+
   months_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   d = new Date();
@@ -84,32 +94,43 @@ export class DailyStatusComponent implements OnInit {
   flag = false;
   projectId = localStorage.getItem("projectId");
   status = false;
+
   lastEdit1;
   lastEdit2;
+
   lastEditString1 = '';
   lastEditString2 = '';
+
   editable1;
   editable2;
+
   checkbox1 = false;
   checkbox2 = false;
+
   numOfSelected = ''
+  // selectAllText = false
   copyCard = false
   getElementStatus1 = false
   getElementStatus2 = false
+
   copied1 = false;
   copied2 = false;
+
   deselectCopiedtext = 'DESELECT';
   elementCopy1;
   elementDelete1;
   elementCopy2;
   elementDelete2;
+
   private eventsSubject1 = new Subject<boolean>();
   private eventsSubject2 = new Subject<boolean>();
   private HideSaved1 = new Subject<boolean>();
   private HideSaved2 = new Subject<boolean>();
+
   changeProjectsubscription: Subscription;
   routeparamsub: any;
   selectmem: Subscription;
+
   name = localStorage.getItem("taskName")
 
   constructor(
@@ -179,6 +200,7 @@ export class DailyStatusComponent implements OnInit {
           var taskName = firstMember.name
           this.email = taskEmail
           this.setMinMaxDate(firstMember)
+
           var addedDateParts = firstMember.addedDate.split('-');
           var addedDate = new Date(+addedDateParts[2], +(addedDateParts[1]) - 1, +addedDateParts[0]);
           if (this.getSelectedDate() > addedDate) {
@@ -187,26 +209,32 @@ export class DailyStatusComponent implements OnInit {
             localStorage.setItem('selectedDate', firstMember.addedDate);
             this.myDateValue = addedDate;
           }
+
         }
 
         if (this.userEmail == this.email) {
           this.setEditable(myMemobj)
         } else {
+
           this.editable1 = false
           this.editable2 = false
           if (taskName == '') {
             taskName = 'Unnamed'
           }
+
           this.taskHolderName = taskName;
         }
         localStorage.setItem("taskEmail", this.email)
         localStorage.setItem("taskName", taskName)
+
         this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
       });
 
     this.selectmem = data.currentdata$.subscribe(datachanged => {
       this.datachanged = datachanged
+
       this.setMinMaxDate(datachanged)
+
       if (this.UserType == 'Admin' || this.UserType == 'Manager') {
 
         if (this.userEmail == this.datachanged.email) {
@@ -233,6 +261,7 @@ export class DailyStatusComponent implements OnInit {
       this.projectId = localStorage.getItem("projectId")
       this.currentProject = localStorage.getItem("currentProject")
     });
+
   }
 
   ngOnInit() {
@@ -251,14 +280,24 @@ export class DailyStatusComponent implements OnInit {
     });
     this.oldtodaytask = new Task;
     this.oldyesterdaytask = new Task;
+    // this.d = this.getSelectedDate()
     this.month = this.months[this.d.getMonth()];
     this.date = this.d.getDate();
     this.year = this.d.getFullYear();
     this.myvalue = true;
+    // this.todayval = "Today, " + this.month + " " + this.date + ", " + this.year;
+    // this.yesterdayval = "Yesterday's Tasks";
+
     this.onDateChange(this.getSelectedDate())
+    // this.todayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
+    // this.todayDate.setDate(this.todayDate.getDate() - 1);
+    // this.yesterdayTaskDate = this.datepipe.transform(this.todayDate, "dd-MM-yyyy");
+
     this.projectId = localStorage.getItem("projectId")
     this.currentProject = localStorage.getItem("currentProject")
+    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
     this.numOfSelected = '0'
+
   }
 
   ngOnDestroy() {
@@ -296,11 +335,14 @@ export class DailyStatusComponent implements OnInit {
       this.totalhour += task.hourSpent;
       this.totalminute += task.minuteSpent;
     }
+
     var extrahour = 0;
+
     if (this.totalminute >= 60) {
       extrahour = Math.floor(this.totalminute / 60);
       this.totalminute = this.totalminute % 60;
     }
+
     this.totalhour += extrahour;
 
     switch (value) {
@@ -470,6 +512,7 @@ export class DailyStatusComponent implements OnInit {
       document.getElementById("leftarrow").classList.remove('blocked-arrow');
     }
 
+    // if (this.status) {
     this.newDate = newDate;
     var d1 = new Date(newDate);
     (d1.setDate(d1.getDate() - 1));
@@ -497,17 +540,17 @@ export class DailyStatusComponent implements OnInit {
 
       var currentnewDate = new Date()
       var lowerlimitdate = new Date()
-      lowerlimitdate.setDate(currentnewDate.getDate() - 7)
+      lowerlimitdate.setDate(currentnewDate.getDate()-7)
       var upperlimitdate = currentDate;
       var diff = upperlimitdate.getDate() - lowerlimitdate.getDate();
-
+    
       if (this.datachanged.isActive && currentDate >= myAddDate) {
         if (currentDateShort === myAddDateShort) {
           this.editable1 = false
           this.editable2 = true
-        } else if (diff <= 7 && diff > 0) {
+        } else if(diff <= 7 && diff > 0) {
           this.editable1 = true;
-          this.editable2 = true;
+          this.editable2 = true; 
         } else if (diff == 0) {
           this.editable1 = false;
           this.editable2 = true;
@@ -544,6 +587,8 @@ export class DailyStatusComponent implements OnInit {
 
       this.newDate = d1;
       this.myDateValue = d1;
+      // var localdate = this.month + " " + this.date + ", " + this.year;
+      // localStorage.setItem('selectedDate', localdate)
       this.saveSelectedDate(this.myDateValue);
     }
   }
@@ -564,6 +609,9 @@ export class DailyStatusComponent implements OnInit {
       }
       this.newDate = d1;
       this.myDateValue = d1;
+      // var localdate = this.date + "-" + this.newDate.getMonth() + this.year;
+
+      // localStorage.setItem('selectedDate', localdate)
       this.saveSelectedDate(this.myDateValue);
     }
   }
@@ -646,6 +694,7 @@ export class DailyStatusComponent implements OnInit {
     (yd.setDate(changedDate.getDate() - 1));
     this.todayTaskDate = this.datepipe.transform(td, "dd-MM-yyyy");
     this.yesterdayTaskDate = this.datepipe.transform(yd, "dd-MM-yyyy");
+
     this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
@@ -717,6 +766,8 @@ export class DailyStatusComponent implements OnInit {
     if (task.description == null || task.description == '') {
       var index = taskArray.indexOf(task);
       taskArray.splice(index, 1);
+      // this.oldyesterdaytask.description = undefined;
+      // this.oldtodaytask.description = undefined;
     }
     if (taskArray == this.MockTodayTasks) {
       this.creatednewtoday = false;
@@ -754,6 +805,7 @@ export class DailyStatusComponent implements OnInit {
       localStorage.setItem('selectedDate', taskMember.addedDate);
       this.onDateChange(addedDate)
     }
+    // this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
   }
 
   setLocalStorage(memobj) {
@@ -773,7 +825,7 @@ export class DailyStatusComponent implements OnInit {
     this.taskHolderName = 'My Tasks'
 
     var lowerlimitdate = new Date()
-    lowerlimitdate.setDate(currentDate.getDate() - 7)
+    lowerlimitdate.setDate(currentDate.getDate()-7)
     var selectedDate = localStorage.getItem("selectedDate")
     var selectedDateArray = selectedDate.split("-")
     var upperlimitdate = new Date(+selectedDateArray[2], +(selectedDateArray[1]) - 1, +selectedDateArray[0])
@@ -782,9 +834,9 @@ export class DailyStatusComponent implements OnInit {
       if (myAddDateShort === currentDateShort) {
         this.editable1 = false
         this.editable2 = true
-      } else if (diff <= 7 && diff > 0) {
+      } else if(diff <= 7 && diff > 0) {
         this.editable1 = true;
-        this.editable2 = true;
+        this.editable2 = true; 
       } else if (diff == 0) {
         this.editable1 = false;
         this.editable2 = true;
@@ -951,6 +1003,7 @@ export class DailyStatusComponent implements OnInit {
   }
 
   unselectAll(value) {
+    // this.selectAllText = 'SELECT ALL'
     switch (value) {
       case 1: this.selectedYesterdaysTasks = [];
         this.emitEventToChild(false, value);
@@ -989,8 +1042,8 @@ export class DailyStatusComponent implements OnInit {
           var formateditTime = editTime.toString();
           task.lastEdit = formateditTime;
           this.taskservice.updateOldTask(task)
-            .subscribe(msg => console.log(msg));
-          this.getLastEdit(this.YesterdayTasks, value)
+          .subscribe(msg => console.log(msg));
+          this.getLastEdit (this.YesterdayTasks, value)
         }
       } else {
         this.TodayTasks.splice(index, 1);
@@ -1000,7 +1053,7 @@ export class DailyStatusComponent implements OnInit {
           var formateditTime = editTime.toString();
           task.lastEdit = formateditTime;
           this.taskservice.updateOldTask(task)
-            .subscribe(msg => console.log(msg));
+          .subscribe(msg => console.log(msg));
           console.log(task.description)
           this.getLastEdit(this.TodayTasks, value)
         }
@@ -1036,7 +1089,9 @@ export class DailyStatusComponent implements OnInit {
         this.elementCopy2.setAttribute('id', 'copy2')
         this.elementDelete2.setAttribute('id', 'delete2')
       }
+
     }
+
   }
 
   getElement(value) {

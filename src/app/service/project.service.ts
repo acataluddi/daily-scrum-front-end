@@ -1,16 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Project } from '../model/project-model'
+import { ProjectMember } from '../model/ProjectMembers';
 import { Observable, EMPTY } from 'rxjs';
 import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 
+
 export class ProjectService {
 
   private readonly baseUrl = environment.apiBase;
+
   private projectUrl = this.baseUrl + '/ProjectController';
   url: string;
   private project: Project;
@@ -67,6 +71,7 @@ export class ProjectService {
       JSON.stringify(this.project), { headers }
     );
   }
+
 
   initializeTempProject(newProject: Project): Project {
     newProject = {

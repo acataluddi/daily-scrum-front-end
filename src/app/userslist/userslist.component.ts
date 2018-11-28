@@ -38,6 +38,7 @@ export class UserslistComponent implements OnInit {
     private taskservice: ProcessIndividualTaskService) {
   }
   ngOnInit() {
+    // this.getProjects();
     this.subscription = this.dashboardservice.getProjects().subscribe(data => {
       this.setProjects(data)
     });
@@ -50,6 +51,7 @@ export class UserslistComponent implements OnInit {
   }
 
   getProjects(): void {
+    // this.projects = this.projectservice.getProjectArray()
     for (let pro of this.projects) {
       if (pro.projectName == this.childProject) {
         this.projectmembers = pro.members;
@@ -63,10 +65,13 @@ export class UserslistComponent implements OnInit {
     }
   }
 
+
+
   gotoDailyStatus(selectedMember) {
     this.selectedEmailEvent.emit(selectedMember)
     this.data.changedata(selectedMember)
     this.router.navigate(['/daily-status', this.childProjectId, this.childProject]);
+
   }
 
   changeCSS() {

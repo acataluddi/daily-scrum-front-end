@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { Task } from "../model/task-model";
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { RequestOptions, Headers } from '@angular/http';
+import {RequestOptions, Headers} from '@angular/http';
 import { Observable, Subject } from 'rxjs';
 import { Project } from '../model/project-model';
 import { environment } from '../../environments/environment';
@@ -16,13 +16,17 @@ export class ProcessIndividualTaskService {
   constructor(
     private http: HttpClient
   ) { }
+
   private url = this.baseUrl + '/TaskController';
   private newListSource = new Subject<Project>();
   newList = this.newListSource.asObservable();
+
   private selectedSource1 = new Subject<Project>();
   selected1 = this.selectedSource1.asObservable();
+
   private selectedSource2 = new Subject<Project>();
   selected2 = this.selectedSource2.asObservable();
+
   selectedProject;
 
   getYesterdays(taskDate, memberEmail, projectId): Observable<Task[]> {
@@ -53,15 +57,16 @@ export class ProcessIndividualTaskService {
     return this.http.put<any>(this.url, JSON.stringify(task), { headers })
   }
 
-  deleteTask(task: Task): Observable<any> {
+  deleteTask(task:Task): Observable<any> {
     const headers = new HttpHeaders().set("token", localStorage.getItem("token"));
     var taskId = task.taskId;
     var memberEmail = task.memberEmail;
+
     let params = new HttpParams()
       .set("taskId", taskId)
       .set("memberEmail", memberEmail)
       .set("token", localStorage.getItem("token"))
-    return this.http.delete<any>(this.url, { params })
+    return this.http.delete<any>(this.url, {params})
   }
 
   changeProject(currentProject: Project) {
@@ -78,4 +83,5 @@ export class ProcessIndividualTaskService {
   setSelectedProject() {
     return this.selectedProject;
   }
+
 }

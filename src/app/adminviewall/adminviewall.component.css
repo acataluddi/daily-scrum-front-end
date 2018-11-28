@@ -44,7 +44,7 @@ h2 {
 .rowstyle {
   font-size: 11pt;
   padding: 1%;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom:1px solid #eeeeee;
   margin-bottom: 1%;
 }
 
@@ -59,7 +59,7 @@ h2 {
 
 .search {
   display: flex;
-  margin-left: 75%;
+  margin-left:75%;
 }
 
 input[placeholder="Search"] {
@@ -108,14 +108,13 @@ div.section.pagination {
 
   .search {
     position: fixed;
-    margin-top: 2%;
+    margin-top:2%;
   }
-
+  
 
   .search_name {
     padding-top: 0%;
   }
-
   .card {
     position: relative;
     background-color: #ffffff;

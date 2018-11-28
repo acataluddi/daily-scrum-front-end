@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
     this.routeEvent(this.router);
   }
 
+
+
   ngOnInit() {
     localStorage.clear();
     this.initializeMember();
@@ -34,8 +36,9 @@ export class LoginComponent implements OnInit {
       imageurl: '',
       idToken: ''
     }
-  }
 
+
+  }
   public socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
     if (socialPlatform == "google") {
@@ -84,13 +87,13 @@ export class LoginComponent implements OnInit {
   getDetails(): Member {
     return this.member;
   }
-
   routeEvent(router: Router) {
     router.events.subscribe(e => {
       if (e instanceof NavigationEnd) {
         if ((e['url'] === '/login') && (localStorage.getItem("logged") == 'true')) {
           this.router.navigate(['/dashboard']);
         }
+
       }
     });
   }

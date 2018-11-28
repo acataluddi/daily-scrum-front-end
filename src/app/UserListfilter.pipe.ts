@@ -6,7 +6,7 @@ import { Member } from './model/member-model';
 })
 export class UserListFilterPipe implements PipeTransform {
 
-  string: any;
+  string:any;
   transform(items: Member[], searchText: string): any[] {
     if (!items) return [];
     if (!searchText) return items;
