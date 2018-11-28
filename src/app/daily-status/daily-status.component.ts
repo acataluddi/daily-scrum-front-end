@@ -110,6 +110,8 @@ export class DailyStatusComponent implements OnInit {
   changeProjectsubscription: Subscription;
   routeparamsub: any;
   selectmem: Subscription;
+  sevenDaysFlagLeft = false;
+  sevenDaysFlagRight = false;
   name = localStorage.getItem("taskName")
 
   constructor(
@@ -454,6 +456,8 @@ export class DailyStatusComponent implements OnInit {
   }
 
   onDateChange(newDate: Date) {
+    this.sevenDaysFlagLeft = false;
+    this.sevenDaysFlagRight = false;
     if (newDate.getDate() === this.maxDate.getDate() &&
       newDate.getMonth() === this.maxDate.getMonth() &&
       newDate.getFullYear() === this.maxDate.getFullYear()) {
@@ -500,7 +504,19 @@ export class DailyStatusComponent implements OnInit {
       lowerlimitdate.setDate(currentnewDate.getDate() - 7)
       var upperlimitdate = currentDate;
       var diff = upperlimitdate.getDate() - lowerlimitdate.getDate();
-
+      var difference = currentnewDate.getDate() - upperlimitdate.getDate()
+      if (difference < 7) {
+        this.sevenDaysFlagLeft = false;
+        this.sevenDaysFlagRight = false;
+      }
+      if (difference == 7) {
+        this.sevenDaysFlagLeft = true;
+        this.sevenDaysFlagRight = false;
+      }
+      if (difference > 7) {
+        this.sevenDaysFlagLeft = true;
+        this.sevenDaysFlagRight = true;
+      }
       if (this.datachanged.isActive && currentDate >= myAddDate) {
         if (currentDateShort === myAddDateShort) {
           this.editable1 = false
