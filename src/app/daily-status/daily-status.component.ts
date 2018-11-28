@@ -833,11 +833,17 @@ export class DailyStatusComponent implements OnInit {
 
     switch (value) {
       case 1: this.HideSaved1.next(true);
+        if(this.selectedYesterdaysTasks.length > 0) {
+          this.copied1 = true;
+        }
         setTimeout(() => {
           this.copied1 = false;
         }, 1000);
         break;
       case 2: this.HideSaved2.next(true);
+        if(this.selectedTodaysTasks.length > 0) {
+          this.copied2 = true;
+        }
         setTimeout(() => {
           this.copied2 = false;
           this.deselectCopiedtext = 'DESELECT'
