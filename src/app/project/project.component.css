@@ -28,19 +28,19 @@ textarea {
   color: rgba(12, 33, 93, 1);
   font-weight: 500;
 }
+
 .high-light-element {
   background-color: rgba(197, 194, 194, 0.404);
 }
 
 ::placeholder {
-  color:  rgb(146, 145, 145);
+  color: rgb(146, 145, 145);
 }
 
 .project-name {
   border: none;
   outline: none;
   margin: auto;
-  /* overflow-y: auto; */
   overflow-x: hidden;
   font-size: 32px;
   max-height: 135px;
@@ -49,7 +49,7 @@ textarea {
   text-overflow: ellipsis;
 }
 
-small.error{
+small.error {
   font-family: Arial, Helvetica, sans-serif;
   color: red;
 }
@@ -108,7 +108,7 @@ div[contenteditable="true"] {
 .teamclass {
   font-size: 14px;
   font-weight: 600;
-  color:  rgb(146, 145, 145);
+  color: rgb(146, 145, 145);
   margin: 10px 0px 0px 0px;
 }
 
@@ -145,7 +145,6 @@ div[contenteditable="true"] {
   font-size: 13px;
   color: rgba(0, 0, 0, 1);
   margin: 0px 20px 0px 0px;
-  /* display: flex; */
 }
 
 select {
@@ -181,7 +180,6 @@ img[src="../../assets/delete_mail.png"] {
 .role-group {
   display: flex;
   float: right;
-  /* width: 119px; */
 }
 
 .role-label {
@@ -189,7 +187,7 @@ img[src="../../assets/delete_mail.png"] {
   padding: 5px 5px 6px 5px;
   border-radius: 3px;
   font-size: 10px;
-  color:  rgb(56, 55, 55);
+  color: rgb(56, 55, 55);
   background-color: #b8b8be52;
 }
 
@@ -246,7 +244,7 @@ select[id="rolevalue"] {
 }
 
 .addmemberclass {
-  color:  rgb(146, 145, 145);
+  color: rgb(146, 145, 145);
   font-size: 16px;
   font-weight: 500;
   margin: 13px 0px 10px 0px;
@@ -263,7 +261,7 @@ select[id="rolevalue"] {
   border: none;
   outline: none;
   color: rgba(255, 255, 255, 1);
-  background-color:rgba(12, 33, 93, 1);
+  background-color: rgba(12, 33, 93, 1);
   padding: 5px 20px;
   text-align: center;
   text-decoration: none;
@@ -296,6 +294,7 @@ select[id="rolevalue"] {
   margin: 4px 10px;
   cursor: pointer;
 }
+
 .button-no:hover {
   color: black;
   font-weight: 600;
@@ -307,7 +306,7 @@ input[value="Cancel"] {
   border: none;
   outline: none;
   font-size: 13px;
-  color:rgb(146, 145, 145);
+  color: rgb(146, 145, 145);
   margin: 10px;
   margin-left: auto;
   margin-right: 0;
@@ -324,7 +323,7 @@ input[value="Update Project"] {
   outline: none;
   font-size: 13px;
   color: rgba(255, 255, 255, 1);
-  background-color:  rgba(12, 33, 93, 1);
+  background-color: rgba(12, 33, 93, 1);
   margin: 10px;
   margin-left: auto;
   margin-right: 0;
@@ -339,17 +338,15 @@ input[value="Update Project"]:hover {
 
 input[value="Create Project"]:active,
 input[value="Update Project"]:active {
-  background-color:  rgba(12, 33, 93, 1);
+  background-color: rgba(12, 33, 93, 1);
 }
 
 input[value="Cancel"]:hover {
   color: black;
   font-weight: 900;
-  /* background-color: rgba(107, 107, 107, 0.11); */
 }
 
 input[value="Cancel"]:active {
-  /* background-color: rgba(131, 131, 131, 0.37); */
   color: black;
   font-weight: 900;
 }
@@ -382,16 +379,12 @@ input[value="Cancel"]:active {
   }
 }
 
-
-
 @media(max-width:360px) {
   small.error1 {
     margin: 0px;
     padding: 10px 21px 10px 0px;
   }
 }
-
-
 
 @media(max-width:345px) {
   .project-name {
@@ -468,9 +461,6 @@ input[value="Cancel"]:active {
     font-size: 13px;
     text-align: center;
   }
-  .role-group {
-    /* width: 150px; */
-  }
 
   .descriptioninputclass {
     font-size: 16px;
@@ -518,10 +508,6 @@ input[value="Cancel"]:active {
 
   .mainclass {
     padding-top: 35%;
-  }
-
-  .role-group {
-    /* width: 150px; */
   }
 
   img[src="../../assets/add-icon.png"] {
@@ -604,7 +590,6 @@ input[value="Cancel"]:active {
   input[value="Update Project"] {
     margin-right: 15%;
   }
-
 }
 
 @media(min-width:2500px) {
@@ -701,5 +686,4 @@ input[value="Cancel"]:active {
   input[value="Update Project"] {
     margin-right: 15%;
   }
-
 }

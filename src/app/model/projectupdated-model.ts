@@ -4,6 +4,7 @@ export class ProjectUpdated {
     projectDesc: string;
     projectName: string;
 }
+
 class member {
     email: string;
     role: string;

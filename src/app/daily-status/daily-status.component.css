@@ -42,7 +42,6 @@ hr {
   box-sizing: border-box;
   float: right;
   padding-left: 2.855%;
-  /* padding-right: 9.37%; */
 }
 
 .main-part {
@@ -109,9 +108,6 @@ hr {
 }
 
 img[src="../../assets/copy.png"] {
-  /* cursor: pointer;
-  margin-top: 11px;
-  margin-left: 40px; */
   height: 16px;
   width: 16px;
 }
@@ -145,7 +141,6 @@ img[src="../../assets/copy.png"] {
   opacity: 0.25;
 }
 
-
 .yesterday_task_header {
   padding-top: 50px;
   padding-bottom: 7px;
@@ -164,10 +159,8 @@ img[src="../../assets/copy.png"] {
   display: flex;
   text-align: center;
   border-style: solid;
-  /* border-width: 2px; */
   border-radius: 4px;
   margin-left: 10px;
-  /* border-color: rgba(0, 0, 0, 0.2); */
   border: 2px solid rgba(225, 227, 230, 1);
 }
 
@@ -283,7 +276,6 @@ img[src="../../assets/copy.png"] {
   font-weight: 500;
 }
 
-
 button.view_all_task::before {
   content: "\e011";
   font-size: 16px;
@@ -344,7 +336,6 @@ button.view_all_task::before {
   padding-bottom: 12px;
 }
 
-/* div.new_task_field:hover, */
 div.today_ header:hover,
 div.today_task_header:hover,
 img.left-arrow:hover,
@@ -400,7 +391,6 @@ input[value="Cancel"]:active {
   margin-top: 13px;
   border-style: solid;
   border-width: 2px;
-  /* border-color: rgb(219, 219, 219); */
   border-color: rgba(181, 186, 201, 1);
 }
 
@@ -418,10 +408,6 @@ input[value="Cancel"]:active {
 }
 
 .dot-fill {
-  /* border: none; */
-  /* border-color:rgb(219, 219, 219);
-  border-width: 4px;
-  background-color: rgba(0, 0, 0, 0.54); */
   border-color: rgb(219, 219, 219);
   border-width: 3px;
   background-color: rgba(0, 0, 0, 0.55);
@@ -541,7 +527,6 @@ input[value="Cancel"]:active {
   }
 
   .main-part {
-    /* padding-left: 32px; */
     padding-left: 2.855%;
   }
 
@@ -612,7 +597,6 @@ input[value="Cancel"]:active {
   }
 
   .today_header {
-    /* margin-left: 44px; */
     margin-top: 5px;
     padding-top: 13px;
   }
@@ -631,7 +615,6 @@ input[value="Cancel"]:active {
 
   .main-part {
     padding-top: 216px;
-    /* padding-left: 32px; */
     padding-right: 20px;
   }
 
@@ -645,7 +628,8 @@ input[value="Cancel"]:active {
     box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.17);
   }
 }
-@media screen and (max-width: 650px){
+
+@media screen and (max-width: 650px) {
   .alt-View {
     visibility: visible;
     position: absolute;
@@ -659,10 +643,12 @@ input[value="Cancel"]:active {
   .view_all_task {
     display: none;
   }
-  .view-all{
-    right: 140px; 
+
+  .view-all {
+    right: 140px;
   }
 }
+
 @media screen and (max-width: 520px) {
 
   #copy1,
@@ -743,7 +729,7 @@ input[value="Cancel"]:active {
     box-shadow: 0px 2px 30px 0px rgba(0, 0, 0, 0.17);
   }
 
-  .main-part{
+  .main-part {
     padding-top: 220px;
   }
 
@@ -754,9 +740,6 @@ input[value="Cancel"]:active {
   .copied-label-mini {
     visibility: visible;
   }
-  /* .select-all-desktop{ */
-  /* display: none; */
-  /* } */
 }
 
 @media screen and (max-width: 480px) {
@@ -811,22 +794,15 @@ input[value="Cancel"]:active {
   .today_task_label {
     font-size: 12px;
   }
-  .view-all{
-    right: 144px; 
+
+  .view-all {
+    right: 144px;
   }
+
   .today_task_header {
     font-size: 16px;
     font-weight: 600;
   }
-
-  /* .today_header {
-    margin-left: 20px;
-    padding-top: 18px;
-  }
-
-  .total_time {
-    margin-left: 20px;
-  } */
 
   .left-arrow {
     height: 20px;
@@ -912,7 +888,6 @@ input[value="Cancel"]:active {
     font-size: 12px;
     padding-left: 4px;
   }
-
 }
 
 @media screen and (min-height: 1000px) {

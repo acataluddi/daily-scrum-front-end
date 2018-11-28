@@ -108,7 +108,7 @@ export class DashboardComponent implements OnInit {
     this.TotalMembers = this.memberArray.length;
 
   }
-  openDailyStatus(project) {    
+  openDailyStatus(project) {
     this.saveSelectedDate();
     var projectId = project.projectId
     var name = project.projectName
@@ -151,7 +151,6 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/daily-status', projectId, name]);
       }
     }
-
   }
 
   setLocalStorage(memobj) {
@@ -166,28 +165,18 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('/admin-view-all');
   }
 
-  // AddProject() {
-  //   this.operation = "AddProject";
-  //   localStorage.setItem('currentOperation', this.operation);
-  //   this.projectService.setRequestType("add");
-  //   this.router.navigateByUrl('/project'); 
-  // }
-
   EditProject(projectDetail) {
     this.operation = "EditProject";
     localStorage.setItem('currentOperation', this.operation);
     this.projectService.setRequestType("update");
     this.projectService.setProjectToBeUpdated(projectDetail)
     this.router.navigateByUrl('/project');
-
-
   }
   deleteId;
   DeleteProject() {
     this.dashboardservice.deleteProjects(this.deleteId)
       .subscribe((msg) => console.log("Project Deleted"));
     window.location.reload();
-
   }
 
   click(index) {
@@ -213,7 +202,7 @@ export class DashboardComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  saveSelectedDate(){
+  saveSelectedDate() {
     var d = new Date();
     var nday = '';
     var nmonth = '';

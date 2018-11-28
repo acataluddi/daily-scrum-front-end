@@ -65,6 +65,7 @@ img.right-arrow:active {
   border-radius: 5%;
   line-height: 180%;
 }
+
 .view_all_task {
   position: absolute;
   display: flex;
@@ -72,7 +73,7 @@ img.right-arrow:active {
   margin-left: 95%;
   border-radius: 4px;
   line-height: 180%;
-  background-color:rgba(229, 229, 229, 1);
+  background-color: rgba(229, 229, 229, 1);
   height: 30px;
   border: none;
   outline: none;
@@ -85,20 +86,21 @@ img.right-arrow:active {
 
 .view_text {
   margin-left: 7px;
-  margin-top:-2px;
-  font-size:13px;
-  color:  rgba(12, 33, 93, 1);
+  margin-top: -2px;
+  font-size: 13px;
+  color: rgba(12, 33, 93, 1);
   font-weight: 500;
 }
 
-.view_all_task:hover{
+.view_all_task:hover {
   background-color: rgba(177, 177, 177, 0.8);
 }
+
 .view_img {
-  width:17px;
-  height:16px;
-  margin-top:2px;
-  background-image:url("../../assets/Group_24.png");
+  width: 17px;
+  height: 16px;
+  margin-top: 2px;
+  background-image: url("../../assets/Group_24.png");
   background-repeat: no-repeat;
 }
 
@@ -191,9 +193,9 @@ img.right-arrow:active {
 }
 
 .bullet {
-  height:16px;
-  margin-top:2px;
-  background-image:url("../../assets/rsz_1all_selected_2.png");
+  height: 16px;
+  margin-top: 2px;
+  background-image: url("../../assets/rsz_1all_selected_2.png");
   background-repeat: no-repeat;
 }
 
@@ -201,7 +203,7 @@ img.right-arrow:active {
   cursor: pointer;
   width: 100%;
   height: 47px;
-  background-color:  rgba(242, 242, 242, 1);
+  background-color: rgba(242, 242, 242, 1);
   padding-left: 5%;
 }
 
@@ -230,6 +232,7 @@ img.right-arrow:active {
   margin-bottom: 10px;
   font-size: 14px;
 }
+
 .fullTask {
   min-height: 30px;
   max-height: 300px;
@@ -257,7 +260,6 @@ img.right-arrow:active {
   color: rgb(100, 99, 99);
   float: left;
 }
-
 
 .dot {
   height: 8px;
@@ -287,7 +289,7 @@ img.right-arrow:active {
   background-color: rgb(31, 132, 179);
 }
 
-.task-imp{
+.task-imp {
   margin-bottom: 7px;
 }
 
@@ -302,13 +304,14 @@ img.right-arrow:active {
 }
 
 .impediment_img {
-  height:16px;
-  width:16px;
-  margin-top:3px;
+  height: 16px;
+  width: 16px;
+  margin-top: 3px;
   margin-right: 1px;
-  background-image:url("../../assets/rsz_rsz_impediment.png");
+  background-image: url("../../assets/rsz_rsz_impediment.png");
   background-repeat: no-repeat;
 }
+
 .imped {
   margin-left: 3px;
   font-size: 13px;
@@ -317,15 +320,16 @@ img.right-arrow:active {
 
 .impediment {
   display: flex;
-  width:90%;
-  margin-left:11px;
-  margin-top:5px;
-  margin-bottom:5px;
-  padding-top:10px;
-  padding-bottom:13px;
-  padding-left:11px;
+  width: 90%;
+  margin-left: 11px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-top: 10px;
+  padding-bottom: 13px;
+  padding-left: 11px;
   white-space: pre-line;
 }
+
 .alt-View {
   visibility: hidden;
 }
@@ -336,6 +340,7 @@ img.right-arrow:active {
     right: -108px;
     padding-top: 3px;
   }
+
   .header {
     width: 90%;
   }
@@ -353,6 +358,7 @@ img.right-arrow:active {
   .view-all {
     right: 325px;
   }
+
   .view_all_task {
     width: 125px;
     right: -125px;
@@ -371,17 +377,16 @@ img.right-arrow:active {
     display: none;
   }
 
-
   .alt-View {
     visibility: hidden;
   }
-
 }
 
 @media screen and (max-width: 650px) {
   .view-all {
     right: 68px;
   }
+
   .header {
     width: 90%;
   }
@@ -391,10 +396,10 @@ img.right-arrow:active {
     position: relative;
     font-size: 22px;
     right: -50px;
-    width:17px;
-    height:16px;
-    margin-top:2px;
-    background-image:url("../../assets/Group_24.png");
+    width: 17px;
+    height: 16px;
+    margin-top: 2px;
+    background-image: url("../../assets/Group_24.png");
     background-repeat: no-repeat;
   }
 
@@ -410,9 +415,7 @@ img.right-arrow:active {
 }
 
 @media screen and (max-width: 400px) {
-  /* .view-all {
-    right: 110px;
-  } */
+
   .header {
     column-width: 400px;
     width: 90%;
@@ -429,6 +432,7 @@ img.right-arrow:active {
     width: 22px;
     font-size: 22px;
   }
+
   .today_task_header {
     font-size: 14px;
   }

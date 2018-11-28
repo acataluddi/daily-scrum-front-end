@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AdminviewallComponent } from './adminviewall.component';
 
 describe('AdminviewallComponent', () => {

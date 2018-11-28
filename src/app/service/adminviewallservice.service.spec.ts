@@ -1,7 +1,5 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { AdminviewallserviceService } from './adminviewallservice.service';
-
 describe('AdminviewallserviceService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({

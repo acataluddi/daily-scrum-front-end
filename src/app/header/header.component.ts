@@ -1,6 +1,5 @@
 import { Component, OnInit, Injectable, TemplateRef } from '@angular/core';
 import { Member } from '../model/member-model';
-import { Http, } from '@angular/http';
 import { AuthService } from 'angular-6-social-login';
 import { LoginService } from '../service/login.service';
 import { Project } from '../model/project-model';
@@ -9,14 +8,11 @@ import { Router, NavigationStart } from '@angular/router';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { ActivatedRoute } from "@angular/router";
 import { ProjectviewallService } from '../service/projectviewall.service';
-import { ProjectUpdated } from '../model/projectupdated-model';
-import { TaskPageAdminComponent } from '../task-page-admin/task-page-admin.component';
 import { Subscription } from 'rxjs';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FeedbackService } from "../service/feedback.service";
 import { Feedback } from '../model/feedback-model';
-
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +46,6 @@ export class HeaderComponent implements OnInit {
   show_feedback;
   feedback: Feedback;
   invalidDescription;
-
   length;
   constructor(
     private viewallservice: ProjectviewallService,
@@ -145,7 +140,6 @@ export class HeaderComponent implements OnInit {
     localStorage.setItem("currentProject", this.selected.projectName);
     localStorage.setItem("projectId", this.selected.projectId);
     this.taskService.changeProject(this.selected);
-
   }
 
   openModal(template: TemplateRef<any>) {

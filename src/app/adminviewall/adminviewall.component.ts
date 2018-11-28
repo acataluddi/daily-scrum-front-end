@@ -2,15 +2,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import { Member } from '../model/member-model';
-import { Http, Response, Headers, RequestOptions, RequestMethod, RequestOptionsArgs } from '@angular/http';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Response, } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { DashboardService } from "../service/dashboardservice.service";
 import { AuthService } from 'angular-6-social-login';
 import { LoginService } from "../service/login.service";
-import { UserListFilterPipe } from '../UserListfilter.pipe';
-
 
 @Injectable({
   providedIn: 'root'
@@ -21,22 +19,21 @@ import { UserListFilterPipe } from '../UserListfilter.pipe';
   templateUrl: './adminviewall.component.html',
   styleUrls: ['./adminviewall.component.css']
 })
-export class AdminviewallComponent implements OnInit {
 
+export class AdminviewallComponent implements OnInit {
   member: Member;
   memberArray: Member[];
   p: number;
   total: number;
   flag = false;
-  filterMember:Member;
+  filterMember: Member;
 
   constructor(
-    public router: Router, 
-    private dashboardservice: DashboardService, 
+    public router: Router,
+    private dashboardservice: DashboardService,
     private viewallservice: AdminviewallserviceService,
-    private http: HttpClient, 
+    private http: HttpClient,
     private socialAuthService: AuthService,
-    // private filter:UserListFilterPipe, 
     private loginservice: LoginService) {
   }
 
@@ -65,9 +62,7 @@ export class AdminviewallComponent implements OnInit {
 
     this.dashboardservice.getMembers()
       .subscribe(membersArr => { this.getTotalCount(membersArr) });
-
   }
-
 
   getTotalCount(membersArr) {
     this.memberArray = membersArr;

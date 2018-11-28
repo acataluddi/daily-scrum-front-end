@@ -1,14 +1,12 @@
 <div class="ind-task">
   <div class="part_1">
     <div>
-      <!-- <span *ngIf="editable == false" class="dot dot-color-1"></span> -->
       <span *ngIf="editable == false && tid%7===0" class="dot dot-color-1"></span>
       <span *ngIf="editable == false && tid%6===0 && tid%7!=0" class="dot dot-color-2"></span>
       <span *ngIf="editable == false && tid%5===0 && tid%6!=0 && tid%7!=0" class="dot dot-color-3"></span>
       <span *ngIf="editable == false && tid%3===0 && tid%5!=0  && tid%6!=0 && tid%7!=0" class="dot dot-color-4"></span>
       <span *ngIf="editable == false && tid%3!=0 && tid%5!=0  && tid%6!=0 && tid%7!=0" class="dot dot-color-5"></span>
       <span *ngIf="check==false && editable" class="dot dot-blank" (click)="check=true; checked(task)"></span>
-      <!-- <span *ngIf="check && editable" class="dot dot-fill" (click)="check=false; unchecked(task)"> -->
       <span *ngIf="check && editable" (click)="check=false; unchecked(task)">
         <img class="img-checked" src="../../assets/radio_selected.png">
       </span>
@@ -18,34 +16,26 @@
         (blur)="updateDescription()" (click)="show_save=true; stageTaskDesc(task)" [(ngModel)]="task.description"
         placeholder="Add description Here"></textarea>
     </div>
-    <!-- <div *ngIf="editable && show_save==false" (click)="delTask(task)">
-    <img src="../../assets/delete_mail.png">
-  </div> -->
-    <!-- <div class="copy" (click)="copy(task.taskId)" >Copy</div> -->
   </div>
   <div class="no_desc" *ngIf="noDesc">Enter Task description</div>
-
   <textarea class="impediments" id="impediments{{task.taskId}}" [disabled]="!editable" autosize rows="1" *ngIf="show_impediment==true"
     (blur)="updateImpediment()" (click)="show_save=true; stageTaskDesc(task)" [(ngModel)]="task.impediments"
     placeholder="Add blockers/impediments Here"></textarea>
-
   <div class="time" (click)="stageTaskTime(task)">
     <div class="time_border" *ngIf="(task.hourSpent>0 || task.minuteSpent>0) && edit_time_spent==false" (click)="show_save=true; edit_time_spent=editable; focus(1)">
       <div>
         {{task.hourSpent}} hour
       </div>
-
       {{task.minuteSpent}} minutes
     </div>
     <div class="add_hours" *ngIf="task.hourSpent===0 && task.minuteSpent===0 && edit_time_spent==false && editable"
       (click)="edit_time_spent=true; show_save=true; focus(1)">
       Add Hours Spent
     </div>
-
     <div class="col-sm-2" *ngIf="edit_time_spent==true" (focusout)="emitTimeEvent(task)">
-      <timepicker id="timeSpent{{task.taskId}}" [(ngModel)]="time" [showMeridian]="false" [showSpinners]="false" [minuteStep]="1" autofocus></timepicker>  
+      <timepicker id="timeSpent{{task.taskId}}" [(ngModel)]="time" [showMeridian]="false" [showSpinners]="false"
+        [minuteStep]="1" autofocus></timepicker>
     </div>
-
     <div class="add_impediment" *ngIf="task.impediments== '' && show_impediment==false && editable" (click)="show_save=true; show_impediment=true; focus(2)">
       Add Blockers
     </div>
@@ -54,7 +44,6 @@
   <div class="status" *ngIf="editable">
     <div class="cancel" *ngIf="show_save" (click)="cancelChange(task)">cancel</div>
     <button class="save" *ngIf="show_save" (click)="save(task)">{{buttonText}}</button>
-
     <div class="saved" *ngIf=" saved==true">Saved!</div>
   </div>
 </div>

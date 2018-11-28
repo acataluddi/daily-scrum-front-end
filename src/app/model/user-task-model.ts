@@ -1,6 +1,4 @@
 import { Task } from './task-model';
-
-
 export class IndividualMember {
   name: string;
   email: string;
