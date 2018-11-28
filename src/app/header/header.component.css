@@ -95,9 +95,6 @@ img[src="../../assets/Scrum_logo.png"] {
 
 #arrow {
   display: inline-block;
-  /* position: absolute; */
-  /* top: 26px; */
-  /* left: 225px; */
   margin-top: 25px;
   margin-left: 10px;
   background-image: url(../../assets/arrow.png);
@@ -156,7 +153,6 @@ img[src="../../assets/Scrum_logo.png"] {
   top: 90%;
   right: 10%;
   z-index: 50;
-
 }
 
 .usermailclass #signout {
@@ -179,16 +175,6 @@ img[src="../../assets/Scrum_logo.png"] {
   font-size: inherit;
   cursor: pointer;
 }
-
-/* .arrow2:focus>#signout  {
-  border: none;
-  z-index: 50;
-}
-
-.arrow2:focus>#feedback  {
-  border: none;
-  z-index: 50;
-} */
 
 .mobile {
   display: inline;
@@ -270,9 +256,6 @@ img[src="../../assets/Scrum_logo.png"] {
   text-align: left;
 }
 
-/* .modal {
-  text-align: center;
-} */
 .MiddleDiv {
   height: 300px;
   width: 100%;
@@ -289,9 +272,11 @@ img[src="../../assets/Scrum_logo.png"] {
   border-color: rgb(220, 220, 223);
   resize: none;
 }
+
 textarea:focus {
-  outline:none;
+  outline: none;
 }
+
 ::placeholder {
   opacity: 1;
   font-family: 'Roboto';
@@ -312,7 +297,6 @@ textarea:focus {
   display: flex;
   padding-left: 545px;
   padding-top: 30px;
-
 }
 
 .cancel {
@@ -333,7 +317,7 @@ textarea:focus {
   font-weight: 600;
 }
 
-small.error{
+small.error {
   font-family: Arial, Helvetica, sans-serif;
   color: red;
   text-align: left;
@@ -343,7 +327,7 @@ small.error{
   border: none;
   outline: none;
   color: rgba(255, 255, 255, 1);
-  background-color:rgba(12, 33, 93, 1);
+  background-color: rgba(12, 33, 93, 1);
   height: 34px;
   width: 80px;
   font-family: 'Roboto';
@@ -408,18 +392,16 @@ small.error{
   }
 }
 
-
-
 @media only screen and (max-width: 820px) {
-  .FeedbackText {   
-    width: 222px;  
-    font-size: 18px;    
+  .FeedbackText {
+    width: 222px;
+    font-size: 18px;
   }
-  
-  
+
   .Feed {
     width: 550px;
   }
+
   .BottomDiv {
     padding-left: 60%;
   }
@@ -432,32 +414,22 @@ small.error{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    /* width: 250px; */
-    /* width: auto; */
   }
 
-  /* #arrow {
-    position: absolute;
-    top: 25px;
-    left: 253px;
-  } */
-
   #projectlist {
-    /* width: 269px; */
     top: 30px;
     left: -104px;
   }
 }
 
-
-
 @media only screen and (max-width: 767px) {
   .Feed {
     margin-left: 10px;
-    right:0px;
+    right: 0px;
     height: 90%;
     width: 100%;
   }
+
   .BottomDiv {
     padding-left: 55%;
   }
@@ -504,16 +476,6 @@ small.error{
     top: 4%;
     right: 1%;
   }
-
-  /* #projectlist {
-    position: absolute;
-    top: 27px;
-    left: -1106%;
-    max-height: 289px;
-    width: 262px;
-  } */
-
-
 }
 
 @media only screen and (max-width: 500px) {
@@ -552,8 +514,6 @@ small.error{
     overflow: hidden;
     text-overflow: ellipsis;
     width: 72%;
-    /* width: 120%; */
-    /* font-size: 1.6rem; */
   }
 
   #dash {
@@ -595,21 +555,8 @@ small.error{
   .button {
     display: none;
   }
-
-  /* #arrow {
-    position: absolute;
-    top: 37%;
-    left: 120%;
-  } */
-
-  /* #projectlist {
-    position: absolute;
-    top: 27px;
-    left: -1106%;
-    height: 289px;
-    width: 262px;
-  } */
 }
+
 @media only screen and (max-width: 420px) {
   .BottomDiv {
     padding-left: 40%;

@@ -39,7 +39,6 @@ export class DashboardHeaderComponent implements OnInit {
             } else if (this.UserType === "Manager") {
               this.flag2 = true;
             }
-
           });
       }
     });

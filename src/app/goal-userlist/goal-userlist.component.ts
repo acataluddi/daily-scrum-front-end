@@ -28,7 +28,6 @@ export class GoalUserlistComponent implements OnInit {
     });
   }
 
-
   getGoalsOfUser(selectedmember) {
     if (selectedmember.hasNewUpdates) {
       selectedmember.hasNewUpdates = false;

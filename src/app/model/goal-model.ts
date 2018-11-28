@@ -7,8 +7,8 @@ export class Goal {
     managerName: string;
     managerImage: string;
     userEmail: string;
-	hasNewUpdatesForUser: boolean;
-	hasNewUpdatesForManager: boolean;
+    hasNewUpdatesForUser: boolean;
+    hasNewUpdatesForManager: boolean;
     comments: Comment[];
 }
 
@@ -26,9 +26,9 @@ export class Comment {
 export class GoalMember {
     id: string;
     userId: string;
-    userName: string;    
+    userName: string;
     userEmail: string;
-    userImage: string;    
+    userImage: string;
     lastUpdate: Date;
     hasNewUpdates: boolean;
     goals: Goal[];
