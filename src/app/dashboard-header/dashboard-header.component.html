@@ -37,11 +37,18 @@
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
-
   <!-- Modal content -->
   <div class="modal-content">
-    <span class="close" (click)="closeModal()">&times;</span>
+    <div class="modal-header">
+      <span class="close" (click)="closeModal()">&times;</span>
+      Set New Goal
+    </div>
     <app-add-goal #addNewGoal (cancelEvent)="closeModal()" (goalAddedEvent)="updatePage()"></app-add-goal>
+    <div class="modal-footer">
+      <div class="addcancelclass">
+        <input type="button" value="Cancel" (click)="closeModal()">
+        <input type="button" value="Add Goal" (click)="createGoal()">
+      </div>
+    </div>
   </div>
-
 </div>

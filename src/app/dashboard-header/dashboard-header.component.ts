@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'angular-6-social-login';
 import { LoginService } from '../service/login.service';
 import { ProjectService } from '../service/project.service';
@@ -65,6 +65,10 @@ export class DashboardHeaderComponent implements OnInit {
     var modal = document.getElementById('myModal');
     //open the modal 
     modal.style.display = "block";
+  }
+
+  createGoal() {
+    this.addNewGoal.createNewGoal();
   }
 
   updatePage() {
