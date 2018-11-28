@@ -184,6 +184,13 @@ img[src="../../assets/copy.png"] {
   padding: 7px 16px 7px 5px;
 }
 
+.sevenDayLimit {
+  margin-top: 28px;
+  font-weight: bold;
+  color: rgb(146, 145, 145);
+  font-size: 15px;
+}
+
 .last_edit_label {
   font-size: 13px;
   color: rgba(0, 0, 0, 0.5);

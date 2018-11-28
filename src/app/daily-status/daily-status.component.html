@@ -82,6 +82,7 @@
   <div class="vertical"></div>
   <div class="container left-part">
     <div class="left-inner-part">
+        <div class="sevenDayLimit" *ngIf="sevenDaysFlagLeft">You can't edit tasks prior to 7 days</div>
       <div class="ind-task" *ngFor="let yesterdayTask of MockYesterdayTasks">
         <app-individual-task [task]=yesterdayTask [editable]=editable1 [events]="eventsSubject1.asObservable()"
           [hideSavedEvent]="HideSaved1.asObservable()" (timeChangeEvent)="modifyTime($event, MockYesterdayTasks, 1)"
@@ -96,6 +97,7 @@
   </div>
   <div class="container right-part">
     <div class="right-inner-part">
+        <div class="sevenDayLimit" *ngIf="sevenDaysFlagRight">You can't edit tasks prior to 7 days</div>
       <div *ngFor="let todayTask of MockTodayTasks">
         <app-individual-task [task]=todayTask [editable]=editable2 [events]="eventsSubject2.asObservable()"
           [hideSavedEvent]="HideSaved2.asObservable()" (timeChangeEvent)="modifyTime($event, MockTodayTasks, 2)"
