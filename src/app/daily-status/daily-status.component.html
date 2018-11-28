@@ -34,7 +34,7 @@
         <div class="last_edit_label" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0)">
           Edited: {{lastEditString1}}
         </div>
-        <div id="block-copy1" (click)="copy(selectedYesterdaysTasks, 1);copied1 = true" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1 ">
+        <div id="block-copy1" (click)="copy(selectedYesterdaysTasks, 1)" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1 ">
           <img src="../../assets/copy.png">
         </div>
         <div id="block-delete1" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1" (click)="deleteSelected(selectedYesterdaysTasks, MockYesterdayTasks, 1)">
@@ -67,7 +67,7 @@
           <div class="spent_text">Hours spent</div>
         </div>
         <div class="last_edit_label">Edited: {{lastEditString2}}</div>
-        <div id="block-copy2" (click)="copy(selectedTodaysTasks, 2);copied2 = true" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
+        <div id="block-copy2" (click)="copy(selectedTodaysTasks, 2)" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
           <img src="../../assets/copy.png">
         </div>
         <div id="block-delete2" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2" (click)="deleteSelected(selectedTodaysTasks, MockTodayTasks, 2)">
