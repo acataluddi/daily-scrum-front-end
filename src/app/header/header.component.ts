@@ -115,6 +115,7 @@ export class HeaderComponent implements OnInit {
   getUserDetails() {
     this.member.email = localStorage.getItem("email");
     this.member.imageurl = localStorage.getItem("image");
+    this.member.userType = localStorage.getItem("userType")
   }
 
   setProjects(userProjects) {
@@ -253,5 +254,16 @@ export class HeaderComponent implements OnInit {
       userName: ''
     }
     return feedback;
+  }
+
+  openUserGuide() {
+    console.log("Opening User Guide")
+    console.log(this.member.userType)
+    if(this.member.userType == "User")
+    window.location.href = 'https://docs.google.com/document/d/1P1x5ZkKORCeDGvCjNOyDQ47i0ZC1lAbaDN4f1CKeWKQ/edit?usp=sharing'
+    else if(this.member.userType == "Manager")
+    window.location.href = 'https://docs.google.com/document/d/1CCmCD6whQfKHym0NKD_uHNz7FuoXrVKLdsWeZwESJNM/edit?usp=sharing'
+    else
+    window.location.href = 'https://docs.google.com/document/d/1UARPlt9p0LcVdXoA-TRkIpc0krkc2dtwVisHgvgfZNg/view'
   }
 }
