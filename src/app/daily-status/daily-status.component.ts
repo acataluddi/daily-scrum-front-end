@@ -458,6 +458,8 @@ export class DailyStatusComponent implements OnInit {
   onDateChange(newDate: Date) {
     this.sevenDaysFlagLeft = false;
     this.sevenDaysFlagRight = false;
+    this.checkbox1 = false;
+    this.checkbox2 = false;
     if (newDate.getDate() === this.maxDate.getDate() &&
       newDate.getMonth() === this.maxDate.getMonth() &&
       newDate.getFullYear() === this.maxDate.getFullYear()) {
@@ -503,27 +505,16 @@ export class DailyStatusComponent implements OnInit {
       var lowerlimitdate = new Date()
       lowerlimitdate.setDate(currentnewDate.getDate() - 7)
       var upperlimitdate = currentDate;
-      var diff = upperlimitdate.getDate() - lowerlimitdate.getDate();
-      var difference = currentnewDate.getDate() - upperlimitdate.getDate()
-      if (difference < 7) {
-        this.sevenDaysFlagLeft = false;
-        this.sevenDaysFlagRight = false;
-      }
-      if (difference == 7) {
-        this.sevenDaysFlagLeft = true;
-        this.sevenDaysFlagRight = false;
-      }
-      if (difference > 7) {
-        this.sevenDaysFlagLeft = true;
-        this.sevenDaysFlagRight = true;
-      }
+      var diff = Math.round((upperlimitdate.getTime() - lowerlimitdate.getTime()) / (1000 * 60 * 60 * 24));
       if (this.datachanged.isActive && currentDate >= myAddDate) {
-        if (currentDateShort === myAddDateShort) {
-          this.editable1 = false
-          this.editable2 = true
-        } else if (diff <= 7 && diff > 0) {
-          this.editable1 = true;
-          this.editable2 = true;
+        if (diff <= 7 && diff > 0) {
+          if (currentDateShort === myAddDateShort) {
+            this.editable1 = false
+            this.editable2 = true
+          } else {
+            this.editable1 = true;
+            this.editable2 = true;
+          }
         } else if (diff == 0) {
           this.editable1 = false;
           this.editable2 = true;
@@ -535,9 +526,22 @@ export class DailyStatusComponent implements OnInit {
         this.editable1 = false
         this.editable2 = false
       }
+
+      if (this.editable1 && this.editable2) {
+        this.sevenDaysFlagLeft = false;
+        this.sevenDaysFlagRight = false;
+      } else if (!this.editable1 && this.editable2) {
+        this.sevenDaysFlagLeft = true;
+        this.sevenDaysFlagRight = false;
+      } else {
+        this.sevenDaysFlagLeft = true;
+        this.sevenDaysFlagRight = true;
+      }
     } else {
-      this.editable1 = false
-      this.editable2 = false
+      this.editable1 = false;
+      this.editable2 = false;
+      this.sevenDaysFlagLeft = false;
+      this.sevenDaysFlagRight = false;
     }
   }
 
@@ -730,14 +734,17 @@ export class DailyStatusComponent implements OnInit {
   }
 
   popTask(taskArray, task) {
+    var value;
     if (task.description == null || task.description == '') {
       var index = taskArray.indexOf(task);
       taskArray.splice(index, 1);
     }
     if (taskArray == this.MockTodayTasks) {
+      value = 2;
       this.creatednewtoday = false;
       this.oldtodaytask.description = undefined;
     } else {
+      value = 1;
       this.creatednewyesterday = false;
       this.oldyesterdaytask.description = undefined;
     }
@@ -793,14 +800,16 @@ export class DailyStatusComponent implements OnInit {
     var selectedDate = localStorage.getItem("selectedDate")
     var selectedDateArray = selectedDate.split("-")
     var upperlimitdate = new Date(+selectedDateArray[2], +(selectedDateArray[1]) - 1, +selectedDateArray[0])
-    var diff = upperlimitdate.getDate() - lowerlimitdate.getDate()
+    var diff = Math.round((upperlimitdate.getTime() - lowerlimitdate.getTime()) / (1000 * 60 * 60 * 24));
     if (member.isActive && currentDate >= myAddDate) {
-      if (myAddDateShort === currentDateShort) {
-        this.editable1 = false
-        this.editable2 = true
-      } else if (diff <= 7 && diff > 0) {
-        this.editable1 = true;
-        this.editable2 = true;
+      if (diff <= 7 && diff > 0) {
+        if (currentDateShort === myAddDateShort) {
+          this.editable1 = false
+          this.editable2 = true
+        } else {
+          this.editable1 = true;
+          this.editable2 = true;
+        }
       } else if (diff == 0) {
         this.editable1 = false;
         this.editable2 = true;
@@ -811,6 +820,17 @@ export class DailyStatusComponent implements OnInit {
     } else {
       this.editable1 = false
       this.editable2 = false
+    }
+
+    if (this.editable1 && this.editable2) {
+      this.sevenDaysFlagLeft = false;
+      this.sevenDaysFlagRight = false;
+    } else if (!this.editable1 && this.editable2) {
+      this.sevenDaysFlagLeft = true;
+      this.sevenDaysFlagRight = false;
+    } else {
+      this.sevenDaysFlagLeft = true;
+      this.sevenDaysFlagRight = true;
     }
   }
 
@@ -849,7 +869,7 @@ export class DailyStatusComponent implements OnInit {
 
     switch (value) {
       case 1: this.HideSaved1.next(true);
-        if(this.selectedYesterdaysTasks.length > 0) {
+        if (this.selectedYesterdaysTasks.length > 0) {
           this.copied1 = true;
         }
         setTimeout(() => {
@@ -857,7 +877,7 @@ export class DailyStatusComponent implements OnInit {
         }, 1000);
         break;
       case 2: this.HideSaved2.next(true);
-        if(this.selectedTodaysTasks.length > 0) {
+        if (this.selectedTodaysTasks.length > 0) {
           this.copied2 = true;
         }
         setTimeout(() => {

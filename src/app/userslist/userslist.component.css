@@ -75,6 +75,9 @@ input[placeholder="Search"] {
 
   .member_name {
     margin: 11px 0px 15px 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   ::-webkit-scrollbar {
