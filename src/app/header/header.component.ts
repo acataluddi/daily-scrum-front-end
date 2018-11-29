@@ -9,8 +9,6 @@ import { ProcessIndividualTaskService } from '../service/process-individual-task
 import { ActivatedRoute } from "@angular/router";
 import { ProjectviewallService } from '../service/projectviewall.service';
 import { Subscription } from 'rxjs';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FeedbackService } from "../service/feedback.service";
 import { Feedback } from '../model/feedback-model';
 
@@ -25,7 +23,6 @@ import { Feedback } from '../model/feedback-model';
 })
 export class HeaderComponent implements OnInit {
 
-  modalRef: BsModalRef;
   member: Member;
   image: String;
   projects: Project[];
@@ -53,7 +50,6 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private loginservice: LoginService,
     private projectService: DashboardService,
-    private modalService: BsModalService,
     private route: ActivatedRoute,
     private taskService: ProcessIndividualTaskService,
     private dashboardService: DashboardService,
@@ -70,6 +66,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.feedback = this.initializeNewFeedback(this.feedback);
     this.invalidDescription = false;
     this.operation = localStorage.getItem("currentOperation");
     this.showTooltip = false;
@@ -136,6 +133,7 @@ export class HeaderComponent implements OnInit {
     this.socialAuthService.signOut();
     this.loginservice.logoutMember();
   }
+
   changeProject(newProject) {
     this.selected = newProject;
     localStorage.setItem("currentProject", this.selected.projectName);
@@ -143,14 +141,6 @@ export class HeaderComponent implements OnInit {
     this.taskService.changeProject(this.selected);
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.feedback = this.initializeNewFeedback(this.feedback);
-    this.invalidDescription = false;
-    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
-  }
-  decline(): void {
-    this.modalRef.hide();
-  }
   toggle(currenturl) {
     if (currenturl == '/dashboard') {
       this.title = '';
@@ -221,26 +211,36 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  fetchFeedbacks() {
-    this.feedbackService.getFeedbacks()
-      .subscribe(feedbacks => {
-        console.log(feedbacks);
-      });
-  }
-
   postFeedback(userFeedback: Feedback) {
     userFeedback.feedbackDescription = userFeedback.feedbackDescription.trim();
     if (userFeedback.feedbackDescription === '') {
       this.invalidDescription = true;
       setTimeout(() => { document.getElementById("feedbackDesc").focus(); });
+      setTimeout(() => {
+        this.invalidDescription = false;
+      }, 2000);
     }
     if (this.invalidDescription == false) {
       this.feedbackService.sendFeedback(userFeedback)
-        .subscribe(feedbacks => {
-          console.log(feedbacks);
+        .subscribe(feedback => {
+          if(feedback.feedbackId !=null) {
+            console.log('Feedback submitted successfully.')
+          }
+          this.closeModal();
         });
-      this.modalRef.hide();
     }
+  }
+
+  closeModal() {
+    var modal = document.getElementById('feedbackModal');
+    modal.style.display = "none";
+  }
+
+  openModal() {
+    this.feedback = this.initializeNewFeedback(this.feedback);
+    this.invalidDescription = false;
+    var modal = document.getElementById('feedbackModal');
+    modal.style.display = "block";
   }
 
   initializeNewFeedback(feedback: Feedback): Feedback {
@@ -257,13 +257,11 @@ export class HeaderComponent implements OnInit {
   }
 
   openUserGuide() {
-    console.log("Opening User Guide")
-    console.log(this.member.userType)
-    if(this.member.userType == "User")
-    window.location.href = 'https://docs.google.com/document/d/1P1x5ZkKORCeDGvCjNOyDQ47i0ZC1lAbaDN4f1CKeWKQ/edit?usp=sharing'
-    else if(this.member.userType == "Manager")
-    window.location.href = 'https://docs.google.com/document/d/1CCmCD6whQfKHym0NKD_uHNz7FuoXrVKLdsWeZwESJNM/edit?usp=sharing'
+    if (this.member.userType == "User")
+      window.location.href = 'https://docs.google.com/document/d/1P1x5ZkKORCeDGvCjNOyDQ47i0ZC1lAbaDN4f1CKeWKQ/edit?usp=sharing'
+    else if (this.member.userType == "Manager")
+      window.location.href = 'https://docs.google.com/document/d/1CCmCD6whQfKHym0NKD_uHNz7FuoXrVKLdsWeZwESJNM/edit?usp=sharing'
     else
-    window.location.href = 'https://docs.google.com/document/d/1UARPlt9p0LcVdXoA-TRkIpc0krkc2dtwVisHgvgfZNg/view'
+      window.location.href = 'https://docs.google.com/document/d/1UARPlt9p0LcVdXoA-TRkIpc0krkc2dtwVisHgvgfZNg/view'
   }
 }

@@ -24,31 +24,36 @@
         <div class="arrow2">
           <div id="signout" *ngIf="show_signout">
             <div id="sign" class="a" (click)="logout()"> Logout </div>
-            <div id="feed" class="a" (click)="openModal(template)"> Feedback </div>
+            <div id="feed" class="a" (click)="openModal()"> Feedback </div>
             <div id="userguide" class="a" (click)="openUserGuide()"> User Guide </div>
           </div>
         </div>
       </div>
-      <ng-template #template>
-        <div class="modal-body text-center">
-          <div id="vis" class="Feed">
-            <div class="TopDiv">
-              <div class="FeedbackText">
-                Feedback and Suggestions
-              </div>
-            </div>
-            <div class="MiddleDiv">
-              <textarea id="feedbackDesc" class="textarea" placeholder="I would like to.." [(ngModel)]="feedback.feedbackDescription"
-                (click)="invalidDescription=false">
-              </textarea>
-              <small *ngIf="invalidDescription" class="error">
-                Please enter description
-              </small>
-            </div>
-            <div class="BottomDiv">
-              <button class="cancel" (click)="decline()">Cancel</button>
-              <button class="submit" (click)="postFeedback(feedback)">Submit</button>
-            </div>
-          </div>
-        </div>
-      </ng-template>
+    </div>
+  </div>
+</div>
+
+
+  <!-- The Modal -->
+<div id="feedbackModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close" (click)="closeModal()">&times;</span>
+      Feedback and Suggestions
+    </div>
+    <div class="feedbackDescription">
+      <textarea id="feedbackDesc" class="textarea" placeholder="I would like to.." [(ngModel)]="feedback.feedbackDescription"
+        (click)="invalidDescription=false"></textarea>
+      <small *ngIf="invalidDescription" class="error">
+        Please enter description
+      </small>
+    </div>
+    <div class="modal-footer">
+      <div class="addcancelclass">
+        <button class="cancel" (click)="closeModal()">Cancel</button>
+        <button class="submit" (click)="postFeedback(feedback)">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
