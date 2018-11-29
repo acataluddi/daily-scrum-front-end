@@ -134,6 +134,7 @@ img[src="../../assets/Scrum_logo.png"] {
   position: relative;
   top: 30%;
   width: auto;
+  max-width: 300px;
   height: 40px;
   color: rgba(79, 86, 105, 1);
   cursor: pointer;
@@ -439,6 +440,7 @@ small.error {
 
 @media only screen and (max-width: 800px) {
   #dailyscrumclass {
+    max-width: 190px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
