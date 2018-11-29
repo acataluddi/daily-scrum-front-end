@@ -258,10 +258,10 @@ export class HeaderComponent implements OnInit {
 
   openUserGuide() {
     if (this.member.userType == "User")
-    window.open("https://drive.google.com/file/d/1w3jXKU4eO0LDeILvXcf6SwsjM8XjuG28/view?usp=sharing")
+    window.open("../../assets/Daily Scrum - User - User Documentation.pdf")
     else if (this.member.userType == "Manager")
-    window.open("https://drive.google.com/file/d/1Owts8J88ewGO38orkFfVV6OYjhCy3G3A/view?usp=sharing")
+    window.open("../../assets/Daily Scrum - PM - User Documentation.pdf")
     else
-    window.open("https://drive.google.com/file/d/1ckdKERzE3T_TB4Uo73HgPM7SnEcNYoL8/view?usp=sharing")
+    window.open("../../assets/Daily Scrum - Admin - User Documentation.pdf")
   }
 }
