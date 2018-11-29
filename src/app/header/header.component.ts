@@ -258,10 +258,10 @@ export class HeaderComponent implements OnInit {
 
   openUserGuide() {
     if (this.member.userType == "User")
-      window.location.href = 'https://docs.google.com/document/d/1P1x5ZkKORCeDGvCjNOyDQ47i0ZC1lAbaDN4f1CKeWKQ/edit?usp=sharing'
+    window.open("https://drive.google.com/file/d/1w3jXKU4eO0LDeILvXcf6SwsjM8XjuG28/view?usp=sharing")
     else if (this.member.userType == "Manager")
-      window.location.href = 'https://docs.google.com/document/d/1CCmCD6whQfKHym0NKD_uHNz7FuoXrVKLdsWeZwESJNM/edit?usp=sharing'
+    window.open("https://drive.google.com/file/d/1Owts8J88ewGO38orkFfVV6OYjhCy3G3A/view?usp=sharing")
     else
-      window.location.href = 'https://docs.google.com/document/d/1UARPlt9p0LcVdXoA-TRkIpc0krkc2dtwVisHgvgfZNg/view'
+    window.open("https://drive.google.com/file/d/1ckdKERzE3T_TB4Uo73HgPM7SnEcNYoL8/view?usp=sharing")
   }
 }
