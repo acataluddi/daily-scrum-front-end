@@ -1,6 +1,6 @@
 <div class="ind-task">
   <div class="part_1">
-    <div>
+    <div *ngIf="task.lastEdit != ''">
       <span *ngIf="editable == false && tid%7===0" class="dot dot-color-1"></span>
       <span *ngIf="editable == false && tid%6===0 && tid%7!=0" class="dot dot-color-2"></span>
       <span *ngIf="editable == false && tid%5===0 && tid%6!=0 && tid%7!=0" class="dot dot-color-3"></span>

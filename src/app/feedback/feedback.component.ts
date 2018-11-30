@@ -22,7 +22,7 @@ export class FeedbackComponent implements OnInit {
   fetchFeedback() {
     this.feedbackService.getFeedbacks().subscribe(feedbackList => {
       this.feedbackArray = feedbackList;
-      if (this.feedbackArray.length != 0) {
+      if (feedbackList.length != 0 || feedbackList != null) {
         this.length = 1;
       } else {
         this.length = 0;
