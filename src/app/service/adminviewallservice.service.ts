@@ -25,6 +25,7 @@ export class AdminviewallserviceService {
   }
 
   putmember(member: Member): Observable<any> {
+    this.apiURL = this.baseUrl + '/CRUDControllerUser';
     var newmember = {
       name: member.name,
       email: member.email,
