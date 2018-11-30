@@ -22,8 +22,9 @@ h2 {
 
 .card {
   position: relative;
+  top: 30px;
   background-color: #ffffff;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1); */
   transition: 0.3s;
   padding: 0% 2% 4.5% 2%;
   margin: 1%;
@@ -51,31 +52,39 @@ h2 {
 .head {
   text-align: left;
   color: black;
-  padding: 1.5% 1%;
+  padding: 18px 1%;
   margin-bottom: 1%;
   font-weight: bold;
   background-color: #eeeeee;
+  height: 50px;
 }
 
 .search {
   display: flex;
-  margin-left: 75%;
+  position: fixed;
+  top: 114px;
+  /* right: 38px; */
+  width: 100%;
+  padding-left: 64%;
+  z-index: 50;
+  background: #fff;;
 }
 
 input[placeholder="Search"] {
   border: none;
   outline: none;
   height: 32px;
+  width: 150px;
   color: rgba(0, 0, 0, 1);
 }
 
 .search_icon {
   width: 14px;
-  margin: 5%;
+  margin: 11px;
 }
 
 .search_name {
-  padding-top: 3%;
+  margin: 3px 0;
 }
 
 .custom-select {
@@ -94,7 +103,13 @@ div.section.pagination {
   right: 2%;
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 650px) {
+  .search {
+    padding-left: 2%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
   .first {
     height: 750px;
     width: 100%;
@@ -105,12 +120,6 @@ div.section.pagination {
     height: 99.8%;
     width: 100%;
   }
-
-  .search {
-    position: fixed;
-    margin-top: 2%;
-  }
-
 
   .search_name {
     padding-top: 0%;

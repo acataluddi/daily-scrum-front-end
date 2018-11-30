@@ -55,10 +55,6 @@ export class AdminviewallComponent implements OnInit {
           });
       }
     });
-    this.viewallservice.getMembers()
-      .subscribe(membersArr => {
-        this.getMembers(membersArr)
-      });
 
     this.dashboardservice.getMembers()
       .subscribe(membersArr => { this.getTotalCount(membersArr) });
@@ -70,23 +66,12 @@ export class AdminviewallComponent implements OnInit {
     this.member = membersArr;
   }
 
-  getMembers(membersArr): void {
-    this.memberArray = membersArr;
-  }
-
   onChange(newType, mem: Member) {
     mem.userType = newType;
     this.viewallservice.putmember(mem)
       .subscribe((res: Response) => {
         console.log(res);
       })
-  }
-
-  getPagenum(pagenum) {
-    this.viewallservice.getPageNum(pagenum);
-    this.p = pagenum;
-    this.viewallservice.getMembers()
-      .subscribe(membersArr => this.getMembers(membersArr));
   }
 }
 
