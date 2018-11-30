@@ -24,7 +24,6 @@ h2 {
   position: relative;
   top: 30px;
   background-color: #ffffff;
-  /* box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1); */
   transition: 0.3s;
   padding: 0% 2% 4.5% 2%;
   margin: 1%;
@@ -63,7 +62,6 @@ h2 {
   display: flex;
   position: fixed;
   top: 114px;
-  /* right: 38px; */
   width: 100%;
   padding-left: 64%;
   z-index: 50;
@@ -109,6 +107,7 @@ div.section.pagination {
   }
 }
 
+
 @media only screen and (max-width: 450px) {
   .first {
     height: 750px;
@@ -128,7 +127,6 @@ div.section.pagination {
   .card {
     position: relative;
     background-color: #ffffff;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
     transition: 0.3s;
     padding: 1% 2% 2.5% 2%;
     margin: 1%;

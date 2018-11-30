@@ -309,6 +309,10 @@ input[type=time]:focus {
   border: none
 }
 
+.col-sm-2 {
+  height: 35px;
+}
+
 @media screen and (max-width: 650px) {
   .description {
     width: 90%;
@@ -363,6 +367,7 @@ input[type=time]:focus {
   }
 
   .impediments {
+    margin-left: 18px;
     width: 90%;
   }
 

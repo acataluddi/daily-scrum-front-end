@@ -56,6 +56,14 @@ body .bs-datepicker-container .bs-datepicker-head * {
   font-size: 20px;
 }
 
+body .bs-timepicker-field {
+  width: 60px;
+}
+
+body .ngx-pagination .current {
+  background: rgba(12, 33, 93, 1);
+}
+
 .theme-orange .bs-datepicker-body table td {
   color: rgba(12, 33, 93, 1);
   font-size: 15px;

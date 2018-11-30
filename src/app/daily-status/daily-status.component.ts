@@ -495,48 +495,7 @@ export class DailyStatusComponent implements OnInit {
     // }
 
     if (this.userEmail == this.datachanged.email) {
-      var currentDate = new Date(newDate)
-      var currentDateShort = this.datepipe.transform(currentDate, "dd-MM-yyyy");
-      var myAddDateArray = this.datachanged.addedDate.split("-")
-      var myAddDate = new Date(+myAddDateArray[2], +(myAddDateArray[1]) - 1, +myAddDateArray[0])
-      var myAddDateShort = this.datepipe.transform(myAddDate, "dd-MM-yyyy");
-
-      var currentnewDate = new Date()
-      var lowerlimitdate = new Date()
-      lowerlimitdate.setDate(currentnewDate.getDate() - 7)
-      var upperlimitdate = currentDate;
-      var diff = Math.round((upperlimitdate.getTime() - lowerlimitdate.getTime()) / (1000 * 60 * 60 * 24));
-      if (this.datachanged.isActive && currentDate >= myAddDate) {
-        if (diff <= 7 && diff > 0) {
-          if (currentDateShort === myAddDateShort) {
-            this.editable1 = false
-            this.editable2 = true
-          } else {
-            this.editable1 = true;
-            this.editable2 = true;
-          }
-        } else if (diff == 0) {
-          this.editable1 = false;
-          this.editable2 = true;
-        } else {
-          this.editable1 = false;
-          this.editable2 = false;
-        }
-      } else {
-        this.editable1 = false
-        this.editable2 = false
-      }
-
-      if (this.editable1 && this.editable2) {
-        this.sevenDaysFlagLeft = false;
-        this.sevenDaysFlagRight = false;
-      } else if (!this.editable1 && this.editable2) {
-        this.sevenDaysFlagLeft = true;
-        this.sevenDaysFlagRight = false;
-      } else {
-        this.sevenDaysFlagLeft = true;
-        this.sevenDaysFlagRight = true;
-      }
+      this.setEditable(this.datachanged);
     } else {
       this.editable1 = false;
       this.editable2 = false;

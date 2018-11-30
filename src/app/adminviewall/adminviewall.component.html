@@ -14,7 +14,6 @@
               <div class="header">Email</div>
               <div class="header">User Type</div>
             </div>
-            <!-- <div class="section rowstyle member" *ngFor="let members of member | paginate: {totalitems:total, itemsPerPage:10, currentPage: p}"> -->
             <div class="section rowstyle member" *ngFor="let members of member | filter:userlistfilter | paginate: {totalitems:total, itemsPerPage:10, currentPage: p}">
               <div class="header">{{members.name}}</div>
               <div class="header">{{members.email}}</div>
@@ -24,10 +23,9 @@
                   <option value="Manager">Manager</option>
                   <option value="User">User</option>
                 </select>
-  
               </div>
             </div>
-            <div class="pagination section" *ngIf="userlistfilter==''">
+            <div class="pagination section" *ngIf="userlistfilter=='' || userlistfilter == undefined ">
               <pagination-controls (pageChange)="p=$event" maxSize="5" previousLabel=""
               nextLabel=""></pagination-controls>
             </div>
