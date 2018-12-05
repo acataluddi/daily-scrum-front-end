@@ -17,7 +17,7 @@
           <div class="view_img"></div>
           <div class="view_text">View my tasks</div>
         </button>
-        <div class="alt-View" (click)="viewMyTasks()">
+        <div class="alt-View" *ngIf="view_my_task_flag==true" (click)="viewMyTasks()">
         </div>
       </div>
     </div>

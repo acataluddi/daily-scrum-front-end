@@ -69,7 +69,7 @@ img.right-arrow:active {
 .view_all_task {
   position: absolute;
   display: flex;
-  width: 130px;
+  width: 125px;
   margin-left: 95%;
   border-radius: 4px;
   line-height: 180%;
@@ -336,7 +336,7 @@ img.right-arrow:active {
 
 @media screen and (max-width: 1300px) {
   .view_all_task {
-    width: 138px;
+    width: 125px;
     right: -108px;
     padding-top: 3px;
   }

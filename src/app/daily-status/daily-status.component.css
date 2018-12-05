@@ -270,7 +270,7 @@ img[src="../../assets/copy.png"] {
 .view_all_task {
   position: absolute;
   display: flex;
-  width: 137px;
+  width: 125px;
   margin-left: 23%;
   border-radius: 4px;
   line-height: 180%;
@@ -285,7 +285,7 @@ img[src="../../assets/copy.png"] {
 
 button.view_all_task::before {
   content: "\e011";
-  font-size: 16px;
+  font-size: 15px;
   font-family: "Glyphicons Halflings";
   margin-right: 5px;
 }
