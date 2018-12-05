@@ -65,7 +65,6 @@ export class DailyStatusComponent implements OnInit {
   maxDate: Date;
   disable = true;
   newDate = new Date();
-  months_short = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   d = new Date();
   hour;
@@ -643,30 +642,10 @@ export class DailyStatusComponent implements OnInit {
       }
       edit.sort()
       var lastEdit = edit[edit.length - 1]
-      var dateDiff = newDate.getDate() - lastEdit.getDate()
-      if (dateDiff <= 7) {
-        weekday = day[lastEdit.getDay()]
-        inweek = true
-      } else {
-        inweek = false
-        let date = lastEdit.getDate()
-        let month = this.months_short[lastEdit.getMonth()]
-
-        monthDate = month + " " + date
-      }
-      var time = lastEdit.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
       if (value == 1) {
-        if (inweek) {
-          this.lastEditString1 = weekday + " " + time
-        } else {
-          this.lastEditString1 = monthDate + ", " + time
-        }
+        this.lastEditString1 = lastEdit;
       } else {
-        if (inweek) {
-          this.lastEditString2 = weekday + " " + time
-        } else {
-          this.lastEditString2 = monthDate + ", " + time
-        }
+        this.lastEditString2 = lastEdit;
       }
     } else {
       if (value == 1) {
