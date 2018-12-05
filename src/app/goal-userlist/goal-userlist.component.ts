@@ -53,25 +53,6 @@ export class GoalUserlistComponent implements OnInit {
     }
   }
 
-  changeCSS() {
-    if (!this.checker) {
-      document.getElementById("userslist").classList.add("block")
-      document.getElementById("list").classList.add("block")
-      document.getElementById("list").classList.add("shadow")
-      document.getElementById("search_name").classList.add("flexed")
-      document.getElementById("userslist").classList.add("flex")
-      this.checker = !this.checker
-    }
-    else {
-      document.getElementById("userslist").classList.remove("block")
-      document.getElementById("list").classList.remove("block")
-      document.getElementById("list").classList.remove("shadow")
-      document.getElementById("search_name").classList.remove("flexed")
-      document.getElementById("userslist").classList.remove("flex")
-      this.checker = !this.checker
-
-    }
-  }
   feedbackUserList(navigationBarList) {
     this.feedbackmemberArray = navigationBarList;
     this.length = this.feedbackmemberArray.length;

@@ -32,7 +32,7 @@
           <div class="spent_text">Hours spent</div>
         </div>
         <div class="last_edit_label" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0)">
-          Edited: {{lastEditString1}}
+          Edited: {{lastEditString1 | date:'dd MMM yy, hh:mm aaa'}}
         </div>
         <div id="block-copy1" (click)="copy(selectedYesterdaysTasks, 1)" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1 ">
           <img src="../../assets/copy.png">
@@ -66,7 +66,7 @@
           <div class="total_time_text">{{total_hours_spent2}}h {{total_minutes_spent2}}m</div>
           <div class="spent_text">Hours spent</div>
         </div>
-        <div class="last_edit_label">Edited: {{lastEditString2}}</div>
+        <div class="last_edit_label">Edited: {{lastEditString2 | date:'dd MMM yy, hh:mm aaa'}}</div>
         <div id="block-copy2" (click)="copy(selectedTodaysTasks, 2)" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
           <img src="../../assets/copy.png">
         </div>

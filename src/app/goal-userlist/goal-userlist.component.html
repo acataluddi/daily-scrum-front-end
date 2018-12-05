@@ -1,9 +1,14 @@
-<div class="userlist-maindiv" id="userslist" *ngIf="length>0">
+<div class="userlist-maindiv" [ngClass]="{'block':checker, 'flex': checker}" 
+id="userslist" *ngIf="length>0">
   <div class="search">
-    <div class="search_icon" (click)="changeCSS(); searchText=''"><img src="../../assets/Combined_Shape_Copy_2.png"></div>
-    <div class="search_name" id="search_name"><input [(ngModel)]="searchText" placeholder="Search"></div>
+    <div class="search_icon" (click)="checker=!checker; searchText=''">
+      <img src="../../assets/Combined_Shape_Copy_2.png">
+    </div>
+    <div class="search_name" [ngClass]="{'flexed':checker}" id="search_name">
+      <input [(ngModel)]="searchText" placeholder="Search">
+    </div>
   </div>
-  <div class="list" id="list">
+  <div class="list" [ngClass]="{'block':checker, 'shadow':checker}" id="list">
     <div *ngFor="let member of feedbackmemberArray | feedbacklistfilter : searchText">
       <div class="member" id="{{member.memberId}}" (click)="getGoalsOfUser(member); searchText=''">
         <div><img class="member_logo" src="{{member.memberImage}}"></div>

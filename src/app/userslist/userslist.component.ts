@@ -69,44 +69,11 @@ export class UserslistComponent implements OnInit {
     this.router.navigate(['/daily-status', this.childProjectId, this.childProject]);
   }
 
-  changeCSS() {
-    if (!this.checker) {
-      document.getElementById("userslist").classList.add("block")
-      document.getElementById("list").classList.add("block")
-      document.getElementById("list").classList.add("shadow")
-      document.getElementById("search_name").classList.add("flexed")
-      document.getElementById("userslist").classList.add("flex")
-      this.checker = !this.checker
-    }
-    else {
-      document.getElementById("userslist").classList.remove("block")
-      document.getElementById("list").classList.remove("block")
-      document.getElementById("list").classList.remove("shadow")
-      document.getElementById("search_name").classList.remove("flexed")
-      document.getElementById("userslist").classList.remove("flex")
-      this.checker = !this.checker
-    }
-  }
-
   @HostListener('window:scroll', [])
   onWindowScroll() {
     let number = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
     if (number > 0) {
-      document.getElementById("userslist").classList.remove("block")
-      document.getElementById("list").classList.remove("block")
-      document.getElementById("list").classList.remove("shadow")
-      document.getElementById("search_name").classList.remove("flexed")
-      document.getElementById("userslist").classList.remove("flex")
-    }
-  }
-
-  hidelist() {
-    if (document.getElementById("list").classList.contains('block')) {
-      document.getElementById("userslist").classList.remove("block")
-      document.getElementById("list").classList.remove("block")
-      document.getElementById("list").classList.remove("shadow")
-      document.getElementById("search_name").classList.remove("flexed")
-      document.getElementById("userslist").classList.remove("flex")
+      this.checker=false;
     }
   }
 }

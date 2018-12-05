@@ -151,10 +151,10 @@ export class HeaderComponent implements OnInit {
     } else if (currenturl == '/project') {
 
       if (this.operation === "AddProject") {
-        this.title = 'New Project';
+        this.title = '|  New Project';
       }
       if (this.operation === "EditProject") {
-        this.title = 'Edit Project';
+        this.title = '|  Edit Project';
       }
 
       this.show_dailyscrum = false
