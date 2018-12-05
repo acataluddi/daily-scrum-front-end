@@ -47,6 +47,7 @@ export class DashboardComponent implements OnInit {
   imageurl = [];
   UserType: string;
   operation: string;
+  myEmail: string;
 
   ngOnInit() {
 
@@ -54,6 +55,7 @@ export class DashboardComponent implements OnInit {
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
           .subscribe(msg => {
+            this.myEmail = msg.email;
             this.UserType = msg.userType;
             if (this.UserType === "Admin") {
               this.flag1 = true;
@@ -213,11 +215,26 @@ export class DashboardComponent implements OnInit {
   outerClick(event) {
     if (this.flag2) {
       if ((event.target.id != 'menu-button' || event.target.id != 'menu-button' || event.target.id != 'menu-dot') &&
-        (event.target.id == 'bottom-div')) {
+        (event.target.id == 'bottom-div') || event.target.id == 'main-div') {
         for (let i = 0; i < this.show.length; i++) {
           this.show[i] = 0;
         }
       }
+    }
+  }
+
+  inProject(project: Project) {
+    if (this.UserType == 'Admin') {
+      return true;
+    } else {
+      var id = this.myEmail;
+      var myMemobj = project.members.find(function (element) {
+        return element.email == id;
+      });
+      if (myMemobj.role == 'Project Manager') {
+        return true;
+      }
+      return false;
     }
   }
 }

@@ -113,6 +113,7 @@
 
  .SmallCircleButton2 {
    background-color: rgba(12, 33, 93, 1);
+   cursor: default;
  }
 
  .ExtraMembersDiv {
@@ -120,10 +121,6 @@
    font-weight: 600;
    font-size: 11px;
    color: white;
- }
-
- .SmallCircleButton2:hover {
-   background-color: rgb(177, 177, 177, 0.8);
  }
 
  .TwoButton {
