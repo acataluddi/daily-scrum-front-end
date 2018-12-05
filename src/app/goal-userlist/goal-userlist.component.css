@@ -42,7 +42,7 @@ input[placeholder="Search"] {
 .member {
   height: 42px;
   padding: 5px 30px 5px 7%;
-  margin: 5px 9px 0px 5px;
+  margin: 5px 5px 0px 5px;
   display: flex;
   cursor: pointer;
 }
