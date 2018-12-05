@@ -4,10 +4,8 @@ import { Member } from "../model/member-model";
 import { LoginService } from "../service/login.service";
 import { Router } from '@angular/router';
 import { DashboardService } from "../service/dashboardservice.service";
-import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import { ProjectService } from "../service/project.service";
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
-import { AdminviewallComponent } from '../adminviewall/adminviewall.component';
 import { AuthService } from 'angular-6-social-login';
 import { NavigationdataService } from '../service/navigationdata.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -27,9 +25,7 @@ export class DashboardComponent implements OnInit {
     private dashboardservice: DashboardService,
     private taskService: ProcessIndividualTaskService,
     private navservice: NavigationdataService,
-    private viewallservice: AdminviewallserviceService,
     private projectService: ProjectService,
-    private viewallcomponent: AdminviewallComponent,
     private socialAuthService: AuthService) {
 
   }
@@ -51,7 +47,7 @@ export class DashboardComponent implements OnInit {
   imageurl = [];
   UserType: string;
   operation: string;
-  dropdownVisibilityFlag: boolean;
+
   ngOnInit() {
 
     this.socialAuthService.authState.subscribe((user) => {
@@ -65,11 +61,9 @@ export class DashboardComponent implements OnInit {
             } else if (this.UserType === "Manager") {
               this.flag2 = true;
             }
-
           });
       }
     });
-    this.dropdownVisibilityFlag = false;
     this.dashboardservice.getProjects()
       .subscribe(projectArr => {
         if (projectArr != null) {
@@ -80,10 +74,10 @@ export class DashboardComponent implements OnInit {
 
   InitializeShow() {
     for (let i = 0; i < this.noOfProjects; i++) {
-
       this.show[i] = 0;
     }
   }
+
   getProjects(projectArr): void {
     let x = 0;
     this.TotalProjectMembers[0] = 0;
@@ -95,19 +89,14 @@ export class DashboardComponent implements OnInit {
     for (let i = 0; i < this.noOfProjects; i++) {
       this.noOfMembers[i] = this.newproject[i].members.length;
       this.TotalProjectMembers[i + 1] = this.TotalProjectMembers[i] + this.noOfMembers[i];
+    }
+  }
 
-    }
-  }
-  HideMenuDropDown() {
-    if (this.dropdownVisibilityFlag == true) {
-      this.dropdownVisibilityFlag = false;
-    }
-  }
   getMembers(membersArr): void {
     this.memberArray = membersArr;
     this.TotalMembers = this.memberArray.length;
-
   }
+
   openDailyStatus(project) {
     this.saveSelectedDate();
     var projectId = project.projectId
@@ -121,7 +110,6 @@ export class DashboardComponent implements OnInit {
       }
     }
     var startdate = project.startDate;
-
     var myMemobj = project.members.find(function (element) {
       return element.email == myId;
     });
@@ -173,6 +161,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('/project');
   }
   deleteId;
+
   DeleteProject() {
     this.dashboardservice.deleteProjects(this.deleteId)
       .subscribe((msg) => console.log("Project Deleted"));
