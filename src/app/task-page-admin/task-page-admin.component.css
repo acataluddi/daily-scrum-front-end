@@ -125,11 +125,9 @@ img.right-arrow:active {
 .total_time_border {
   display: flex;
   text-align: center;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 2px;
+  border-radius: 4px;
   height: 60%;
-  border-color: rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(225, 227, 230, 1);
 }
 
 .total_time_text {
@@ -176,7 +174,8 @@ img.right-arrow:active {
 .member1 {
   width: 100%;
   margin-top: 0%;
-  border: 1px solid rgba(216, 216, 216, 1);
+  border: 1px solid rgba(225, 227, 230, 1);
+  border-radius: 4px;
 }
 
 .header {
