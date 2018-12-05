@@ -6,7 +6,7 @@
 
 <body>
   <div class="MainDiv">
-    <div class="BottomDiv">
+    <div class="BottomDiv" id="bottom-div" (click)=outerClick($event)>
       <div *ngIf="noOfProjects === 0">
         <img class="smiley" src="../../assets/NoProject.png">
         <div class="noProject">Relax! You have no projects assigned</div>
@@ -31,7 +31,7 @@
             <button class="DailyStatusButton" (click)="openDailyStatus(Project)">
               <div class="DailyStatusDiv">Daily Status</div>
             </button>
-            <div class="MenuButton DropdownButton" *ngIf="flag2 === true" (click)="click(j)">
+            <div class="MenuButton DropdownButton" id="menu-button" *ngIf="flag2 === true" (click)="click(j)">
               <div class="DropdownContentDiv" *ngIf="show[j]">
                 <div class="EditDiv Button" (click)="EditProject(Project)">
                   Edit Project
@@ -40,8 +40,8 @@
                   Delete Project
                 </div>
               </div>
-              <div class="MenuDotDiv">
-                <img src="../../assets/Menudots.png">
+              <div class="MenuDotDiv" id="menu-dot">
+                <img id="dot-img" src="../../assets/Menudots.png">
               </div>
             </div>
           </div>

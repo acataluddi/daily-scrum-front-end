@@ -209,4 +209,15 @@ export class DashboardComponent implements OnInit {
     selectedDate += nday + '-' + nmonth + '-' + d.getFullYear();
     localStorage.setItem("selectedDate", selectedDate);
   }
+
+  outerClick(event) {
+    if (this.flag2) {
+      if ((event.target.id != 'menu-button' || event.target.id != 'menu-button' || event.target.id != 'menu-dot') &&
+        (event.target.id == 'bottom-div')) {
+        for (let i = 0; i < this.show.length; i++) {
+          this.show[i] = 0;
+        }
+      }
+    }
+  }
 }

@@ -75,7 +75,9 @@
   font-weight: 600;
   color: rgba(27, 47, 103, 1);
   text-align: left;
-  line-height: 24px
+  line-height: 24px;
+  white-space: pre-line;
+  word-break: break-all;
 }
 
 .created-on {
@@ -243,5 +245,13 @@
 
   .time {
     display: flex;
+  }
+
+  .no-goals {
+    width: 100% !important;
+  }
+
+  .no-goals-msg {
+    padding-left: 10px;
   }
 }
