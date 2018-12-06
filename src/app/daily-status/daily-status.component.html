@@ -10,7 +10,7 @@
       <button class="view_all_task" *ngIf="flag && showUserList" (click)="viewAllTasks()">
         View all tasks
       </button>
-      <div *ngIf="flag" class="alt-View-class" (click)="viewAllTasks()">
+      <div *ngIf="flag && showUserList" class="alt-View-class" (click)="viewAllTasks()">
         <span class="alt-View glyphicon glyphicon-th"></span>
       </div>
     </div>
