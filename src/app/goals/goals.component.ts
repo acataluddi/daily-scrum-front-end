@@ -23,6 +23,7 @@ export class GoalsComponent implements OnInit {
   navigationMemberLength: number;
   noOfComments = [];
   expand = [];
+  showSend = true;
   @ViewChild('goalUserList') goalUserList: GoalUserlistComponent;
 
   constructor(
