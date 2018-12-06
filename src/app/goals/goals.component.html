@@ -42,8 +42,8 @@
             </div>
             <div class="input-comment">
               <textarea [(ngModel)]="comment.commentDescription" class="addComment" autosize rows="2" max-row="3"
-                placeholder="Add a comment"></textarea>
-              <img *ngIf="comment.commentDescription!==''" class="sendIcon" (click)="createNewComment(comment,goal);expand[i]=true"
+                placeholder="Add a comment" (click)="showSend=true"></textarea>
+              <img *ngIf="comment.commentDescription!=='' && showSend" class="sendIcon" (click)="createNewComment(comment,goal);expand[i]=true;showSend=false"
                 src="../../assets/send.png">
             </div>
           </div>
