@@ -333,6 +333,11 @@ img.right-arrow:active {
   visibility: hidden;
 }
 
+.not-pm {
+  text-align: center;
+  margin-top: 350px;
+}
+
 @media screen and (max-width: 1300px) {
   .view_all_task {
     width: 125px;

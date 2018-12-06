@@ -31,7 +31,7 @@
             <button class="DailyStatusButton" (click)="openDailyStatus(Project)">
               <div class="DailyStatusDiv">Daily Status</div>
             </button>
-            <div class="MenuButton DropdownButton" id="menu-button" *ngIf="flag2 === true && inProject(Project)" (click)="click(j)">
+            <div class="MenuButton DropdownButton" id="menu-button" *ngIf="flag2 === true && isProjectManager(Project)" (click)="click(j)">
               <div class="DropdownContentDiv" *ngIf="show[j]">
                 <div class="EditDiv Button" (click)="EditProject(Project)">
                   Edit Project

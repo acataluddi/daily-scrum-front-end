@@ -1,5 +1,5 @@
 import { Component, OnInit, Injectable } from '@angular/core';
-import { member } from "../model/project-model";
+import { member, Project } from "../model/project-model";
 import { Task } from '../model/task-model';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
@@ -102,6 +102,7 @@ export class DailyStatusComponent implements OnInit {
   elementDelete1;
   elementCopy2;
   elementDelete2;
+  showUserList = (localStorage.getItem('showUsers')=='true');
   private eventsSubject1 = new Subject<boolean>();
   private eventsSubject2 = new Subject<boolean>();
   private HideSaved1 = new Subject<boolean>();
@@ -135,6 +136,8 @@ export class DailyStatusComponent implements OnInit {
 
     this.changeProjectsubscription = taskservice.newList.subscribe(
       data => {
+        this.showUserList=this.isProjectManager(data);
+        localStorage.setItem('showUsers', this.showUserList.toString());
         var myEmail = this.userEmail
         var inProject;
 
@@ -1059,5 +1062,20 @@ export class DailyStatusComponent implements OnInit {
     }
     selectedDate += nday + '-' + nmonth + '-' + newSelectedDate.getFullYear();
     localStorage.setItem("selectedDate", selectedDate);
+  }
+
+  isProjectManager(project: Project) {
+    if (this.UserType == 'Admin') {
+      return true;
+    } else {
+      var id = this.userEmail;
+      var myMemobj = project.members.find(function (element) {
+        return element.email == id;
+      });
+      if (myMemobj.role == 'Project Manager') {
+        return true;
+      }
+      return false;
+    }
   }
 }

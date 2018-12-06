@@ -3,7 +3,7 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 </head>
 
-<body *ngIf="flag === true">
+<div *ngIf="flag === true && showContents">
   <div class="right-header">
     <app-userslist [childProject]="currentProject" [childProjectId]="projectId"></app-userslist>
     <div class="today_header">
@@ -60,4 +60,7 @@
       </div>
     </div>
   </div>
-</body>
+</div>
+<div *ngIf="flag==true && showContents==false" class="not-pm">
+  Sorry, You're not a PM in this Project
+</div>
