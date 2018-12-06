@@ -60,8 +60,10 @@ export class DashboardComponent implements OnInit {
             if (this.UserType === "Admin") {
               this.flag1 = true;
               this.flag2 = true;
+              localStorage.setItem('showContents', 'true');
             } else if (this.UserType === "Manager") {
               this.flag2 = true;
+              localStorage.setItem('showContents', 'true');
             }
           });
       }
@@ -72,6 +74,7 @@ export class DashboardComponent implements OnInit {
           this.getProjects(projectArr)
         }
       });
+    localStorage.setItem('showUsers','')
   }
 
   InitializeShow() {
@@ -135,12 +138,13 @@ export class DashboardComponent implements OnInit {
     } else {
       this.setLocalStorage(myMemobj)
       this.navservice.changedata(myMemobj)
-      if (this.flag2) {
+      if (this.flag2 && this.isProjectManager(project)) {
         this.router.navigate(['/task-page-admin', projectId, name, startdate]);
       } else {
         this.router.navigate(['/daily-status', projectId, name]);
       }
     }
+    this.taskService.changeProject(project)
   }
 
   setLocalStorage(memobj) {
@@ -223,7 +227,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  inProject(project: Project) {
+  isProjectManager(project: Project) {
     if (this.UserType == 'Admin') {
       return true;
     } else {

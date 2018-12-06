@@ -1,5 +1,5 @@
 <div class="header-part">
-  <div *ngIf="flag">
+  <div *ngIf="flag && showUserList">
     <app-userslist [childProject]="currentProject" [childProjectId]="projectId" (selectedEmailEvent)="changeEmail($event)"></app-userslist>
   </div>
   <div class="name-button">
@@ -7,7 +7,7 @@
       {{taskHolderName}}
     </div>
     <div class="view-all">
-      <button class="view_all_task" *ngIf="flag" (click)="viewAllTasks()">
+      <button class="view_all_task" *ngIf="flag && showUserList" (click)="viewAllTasks()">
         View all tasks
       </button>
       <div *ngIf="flag" class="alt-View-class" (click)="viewAllTasks()">

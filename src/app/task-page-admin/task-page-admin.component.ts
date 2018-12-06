@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { LoginService } from "../service/login.service";
 import { TaskPageService } from "../service/task-page.service";
 import { NavigationdataService } from '../service/navigationdata.service';
-import { member } from '../model/project-model';
+import { member, Project } from '../model/project-model';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +46,8 @@ export class TaskPageAdminComponent implements OnInit {
   selectedDate: Date;
   minDate: Date;
   maxDate: Date;
+  showContents = true;
+  UserType:string;
 
   constructor(
     private taskservice: ProcessIndividualTaskService,
@@ -76,6 +78,8 @@ export class TaskPageAdminComponent implements OnInit {
     });
     this.subscription = taskservice.newList.subscribe(
       data => {
+        this.showContents = this.isProjectManager(data);
+        localStorage.setItem('showContents',this.showContents.toString())
         this.currentProject = data.projectName;
         this.projectId = data.projectId;
         var parts = data.startDate.split('-');
@@ -91,6 +95,7 @@ export class TaskPageAdminComponent implements OnInit {
       });
   }
   ngOnInit() {
+    this.showContents = (localStorage.getItem('showContents') == 'true')
     this.maxDate = new Date();
     this.myDateValue = this.getSelectedDate();
     this.projectId = localStorage.getItem("projectId");
@@ -100,13 +105,15 @@ export class TaskPageAdminComponent implements OnInit {
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
           .subscribe(msg => {
-            msg.userType;
+            this.UserType = msg.userType;
+            this.email = msg.email;
             if (msg.userType === "Admin" || msg.userType === "Manager") {
               this.flag = true;
             }
           });
       }
     });
+    localStorage.setItem('showUsers','true');
   }
 
   getTaskPageData(taskDate, projectId) {
@@ -248,5 +255,20 @@ export class TaskPageAdminComponent implements OnInit {
     var parts = dateSelected.split('-');
     var newSelectedDate = new Date(+parts[2], +(parts[1]) - 1, +parts[0]);
     return newSelectedDate;
+  }
+
+  isProjectManager(project: Project) {
+    if (this.UserType == 'Admin') {
+      return true;
+    } else {
+      var id = this.email;
+      var myMemobj = project.members.find(function (element) {
+        return element.email == id;
+      });
+      if (myMemobj.role == 'Project Manager') {
+        return true;
+      }
+      return false;
+    }
   }
 }
