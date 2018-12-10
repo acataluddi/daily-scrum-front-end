@@ -429,13 +429,13 @@ input[value="Cancel"]:active {
 }
 
 .copied-label1 {
-  margin: -14px 16px 0px 383px;
+  margin: -14px 16px 0px 395px;
   color: rgb(169, 169, 169);
   font-size: 12px;
 }
 
 .copied-label2 {
-  margin: -14px 16px 0px 375px;
+  margin: -14px 16px 0px 395px;
   color: rgb(169, 169, 169);
   font-size: 12px;
 }
@@ -472,11 +472,11 @@ input[value="Cancel"]:active {
   }
 
   .copied-label1 {
-    margin-left: 370px;
+    margin-left: 385px;
   }
 
   .copied-label2 {
-    margin-left: 360px;
+    margin-left: 385px;
   }
 }
 
@@ -520,11 +520,11 @@ input[value="Cancel"]:active {
   }
 
   .copied-label1 {
-    margin-left: 325px
+    margin-left: 360px
   }
 
   .copied-label2 {
-    margin-left: 315px
+    margin-left: 360px
   }
 }
 
