@@ -98,10 +98,8 @@ export class DailyStatusComponent implements OnInit {
   copied1 = false;
   copied2 = false;
   deselectCopiedtext = 'DESELECT';
-  elementCopy1;
-  elementDelete1;
-  elementCopy2;
-  elementDelete2;
+  blockCopyDelete1 = true;
+  blockCopyDelete2 = true;
   showUserList = (localStorage.getItem('showUsers')=='true');
   private eventsSubject1 = new Subject<boolean>();
   private eventsSubject2 = new Subject<boolean>();
@@ -352,15 +350,23 @@ export class DailyStatusComponent implements OnInit {
           this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
           this.selectedYesterdaysTasks = []
           this.checkbox1 = false
-          this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
+          if (this.selectedYesterdaysTasks.length == 0) {
+            this.blockCopyDelete1 = true;
+          } else {
+            this.blockCopyDelete1 = false;
+          }
           break;
         case 2: this.creatednewtoday = true
           this.total_hours_spent2 = this.totalhour;
           this.total_minutes_spent2 = this.totalminute;
           this.getTask(this.todayTaskDate, this.yesterdayTaskDate, this.email, this.projectId)
           this.selectedTodaysTasks = []
-          this.checkbox2 = false
-          this.blockCopyDelete(this.selectedTodaysTasks.length, 2)
+          this.checkbox2 = false;
+          if (this.selectedTodaysTasks.length == 0) {
+            this.blockCopyDelete2 = true;
+          } else {
+            this.blockCopyDelete2 = false;
+          }
           break;
       }
     }
@@ -462,6 +468,10 @@ export class DailyStatusComponent implements OnInit {
     this.sevenDaysFlagRight = false;
     this.checkbox1 = false;
     this.checkbox2 = false;
+    this.selectedTodaysTasks = [];
+    this.selectedYesterdaysTasks = [];
+    this.blockCopyDelete1 = true;
+    this.blockCopyDelete2 = true;
     if (newDate.getDate() === this.maxDate.getDate() &&
       newDate.getMonth() === this.maxDate.getMonth() &&
       newDate.getFullYear() === this.maxDate.getFullYear()) {
@@ -832,10 +842,7 @@ export class DailyStatusComponent implements OnInit {
   selectedTasks(task, value) {
 
     switch (value) {
-      case 1: if (this.selectedYesterdaysTasks.length == 0) {
-        this.getElementStatus1 = false;
-      }
-        this.getElement(1)
+      case 1: 
         var exist = this.selectedYesterdaysTasks.find(function (element) {
           return element.taskId == task.taskId;
         });
@@ -847,12 +854,9 @@ export class DailyStatusComponent implements OnInit {
         } else {
           this.checkbox1 = false
         }
-        this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
+        this.blockCopyDelete1 = false;
         break;
-      case 2: if (this.selectedTodaysTasks.length == 0) {
-        this.getElementStatus2 = false;
-      }
-        this.getElement(2)
+      case 2: 
         var exist = this.selectedTodaysTasks.find(function (element) {
           return element.taskId == task.taskId;
         });
@@ -870,7 +874,7 @@ export class DailyStatusComponent implements OnInit {
         } else {
           this.copyCard = false
         }
-        this.blockCopyDelete(this.selectedTodaysTasks.length, 2)
+        this.blockCopyDelete2 = false;
         break;
     }
   }
@@ -884,7 +888,11 @@ export class DailyStatusComponent implements OnInit {
         } else {
           this.checkbox1 = false
         }
-        this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
+        if (this.selectedYesterdaysTasks.length == 0) {
+          this.blockCopyDelete1 = true;
+        } else {
+          this.blockCopyDelete1 = false;
+        }
         break;
       case 2: var index = this.selectedTodaysTasks.indexOf(task);
         this.selectedTodaysTasks.splice(index, 1);
@@ -895,32 +903,27 @@ export class DailyStatusComponent implements OnInit {
         }
         this.numOfSelected = this.selectedTodaysTasks.length.toString()
         if (this.selectedTodaysTasks.length != 0) {
-          this.copyCard = true
+          this.copyCard = true;
+          this.blockCopyDelete2 = false;
         } else {
-          this.copyCard = false
+          this.copyCard = false;
+          this.blockCopyDelete2 = true;
         }
-        this.blockCopyDelete(this.selectedTodaysTasks.length, 2)
         break;
     }
   }
 
   selectAll(taskArray, value) {
     switch (value) {
-      case 1: if (this.selectedYesterdaysTasks.length == 0) {
-        this.getElementStatus1 = false;
-      }
-        this.getElement(1)
+      case 1: 
         this.selectedYesterdaysTasks = [];
         for (let task of taskArray) {
           this.selectedYesterdaysTasks.push(task);
         }
         this.emitEventToChild(true, value);
-        this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
+        this.blockCopyDelete1 = false;
         break;
-      case 2: if (this.selectedTodaysTasks.length == 0) {
-        this.getElementStatus2 = false;
-      }
-        this.getElement(2);
+      case 2: 
         this.selectedTodaysTasks = [];
         for (let task of taskArray) {
           this.selectedTodaysTasks.push(task)
@@ -928,7 +931,7 @@ export class DailyStatusComponent implements OnInit {
         this.numOfSelected = this.selectedTodaysTasks.length.toString()
         this.copyCard = true
         this.emitEventToChild(true, value);
-        this.blockCopyDelete(this.selectedTodaysTasks.length, 2)
+        this.blockCopyDelete2 = false;
         break;
     }
   }
@@ -937,14 +940,14 @@ export class DailyStatusComponent implements OnInit {
     switch (value) {
       case 1: this.selectedYesterdaysTasks = [];
         this.emitEventToChild(false, value);
-        this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
+        this.blockCopyDelete1 = true;
         break;
       case 2: this.selectedTodaysTasks = [];
         this.checkbox2 = false
         this.emitEventToChild(false, value);
         this.numOfSelected = this.selectedTodaysTasks.length.toString()
-        this.copyCard = false
-        this.blockCopyDelete(this.selectedTodaysTasks.length, 2)
+        this.copyCard = false;
+        this.blockCopyDelete2 = true;
         break;
     }
   }
@@ -993,50 +996,13 @@ export class DailyStatusComponent implements OnInit {
     if (value == 1) {
       this.checkbox1 = false;
       this.selectedYesterdaysTasks = [];
-      this.blockCopyDelete(this.selectedYesterdaysTasks.length, 1)
+      this.blockCopyDelete1 = true;
     } else {
       this.checkbox2 = false;
       this.selectedTodaysTasks = [];
-      this.blockCopyDelete(this.selectedTodaysTasks.length, 2)
+      this.blockCopyDelete2 = true;
     }
     this.copyCard = false;
-  }
-
-  blockCopyDelete(length, value) {
-    switch (value) {
-      case 1: if (length == 0) {
-        this.elementCopy1.setAttribute('id', 'block-copy1');
-        this.elementDelete1.setAttribute('id', 'block-delete1');
-      } else {
-        this.elementCopy1.setAttribute('id', 'copy1')
-        this.elementDelete1.setAttribute('id', 'delete1')
-      }
-        break
-      case 2: if (length == 0) {
-        this.elementCopy2.setAttribute('id', 'block-copy2');
-        this.elementDelete2.setAttribute('id', 'block-delete2');
-      } else {
-        this.elementCopy2.setAttribute('id', 'copy2')
-        this.elementDelete2.setAttribute('id', 'delete2')
-      }
-    }
-  }
-
-  getElement(value) {
-    switch (value) {
-      case 1: if (this.getElementStatus1 == false) {
-        this.elementCopy1 = document.getElementById('block-copy1');
-        this.elementDelete1 = document.getElementById('block-delete1');
-        this.getElementStatus1 = true
-      }
-        break;
-      case 2: if (this.getElementStatus2 == false) {
-        this.elementCopy2 = document.getElementById('block-copy2');
-        this.elementDelete2 = document.getElementById('block-delete2');
-        this.getElementStatus2 = true
-      }
-        break;
-    }
   }
 
   getSelectedDate(): Date {

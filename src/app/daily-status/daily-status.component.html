@@ -34,11 +34,21 @@
         <div class="last_edit_label" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0)">
           Edited: {{lastEditString1 | date:'dd MMM yy, hh:mm aaa'}}
         </div>
-        <div id="block-copy1" (click)="copy(selectedYesterdaysTasks, 1)" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1 ">
-          <img src="../../assets/copy.png">
+        <div style="display: flex" *ngIf="blockCopyDelete1">
+          <div id="block-copy1" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1 ">
+            <img src="../../assets/copy.png">
+          </div>
+          <div id="block-delete1" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1">
+            <img src="../../assets/delete-task24px.png">
+          </div>
         </div>
-        <div id="block-delete1" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1" (click)="deleteSelected(selectedYesterdaysTasks, MockYesterdayTasks, 1)">
-          <img src="../../assets/delete-task24px.png">
+        <div style="display: flex" *ngIf="!blockCopyDelete1">
+          <div id="copy1" (click)="copy(selectedYesterdaysTasks, 1)" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1 ">
+            <img src="../../assets/copy.png">
+          </div>
+          <div id="delete1" (click)="deleteSelected(selectedYesterdaysTasks, MockYesterdayTasks, 1)" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1">
+            <img src="../../assets/delete-task24px.png">
+          </div>
         </div>
       </div>
       <div class="copied-label1" *ngIf="copied1">Copied!</div>
@@ -67,11 +77,21 @@
           <div class="spent_text">Hours spent</div>
         </div>
         <div class="last_edit_label">Edited: {{lastEditString2 | date:'dd MMM yy, hh:mm aaa'}}</div>
-        <div id="block-copy2" (click)="copy(selectedTodaysTasks, 2)" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
-          <img src="../../assets/copy.png">
+        <div style="display: flex" *ngIf="blockCopyDelete2">
+          <div id="block-copy2" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
+            <img src="../../assets/copy.png">
+          </div>
+          <div id="block-delete2" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
+            <img src="../../assets/delete-task24px.png">
+          </div>
         </div>
-        <div id="block-delete2" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2" (click)="deleteSelected(selectedTodaysTasks, MockTodayTasks, 2)">
-          <img src="../../assets/delete-task24px.png">
+        <div style="display: flex" *ngIf="!blockCopyDelete2">
+          <div id="copy2" (click)="copy(selectedTodaysTasks, 2)" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
+            <img src="../../assets/copy.png">
+          </div>
+          <div id="delete2" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2" (click)="deleteSelected(selectedTodaysTasks, MockTodayTasks, 2)">
+            <img src="../../assets/delete-task24px.png">
+          </div>
         </div>
       </div>
       <div class="copied-label2" *ngIf="copied2">Copied!</div>
@@ -82,7 +102,7 @@
   <div class="vertical"></div>
   <div class="container left-part">
     <div class="left-inner-part">
-        <div class="sevenDayLimit" *ngIf="sevenDaysFlagLeft">You can't edit tasks prior to 7 days</div>
+      <div class="sevenDayLimit" *ngIf="sevenDaysFlagLeft">You can't edit tasks prior to 7 days</div>
       <div class="ind-task" *ngFor="let yesterdayTask of MockYesterdayTasks">
         <app-individual-task [task]=yesterdayTask [editable]=editable1 [events]="eventsSubject1.asObservable()"
           [hideSavedEvent]="HideSaved1.asObservable()" (timeChangeEvent)="modifyTime($event, MockYesterdayTasks, 1)"
@@ -97,7 +117,7 @@
   </div>
   <div class="container right-part">
     <div class="right-inner-part">
-        <div class="sevenDayLimit" *ngIf="sevenDaysFlagRight">You can't edit tasks prior to 7 days</div>
+      <div class="sevenDayLimit" *ngIf="sevenDaysFlagRight">You can't edit tasks prior to 7 days</div>
       <div *ngFor="let todayTask of MockTodayTasks">
         <app-individual-task [task]=todayTask [editable]=editable2 [events]="eventsSubject2.asObservable()"
           [hideSavedEvent]="HideSaved2.asObservable()" (timeChangeEvent)="modifyTime($event, MockTodayTasks, 2)"
