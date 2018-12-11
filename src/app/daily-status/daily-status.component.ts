@@ -693,11 +693,11 @@ export class DailyStatusComponent implements OnInit {
     if (taskArray == this.MockTodayTasks) {
       value = 2;
       this.creatednewtoday = false;
-      this.oldtodaytask.description = undefined;
+      this.oldtodaytask = taskArray[taskArray.length-1]
     } else {
       value = 1;
       this.creatednewyesterday = false;
-      this.oldyesterdaytask.description = undefined;
+      this.oldyesterdaytask = taskArray[taskArray.length-1]
     }
   }
 
