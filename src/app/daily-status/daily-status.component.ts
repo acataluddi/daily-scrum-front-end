@@ -65,6 +65,7 @@ export class DailyStatusComponent implements OnInit {
   maxDate: Date;
   disable = true;
   newDate = new Date();
+  days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   d = new Date();
   hour;
@@ -499,8 +500,8 @@ export class DailyStatusComponent implements OnInit {
       this.yesterdayval = "Yesterday's Tasks";
     }
     else {
-      this.todayval = this.month + " " + this.date + ", " + this.year;
-      this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+      this.todayval = this.days[newDate.getDay()] + ", " + this.month + " " + this.date + ", " + this.year;
+      this.yesterdayval = this.days[d1.getDay()] + ", " + this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
     }
     this.getData(newDate);
     this.saveSelectedDate(newDate)
@@ -529,8 +530,8 @@ export class DailyStatusComponent implements OnInit {
         this.yesterdayval = "Yesterday's Tasks";
       }
       else {
-        this.todayval = this.month + " " + this.date + ", " + this.year;
-        this.yesterdayval = this.months[this.newDate.getMonth()] + " " + this.newDate.getDate() + ", " + this.newDate.getFullYear();
+        this.todayval = this.days[d1.getDay()] + ", " + this.month + " " + this.date + ", " + this.year;
+        this.yesterdayval = this.days[this.newDate.getDay()] + ", " + this.months[this.newDate.getMonth()] + " " + this.newDate.getDate() + ", " + this.newDate.getFullYear();
       }
 
       this.newDate = d1;
@@ -550,8 +551,8 @@ export class DailyStatusComponent implements OnInit {
         this.yesterdayval = "Yesterday's Tasks";
       }
       else {
-        this.todayval = this.month + " " + this.date + ", " + this.year;
-        this.yesterdayval = this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
+        this.todayval = this.days[this.newDate.getDay()] + ", " + this.month + " " + this.date + ", " + this.year;
+        this.yesterdayval = this.days[d1.getDay()] + ", " + this.months[d1.getMonth()] + " " + d1.getDate() + ", " + d1.getFullYear();
       }
       this.newDate = d1;
       this.myDateValue = d1;
@@ -642,13 +643,7 @@ export class DailyStatusComponent implements OnInit {
 
   getLastEdit(taskArray, value) {
     if (taskArray.length != 0) {
-      var newDate = new Date()
       var edit = new Array()
-      var day = new Array(7);
-      var weekday
-      var inweek
-      let monthDate: string;
-      day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
       for (let task of taskArray) {
         let datevar = new Date(task.lastEdit)
         edit.push(datevar)
