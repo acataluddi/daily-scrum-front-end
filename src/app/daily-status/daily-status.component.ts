@@ -274,6 +274,7 @@ export class DailyStatusComponent implements OnInit {
       Todays.forEach(element => {
         this.TodayTasks.push(element)
       });
+      this.oldtodaytask = Todays[Todays.length-1];
     } else {
       this.TodayTasks = []
     }
@@ -286,6 +287,7 @@ export class DailyStatusComponent implements OnInit {
       Yesterdays.forEach(element => {
         this.YesterdayTasks.push(element)
       });
+      this.oldyesterdaytask = Yesterdays[Yesterdays.length-1];
     } else {
       this.YesterdayTasks = []
     }
@@ -394,7 +396,7 @@ export class DailyStatusComponent implements OnInit {
       this.creatednewtoday = false;
     }
     if (this.creatednewtoday === false) {
-      if (this.oldtodaytask.description !== '') {
+      if (this.oldtodaytask.description !== '' || this.MockTodayTasks.length === 0) {
         var ts = new Task();
         ts = this.initializeNew(ts);
         this.oldtodaytask = ts;
@@ -412,7 +414,7 @@ export class DailyStatusComponent implements OnInit {
       this.creatednewyesterday = false;
     }
     if (this.creatednewyesterday === false) {
-      if (this.oldyesterdaytask.description != '') {
+      if (this.oldyesterdaytask.description != '' || this.MockYesterdayTasks.length === 0) {
         var ts = new Task();
         ts = this.initializeNew(ts);
         this.oldyesterdaytask = ts;
@@ -465,6 +467,8 @@ export class DailyStatusComponent implements OnInit {
   }
 
   onDateChange(newDate: Date) {
+    this.creatednewtoday = false;
+    this.creatednewyesterday = false;
     this.sevenDaysFlagLeft = false;
     this.sevenDaysFlagRight = false;
     this.checkbox1 = false;
