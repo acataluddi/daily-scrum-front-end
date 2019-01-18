@@ -33,7 +33,7 @@
       Add Hours Spent
     </div>
     <div class="col-sm-2" *ngIf="edit_time_spent==true" (focusout)="emitTimeEvent(task)">
-      <timepicker id="timeSpent{{task.taskId}}" [(ngModel)]="time" [showMeridian]="false" [showSpinners]="false"
+      <timepicker id="timeSpent{{task.taskId}}" [(ngModel)]="time" [showMeridian]="false" [showSpinners]="false" [mousewheel]="false"
         [minuteStep]="1" autofocus></timepicker>
     </div>
     <div class="add_impediment" *ngIf="task.impediments== '' && show_impediment==false && editable" (click)="show_save=true; show_impediment=true; focus(2)">
