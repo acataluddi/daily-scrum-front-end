@@ -1,5 +1,5 @@
 <div class="header-part">
-  <div *ngIf="flag">
+  <div *ngIf="flag && showUserList">
     <app-userslist [childProject]="currentProject" [childProjectId]="projectId" (selectedEmailEvent)="changeEmail($event)"></app-userslist>
   </div>
   <div class="name-button">
@@ -7,10 +7,10 @@
       {{taskHolderName}}
     </div>
     <div class="view-all">
-      <button class="view_all_task" *ngIf="flag" (click)="viewAllTasks()">
+      <button class="view_all_task" *ngIf="flag && showUserList" (click)="viewAllTasks()">
         View all tasks
       </button>
-      <div *ngIf="flag" class="alt-View-class" (click)="viewAllTasks()">
+      <div *ngIf="flag && showUserList" class="alt-View-class" (click)="viewAllTasks()">
         <span class="alt-View glyphicon glyphicon-th"></span>
       </div>
     </div>
@@ -20,23 +20,38 @@
       <div class="yesterday_task_header">{{yesterdayval}}</div>
       <div class="total_time">
         <div *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1">
-          <span *ngIf="checkbox1 == false && editable1" class="dot dot-blank" (click)="checkbox1=true; selectAll(MockYesterdayTasks, 1)"></span>
-          <span *ngIf="checkbox1 && editable1" class="dot dot-fill" (click)="checkbox1=false; unselectAll(1)"></span>
+          <span *ngIf="checkbox1 == false && editable1" class="dot dot-blank" (click)="checkbox1=true; selectAll(MockYesterdayTasks, 1)"
+            style="margin-left: 1px"></span>
+          <span *ngIf="checkbox1 && editable1" (click)="checkbox1=false; unselectAll(1)">
+            <img class="img-checked" src="../../assets/minus-sign-in-circle.png" style="
+            margin-left: 1px">
+          </span>
         </div>
         <div class="total_time_border">
           <div class="total_time_text">{{total_hours_spent1}}h {{total_minutes_spent1}}m</div>
           <div class="spent_text">Hours spent</div>
         </div>
-        <div class="last_edit_label">Edited: {{lastEditString1}}</div>
-        <div id="block-copy1" (click)="copy(selectedYesterdaysTasks, 1)" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1 ">
-          <img src="../../assets/copy.png">
+        <div class="last_edit_label" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0)">
+          Edited: {{lastEditString1 | date:'dd MMM yy, hh:mm aaa'}}
         </div>
-        <div id="block-delete1" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1"
-          (click)="deleteSelected(selectedYesterdaysTasks, MockYesterdayTasks, 1)">
-          <img src="../../assets/delete-task24px.png">
+        <div style="display: flex" *ngIf="blockCopyDelete1">
+          <div id="block-copy1" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1 ">
+            <img src="../../assets/copy.png">
+          </div>
+          <div id="block-delete1" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1">
+            <img src="../../assets/delete-task24px.png">
+          </div>
+        </div>
+        <div style="display: flex" *ngIf="!blockCopyDelete1">
+          <div id="copy1" (click)="copy(selectedYesterdaysTasks, 1)" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1 ">
+            <img src="../../assets/copy.png">
+          </div>
+          <div id="delete1" (click)="deleteSelected(selectedYesterdaysTasks, MockYesterdayTasks, 1)" *ngIf="(total_hours_spent1 != 0 || total_minutes_spent1 != 0) && editable1">
+            <img src="../../assets/delete-task24px.png">
+          </div>
         </div>
       </div>
-
+      <div class="copied-label1" *ngIf="copied1">Copied!</div>
     </div>
     <div class="right-header">
       <div class="today_header">
@@ -53,23 +68,33 @@
       <div class="total_time" *ngIf="total_hours_spent2 != 0 || total_minutes_spent2 != 0">
         <div class="select-all-desktop">
           <span *ngIf="checkbox2 == false && editable2" class="dot dot-blank" (click)="checkbox2=true; selectAll(MockTodayTasks, 2)"></span>
-          <span *ngIf="checkbox2 && editable2" class="dot dot-fill" (click)="checkbox2=false; unselectAll(2)"></span>
+          <span *ngIf="checkbox2 && editable2" (click)="checkbox2=false; unselectAll(2)">
+            <img class="img-checked" src="../../assets/minus-sign-in-circle.png">
+          </span>
         </div>
         <div class="total_time_border">
           <div class="total_time_text">{{total_hours_spent2}}h {{total_minutes_spent2}}m</div>
           <div class="spent_text">Hours spent</div>
         </div>
-        <div class="last_edit_label">Edited: {{lastEditString2}}</div>
-
-        <div id="block-copy2" (click)="copy(selectedTodaysTasks, 2)" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
-          <img src="../../assets/copy.png">
+        <div class="last_edit_label">Edited: {{lastEditString2 | date:'dd MMM yy, hh:mm aaa'}}</div>
+        <div style="display: flex" *ngIf="blockCopyDelete2">
+          <div id="block-copy2" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
+            <img src="../../assets/copy.png">
+          </div>
+          <div id="block-delete2" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
+            <img src="../../assets/delete-task24px.png">
+          </div>
         </div>
-        <div id="block-delete2" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2"
-          (click)="deleteSelected(selectedTodaysTasks, MockTodayTasks, 2)">
-          <img src="../../assets/delete-task24px.png">
+        <div style="display: flex" *ngIf="!blockCopyDelete2">
+          <div id="copy2" (click)="copy(selectedTodaysTasks, 2)" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2">
+            <img src="../../assets/copy.png">
+          </div>
+          <div id="delete2" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2" (click)="deleteSelected(selectedTodaysTasks, MockTodayTasks, 2)">
+            <img src="../../assets/delete-task24px.png">
+          </div>
         </div>
       </div>
-
+      <div class="copied-label2" *ngIf="copied2">Copied!</div>
     </div>
   </div>
 </div>
@@ -77,13 +102,14 @@
   <div class="vertical"></div>
   <div class="container left-part">
     <div class="left-inner-part">
+      <div class="sevenDayLimit" *ngIf="sevenDaysFlagLeft">You can't edit tasks prior to 7 days</div>
       <div class="ind-task" *ngFor="let yesterdayTask of MockYesterdayTasks">
         <app-individual-task [task]=yesterdayTask [editable]=editable1 [events]="eventsSubject1.asObservable()"
           [hideSavedEvent]="HideSaved1.asObservable()" (timeChangeEvent)="modifyTime($event, MockYesterdayTasks, 1)"
           (selectedTask)="selectedTasks($event, 1)" (unselectedTask)="unselectedTasks($event, 1)" (popTask)="popTask(MockYesterdayTasks, $event)"></app-individual-task>
       </div>
       <div class="new_task_field" (click)="addYesterdayTask()" *ngIf="editable1">
-        <img class="img_add_new_task" src="../../assets/add-icon.png" align="top">
+        <img class="img_add_new_task" src="../../assets/add green.png" align="top">
         <div class="add_task_label">
           Add new task here</div>
       </div>
@@ -91,13 +117,14 @@
   </div>
   <div class="container right-part">
     <div class="right-inner-part">
+      <div class="sevenDayLimit" *ngIf="sevenDaysFlagRight">You can't edit tasks prior to 7 days</div>
       <div *ngFor="let todayTask of MockTodayTasks">
         <app-individual-task [task]=todayTask [editable]=editable2 [events]="eventsSubject2.asObservable()"
           [hideSavedEvent]="HideSaved2.asObservable()" (timeChangeEvent)="modifyTime($event, MockTodayTasks, 2)"
           (selectedTask)="selectedTasks($event, 2)" (unselectedTask)="unselectedTasks($event, 2)" (popTask)="popTask(MockTodayTasks, $event)"></app-individual-task>
       </div>
       <div class="new_task_field" (click)="addTodayTask()" *ngIf="editable2">
-        <img class="img_add_new_task" src="../../assets/add-icon.png" align="top">
+        <img class="img_add_new_task" src="../../assets/add green.png" align="top">
         <div class="add_task_label">
           Add new task here</div>
       </div>
@@ -105,19 +132,12 @@
   </div>
   <div class="mobview" *ngIf="(total_hours_spent2 != 0 || total_minutes_spent2 != 0) && editable2 && copyCard">
     <div class="selected-count">{{numOfSelected}} Tasks Selected</div>
-    <div id="copy-mini" (click)="copy(selectedTodaysTasks, 2)">
+    <div id="copy-mini" (click)="copy(selectedTodaysTasks, 2); deselectCopiedtext='Copied'">
       <img src="../../assets/copy.png">
     </div>
     <div id="delete-mini" (click)="deleteSelected(selectedTodaysTasks, MockTodayTasks, 2)">
       <img src="../../assets/delete-task24px.png">
     </div>
-    <!-- <div class="select-all" (click)="selectAllText=true; selectAll(MockTodayTasks, 2)">SELECT ALL</div> -->
-    <div class="select-all" (click)="selectAllText=false; unselectAll(2)">DESELECT</div>
+    <div class="select-all" (click)="selectAllText=false; unselectAll(2)">{{deselectCopiedtext}}</div>
   </div>
 </div>
-<!-- <ng-template #template>
-  <div class="modal-body text-center">
-    <p>Total time worked cannot be more than 16 hours</p>
-    <button type="button" class="button-no" (click)="decline()">OK</button>
-  </div>
-</ng-template> -->

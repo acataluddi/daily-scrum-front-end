@@ -5,23 +5,11 @@
 </head>
 
 <body>
-  <div class="MainDiv">
-    <!-- <div class="TopDiv"> -->
-      <!-- <app-dashboard-header [activetab]=activetab></app-dashboard-header> -->
-      <!-- <div class="ProjectHeadingDiv">
-        <div class="ProjectHeadingTextDiv">My Projects ({{noOfProjects}})</div>
-      </div>
-
-      <button *ngIf="flag2 === true" class="AddProjectButton" (click)="AddProject()">
-        <div class="AddProjectDiv">Add Project</div>
-      </button>
-      <button *ngIf="flag1 === true" class="UserList" (click)="gotoUsersList()"> User List
-      </button> -->
-    <!-- </div> -->
-    <div class="BottomDiv">
+  <div class="MainDiv" id="main-div" (click)="outerClick($event)">
+    <div class="BottomDiv" id="bottom-div">
       <div *ngIf="noOfProjects === 0">
-        <img class="smiley" src="../../assets/2018-09-19.png">
-        <div class="noProject"> Oops! You have no Projects assigned...</div>
+        <img class="smiley" src="../../assets/NoProject.png">
+        <div class="noProject">Relax! You have no projects assigned</div>
       </div>
       <div class="ProjectBoxDiv" *ngFor="let Project of newproject ; let j=index">
         <div class=" ProjectNameBoxDiv">
@@ -30,11 +18,11 @@
         <div class="InnerProjectBoxDiv">
           <div *ngFor="let member of Project.members ; let i=index">
             <div *ngIf="i<4">
-                <div class="SmallCircleNameDiv">
-                  <img class="memberImage" src="{{member.image}}"></div>                 
+              <div class="SmallCircleNameDiv">
+                <img class="memberImage" src="{{member.image}}"></div>
             </div>
           </div>
-          <div *ngIf="noOfMembers[j]-4>0" >
+          <div *ngIf="noOfMembers[j]-4>0">
             <button class="SmallCircleButton2">
               <div class="ExtraMembersDiv">+{{noOfMembers[j]-4}}</div>
             </button>
@@ -43,36 +31,30 @@
             <button class="DailyStatusButton" (click)="openDailyStatus(Project)">
               <div class="DailyStatusDiv">Daily Status</div>
             </button>
-            <div class="MenuButton DropdownButton"  *ngIf="flag2 === true">
+            <div class="MenuButton DropdownButton" id="menu-button" *ngIf="flag2 === true && isProjectManager(Project)" (click)="click(j)">
               <div class="DropdownContentDiv" *ngIf="show[j]">
                 <div class="EditDiv Button" (click)="EditProject(Project)">
-
                   Edit Project
-
                 </div>
                 <div class="DeleteDiv Button" (click)="openModal(template,Project.projectId)">
                   Delete Project
                 </div>
               </div>
-              <div class="MenuDotDiv" (click)="click(j)">
-                <img src="../../assets/Menudots.png">
+              <div class="MenuDotDiv" id="menu-dot">
+                <img id="dot-img" src="../../assets/Menudots.png">
               </div>
             </div>
-            
           </div>
         </div>
-
       </div>
     </div>
   </div>
-
   <div class="footer-div">
   </div>
 </body>
 <div style="position : fixed; height : 10px;"></div>
 
 </html>
-
 <ng-template #template>
   <div class="modal-body text-center">
     <p>Do you want to delete this project?</p>

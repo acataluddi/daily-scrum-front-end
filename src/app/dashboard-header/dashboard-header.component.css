@@ -1,16 +1,143 @@
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 50;
+  padding-top: 100px !important;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  border: 1px solid #888;
+  width: 50%;
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+.modal-header {
+  border-radius: 6px 6px 0px 0px;
+  padding: 20px 32px;
+  background-color: rgba(242, 242, 242, 1);
+  font-family: 'Roboto';
+  font-size: 22px;
+  font-weight: 600;
+  color: rgba(12, 33, 93, 1);
+}
+
+.modal-footer {
+  padding: 2px 16px;
+  border-radius: 0px 0px 6px 6px;
+  margin-top: 70px;
+}
+
+.addcancelclass {
+  display: flex;
+}
+
+input[value="Cancel"] {
+  height: 30px;
+  width: 25%;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: rgb(146, 145, 145);
+  margin: 10px;
+  margin-left: auto;
+  margin-right: 0;
+  font-weight: 600;
+  border-radius: 2px;
+  background-color: transparent;
+}
+
+input[value="Cancel"]:hover {
+  color: black;
+  font-weight: 900;
+}
+
+input[value="Add Goal"] {
+  height: 32px;
+  width: 120px;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(12, 33, 93, 1);
+  margin: 10px;
+  margin-right: 0;
+  font-weight: bold;
+  border-radius: 2px;
+}
+
+input[value="Add Goal"]:hover {
+  background-color: #072988
+}
+
+input[value="Add Goal"]:active {
+  background-color: rgba(12, 33, 93, 1);
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0
+  }
+
+  to {
+    top: 0;
+    opacity: 1
+  }
+}
+
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0
+  }
+
+  to {
+    top: 0;
+    opacity: 1
+  }
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .add-project-div {
-  text-align: center;
-  margin: 5%;
-  padding-left: 9px;
+  text-align: left;
+  margin: 4%;
+  padding-left: 0px;
   font-size: 14px;
   font-weight: 500;
   color: white;
 }
 
 .add-new-div {
-  text-align: center;
-  margin: 5%;
-  padding-left: 15px;
+  text-align: left;
+  margin: 4%;
+  padding-left: 0px;
   font-size: 14px;
   font-weight: 500;
   color: white;
@@ -18,11 +145,11 @@
 
 .add-pro-button {
   position: absolute;
-  right: 10%;
+  right: 210px;
   top: 18px;
   height: 32px;
-  width: 115px;
-  background-color: #b1b1b1;
+  width: 135px;
+  background-color: rgba(12, 33, 93, 1);
   border-radius: 4px;
   display: flex;
   border-style: none;
@@ -32,15 +159,31 @@
   border-color: #555;
 }
 
-.add-pro-button:hover {
-  background-color: rgb(168, 168, 168);
+.add-goal-button {
+  position: absolute;
+  right: 250px;
+  top: 18px;
+  height: 32px;
+  width: 135px;
+  background-color: rgba(12, 33, 93, 1);
+  border-radius: 4px;
+  display: flex;
+  border-style: none;
+  outline: none;
+  font-size: 14px;
+  font-weight: 600;
+  border-color: #555;
+}
+
+.add-pro-button:hover,
+.add-goal-button:hover {
+  background-color: #072988;
 }
 
 .goals-tab {
   margin-left: 30px;
   height: 32px;
-  /* width: 85px; */
-  color: rgba(79, 86, 105, 1);
+  color: rgba(181, 186, 201, 1);
   border: none;
   cursor: pointer;
 }
@@ -54,19 +197,19 @@
   z-index: 40;
   padding-top: 20px;
   top: 60px;
-  border-top: 1px solid #dfded9;
   padding-bottom: 10px;
   font-size: 18px;
   font-weight: 500;
 }
 
-.mob-view {
+.mob-view-goal,
+.mob-view-project {
   visibility: hidden;
 }
 
 .projects-tab {
-  margin-left: 5%;
-  color: rgba(79, 86, 105, 1);
+  margin-left: 6.8%;
+  color: rgba(181, 186, 201, 1);
   height: 32px;
   border: none;
   cursor: pointer;
@@ -76,14 +219,15 @@
 .feedback-tab {
   margin-left: 30px;
   height: 32px;
-  color: rgba(79, 86, 105, 1);
+  color: rgba(181, 186, 201, 1);
   border: none;
   cursor: pointer;
 }
 
 .tab-active {
   border-bottom-style: solid;
-  border-bottom-color: #b1b1b1;
+  color: rgba(12, 33, 93, 1);
+  border-bottom-color: rgba(255, 0, 0, 1);
   font-weight: 600;
 }
 
@@ -92,37 +236,79 @@
   width: 75%;
 }
 
+.plus-sign {
+  padding: 6%;
+}
+
+.search {
+  display: flex;
+}
+
+input[placeholder="Search"] {
+  border: none;
+  outline: none;
+  height: 32px;
+  color: rgba(0, 0, 0, 1);
+}
+
+.search_icon {
+  height: 32px;
+  width: 32px;
+  margin-top: 1%;
+}
+
 @media only screen and (max-width: 520px) {
-  .add-pro-button {
-    right: 5%;
-  }
 
   .users-tab,
   .goals-tab,
   .feedback-tab {
     margin-left: 20px;
   }
-
-
-
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 700px) {
+
+  .modal-content {
+    width: 80%;
+  }
+
+  .add-goal-button,
   .add-pro-button {
     visibility: hidden;
   }
 
-  .mob-view {
+  .mob-view-goal {
     position: absolute;
     right: 5%;
     top: 16px;
     visibility: visible;
     width: 32px;
     height: 32px;
-    background: #b1b1b1;
+    background-color: rgba(12, 33, 93, 1);
     border-radius: 4px;
     padding: 4.4px 7.5px;
     color: white;
+    cursor: pointer;
+  }
+
+  .mob-view-project {
+    position: absolute;
+    right: 5%;
+    top: 16px;
+    visibility: visible;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(12, 33, 93, 1);
+    border-radius: 4px;
+    padding: 4.4px 7.5px;
+    color: white;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .add-pro-button {
+    visibility: hidden;
   }
 
   .users-tab,

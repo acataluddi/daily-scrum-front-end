@@ -1,0 +1,46 @@
+<div class=body1>
+  <div class="mainclass">
+    <div class="subclasszero">
+      <div class="member_title1" *ngIf="showSign1 && !hide" (click)="hide=false;list()" (keyup)="dropDown=true">
+        <img src='../../assets/add_goal.png'>
+        <textarea id="teamMember" autofocus type="text" class="email-input" placeholder="Select Assignee" [(ngModel)]="searchText"
+          (click)="invalidGoalMember=false;"></textarea>
+      </div>
+      <div class="member_title1" *ngIf="hide">
+        <img class="memberImage" src='{{image}}'>
+        <div class="Member_name">{{name}}</div>
+        <img class="deleteMember" src="../../assets/delete_mail.png" (click)="hide=false;showSign1=true; searchText=''; goal.userEmail=''">
+      </div>
+      <small *ngIf="invalidGoalMember" class="error">
+        Please select a team member
+      </small>
+      <div *ngIf="dropDown" class="dropdown-content">
+        <div *ngFor="let member of members | goalMemberFilter : searchText;" (click)="selectMember(member);">
+          <div class="memberArray" *ngIf="member.memberName!=null">
+            <img class='image' src="{{member.memberImage}}">
+            <div class="block">
+              <div class='name'>{{member.memberName}}</div>
+              <div class='email'>{{member.memberEmail}}</div>
+            </div>
+          </div>
+          <div class="error" *ngIf="member.memberName==null">
+            No results matching
+          </div>
+        </div>
+      </div>
+      <textarea id="goalName" class="goal-name" autosize rows="1" [maxRows]="3" placeholder="Title" [(ngModel)]="goal.goalTitle"
+        (click)="invalidGoalTitle=false;" (blur)="isValidGoalName(goal.goalTitle)"></textarea>
+      <small *ngIf="invalidGoalTitle" class="error">
+        Please enter goal name
+      </small>
+      <div class="description" *ngIf="showSign2" (click)="show2()">
+        <img src='../../assets/add_goal.png'>
+        <div id="goalDescriptionLabel" class="goalDescription">Describe about the goal</div>
+      </div>
+      <div class="description" *ngIf="!showSign2">
+        <textarea autofocus id="goalDescriptionInput" class="goalDescription" autosize rows="1" [maxRows]="5"
+          placeholder="Add description" [(ngModel)]="goal.goalDescription"></textarea>
+      </div>
+    </div>
+  </div>
+</div>

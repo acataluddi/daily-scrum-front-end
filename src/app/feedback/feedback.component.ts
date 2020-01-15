@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FeedbackMember } from '../model/feedback-model';
+import { Component, OnInit } from '@angular/core';
+import { Feedback } from '../model/feedback-model';
 import { FeedbackService } from '../service/feedback.service';
-import { GoalMember } from '../model/goalmember-model';
 
 @Component({
   selector: 'app-feedback',
@@ -10,39 +9,24 @@ import { GoalMember } from '../model/goalmember-model';
 })
 export class FeedbackComponent implements OnInit {
 
-  @Input() firstFeedback: FeedbackMember;
-
-  feedbackMember: FeedbackMember;
-  // lastUpdate: string = 'Thu, 01:30PM';
-
+  feedbackArray: Feedback[];
+  individualfeedback: Feedback;
+  length: number;
+  date = new Date();
   constructor(private feedbackService: FeedbackService) { }
-
   ngOnInit() {
-    // console.log(this.firstFeedback)
-    this.feedbackMember = this.firstFeedback;
-    // this.initialize();
-    // this.lastUpdate = 'Thu, 01:30PM';
+    this.length = 2;
+    this.fetchFeedback();
   }
 
-  // initialize() {
-  //   this.feedbackMember = {
-  //     userEmail: '',
-  //     userId: '',
-  //     userImage: '',
-  //     userName: '',
-  //     lastUpdate:'',
-  //     hasNewUpdates: true,
-  //     feedbacks: [
-  //       {
-  //         feedbackDate: '',
-  //         feedbackId: "",
-  //         feedbackDescription: ''
-  //       }
-  //     ]
-  //   };
-  // }
-
-  selectedMember(member: GoalMember){
-    this.feedbackService.getFeedbacks(member.memberEmail).subscribe(data => this.feedbackMember = data);
+  fetchFeedback() {
+    this.feedbackService.getFeedbacks().subscribe(feedbackList => {
+      this.feedbackArray = feedbackList;
+      if (feedbackList.length != 0 || feedbackList != null) {
+        this.length = 1;
+      } else {
+        this.length = 0;
+      }
+    });
   }
 }

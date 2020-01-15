@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, HostListener } from '@angular/core';
 import { ProjectService } from '../service/project.service'
 import { Project, member } from '../model/project-model'
 import { Member } from '../model/member-model';
@@ -38,53 +38,42 @@ export class UserslistComponent implements OnInit {
     private taskservice: ProcessIndividualTaskService) {
   }
   ngOnInit() {
-    // this.getProjects();
     this.subscription = this.dashboardservice.getProjects().subscribe(data => {
       this.setProjects(data)
     });
+    this.onWindowScroll();
   }
 
-  setProjects(projects){
+  setProjects(projects) {
     this.projects = projects;
     this.getProjects();
   }
 
   getProjects(): void {
-    // this.projects = this.projectservice.getProjectArray()
     for (let pro of this.projects) {
       if (pro.projectName == this.childProject) {
         this.projectmembers = pro.members;
       }
     }
-    for(let mem of this.projectmembers){
-      if(mem.name == ''){
+    for (let mem of this.projectmembers) {
+      if (mem.name == '') {
         var index = this.projectmembers.indexOf(mem);
-        this.projectmembers.splice(index,1);
+        this.projectmembers.splice(index, 1);
       }
     }
   }
-
-  
 
   gotoDailyStatus(selectedMember) {
     this.selectedEmailEvent.emit(selectedMember)
     this.data.changedata(selectedMember)
     this.router.navigate(['/daily-status', this.childProjectId, this.childProject]);
-    
   }
 
-  changeCSS() {
-    if (!this.checker) {
-      document.getElementById("userslist").classList.add("block")
-      document.getElementById("search_name").classList.add("flexed")
-      document.getElementById("userslist").classList.add("flex")
-      this.checker = !this.checker
-    }
-    else {
-      document.getElementById("userslist").classList.remove("block")
-      document.getElementById("search_name").classList.remove("flexed")
-      document.getElementById("userslist").classList.remove("flex")
-      this.checker = !this.checker
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    let number = window.pageYOffset || document.documentElement.scrollTop || window.scrollY || 0;
+    if (number > 0) {
+      this.checker=false;
     }
   }
 }

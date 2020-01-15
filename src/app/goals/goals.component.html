@@ -1,6 +1,61 @@
-<div class="header">
-  <p>
-    goals works!
-  </p>
+<div class="maindiv">
+  <div class="right-part" *ngIf="length>0">
+    <div class="header">
+      <div>
+        <img class="member-image" src="{{selectedGoalMember.userImage}}">
+      </div>
+      <div class="member-goal-head">
+        <div class="member-name">{{selectedGoalMember.userName}}</div>
+      </div>
+    </div>
+    <div class="goals" *ngFor="let goal of selectedGoalMember.goals;let i=index">
+      <div class="time">
+        <div class="goalLabel">Goal {{length-i}}</div>
+        <div class="last-update">Created on {{goal.goalTime | date:'dd MMM yyyy'}}</div>
+      </div>
+      <div>
+        <div class="goalTitle">{{goal.goalTitle}}</div>
+        <div class="goalDescription">{{goal.goalDescription}}</div>
+        <div class="comment-num" *ngIf="goal.comments.length-1 > 0" (click)="expand[i]=!expand[i]">{{goal.comments.length-1}}
+          Comments
+          <div *ngIf="expand[i]">
+            <img src="../../assets/collapse-arrow.svg">
+          </div>
+          <div *ngIf="!expand[i]">
+            <img src="../../assets/expand-arrow.svg">
+          </div>
+        </div>
+        <div class="comment" *ngFor="let comment of goal.comments">
+          <div *ngIf="comment.commentId!=''&& expand[i]" class="non-empty-comment">
+            <div>
+              <img class="member-image" src="{{comment.memberImage}}">
+            </div>
+            <div class="commentTitle">
+              <div class="commentDescp">{{comment.commentDescription}}</div>
+              <div class="commentTime">{{comment.commentTime | date:'EEE, dd MMM yyyy, hh:mm aaa'}}</div>
+            </div>
+          </div>
+          <div *ngIf="comment.commentId==='' && (goal.managerEmail === currentUserEmail || goal.userEmail === currentUserEmail)"
+            class="send">
+            <div class="user-image">
+              <img class="member-image" src="{{currentUserImage}}">
+            </div>
+            <div class="input-comment">
+              <textarea [(ngModel)]="comment.commentDescription" class="addComment" autosize rows="2" max-row="3"
+                placeholder="Add a comment" (click)="showSend=true"></textarea>
+              <img *ngIf="comment.commentDescription!=='' && showSend" class="sendIcon" (click)="createNewComment(comment,goal);expand[i]=true;showSend=false"
+                src="../../assets/send.png">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="no-goals" [style.width]="getStyle()" *ngIf="length==0">
+    <img class="no-goals-img" src="../../assets/Manager - No Goal.png">
+    <div class="no-goals-msg">No Goals Assigned Yet!</div>
+  </div>
+  <div>
+    <app-goal-userlist #goalUserList (selectMemberEvent)="selectMember($event)"></app-goal-userlist>
+  </div>
 </div>
-

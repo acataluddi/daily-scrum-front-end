@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 import { LoginService } from "../service/login.service";
 import { TaskPageService } from "../service/task-page.service";
 import { NavigationdataService } from '../service/navigationdata.service';
-import { member } from '../model/project-model';
+import { member, Project } from '../model/project-model';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +46,8 @@ export class TaskPageAdminComponent implements OnInit {
   selectedDate: Date;
   minDate: Date;
   maxDate: Date;
-
+  showContents = true;
+  UserType:string;
 
   constructor(
     private taskservice: ProcessIndividualTaskService,
@@ -67,23 +68,36 @@ export class TaskPageAdminComponent implements OnInit {
       this.projectId = +params['projectId'];
       var parts = params['startdate'].split('-');
       this.minDate = new Date(+parts[2], +(parts[1]) - 1, +parts[0]);
-      var dt = new Date();
-      this.myDateValue = dt;
+      var newSelectedDate = this.getSelectedDate();
+      if (newSelectedDate < this.minDate) {
+        var dt = new Date();
+        this.myDateValue = dt;
+      } else {
+        this.myDateValue = newSelectedDate;
+      }
     });
     this.subscription = taskservice.newList.subscribe(
       data => {
+        this.showContents = this.isProjectManager(data);
+        localStorage.setItem('showContents',this.showContents.toString())
         this.currentProject = data.projectName;
         this.projectId = data.projectId;
         var parts = data.startDate.split('-');
         this.minDate = new Date(+parts[2], +(parts[1]) - 1, +parts[0]);
         this.view_my_task_flag = false;
-        var dt = new Date();
-        this.myDateValue = dt;
+        var newSelectedDate = this.getSelectedDate();
+        if (newSelectedDate < this.minDate) {
+          var dt = new Date();
+          this.myDateValue = dt;
+        } else {
+          this.myDateValue = newSelectedDate;
+        }
       });
   }
   ngOnInit() {
+    this.showContents = (localStorage.getItem('showContents') == 'true')
     this.maxDate = new Date();
-    this.myDateValue = new Date();
+    this.myDateValue = this.getSelectedDate();
     this.projectId = localStorage.getItem("projectId");
     this.currentProject = localStorage.getItem("currentProject");
     this.view_my_task_flag = false;
@@ -91,14 +105,15 @@ export class TaskPageAdminComponent implements OnInit {
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
           .subscribe(msg => {
-            msg.userType;
+            this.UserType = msg.userType;
+            this.email = msg.email;
             if (msg.userType === "Admin" || msg.userType === "Manager") {
               this.flag = true;
             }
           });
       }
     });
-
+    localStorage.setItem('showUsers','true');
   }
 
   getTaskPageData(taskDate, projectId) {
@@ -113,7 +128,7 @@ export class TaskPageAdminComponent implements OnInit {
           this.view_my_task_flag = true;
         }
         for (let m of this.IndMembArray) {
-          if(m.email ===  localStorage.getItem("email")){
+          if (m.email === localStorage.getItem("email")) {
             localStorage.setItem('addedDate', m.addedDate);
             localStorage.setItem('deletedDate', m.deletedDate);
           }
@@ -121,6 +136,7 @@ export class TaskPageAdminComponent implements OnInit {
         }
       });
   }
+
   calculateTotalTime(tasksArray: IndividualMember[]) {
     var totalHour = 0;
     var totalMinute = 0;
@@ -137,7 +153,9 @@ export class TaskPageAdminComponent implements OnInit {
     this.total_hours_spent = totalHour;
     this.total_minutes_spent = totalMinute;
   }
+
   onDateChange(newDate: Date) {
+    this.saveSelectedDate();
     if (newDate.getDate() === this.maxDate.getDate() &&
       newDate.getMonth() === this.maxDate.getMonth() &&
       newDate.getFullYear() === this.maxDate.getFullYear()) {
@@ -180,6 +198,7 @@ export class TaskPageAdminComponent implements OnInit {
     }
     this.getTaskPageData(ndate, this.projectId)
   }
+
   getNextDate() {
     var d1 = new Date(this.selectedDate);
     if (d1.toDateString() !== this.maxDate.toDateString()) {
@@ -187,6 +206,7 @@ export class TaskPageAdminComponent implements OnInit {
       this.myDateValue = d1;
     }
   }
+
   getPreviousDate() {
     var d1 = new Date(this.selectedDate);
     if (d1.toDateString() !== this.minDate.toDateString()) {
@@ -194,7 +214,9 @@ export class TaskPageAdminComponent implements OnInit {
       this.myDateValue = d1;
     }
   }
+
   viewMyTasks(): void {
+    this.saveSelectedDate();
     var email = localStorage.getItem("email");
     var adDate = localStorage.getItem('addedDate');
     var delDate = localStorage.getItem('deletedDate');
@@ -204,9 +226,49 @@ export class TaskPageAdminComponent implements OnInit {
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }
 
-  gotoDailyStatus(IndMemOb){
+  gotoDailyStatus(IndMemOb) {
+    this.saveSelectedDate();
     this.navservice.changedata(IndMemOb)
     this.router.navigate(['/daily-status', this.projectId, this.currentProject]);
   }
 
+  saveSelectedDate() {
+    var nday = '';
+    var nmonth = '';
+    var selectedDate = '';
+    if (this.myDateValue.getDate() < 10) {
+      nday += '0' + this.myDateValue.getDate();
+    } else {
+      nday += this.myDateValue.getDate();
+    }
+    if ((this.myDateValue.getMonth() + 1) < 10) {
+      nmonth += '0' + (this.myDateValue.getMonth() + 1);
+    } else {
+      nmonth += (this.myDateValue.getMonth() + 1);
+    }
+    selectedDate += nday + '-' + nmonth + '-' + this.myDateValue.getFullYear();
+    localStorage.setItem("selectedDate", selectedDate);
+  }
+
+  getSelectedDate(): Date {
+    var dateSelected = localStorage.getItem("selectedDate");
+    var parts = dateSelected.split('-');
+    var newSelectedDate = new Date(+parts[2], +(parts[1]) - 1, +parts[0]);
+    return newSelectedDate;
+  }
+
+  isProjectManager(project: Project) {
+    if (this.UserType == 'Admin') {
+      return true;
+    } else {
+      var id = this.email;
+      var myMemobj = project.members.find(function (element) {
+        return element.email == id;
+      });
+      if (myMemobj.role == 'Project Manager') {
+        return true;
+      }
+      return false;
+    }
+  }
 }

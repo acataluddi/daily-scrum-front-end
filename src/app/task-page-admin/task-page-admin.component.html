@@ -3,7 +3,7 @@
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 </head>
 
-<body *ngIf="flag === true">
+<div *ngIf="flag === true && showContents">
   <div class="right-header">
     <app-userslist [childProject]="currentProject" [childProjectId]="projectId"></app-userslist>
     <div class="today_header">
@@ -12,14 +12,14 @@
       <div class="today_task_header" (click)="showDatePicker=true" type="text" [minDate]="minDate" [maxDate]="maxDate"
         #dp="bsDatepicker" [bsConfig]="datePickerConfig" bsDatepicker [(bsValue)]="myDateValue" (onHidden)="showDatePicker=false"
         (bsValueChange)="onDateChange($event)">{{todayval}}</div>
-        <div class="view-all">
-      <button *ngIf="view_my_task_flag==true" class="view_all_task" (click)="viewMyTasks()">
-        View my tasks
-      </button>
-      <div class="altView" (click)="viewMyTasks()">
-        <span class="alt-View glyphicon glyphicon-tasks"></span>
+      <div class="view-all">
+        <button *ngIf="view_my_task_flag==true" class="view_all_task" (click)="viewMyTasks()">
+          <div class="view_img"></div>
+          <div class="view_text">View my tasks</div>
+        </button>
+        <div class="alt-View" *ngIf="view_my_task_flag==true" (click)="viewMyTasks()">
+        </div>
       </div>
-    </div>
     </div>
   </div>
 
@@ -32,34 +32,35 @@
   <div class="main">
     <div class="header">
       <div *ngFor="let IndMemOb of IndMembArray">
-        <div class="column" *ngIf="IndMemOb.showMember===true">
+        <div class="column" *ngIf="IndMemOb.showMember===true && IndMemOb.name!=''">
           <div class="member1">
-            <div class="member_title1"  (click)="gotoDailyStatus(IndMemOb)" >
+            <div class="member_title1" (click)="gotoDailyStatus(IndMemOb)">
               <div class="member_image1"><img class="size" src={{IndMemOb.image}}></div>
               <div class="member_name1">{{IndMemOb.name}}</div>
               <div class="member_time_spent1">{{IndMemOb.hour}} h {{IndMemOb.minute}} m</div>
-
             </div>
             <div class="fullTask">
-            <div class="member_part">
-              <div *ngIf="IndMemOb.hour===0 && IndMemOb.minute===0">Tasks not Entered</div>
-              <div *ngFor="let Task of IndMemOb.tasks ">
-                <span *ngIf="Task.taskId%7===0" class="dot dot-color-1"></span>
-                <span *ngIf="Task.taskId%6===0 && Task.taskId%7!=0" class="dot dot-color-2"></span>
-                <span *ngIf="Task.taskId%5===0 && Task.taskId%6!=0 && Task.taskId%7!=0" class="dot dot-color-3"></span>
-                <span *ngIf="Task.taskId%3===0 && Task.taskId%5!=0  && Task.taskId%6!=0 && Task.taskId%7!=0" class="dot dot-color-4"></span>
-                <span *ngIf="Task.taskId%3!=0 && Task.taskId%5!=0  && Task.taskId%6!=0 && Task.taskId%7!=0" class="dot dot-color-5"></span>
-                <div class="task-imp">
-                <div class="task">
-                  {{Task.description}}</div>
-                  <div class="impediment" *ngIf="Task.impediments!=0">{{Task.impediments}}</div>
+              <div class="member_part">
+                <div *ngIf="IndMemOb.hour===0 && IndMemOb.minute===0">Tasks not Entered</div>
+                <div *ngFor="let Task of IndMemOb.tasks ">
+                  <div class="bullet"></div>
+                  <div class="task-imp">
+                    <div class="task">
+                      {{Task.description}}</div>
+                    <div class="impediment" *ngIf="Task.impediments!=0">
+                      <div class="impediment_img"></div>
+                      <div class="imped"> {{Task.impediments}}</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            </div>
-          </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</body>
+</div>
+<div *ngIf="flag==true && showContents==false" class="not-pm">
+  Sorry, You're not a PM in this Project
+</div>

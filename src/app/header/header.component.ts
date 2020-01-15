@@ -1,6 +1,5 @@
-import { Component, OnInit, Injectable,TemplateRef } from '@angular/core';
+import { Component, OnInit, Injectable, TemplateRef } from '@angular/core';
 import { Member } from '../model/member-model';
-import { Http, } from '@angular/http';
 import { AuthService } from 'angular-6-social-login';
 import { LoginService } from '../service/login.service';
 import { Project } from '../model/project-model';
@@ -9,14 +8,9 @@ import { Router, NavigationStart } from '@angular/router';
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
 import { ActivatedRoute } from "@angular/router";
 import { ProjectviewallService } from '../service/projectviewall.service';
-import { ProjectUpdated } from '../model/projectupdated-model';
-import { TaskPageAdminComponent } from '../task-page-admin/task-page-admin.component';
 import { Subscription } from 'rxjs';
-import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FeedbackService } from "../service/feedback.service";
 import { Feedback } from '../model/feedback-model';
-
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +23,6 @@ import { Feedback } from '../model/feedback-model';
 })
 export class HeaderComponent implements OnInit {
 
-  modalRef: BsModalRef;
   member: Member;
   image: String;
   projects: Project[];
@@ -50,7 +43,6 @@ export class HeaderComponent implements OnInit {
   show_feedback;
   feedback: Feedback;
   invalidDescription;
-
   length;
   constructor(
     private viewallservice: ProjectviewallService,
@@ -58,7 +50,6 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private loginservice: LoginService,
     private projectService: DashboardService,
-    private modalService: BsModalService,
     private route: ActivatedRoute,
     private taskService: ProcessIndividualTaskService,
     private dashboardService: DashboardService,
@@ -75,7 +66,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.invalidDescription=false;
+    this.feedback = this.initializeNewFeedback(this.feedback);
+    this.invalidDescription = false;
     this.operation = localStorage.getItem("currentOperation");
     this.showTooltip = false;
     this.show_dailyscrum = false
@@ -120,6 +112,7 @@ export class HeaderComponent implements OnInit {
   getUserDetails() {
     this.member.email = localStorage.getItem("email");
     this.member.imageurl = localStorage.getItem("image");
+    this.member.userType = localStorage.getItem("userType")
   }
 
   setProjects(userProjects) {
@@ -140,25 +133,17 @@ export class HeaderComponent implements OnInit {
     this.socialAuthService.signOut();
     this.loginservice.logoutMember();
   }
+
   changeProject(newProject) {
     this.selected = newProject;
     localStorage.setItem("currentProject", this.selected.projectName);
     localStorage.setItem("projectId", this.selected.projectId);
     this.taskService.changeProject(this.selected);
-
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.feedback = this.initializeNewFeedback(this.feedback);
-    this.invalidDescription=false;
-    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
-}
-decline(): void {
-  this.modalRef.hide();
-}
   toggle(currenturl) {
     if (currenturl == '/dashboard') {
-      this.title = 'Dashboard';
+      this.title = '';
       this.show_dailyscrum = false
       this.show_arrow = false
       this.show_scrum = true
@@ -166,10 +151,10 @@ decline(): void {
     } else if (currenturl == '/project') {
 
       if (this.operation === "AddProject") {
-        this.title = 'New Project';
+        this.title = '|  New Project';
       }
       if (this.operation === "EditProject") {
-        this.title = 'Edit Project';
+        this.title = '|  Edit Project';
       }
 
       this.show_dailyscrum = false
@@ -180,6 +165,11 @@ decline(): void {
       this.show_arrow = false
       this.show_scrum = true
       this.show_dash = false
+    } else if (currenturl == '/addGoal') {
+      this.show_dailyscrum = false
+      this.show_arrow = false
+      this.show_scrum = true
+      this.title = 'New Goal'
     }
     else {
       this.dashboardService.getProjects()
@@ -221,48 +211,57 @@ decline(): void {
     }
   }
 
-  fetchFeedbacks(userEmail: string) {
-    this.feedbackService.getFeedbacks(userEmail)
-      .subscribe(feedbacks => {
-        console.log(feedbacks);
-      });
-  }
-
   postFeedback(userFeedback: Feedback) {
     userFeedback.feedbackDescription = userFeedback.feedbackDescription.trim();
-    if(userFeedback.feedbackDescription===''){
+    if (userFeedback.feedbackDescription === '') {
       this.invalidDescription = true;
       setTimeout(() => { document.getElementById("feedbackDesc").focus(); });
+      setTimeout(() => {
+        this.invalidDescription = false;
+      }, 2000);
     }
-    if(this.invalidDescription==false){
+    if (this.invalidDescription == false) {
       this.feedbackService.sendFeedback(userFeedback)
-        .subscribe(feedbacks => {
-          console.log(feedbacks);
+        .subscribe(feedback => {
+          if(feedback.feedbackId !=null) {
+            console.log('Feedback submitted successfully.')
+          }
+          this.closeModal();
         });
-      this.modalRef.hide();
-    }    
+    }
+  }
+
+  closeModal() {
+    var modal = document.getElementById('feedbackModal');
+    modal.style.display = "none";
+  }
+
+  openModal() {
+    this.feedback = this.initializeNewFeedback(this.feedback);
+    this.invalidDescription = false;
+    var modal = document.getElementById('feedbackModal');
+    modal.style.display = "block";
   }
 
   initializeNewFeedback(feedback: Feedback): Feedback {
     feedback = {
       feedbackId: '',
-      feedbackDate: '',
-      feedbackDescription: ''
+      feedbackDate: new Date(),
+      feedbackDescription: '',
+      userEmail: '',
+      userId: '',
+      userImage: '',
+      userName: ''
     }
     return feedback;
   }
 
-  fetchFeedbackList(){
-    this.feedbackService.getFeedBackStatusList()
-      .subscribe(data => {
-        console.log(data);
-      });
-  }
-
-  changeFeedbackStatus(userEmail: string){
-    this.feedbackService.updateFeedbackStatus(userEmail)
-      .subscribe(data => {
-        console.log(data);
-      });
+  openUserGuide() {
+    if (this.member.userType == "User")
+    window.open("../../assets/Daily Scrum - User - User Documentation.pdf")
+    else if (this.member.userType == "Manager")
+    window.open("../../assets/Daily Scrum - PM - User Documentation.pdf")
+    else
+    window.open("../../assets/Daily Scrum - Admin - User Documentation.pdf")
   }
 }

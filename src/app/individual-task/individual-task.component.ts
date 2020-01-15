@@ -16,7 +16,6 @@ export class IndividualTaskComponent implements OnInit {
   @Output() timeChangeEvent = new EventEmitter<Task>();
   @Output() selectedTask = new EventEmitter<Task>();
   @Output() unselectedTask = new EventEmitter<Task>();
-  // @Output() deleteTask = new EventEmitter<Task>();
   @Output() popTask = new EventEmitter<Task>();
   @ViewChild('des') des: ElementRef;
   @ViewChild('imp') imp: ElementRef;
@@ -25,33 +24,45 @@ export class IndividualTaskComponent implements OnInit {
   edit_time_spent;
   saved;
   show_save;
-
+  buttonText;
   noDesc = false;
   noTime = false;
-
+  time: Date = new Date();
+  maxtime: Date = new Date();
   timeArray = Array;
-  hours = 17;
-  minutes = 60;
+  hours;
+  minutes;
   newdesc = '';
   tid;
   old_desc = '';
   old_imped = '';
   old_hourspent = '';
   old_minspent = '';
-  stageDesc = false
-  stageTime = false
-
+  stageDesc = false;
+  stageTime = false;
   check = false;
-
   eventsSubscription: any;
   copiedSubscription: any;
-  constructor() { }
+  constructor() {
+    this.maxtime.setHours(17);
+    this.maxtime.setMinutes(0);
+  }
 
   ngOnInit() {
+    if (this.task.lastEdit == '') {
+      this.buttonText = 'Save';
+    } else {
+      this.buttonText = 'Update';
+    }
+
     this.eventsSubscription = this.events.subscribe((ischecked) =>
       this.check = ischecked);
     this.copiedSubscription = this.hideSavedEvent.subscribe((hideSaved) =>
       this.saved = false);
+
+    this.time.setHours(this.task.hourSpent);
+    this.time.setMinutes(this.task.minuteSpent);
+
     if (this.task.description == '' || this.task.description == null) {
       this.show_save = true;
       this.saved = false;
@@ -60,9 +71,7 @@ export class IndividualTaskComponent implements OnInit {
       this.show_save = false;
       this.saved = false;
     }
-
     this.check = false
-
     this.tid = parseInt(this.task.taskId);
     if (this.task.impediments === "") {
       this.show_impediment = false;
@@ -80,8 +89,8 @@ export class IndividualTaskComponent implements OnInit {
   }
 
   emitTimeEvent(task) {
-    task.hourSpent = parseInt(task.hourSpent);
-    task.minuteSpent = parseInt(task.minuteSpent);
+    task.hourSpent = this.time.getHours();
+    task.minuteSpent = this.time.getMinutes();
   }
   updateDescription() {
     this.task.description = this.task.description.trim();
@@ -107,15 +116,14 @@ export class IndividualTaskComponent implements OnInit {
       this.noTime = true;
     }
     else {
-      // this.addUpdateTask.emit(task);
       this.timeChangeEvent.emit(task);
       this.saved = true;
       this.noDesc = false;
       this.noTime = false;
       this.show_save = false;
-      setTimeout(()=>{  
+      setTimeout(() => {
         this.saved = false;
-   }, 5000);
+      }, 5000);
     }
     this.stageDesc = false;
     this.stageTime = false;
@@ -129,6 +137,12 @@ export class IndividualTaskComponent implements OnInit {
       this.old_imped = task.impediments
       this.stageDesc = true
     }
+
+    if (this.task.lastEdit == '') {
+      this.buttonText = 'Save';
+    } else {
+      this.buttonText = 'Update';
+    }
   }
 
   stageTaskTime(task) {
@@ -138,6 +152,12 @@ export class IndividualTaskComponent implements OnInit {
       this.old_hourspent = task.hourSpent
       this.old_minspent = task.minuteSpent
       this.stageTime = true
+    }
+
+    if (this.task.lastEdit == '') {
+      this.buttonText = 'Save';
+    } else {
+      this.buttonText = 'Update';
     }
   }
 
@@ -151,11 +171,15 @@ export class IndividualTaskComponent implements OnInit {
     if (this.stageDesc && this.stageTime) {
       task.hourSpent = this.old_hourspent
       task.minuteSpent = this.old_minspent
+      this.time.setHours(+this.old_hourspent)
+      this.time.setMinutes(+this.old_minspent)
       task.description = this.old_desc
       task.impediments = this.old_imped
     } else if (this.stageTime) {
       task.hourSpent = this.old_hourspent
       task.minuteSpent = this.old_minspent
+      this.time.setHours(+this.old_hourspent)
+      this.time.setMinutes(+this.old_minspent)
     } else if (this.stageDesc) {
       task.description = this.old_desc
       task.impediments = this.old_imped
@@ -164,6 +188,8 @@ export class IndividualTaskComponent implements OnInit {
       task.impediments = this.old_imped
       task.hourSpent = this.old_hourspent
       task.minuteSpent = this.old_minspent
+      this.time.setHours(+this.old_hourspent)
+      this.time.setMinutes(+this.old_minspent)
     }
     if (task.impediments != '') {
       this.show_impediment = true
@@ -171,20 +197,15 @@ export class IndividualTaskComponent implements OnInit {
     this.popTask.emit(task)
   }
 
-  focus() {
-    setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });
-  }
-
-  copy(id) {
-    console.log(id)
-    let copyText = document.getElementById('description' + id) as HTMLInputElement;
-    console.log(copyText.value)
-    copyText.select()
-    document.execCommand("copy");
+  focus(value) {
+    if (value == 1) {
+      setTimeout(() => { document.getElementById('timeSpent' + this.task.taskId).focus() });
+    } else if (value == 2) {
+      setTimeout(() => { document.getElementById('impediments' + this.task.taskId).focus() });
+    }
   }
 
   checked(task) {
-    // console.log(task)
     this.selectedTask.emit(task)
   }
 

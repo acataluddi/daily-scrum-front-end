@@ -1,17 +1,19 @@
-<div class="header">
-  <app-goal-userlist (selectMemberEvent)="selectedMember($event)"></app-goal-userlist>
-  <div class="right-part">
+<div class="feedback-list" *ngIf="length == 1 ">
+  <div *ngFor="let feedback of feedbackArray">
     <div class="right-header">
       <div class="member-image">
-        <img class="image" src="{{feedbackMember.userImage}}">
+        <img class="image" src="{{feedback.userImage}}">
       </div>
       <div class="member-feedback-head">
-        <div class="member-name">{{feedbackMember.userName}}</div>
-        <div class="last-update">{{feedbackMember.lastUpdate}}</div>
+        <div class="member-name">{{feedback.userName}}</div>
+        <div class="last-update">{{feedback.feedbackDate | date:'EEE, dd MMM, yyyy, hh:mm aaa'}}</div>
       </div>
     </div>
-    <div class="right-body">
-      <div class="feedback" *ngFor="let feedback of feedbackMember.feedbacks">{{feedback.feedbackDescription}}</div>
-    </div>
+    <div class="feedback-description">{{feedback.feedbackDescription}}</div>
+    <hr>
   </div>
+</div>
+<div class="feedbackErr" *ngIf="length == 0">
+  <img class="nofeedback" src="../../assets/nofeedback.png">
+  <div class="nofeedbackmsg">Be patient! Feedback is on the way.</div>
 </div>

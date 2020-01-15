@@ -1,12 +1,20 @@
-<div class="userslist" id="userslist">
+<div class="userslist" id="userslist" [ngClass]="{'block':checker, 'flex': checker}">
   <div class="search">
-    <div class="search_icon" (click)="changeCSS()"><img src="../../assets/Combined_Shape_Copy_2.png"></div>
-    <div class="search_name" id="search_name"><input [(ngModel)]="searchText" placeholder="Search"></div>
+    <div class="search_icon" (click)="checker=!checker; searchText=''">
+      <img src="../../assets/Combined_Shape_Copy_2.png">
+    </div>
+    <div class="search_name" [ngClass]="{'flexed':checker}" id="search_name">
+      <input [(ngModel)]="searchText" placeholder="Search">
+    </div>
   </div>
-  <div class="member" *ngFor="let member of projectmembers | filter : searchText;let i = index" (click)="gotoDailyStatus(member)">
-    <div class="member_logo"><img src="{{member.image}}"></div>
-    <div class="member_name" id="member_name{{i}}">
-      <p>{{member.name}}</p>
+  <div class="list" [ngClass]="{'block':checker, 'shadow':checker}" id="list">
+    <div *ngFor="let member of projectmembers | filter : searchText;let i = index" (click)="gotoDailyStatus(member);checker=false;searchText=''">
+      <div class="member" *ngIf="member.name!=''">
+        <div class="member_logo"><img src="{{member.image}}"></div>
+        <div class="member_name" id="member_name{{i}}">
+          <p>{{member.name}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

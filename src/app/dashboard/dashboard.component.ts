@@ -4,10 +4,8 @@ import { Member } from "../model/member-model";
 import { LoginService } from "../service/login.service";
 import { Router } from '@angular/router';
 import { DashboardService } from "../service/dashboardservice.service";
-import { AdminviewallserviceService } from '../service/adminviewallservice.service';
 import { ProjectService } from "../service/project.service";
 import { ProcessIndividualTaskService } from '../service/process-individual-task.service';
-import { AdminviewallComponent } from '../adminviewall/adminviewall.component';
 import { AuthService } from 'angular-6-social-login';
 import { NavigationdataService } from '../service/navigationdata.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -27,9 +25,7 @@ export class DashboardComponent implements OnInit {
     private dashboardservice: DashboardService,
     private taskService: ProcessIndividualTaskService,
     private navservice: NavigationdataService,
-    private viewallservice: AdminviewallserviceService,
     private projectService: ProjectService,
-    private viewallcomponent: AdminviewallComponent,
     private socialAuthService: AuthService) {
 
   }
@@ -51,6 +47,7 @@ export class DashboardComponent implements OnInit {
   imageurl = [];
   UserType: string;
   operation: string;
+  myEmail: string;
 
   ngOnInit() {
 
@@ -58,14 +55,16 @@ export class DashboardComponent implements OnInit {
       if (user != null) {
         this.loginservice.loginMember(user.idToken)
           .subscribe(msg => {
+            this.myEmail = msg.email;
             this.UserType = msg.userType;
             if (this.UserType === "Admin") {
               this.flag1 = true;
               this.flag2 = true;
+              localStorage.setItem('showContents', 'true');
             } else if (this.UserType === "Manager") {
               this.flag2 = true;
+              localStorage.setItem('showContents', 'true');
             }
-
           });
       }
     });
@@ -75,14 +74,15 @@ export class DashboardComponent implements OnInit {
           this.getProjects(projectArr)
         }
       });
+    localStorage.setItem('showUsers','')
   }
 
   InitializeShow() {
     for (let i = 0; i < this.noOfProjects; i++) {
-
       this.show[i] = 0;
     }
   }
+
   getProjects(projectArr): void {
     let x = 0;
     this.TotalProjectMembers[0] = 0;
@@ -94,16 +94,16 @@ export class DashboardComponent implements OnInit {
     for (let i = 0; i < this.noOfProjects; i++) {
       this.noOfMembers[i] = this.newproject[i].members.length;
       this.TotalProjectMembers[i + 1] = this.TotalProjectMembers[i] + this.noOfMembers[i];
-
     }
   }
 
   getMembers(membersArr): void {
     this.memberArray = membersArr;
     this.TotalMembers = this.memberArray.length;
-
   }
+
   openDailyStatus(project) {
+    this.saveSelectedDate();
     var projectId = project.projectId
     var name = project.projectName
     var myId = localStorage.getItem("email")
@@ -115,7 +115,6 @@ export class DashboardComponent implements OnInit {
       }
     }
     var startdate = project.startDate;
-
     var myMemobj = project.members.find(function (element) {
       return element.email == myId;
     });
@@ -139,13 +138,13 @@ export class DashboardComponent implements OnInit {
     } else {
       this.setLocalStorage(myMemobj)
       this.navservice.changedata(myMemobj)
-      if (this.flag2) {
+      if (this.flag2 && this.isProjectManager(project)) {
         this.router.navigate(['/task-page-admin', projectId, name, startdate]);
       } else {
         this.router.navigate(['/daily-status', projectId, name]);
       }
     }
-
+    this.taskService.changeProject(project)
   }
 
   setLocalStorage(memobj) {
@@ -160,40 +159,86 @@ export class DashboardComponent implements OnInit {
     this.router.navigateByUrl('/admin-view-all');
   }
 
-  // AddProject() {
-  //   this.operation = "AddProject";
-  //   localStorage.setItem('currentOperation', this.operation);
-  //   this.projectService.setRequestType("add");
-  //   this.router.navigateByUrl('/project'); 
-  // }
-
   EditProject(projectDetail) {
     this.operation = "EditProject";
     localStorage.setItem('currentOperation', this.operation);
     this.projectService.setRequestType("update");
     this.projectService.setProjectToBeUpdated(projectDetail)
     this.router.navigateByUrl('/project');
-   
-
   }
   deleteId;
+
   DeleteProject() {
     this.dashboardservice.deleteProjects(this.deleteId)
       .subscribe((msg) => console.log("Project Deleted"));
     window.location.reload();
-
   }
+
   click(index) {
-    let i: number = index
-    this.show[index] = !this.show[index];
+    if (this.show[index] == 1) {
+      this.show[index] = 0;
+    }
+    else {
+      this.show[index] = 1;
+      for (let i = 0; i < this.noOfProjects; i++) {
+        if (i != index) {
+          this.show[i] = 0;
+        }
+      }
+    }
   }
 
-  openModal(template: TemplateRef<any>,projectId) {
-    this.deleteId=projectId;
+  openModal(template: TemplateRef<any>, projectId) {
+    this.deleteId = projectId;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
   decline(): void {
-      this.modalRef.hide();
+    this.modalRef.hide();
+  }
+
+  saveSelectedDate() {
+    var d = new Date();
+    var nday = '';
+    var nmonth = '';
+    var selectedDate = '';
+    if (d.getDate() < 10) {
+      nday += '0' + d.getDate();
+    } else {
+      nday += d.getDate();
+    }
+    if ((d.getMonth() + 1) < 10) {
+      nmonth += '0' + (d.getMonth() + 1);
+    } else {
+      nmonth += (d.getMonth() + 1);
+    }
+    selectedDate += nday + '-' + nmonth + '-' + d.getFullYear();
+    localStorage.setItem("selectedDate", selectedDate);
+  }
+
+  outerClick(event) {
+    if (this.flag2) {
+      if ((event.target.id != 'menu-button' || event.target.id != 'menu-button' || event.target.id != 'menu-dot') &&
+        (event.target.id == 'bottom-div') || event.target.id == 'main-div') {
+        for (let i = 0; i < this.show.length; i++) {
+          this.show[i] = 0;
+        }
+      }
+    }
+  }
+
+  isProjectManager(project: Project) {
+    if (this.UserType == 'Admin') {
+      return true;
+    } else {
+      var id = this.myEmail;
+      var myMemobj = project.members.find(function (element) {
+        return element.email == id;
+      });
+      if (myMemobj.role == 'Project Manager') {
+        return true;
+      }
+      return false;
+    }
   }
 }

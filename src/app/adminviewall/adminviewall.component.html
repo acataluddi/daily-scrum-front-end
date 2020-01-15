@@ -1,32 +1,37 @@
 <body>
-  <div *ngIf="flag === true" class="first">
-    <div class="mainClass">
-      <!-- <h2>Users</h2> -->
-      <div class="card">
-        <div>
-          <div class="section head">
-            <div class="header">User</div>
-            <div class="header">Email</div>
-            <div class="header">User Type</div>
+    <div *ngIf="flag === true" class="first">
+      <div class="mainClass">
+          <div class="search">
+              <div class="search_icon"><img src="../../assets/Combined_Shape_Copy_2.png"></div>
+              <div class="search_name" id="search_name" (click)="p=1">
+                <input [(ngModel)]="userlistfilter" placeholder="Search">
+              </div>
           </div>
-
-          <div class="section rowstyle member" *ngFor="let member of memberArray | paginate: {totalItems: total, itemsPerPage:10, currentPage: p}">
-            <div class="header">{{member.name}}</div>
-            <div class="header">{{member.email}}</div>
-            <div class="header">
-              <select class="custom-select" name="userType" [(ngModel)]="member.userType" (ngModelChange)="onChange($event, member)">
-                <option value="Admin">Admin</option>
-                <option value="Manager">Manager</option>
-                <option value="User">User</option>
-              </select>
-
+        <div class="card">
+          <div>
+            <div class="section head">
+              <div class="header">User</div>
+              <div class="header">Email</div>
+              <div class="header">User Type</div>
             </div>
-          </div>
-          <div class="pagination section">
-            <pagination-controls (pageChange)="getPagenum($event)"></pagination-controls>
+            <div class="section rowstyle member" *ngFor="let members of member | filter:userlistfilter | paginate: {totalitems:total, itemsPerPage:10, currentPage: p}">
+              <div class="header">{{members.name}}</div>
+              <div class="header">{{members.email}}</div>
+              <div class="header">
+                <select class="custom-select" name="userType" [(ngModel)]="members.userType" (ngModelChange)="onChange($event, members)">
+                  <option value="Admin">Admin</option>
+                  <option value="Manager">Manager</option>
+                  <option value="User">User</option>
+                </select>
+              </div>
+            </div>
+            <div class="pagination section" *ngIf="userlistfilter=='' || userlistfilter == undefined ">
+              <pagination-controls (pageChange)="p=$event" maxSize="5" previousLabel=""
+              nextLabel=""></pagination-controls>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</body>
+  </body>
+  

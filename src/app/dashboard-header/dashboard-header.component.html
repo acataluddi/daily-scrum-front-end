@@ -1,20 +1,34 @@
 <div class="main-div">
   <div class="tabs">
-    <div id="projects-tab" class="projects-tab" (click)="activateTab(1)">PROJECTS</div>
-    <div id="users-tab" class="users-tab" *ngIf="flag1 === true" (click)="activateTab(2)">USERS</div>
-    <div id="goals-tab" class="goals-tab" *ngIf="UserType === 'Manager' || UserType === 'User'" (click)="activateTab(3)">GOALS</div>
-    <div id="feedback-tab" class="feedback-tab" *ngIf="flag1 === true" (click)="activateTab(4)">FEEDBACK</div>
+    <div id="projects-tab" class="projects-tab" 
+    [ngClass]="{'tab-active':activetab==1}" (click)="activetab=1">
+      PROJECTS
+    </div>
+    <div id="users-tab" class="users-tab" *ngIf="flag1 === true" 
+    [ngClass]="{'tab-active':activetab==2}" (click)="activetab=2">
+      USERS
+    </div>
+    <div id="goals-tab" class="goals-tab" *ngIf="UserType === 'Manager' || UserType === 'User'" 
+    [ngClass]="{'tab-active':activetab==3}" (click)="activetab=3">
+      GOALS
+    </div>
+    <div id="feedback-tab" class="feedback-tab" *ngIf="flag1 === true" 
+    [ngClass]="{'tab-active':activetab==4}" (click)="activetab=4">
+      FEEDBACK
+    </div>
   </div>
   <button class="add-pro-button" *ngIf="activetab==1 && flag2 === true" (click)="AddProject()">
+    <img class="plus-sign" src="../../assets/add_project_button.png">
     <div class="add-project-div">Add Project</div>
   </button>
-  <div class="mob-view" *ngIf="activetab==1 && flag2 === true" (click)="AddProject()">
+  <div class="mob-view-project" *ngIf="activetab==1 && flag2 === true" (click)="AddProject()">
     <span class="glyphicon glyphicon-plus"></span>
   </div>
-  <button class="add-pro-button" *ngIf="activetab==3 && UserType === 'Manager'" (click)="AddGoal()">
-    <div class="add-new-div">Add New</div>
+  <button class="add-goal-button" *ngIf="activetab==3 && UserType === 'Manager'" (click)="AddGoal()">
+    <img class="plus-sign" src="../../assets/add_project_button.png">
+    <div class="add-new-div">Add Goal</div>
   </button>
-  <div class="mob-view" *ngIf="activetab==3 && UserType === 'Manager'" (click)="AddGoal()">
+  <div class="mob-view-goal" *ngIf="activetab==3 && UserType === 'Manager'" (click)="AddGoal()">
     <span class="glyphicon glyphicon-plus"></span>
   </div>
 </div>
@@ -25,8 +39,26 @@
   <app-adminviewall></app-adminviewall>
 </div>
 <div *ngIf="activetab==3">
-  <app-goals></app-goals>
+  <app-goals #goalsPage></app-goals>
 </div>
 <div *ngIf="activetab==4">
-  <app-feedback [firstFeedback] = "firstFeedbackmember"></app-feedback>
+  <app-feedback></app-feedback>
+</div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close" (click)="closeModal()">&times;</span>
+      Set New Goal
+    </div>
+    <app-add-goal #addNewGoal (cancelEvent)="closeModal()" (goalAddedEvent)="updatePage()"></app-add-goal>
+    <div class="modal-footer">
+      <div class="addcancelclass">
+        <input type="button" value="Cancel" (click)="closeModal()">
+        <input type="button" value="Add Goal" (click)="createGoal()">
+      </div>
+    </div>
+  </div>
 </div>

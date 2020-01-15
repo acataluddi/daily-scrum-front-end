@@ -1,3 +1,257 @@
-.header{
-    margin-top: 125px;
+.maindiv {
+  margin-top: 125px;
+  margin-left: 5.1%;
+  display: flex;
+}
+
+.right-part {
+  width: calc(100% - 250px);
+  height: calc(100% - 90px);
+}
+
+.header {
+  width: 100%;
+  height: 50px;
+  padding: 10px 22px 0px 12px;
+  display: flex;
+  background: rgba(242, 242, 242, 1);
+}
+
+.member-goal-head {
+  margin-left: 8px;
+  margin-top: 5px;
+}
+
+.member-name {
+  font-family: 'Open Sans';
+  font-size: 15px;
+  color: rgba(0, 0, 0, 1);
+}
+
+.member-image {
+  height: 32px;
+  width: 32px;
+  background: wheat;
+  border-radius: 50%
+}
+
+.goals {
+  width: 95%;
+  padding-bottom: 15px;
+  margin-left: 15px;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+}
+
+.time {
+  margin-top: 25px;
+}
+
+.goalLabel {
+  padding: 4px 0px 6px 10px;
+  height: 25px;
+  width: 65px;
+  margin-right: 20px;
+  background-color: rgba(242, 242, 242, 1);
+  border-radius: 4px;
+  font-family: 'Open Sans';
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(12, 33, 93, 1);
+}
+
+.last-update {
+  float: right;
+  margin-top: -22px;
+  font-family: 'Open Sans';
+  font-size: 13px;
+  color: rgba(129, 130, 159, 1);
+}
+
+.goalTitle {
+  margin-top: 10px;
+  width: 509px;
+  font-family: 'Open Sans';
+  font-size: 20px;
+  font-weight: 600;
+  color: rgba(27, 47, 103, 1);
+  text-align: left;
+  line-height: 24px;
+  white-space: pre-line;
+  word-break: break-all;
+}
+
+.created-on {
+  width: 250px;
+  margin-top: 4px;
+  font-family: 'Open Sans';
+  font-size: 10px;
+  color: rgba(129, 130, 159, 1);
+}
+
+.goalDescription {
+  margin-top: 6px;
+  font-family: 'Open Sans';
+  font-size: 16px;
+  color: rgba(79, 86, 105, 1);
+  white-space: pre-line;
+  word-break: break-all;
+}
+
+.comment-num {
+  color: rgba(79, 86, 105, 1);
+  cursor: pointer;
+  display: flex;
+  margin: 20px 1px;
+  font-family: 'Open Sans';
+}
+
+.comment {
+  width: 75%;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.non-empty-comment {
+  display: flex;
+}
+
+.commentDescp {
+  margin-left: 20px;
+  font-family: 'Open Sans';
+  font-size: 14px;
+  color: rgba(79, 86, 105, 1);
+  white-space: pre-line;
+  word-break: break-all;
+}
+
+.commentTime {
+  margin-left: 20px;
+  font-family: 'Open Sans';
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.addComment {
+  border: 1px solid #fff;
+  width: 90%;
+  height: auto;
+  font-family: 'Open Sans';
+  font-size: 14px;
+  color: rgba(129, 130, 159, 1);
+  word-break: break-all;
+  resize: none;
+  outline: none;
+  overflow-y: auto;
+}
+
+.input-comment {
+  display: inherit;
+  border: 1px solid rgba(224, 224, 224, 1);
+  margin-top: 10px;
+  margin-left: 20px;
+  width: 100%;
+  padding: 5px 0px 5px 3px;
+}
+
+.send {
+  display: flex;
+  margin-top: 10px;
+}
+
+.sendIcon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin: 9px 0px 0px 15px;
+}
+
+.sendIcon:hover {
+  opacity: 0.5;
+}
+
+.user-image {
+  margin: 10px 0px;
+}
+
+.no-goals {
+  height: 100%;
+  margin-top: -50px;
+}
+
+.no-goals-img {
+  display: block;
+  margin-top: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  filter: opacity(90%);
+  height: 230px;
+  width: 310px;
+}
+
+.no-goals-msg {
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+  color: rgba(79, 86, 105, 1);
+}
+
+@media only screen and (max-width: 700px) {
+  .maindiv {
+    margin-top: 188px;
+    margin-right: 5.2%;
+  }
+
+  .right-part {
+    width: 100%;
+  }
+
+  .goals {
+    width: 100%;
+    padding-right: 5%;
+  }
+
+  .goalLabel {
+    padding: 4px 0px 6px 3px;
+    margin-right: 5px;
+    width: 56px;
+  }
+
+  .last-update {
+    margin-top: 2px;
+    font-size: 10px;
+  }
+
+  .goalTitle {
+    font-size: 18px;
+    width: 100%;
+  }
+
+  .goalDescription {
+    font-size: 14px;
+  }
+
+  .comment {
+    width: 95%;
+    margin-left: 5px;
+  }
+
+  .comment-num {
+    font-size: 12px;
+  }
+
+  .commentTime {
+    font-size: 10px;
+  }
+
+  .time {
+    display: flex;
+  }
+
+  .no-goals {
+    width: 100% !important;
+  }
+
+  .no-goals-msg {
+    padding-left: 10px;
+  }
 }

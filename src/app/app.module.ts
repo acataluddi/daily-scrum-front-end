@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
-
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,18 +22,22 @@ import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TaskPageAdminComponent } from './task-page-admin/task-page-admin.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule, Response, Headers } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { HeaderComponent } from './header/header.component';
 import { UserslistComponent } from './userslist/userslist.component';
 import { FilterPipe } from './filter.pipe';
 import { NavigationdataService } from './service/navigationdata.service'
-import {AutosizeModule} from 'ngx-autosize';
+import { AutosizeModule } from 'ngx-autosize';
 import { FilterEmail } from './filterEmail.pipe';
 import { DashboardHeaderComponent } from './dashboard-header/dashboard-header.component';
 import { GoalsComponent } from './goals/goals.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { GoalUserlistComponent } from './goal-userlist/goal-userlist.component';
 import { FeedbackFilterPipe } from './feedbacklistfilter.pipe';
+import { UserListFilterPipe } from './UserListfilter.pipe';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { AddGoalComponent } from './add-goal/add-goal.component';
+import { GoalMemberFilter } from './goalMemberFilter.pipe';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -47,7 +50,6 @@ export function getAuthServiceConfigs() {
   );
   return config;
 }
-
 
 @NgModule({
   declarations: [
@@ -64,10 +66,13 @@ export function getAuthServiceConfigs() {
     FeedbackFilterPipe,
     FilterPipe,
     FilterEmail,
+    UserListFilterPipe,
     DashboardHeaderComponent,
     GoalsComponent,
     FeedbackComponent,
-    GoalUserlistComponent
+    GoalUserlistComponent,
+    AddGoalComponent,
+    GoalMemberFilter
   ],
   imports: [
     BrowserModule,
@@ -78,6 +83,7 @@ export function getAuthServiceConfigs() {
     Ng2Webstorage,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
     HttpClientModule,
     HttpModule,
     Ng2Webstorage,
